@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <!-- Link back to your Survey Tool -->
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
+                    <a href="YOUR_SURVEY_TOOL_LINK_HERE" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
                         📝 Open Survey Tool
                     </a>
                 </div>
@@ -103,10 +103,10 @@
                 
                 <!-- Custom CSS Map Legend -->
                 <div class="absolute bottom-6 left-6 map-legend z-[1000]">
-                    <div class="font-bold mb-1 border-b pb-1">Site Elements</div>
-                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Trees/Canopy</div>
-                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> Water Storage</div>
-                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Pathways/Infra</div>
+                    <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
+                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Vendor</div>
+                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> KII / FGD</div>
                 </div>
             </div>
 
@@ -211,10 +211,13 @@
         // ==========================================
         // CONFIGURATION: ADD YOUR GOOGLE SCRIPT URL 
         // ==========================================
-        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbz8j0EcmZCsvTYwjUfHHEINgljfwxg12SyDBz10G5Hc7aepXjrV8dI-V6T3AcuHw8df/exec";
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbybflMLa_4LohKPgnSF0FIAQBcptOGzAxmMembf7_tIGu9X_kcyYlwOAeRsGhZ6mwA/exec";
+
+        // Global variable to hold live data
+        window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
 
         // ==========================================
-        // MAP & DATA CONFIGURATION (EDITABLE)
+        // MAP & DATA CONFIGURATION
         // ==========================================
         const siteData = {
             overview: { 
@@ -260,47 +263,62 @@
 
         var markers = L.layerGroup().addTo(map);
 
-        // HOW TO EDIT THE MAP:
-        // Change the coordinates [Latitude, Longitude] below to place your thematic markers.
-        // Colors: green = Trees, blue = Water, orange = Pathways/Infra
+        // --- MAP DYNAMIC DATA PLOTTING ---
         function drawMarkers(state) {
             markers.clearLayers();
             
-            if (state === 'overview' || state === 'gujarat') {
-                L.circleMarker([22.25, 71.19], {color: 'green', fillColor: 'green', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Gujarat NVY</b><br>High Canopy Cover");
-                L.circleMarker([22.50, 71.50], {color: 'orange', fillColor: 'orange', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Gujarat NVY</b><br>New Pathways");
-            }
-            if (state === 'overview' || state === 'jharkhand') {
-                L.circleMarker([23.61, 85.27], {color: 'blue', fillColor: 'blue', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Jharkhand NVY</b><br>Water Harvesting Structure");
-            }
-            if (state === 'overview' || state === 'mp') {
-                L.circleMarker([22.97, 78.65], {color: 'orange', fillColor: 'orange', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>MP NVY</b><br>Solar Lights Installed");
-                L.circleMarker([22.80, 78.50], {color: 'green', fillColor: 'green', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>MP NVY</b><br>Medicinal Plant Zone");
-            }
-            if (state === 'overview' || state === 'andhra') {
-                L.circleMarker([15.91, 79.74], {color: 'blue', fillColor: 'blue', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Andhra NVY</b><br>Pond Restored");
-            }
+            if (!window.liveData || !window.liveData.locations) return;
+
+            // Plot real coordinates from the sheet
+            window.liveData.locations.forEach(loc => {
+                // Filter by selected state (unless overview is selected)
+                if (state !== 'overview' && loc.siteKey !== state) return;
+
+                let color = 'gray';
+                let fill = 'gray';
+                let typeLower = loc.type.toLowerCase();
+
+                // Dynamic coloring based on Respondent Type
+                if (typeLower.includes('visitor')) { color = 'green'; fill = 'green'; }
+                else if (typeLower.includes('vendor')) { color = 'orange'; fill = 'orange'; }
+                else if (typeLower.includes('kii') || typeLower.includes('fgd')) { color = 'blue'; fill = 'blue'; }
+
+                // Popup Data Setup
+                let popupContent = `
+                    <div class="font-sans">
+                        <b class="text-[#1b3a2d] text-sm">${loc.rawSite}</b><br>
+                        <span class="text-xs text-gray-600">Type: <span class="font-bold">${loc.type}</span></span><br>
+                        <span class="text-[10px] text-gray-400">Lat: ${loc.lat} | Lon: ${loc.lon}</span>
+                    </div>`;
+
+                L.circleMarker([loc.lat, loc.lon], {color: color, fillColor: fill, fillOpacity: 0.8, radius: 8})
+                    .addTo(markers)
+                    .bindPopup(popupContent);
+            });
         }
-        
-        // Initial Draw
-        drawMarkers('overview');
 
         // --- DASHBOARD UPDATER ---
         function updateDashboard() {
             var selected = document.getElementById('state-selector').value;
             var data = siteData[selected];
             
-            // 1. Update Map
+            // 1. Update Map Position & Markers
             map.flyTo(data.center, data.zoom, { duration: 1.5 });
             drawMarkers(selected);
             document.getElementById('map-title').innerText = "Thematic Map: " + data.title;
             
-            // 2. Update Top Metrics
+            // 2. Update Dynamic Live Samples
+            if (window.liveData) {
+                let currentCount = window.liveData.sites[selected] || 0;
+                document.getElementById('metric-samples').innerText = currentCount;
+            }
+
+            // 3. Update Other Metrics
             document.getElementById('metric-eco').innerText = data.eco;
             document.getElementById('metric-socio').innerText = data.socio;
             document.getElementById('metric-wtp').innerText = data.wtp;
 
-            // 3. Update Progress Bars
+            // 4. Update Progress Bars
             document.getElementById('bar-gov').style.width = data.bars.gov + "%";
             document.getElementById('bar-gov-val').innerText = data.bars.gov + "%";
             
@@ -310,7 +328,7 @@
             document.getElementById('bar-infra').style.width = data.bars.infra + "%";
             document.getElementById('bar-infra-val').innerText = data.bars.infra + "%";
 
-            // 4. Update Review Text
+            // 5. Update Review Text
             document.getElementById('site-review').innerText = data.review;
             document.getElementById('panel-title').innerText = data.title + " Metrics";
         }
@@ -324,14 +342,26 @@
             }
 
             try {
+                document.getElementById('metric-samples').innerText = "...";
                 let response = await fetch(GOOGLE_SHEET_API_URL);
-                let data = await response.json();
-                if(data.total !== undefined) {
-                    document.getElementById('metric-samples').innerText = data.total;
+                let text = await response.text(); 
+                
+                try {
+                    let parsedData = JSON.parse(text);
+                    if(parsedData.total !== undefined) {
+                        window.liveData = parsedData;
+                        updateDashboard(); // Refreshes the UI & Map with new data
+                    } else if (parsedData.error) {
+                        document.getElementById('metric-samples').innerText = "Error";
+                        console.error("Google Script Error:", parsedData.error);
+                    }
+                } catch (parseError) {
+                    document.getElementById('metric-samples').innerText = "Auth Blocked";
+                    console.error("Blocked by Google Auth. Check 'Execute as: Me' in Deployment.");
                 }
             } catch (error) {
                 console.error("Error fetching live data:", error);
-                document.getElementById('metric-samples').innerText = "Error";
+                document.getElementById('metric-samples').innerText = "Network Err";
             }
         }
 
