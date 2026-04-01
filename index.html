@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <!-- Link back to your Survey Tool -->
-                    <a href="YOUR_SURVEY_TOOL_LINK_HERE" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
+                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
                         📝 Open Survey Tool
                     </a>
                 </div>
@@ -211,7 +211,7 @@
         // ==========================================
         // CONFIGURATION: ADD YOUR GOOGLE SCRIPT URL 
         // ==========================================
-        const GOOGLE_SHEET_API_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzfef8kTd66yKELsPGI_fsX9nzdqimnFyAu4x87XyxqdWL7myfU39PwC4T6QdoJ9B_x/exec";
 
         // ==========================================
         // MAP & DATA CONFIGURATION (EDITABLE)
@@ -318,7 +318,7 @@
         // --- FETCH LIVE TOTAL FROM GOOGLE SHEETS ---
         async function fetchLiveSampleCount() {
             // Prevent error if URL isn't pasted yet
-            if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
+            if(GOOGLE_SHEET_API_URL === "https://script.google.com/macros/s/AKfycbzfef8kTd66yKELsPGI_fsX9nzdqimnFyAu4x87XyxqdWL7myfU39PwC4T6QdoJ9B_x/exec") {
                 document.getElementById('metric-samples').innerText = "0";
                 return; 
             }
