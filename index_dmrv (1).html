@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagar Van DMRV Dashboard</title>
+    <!-- Tailwind CSS for Modern Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Leaflet CSS for Interactive Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        #map { height: 450px; width: 100%; border-radius: 0.5rem; z-index: 1; }
+        .gradient-text { background: linear-gradient(90deg, #1b3a2d, #5dc48a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Map Legend Customization */
+        .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
+        .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- 1. TOP NAVIGATION -->
+    <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🌳</span>
+                    <span class="font-bold text-xl tracking-wide">Nagar Van DMRV Dashboard</span>
+                </div>
+                <div>
+                    <!-- Link back to your Survey Tool -->
+                    <a href="YOUR_SURVEY_TOOL_LINK_HERE" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
+                        📝 Open Survey Tool
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- 2. HEADER & REGION SELECTOR -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold gradient-text">Site Insights & Verification</h1>
+                <p class="text-sm text-gray-500 mt-1">Monitoring Ecological, Social, and Infrastructural parameters.</p>
+            </div>
+            <div class="w-full md:w-auto">
+                <select id="state-selector" onchange="updateDashboard()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]">
+                    <option value="overview">🌐 All Sites Overview</option>
+                    <option value="gujarat">📍 NVY Gujarat</option>
+                    <option value="jharkhand">📍 NVY Jharkhand</option>
+                    <option value="andhra">📍 NVY Andhra Pradesh</option>
+                    <option value="mp">📍 NVY Madhya Pradesh</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 3. LIVE METRICS ROW -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="glass-panel p-6 border-b-4 border-[#5dc48a]">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Live Survey Samples</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
+                    <span class="text-xs text-green-700 bg-green-100 px-2 py-1 rounded-full animate-pulse">Live Sync</span>
+                </div>
+            </div>
+            <div class="glass-panel p-6 border-b-4 border-blue-500">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ecological Index</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl font-extrabold text-blue-900" id="metric-eco">7.8</span>
+                    <span class="text-sm text-gray-500 font-bold">/ 10</span>
+                </div>
+            </div>
+            <div class="glass-panel p-6 border-b-4 border-purple-500">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Socio-Economic Impact</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl font-extrabold text-purple-900" id="metric-socio">High</span>
+                </div>
+            </div>
+            <div class="glass-panel p-6 border-b-4 border-orange-500">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Avg. WTP (CVM)</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
+                    <span class="text-sm text-gray-500 font-bold">/ mo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. MAP & INDICATORS SECTION -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
+            
+            <!-- Interactive Map -->
+            <div class="xl:col-span-2 glass-panel p-4 flex flex-col relative">
+                <div class="flex justify-between items-center mb-3 px-2">
+                    <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview</h2>
+                </div>
+                <!-- Map Container -->
+                <div id="map"></div>
+                
+                <!-- Custom CSS Map Legend -->
+                <div class="absolute bottom-6 left-6 map-legend z-[1000]">
+                    <div class="font-bold mb-1 border-b pb-1">Site Elements</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Trees/Canopy</div>
+                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> Water Storage</div>
+                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Pathways/Infra</div>
+                </div>
+            </div>
+
+            <!-- Indicator Metrics Panel -->
+            <div class="glass-panel p-6">
+                <h2 class="text-lg font-bold text-[#1b3a2d] mb-6" id="panel-title">Regional Metrics</h2>
+                
+                <div class="space-y-5" id="indicator-bars">
+                    <!-- Progress Bar 1 -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Governance (PPP Efficacy)</span>
+                            <span class="text-[#5dc48a] font-bold" id="bar-gov-val">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-[#5dc48a] h-2.5 rounded-full transition-all duration-1000" id="bar-gov" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <!-- Progress Bar 2 -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Community Well-being (WHO-5)</span>
+                            <span class="text-blue-500 font-bold" id="bar-who-val">68%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000" id="bar-who" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    <!-- Progress Bar 3 -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Infrastructure Quality</span>
+                            <span class="text-purple-500 font-bold" id="bar-infra-val">72%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000" id="bar-infra" style="width: 72%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-5 border-t border-gray-200">
+                    <h3 class="text-sm font-bold text-[#1b3a2d] mb-3">📝 Field Review / Notes</h3>
+                    <p class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200 leading-relaxed" id="site-review">
+                        Select a specific state from the dropdown above to view the detailed ecological and socio-economic reviews, along with specific PRA observations from the field.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. MEDIA GALLERY SECTION -->
+        <div class="glass-panel p-6">
+            <div class="flex justify-between items-center mb-6 border-b pb-3">
+                <h2 class="text-xl font-bold text-[#1b3a2d]">Site Media & Evidence</h2>
+                <p class="text-sm text-gray-500">Photos & Videos from the field</p>
+            </div>
+            
+            <!-- Replace the 'src' in these image tags with your Google Drive direct links -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="media-gallery">
+                
+                <!-- Example Photo 1 -->
+                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Forest Canopy">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
+                        Canopy Cover (Gujarat)
+                    </div>
+                </div>
+
+                <!-- Example Photo 2 -->
+                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
+                    <img src="https://images.unsplash.com/photo-1541427468627-a46bea1fb6cb?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Pathways">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
+                        New Pathways (MP)
+                    </div>
+                </div>
+
+                <!-- Example Video Format (Using an HTML5 video tag) -->
+                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video bg-black flex items-center justify-center">
+                    <!-- Replace the src with an actual video link if you have one -->
+                    <video controls class="w-full h-full object-cover">
+                        <source src="YOUR_VIDEO_LINK_HERE.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">VIDEO</div>
+                </div>
+
+                <!-- Example Photo 4 -->
+                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Water Body">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
+                        Water Harvesting (Jharkhand)
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Leaflet JS for Map functionality -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // ==========================================
+        // CONFIGURATION: ADD YOUR GOOGLE SCRIPT URL 
+        // ==========================================
+        const GOOGLE_SHEET_API_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+        // ==========================================
+        // MAP & DATA CONFIGURATION (EDITABLE)
+        // ==========================================
+        const siteData = {
+            overview: { 
+                center: [22.0, 79.0], zoom: 5, title: "Overview (All States)",
+                eco: "7.8", socio: "High", wtp: "₹25",
+                bars: { gov: 85, who: 68, infra: 72 },
+                review: "Overall observation across all states indicates positive community engagement. Boundaries largely align with KML files, though some regions require infra upgrades."
+            },
+            gujarat: { 
+                center: [22.2587, 71.1924], zoom: 8, title: "NVY Gujarat",
+                eco: "8.2", socio: "Very High", wtp: "₹35",
+                bars: { gov: 90, who: 75, infra: 88 },
+                review: "Strong collective action from local NGOs. Good survival rate of native flora. The PPP model is highly active with clear socio-economic benefits for vendors."
+            },
+            jharkhand: { 
+                center: [23.6102, 85.2799], zoom: 8, title: "NVY Jharkhand",
+                eco: "7.1", socio: "Medium", wtp: "₹15",
+                bars: { gov: 70, who: 60, infra: 65 },
+                review: "Rich biodiversity observed, but minor resource conflicts regarding firewood collection exist. Water harvesting structures require maintenance before summer."
+            },
+            andhra: { 
+                center: [15.9129, 79.7400], zoom: 7, title: "NVY Andhra Pradesh",
+                eco: "7.5", socio: "High", wtp: "₹20",
+                bars: { gov: 80, who: 70, infra: 75 },
+                review: "Excellent progress on formal boundary demarcation. High community willingness to pay (CVM), but informal vendors request better designated spaces."
+            },
+            mp: { 
+                center: [22.9734, 78.6569], zoom: 7, title: "NVY Madhya Pradesh",
+                eco: "8.0", socio: "High", wtp: "₹30",
+                bars: { gov: 85, who: 65, infra: 80 },
+                review: "Great improvements in urban cooling and physical capital (pathways, lights). KIIs show seamless coordination between Forest Dept and ULBs."
+            }
+        };
+
+        // --- MAP INITIALIZATION ---
+        var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        var markers = L.layerGroup().addTo(map);
+
+        // HOW TO EDIT THE MAP:
+        // Change the coordinates [Latitude, Longitude] below to place your thematic markers.
+        // Colors: green = Trees, blue = Water, orange = Pathways/Infra
+        function drawMarkers(state) {
+            markers.clearLayers();
+            
+            if (state === 'overview' || state === 'gujarat') {
+                L.circleMarker([22.25, 71.19], {color: 'green', fillColor: 'green', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Gujarat NVY</b><br>High Canopy Cover");
+                L.circleMarker([22.50, 71.50], {color: 'orange', fillColor: 'orange', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Gujarat NVY</b><br>New Pathways");
+            }
+            if (state === 'overview' || state === 'jharkhand') {
+                L.circleMarker([23.61, 85.27], {color: 'blue', fillColor: 'blue', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Jharkhand NVY</b><br>Water Harvesting Structure");
+            }
+            if (state === 'overview' || state === 'mp') {
+                L.circleMarker([22.97, 78.65], {color: 'orange', fillColor: 'orange', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>MP NVY</b><br>Solar Lights Installed");
+                L.circleMarker([22.80, 78.50], {color: 'green', fillColor: 'green', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>MP NVY</b><br>Medicinal Plant Zone");
+            }
+            if (state === 'overview' || state === 'andhra') {
+                L.circleMarker([15.91, 79.74], {color: 'blue', fillColor: 'blue', fillOpacity: 0.7, radius: 8}).addTo(markers).bindPopup("<b>Andhra NVY</b><br>Pond Restored");
+            }
+        }
+        
+        // Initial Draw
+        drawMarkers('overview');
+
+        // --- DASHBOARD UPDATER ---
+        function updateDashboard() {
+            var selected = document.getElementById('state-selector').value;
+            var data = siteData[selected];
+            
+            // 1. Update Map
+            map.flyTo(data.center, data.zoom, { duration: 1.5 });
+            drawMarkers(selected);
+            document.getElementById('map-title').innerText = "Thematic Map: " + data.title;
+            
+            // 2. Update Top Metrics
+            document.getElementById('metric-eco').innerText = data.eco;
+            document.getElementById('metric-socio').innerText = data.socio;
+            document.getElementById('metric-wtp').innerText = data.wtp;
+
+            // 3. Update Progress Bars
+            document.getElementById('bar-gov').style.width = data.bars.gov + "%";
+            document.getElementById('bar-gov-val').innerText = data.bars.gov + "%";
+            
+            document.getElementById('bar-who').style.width = data.bars.who + "%";
+            document.getElementById('bar-who-val').innerText = data.bars.who + "%";
+            
+            document.getElementById('bar-infra').style.width = data.bars.infra + "%";
+            document.getElementById('bar-infra-val').innerText = data.bars.infra + "%";
+
+            // 4. Update Review Text
+            document.getElementById('site-review').innerText = data.review;
+            document.getElementById('panel-title').innerText = data.title + " Metrics";
+        }
+
+        // --- FETCH LIVE TOTAL FROM GOOGLE SHEETS ---
+        async function fetchLiveSampleCount() {
+            // Prevent error if URL isn't pasted yet
+            if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                document.getElementById('metric-samples').innerText = "0";
+                return; 
+            }
+
+            try {
+                let response = await fetch(GOOGLE_SHEET_API_URL);
+                let data = await response.json();
+                if(data.total !== undefined) {
+                    document.getElementById('metric-samples').innerText = data.total;
+                }
+            } catch (error) {
+                console.error("Error fetching live data:", error);
+                document.getElementById('metric-samples').innerText = "Error";
+            }
+        }
+
+        // Trigger fetch on load
+        fetchLiveSampleCount();
+    </script>
+</body>
+</html>
