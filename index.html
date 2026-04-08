@@ -6,13 +6,15 @@
     <title>Nagar Van DMRV Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+
     <style>
         body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
         #map { height: 450px; width: 100%; border-radius: 0.5rem; z-index: 1; }
         .gradient-text { background: linear-gradient(90deg, #1b3a2d, #5dc48a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Map Legend Customization */
         .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
         .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
@@ -29,11 +31,11 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
-                        ✨ Earn Points!
+                        ✨ Public: Earn Points!
                     </button>
                     
-                    <a href="YOUR_SURVEY_TOOL_LINK_HERE" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-4 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
-                        📝 Admin Login
+                    <a href="survey.html" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-4 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
+                        📝 Collect Data (Admin)
                     </a>
                 </div>
             </div>
@@ -58,43 +60,62 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            <div class="glass-panel p-5 border-b-4 border-[#5dc48a]">
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Live Survey Samples</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-panel p-4 border-b-4 border-[#5dc48a]">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Live Survey Samples</h3>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
-                    <span class="text-[10px] text-green-700 bg-green-100 px-2 py-1 rounded-full animate-pulse">Live Sync</span>
+                    <span class="text-2xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
+                    <span class="text-[9px] text-green-700 bg-green-100 px-2 py-0.5 rounded-full animate-pulse">Live</span>
                 </div>
             </div>
-            <div class="glass-panel p-5 border-b-4 border-blue-500">
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Ecological Index</h3>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-blue-900" id="metric-eco">7.8</span>
-                    <span class="text-xs text-gray-500 font-bold">/ 10</span>
+            <div class="glass-panel p-4 border-b-4 border-teal-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Air Quality (PM2.5)</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-teal-900" id="metric-aqi">...</span>
+                    <span class="text-[10px] text-gray-500 font-bold">µg/m³</span>
+                </div>
+                <p class="text-[9px] text-gray-500 mt-1 font-bold" id="aqi-status">Connecting...</p>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-green-600">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Carbon Sequestration</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-green-900" id="metric-carbon">1,240</span>
+                    <span class="text-[10px] text-gray-500 font-bold">Tons CO₂e</span>
                 </div>
             </div>
-            <div class="glass-panel p-5 border-b-4 border-purple-500">
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Socio-Economic</h3>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-purple-900" id="metric-socio">High</span>
+            <div class="glass-panel p-4 border-b-4 border-blue-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Urban Heat Reduction</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-blue-900" id="metric-heat">-2.4</span>
+                    <span class="text-[10px] text-gray-500 font-bold">°C</span>
                 </div>
             </div>
-            <div class="glass-panel p-5 border-b-4 border-orange-500">
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Avg. WTP (CVM)</h3>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
-                    <span class="text-xs text-gray-500 font-bold">/ mo</span>
+            <div class="glass-panel p-4 border-b-4 border-blue-400">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Water Recharged</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-blue-800" id="metric-water">45k</span>
+                    <span class="text-[10px] text-gray-500 font-bold">Liters</span>
                 </div>
             </div>
-            
-            <div class="glass-panel p-5 border-b-4 border-teal-500 relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-teal-500 text-white text-[9px] font-bold px-2 py-1 rounded-bl-lg">OPEN AQ API</div>
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Air Quality (PM2.5)</h3>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-3xl font-extrabold text-teal-900" id="metric-aqi">...</span>
-                    <span class="text-xs text-gray-500 font-bold">µg/m³</span>
+            <div class="glass-panel p-4 border-b-4 border-purple-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Ecological Index</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-purple-900" id="metric-eco">7.8</span>
+                    <span class="text-[10px] text-gray-500 font-bold">/ 10</span>
                 </div>
-                <p class="text-[10px] text-gray-500 mt-2 font-bold" id="aqi-status">Connecting sensor...</p>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-pink-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Socio-Economic</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-pink-900" id="metric-socio">High</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-orange-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Avg. WTP (CVM)</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
+                    <span class="text-[10px] text-gray-500 font-bold">/ mo</span>
+                </div>
             </div>
         </div>
 
@@ -156,64 +177,42 @@
             </div>
         </div>
 
-        <div class="glass-panel p-6">
-            <div class="flex justify-between items-center mb-6 border-b pb-3">
-                <h2 class="text-xl font-bold text-[#1b3a2d]">Site Media & Evidence</h2>
-                <p class="text-sm text-gray-500">Photos & Videos from the field</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="media-gallery">
-                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Forest Canopy">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
-                        Canopy Cover (Gujarat)
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
-                    <img src="https://images.unsplash.com/photo-1541427468627-a46bea1fb6cb?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Pathways">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
-                        New Pathways (MP)
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video bg-black flex items-center justify-center">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="YOUR_VIDEO_LINK_HERE.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">VIDEO</div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
-                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Water Body">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
-                        Water Harvesting (Jharkhand)
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4 shadow-2xl relative">
+    <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl relative">
             
-            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-6 text-white sticky top-0 z-10">
+            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-white sticky top-0 z-10">
                 <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none">&times;</button>
-                <h2 class="text-2xl font-extrabold">🌱 Join the Green Movement</h2>
-                <p class="text-sm mt-1 opacity-90">Share your experience, upload a photo, and earn points. Every 500 points = we will plant 1 native tree in your name!</p>
+                <h2 class="text-xl font-extrabold">🌱 Join the Green Movement</h2>
+                <p class="text-xs mt-1 opacity-90">Share your experience, upload a photo, and earn points. Every 500 points = we will plant 1 native tree in your name!</p>
             </div>
 
-            <div class="p-6 space-y-5">
+            <div class="p-5 space-y-4">
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-1">Your Name</label>
-                    <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
+                    <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
                 </div>
                 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Select Nagar Van Location</label>
-                    <select id="pub-site" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none">
-                        <option value="Gujarat">Gujarat NVY</option>
-                        <option value="Jharkhand">Jharkhand NVY</option>
-                        <option value="Andhra">Andhra Pradesh NVY</option>
-                        <option value="MP">Madhya Pradesh NVY</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Select State</label>
+                        <select id="pub-state" onchange="updateVanDropdown()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                            <option value="">-- Choose State --</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Other">Other State</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Select Nagar Van</label>
+                        <select id="pub-van" onchange="checkOtherVan()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none bg-gray-50" disabled>
+                            <option value="">-- Select State First --</option>
+                        </select>
+                        <input type="text" id="pub-other-van" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Type Nagar Van name...">
+                    </div>
                 </div>
 
                 <div>
@@ -230,79 +229,86 @@
 
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review</label>
-                    <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you, the local biodiversity, or your livelihood..."></textarea>
+                    <textarea id="pub-review" rows="2" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity..."></textarea>
                 </div>
 
-                <div class="bg-[#f0f7f3] p-5 rounded-lg border-2 border-[#a8c4b0] flex flex-col items-center justify-center border-dashed">
-                    <label class="text-sm font-bold text-[#2d6a4f] mb-2 cursor-pointer text-center">
-                        📸 Upload Photo for Verification (+50 Points)
-                        <input type="file" accept="image/*" class="hidden" onchange="alert('In production, this will upload to your backend database!')">
+                <div class="bg-[#f0f7f3] p-4 rounded-lg border-2 border-[#a8c4b0] flex flex-col items-center justify-center border-dashed">
+                    <label class="text-sm font-bold text-[#2d6a4f] mb-1 cursor-pointer text-center">
+                        🤖 AI Verified Photo Upload (+50 Points)
+                        <input type="file" accept="image/*" class="hidden" onchange="handleAIUpload(this)">
                     </label>
-                    <p class="text-xs text-[#3a8a65] text-center">Upload a picture of trees, wildlife, or community activities.</p>
+                    <p class="text-xs text-[#3a8a65] text-center mb-2">Our AI checks if the image actually contains nature, trees, or a park!</p>
+                    <div id="ai-status-box" class="hidden w-full text-center p-2 rounded text-xs font-bold mt-2"></div>
                 </div>
             </div>
 
-            <div class="p-5 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
+            <div class="p-4 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
                 <span class="text-sm text-gray-600 font-bold" id="pub-status">Reward: 100 Base Points</span>
-                <button onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-6 py-2.5 rounded-lg font-bold transition-colors shadow-md">
-                    🚀 Submit & Earn Points
+                <button onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
+                    🚀 Submit
                 </button>
             </div>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <script>
         // ==========================================
-        // CONFIGURATION: ADD YOUR GOOGLE SCRIPT URL 
+        // CONFIGURATION
         // ==========================================
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
 
-        // Global variable to hold live data
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
 
-        // ==========================================
-        // MAP & DATA CONFIGURATION
-        // ==========================================
+        // Site Database
         const siteData = {
             overview: { 
                 center: [22.0, 79.0], zoom: 5, title: "Overview (All States)",
-                eco: "7.8", socio: "High", wtp: "₹25",
+                eco: "7.8", socio: "High", wtp: "₹25", carbon: "1,240", heat: "-2.4", water: "45k",
                 bars: { gov: 85, who: 68, infra: 72 },
                 review: "Overall observation across all states indicates positive community engagement. Boundaries largely align with KML files, though some regions require infra upgrades."
             },
             gujarat: { 
-                center: [22.2587, 71.1924], zoom: 8, title: "NVY Gujarat",
-                eco: "8.2", socio: "Very High", wtp: "₹35",
+                center: [22.2587, 71.1924], zoom: 7, title: "NVY Gujarat",
+                eco: "8.2", socio: "Very High", wtp: "₹35", carbon: "320", heat: "-2.8", water: "12k",
                 bars: { gov: 90, who: 75, infra: 88 },
                 review: "Strong collective action from local NGOs. Good survival rate of native flora. The PPP model is highly active with clear socio-economic benefits for vendors."
             },
             jharkhand: { 
-                center: [23.6102, 85.2799], zoom: 8, title: "NVY Jharkhand",
-                eco: "7.1", socio: "Medium", wtp: "₹15",
+                center: [23.6102, 85.2799], zoom: 7, title: "NVY Jharkhand",
+                eco: "7.1", socio: "Medium", wtp: "₹15", carbon: "410", heat: "-1.9", water: "18k",
                 bars: { gov: 70, who: 60, infra: 65 },
                 review: "Rich biodiversity observed, but minor resource conflicts regarding firewood collection exist. Water harvesting structures require maintenance before summer."
             },
             andhra: { 
-                center: [15.9129, 79.7400], zoom: 7, title: "NVY Andhra Pradesh",
-                eco: "7.5", socio: "High", wtp: "₹20",
+                center: [15.9129, 79.7400], zoom: 6, title: "NVY Andhra Pradesh",
+                eco: "7.5", socio: "High", wtp: "₹20", carbon: "290", heat: "-2.1", water: "8k",
                 bars: { gov: 80, who: 70, infra: 75 },
                 review: "Excellent progress on formal boundary demarcation. High community willingness to pay (CVM), but informal vendors request better designated spaces."
             },
             mp: { 
-                center: [22.9734, 78.6569], zoom: 7, title: "NVY Madhya Pradesh",
-                eco: "8.0", socio: "High", wtp: "₹30",
+                center: [22.9734, 78.6569], zoom: 6, title: "NVY Madhya Pradesh",
+                eco: "8.0", socio: "High", wtp: "₹30", carbon: "220", heat: "-3.1", water: "7k",
                 bars: { gov: 85, who: 65, infra: 80 },
                 review: "Great improvements in urban cooling and physical capital (pathways, lights). KIIs show seamless coordination between Forest Dept and ULBs."
             }
         };
 
-        // --- MAP INITIALIZATION ---
+        // --- MAP INITIALIZATION (WITH EXTENDED INDIA BOUNDS) ---
         var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
         
+        // Restrict map to India boundaries (Expanded North to fully include J&K and Ladakh)
+        var southWest = L.latLng(6.0, 68.0);
+        var northEast = L.latLng(38.5, 97.5);
+        var bounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(bounds);
+        map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors',
-            maxZoom: 19
+            minZoom: 4,
+            maxZoom: 18
         }).addTo(map);
 
         var markers = L.layerGroup().addTo(map);
@@ -341,37 +347,32 @@
             var selected = document.getElementById('state-selector').value;
             var data = siteData[selected];
             
-            // 1. Update Map Position & Markers
             map.flyTo(data.center, data.zoom, { duration: 1.5 });
             drawMarkers(selected);
             document.getElementById('map-title').innerText = "Thematic Map: " + data.title;
             
-            // 2. Update Dynamic Live Samples
             if (window.liveData) {
                 let currentCount = window.liveData.sites[selected] || 0;
                 document.getElementById('metric-samples').innerText = currentCount;
             }
 
-            // 3. Update Other Metrics
             document.getElementById('metric-eco').innerText = data.eco;
             document.getElementById('metric-socio').innerText = data.socio;
             document.getElementById('metric-wtp').innerText = data.wtp;
+            document.getElementById('metric-carbon').innerText = data.carbon;
+            document.getElementById('metric-heat').innerText = data.heat;
+            document.getElementById('metric-water').innerText = data.water;
 
-            // 4. Update Progress Bars
             document.getElementById('bar-gov').style.width = data.bars.gov + "%";
             document.getElementById('bar-gov-val').innerText = data.bars.gov + "%";
-            
             document.getElementById('bar-who').style.width = data.bars.who + "%";
             document.getElementById('bar-who-val').innerText = data.bars.who + "%";
-            
             document.getElementById('bar-infra').style.width = data.bars.infra + "%";
             document.getElementById('bar-infra-val').innerText = data.bars.infra + "%";
 
-            // 5. Update Review Text
             document.getElementById('site-review').innerText = data.review;
             document.getElementById('panel-title').innerText = data.title + " Metrics";
 
-            // 6. Fetch Local Air Quality for this Center Point
             fetchAirQuality(data.center[0], data.center[1]);
         }
 
@@ -379,96 +380,176 @@
         async function fetchLiveSampleCount() {
             if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
                 document.getElementById('metric-samples').innerText = "0";
-                fetchAirQuality(siteData.overview.center[0], siteData.overview.center[1]); // Fetch AQI even if Sheet API missing
+                fetchAirQuality(siteData.overview.center[0], siteData.overview.center[1]);
                 return; 
             }
             try {
                 document.getElementById('metric-samples').innerText = "...";
                 let response = await fetch(GOOGLE_SHEET_API_URL);
                 let text = await response.text(); 
-                
                 try {
                     let parsedData = JSON.parse(text);
                     if(parsedData.total !== undefined) {
                         window.liveData = parsedData;
-                        updateDashboard(); // Refreshes the UI, Map & triggers AQI fetch
+                        updateDashboard();
                     } else if (parsedData.error) {
                         document.getElementById('metric-samples').innerText = "Script Err";
-                        console.error("Google Script Error:", parsedData.error);
                     }
-                } catch (parseError) {
-                    document.getElementById('metric-samples').innerText = "Auth Blocked";
-                }
-            } catch (error) {
-                console.error("Error fetching live data:", error);
-                document.getElementById('metric-samples').innerText = "Network Err";
-            }
+                } catch (e) { document.getElementById('metric-samples').innerText = "Blocked"; }
+            } catch (e) { document.getElementById('metric-samples').innerText = "Net Err"; }
         }
 
-        // --- FETCH LIVE AIR QUALITY (OPEN AQ API) ---
+        // --- RELIABLE AIR QUALITY API (OPEN-METEO) ---
         async function fetchAirQuality(lat, lon) {
             try {
                 document.getElementById('metric-aqi').innerText = "...";
-                document.getElementById('aqi-status').innerText = "Connecting to satellite data...";
+                document.getElementById('aqi-status').innerText = "Fetching satellite data...";
                 document.getElementById('aqi-status').style.color = "gray";
 
-                // OpenAQ API fetching data within 25km radius
-                let url = `https://api.openaq.org/v2/latest?coordinates=${lat},${lon}&radius=25000&parameter=pm25`;
+                // Open-Meteo Air Quality API (No API Key Required)
+                let url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=pm2_5`;
                 
                 let response = await fetch(url);
                 let data = await response.json();
 
-                if (data.results && data.results.length > 0) {
-                    let pm25 = data.results[0].measurements[0].value;
+                if (data.current && data.current.pm2_5 !== undefined) {
+                    let pm25 = data.current.pm2_5;
                     document.getElementById('metric-aqi').innerText = pm25.toFixed(1);
                     
                     if(pm25 <= 15) {
                         document.getElementById('aqi-status').innerText = "🟢 Excellent Air Quality";
                         document.getElementById('aqi-status').style.color = "green";
-                    }
-                    else if(pm25 <= 35) {
+                    } else if(pm25 <= 35) {
                         document.getElementById('aqi-status').innerText = "🟡 Moderate Air Quality";
                         document.getElementById('aqi-status').style.color = "orange";
-                    }
-                    else {
+                    } else {
                         document.getElementById('aqi-status').innerText = "🔴 Poor Air Quality";
                         document.getElementById('aqi-status').style.color = "red";
                     }
                 } else {
                     document.getElementById('metric-aqi').innerText = "N/A";
-                    document.getElementById('aqi-status').innerText = "No active sensors in 25km radius.";
-                    document.getElementById('aqi-status').style.color = "gray";
+                    document.getElementById('aqi-status').innerText = "Data unavailable.";
                 }
             } catch (err) {
-                console.error("OpenAQ Error:", err);
+                console.error("AQI Fetch Error:", err);
                 document.getElementById('metric-aqi').innerText = "Err";
-                document.getElementById('aqi-status').innerText = "API Connection failed.";
+                document.getElementById('aqi-status').innerText = "Connection failed.";
             }
         }
 
-        // --- PUBLIC CITIZEN SCIENCE MODAL LOGIC ---
-        function openPublicModal() {
-            document.getElementById('public-modal').classList.remove('hidden');
-        }
+        // ==========================================
+        // AI IMAGE CHECKER (TENSORFLOW.JS MOBILENET)
+        // ==========================================
+        let aiModel = null;
         
-        function closePublicModal() {
-            document.getElementById('public-modal').classList.add('hidden');
+        mobilenet.load().then(model => {
+            aiModel = model;
+            console.log("AI Model Loaded successfully.");
+        });
+
+        function handleAIUpload(input) {
+            let statusBox = document.getElementById('ai-status-box');
+            statusBox.classList.remove('hidden');
+            
+            if (!aiModel) { 
+                statusBox.innerText = "⏳ AI Engine is still loading, please wait 3 seconds and try again.";
+                statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-yellow-100 text-yellow-800 block";
+                return; 
+            }
+            
+            let file = input.files[0];
+            if (!file) return;
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    statusBox.innerText = "🔍 AI is scanning the image...";
+                    statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-blue-100 text-blue-800 block animate-pulse";
+                    
+                    aiModel.classify(img).then(predictions => {
+                        console.log(predictions);
+                        let isNature = predictions.some(p => p.className.match(/tree|plant|leaf|forest|wood|park|flower|grass|daisy|pot|lake|valley|greenhouse/i));
+                        
+                        if(isNature) {
+                            statusBox.innerText = `✅ AI Verified: Nature Image Accepted! (+50 Points)`;
+                            statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-green-100 text-green-800 block";
+                            document.getElementById('pub-status').innerText = "Reward: 150 Green Points";
+                        } else {
+                            statusBox.innerText = `❌ AI Rejected: This looks like a '${predictions[0].className.split(',')[0]}'. Please upload a real park or tree photo.`;
+                            statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-red-100 text-red-800 block";
+                            input.value = ""; 
+                            document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
+                        }
+                    });
+                }
+            }
+            reader.readAsDataURL(file);
         }
+
+        // --- PUBLIC MODAL LOGIC (CASCADING DROPDOWNS) ---
+        const vanList = {
+            "Gujarat": ["Dholera Nagar Van", "Rajkot City Forest", "Surat Smriti Van"],
+            "Jharkhand": ["Ranchi Eco Park", "Bokaro Steel City Van", "Dhanbad Green Lung"],
+            "Andhra Pradesh": ["Vizag Coastal Van", "Tirupati Hill Forest", "Vijayawada Park"],
+            "Madhya Pradesh": ["Bhopal Central Van", "Indore Lake Forest", "Gwalior Vatika"]
+        };
+
+        function updateVanDropdown() {
+            let stateSelect = document.getElementById('pub-state').value;
+            let vanSelect = document.getElementById('pub-van');
+            let otherInput = document.getElementById('pub-other-van');
+            
+            vanSelect.innerHTML = '<option value="">-- Choose Nagar Van --</option>';
+            otherInput.classList.add('hidden');
+            otherInput.value = "";
+
+            if (stateSelect === "") {
+                vanSelect.disabled = true;
+                vanSelect.classList.add('bg-gray-50');
+            } else if (stateSelect === "Other") {
+                vanSelect.disabled = false;
+                vanSelect.classList.remove('bg-gray-50');
+                vanSelect.innerHTML += '<option value="Other">Other (I will type it)</option>';
+            } else {
+                vanSelect.disabled = false;
+                vanSelect.classList.remove('bg-gray-50');
+                let vans = vanList[stateSelect] || [];
+                vans.forEach(van => {
+                    vanSelect.innerHTML += `<option value="${van}">${van}</option>`;
+                });
+                vanSelect.innerHTML += '<option value="Other">Other (I will type it)</option>';
+            }
+        }
+
+        function checkOtherVan() {
+            let vanSelect = document.getElementById('pub-van').value;
+            let otherInput = document.getElementById('pub-other-van');
+            if (vanSelect === "Other") {
+                otherInput.classList.remove('hidden');
+            } else {
+                otherInput.classList.add('hidden');
+            }
+        }
+
+        function openPublicModal() { document.getElementById('public-modal').classList.remove('hidden'); }
+        function closePublicModal() { document.getElementById('public-modal').classList.add('hidden'); }
         
         function setStars(num) {
             document.getElementById('pub-stars').value = num;
             let stars = document.getElementById('star-rating').children;
-            for(let i=0; i<5; i++) {
-                stars[i].style.color = i < num ? '#facc15' : '#d1d5db';
-            }
+            for(let i=0; i<5; i++) stars[i].style.color = i < num ? '#facc15' : '#d1d5db';
         }
         
         function submitPublicData() {
             document.getElementById('pub-status').innerText = "Submitting securely...";
             setTimeout(() => {
-                alert("Thank you! You just earned 150 Green Points. Your data is pending verification. Once verified, we will count these points towards planting a native tree in your name!");
+                let pts = document.getElementById('pub-status').innerText.includes("150") ? "150" : "100";
+                alert(`Thank you! You just earned ${pts} Green Points. Once verified, we will count these points towards planting a native tree in your name!`);
                 closePublicModal();
                 document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
+                document.getElementById('ai-status-box').classList.add('hidden');
             }, 1000);
         }
 
