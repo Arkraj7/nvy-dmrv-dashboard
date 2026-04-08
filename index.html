@@ -18,6 +18,11 @@
         .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
         .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        
+        /* Media Gallery Scrollbar */
+        .media-scroll::-webkit-scrollbar { height: 8px; }
+        .media-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .media-scroll::-webkit-scrollbar-thumb { background: #5dc48a; border-radius: 4px; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -27,14 +32,18 @@
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🌳</span>
-                    <span class="font-bold text-xl tracking-wide hidden sm:block">Nagar Van DMRV Dashboard</span>
+                    <span class="font-bold text-xl tracking-wide hidden sm:block">Nagar Van DMRV</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
-                        ✨ Public: Earn Points!
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="openAboutModal()" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors">
+                        About Project
                     </button>
                     
-                    <a href="survey.html" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-4 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
+                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
+                        ✨ Earn Points
+                    </button>
+                    
+                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
                         📝 Collect Data (Admin)
                     </a>
                 </div>
@@ -120,10 +129,9 @@
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
-            
             <div class="xl:col-span-2 glass-panel p-4 flex flex-col relative">
                 <div class="flex justify-between items-center mb-3 px-2">
-                    <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview (Nagar Van Study)</h2>
                 </div>
                 <div id="map"></div>
                 
@@ -177,6 +185,72 @@
             </div>
         </div>
 
+        <div class="glass-panel p-6 mb-8">
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-2">📸 Field Media Gallery</h2>
+            <p class="text-sm text-gray-500 mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits.</p>
+            
+            <div class="flex overflow-x-auto gap-4 pb-4 media-scroll">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Ranchi Eco Park, Jharkhand</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Dholera Nagar Van, Gujarat</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-[#f0f7f3] border-2 border-dashed border-[#5dc48a] rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-[#e4f0e9] transition-colors">
+                    <span class="text-3xl mb-2">➕</span>
+                    <span class="text-sm font-bold text-[#2d6a4f]">Paste/Add Media</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="glass-panel p-6 mb-8 bg-gray-50 border-t-4 border-[#1b3a2d]">
+            <h3 class="text-lg font-bold text-[#1b3a2d] mb-2">About This Study</h3>
+            <p class="text-sm text-gray-700 mb-6 border-b pb-4">
+                This study is comprehensive to understand the essence of Nagar Vans and Nagar Vatikas. It aims to evaluate their true impact on urban ecology, biodiversity, and community well-being, driving grassroots policy change and promoting sustainable urban environments.
+            </p>
+            
+            <h4 class="text-md font-bold text-gray-800 mb-3">Metrics Importance & Formulas</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-gray-600">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Live Survey Samples:</strong><br>
+                    Real-time count of inputs reflecting active community and field-level engagement.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Air Quality (PM2.5):</strong><br>
+                    Measures fine particulate matter mitigation. Vital for assessing public health benefits of urban forests.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Carbon Sequestration:</strong><br>
+                    <em>Formula:</em> Biomass × 0.47. Indicates the total CO₂ equivalent absorbed, crucial for climate action goals.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Urban Heat Reduction:</strong><br>
+                    <em>Formula:</em> ΔT (°C) Local vs Surrounding. Highlights micro-climate cooling to combat Urban Heat Islands.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Water Recharged:</strong><br>
+                    <em>Formula:</em> Catchment Area × Rainfall × Runoff Coefficient. Shows contribution to local water tables.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Ecological Index:</strong><br>
+                    Composite scale (0-10) assessing native tree density, species richness, and habitat quality.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Socio-Economic:</strong><br>
+                    Evaluates non-timber forest product utility, eco-tourism potential, and vendor livelihoods generated.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Avg. WTP (CVM):</strong><br>
+                    <em>Contingent Valuation Method.</em> The average monetary value citizens are willing to pay for maintenance.
+                </div>
+            </div>
+        </footer>
     </div>
 
     <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
@@ -185,7 +259,7 @@
             <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-white sticky top-0 z-10">
                 <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none">&times;</button>
                 <h2 class="text-xl font-extrabold">🌱 Join the Green Movement</h2>
-                <p class="text-xs mt-1 opacity-90">Share your experience, upload a photo, and earn points. Every 500 points = we will plant 1 native tree in your name!</p>
+                <p class="text-xs mt-1 opacity-90">Share your experience, upload a photo, and earn points. <strong>Every 500 points = we will plant 1 native tree in your name!</strong> Your experience and review will be helpful for further improvement and enhancement. Share the moments you have experienced with Nagar Van!</p>
             </div>
 
             <div class="p-5 space-y-4">
@@ -196,14 +270,45 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Select State</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Select State/UT</label>
                         <select id="pub-state" onchange="updateVanDropdown()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
                             <option value="">-- Choose State --</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Jharkhand">Jharkhand</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
                             <option value="Madhya Pradesh">Madhya Pradesh</option>
-                            <option value="Other">Other State</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Andaman and Nicobar">Andaman and Nicobar</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
                         </select>
                     </div>
                     <div>
@@ -251,13 +356,46 @@
         </div>
     </div>
 
+    <div id="about-modal" class="fixed inset-0 bg-black bg-opacity-70 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[95vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeAboutModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none z-10">&times;</button>
+            
+            <div class="p-8">
+                <div class="flex flex-col md:flex-row gap-6 items-center md:items-start mb-6">
+                    <div class="w-32 h-32 bg-[#e4f0e9] rounded-full flex items-center justify-center text-5xl flex-shrink-0 border-4 border-[#5dc48a]">
+                        👨‍🔬
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-[#1b3a2d]">Arkraj Biswas</h2>
+                        <p class="text-[#5dc48a] font-bold text-lg mb-2">Research Associate & Environmental Policy Advocate</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Welcome! This initiative is a stepping stone towards actionable grassroots implementation and driving localized policy change. My core motivation is bridging the gap between national environmental goals and on-ground ecological realities.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 text-sm text-gray-700">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h3 class="font-bold text-[#1b3a2d] mb-1 text-base">Academic & Professional Background</h3>
+                        <p>I hold a Master of Science in Environmental and Sustainable Development (Earth and Atmospheric Sciences) from Banaras Hindu University, and a Bachelor of Science in Agricultural Sciences. As the founder of the Ecoserve Development Foundation and through my ongoing work with the Embark India Development Fellowship placed at National CAMPA, my focus revolves around the Nagar Van Yojana, ecosystem restoration, and building robust Digital Monitoring, Reporting, and Verification (DMRV) tools.</p>
+                    </div>
+
+                    <div class="bg-[#f0f7f3] p-4 rounded-lg border border-[#a8c4b0]">
+                        <h3 class="font-bold text-[#2d6a4f] mb-1 text-base">Vision for a Viksit Bharat & Sustainability</h3>
+                        <p>India’s commitment to its Nationally Determined Contributions (NDCs) requires decentralized, data-driven action. Urban forestry via Nagar Vans and Nagar Vatikas represents a crucial strategy to create carbon sinks, combat the Urban Heat Island effect, and foster community resilience. This platform empowers citizens, local authorities, and policymakers to monitor real-time metrics, driving us collectively towards a truly sustainable and developed nation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script>
         // ==========================================
         // CONFIGURATION
         // ==========================================
-        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
 
@@ -295,10 +433,9 @@
             }
         };
 
-        // --- MAP INITIALIZATION (WITH EXTENDED INDIA BOUNDS) ---
+        // --- MAP INITIALIZATION ---
         var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
         
-        // Restrict map to India boundaries (Expanded North to fully include J&K and Ladakh)
         var southWest = L.latLng(6.0, 68.0);
         var northEast = L.latLng(38.5, 97.5);
         var bounds = L.latLngBounds(southWest, northEast);
@@ -313,7 +450,6 @@
 
         var markers = L.layerGroup().addTo(map);
 
-        // --- MAP DYNAMIC DATA PLOTTING ---
         function drawMarkers(state) {
             markers.clearLayers();
             if (!window.liveData || !window.liveData.locations) return;
@@ -342,14 +478,13 @@
             });
         }
 
-        // --- DASHBOARD UPDATER ---
         function updateDashboard() {
             var selected = document.getElementById('state-selector').value;
             var data = siteData[selected];
             
             map.flyTo(data.center, data.zoom, { duration: 1.5 });
             drawMarkers(selected);
-            document.getElementById('map-title').innerText = "Thematic Map: " + data.title;
+            document.getElementById('map-title').innerText = "Thematic Map: " + data.title + " (Nagar Van Study)";
             
             if (window.liveData) {
                 let currentCount = window.liveData.sites[selected] || 0;
@@ -376,7 +511,6 @@
             fetchAirQuality(data.center[0], data.center[1]);
         }
 
-        // --- FETCH LIVE TOTAL FROM GOOGLE SHEETS ---
         async function fetchLiveSampleCount() {
             if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
                 document.getElementById('metric-samples').innerText = "0";
@@ -399,14 +533,12 @@
             } catch (e) { document.getElementById('metric-samples').innerText = "Net Err"; }
         }
 
-        // --- RELIABLE AIR QUALITY API (OPEN-METEO) ---
         async function fetchAirQuality(lat, lon) {
             try {
                 document.getElementById('metric-aqi').innerText = "...";
                 document.getElementById('aqi-status').innerText = "Fetching satellite data...";
                 document.getElementById('aqi-status').style.color = "gray";
 
-                // Open-Meteo Air Quality API (No API Key Required)
                 let url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=pm2_5`;
                 
                 let response = await fetch(url);
@@ -438,7 +570,7 @@
         }
 
         // ==========================================
-        // AI IMAGE CHECKER (TENSORFLOW.JS MOBILENET)
+        // AI IMAGE CHECKER
         // ==========================================
         let aiModel = null;
         
@@ -488,12 +620,18 @@
             reader.readAsDataURL(file);
         }
 
-        // --- PUBLIC MODAL LOGIC (CASCADING DROPDOWNS) ---
+        // --- PUBLIC MODAL LOGIC & EXTENDED VAN LIST ---
         const vanList = {
+            "Andhra Pradesh": ["Vizag Coastal Van", "Tirupati Hill Forest", "Vijayawada Park"],
+            "Delhi": ["Asola Bhatti Eco Park", "Garhi Mandu Nagar Van", "Tughlaqabad Forest"],
             "Gujarat": ["Dholera Nagar Van", "Rajkot City Forest", "Surat Smriti Van"],
             "Jharkhand": ["Ranchi Eco Park", "Bokaro Steel City Van", "Dhanbad Green Lung"],
-            "Andhra Pradesh": ["Vizag Coastal Van", "Tirupati Hill Forest", "Vijayawada Park"],
-            "Madhya Pradesh": ["Bhopal Central Van", "Indore Lake Forest", "Gwalior Vatika"]
+            "Karnataka": ["Turahalli Urban Forest", "Jarakabande Kaval", "Mysore City Forest"],
+            "Madhya Pradesh": ["Bhopal Central Van", "Indore Lake Forest", "Gwalior Vatika"],
+            "Maharashtra": ["Warje Urban Forest", "Aarey Eco Park", "Nagpur Smriti Van"],
+            "Uttar Pradesh": ["Lucknow Kukrail Reserve", "Noida City Forest", "Kanpur Nagar Vatika"],
+            "West Bengal": ["New Town Eco Park", "Kolkata Green Lung", "Siliguri Salugara Van"]
+            // Add arrays for all other states here as needed
         };
 
         function updateVanDropdown() {
@@ -508,17 +646,15 @@
             if (stateSelect === "") {
                 vanSelect.disabled = true;
                 vanSelect.classList.add('bg-gray-50');
-            } else if (stateSelect === "Other") {
-                vanSelect.disabled = false;
-                vanSelect.classList.remove('bg-gray-50');
-                vanSelect.innerHTML += '<option value="Other">Other (I will type it)</option>';
             } else {
                 vanSelect.disabled = false;
                 vanSelect.classList.remove('bg-gray-50');
                 let vans = vanList[stateSelect] || [];
-                vans.forEach(van => {
-                    vanSelect.innerHTML += `<option value="${van}">${van}</option>`;
-                });
+                if (vans.length > 0) {
+                    vans.forEach(van => {
+                        vanSelect.innerHTML += `<option value="${van}">${van}</option>`;
+                    });
+                }
                 vanSelect.innerHTML += '<option value="Other">Other (I will type it)</option>';
             }
         }
@@ -533,8 +669,11 @@
             }
         }
 
+        // MODAL TOGGLES
         function openPublicModal() { document.getElementById('public-modal').classList.remove('hidden'); }
         function closePublicModal() { document.getElementById('public-modal').classList.add('hidden'); }
+        function openAboutModal() { document.getElementById('about-modal').classList.remove('hidden'); }
+        function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
         
         function setStars(num) {
             document.getElementById('pub-stars').value = num;
@@ -546,7 +685,7 @@
             document.getElementById('pub-status').innerText = "Submitting securely...";
             setTimeout(() => {
                 let pts = document.getElementById('pub-status').innerText.includes("150") ? "150" : "100";
-                alert(`Thank you! You just earned ${pts} Green Points. Once verified, we will count these points towards planting a native tree in your name!`);
+                alert(`Thank you! You just earned ${pts} Green Points. Your experience and review will be helpful for further improvement and enhancement. Once verified, we will count these points towards planting a native tree in your name!`);
                 closePublicModal();
                 document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
                 document.getElementById('ai-status-box').classList.add('hidden');
