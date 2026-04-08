@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nagar Van DMRV Dashboard</title>
-    <!-- Tailwind CSS for Modern Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Leaflet CSS for Interactive Maps -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -22,18 +20,20 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- 1. TOP NAVIGATION -->
     <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🌳</span>
-                    <span class="font-bold text-xl tracking-wide">Nagar Van DMRV Dashboard</span>
+                    <span class="font-bold text-xl tracking-wide hidden sm:block">Nagar Van DMRV Dashboard</span>
                 </div>
-                <div>
-                    <!-- Link back to your Survey Tool -->
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm">
-                        📝 Open Survey Tool
+                <div class="flex items-center gap-3">
+                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
+                        ✨ Earn Points!
+                    </button>
+                    
+                    <a href="YOUR_SURVEY_TOOL_LINK_HERE" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-4 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
+                        📝 Admin Login
                     </a>
                 </div>
             </div>
@@ -42,7 +42,6 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- 2. HEADER & REGION SELECTOR -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <h1 class="text-3xl font-extrabold gradient-text">Site Insights & Verification</h1>
@@ -59,49 +58,54 @@
             </div>
         </div>
 
-        <!-- 3. LIVE METRICS ROW -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="glass-panel p-6 border-b-4 border-[#5dc48a]">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Live Survey Samples</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+            <div class="glass-panel p-5 border-b-4 border-[#5dc48a]">
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Live Survey Samples</h3>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
-                    <span class="text-xs text-green-700 bg-green-100 px-2 py-1 rounded-full animate-pulse">Live Sync</span>
+                    <span class="text-3xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
+                    <span class="text-[10px] text-green-700 bg-green-100 px-2 py-1 rounded-full animate-pulse">Live Sync</span>
                 </div>
             </div>
-            <div class="glass-panel p-6 border-b-4 border-blue-500">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ecological Index</h3>
+            <div class="glass-panel p-5 border-b-4 border-blue-500">
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Ecological Index</h3>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-extrabold text-blue-900" id="metric-eco">7.8</span>
-                    <span class="text-sm text-gray-500 font-bold">/ 10</span>
+                    <span class="text-3xl font-extrabold text-blue-900" id="metric-eco">7.8</span>
+                    <span class="text-xs text-gray-500 font-bold">/ 10</span>
                 </div>
             </div>
-            <div class="glass-panel p-6 border-b-4 border-purple-500">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Socio-Economic Impact</h3>
+            <div class="glass-panel p-5 border-b-4 border-purple-500">
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Socio-Economic</h3>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-extrabold text-purple-900" id="metric-socio">High</span>
+                    <span class="text-3xl font-extrabold text-purple-900" id="metric-socio">High</span>
                 </div>
             </div>
-            <div class="glass-panel p-6 border-b-4 border-orange-500">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Avg. WTP (CVM)</h3>
+            <div class="glass-panel p-5 border-b-4 border-orange-500">
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Avg. WTP (CVM)</h3>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
-                    <span class="text-sm text-gray-500 font-bold">/ mo</span>
+                    <span class="text-3xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
+                    <span class="text-xs text-gray-500 font-bold">/ mo</span>
                 </div>
+            </div>
+            
+            <div class="glass-panel p-5 border-b-4 border-teal-500 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-teal-500 text-white text-[9px] font-bold px-2 py-1 rounded-bl-lg">OPEN AQ API</div>
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Air Quality (PM2.5)</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-extrabold text-teal-900" id="metric-aqi">...</span>
+                    <span class="text-xs text-gray-500 font-bold">µg/m³</span>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-2 font-bold" id="aqi-status">Connecting sensor...</p>
             </div>
         </div>
 
-        <!-- 4. MAP & INDICATORS SECTION -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
             
-            <!-- Interactive Map -->
             <div class="xl:col-span-2 glass-panel p-4 flex flex-col relative">
                 <div class="flex justify-between items-center mb-3 px-2">
                     <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview</h2>
                 </div>
-                <!-- Map Container -->
                 <div id="map"></div>
                 
-                <!-- Custom CSS Map Legend -->
                 <div class="absolute bottom-6 left-6 map-legend z-[1000]">
                     <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
                     <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
@@ -110,12 +114,10 @@
                 </div>
             </div>
 
-            <!-- Indicator Metrics Panel -->
             <div class="glass-panel p-6">
                 <h2 class="text-lg font-bold text-[#1b3a2d] mb-6" id="panel-title">Regional Metrics</h2>
                 
                 <div class="space-y-5" id="indicator-bars">
-                    <!-- Progress Bar 1 -->
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="font-bold text-gray-700">Governance (PPP Efficacy)</span>
@@ -125,7 +127,6 @@
                             <div class="bg-[#5dc48a] h-2.5 rounded-full transition-all duration-1000" id="bar-gov" style="width: 85%"></div>
                         </div>
                     </div>
-                    <!-- Progress Bar 2 -->
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="font-bold text-gray-700">Community Well-being (WHO-5)</span>
@@ -135,7 +136,6 @@
                             <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000" id="bar-who" style="width: 68%"></div>
                         </div>
                     </div>
-                    <!-- Progress Bar 3 -->
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="font-bold text-gray-700">Infrastructure Quality</span>
@@ -156,56 +156,101 @@
             </div>
         </div>
 
-        <!-- 5. MEDIA GALLERY SECTION -->
         <div class="glass-panel p-6">
             <div class="flex justify-between items-center mb-6 border-b pb-3">
                 <h2 class="text-xl font-bold text-[#1b3a2d]">Site Media & Evidence</h2>
                 <p class="text-sm text-gray-500">Photos & Videos from the field</p>
             </div>
             
-            <!-- Replace the 'src' in these image tags with your Google Drive direct links -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="media-gallery">
-                
-                <!-- Example Photo 1 -->
                 <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
                     <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Forest Canopy">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
                         Canopy Cover (Gujarat)
                     </div>
                 </div>
-
-                <!-- Example Photo 2 -->
                 <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
                     <img src="https://images.unsplash.com/photo-1541427468627-a46bea1fb6cb?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Pathways">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
                         New Pathways (MP)
                     </div>
                 </div>
-
-                <!-- Example Video Format (Using an HTML5 video tag) -->
                 <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video bg-black flex items-center justify-center">
-                    <!-- Replace the src with an actual video link if you have one -->
                     <video controls class="w-full h-full object-cover">
                         <source src="YOUR_VIDEO_LINK_HERE.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
                     <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">VIDEO</div>
                 </div>
-
-                <!-- Example Photo 4 -->
                 <div class="relative group rounded-lg overflow-hidden border border-gray-200 shadow-sm aspect-video">
                     <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" alt="Water Body">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white text-xs font-bold p-3 pt-8">
                         Water Harvesting (Jharkhand)
                     </div>
                 </div>
-                
             </div>
         </div>
-
     </div>
 
-    <!-- Leaflet JS for Map functionality -->
+    <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4 shadow-2xl relative">
+            
+            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-6 text-white sticky top-0 z-10">
+                <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none">&times;</button>
+                <h2 class="text-2xl font-extrabold">🌱 Join the Green Movement</h2>
+                <p class="text-sm mt-1 opacity-90">Share your experience, upload a photo, and earn points. Every 500 points = we will plant 1 native tree in your name!</p>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Name</label>
+                    <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Select Nagar Van Location</label>
+                    <select id="pub-site" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <option value="Gujarat">Gujarat NVY</option>
+                        <option value="Jharkhand">Jharkhand NVY</option>
+                        <option value="Andhra">Andhra Pradesh NVY</option>
+                        <option value="MP">Madhya Pradesh NVY</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Rate the Ecosystem & Aesthetics (1-5 Stars)</label>
+                    <div class="flex gap-2 text-3xl text-gray-300 cursor-pointer" id="star-rating">
+                        <span onclick="setStars(1)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span onclick="setStars(2)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span onclick="setStars(3)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span onclick="setStars(4)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span onclick="setStars(5)" class="hover:text-yellow-400 transition-colors">★</span>
+                    </div>
+                    <input type="hidden" id="pub-stars" value="0">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review</label>
+                    <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you, the local biodiversity, or your livelihood..."></textarea>
+                </div>
+
+                <div class="bg-[#f0f7f3] p-5 rounded-lg border-2 border-[#a8c4b0] flex flex-col items-center justify-center border-dashed">
+                    <label class="text-sm font-bold text-[#2d6a4f] mb-2 cursor-pointer text-center">
+                        📸 Upload Photo for Verification (+50 Points)
+                        <input type="file" accept="image/*" class="hidden" onchange="alert('In production, this will upload to your backend database!')">
+                    </label>
+                    <p class="text-xs text-[#3a8a65] text-center">Upload a picture of trees, wildlife, or community activities.</p>
+                </div>
+            </div>
+
+            <div class="p-5 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
+                <span class="text-sm text-gray-600 font-bold" id="pub-status">Reward: 100 Base Points</span>
+                <button onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-6 py-2.5 rounded-lg font-bold transition-colors shadow-md">
+                    🚀 Submit & Earn Points
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // ==========================================
@@ -255,7 +300,6 @@
         // --- MAP INITIALIZATION ---
         var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
         
-        // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors',
             maxZoom: 19
@@ -266,24 +310,19 @@
         // --- MAP DYNAMIC DATA PLOTTING ---
         function drawMarkers(state) {
             markers.clearLayers();
-            
             if (!window.liveData || !window.liveData.locations) return;
 
-            // Plot real coordinates from the sheet
             window.liveData.locations.forEach(loc => {
-                // Filter by selected state (unless overview is selected)
                 if (state !== 'overview' && loc.siteKey !== state) return;
 
                 let color = 'gray';
                 let fill = 'gray';
                 let typeLower = loc.type.toLowerCase();
 
-                // Dynamic coloring based on Respondent Type
                 if (typeLower.includes('visitor')) { color = 'green'; fill = 'green'; }
                 else if (typeLower.includes('vendor')) { color = 'orange'; fill = 'orange'; }
                 else if (typeLower.includes('kii') || typeLower.includes('fgd')) { color = 'blue'; fill = 'blue'; }
 
-                // Popup Data Setup
                 let popupContent = `
                     <div class="font-sans">
                         <b class="text-[#1b3a2d] text-sm">${loc.rawSite}</b><br>
@@ -331,16 +370,18 @@
             // 5. Update Review Text
             document.getElementById('site-review').innerText = data.review;
             document.getElementById('panel-title').innerText = data.title + " Metrics";
+
+            // 6. Fetch Local Air Quality for this Center Point
+            fetchAirQuality(data.center[0], data.center[1]);
         }
 
         // --- FETCH LIVE TOTAL FROM GOOGLE SHEETS ---
         async function fetchLiveSampleCount() {
-            // Prevent error if URL isn't pasted yet
             if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
                 document.getElementById('metric-samples').innerText = "0";
+                fetchAirQuality(siteData.overview.center[0], siteData.overview.center[1]); // Fetch AQI even if Sheet API missing
                 return; 
             }
-
             try {
                 document.getElementById('metric-samples').innerText = "...";
                 let response = await fetch(GOOGLE_SHEET_API_URL);
@@ -350,14 +391,13 @@
                     let parsedData = JSON.parse(text);
                     if(parsedData.total !== undefined) {
                         window.liveData = parsedData;
-                        updateDashboard(); // Refreshes the UI & Map with new data
+                        updateDashboard(); // Refreshes the UI, Map & triggers AQI fetch
                     } else if (parsedData.error) {
-                        document.getElementById('metric-samples').innerText = "Error";
+                        document.getElementById('metric-samples').innerText = "Script Err";
                         console.error("Google Script Error:", parsedData.error);
                     }
                 } catch (parseError) {
                     document.getElementById('metric-samples').innerText = "Auth Blocked";
-                    console.error("Blocked by Google Auth. Check 'Execute as: Me' in Deployment.");
                 }
             } catch (error) {
                 console.error("Error fetching live data:", error);
@@ -365,8 +405,76 @@
             }
         }
 
-        // Trigger fetch on load
+        // --- FETCH LIVE AIR QUALITY (OPEN AQ API) ---
+        async function fetchAirQuality(lat, lon) {
+            try {
+                document.getElementById('metric-aqi').innerText = "...";
+                document.getElementById('aqi-status').innerText = "Connecting to satellite data...";
+                document.getElementById('aqi-status').style.color = "gray";
+
+                // OpenAQ API fetching data within 25km radius
+                let url = `https://api.openaq.org/v2/latest?coordinates=${lat},${lon}&radius=25000&parameter=pm25`;
+                
+                let response = await fetch(url);
+                let data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    let pm25 = data.results[0].measurements[0].value;
+                    document.getElementById('metric-aqi').innerText = pm25.toFixed(1);
+                    
+                    if(pm25 <= 15) {
+                        document.getElementById('aqi-status').innerText = "🟢 Excellent Air Quality";
+                        document.getElementById('aqi-status').style.color = "green";
+                    }
+                    else if(pm25 <= 35) {
+                        document.getElementById('aqi-status').innerText = "🟡 Moderate Air Quality";
+                        document.getElementById('aqi-status').style.color = "orange";
+                    }
+                    else {
+                        document.getElementById('aqi-status').innerText = "🔴 Poor Air Quality";
+                        document.getElementById('aqi-status').style.color = "red";
+                    }
+                } else {
+                    document.getElementById('metric-aqi').innerText = "N/A";
+                    document.getElementById('aqi-status').innerText = "No active sensors in 25km radius.";
+                    document.getElementById('aqi-status').style.color = "gray";
+                }
+            } catch (err) {
+                console.error("OpenAQ Error:", err);
+                document.getElementById('metric-aqi').innerText = "Err";
+                document.getElementById('aqi-status').innerText = "API Connection failed.";
+            }
+        }
+
+        // --- PUBLIC CITIZEN SCIENCE MODAL LOGIC ---
+        function openPublicModal() {
+            document.getElementById('public-modal').classList.remove('hidden');
+        }
+        
+        function closePublicModal() {
+            document.getElementById('public-modal').classList.add('hidden');
+        }
+        
+        function setStars(num) {
+            document.getElementById('pub-stars').value = num;
+            let stars = document.getElementById('star-rating').children;
+            for(let i=0; i<5; i++) {
+                stars[i].style.color = i < num ? '#facc15' : '#d1d5db';
+            }
+        }
+        
+        function submitPublicData() {
+            document.getElementById('pub-status').innerText = "Submitting securely...";
+            setTimeout(() => {
+                alert("Thank you! You just earned 150 Green Points. Your data is pending verification. Once verified, we will count these points towards planting a native tree in your name!");
+                closePublicModal();
+                document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
+            }, 1000);
+        }
+
+        // Trigger initial data fetch on load
         fetchLiveSampleCount();
+
     </script>
 </body>
 </html>
