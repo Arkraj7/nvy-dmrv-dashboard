@@ -187,7 +187,7 @@
 
         <div class="glass-panel p-6 mb-8">
             <h2 class="text-xl font-bold text-[#1b3a2d] mb-2">📸 Field Media Gallery</h2>
-            <p class="text-sm text-gray-500 mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits.</p>
+            <p class="text-sm text-gray-500 mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)</p>
             
             <div class="flex overflow-x-auto gap-4 pb-4 media-scroll">
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
@@ -196,17 +196,15 @@
                         <p class="text-white text-xs font-bold">Ranchi Eco Park, Jharkhand</p>
                     </div>
                 </div>
+                
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
                     <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
                         <p class="text-white text-xs font-bold">Dholera Nagar Van, Gujarat</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-[#f0f7f3] border-2 border-dashed border-[#5dc48a] rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-[#e4f0e9] transition-colors">
-                    <span class="text-3xl mb-2">➕</span>
-                    <span class="text-sm font-bold text-[#2d6a4f]">Paste/Add Media</span>
+
                 </div>
-            </div>
         </div>
 
         <footer class="glass-panel p-6 mb-8 bg-gray-50 border-t-4 border-[#1b3a2d]">
@@ -274,41 +272,15 @@
                         <select id="pub-state" onchange="updateVanDropdown()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
                             <option value="">-- Choose State --</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
-                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                            <option value="Assam">Assam</option>
-                            <option value="Bihar">Bihar</option>
-                            <option value="Chhattisgarh">Chhattisgarh</option>
-                            <option value="Goa">Goa</option>
+                            <option value="Delhi">Delhi</option>
                             <option value="Gujarat">Gujarat</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Himachal Pradesh">Himachal Pradesh</option>
                             <option value="Jharkhand">Jharkhand</option>
                             <option value="Karnataka">Karnataka</option>
-                            <option value="Kerala">Kerala</option>
                             <option value="Madhya Pradesh">Madhya Pradesh</option>
                             <option value="Maharashtra">Maharashtra</option>
-                            <option value="Manipur">Manipur</option>
-                            <option value="Meghalaya">Meghalaya</option>
-                            <option value="Mizoram">Mizoram</option>
-                            <option value="Nagaland">Nagaland</option>
-                            <option value="Odisha">Odisha</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Sikkim">Sikkim</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="Tripura">Tripura</option>
                             <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="Uttarakhand">Uttarakhand</option>
                             <option value="West Bengal">West Bengal</option>
-                            <option value="Andaman and Nicobar">Andaman and Nicobar</option>
-                            <option value="Chandigarh">Chandigarh</option>
-                            <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                            <option value="Ladakh">Ladakh</option>
-                            <option value="Lakshadweep">Lakshadweep</option>
-                            <option value="Puducherry">Puducherry</option>
+                            <option value="Other">Other State</option>
                         </select>
                     </div>
                     <div>
@@ -320,21 +292,48 @@
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Rate the Ecosystem & Aesthetics (1-5 Stars)</label>
-                    <div class="flex gap-2 text-3xl text-gray-300 cursor-pointer" id="star-rating">
-                        <span onclick="setStars(1)" class="hover:text-yellow-400 transition-colors">★</span>
-                        <span onclick="setStars(2)" class="hover:text-yellow-400 transition-colors">★</span>
-                        <span onclick="setStars(3)" class="hover:text-yellow-400 transition-colors">★</span>
-                        <span onclick="setStars(4)" class="hover:text-yellow-400 transition-colors">★</span>
-                        <span onclick="setStars(5)" class="hover:text-yellow-400 transition-colors">★</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-y border-gray-200 py-3 my-2">
+                    <div class="flex flex-col items-center">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Ecosystem & Aesthetics</label>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-eco">
+                            <span onclick="setStars('eco', 1)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('eco', 2)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('eco', 3)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('eco', 4)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('eco', 5)" class="hover:text-yellow-400 transition-colors">★</span>
+                        </div>
+                        <input type="hidden" id="eco-stars" value="0">
                     </div>
-                    <input type="hidden" id="pub-stars" value="0">
+                    
+                    <div class="flex flex-col items-center border-l border-gray-200 md:pl-2">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Cleanliness & Maintenance</label>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-clean">
+                            <span onclick="setStars('clean', 1)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('clean', 2)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('clean', 3)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('clean', 4)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('clean', 5)" class="hover:text-yellow-400 transition-colors">★</span>
+                        </div>
+                        <input type="hidden" id="clean-stars" value="0">
+                    </div>
+
+                    <div class="flex flex-col items-center border-l border-gray-200 md:pl-2">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Safety & Accessibility</label>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-safety">
+                            <span onclick="setStars('safety', 1)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('safety', 2)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('safety', 3)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('safety', 4)" class="hover:text-yellow-400 transition-colors">★</span>
+                            <span onclick="setStars('safety', 5)" class="hover:text-yellow-400 transition-colors">★</span>
+                        </div>
+                        <input type="hidden" id="safety-stars" value="0">
+                    </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review</label>
-                    <textarea id="pub-review" rows="2" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity..."></textarea>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review <span class="text-red-500 font-normal text-xs">(Min. 20 words required)</span></label>
+                    <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity. Please write at least 20 words..."></textarea>
+                    <p id="word-count-display" class="text-xs text-gray-500 text-right mt-1">Words: 0 / 20</p>
                 </div>
 
                 <div class="bg-[#f0f7f3] p-4 rounded-lg border-2 border-[#a8c4b0] flex flex-col items-center justify-center border-dashed">
@@ -342,7 +341,7 @@
                         🤖 AI Verified Photo Upload (+50 Points)
                         <input type="file" accept="image/*" class="hidden" onchange="handleAIUpload(this)">
                     </label>
-                    <p class="text-xs text-[#3a8a65] text-center mb-2">Our AI checks if the image actually contains nature, trees, or a park!</p>
+                    <p class="text-xs text-[#3a8a65] text-center mb-2">Upload a real picture of the park/nature to be sent to our secure database!</p>
                     <div id="ai-status-box" class="hidden w-full text-center p-2 rounded text-xs font-bold mt-2"></div>
                 </div>
             </div>
@@ -350,7 +349,7 @@
             <div class="p-4 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
                 <span class="text-sm text-gray-600 font-bold" id="pub-status">Reward: 100 Base Points</span>
                 <button onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
-                    🚀 Submit
+                    🚀 Submit Feedback
                 </button>
             </div>
         </div>
@@ -393,9 +392,16 @@
     
     <script>
         // ==========================================
-        // CONFIGURATION
+        // CONFIGURATION: PASTE YOUR LINKS HERE
         // ==========================================
-        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
+        
+        // 1. URL for fetching Live Admin/Survey Samples (GET request)
+        const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
+
+        // 2. URL for submitting Public Data (POST request to your newly created doPost script)
+        // REPLACE THIS STRING WITH YOUR NEW WEB APP URL
+        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
+
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
 
@@ -512,14 +518,9 @@
         }
 
         async function fetchLiveSampleCount() {
-            if(GOOGLE_SHEET_API_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
-                document.getElementById('metric-samples').innerText = "0";
-                fetchAirQuality(siteData.overview.center[0], siteData.overview.center[1]);
-                return; 
-            }
             try {
                 document.getElementById('metric-samples').innerText = "...";
-                let response = await fetch(GOOGLE_SHEET_API_URL);
+                let response = await fetch(ADMIN_DATA_API_URL);
                 let text = await response.text(); 
                 try {
                     let parsedData = JSON.parse(text);
@@ -527,10 +528,12 @@
                         window.liveData = parsedData;
                         updateDashboard();
                     } else if (parsedData.error) {
-                        document.getElementById('metric-samples').innerText = "Script Err";
+                        document.getElementById('metric-samples').innerText = "0"; 
                     }
-                } catch (e) { document.getElementById('metric-samples').innerText = "Blocked"; }
-            } catch (e) { document.getElementById('metric-samples').innerText = "Net Err"; }
+                } catch (e) { document.getElementById('metric-samples').innerText = "0"; }
+            } catch (e) { 
+                document.getElementById('metric-samples').innerText = "Offline"; 
+            }
         }
 
         async function fetchAirQuality(lat, lon) {
@@ -570,9 +573,10 @@
         }
 
         // ==========================================
-        // AI IMAGE CHECKER
+        // AI IMAGE CHECKER & IMAGE DATA HANDLER
         // ==========================================
         let aiModel = null;
+        let uploadedImageData = { base64: "", mimeType: "", fileName: "" };
         
         mobilenet.load().then(model => {
             aiModel = model;
@@ -594,6 +598,11 @@
 
             let reader = new FileReader();
             reader.onload = function(e) {
+                // Save image data for submission payload to your Apps Script
+                uploadedImageData.base64 = e.target.result.split(',')[1];
+                uploadedImageData.mimeType = file.type;
+                uploadedImageData.fileName = file.name;
+
                 let img = new Image();
                 img.src = e.target.result;
                 img.onload = function() {
@@ -601,7 +610,6 @@
                     statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-blue-100 text-blue-800 block animate-pulse";
                     
                     aiModel.classify(img).then(predictions => {
-                        console.log(predictions);
                         let isNature = predictions.some(p => p.className.match(/tree|plant|leaf|forest|wood|park|flower|grass|daisy|pot|lake|valley|greenhouse/i));
                         
                         if(isNature) {
@@ -612,6 +620,7 @@
                             statusBox.innerText = `❌ AI Rejected: This looks like a '${predictions[0].className.split(',')[0]}'. Please upload a real park or tree photo.`;
                             statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-red-100 text-red-800 block";
                             input.value = ""; 
+                            uploadedImageData = { base64: "", mimeType: "", fileName: "" }; // Clear failed upload
                             document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
                         }
                     });
@@ -631,7 +640,6 @@
             "Maharashtra": ["Warje Urban Forest", "Aarey Eco Park", "Nagpur Smriti Van"],
             "Uttar Pradesh": ["Lucknow Kukrail Reserve", "Noida City Forest", "Kanpur Nagar Vatika"],
             "West Bengal": ["New Town Eco Park", "Kolkata Green Lung", "Siliguri Salugara Van"]
-            // Add arrays for all other states here as needed
         };
 
         function updateVanDropdown() {
@@ -675,21 +683,113 @@
         function openAboutModal() { document.getElementById('about-modal').classList.remove('hidden'); }
         function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
         
-        function setStars(num) {
-            document.getElementById('pub-stars').value = num;
-            let stars = document.getElementById('star-rating').children;
+        // Multi-rating logic
+        function setStars(type, num) {
+            document.getElementById(type + '-stars').value = num;
+            let stars = document.getElementById('star-rating-' + type).children;
             for(let i=0; i<5; i++) stars[i].style.color = i < num ? '#facc15' : '#d1d5db';
         }
+
+        // Live word count display
+        document.getElementById('pub-review').addEventListener('input', function() {
+            let text = this.value.trim();
+            let wordCount = text === "" ? 0 : text.split(/\s+/).length;
+            let display = document.getElementById('word-count-display');
+            display.innerText = `Words: ${wordCount} / 20 minimum`;
+            if(wordCount >= 20) {
+                display.classList.remove('text-red-500');
+                display.classList.add('text-green-600');
+            } else {
+                display.classList.remove('text-green-600');
+                display.classList.add('text-gray-500');
+            }
+        });
         
-        function submitPublicData() {
-            document.getElementById('pub-status').innerText = "Submitting securely...";
-            setTimeout(() => {
+        // ==========================================
+        // SUBMIT PUBLIC DATA TO YOUR DOPOST SCRIPT
+        // ==========================================
+        async function submitPublicData() {
+            let name = document.getElementById('pub-name').value;
+            let state = document.getElementById('pub-state').value;
+            let vanSelect = document.getElementById('pub-van').value;
+            let vanName = vanSelect === "Other" ? document.getElementById('pub-other-van').value : vanSelect;
+            
+            // Get all three ratings
+            let ecoStars = document.getElementById('eco-stars').value;
+            let cleanStars = document.getElementById('clean-stars').value;
+            let safetyStars = document.getElementById('safety-stars').value;
+            
+            let review = document.getElementById('pub-review').value;
+
+            // Word Count Check (Minimum 20 words)
+            let wordCount = review.trim() === "" ? 0 : review.trim().split(/\s+/).length;
+
+            // Basic Validation
+            if (!name || !state || !vanName) {
+                alert("Please fill in your name, state, and select a Nagar Van!");
+                return;
+            }
+            if (ecoStars === "0" || cleanStars === "0" || safetyStars === "0") {
+                alert("Please provide a rating (1-5 stars) for all three categories!");
+                return;
+            }
+            if (wordCount < 20) {
+                alert(`Your review must be at least 20 words long. Currently, it is ${wordCount} words.`);
+                return;
+            }
+
+            if (PUBLIC_SUBMISSION_API_URL === "YOUR_PUBLIC_SUBMISSION_WEB_APP_URL_HERE") {
+                alert("Developer Note: Please configure your PUBLIC_SUBMISSION_API_URL at the top of the script.");
+                return;
+            }
+
+            document.getElementById('pub-status').innerText = "Submitting securely to Google Drive & Sheets...";
+
+            // Create payload matching your Google Apps Script JSON.parse expectations
+            let payload = {
+                name: name,
+                state: state,
+                vanName: vanName,
+                ecoRating: ecoStars,
+                cleanRating: cleanStars,
+                safetyRating: safetyStars,
+                review: review,
+                imageBase64: uploadedImageData.base64,
+                mimeType: uploadedImageData.mimeType,
+                fileName: uploadedImageData.fileName
+            };
+
+            try {
+                let response = await fetch(PUBLIC_SUBMISSION_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required if Google Apps Script is not returning specific CORS headers
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                // Alert Success
                 let pts = document.getElementById('pub-status').innerText.includes("150") ? "150" : "100";
-                alert(`Thank you! You just earned ${pts} Green Points. Your experience and review will be helpful for further improvement and enhancement. Once verified, we will count these points towards planting a native tree in your name!`);
+                alert(`Thank you! You just earned ${pts} Green Points.\n\nYour experience and review have been logged securely!`);
+                
+                // Clear Form
+                document.getElementById('pub-name').value = "";
+                document.getElementById('pub-review').value = "";
+                document.getElementById('word-count-display').innerText = "Words: 0 / 20 minimum";
+                setStars('eco', 0);
+                setStars('clean', 0);
+                setStars('safety', 0);
+                document.getElementById('ai-status-box').classList.add('hidden');
+                uploadedImageData = { base64: "", mimeType: "", fileName: "" };
                 closePublicModal();
                 document.getElementById('pub-status').innerText = "Reward: 100 Base Points";
-                document.getElementById('ai-status-box').classList.add('hidden');
-            }, 1000);
+
+            } catch (error) {
+                console.error("Submission error:", error);
+                alert("There was an issue submitting your data. Please try again.");
+                document.getElementById('pub-status').innerText = "Submission Failed";
+            }
         }
 
         // Trigger initial data fetch on load
