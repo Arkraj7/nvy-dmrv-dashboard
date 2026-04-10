@@ -834,7 +834,7 @@
             else { display.classList.replace('text-green-600', 'text-gray-500'); }
         });
 
-        async function submitPublicData() {
+        function submitPublicData() {
             let name = document.getElementById('pub-name').value;
             let state = document.getElementById('pub-state').value;
             let vanSelect = document.getElementById('pub-van').value;
@@ -853,17 +853,20 @@
             document.getElementById('pub-status').innerText = "Submitting securely...";
             let payload = { name: name, state: state, vanName: vanName, ecoRating: eco, cleanRating: clean, safetyRating: safety, review: review, imageBase64: uploadedImageData.base64, mimeType: uploadedImageData.mimeType, fileName: uploadedImageData.fileName };
 
-            try {
-                await fetch(PUBLIC_SUBMISSION_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
+            fetch(PUBLIC_SUBMISSION_API_URL, {
+                method: 'POST',
+                mode: 'no-cors', // BULLETPROOF CORS BYPASS
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            }).then(() => {
                 alert("Submitted! Thank you for your contribution to the green initiative.");
                 document.getElementById('pub-name').value = ""; document.getElementById('pub-review').value = "";
                 setStars('eco', 0); setStars('clean', 0); setStars('safety', 0);
                 closePublicModal(); document.getElementById('pub-status').innerText = "Ready to Submit";
-            } catch (error) { alert("Submission error."); document.getElementById('pub-status').innerText = "Failed"; }
+            }).catch((error) => { 
+                alert("Submission error. Please try again."); 
+                document.getElementById('pub-status').innerText = "Failed"; 
+            });
         }
 
         // ==========================================
@@ -894,7 +897,7 @@
             else { display.className = "text-xs text-red-500 text-right mt-1 font-bold"; }
         });
 
-        async function submitReportData() {
+        function submitReportData() {
             let lat = document.getElementById('report-lat').value;
             let lon = document.getElementById('report-lon').value;
             let cat = document.getElementById('report-category').value;
@@ -925,13 +928,13 @@
                 fileName: grievanceImageData.fileName
             };
             
-            try {
-                await fetch(REPORT_API_URL, {
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload)
-                });
-                
+            // BULLETPROOF FETCH METHOD (no-cors)
+            fetch(REPORT_API_URL, {
+                method: 'POST', 
+                mode: 'no-cors', // Forces the browser to bypass CORS blocking
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(payload)
+            }).then(() => {
                 alert(`Thank you for acting as a guardian of the Nagar Van! \n\nYour Report ID is: ${reportID}\n\nYou have earned 10 Reward Points. Track it on the Issue Tracker Map.`);
                 
                 mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
@@ -945,11 +948,11 @@
                 
                 closeReportModal();
                 statusBtn.innerText = "Fill form to submit";
-            } catch (error) {
+            }).catch((error) => {
                 console.error("Submission error:", error);
-                alert("There was an error submitting your report. Please try again.");
+                alert("There was an error submitting your report. Please check your internet connection.");
                 statusBtn.innerText = "Submission Failed";
-            }
+            });
         }
 
         // --- MODAL TOGGLES ---
