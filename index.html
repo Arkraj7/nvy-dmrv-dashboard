@@ -530,7 +530,7 @@
         // --- 1. API CONFIGURATION URLS ---
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
-        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbwrCZ_dUOXXo3vCL1KCgagu9Ds2qvEKzVjjH0ktfA1-kRe7UsZMNDuvtBy_ZvtSDqI9/exec"; 
+        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbxvemb8Z5SGZESKYcyBfiG_5P5jmjUXirs6jUt3ppxTosR2cLpXetY-4GKheDg3Npwr/exec"; 
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
         let mapMode = 'ecology'; // 'ecology' or 'issues'
@@ -851,11 +851,17 @@
             if (wordCount < 20) { alert(`Review must be at least 20 words.`); return; }
 
             document.getElementById('pub-status').innerText = "Submitting securely...";
-            let payload = { name: name, state: state, vanName: vanName, ecoRating: eco, cleanRating: clean, safetyRating: safety, review: review, imageBase64: uploadedImageData.base64, mimeType: uploadedImageData.mimeType, fileName: uploadedImageData.fileName };
+            
+            let payload = { 
+                name: name, state: state, vanName: vanName, 
+                ecoRating: eco, cleanRating: clean, safetyRating: safety, 
+                review: review, 
+                imageBase64: uploadedImageData.base64, mimeType: uploadedImageData.mimeType, fileName: uploadedImageData.fileName 
+            };
 
             fetch(PUBLIC_SUBMISSION_API_URL, {
                 method: 'POST',
-                mode: 'no-cors', // BULLETPROOF CORS BYPASS
+                mode: 'no-cors', // BYPASS CORS BLOCKING
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(payload)
             }).then(() => {
@@ -870,7 +876,7 @@
         }
 
         // ==========================================
-        // REPORT ISSUE (GRIEVANCE) LOGIC
+        // REPORT ISSUE (GRIEVANCE) LOGIC (FormData)
         // ==========================================
         function fetchGPSLocation() {
             let statusText = document.getElementById('gps-status');
@@ -916,30 +922,28 @@
             let randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
             let reportID = `NVY-ISSUE-${dateStr}-${randomStr}`;
 
-            let payload = {
-                reportID: reportID,
-                category: cat,
-                severity: sev,
-                description: desc,
-                lat: lat,
-                lon: lon,
-                imageBase64: grievanceImageData.base64,
-                mimeType: grievanceImageData.mimeType,
-                fileName: grievanceImageData.fileName
-            };
-            
-            // BULLETPROOF FETCH METHOD (no-cors)
+            // Create standard form data (NEVER gets blocked by CORS)
+            let formData = new URLSearchParams();
+            formData.append("reportID", reportID);
+            formData.append("category", cat);
+            formData.append("severity", sev);
+            formData.append("description", desc);
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+
+            // Send the data using no-cors bypass
             fetch(REPORT_API_URL, {
                 method: 'POST', 
-                mode: 'no-cors', // Forces the browser to bypass CORS blocking
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                body: JSON.stringify(payload)
+                mode: 'no-cors',
+                body: formData
             }).then(() => {
                 alert(`Thank you for acting as a guardian of the Nagar Van! \n\nYour Report ID is: ${reportID}\n\nYou have earned 10 Reward Points. Track it on the Issue Tracker Map.`);
                 
+                // Add to local map instantly
                 mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
                 setMapMode('issues'); 
                 
+                // Reset form
                 document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
                 document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
                 document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
