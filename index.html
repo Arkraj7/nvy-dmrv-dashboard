@@ -23,28 +23,40 @@
         .media-scroll::-webkit-scrollbar { height: 8px; }
         .media-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .media-scroll::-webkit-scrollbar-thumb { background: #5dc48a; border-radius: 4px; }
+
+        /* Blinking Alert for Grievance Button */
+        @keyframes blink-red {
+            0% { background-color: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+            50% { background-color: #fca5a5; border-color: #dc2626; color: #7f1d1d; }
+            100% { background-color: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+        }
+        .btn-report { animation: blink-red 2.5s infinite; }
     </style>
 </head>
 <body class="text-gray-800">
 
     <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+            <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🌳</span>
-                    <span class="font-bold text-xl tracking-wide hidden sm:block">Nagar Van DMRV</span>
+                    <span class="font-bold text-xl tracking-wide hidden md:block">Nagar Van DMRV</span>
                 </div>
-                <div class="flex items-center gap-2 sm:gap-3">
+                <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                     <button onclick="openAboutModal()" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors">
                         About Project
+                    </button>
+                    
+                    <button onclick="openReportModal()" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block">
+                        🚨 Report Issue
                     </button>
                     
                     <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
                         🌱 Public Contribution
                     </button>
                     
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm">
-                        📝 Collect Data (Admin)
+                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block">
+                        📝 Admin Form
                     </a>
                 </div>
             </div>
@@ -130,17 +142,19 @@
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
             <div class="xl:col-span-2 glass-panel p-4 flex flex-col relative">
-                <div class="flex justify-between items-center mb-3 px-2">
-                    <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview (Nagar Van Study)</h2>
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 px-2 border-b pb-2 gap-3">
+                    <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview</h2>
+                    <div class="flex bg-gray-100 rounded-lg p-1 border border-gray-200 shadow-inner w-full sm:w-auto">
+                        <button onclick="setMapMode('ecology')" id="tab-ecology" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-white text-[#1b3a2d] shadow-sm transition-all">🌳 Ecology Map</button>
+                        <button onclick="setMapMode('issues')" id="tab-issues" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all">🚨 Issue Tracker</button>
+                    </div>
                 </div>
+
                 <div id="map"></div>
                 
-                <div class="absolute bottom-6 left-6 map-legend z-[1000]">
-                    <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
-                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
-                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Vendor</div>
-                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> KII / FGD</div>
-                </div>
+                <div id="map-legend" class="absolute bottom-6 left-6 map-legend z-[1000]">
+                    </div>
             </div>
 
             <div class="glass-panel p-6">
@@ -208,52 +222,6 @@
                         <p class="text-white text-xs font-bold">Tirupati Hill Forest, AP</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Indore Lake Forest, MP</p>
-                    </div>
-                </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Bhopal Central Van, MP</p>
-                    </div>
-                </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Asola Bhatti, Delhi</p>
-                    </div>
-                </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Vizag Coastal Van, AP</p>
-                    </div>
-                </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Surat Smriti Van, Gujarat</p>
-                    </div>
-                </div>
-
-                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
-                </div>
-
-                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
-                </div>
             </div>
         </div>
 
@@ -280,22 +248,6 @@
                 <div class="bg-white p-3 rounded shadow-sm">
                     <strong class="text-[#1b3a2d]">Urban Heat Reduction:</strong><br>
                     <em>Formula:</em> ΔT (°C) Local vs Surrounding. Highlights micro-climate cooling to combat Urban Heat Islands.
-                </div>
-                <div class="bg-white p-3 rounded shadow-sm">
-                    <strong class="text-[#1b3a2d]">Water Recharged:</strong><br>
-                    <em>Formula:</em> Catchment Area × Rainfall × Runoff Coefficient. Shows contribution to local water tables.
-                </div>
-                <div class="bg-white p-3 rounded shadow-sm">
-                    <strong class="text-[#1b3a2d]">Ecological Index:</strong><br>
-                    Composite scale (0-10) assessing native tree density, species richness, and habitat quality.
-                </div>
-                <div class="bg-white p-3 rounded shadow-sm">
-                    <strong class="text-[#1b3a2d]">Socio-Economic:</strong><br>
-                    Evaluates non-timber forest product utility, eco-tourism potential, and vendor livelihoods generated.
-                </div>
-                <div class="bg-white p-3 rounded shadow-sm">
-                    <strong class="text-[#1b3a2d]">Avg. WTP (CVM):</strong><br>
-                    <em>Contingent Valuation Method.</em> The average monetary value citizens are willing to pay for maintenance.
                 </div>
             </div>
         </footer>
@@ -405,17 +357,89 @@
         </div>
     </div>
 
+    <div id="report-modal" class="fixed inset-0 bg-black bg-opacity-70 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl relative border-t-8 border-red-500">
+            
+            <div class="bg-red-50 p-5 border-b border-red-100 sticky top-0 z-10">
+                <button onclick="closeReportModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-700 text-3xl font-bold leading-none">&times;</button>
+                <h2 class="text-xl font-extrabold text-red-800 flex items-center gap-2">🚨 Report an Issue in Nagar Van</h2>
+                <p class="text-xs text-red-600 mt-1 font-semibold">Help authorities maintain the ecosystem. You earn 10 reward points for verified reports!</p>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <label class="block text-sm font-bold text-gray-800 mb-2">Step 1: Incident Location (Required)</label>
+                    <div class="flex items-center gap-3">
+                        <button onclick="fetchGPSLocation()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-bold shadow-sm transition-all flex items-center gap-1">
+                            📍 Fetch My GPS Location
+                        </button>
+                        <span id="gps-status" class="text-xs text-gray-500 font-semibold">Location not acquired.</span>
+                    </div>
+                    <input type="hidden" id="report-lat"><input type="hidden" id="report-lon">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Issue Category</label>
+                        <select id="report-category" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <option value="">-- Select Problem Type --</option>
+                            <option value="Solid Waste / Littering">🗑️ Solid Waste / Littering</option>
+                            <option value="Broken Infrastructure">🚧 Broken Infrastructure (Fences/Benches)</option>
+                            <option value="Illegal Tree Cutting">🪓 Illegal Tree Cutting / Encroachment</option>
+                            <option value="Water Logging">💧 Water Logging / Dried Waterbody</option>
+                            <option value="Forest Fire / Smoke">🔥 Forest Fire / Smoke</option>
+                            <option value="Wildlife Sighting">🐅 Wildlife Conflict / Sighting</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Severity Level</label>
+                        <select id="report-severity" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <option value="Low">Low (Routine Maintenance)</option>
+                            <option value="Medium" selected>Medium (Needs Action Soon)</option>
+                            <option value="High">High (Immediate Danger/Emergency)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Detailed Description <span class="text-red-500 font-normal text-xs">(Min. 20 words required)</span></label>
+                    <textarea id="report-desc" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please describe the exact issue, landmarks nearby, and how long it has been there. (Minimum 20 words)"></textarea>
+                    <p id="report-word-count" class="text-xs text-red-500 text-right mt-1 font-bold">Words: 0 / 20</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Upload Photo Evidence (Optional)</label>
+                    <div class="flex items-center justify-center w-full">
+                        <label class="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
+                            <div class="flex flex-col items-center justify-center pt-3 pb-4">
+                                <span class="text-2xl mb-1">📸</span>
+                                <p class="text-xs text-gray-600"><span class="font-bold">Click to upload</span> image</p>
+                            </div>
+                            <input type="file" accept="image/*" class="hidden" onchange="handleReportUpload(this)" id="report-file">
+                        </label>
+                    </div>
+                    <p id="report-file-status" class="text-xs text-green-600 text-center mt-2 font-bold"></p>
+                </div>
+            </div>
+
+            <div class="p-4 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
+                <span class="text-sm text-gray-600 font-bold" id="report-submit-status">Fill form to submit</span>
+                <button onclick="submitReportData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
+                    Submit Issue
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="about-modal" class="fixed inset-0 bg-black bg-opacity-70 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
         <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[95vh] overflow-y-auto shadow-2xl relative">
             <button onclick="closeAboutModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none z-10">&times;</button>
             
             <div class="p-8">
                 <div class="flex flex-col md:flex-row gap-6 items-center md:items-start mb-6">
-                    
                     <div class="w-32 h-32 bg-[#e4f0e9] rounded-full flex items-center justify-center text-5xl flex-shrink-0 border-4 border-[#5dc48a] overflow-hidden">
                         <img src="assets/images/WhatsApp Image 2026-02-09 at 8_imgupscaler.ai_Sharpener_2K (1) (1).png" alt="Arkraj Biswas" class="w-full h-full object-cover">
                     </div>
-
                     <div>
                         <h2 class="text-3xl font-extrabold text-[#1b3a2d]">Arkraj Biswas</h2>
                         <p class="text-[#5dc48a] font-bold text-lg mb-2">Research Associate & Environmental Policy Advocate</p>
@@ -430,7 +454,6 @@
                         <h3 class="font-bold text-[#1b3a2d] mb-1 text-base">Academic & Professional Background</h3>
                         <p>I hold a Master of Science in Environmental and Sustainable Development (Earth and Atmospheric Sciences) from Banaras Hindu University, and a Bachelor of Science in Agricultural Sciences. As the founder of the Ecoserve Development Foundation and through my ongoing work with the Embark India Development Fellowship placed at National CAMPA, my focus revolves around the Nagar Van Yojana, ecosystem restoration, and building robust Digital Monitoring, Reporting, and Verification (DMRV) tools.</p>
                     </div>
-
                     <div class="bg-[#f0f7f3] p-4 rounded-lg border border-[#a8c4b0]">
                         <h3 class="font-bold text-[#2d6a4f] mb-1 text-base">Vision for a Viksit Bharat & Sustainability</h3>
                         <p>India’s commitment to its Nationally Determined Contributions (NDCs) requires decentralized, data-driven action. Urban forestry via Nagar Vans and Nagar Vatikas represents a crucial strategy to create carbon sinks, combat the Urban Heat Island effect, and foster community resilience. This platform empowers citizens, local authorities, and policymakers to monitor real-time metrics, driving us collectively towards a truly sustainable and developed nation.</p>
@@ -440,17 +463,22 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
     <script>
-        // ==========================================
-        // CONFIGURATION: PASTE YOUR LINKS HERE
-        // ==========================================
-        
+        // --- 1. API CONFIGURATION URLS ---
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
+        
+        // YOUR NEW GRIEVANCE URL
+        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbxvemb8Z5SGZESKYcyBfiG_5P5jmjUXirs6jUt3ppxTosR2cLpXetY-4GKheDg3Npwr/exec"; 
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
+        let mapMode = 'ecology'; // 'ecology' or 'issues'
+
+        // MOCK ISSUE DATA (For the Tracker Map)
+        const mockIssues = [
+            { lat: 23.6102, lon: 85.2799, id: "NVY-26-A1", cat: "Solid Waste", status: "Unsolved", sev: "High" },
+            { lat: 22.2587, lon: 71.1924, id: "NVY-26-B2", cat: "Broken Fence", status: "In Process", sev: "Medium" }
+        ];
 
         // Site Database
         const siteData = {
@@ -464,31 +492,30 @@
                 center: [22.2587, 71.1924], zoom: 7, title: "NVY Gujarat",
                 eco: "8.2", socio: "Very High", wtp: "₹35", carbon: "320", heat: "-2.8", water: "12k",
                 bars: { gov: 90, who: 75, infra: 88 },
-                review: "Strong collective action from local NGOs. Good survival rate of native flora. The PPP model is highly active with clear socio-economic benefits for vendors."
+                review: "Strong collective action from local NGOs. Good survival rate of native flora."
             },
             jharkhand: { 
                 center: [23.6102, 85.2799], zoom: 7, title: "NVY Jharkhand",
                 eco: "7.1", socio: "Medium", wtp: "₹15", carbon: "410", heat: "-1.9", water: "18k",
                 bars: { gov: 70, who: 60, infra: 65 },
-                review: "Rich biodiversity observed, but minor resource conflicts regarding firewood collection exist. Water harvesting structures require maintenance before summer."
+                review: "Rich biodiversity observed, but minor resource conflicts regarding firewood collection exist."
             },
             andhra: { 
                 center: [15.9129, 79.7400], zoom: 6, title: "NVY Andhra Pradesh",
                 eco: "7.5", socio: "High", wtp: "₹20", carbon: "290", heat: "-2.1", water: "8k",
                 bars: { gov: 80, who: 70, infra: 75 },
-                review: "Excellent progress on formal boundary demarcation. High community willingness to pay (CVM), but informal vendors request better designated spaces."
+                review: "Excellent progress on formal boundary demarcation. High community willingness to pay."
             },
             mp: { 
                 center: [22.9734, 78.6569], zoom: 6, title: "NVY Madhya Pradesh",
                 eco: "8.0", socio: "High", wtp: "₹30", carbon: "220", heat: "-3.1", water: "7k",
                 bars: { gov: 85, who: 65, infra: 80 },
-                review: "Great improvements in urban cooling and physical capital (pathways, lights). KIIs show seamless coordination between Forest Dept and ULBs."
+                review: "Great improvements in urban cooling and physical capital. KIIs show seamless coordination."
             }
         };
 
         // --- MAP INITIALIZATION ---
         var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
-        
         var southWest = L.latLng(6.0, 68.0);
         var northEast = L.latLng(38.5, 97.5);
         var bounds = L.latLngBounds(southWest, northEast);
@@ -497,38 +524,77 @@
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors',
-            minZoom: 4,
-            maxZoom: 18
+            minZoom: 4, maxZoom: 18
         }).addTo(map);
 
         var markers = L.layerGroup().addTo(map);
 
+        // --- MAP TOGGLE & DRAW LOGIC ---
+        function setMapMode(mode) {
+            mapMode = mode;
+            let tabEco = document.getElementById('tab-ecology');
+            let tabIss = document.getElementById('tab-issues');
+            
+            if(mode === 'ecology') {
+                tabEco.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-white text-[#1b3a2d] shadow-sm transition-all";
+                tabIss.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all";
+                document.getElementById('map-legend').innerHTML = `
+                    <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
+                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Vendor</div>
+                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> KII / FGD</div>
+                `;
+            } else {
+                tabIss.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-red-50 text-red-700 shadow-sm transition-all border border-red-200";
+                tabEco.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all";
+                document.getElementById('map-legend').innerHTML = `
+                    <div class="font-bold mb-1 border-b pb-1 text-red-800">Issue Status</div>
+                    <div class="legend-item"><div class="legend-color bg-red-600 border border-white"></div> Unsolved</div>
+                    <div class="legend-item"><div class="legend-color bg-yellow-400 border border-white"></div> In Process</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Solved</div>
+                `;
+            }
+            updateDashboard();
+        }
+
         function drawMarkers(state) {
             markers.clearLayers();
-            if (!window.liveData || !window.liveData.locations) return;
+            
+            if (mapMode === 'ecology') {
+                if (!window.liveData || !window.liveData.locations) return;
+                window.liveData.locations.forEach(loc => {
+                    if (state !== 'overview' && loc.siteKey !== state) return;
+                    let color = 'gray', fill = 'gray';
+                    let typeLower = loc.type.toLowerCase();
 
-            window.liveData.locations.forEach(loc => {
-                if (state !== 'overview' && loc.siteKey !== state) return;
+                    if (typeLower.includes('visitor')) { color = 'green'; fill = 'green'; }
+                    else if (typeLower.includes('vendor')) { color = 'orange'; fill = 'orange'; }
+                    else if (typeLower.includes('kii') || typeLower.includes('fgd')) { color = 'blue'; fill = 'blue'; }
 
-                let color = 'gray';
-                let fill = 'gray';
-                let typeLower = loc.type.toLowerCase();
+                    let popupContent = `
+                        <div class="font-sans">
+                            <b class="text-[#1b3a2d] text-sm">${loc.rawSite}</b><br>
+                            <span class="text-xs text-gray-600">Type: <span class="font-bold">${loc.type}</span></span><br>
+                            <span class="text-[10px] text-gray-400">Lat: ${loc.lat} | Lon: ${loc.lon}</span>
+                        </div>`;
 
-                if (typeLower.includes('visitor')) { color = 'green'; fill = 'green'; }
-                else if (typeLower.includes('vendor')) { color = 'orange'; fill = 'orange'; }
-                else if (typeLower.includes('kii') || typeLower.includes('fgd')) { color = 'blue'; fill = 'blue'; }
+                    L.circleMarker([loc.lat, loc.lon], {color: color, fillColor: fill, fillOpacity: 0.8, radius: 8})
+                        .addTo(markers).bindPopup(popupContent);
+                });
+            } else if (mapMode === 'issues') {
+                mockIssues.forEach(iss => {
+                    let color = iss.status === 'Solved' ? 'green' : (iss.status === 'In Process' ? '#facc15' : 'red');
+                    let popupContent = `
+                        <div class="font-sans border-l-4 border-${color}-500 pl-2">
+                            <b class="text-gray-800 text-sm">ID: ${iss.id}</b><br>
+                            <span class="text-xs font-bold text-gray-600">Issue: ${iss.cat}</span><br>
+                            <span class="text-[10px] text-white bg-gray-800 px-1 rounded">Status: ${iss.status}</span>
+                        </div>`;
 
-                let popupContent = `
-                    <div class="font-sans">
-                        <b class="text-[#1b3a2d] text-sm">${loc.rawSite}</b><br>
-                        <span class="text-xs text-gray-600">Type: <span class="font-bold">${loc.type}</span></span><br>
-                        <span class="text-[10px] text-gray-400">Lat: ${loc.lat} | Lon: ${loc.lon}</span>
-                    </div>`;
-
-                L.circleMarker([loc.lat, loc.lon], {color: color, fillColor: fill, fillOpacity: 0.8, radius: 8})
-                    .addTo(markers)
-                    .bindPopup(popupContent);
-            });
+                    L.circleMarker([iss.lat, iss.lon], {color: color, fillColor: color, fillOpacity: 0.9, radius: 8})
+                        .addTo(markers).bindPopup(popupContent);
+                });
+            }
         }
 
         function updateDashboard() {
@@ -537,8 +603,13 @@
             
             map.flyTo(data.center, data.zoom, { duration: 1.5 });
             drawMarkers(selected);
-            document.getElementById('map-title').innerText = "Thematic Map: " + data.title + " (Nagar Van Study)";
             
+            if(mapMode === 'ecology') {
+                document.getElementById('map-title').innerText = "Thematic Map: " + data.title + " (Nagar Van Study)";
+            } else {
+                document.getElementById('map-title').innerText = "🚨 Live Issue Tracker Map";
+            }
+
             if (window.liveData) {
                 let currentCount = window.liveData.sites[selected] || 0;
                 document.getElementById('metric-samples').innerText = currentCount;
@@ -564,81 +635,50 @@
             fetchAirQuality(data.center[0], data.center[1]);
         }
 
-        async function fetchLiveSampleCount() {
-            try {
-                document.getElementById('metric-samples').innerText = "...";
-                let response = await fetch(ADMIN_DATA_API_URL);
-                let text = await response.text(); 
-                try {
-                    let parsedData = JSON.parse(text);
-                    if(parsedData.total !== undefined) {
-                        window.liveData = parsedData;
-                        updateDashboard();
-                    } else if (parsedData.error) {
-                        document.getElementById('metric-samples').innerText = "0"; 
-                    }
-                } catch (e) { document.getElementById('metric-samples').innerText = "0"; }
-            } catch (e) { 
-                document.getElementById('metric-samples').innerText = "Offline"; 
-            }
-        }
-
         async function fetchAirQuality(lat, lon) {
             try {
                 document.getElementById('metric-aqi').innerText = "...";
                 document.getElementById('aqi-status').innerText = "Fetching satellite data...";
-                document.getElementById('aqi-status').style.color = "gray";
-
                 let url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=pm2_5`;
-                
                 let response = await fetch(url);
                 let data = await response.json();
-
                 if (data.current && data.current.pm2_5 !== undefined) {
                     let pm25 = data.current.pm2_5;
                     document.getElementById('metric-aqi').innerText = pm25.toFixed(1);
-                    
-                    if(pm25 <= 15) {
-                        document.getElementById('aqi-status').innerText = "🟢 Excellent Air Quality";
-                        document.getElementById('aqi-status').style.color = "green";
-                    } else if(pm25 <= 35) {
-                        document.getElementById('aqi-status').innerText = "🟡 Moderate Air Quality";
-                        document.getElementById('aqi-status').style.color = "orange";
-                    } else {
-                        document.getElementById('aqi-status').innerText = "🔴 Poor Air Quality";
-                        document.getElementById('aqi-status').style.color = "red";
-                    }
-                } else {
-                    document.getElementById('metric-aqi').innerText = "N/A";
-                    document.getElementById('aqi-status').innerText = "Data unavailable.";
+                    if(pm25 <= 15) { document.getElementById('aqi-status').innerText = "🟢 Excellent Air Quality"; document.getElementById('aqi-status').style.color = "green"; }
+                    else if(pm25 <= 35) { document.getElementById('aqi-status').innerText = "🟡 Moderate Air Quality"; document.getElementById('aqi-status').style.color = "orange"; }
+                    else { document.getElementById('aqi-status').innerText = "🔴 Poor Air Quality"; document.getElementById('aqi-status').style.color = "red"; }
                 }
             } catch (err) {
-                console.error("AQI Fetch Error:", err);
                 document.getElementById('metric-aqi').innerText = "Err";
-                document.getElementById('aqi-status').innerText = "Connection failed.";
             }
         }
 
+        async function fetchLiveSampleCount() {
+            try {
+                let response = await fetch(ADMIN_DATA_API_URL);
+                let text = await response.text(); 
+                let parsedData = JSON.parse(text);
+                if(parsedData.total !== undefined) {
+                    window.liveData = parsedData;
+                    updateDashboard();
+                }
+            } catch (e) { document.getElementById('metric-samples').innerText = "Offline"; }
+        }
+
         // ==========================================
-        // AI IMAGE CHECKER & IMAGE DATA HANDLER
+        // AI IMAGE CHECKER (For Public Reviews)
         // ==========================================
         let aiModel = null;
         let uploadedImageData = { base64: "", mimeType: "", fileName: "" };
+        let grievanceImageData = { base64: "", mimeType: "", fileName: "" };
         
-        mobilenet.load().then(model => {
-            aiModel = model;
-            console.log("AI Model Loaded successfully.");
-        });
+        mobilenet.load().then(model => { aiModel = model; console.log("AI Model Loaded"); });
 
         function handleAIUpload(input) {
             let statusBox = document.getElementById('ai-status-box');
             statusBox.classList.remove('hidden');
-            
-            if (!aiModel) { 
-                statusBox.innerText = "⏳ AI Engine is still loading, please wait 3 seconds and try again.";
-                statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-yellow-100 text-yellow-800 block";
-                return; 
-            }
+            if (!aiModel) return;
             
             let file = input.files[0];
             if (!file) return;
@@ -657,12 +697,11 @@
                     
                     aiModel.classify(img).then(predictions => {
                         let isNature = predictions.some(p => p.className.match(/tree|plant|leaf|forest|wood|park|flower|grass|daisy|pot|lake|valley|greenhouse/i));
-                        
                         if(isNature) {
                             statusBox.innerText = `✅ AI Verified: Nature Image Accepted!`;
                             statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-green-100 text-green-800 block";
                         } else {
-                            statusBox.innerText = `❌ AI Rejected: This looks like a '${predictions[0].className.split(',')[0]}'. Please upload a real park or tree photo.`;
+                            statusBox.innerText = `❌ AI Rejected: Looks like a '${predictions[0].className.split(',')[0]}'. Upload a real park photo.`;
                             statusBox.className = "w-full text-center p-2 rounded text-xs font-bold mt-2 bg-red-100 text-red-800 block";
                             input.value = ""; 
                             uploadedImageData = { base64: "", mimeType: "", fileName: "" }; 
@@ -673,7 +712,22 @@
             reader.readAsDataURL(file);
         }
 
-        // --- PUBLIC MODAL LOGIC & EXTENDED VAN LIST ---
+        function handleReportUpload(input) {
+            let file = input.files[0];
+            if (!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                grievanceImageData.base64 = e.target.result.split(',')[1];
+                grievanceImageData.mimeType = file.type;
+                grievanceImageData.fileName = file.name;
+                document.getElementById('report-file-status').innerText = '✅ File selected: ' + file.name;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        // ==========================================
+        // PUBLIC REVIEW SUBMISSION LOGIC
+        // ==========================================
         const vanList = {
             "Andhra Pradesh": ["Vizag Coastal Van", "Tirupati Hill Forest", "Vijayawada Park"],
             "Delhi": ["Asola Bhatti Eco Park", "Garhi Mandu Nagar Van", "Tughlaqabad Forest"],
@@ -690,142 +744,167 @@
             let stateSelect = document.getElementById('pub-state').value;
             let vanSelect = document.getElementById('pub-van');
             let otherInput = document.getElementById('pub-other-van');
-            
             vanSelect.innerHTML = '<option value="">-- Choose Nagar Van --</option>';
             otherInput.classList.add('hidden');
-            otherInput.value = "";
-
-            if (stateSelect === "") {
-                vanSelect.disabled = true;
-                vanSelect.classList.add('bg-gray-50');
-            } else {
-                vanSelect.disabled = false;
-                vanSelect.classList.remove('bg-gray-50');
+            if (stateSelect === "") { vanSelect.disabled = true; vanSelect.classList.add('bg-gray-50'); } 
+            else {
+                vanSelect.disabled = false; vanSelect.classList.remove('bg-gray-50');
                 let vans = vanList[stateSelect] || [];
-                if (vans.length > 0) {
-                    vans.forEach(van => {
-                        vanSelect.innerHTML += `<option value="${van}">${van}</option>`;
-                    });
-                }
+                vans.forEach(van => { vanSelect.innerHTML += `<option value="${van}">${van}</option>`; });
                 vanSelect.innerHTML += '<option value="Other">Other (I will type it)</option>';
             }
         }
 
         function checkOtherVan() {
-            let vanSelect = document.getElementById('pub-van').value;
-            let otherInput = document.getElementById('pub-other-van');
-            if (vanSelect === "Other") {
-                otherInput.classList.remove('hidden');
-            } else {
-                otherInput.classList.add('hidden');
-            }
+            let val = document.getElementById('pub-van').value;
+            if (val === "Other") { document.getElementById('pub-other-van').classList.remove('hidden'); } 
+            else { document.getElementById('pub-other-van').classList.add('hidden'); }
         }
 
-        // MODAL TOGGLES
-        function openPublicModal() { document.getElementById('public-modal').classList.remove('hidden'); }
-        function closePublicModal() { document.getElementById('public-modal').classList.add('hidden'); }
-        function openAboutModal() { document.getElementById('about-modal').classList.remove('hidden'); }
-        function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
-        
-        // Multi-rating logic
         function setStars(type, num) {
             document.getElementById(type + '-stars').value = num;
             let stars = document.getElementById('star-rating-' + type).children;
             for(let i=0; i<5; i++) stars[i].style.color = i < num ? '#facc15' : '#d1d5db';
         }
 
-        // Live word count display
         document.getElementById('pub-review').addEventListener('input', function() {
             let text = this.value.trim();
             let wordCount = text === "" ? 0 : text.split(/\s+/).length;
             let display = document.getElementById('word-count-display');
             display.innerText = `Words: ${wordCount} / 20 minimum`;
-            if(wordCount >= 20) {
-                display.classList.remove('text-red-500');
-                display.classList.add('text-green-600');
-            } else {
-                display.classList.remove('text-green-600');
-                display.classList.add('text-gray-500');
-            }
+            if(wordCount >= 20) { display.classList.replace('text-gray-500', 'text-green-600'); } 
+            else { display.classList.replace('text-green-600', 'text-gray-500'); }
         });
-        
-        // ==========================================
-        // SUBMIT PUBLIC DATA
-        // ==========================================
+
         async function submitPublicData() {
             let name = document.getElementById('pub-name').value;
             let state = document.getElementById('pub-state').value;
             let vanSelect = document.getElementById('pub-van').value;
             let vanName = vanSelect === "Other" ? document.getElementById('pub-other-van').value : vanSelect;
-            
-            let ecoStars = document.getElementById('eco-stars').value;
-            let cleanStars = document.getElementById('clean-stars').value;
-            let safetyStars = document.getElementById('safety-stars').value;
-            
+            let eco = document.getElementById('eco-stars').value;
+            let clean = document.getElementById('clean-stars').value;
+            let safety = document.getElementById('safety-stars').value;
             let review = document.getElementById('pub-review').value;
-
             let wordCount = review.trim() === "" ? 0 : review.trim().split(/\s+/).length;
 
-            if (!name || !state || !vanName) {
-                alert("Please fill in your name, state, and select a Nagar Van!");
-                return;
+            if (!name || !state || !vanName || eco === "0" || clean === "0" || safety === "0") {
+                alert("Please fill all fields and rate all categories."); return;
             }
-            if (ecoStars === "0" || cleanStars === "0" || safetyStars === "0") {
-                alert("Please provide a rating (1-5 stars) for all three categories!");
-                return;
-            }
-            if (wordCount < 20) {
-                alert(`Your review must be at least 20 words long. Currently, it is ${wordCount} words.`);
-                return;
-            }
+            if (wordCount < 20) { alert(`Review must be at least 20 words.`); return; }
 
             document.getElementById('pub-status').innerText = "Submitting securely...";
-
-            let payload = {
-                name: name,
-                state: state,
-                vanName: vanName,
-                ecoRating: ecoStars,
-                cleanRating: cleanStars,
-                safetyRating: safetyStars,
-                review: review,
-                imageBase64: uploadedImageData.base64,
-                mimeType: uploadedImageData.mimeType,
-                fileName: uploadedImageData.fileName
-            };
+            let payload = { name: name, state: state, vanName: vanName, ecoRating: eco, cleanRating: clean, safetyRating: safety, review: review, imageBase64: uploadedImageData.base64, mimeType: uploadedImageData.mimeType, fileName: uploadedImageData.fileName };
 
             try {
-                let response = await fetch(PUBLIC_SUBMISSION_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                await fetch(PUBLIC_SUBMISSION_API_URL, {
+                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+                });
+                alert("Submitted! Thank you for your contribution to the green initiative.");
+                document.getElementById('pub-name').value = ""; document.getElementById('pub-review').value = "";
+                setStars('eco', 0); setStars('clean', 0); setStars('safety', 0);
+                closePublicModal(); document.getElementById('pub-status').innerText = "Ready to Submit";
+            } catch (error) { alert("Submission error."); document.getElementById('pub-status').innerText = "Failed"; }
+        }
+
+        // ==========================================
+        // REPORT ISSUE (GRIEVANCE) LOGIC
+        // ==========================================
+        function fetchGPSLocation() {
+            let statusText = document.getElementById('gps-status');
+            statusText.innerText = "Locating..."; statusText.style.color = "blue";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        document.getElementById('report-lat').value = position.coords.latitude;
+                        document.getElementById('report-lon').value = position.coords.longitude;
+                        statusText.innerText = `✅ Lat: ${position.coords.latitude.toFixed(4)}, Lon: ${position.coords.longitude.toFixed(4)}`;
+                        statusText.style.color = "green";
+                    },
+                    (error) => { statusText.innerText = "❌ GPS Denied/Failed. Please enable location."; statusText.style.color = "red"; }
+                );
+            } else { statusText.innerText = "Geolocation not supported."; }
+        }
+
+        document.getElementById('report-desc').addEventListener('input', function() {
+            let text = this.value.trim();
+            let wordCount = text === "" ? 0 : text.split(/\s+/).length;
+            let display = document.getElementById('report-word-count');
+            display.innerText = `Words: ${wordCount} / 20 minimum`;
+            if(wordCount >= 20) { display.className = "text-xs text-green-600 text-right mt-1 font-bold"; } 
+            else { display.className = "text-xs text-red-500 text-right mt-1 font-bold"; }
+        });
+
+        async function submitReportData() {
+            let lat = document.getElementById('report-lat').value;
+            let lon = document.getElementById('report-lon').value;
+            let cat = document.getElementById('report-category').value;
+            let sev = document.getElementById('report-severity').value;
+            let desc = document.getElementById('report-desc').value;
+            let wordCount = desc.trim() === "" ? 0 : desc.trim().split(/\s+/).length;
+
+            if(!lat) { alert("Please click 'Fetch My GPS Location' first."); return; }
+            if(!cat) { alert("Please select an Issue Category."); return; }
+            if(wordCount < 20) { alert(`Your description must be at least 20 words.`); return; }
+
+            let statusBtn = document.getElementById('report-submit-status');
+            statusBtn.innerText = "Submitting securely...";
+
+            let dateStr = new Date().toISOString().slice(0,10).replace(/-/g, "");
+            let randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+            let reportID = `NVY-ISSUE-${dateStr}-${randomStr}`;
+
+            // We adapt the payload slightly to be caught by the Traffic Cop OR direct sheet.
+            // Since you have a dedicated Grievance sheet now, it will safely store these.
+            let payload = {
+                reportID: reportID,
+                category: cat,
+                severity: sev,
+                description: desc,
+                lat: lat,
+                lon: lon,
+                imageBase64: grievanceImageData.base64,
+                mimeType: grievanceImageData.mimeType,
+                fileName: grievanceImageData.fileName
+            };
+            
+            try {
+                await fetch(REPORT_API_URL, {
+                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
                 });
                 
-                // NEW CUSTOM SUCCESS ALERT
-                alert("Submitted! Thanking you for your time and contribution to the green initiative.");
+                alert(`Thank you for acting as a guardian of the Nagar Van! \n\nYour Report ID is: ${reportID}\n\nYou have earned 10 Reward Points. Track it on the Issue Tracker Map.`);
                 
-                // Clear Form
-                document.getElementById('pub-name').value = "";
-                document.getElementById('pub-review').value = "";
-                document.getElementById('word-count-display').innerText = "Words: 0 / 20 minimum";
-                setStars('eco', 0);
-                setStars('clean', 0);
-                setStars('safety', 0);
-                document.getElementById('ai-status-box').classList.add('hidden');
-                uploadedImageData = { base64: "", mimeType: "", fileName: "" };
-                closePublicModal();
-                document.getElementById('pub-status').innerText = "Ready to Submit";
-
+                mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
+                setMapMode('issues'); 
+                
+                document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
+                document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
+                document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
+                document.getElementById('report-file-status').innerText = "";
+                grievanceImageData = { base64: "", mimeType: "", fileName: "" };
+                
+                closeReportModal();
+                statusBtn.innerText = "Fill form to submit";
             } catch (error) {
                 console.error("Submission error:", error);
-                alert("There was an issue submitting your data. Please try again.");
-                document.getElementById('pub-status').innerText = "Submission Failed";
+                alert("There was an error submitting your report. Please try again.");
+                statusBtn.innerText = "Submission Failed";
             }
         }
 
-        fetchLiveSampleCount();
+        // --- MODAL TOGGLES ---
+        function openPublicModal() { document.getElementById('public-modal').classList.remove('hidden'); }
+        function closePublicModal() { document.getElementById('public-modal').classList.add('hidden'); }
+        function openReportModal() { document.getElementById('report-modal').classList.remove('hidden'); }
+        function closeReportModal() { document.getElementById('report-modal').classList.add('hidden'); }
+        function openAboutModal() { document.getElementById('about-modal').classList.remove('hidden'); }
+        function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
 
+        // Init
+        window.onload = () => {
+            setMapMode('ecology');
+            fetchLiveSampleCount();
+        };
     </script>
 </body>
 </html>
