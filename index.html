@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nagar Van DMRV Dashboard</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
@@ -222,6 +225,52 @@
                         <p class="text-white text-xs font-bold">Tirupati Hill Forest, AP</p>
                     </div>
                 </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Indore Lake Forest, MP</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Bhopal Central Van, MP</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Asola Bhatti, Delhi</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Vizag Coastal Van, AP</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold">Surat Smriti Van, Gujarat</p>
+                    </div>
+                </div>
+
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                </div>
+
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                </div>
             </div>
         </div>
 
@@ -248,6 +297,22 @@
                 <div class="bg-white p-3 rounded shadow-sm">
                     <strong class="text-[#1b3a2d]">Urban Heat Reduction:</strong><br>
                     <em>Formula:</em> ΔT (°C) Local vs Surrounding. Highlights micro-climate cooling to combat Urban Heat Islands.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Water Recharged:</strong><br>
+                    <em>Formula:</em> Catchment Area × Rainfall × Runoff Coefficient. Shows contribution to local water tables.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Ecological Index:</strong><br>
+                    Composite scale (0-10) assessing native tree density, species richness, and habitat quality.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Socio-Economic:</strong><br>
+                    Evaluates non-timber forest product utility, eco-tourism potential, and vendor livelihoods generated.
+                </div>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <strong class="text-[#1b3a2d]">Avg. WTP (CVM):</strong><br>
+                    <em>Contingent Valuation Method.</em> The average monetary value citizens are willing to pay for maintenance.
                 </div>
             </div>
         </footer>
@@ -467,8 +532,6 @@
         // --- 1. API CONFIGURATION URLS ---
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
-        
-        // YOUR NEW GRIEVANCE URL
         const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbxvemb8Z5SGZESKYcyBfiG_5P5jmjUXirs6jUt3ppxTosR2cLpXetY-4GKheDg3Npwr/exec"; 
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
@@ -853,8 +916,6 @@
             let randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
             let reportID = `NVY-ISSUE-${dateStr}-${randomStr}`;
 
-            // We adapt the payload slightly to be caught by the Traffic Cop OR direct sheet.
-            // Since you have a dedicated Grievance sheet now, it will safely store these.
             let payload = {
                 reportID: reportID,
                 category: cat,
