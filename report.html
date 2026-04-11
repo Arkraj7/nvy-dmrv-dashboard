@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Issue - Nagar Van DMRV</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        #map { height: 450px; width: 100%; border-radius: 0.5rem; z-index: 1; }
+        .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
+        .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center flex-wrap">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🌳</span>
+                    <span class="font-bold text-xl tracking-wide hidden md:block"><a href="index.html">Nagar Van DMRV</a></span>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+                    <a href="index.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors">
+                        ← Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-red-800">🚨 Live Issue Tracker & Grievance Report</h1>
+            <p class="text-sm text-gray-600 mt-1">Help authorities maintain the ecosystem by reporting broken infrastructure, waste, or illegal activities. You earn 10 reward points for verified reports!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            
+            <div class="glass-panel p-6 border-t-8 border-red-500">
+                <h2 class="text-xl font-extrabold text-red-800 mb-4 border-b pb-2">Submit a New Report</h2>
+                <div class="space-y-5">
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-800 mb-2">Step 1: Incident Location (Required)</label>
+                        <div class="flex items-center gap-3">
+                            <button onclick="fetchGPSLocation()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-bold shadow-sm transition-all flex items-center gap-1">
+                                📍 Fetch My GPS Location
+                            </button>
+                            <span id="gps-status" class="text-xs text-gray-500 font-semibold">Location not acquired.</span>
+                        </div>
+                        <input type="hidden" id="report-lat"><input type="hidden" id="report-lon">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Issue Category</label>
+                            <select id="report-category" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                                <option value="">-- Select Problem Type --</option>
+                                <option value="Solid Waste / Littering">🗑️ Solid Waste / Littering</option>
+                                <option value="Broken Infrastructure">🚧 Broken Infrastructure</option>
+                                <option value="Illegal Tree Cutting">🪓 Illegal Tree Cutting</option>
+                                <option value="Water Logging">💧 Water Logging</option>
+                                <option value="Forest Fire / Smoke">🔥 Forest Fire / Smoke</option>
+                                <option value="Wildlife Sighting">🐅 Wildlife Conflict</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Severity Level</label>
+                            <select id="report-severity" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                                <option value="Low">Low (Routine)</option>
+                                <option value="Medium" selected>Medium (Action Soon)</option>
+                                <option value="High">High (Emergency)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Detailed Description <span class="text-red-500 font-normal text-xs">(Min. 20 words)</span></label>
+                        <textarea id="report-desc" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Describe the issue, landmarks, and duration..."></textarea>
+                        <p id="report-word-count" class="text-xs text-red-500 text-right mt-1 font-bold">Words: 0 / 20</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Upload Photo Evidence (Optional)</label>
+                        <input type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" id="report-file" onchange="document.getElementById('report-file-status').innerText = '✅ File selected';">
+                        <p id="report-file-status" class="text-xs text-green-600 mt-1 font-bold"></p>
+                    </div>
+
+                    <div class="pt-4 border-t flex justify-between items-center">
+                        <span class="text-sm text-gray-600 font-bold" id="report-submit-status">Ready to submit</span>
+                        <button onclick="submitReportData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
+                            Submit Issue
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-4 relative">
+                <h2 class="text-lg font-bold text-[#1b3a2d] mb-2 px-2">🚨 Tracking Map</h2>
+                <div id="map"></div>
+                <div class="absolute bottom-6 left-6 map-legend z-[1000]">
+                    <div class="font-bold mb-1 border-b pb-1 text-red-800">Issue Status</div>
+                    <div class="legend-item"><div class="legend-color bg-red-600 border border-white"></div> Unsolved</div>
+                    <div class="legend-item"><div class="legend-color bg-yellow-400 border border-white"></div> In Process</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Solved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbxvemb8Z5SGZESKYcyBfiG_5P5jmjUXirs6jUt3ppxTosR2cLpXetY-4GKheDg3Npwr/exec"; 
+
+        const mockIssues = [
+            { lat: 23.6102, lon: 85.2799, id: "NVY-26-A1", cat: "Solid Waste", status: "Unsolved", sev: "High" },
+            { lat: 22.2587, lon: 71.1924, id: "NVY-26-B2", cat: "Broken Fence", status: "In Process", sev: "Medium" }
+        ];
+
+        var map = L.map('map').setView([22.0, 79.0], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap', minZoom: 4, maxZoom: 18
+        }).addTo(map);
+
+        var markers = L.layerGroup().addTo(map);
+
+        function drawIssues() {
+            markers.clearLayers();
+            mockIssues.forEach(iss => {
+                let color = iss.status === 'Solved' ? 'green' : (iss.status === 'In Process' ? '#facc15' : 'red');
+                let popupContent = `
+                    <div class="font-sans border-l-4 border-${color}-500 pl-2">
+                        <b class="text-gray-800 text-sm">ID: ${iss.id}</b><br>
+                        <span class="text-xs font-bold text-gray-600">Issue: ${iss.cat}</span><br>
+                        <span class="text-[10px] text-white bg-gray-800 px-1 rounded">Status: ${iss.status}</span>
+                    </div>`;
+
+                L.circleMarker([iss.lat, iss.lon], {color: color, fillColor: color, fillOpacity: 0.9, radius: 8})
+                    .addTo(markers).bindPopup(popupContent);
+            });
+        }
+
+        function fetchGPSLocation() {
+            let statusText = document.getElementById('gps-status');
+            statusText.innerText = "Locating..."; statusText.style.color = "blue";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        document.getElementById('report-lat').value = position.coords.latitude;
+                        document.getElementById('report-lon').value = position.coords.longitude;
+                        statusText.innerText = `✅ Lat: ${position.coords.latitude.toFixed(4)}, Lon: ${position.coords.longitude.toFixed(4)}`;
+                        statusText.style.color = "green";
+                        map.flyTo([position.coords.latitude, position.coords.longitude], 12);
+                    },
+                    (error) => { statusText.innerText = "❌ GPS Denied/Failed."; statusText.style.color = "red"; }
+                );
+            } else { statusText.innerText = "Geolocation not supported."; }
+        }
+
+        document.getElementById('report-desc').addEventListener('input', function() {
+            let text = this.value.trim();
+            let wordCount = text === "" ? 0 : text.split(/\s+/).length;
+            let display = document.getElementById('report-word-count');
+            display.innerText = `Words: ${wordCount} / 20 minimum`;
+            if(wordCount >= 20) { display.className = "text-xs text-green-600 text-right mt-1 font-bold"; } 
+            else { display.className = "text-xs text-red-500 text-right mt-1 font-bold"; }
+        });
+
+        function submitReportData() {
+            let lat = document.getElementById('report-lat').value;
+            let lon = document.getElementById('report-lon').value;
+            let cat = document.getElementById('report-category').value;
+            let sev = document.getElementById('report-severity').value;
+            let desc = document.getElementById('report-desc').value;
+            let wordCount = desc.trim() === "" ? 0 : desc.trim().split(/\s+/).length;
+
+            if(!lat) { alert("Please fetch GPS location first."); return; }
+            if(!cat) { alert("Please select an issue category."); return; }
+            if(wordCount < 20) { alert("Description must be at least 20 words."); return; }
+
+            let statusBtn = document.getElementById('report-submit-status');
+            statusBtn.innerText = "Submitting securely...";
+
+            let dateStr = new Date().toISOString().slice(0,10).replace(/-/g, "");
+            let randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+            let reportID = `NVY-ISSUE-${dateStr}-${randomStr}`;
+
+            let formData = new URLSearchParams();
+            formData.append("reportID", reportID);
+            formData.append("category", cat);
+            formData.append("severity", sev);
+            formData.append("description", desc);
+            formData.append("lat", lat);
+            formData.append("lon", lon);
+
+            fetch(REPORT_API_URL, {
+                method: 'POST', mode: 'no-cors', body: formData
+            }).then(() => {
+                alert(`Thank you! \nReport ID: ${reportID}\n\nYou have earned 10 Reward Points.`);
+                mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
+                drawIssues();
+                
+                document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
+                document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
+                document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
+                document.getElementById('report-file-status').innerText = "";
+                statusBtn.innerText = "Ready to submit";
+            }).catch(() => {
+                alert("Submission error. Please check your connection.");
+                statusBtn.innerText = "Submission Failed";
+            });
+        }
+
+        window.onload = drawIssues;
+    </script>
+</body>
+</html>
