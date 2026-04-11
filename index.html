@@ -44,7 +44,7 @@
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-white/10 rounded-lg p-1.5 flex items-center justify-center border border-white/20">
-                        <img id="animated-hero-icon" src="assets/images/0.svg" alt="Nagar Van Icon" class="w-full h-full object-contain icon-fade" style="filter: brightness(0) invert(1);">
+                        <img id="animated-hero-icon" src="./assets/images/tree-svgrepo-com.svg" alt="Nagar Van Icon" class="w-full h-full object-contain icon-fade">
                     </div>
                     <div class="flex flex-col hidden md:flex">
                         <a href="index.html" class="font-bold text-xl tracking-wide leading-none">Nagar Van DMRV</a>
@@ -155,16 +155,16 @@
                 
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 px-2 border-b pb-2 gap-3">
                     <h2 class="text-lg font-bold text-[#1b3a2d]" id="map-title">Thematic Map: Overview (Nagar Van Study)</h2>
+                    <div class="flex bg-gray-100 rounded-lg p-1 border border-gray-200 shadow-inner w-full sm:w-auto">
+                        <button onclick="setMapMode('ecology')" id="tab-ecology" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-white text-[#1b3a2d] shadow-sm transition-all">🌳 Ecology Map</button>
+                        <button onclick="setMapMode('issues')" id="tab-issues" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all">🚨 Issue Tracker</button>
+                    </div>
                 </div>
 
                 <div id="map"></div>
                 
                 <div id="map-legend" class="absolute bottom-6 left-6 map-legend z-[1000]">
-                    <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
-                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
-                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Vendor</div>
-                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> KII / FGD</div>
-                </div>
+                    </div>
             </div>
 
             <div class="glass-panel p-6">
@@ -433,20 +433,28 @@
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
 
-        // Hero Icon Animation Logic
+        // Hero Icon Animation Logic (Updated with exact SVG filenames)
+        const svgFiles = [
+            "tree-svgrepo-com.svg",
+            "tree-svgrepo-com (1).svg",
+            "tree-svgrepo-com (2).svg",
+            "tree-svgrepo-com (3).svg",
+            "tree-svgrepo-com (4).svg",
+            "tree-svgrepo-com (5).svg"
+        ];
+        
         let currentSvgIndex = 0;
-        const totalSvgs = 6; // 0.svg to 5.svg
         const heroIcon = document.getElementById('animated-hero-icon');
 
         if (heroIcon) {
             setInterval(() => {
                 heroIcon.style.opacity = '0'; // Fade out
                 setTimeout(() => {
-                    currentSvgIndex = (currentSvgIndex + 1) % totalSvgs;
-                    heroIcon.src = `assets/images/${currentSvgIndex}.svg`;
+                    currentSvgIndex = (currentSvgIndex + 1) % svgFiles.length;
+                    heroIcon.src = `./assets/images/${svgFiles[currentSvgIndex]}`;
                     heroIcon.style.opacity = '1'; // Fade in
-                }, 500); // Wait for CSS transition duration before swapping source
-            }, 3000); // Trigger every 3 seconds
+                }, 500); 
+            }, 3000); 
         }
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
@@ -497,6 +505,32 @@
         }).addTo(map);
 
         var markers = L.layerGroup().addTo(map);
+
+        function setMapMode(mode) {
+            let tabEco = document.getElementById('tab-ecology');
+            let tabIss = document.getElementById('tab-issues');
+            
+            if(mode === 'ecology') {
+                tabEco.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-white text-[#1b3a2d] shadow-sm transition-all";
+                tabIss.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all";
+                document.getElementById('map-legend').innerHTML = `
+                    <div class="font-bold mb-1 border-b pb-1">Respondent Tags</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Visitor</div>
+                    <div class="legend-item"><div class="legend-color bg-orange-500 border border-white"></div> Vendor</div>
+                    <div class="legend-item"><div class="legend-color bg-blue-500 border border-white"></div> KII / FGD</div>
+                `;
+            } else {
+                tabIss.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-red-50 text-red-700 shadow-sm transition-all border border-red-200";
+                tabEco.className = "flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all";
+                document.getElementById('map-legend').innerHTML = `
+                    <div class="font-bold mb-1 border-b pb-1 text-red-800">Issue Status</div>
+                    <div class="legend-item"><div class="legend-color bg-red-600 border border-white"></div> Unsolved</div>
+                    <div class="legend-item"><div class="legend-color bg-yellow-400 border border-white"></div> In Process</div>
+                    <div class="legend-item"><div class="legend-color bg-green-500 border border-white"></div> Solved</div>
+                `;
+            }
+            updateDashboard();
+        }
 
         function drawMarkers(state) {
             markers.clearLayers();
