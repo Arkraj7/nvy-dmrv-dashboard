@@ -11,17 +11,17 @@
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            /* Base color in case image doesn't load instantly */
-            background-color: #064e3b; 
+            background-color: #fdfbf7; /* Cream base color */
         }
         
         .glass-panel { 
-            background: rgba(255, 255, 255, 0.90); 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 24px; 
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); 
-            border: 1px solid rgba(255, 255, 255, 0.4); 
+            /* More transparent to let the background image shine through */
+            background: rgba(255, 255, 255, 0.45); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.6); 
         }
         
         .gradient-text { 
@@ -39,20 +39,20 @@
     <div class="fixed inset-0 z-0 pointer-events-none">
         <img src="assets/images/Men and women walking, having picnic and doing exercises in park.jpg" 
              alt="Park Community Background" 
-             class="w-full h-full object-cover object-center" />
+             class="w-full h-full object-cover object-top opacity-90" />
              
-        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/80 to-teal-900/70 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 bg-[#fcfbf5]/75 backdrop-blur-[3px]"></div>
     </div>
 
-    <nav class="bg-[#1b3a2d]/90 backdrop-blur-md text-white shadow-lg sticky top-0 z-50 border-b border-white/10">
+    <nav class="bg-[#1b3a2d]/95 backdrop-blur-md text-white shadow-lg sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center flex-wrap">
+            <div class="flex justify-between h-14 items-center flex-wrap">
                 <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22v-8m0-12a6 6 0 0 0-6 6c0 2 1.5 4 1.5 4s-2.5.5-2.5 3c0 2.5 4 4 7 4s7-1.5 7-4c0-2.5-2.5-3-2.5-3s1.5-2 1.5-4a6 6 0 0 0-6-6z"/></svg>
-                    <span class="font-bold text-xl tracking-wide hidden md:block"><a href="index.html">Nagar Van DMRV</a></span>
+                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22v-8m0-12a6 6 0 0 0-6 6c0 2 1.5 4 1.5 4s-2.5.5-2.5 3c0 2.5 4 4 7 4s7-1.5 7-4c0-2.5-2.5-3-2.5-3s1.5-2 1.5-4a6 6 0 0 0-6-6z"/></svg>
+                    <span class="font-bold text-lg tracking-wide hidden md:block"><a href="index.html">Nagar Van DMRV</a></span>
                 </div>
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
-                    <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition-all flex items-center gap-2 border border-white/20">
+                    <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm transition-all flex items-center gap-2 border border-white/20">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                         Back to Dashboard
                     </a>
@@ -61,63 +61,62 @@
         </div>
     </nav>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 flex-grow">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10 flex-grow">
         
-        <div class="glass-panel p-8 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/40">
-            <div class="flex flex-col md:flex-row gap-10 items-center md:items-start mb-10">
+        <div class="glass-panel p-6 md:p-10 transition-all duration-500 hover:shadow-2xl hover:bg-white/50">
+            <div class="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
                 
-                <div class="relative w-48 h-48 flex-shrink-0">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-200 to-teal-100 rounded-full animate-spin" style="animation-duration: 15s;"></div>
-                    <div class="absolute inset-1 bg-white rounded-full flex items-center justify-center overflow-hidden border-4 border-white shadow-inner">
+                <div class="relative w-36 h-36 md:w-40 md:h-40 flex-shrink-0">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-300 to-teal-200 rounded-full animate-spin" style="animation-duration: 20s;"></div>
+                    <div class="absolute inset-1 bg-white rounded-full flex items-center justify-center overflow-hidden border-[3px] border-white shadow-inner">
                         <img src="assets/images/WhatsApp Image 2026-02-09 at 8_imgupscaler.ai_Sharpener_2K (1) (1).png" alt="Arkraj Biswas" class="w-full h-full object-cover">
                     </div>
                 </div>
                 
                 <div class="text-center md:text-left flex-1">
-                    <h2 class="text-4xl md:text-5xl font-black gradient-text tracking-tight pb-2">Arkraj Biswas</h2>
-                    <p class="text-[#065f46] font-bold text-lg md:text-xl mb-4 bg-emerald-50 inline-block px-5 py-1.5 rounded-full border border-emerald-200 shadow-sm">
+                    <h2 class="text-3xl md:text-4xl font-black gradient-text tracking-tight pb-1">Arkraj Biswas</h2>
+                    <p class="text-[#065f46] font-bold text-sm md:text-base mb-3 bg-emerald-50/80 inline-block px-4 py-1 rounded-full border border-emerald-200/50 shadow-sm backdrop-blur-sm">
                         Research Associate & Director of Sustainability
                     </p>
-                    <p class="text-base text-gray-700 leading-relaxed mb-6 font-medium">
+                    <p class="text-sm md:text-[15px] text-gray-800 leading-relaxed mb-5 font-medium">
                         Welcome! This initiative is a vibrant stepping stone towards actionable grassroots implementation and localized policy change. My core motivation is bridging the gap between national environmental goals and on-ground ecological realities. True sustainability is alive—built right here in our local communities, bustling urban parks, and restored ecosystems.
                     </p>
                     
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             Connect on LinkedIn
                         </a>
-                        <a href="mailto:YOUR_EMAIL@example.com" class="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-black text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <a href="mailto:YOUR_EMAIL@example.com" class="bg-white hover:bg-gray-50 text-gray-800 px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 border border-gray-200">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             Email Me
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-6 text-gray-700 mt-8">
+            <div class="space-y-5 text-gray-800 mt-6">
                 
-                <div class="bg-white/80 p-6 md:p-8 rounded-2xl border border-emerald-100 shadow-sm relative overflow-hidden group hover:bg-white transition-colors">
-                    <div class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
-                    <h3 class="font-extrabold text-[#064e3b] mb-3 text-xl flex items-center gap-3">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7"/></svg>
+                <div class="bg-white/50 p-5 md:p-6 rounded-xl border border-white/60 shadow-sm relative overflow-hidden group hover:bg-white/70 transition-colors backdrop-blur-md">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500/80"></div>
+                    <h3 class="font-extrabold text-[#064e3b] mb-2 text-lg flex items-center gap-2">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7"/></svg>
                         Academic & Professional Background
                     </h3>
-                    <p class="leading-relaxed text-gray-800 font-medium text-[15px]">
+                    <p class="leading-relaxed font-medium text-[14px] md:text-[15px]">
                         I hold a Master of Science in Environmental & Sustainable Development (Earth & Atmospheric Sciences) from Banaras Hindu University and a Bachelor of Science in Agricultural Sciences from UAS Dharwad. Currently, I serve as the Director of Sustainability at the Ecoserve Development Foundation and as an Embark India Development Fellow placed at National CAMPA. In these roles, my work is dedicated to advancing the Nagar Van Yojana, driving ecosystem restoration, and building robust Digital Monitoring, Reporting, and Verification (DMRV) tools to connect grassroots action with high-level policy.
                     </p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-emerald-50/90 to-teal-50/90 p-6 md:p-8 rounded-2xl border border-emerald-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-                    
-                    <h3 class="font-extrabold text-[#064e3b] mb-4 text-xl border-b border-emerald-200/80 pb-3 flex items-center gap-3 relative z-10">
-                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="bg-white/60 p-5 md:p-6 rounded-xl border border-white/60 shadow-sm relative overflow-hidden group hover:bg-white/80 transition-shadow backdrop-blur-md">
+                    <h3 class="font-extrabold text-[#064e3b] mb-2 text-lg border-b border-emerald-900/10 pb-2 flex items-center gap-2 relative z-10">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Vision for a Viksit Bharat & Sustainability
                     </h3>
-                    <p class="leading-relaxed mb-4 font-medium text-gray-800 relative z-10 text-[15px]">
+                    <p class="leading-relaxed mb-3 font-medium relative z-10 text-[14px] md:text-[15px]">
                         India’s commitment to its Nationally Determined Contributions (NDCs) requires decentralized, data-driven action. Urban forestry via Nagar Vans and Nagar Vatikas represents a crucial, lively strategy to create carbon sinks, combat the Urban Heat Island effect, and foster vibrant community resilience alongside local vendors and citizens.
                     </p>
-                    <p class="leading-relaxed font-medium text-gray-800 relative z-10 text-[15px]">
+                    <p class="leading-relaxed font-medium relative z-10 text-[14px] md:text-[15px]">
                         This platform empowers everyone—from park visitors to policymakers—to monitor real-time metrics, effectively driving us collectively towards a truly sustainable, developed nation: a Viksit Bharat.
                     </p>
                 </div>
