@@ -33,8 +33,8 @@
         }
         .btn-report { animation: blink-red 2.5s infinite; }
         
-        /* Smooth Icon Fade */
-        .icon-fade { transition: opacity 0.5s ease-in-out; }
+        /* Smooth and Slow Icon Fade */
+        .icon-fade { transition: opacity 1.2s ease-in-out; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -43,7 +43,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/10 rounded-lg p-1.5 flex items-center justify-center border border-white/20">
+                    <div class="w-11 h-11 bg-[#fdfbf7] rounded-lg p-1.5 flex items-center justify-center border border-white/30 shadow-md">
                         <img id="animated-hero-icon" src="./assets/images/tree-svgrepo-com.svg" alt="Nagar Van Icon" class="w-full h-full object-contain icon-fade">
                     </div>
                     <div class="flex flex-col hidden md:flex">
@@ -433,7 +433,7 @@
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
 
-        // Hero Icon Animation Logic (Updated with exact SVG filenames)
+        // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
             "tree-svgrepo-com.svg",
             "tree-svgrepo-com (1).svg",
@@ -448,13 +448,13 @@
 
         if (heroIcon) {
             setInterval(() => {
-                heroIcon.style.opacity = '0'; // Fade out
+                heroIcon.style.opacity = '0'; // Fade out slowly
                 setTimeout(() => {
                     currentSvgIndex = (currentSvgIndex + 1) % svgFiles.length;
                     heroIcon.src = `./assets/images/${svgFiles[currentSvgIndex]}`;
-                    heroIcon.style.opacity = '1'; // Fade in
-                }, 500); 
-            }, 3000); 
+                    heroIcon.style.opacity = '1'; // Fade in slowly
+                }, 1200); // Wait 1.2s for CSS fade to finish
+            }, 4000); // Wait 4 seconds between swaps
         }
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
