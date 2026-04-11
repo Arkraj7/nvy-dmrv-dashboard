@@ -19,15 +19,22 @@
         .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
         .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        
+        /* Media Gallery Scrollbar */
         .media-scroll::-webkit-scrollbar { height: 8px; }
         .media-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .media-scroll::-webkit-scrollbar-thumb { background: #5dc48a; border-radius: 4px; }
+
+        /* Blinking Alert for Grievance Button */
         @keyframes blink-red {
             0% { background-color: #fee2e2; border-color: #ef4444; color: #b91c1c; }
             50% { background-color: #fca5a5; border-color: #dc2626; color: #7f1d1d; }
             100% { background-color: #fee2e2; border-color: #ef4444; color: #b91c1c; }
         }
         .btn-report { animation: blink-red 2.5s infinite; }
+        
+        /* Smooth Icon Fade */
+        .icon-fade { transition: opacity 0.5s ease-in-out; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -36,15 +43,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
-                    <span class="text-2xl">🌳</span>
-                    <span class="font-bold text-xl tracking-wide hidden md:block"><a href="index.html">Nagar Van DMRV</a></span>
+                    <div class="w-10 h-10 bg-white/10 rounded-lg p-1.5 flex items-center justify-center border border-white/20">
+                        <img id="animated-hero-icon" src="assets/images/0.svg" alt="Nagar Van Icon" class="w-full h-full object-contain icon-fade" style="filter: brightness(0) invert(1);">
+                    </div>
+                    <div class="flex flex-col hidden md:flex">
+                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none">Nagar Van DMRV</a>
+                        <span class="text-[9px] text-emerald-300 uppercase tracking-widest font-bold mt-0.5">Digital Monitoring, Reporting & Verification</span>
+                    </div>
                 </div>
+                
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                     <a href="about.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors">
                         About Project
                     </a>
                     
-                    <a href="report.html" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block text-center">
+                    <a href="report.html" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block">
                         🚨 Report Issue
                     </a>
                     
@@ -249,6 +262,22 @@
                         <p class="text-white text-xs font-bold">Surat Smriti Van, Gujarat</p>
                     </div>
                 </div>
+
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                </div>
+
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                </div>
             </div>
         </div>
 
@@ -403,6 +432,22 @@
     <script>
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
+
+        // Hero Icon Animation Logic
+        let currentSvgIndex = 0;
+        const totalSvgs = 6; // 0.svg to 5.svg
+        const heroIcon = document.getElementById('animated-hero-icon');
+
+        if (heroIcon) {
+            setInterval(() => {
+                heroIcon.style.opacity = '0'; // Fade out
+                setTimeout(() => {
+                    currentSvgIndex = (currentSvgIndex + 1) % totalSvgs;
+                    heroIcon.src = `assets/images/${currentSvgIndex}.svg`;
+                    heroIcon.style.opacity = '1'; // Fade in
+                }, 500); // Wait for CSS transition duration before swapping source
+            }, 3000); // Trigger every 3 seconds
+        }
 
         window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
 
