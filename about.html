@@ -7,33 +7,33 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         body { 
-            background-color: #f0fdf4; 
+            background-color: #f4fcf7; /* Very soft, professional mint white */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
+        
         .glass-panel { 
             background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             border-radius: 24px; 
-            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.1); 
-            border: 2px solid rgba(255, 255, 255, 0.5); 
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08); 
+            border: 1px solid rgba(209, 250, 229, 0.6); 
         }
         
-        /* Floating Animation for Abstract Vibe */
+        /* Smooth Floating Animations for the Line Art */
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(5deg); }
-            66% { transform: translateY(10px) rotate(-5deg); }
+            33% { transform: translateY(-15px) rotate(3deg); }
+            66% { transform: translateY(10px) rotate(-3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
-        .animate-float { animation: float 7s ease-in-out infinite; }
-        .animate-float-delay-1 { animation: float 8s ease-in-out 2s infinite; }
-        .animate-float-delay-2 { animation: float 6s ease-in-out 4s infinite; }
-        .animate-float-delay-3 { animation: float 9s ease-in-out 1s infinite; }
+        
+        .animate-float { animation: float 12s ease-in-out infinite; }
+        .animate-float-delay-1 { animation: float 14s ease-in-out 3s infinite; }
+        .animate-float-delay-2 { animation: float 10s ease-in-out 5s infinite; }
+        .animate-float-delay-3 { animation: float 16s ease-in-out 2s infinite; }
         
         .gradient-text { 
             background: linear-gradient(135deg, #065f46, #10b981); 
@@ -45,30 +45,54 @@
 <body class="text-gray-800 relative min-h-screen">
 
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div class="absolute top-20 left-10 text-6xl animate-float opacity-10 text-emerald-800"><i class="fa-solid fa-tree"></i></div>
-        <div class="absolute top-40 right-16 text-5xl animate-float-delay-1 opacity-10 text-teal-700"><i class="fa-solid fa-leaf"></i></div>
-        <div class="absolute bottom-32 left-20 text-7xl animate-float-delay-2 opacity-10 text-green-900"><i class="fa-solid fa-seedling"></i></div>
-        <div class="absolute top-1/3 left-1/4 text-5xl animate-float-delay-3 opacity-10 text-emerald-600"><i class="fa-solid fa-tree-city"></i></div>
         
-        <div class="absolute bottom-40 right-24 text-6xl animate-float opacity-10 text-emerald-800"><i class="fa-solid fa-handshake-angle"></i></div>
-        <div class="absolute top-1/4 right-1/3 text-5xl animate-float-delay-2 opacity-10 text-teal-800"><i class="fa-solid fa-users-viewfinder"></i></div>
-        <div class="absolute bottom-16 right-1/3 text-6xl animate-float-delay-1 opacity-10 text-green-700"><i class="fa-solid fa-seedling"></i></div>
+        <svg class="absolute top-12 left-10 w-32 h-32 text-emerald-900 opacity-[0.06] animate-float" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 22v-8m0-12a6 6 0 0 0-6 6c0 2 1.5 4 1.5 4s-2.5.5-2.5 3c0 2.5 4 4 7 4s7-1.5 7-4c0-2.5-2.5-3-2.5-3s1.5-2 1.5-4a6 6 0 0 0-6-6z"/>
+        </svg>
+
+        <svg class="absolute top-32 right-12 w-28 h-28 text-teal-900 opacity-[0.05] animate-float-delay-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+
+        <svg class="absolute bottom-32 left-16 w-40 h-40 text-emerald-800 opacity-[0.04] animate-float-delay-2" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-3 4-3 2 3h2"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14h2.5"/>
+        </svg>
+
+        <svg class="absolute top-[40%] right-8 w-32 h-32 text-emerald-900 opacity-[0.05] animate-float-delay-3" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7M2 7h20l-2-5H4L2 7zm8 14v-6h4v6"/>
+        </svg>
+
+        <svg class="absolute top-[20%] left-[30%] w-24 h-24 text-green-800 opacity-[0.05] animate-float" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20a4 4 0 0 0 4-4c0-3-4-6-4-6s-4 3-4 6a4 4 0 0 0 4 4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 10c2-3 6-5 8-2 2 4-4 8-8 12-4-4-10-8-8-12 2-3 6-1 8 2z"/>
+        </svg>
+
+        <svg class="absolute bottom-[20%] right-[30%] w-32 h-32 text-teal-800 opacity-[0.04] animate-float-delay-1" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-3-3-2 5-3-9-2 5H5m14.5-2.5a5.5 5.5 0 0 0-8.5-4.5 5.5 5.5 0 0 0-8.5 4.5c0 4 7 9.5 8.5 9.5s8.5-5.5 8.5-9.5z"/>
+        </svg>
+
+        <svg class="absolute bottom-16 left-[40%] w-28 h-28 text-emerald-900 opacity-[0.05] animate-float-delay-3" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M5 10v10m14-10v10m-14-6h14m-12-4V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/>
+        </svg>
+
+        <svg class="absolute top-[10%] right-[40%] w-24 h-24 text-green-900 opacity-[0.04] animate-float-delay-2" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4l-2 3 3 3-1 5m5-11l1 4 4 1m-5-5l-2-4h-3"/>
+        </svg>
         
-        <div class="absolute -top-20 -left-20 w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
-        <div class="absolute top-1/2 -right-20 w-80 h-80 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
-        <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" style="animation-delay: 4s;"></div>
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse"></div>
+        <div class="absolute top-1/2 -right-20 w-80 h-80 bg-teal-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" style="animation-delay: 3s;"></div>
     </div>
 
     <nav class="bg-[#1b3a2d] text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-leaf text-emerald-400 text-2xl"></i>
+                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22v-8m0-12a6 6 0 0 0-6 6c0 2 1.5 4 1.5 4s-2.5.5-2.5 3c0 2.5 4 4 7 4s7-1.5 7-4c0-2.5-2.5-3-2.5-3s1.5-2 1.5-4a6 6 0 0 0-6-6z"/></svg>
                     <span class="font-bold text-xl tracking-wide hidden md:block"><a href="index.html">Nagar Van DMRV</a></span>
                 </div>
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
-                    <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition-all backdrop-blur-md flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                    <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full font-bold text-xs sm:text-sm transition-all backdrop-blur-md flex items-center gap-2 border border-white/20">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        Back to Dashboard
                     </a>
                 </div>
             </div>
@@ -77,21 +101,19 @@
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         
-        <div class="glass-panel p-8 md:p-12 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-200/50">
+        <div class="glass-panel p-8 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/10">
             <div class="flex flex-col md:flex-row gap-10 items-center md:items-start mb-10">
+                
                 <div class="relative w-48 h-48 flex-shrink-0">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-400 to-teal-300 rounded-full animate-spin" style="animation-duration: 10s;"></div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-200 to-teal-100 rounded-full animate-spin" style="animation-duration: 15s;"></div>
                     <div class="absolute inset-1 bg-white rounded-full flex items-center justify-center overflow-hidden border-4 border-white shadow-inner">
                         <img src="assets/images/WhatsApp Image 2026-02-09 at 8_imgupscaler.ai_Sharpener_2K (1) (1).png" alt="Arkraj Biswas" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-900 text-xl w-10 h-10 flex items-center justify-center rounded-full shadow-lg border-2 border-white">
-                        <i class="fa-solid fa-certificate"></i>
                     </div>
                 </div>
                 
                 <div class="text-center md:text-left flex-1">
                     <h2 class="text-4xl md:text-5xl font-black gradient-text mb-2 tracking-tight">Arkraj Biswas</h2>
-                    <p class="text-[#059669] font-bold text-lg md:text-xl mb-4 bg-emerald-50 inline-block px-5 py-1.5 rounded-full border border-emerald-200 shadow-sm">
+                    <p class="text-[#065f46] font-bold text-lg md:text-xl mb-4 bg-emerald-50 inline-block px-5 py-1.5 rounded-full border border-emerald-100 shadow-sm">
                         Research Associate & Director of Sustainability
                     </p>
                     <p class="text-base text-gray-700 leading-relaxed mb-6 font-medium">
@@ -99,12 +121,12 @@
                     </p>
                     
                     <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
-                            <i class="fa-brands fa-linkedin text-xl"></i>
+                        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             Connect on LinkedIn
                         </a>
-                        <a href="mailto:YOUR_EMAIL@example.com" class="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-black hover:to-gray-900 text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
-                            <i class="fa-solid fa-envelope text-lg"></i>
+                        <a href="mailto:YOUR_EMAIL@example.com" class="bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-900 hover:to-black text-white px-6 py-3 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             Email Me
                         </a>
                     </div>
@@ -112,27 +134,31 @@
             </div>
 
             <div class="space-y-6 text-gray-700 mt-8">
-                <div class="bg-white/60 p-6 rounded-2xl border border-emerald-100 shadow-sm relative overflow-hidden group hover:bg-white/80 transition-colors">
+                
+                <div class="bg-white/70 p-6 md:p-8 rounded-2xl border border-emerald-50 shadow-sm relative overflow-hidden group hover:bg-white transition-colors">
                     <div class="absolute top-0 left-0 w-2 h-full bg-emerald-400"></div>
                     <h3 class="font-extrabold text-[#064e3b] mb-3 text-xl flex items-center gap-3">
-                        <i class="fa-solid fa-graduation-cap text-emerald-600"></i> Academic & Professional Background
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7"/></svg>
+                        Academic & Professional Background
                     </h3>
-                    <p class="leading-relaxed text-gray-700 font-medium">
+                    <p class="leading-relaxed text-gray-700 font-medium text-[15px]">
                         I hold a Master of Science in Environmental & Sustainable Development (Earth & Atmospheric Sciences) from Banaras Hindu University and a Bachelor of Science in Agricultural Sciences from UAS Dharwad. Currently, I serve as the Director of Sustainability at the Ecoserve Development Foundation and as an Embark India Development Fellow placed at National CAMPA. In these roles, my work is dedicated to advancing the Nagar Van Yojana, driving ecosystem restoration, and building robust Digital Monitoring, Reporting, and Verification (DMRV) tools to connect grassroots action with high-level policy.
                     </p>
                 </div>
                 
-                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border border-emerald-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-                    <div class="absolute -right-10 -top-10 text-8xl opacity-5 text-emerald-800 transform rotate-12 transition-transform group-hover:rotate-45">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-                    <h3 class="font-extrabold text-[#064e3b] mb-3 text-xl border-b border-emerald-200 pb-3 flex items-center gap-3">
-                        <i class="fa-solid fa-map-location-dot text-emerald-600"></i> Vision for a Viksit Bharat & Sustainability
+                <div class="bg-gradient-to-br from-emerald-50/80 to-teal-50/80 p-6 md:p-8 rounded-2xl border border-emerald-100 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <svg class="absolute -right-8 -top-8 w-40 h-40 text-emerald-900 opacity-[0.03] transform rotate-12 transition-transform group-hover:rotate-45" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 22c4-4 8-9 8-14a4 4 0 0 0-8 0v14zm0 0c-4-4-8-9-8-14a4 4 0 0 1 8 0v14z"/>
+                    </svg>
+                    
+                    <h3 class="font-extrabold text-[#064e3b] mb-4 text-xl border-b border-emerald-200/60 pb-3 flex items-center gap-3 relative z-10">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Vision for a Viksit Bharat & Sustainability
                     </h3>
-                    <p class="leading-relaxed mb-3 font-medium text-gray-700 relative z-10 mt-2">
+                    <p class="leading-relaxed mb-4 font-medium text-gray-700 relative z-10 text-[15px]">
                         India’s commitment to its Nationally Determined Contributions (NDCs) requires decentralized, data-driven action. Urban forestry via Nagar Vans and Nagar Vatikas represents a crucial, lively strategy to create carbon sinks, combat the Urban Heat Island effect, and foster vibrant community resilience alongside local vendors and citizens.
                     </p>
-                    <p class="leading-relaxed font-medium text-gray-700 relative z-10">
+                    <p class="leading-relaxed font-medium text-gray-700 relative z-10 text-[15px]">
                         This platform empowers everyone—from park visitors to policymakers—to monitor real-time metrics, effectively driving us collectively towards a truly sustainable, developed nation: a Viksit Bharat.
                     </p>
                 </div>
