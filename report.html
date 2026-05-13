@@ -11,14 +11,31 @@
 
     <style>
         body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .glass-panel:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
         #map { height: 450px; width: 100%; border-radius: 0.5rem; z-index: 1; }
         .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
         .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+
+        /* Accessibility */
+        *:focus-visible { outline: 3px solid #ef4444; outline-offset: 2px; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #1b3a2d; color: white; padding: 8px; z-index: 100; }
+        .skip-link:focus { top: 0; }
+
+        /* Enhanced inputs */
+        input, select, textarea { transition: all 0.2s ease; }
+        input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); }
+
+        /* Button effects */
+        .btn-hover { transition: all 0.2s ease; }
+        .btn-hover:hover { transform: translateY(-2px); }
+        .btn-hover:active { transform: translateY(0); }
     </style>
+<!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800" role="main" aria-label="Issue Report Page">
 
     <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +53,7 @@
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main">
         
         <div class="mb-8">
             <h1 class="text-3xl font-extrabold text-red-800">🚨 Live Issue Tracker & Grievance Report</h1>
@@ -62,7 +79,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-1">Issue Category</label>
-                            <select id="report-category" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <select id="report-category" onchange="toggleOtherCategory()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
                                 <option value="">-- Select Problem Type --</option>
                                 <option value="Solid Waste / Littering">🗑️ Solid Waste / Littering</option>
                                 <option value="Broken Infrastructure">🚧 Broken Infrastructure</option>
@@ -70,15 +87,22 @@
                                 <option value="Water Logging">💧 Water Logging</option>
                                 <option value="Forest Fire / Smoke">🔥 Forest Fire / Smoke</option>
                                 <option value="Wildlife Sighting">🐅 Wildlife Conflict</option>
+                                <option value="Noise Pollution">🔊 Noise Pollution</option>
+                                <option value="Encroachment">🏗️ Illegal Encroachment</option>
+                                <option value="Other">📝 Other (Specify below)</option>
                             </select>
+                            <input type="text" id="report-other-category" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify the issue type...">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-1">Severity Level</label>
-                            <select id="report-severity" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <select id="report-severity" onchange="toggleOtherSeverity()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
                                 <option value="Low">Low (Routine)</option>
                                 <option value="Medium" selected>Medium (Action Soon)</option>
                                 <option value="High">High (Emergency)</option>
+                                <option value="Critical">⛔ Critical (Immediate Action)</option>
+                                <option value="Other">📝 Other (Specify below)</option>
                             </select>
+                            <input type="text" id="report-other-severity" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify severity level...">
                         </div>
                     </div>
 
@@ -114,7 +138,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
         const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbxvemb8Z5SGZESKYcyBfiG_5P5jmjUXirs6jUt3ppxTosR2cLpXetY-4GKheDg3Npwr/exec"; 
@@ -147,6 +171,26 @@
             });
         }
 
+        function toggleOtherCategory() {
+            let categorySelect = document.getElementById('report-category');
+            let otherInput = document.getElementById('report-other-category');
+            if (categorySelect.value === "Other") {
+                otherInput.classList.remove('hidden');
+            } else {
+                otherInput.classList.add('hidden');
+            }
+        }
+
+        function toggleOtherSeverity() {
+            let severitySelect = document.getElementById('report-severity');
+            let otherInput = document.getElementById('report-other-severity');
+            if (severitySelect.value === "Other") {
+                otherInput.classList.remove('hidden');
+            } else {
+                otherInput.classList.add('hidden');
+            }
+        }
+
         function fetchGPSLocation() {
             let statusText = document.getElementById('gps-status');
             statusText.innerText = "Locating..."; statusText.style.color = "blue";
@@ -176,13 +220,16 @@
         function submitReportData() {
             let lat = document.getElementById('report-lat').value;
             let lon = document.getElementById('report-lon').value;
-            let cat = document.getElementById('report-category').value;
-            let sev = document.getElementById('report-severity').value;
+            let catSelect = document.getElementById('report-category');
+            let cat = catSelect.value === "Other" ? document.getElementById('report-other-category').value : catSelect.value;
+            let sevSelect = document.getElementById('report-severity');
+            let sev = sevSelect.value === "Other" ? document.getElementById('report-other-severity').value : sevSelect.value;
             let desc = document.getElementById('report-desc').value;
             let wordCount = desc.trim() === "" ? 0 : desc.trim().split(/\s+/).length;
 
             if(!lat) { alert("Please fetch GPS location first."); return; }
-            if(!cat) { alert("Please select an issue category."); return; }
+            if(!cat) { alert("Please select or specify an issue category."); return; }
+            if(!sev) { alert("Please select or specify severity level."); return; }
             if(wordCount < 20) { alert("Description must be at least 20 words."); return; }
 
             let statusBtn = document.getElementById('report-submit-status');

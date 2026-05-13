@@ -13,13 +13,22 @@
 
     <style>
         body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .glass-panel { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .glass-panel:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
         #map { height: 450px; width: 100%; border-radius: 0.5rem; z-index: 1; }
         .gradient-text { background: linear-gradient(90deg, #1b3a2d, #5dc48a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text-animated { background: linear-gradient(90deg, #1b3a2d, #5dc48a, #1b3a2d); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-move 3s linear infinite; }
+        @keyframes gradient-move { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         .map-legend { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 12px; }
         .legend-item { display: flex; align-items: center; margin-bottom: 4px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
-        
+
+        /* Metric Cards with Enhanced Visuals */
+        .metric-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #5dc48a, #3d9a6a); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+        .metric-card:hover::before { transform: scaleX(1); }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(93, 196, 138, 0.2); }
+
         /* Media Gallery Scrollbar */
         .media-scroll::-webkit-scrollbar { height: 8px; }
         .media-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
@@ -32,12 +41,44 @@
             100% { background-color: #fee2e2; border-color: #ef4444; color: #b91c1c; }
         }
         .btn-report { animation: blink-red 2.5s infinite; }
-        
+
         /* Smooth and Slow Icon Fade */
         .icon-fade { transition: opacity 1.2s ease-in-out; }
+
+        /* Accessibility - Focus States */
+        *:focus-visible { outline: 3px solid #5dc48a; outline-offset: 2px; }
+
+        /* Skip Link for Accessibility */
+        .skip-link { position: absolute; top: -40px; left: 0; background: #1b3a2d; color: white; padding: 8px; z-index: 100; }
+        .skip-link:focus { top: 0; }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .glass-panel { border: 2px solid #1b3a2d; }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        /* Map Mode Tab Styling */
+        .map-tab { transition: all 0.2s ease; }
+        .map-tab:active { transform: scale(0.95); }
+
+        /* Star Rating Enhanced */
+        .star-rating span { transition: all 0.15s ease; }
+        .star-rating span:hover { transform: scale(1.2); }
+
+        /* Button Hover Effects */
+        .btn-hover-effect { position: relative; overflow: hidden; }
+        .btn-hover-effect::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.2); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
+        .btn-hover-effect:active::after { width: 200px; height: 200px; }
     </style>
+<!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
 
     <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,7 +114,7 @@
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content">
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
@@ -81,13 +122,20 @@
                 <p class="text-sm text-gray-500 mt-1">Monitoring Ecological, Social, and Infrastructural parameters.</p>
             </div>
             <div class="w-full md:w-auto">
-                <select id="state-selector" onchange="updateDashboard()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]">
+                <select id="state-selector" onchange="handleStateSelectorChange()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]">
                     <option value="overview">🌐 All Sites Overview</option>
                     <option value="gujarat">📍 NVY Gujarat</option>
                     <option value="jharkhand">📍 NVY Jharkhand</option>
                     <option value="andhra">📍 NVY Andhra Pradesh</option>
                     <option value="mp">📍 NVY Madhya Pradesh</option>
+                    <option value="maharashtra">📍 NVY Maharashtra</option>
+                    <option value="karnataka">📍 NVY Karnataka</option>
+                    <option value="rajasthan">📍 NVY Rajasthan</option>
+                    <option value="delhi">📍 NVY Delhi</option>
+                    <option value="westbengal">📍 NVY West Bengal</option>
+                    <option value="other">📝 Other State / UT</option>
                 </select>
+                <input type="text" id="state-other-input" class="hidden w-full md:w-64 mt-2 bg-white border-2 border-[#5dc48a] text-[#1b3a2d] font-bold py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3d9a6a] animate-pulse" placeholder="Enter State/UT name...">
             </div>
         </div>
 
@@ -280,8 +328,9 @@
                 </div>
             </div>
         </div>
+        </main>
 
-        <footer class="glass-panel p-6 mb-8 bg-gray-50 border-t-4 border-[#1b3a2d]">
+        <footer class="glass-panel p-6 mb-8 bg-gray-50 border-t-4 border-[#1b3a2d]" role="contentinfo" aria-label="Footer">
             <h3 class="text-lg font-bold text-[#1b3a2d] mb-2">About This Study</h3>
             <p class="text-sm text-gray-700 mb-6 border-b pb-4">
                 This study is comprehensive to understand the essence of Nagar Vans and Nagar Vatikas. It aims to evaluate their true impact on urban ecology, biodiversity, and community well-being, driving grassroots policy change and promoting sustainable urban environments.
@@ -335,11 +384,28 @@
             </div>
 
             <div class="p-5 space-y-4">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Name</label>
-                    <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Your Name</label>
+                        <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Respondent Category <span class="text-xs font-normal text-gray-500">(For Research)</span></label>
+                        <select id="pub-respondent-type" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                            <option value="">-- Select Category --</option>
+                            <option value="Visitor">👤 Regular Visitor</option>
+                            <option value="Resident">🏠 Local Resident</option>
+                            <option value="Vendor">🛒 Vendor/Faaccha</option>
+                            <option value="Student">🎓 Student/Researcher</option>
+                            <option value="Environmentalist">🌿 Environmentalist</option>
+                            <option value="Government">🏛️ Government Official</option>
+                            <option value="NGO">🤝 NGO Worker</option>
+                            <option value="Other">📝 Other</option>
+                        </select>
+                        <input type="text" id="pub-other-respondent" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none text-sm" placeholder="Please specify...">
+                    </div>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-1">Select State/UT</label>
@@ -404,6 +470,46 @@
                     </div>
                 </div>
 
+                <!-- Academic/Research Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 border-t border-b border-gray-200 py-3 my-2">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Visit Frequency</label>
+                        <select id="pub-visit-frequency" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                            <option value="">-- Select --</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Occasionally">Occasionally</option>
+                            <option value="First Time">First Time</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Primary Purpose</label>
+                        <select id="pub-purpose" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                            <option value="">-- Select --</option>
+                            <option value="Recreation">🎮 Recreation</option>
+                            <option value="Exercise">🏃 Exercise/Yoga</option>
+                            <option value="Nature Study">📚 Nature Study</option>
+                            <option value="Research">🔬 Research/Survey</option>
+                            <option value="Business">💼 Vendor/Business</option>
+                            <option value="Commute">🚶 Commute</option>
+                            <option value="Social">👥 Social Gathering</option>
+                            <option value="Other">📝 Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Duration of Stay</label>
+                        <select id="pub-duration" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                            <option value="">-- Select --</option>
+                            <option value="< 30 min">Less than 30 min</option>
+                            <option value="30-60 min">30 min - 1 hour</option>
+                            <option value="1-2 hours">1-2 hours</option>
+                            <option value="2-4 hours">2-4 hours</option>
+                            <option value="> 4 hours">More than 4 hours</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review <span class="text-red-500 font-normal text-xs">(Min. 20 words required)</span></label>
                     <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity. Please write at least 20 words..."></textarea>
@@ -433,6 +539,29 @@
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
 
+        // Handle "Other" state selection
+        function handleStateSelectorChange() {
+            let selector = document.getElementById('state-selector');
+            let otherInput = document.getElementById('state-other-input');
+            if (selector.value === 'other') {
+                otherInput.classList.remove('hidden');
+                otherInput.focus();
+            } else {
+                otherInput.classList.add('hidden');
+                updateDashboard();
+            }
+        }
+
+        // Handle custom state input
+        document.addEventListener('DOMContentLoaded', function() {
+            let otherInput = document.getElementById('state-other-input');
+            if (otherInput) {
+                otherInput.addEventListener('input', function() {
+                    // Can add custom handling for custom states here
+                });
+            }
+        });
+
         // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
             "tree-svgrepo-com.svg",
@@ -457,7 +586,7 @@
             }, 4000); // Wait 4 seconds between swaps
         }
 
-        window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0 }, locations: [] };
+        window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0, maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0 }, locations: [] };
 
         const siteData = {
             overview: { 
@@ -484,11 +613,41 @@
                 bars: { gov: 80, who: 70, infra: 75 },
                 review: "Excellent progress on formal boundary demarcation. High community willingness to pay (CVM), but informal vendors request better designated spaces."
             },
-            mp: { 
+            mp: {
                 center: [22.9734, 78.6569], zoom: 6, title: "NVY Madhya Pradesh",
                 eco: "8.0", socio: "High", wtp: "₹30", carbon: "220", heat: "-3.1", water: "7k",
                 bars: { gov: 85, who: 65, infra: 80 },
                 review: "Great improvements in urban cooling and physical capital (pathways, lights). KIIs show seamless coordination between Forest Dept and ULBs."
+            },
+            maharashtra: {
+                center: [19.7515, 75.5522], zoom: 6, title: "NVY Maharashtra",
+                eco: "7.6", socio: "High", wtp: "₹28", carbon: "380", heat: "-2.2", water: "15k",
+                bars: { gov: 82, who: 72, infra: 78 },
+                review: "Mumbai and Pune show excellent urban forest coverage. Aarey Colony restoration in progress with high community participation."
+            },
+            karnataka: {
+                center: [15.3173, 75.7139], zoom: 6, title: "NVY Karnataka",
+                eco: "7.9", socio: "High", wtp: "₹32", carbon: "290", heat: "-2.0", water: "11k",
+                bars: { gov: 88, who: 70, infra: 82 },
+                review: "Bangalore's tree conservation efforts notable. Tech-enabled monitoring with citizen science programs gaining momentum."
+            },
+            rajasthan: {
+                center: [27.0238, 74.2179], zoom: 6, title: "NVY Rajasthan",
+                eco: "6.8", socio: "Medium", wtp: "₹18", carbon: "150", heat: "-1.8", water: "5k",
+                bars: { gov: 75, who: 58, infra: 65 },
+                review: "Desert eco-restoration challenging but innovative. Water harvesting structures critical for survival in arid zones."
+            },
+            delhi: {
+                center: [28.7041, 77.1025], zoom: 10, title: "NVY Delhi",
+                eco: "6.5", socio: "Medium", wtp: "₹22", carbon: "180", heat: "-1.5", water: "4k",
+                bars: { gov: 70, who: 62, infra: 60 },
+                review: "Asola Bhatti and Delhi Ridge need protection. Air quality mitigation through urban forestry crucial for capital region."
+            },
+            westbengal: {
+                center: [22.9868, 87.8550], zoom: 6, title: "NVY West Bengal",
+                eco: "7.4", socio: "High", wtp: "₹20", carbon: "340", heat: "-1.9", water: "14k",
+                bars: { gov: 78, who: 68, infra: 72 },
+                review: "Kolkata New Town Eco Park a model project. Sundarbans buffer zone forests need strategic expansion."
             }
         };
 
@@ -560,8 +719,33 @@
 
         function updateDashboard() {
             var selected = document.getElementById('state-selector').value;
+            // Handle "Other" state selection - show a message instead of failing
+            if (selected === 'other') {
+                let otherInput = document.getElementById('state-other-input');
+                let customState = otherInput.value.trim();
+                if (customState) {
+                    document.getElementById('map-title').innerText = "Thematic Map: Custom Location (" + customState + ")";
+                    document.getElementById('metric-eco').innerText = "--";
+                    document.getElementById('metric-socio').innerText = "--";
+                    document.getElementById('metric-wtp').innerText = "--";
+                    document.getElementById('metric-carbon').innerText = "--";
+                    document.getElementById('metric-heat').innerText = "--";
+                    document.getElementById('metric-water').innerText = "--";
+                    document.getElementById('bar-gov').style.width = "0%";
+                    document.getElementById('bar-gov-val').innerText = "--";
+                    document.getElementById('bar-who').style.width = "0%";
+                    document.getElementById('bar-who-val').innerText = "--";
+                    document.getElementById('bar-infra').style.width = "0%";
+                    document.getElementById('bar-infra-val').innerText = "--";
+                    document.getElementById('site-review').innerText = "Custom location data will be loaded for: " + customState + ". This feature allows researchers to add new study sites dynamically.";
+                    document.getElementById('panel-title').innerText = customState + " Metrics";
+                    map.setView([20.0, 78.0], 5);
+                    markers.clearLayers();
+                }
+                return;
+            }
             var data = siteData[selected];
-            
+
             map.flyTo(data.center, data.zoom, { duration: 1.5 });
             drawMarkers(selected);
             document.getElementById('map-title').innerText = "Thematic Map: " + data.title + " (Nagar Van Study)";
@@ -678,6 +862,16 @@
             "West Bengal": ["New Town Eco Park", "Kolkata Green Lung", "Siliguri Salugara Van"]
         };
 
+        // Handle Other Respondent Type
+        document.getElementById('pub-respondent-type').addEventListener('change', function() {
+            let otherInput = document.getElementById('pub-other-respondent');
+            if (this.value === 'Other') {
+                otherInput.classList.remove('hidden');
+            } else {
+                otherInput.classList.add('hidden');
+            }
+        });
+
         function updateVanDropdown() {
             let stateSelect = document.getElementById('pub-state').value;
             let vanSelect = document.getElementById('pub-van');
@@ -716,22 +910,42 @@
 
         function submitPublicData() {
             let name = document.getElementById('pub-name').value;
+            let respondentTypeSelect = document.getElementById('pub-respondent-type');
+            let respondentType = respondentTypeSelect.value === "Other" ? document.getElementById('pub-other-respondent').value : respondentTypeSelect.value;
             let state = document.getElementById('pub-state').value;
             let vanSelect = document.getElementById('pub-van').value;
             let vanName = vanSelect === "Other" ? document.getElementById('pub-other-van').value : vanSelect;
+            let visitFrequency = document.getElementById('pub-visit-frequency').value;
+            let purpose = document.getElementById('pub-purpose').value;
+            let duration = document.getElementById('pub-duration').value;
             let eco = document.getElementById('eco-stars').value;
             let clean = document.getElementById('clean-stars').value;
             let safety = document.getElementById('safety-stars').value;
             let review = document.getElementById('pub-review').value;
             let wordCount = review.trim() === "" ? 0 : review.trim().split(/\s+/).length;
 
-            if (!name || !state || !vanName || eco === "0" || clean === "0" || safety === "0") {
-                alert("Please fill all fields and rate all categories."); return;
+            if (!name || !respondentType || !state || !vanName || !visitFrequency || !purpose || !duration || eco === "0" || clean === "0" || safety === "0") {
+                alert("Please fill all required fields and rate all categories."); return;
             }
             if (wordCount < 20) { alert(`Review must be at least 20 words.`); return; }
 
             document.getElementById('pub-status').innerText = "Submitting securely...";
-            let payload = { name: name, state: state, vanName: vanName, ecoRating: eco, cleanRating: clean, safetyRating: safety, review: review, imageBase64: uploadedImageData.base64, mimeType: uploadedImageData.mimeType, fileName: uploadedImageData.fileName };
+            let payload = {
+                name: name,
+                respondentType: respondentType,
+                state: state,
+                vanName: vanName,
+                visitFrequency: visitFrequency,
+                purpose: purpose,
+                duration: duration,
+                ecoRating: eco,
+                cleanRating: clean,
+                safetyRating: safety,
+                review: review,
+                imageBase64: uploadedImageData.base64,
+                mimeType: uploadedImageData.mimeType,
+                fileName: uploadedImageData.fileName
+            };
 
             fetch(PUBLIC_SUBMISSION_API_URL, {
                 method: 'POST',
