@@ -325,7 +325,7 @@
                         <img id="animated-hero-icon" src="./assets/images/tree-svgrepo-com.svg" alt="Nagar Van Logo - Tree icon representing urban forest" class="w-full h-full object-contain icon-fade">
                     </div>
                     <div class="flex flex-col hidden md:flex">
-                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none" aria-current="page">Nagar Van DMRV</a>
+                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none" aria-current="page" data-i18n="dashboardTitle">Nagar Van DMRV</a>
                         <span class="text-[9px] text-emerald-300 uppercase tracking-widest font-bold mt-0.5">Digital Monitoring, Reporting & Verification</span>
                     </div>
                 </div>
@@ -357,6 +357,7 @@
                             <button type="button" class="text-size-btn" onclick="setTextSize('small')" aria-label="Small text" title="Small">A-</button>
                             <button type="button" class="text-size-btn" onclick="setTextSize('normal')" aria-label="Normal text" title="Normal">A</button>
                             <button type="button" class="text-size-btn" onclick="setTextSize('large')" aria-label="Large text" title="Large">A+</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('extra-large')" aria-label="Extra Large text" title="Extra Large">A++</button>
                         </div>
                     </div>
                 </div>
@@ -368,8 +369,8 @@
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
-                <h1 class="text-3xl font-extrabold gradient-text">Site Insights & Verification</h1>
-                <p class="text-sm contrast-medium mt-1">Monitoring Ecological, Social, and Infrastructural parameters.</p>
+                <h1 class="text-3xl font-extrabold gradient-text" data-i18n="siteInsights">Site Insights & Verification</h1>
+                <p class="text-sm contrast-medium mt-1" data-i18n="monitoring">Monitoring Ecological, Social, and Infrastructural parameters.</p>
             </div>
             <div class="w-full md:w-auto">
                 <label for="state-selector" class="sr-only">Select state or territory to view site data</label>
@@ -635,8 +636,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     <!-- About Section -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white">About Portal</h4>
-                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="aboutPortal">About Nagar Van DMRV Portal</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4" data-i18n="portalDesc">
                             The Nagar Van DMRV (Digital Monitoring, Reporting & Verification) Dashboard is an AI-powered, geospatial platform designed to track and evaluate the ecological, infrastructural, and socio-economic impacts of India's urban forests.
                         </p>
                         <p class="text-sm text-gray-400">
@@ -646,7 +647,7 @@
 
                     <!-- Quick Links -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white">Quick Links</h4>
+                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="quickLinks">Quick Links</h4>
                         <ul class="space-y-2">
                             <li><a href="index.html" class="footer-link text-sm">Dashboard</a></li>
                             <li><a href="about.html" class="footer-link text-sm">About Project</a></li>
@@ -1418,22 +1419,243 @@
         // ========== NEW FEATURES ==========
 
         // Language translations
+        // Complete translations for all text content
         const translations = {
             en: {
-                dashboard: "Site Insights & Verification",
-                monitoring: "Monitoring Ecological, Social, and Infrastructural parameters.",
+                // Nav
+                dashboardTitle: "Nagar Van DMRV",
+                dashboardSubtitle: "Digital Monitoring, Reporting & Verification",
+                aboutProject: "About Project",
                 reportIssue: "Report Issue",
                 publicContribution: "Public Contribution",
-                aboutProject: "About Project",
-                submitFeedback: "Submit Feedback"
+                adminForm: "Admin Form",
+
+                // Main content
+                siteInsights: "Site Insights & Verification",
+                monitoring: "Monitoring Ecological, Social, and Infrastructural parameters.",
+                allSites: "All Sites Overview",
+                liveSurveySamples: "Live Survey Samples",
+                airQuality: "Air Quality (PM2.5)",
+                carbonSequestration: "Carbon Sequestration",
+                urbanHeatReduction: "Urban Heat Reduction",
+                waterRecharged: "Water Recharged",
+                ecologicalIndex: "Ecological Index",
+                socioEconomic: "Socio-Economic",
+                avgWtp: "Avg. WTP (CVM)",
+                connecting: "Connecting...",
+                live: "Live",
+                tonsCO2e: "Tons CO₂e",
+                excellentAir: "Excellent Air Quality",
+                moderateAir: "Moderate Air Quality",
+                poorAir: "Poor Air Quality",
+
+                // Map section
+                thematicMap: "Thematic Map:",
+                ecologyMap: "Ecology Map",
+                issueTracker: "Issue Tracker",
+                regionalMetrics: "Regional Metrics",
+                governance: "Governance (PPP Efficacy)",
+                communityWellbeing: "Community Well-being (WHO-5)",
+                infrastructureQuality: "Infrastructure Quality",
+                fieldReview: "Field Review / Notes",
+                visitor: "Visitor",
+                vendor: "Vendor",
+                kiiFgd: "KII / FGD",
+                unsolved: "Unsolved",
+                inProcess: "In Process",
+                solved: "Solved",
+
+                // Gallery
+                fieldMediaGallery: "Field Media Gallery",
+                galleryDesc: "A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)",
+
+                // Footer
+                aboutPortal: "About Nagar Van DMRV Portal",
+                portalDesc: "The Nagar Van DMRV (Digital Monitoring, Reporting & Verification) Dashboard is an AI-powered, geospatial platform designed to track and evaluate the ecological, infrastructural, and socio-economic impacts of India's urban forests. By providing real-time metrics on carbon sequestration, urban cooling, air quality, and community well-being, it bridges grassroots conservation efforts with national climate policy and sustainable development goals.",
+                quickLinks: "Quick Links",
+                supportFeedback: "Support & Feedback",
+                technicalSupport: "Technical Support",
+                submitFeedback: "Submit Feedback",
+                documentation: "Documentation",
+                researchPapers: "Research Papers",
+                shareConnect: "Share & Connect",
+                followUs: "Follow us on social media for updates",
+                sitemap: "Sitemap",
+
+                // Modal
+                civicEngagement: "Civic Engagement Form",
+                civicDesc: "Share your experience and upload a photo. Your review will be helpful for further improvement of local ecosystems. Share the moments you have experienced with Nagar Van!",
+                yourName: "Your Name",
+                respondentCategory: "Respondent Category",
+                forResearch: "(For Research)",
+                selectCategory: "-- Select Category --",
+                regularVisitor: "Regular Visitor",
+                localResident: "Local Resident",
+                vendorFaaccha: "Vendor/Faaccha",
+                studentResearcher: "Student/Researcher",
+                environmentalist: "Environmentalist",
+                governmentOfficial: "Government Official",
+                ngoWorker: "NGO Worker",
+                selectStateUT: "Select State/UT",
+                chooseState: "-- Choose State --",
+                selectNagarVan: "Select Nagar Van",
+                selectStateFirst: "-- Select State First --",
+                visitFrequency: "Visit Frequency",
+                primaryPurpose: "Primary Purpose",
+                durationOfStay: "Duration of Stay",
+                selectOption: "-- Select --",
+                daily: "Daily",
+                weekly: "Weekly",
+                monthly: "Monthly",
+                occasionally: "Occasionally",
+                firstTime: "First Time",
+                recreation: "Recreation",
+                exercise: "Exercise/Yoga",
+                natureStudy: "Nature Study",
+                research: "Research/Survey",
+                business: "Vendor/Business",
+                commute: "Commute",
+                social: "Social Gathering",
+                lessThan30: "Less than 30 min",
+                min30to60: "30 min - 1 hour",
+                hour1to2: "1-2 hours",
+                hour2to4: "2-4 hours",
+                moreThan4: "More than 4 hours",
+                ecosystemAesthetics: "Ecosystem & Aesthetics",
+                cleanlinessMaintenance: "Cleanliness & Maintenance",
+                safetyAccessibility: "Safety & Accessibility",
+                yourExperience: "Your Experience / Review",
+                min20Words: "(Min. 20 words required)",
+                aiVerifiedPhoto: "AI Verified Photo Upload (Optional)",
+                uploadPhoto: "Upload a real picture of the park/nature to be sent to our secure database!",
+                readyToSubmit: "Ready to Submit",
+                consentText: "I consent to the collection and processing of my data for research purposes. I understand that my personal information will be handled in accordance with data protection regulations. I have read and agree to the Privacy Policy and Terms of Use. I can withdraw my consent at any time by contacting the administrator.",
+
+                // Footer bottom
+                allRightsReserved: "All rights reserved.",
+                designedBy: "Designed and Developed by",
+                privacyPolicy: "Privacy Policy",
+                termsOfUse: "Terms of Use",
+                cookiePolicy: "Cookie Policy",
+                accessibility: "Accessibility"
             },
             hi: {
-                dashboard: "साइट अंतर्दृष्टि और सत्यापन",
-                monitoring: "पारिस्थितिक, सामाजिक और अवसंरचनात्मक मापदंडों की निगरानी।",
+                // Nav
+                dashboardTitle: "नगर वन डीएमआरवी",
+                dashboardSubtitle: "डिजिटल मॉनिटरिंग, रिपोर्टिंग और वेरिफिकेशन",
+                aboutProject: "परियोजना के बारे में",
                 reportIssue: "समस्या रिपोर्ट करें",
                 publicContribution: "सार्वजनिक योगदान",
-                aboutProject: "परियोजना के बारे में",
-                submitFeedback: "प्रतिक्रिया जमा करें"
+                adminForm: "एडमिन फॉर्म",
+
+                // Main content
+                siteInsights: "साइट अंतर्दृष्टि और सत्यापन",
+                monitoring: "पारिस्थितिक, सामाजिक और अवसंरचनात्मक मापदंडों की निगरानी।",
+                allSites: "सभी साइट का अवलोकन",
+                liveSurveySamples: "लाइव सर्वे नमूने",
+                airQuality: "वायु गुणवत्ता (PM2.5)",
+                carbonSequestration: "कार्बन सेक्वेस्ट्रेशन",
+                urbanHeatReduction: "शहरी तापमान में कमी",
+                waterRecharged: "जल रिचार्ज",
+                ecologicalIndex: "पारिस्थितिक सूचकांक",
+                socioEconomic: "सामाजिक-आर्थिक",
+                avgWtp: "औसत WTP (CVM)",
+                connecting: "कनेक्ट हो रहा है...",
+                live: "लाइव",
+                tonsCO2e: "टन CO₂e",
+                excellentAir: "उत्कृष्ट वायु गुणवत्ता",
+                moderateAir: "मध्यम वायु गुणवत्ता",
+                poorAir: "खराब वायु गुणवत्ता",
+
+                // Map section
+                thematicMap: "थीमैटिक मैप:",
+                ecologyMap: "पारिस्थितिक मैप",
+                issueTracker: "समस्या ट्रैकर",
+                regionalMetrics: "क्षेत्रीय मेट्रिक्स",
+                governance: "शासन (PPP प्रभावशीलता)",
+                communityWellbeing: "सामुदायिक कल्याण (WHO-5)",
+                infrastructureQuality: "अवसंरचना गुणवत्ता",
+                fieldReview: "फील्ड समीक्षा / नोट्स",
+                visitor: "आगंतुक",
+                vendor: "विक्रेता",
+                kiiFgd: "KII / FGD",
+                unsolved: "अनसुलझा",
+                inProcess: "प्रक्रियाधीन",
+                solved: "हल किया गया",
+
+                // Gallery
+                fieldMediaGallery: "फील्ड मीडिया गैलरी",
+                galleryDesc: "फील्ड विज़िट के दौरान नगर वन और वाटिका की जमीनी तस्वीरों और वीडियो का संग्रह। (केवल एडमिन अपलोड)",
+
+                // Footer
+                aboutPortal: "नगर वन डीएमआरवी पोर्टल के बारे में",
+                portalDesc: "नगर वन डीएमआरवी (डिजिटल मॉनिटरिंग, रिपोर्टिंग और वेरिफिकेशन) डैशबोर्ड एक एआई-संचालित, भू-स्थानिक मंच है जिसे भारत के शहरी वनों के पारिस्थितिक, अवसंरचनात्मक और सामाजिक-आर्थिक प्रभावों को ट्रैक और मूल्यांकन करने के लिए डिज़ाइन किया गया है। कार्बन सेक्वेस्ट्रेशन, शहरी ठंडापन, वायु गुणवत्ता और सामुदायिक कल्याण पर रियल-टाइम मेट्रिक्स प्रदान करके, यह ग्रासरुट संरक्षण प्रयासों को राष्ट्रीय जलवायु नीति और सतत विकास लक्ष्यों से जोड़ता है।",
+                quickLinks: "त्वरित लिंक",
+                supportFeedback: "सहायता और प्रतिक्रिया",
+                technicalSupport: "तकनीकी सहायता",
+                submitFeedback: "प्रतिक्रिया जमा करें",
+                documentation: "प्रलेखन",
+                researchPapers: "शोध पत्र",
+                shareConnect: "शेयर और जुड़ें",
+                followUs: "अपडेट के लिए सोशल मीडिया पर हमें फॉलो करें",
+                sitemap: "साइटमैप",
+
+                // Modal
+                civicEngagement: "नागरिक सहभागिता फॉर्म",
+                civicDesc: "अपना अनुभव साझा करें और एक फोटो अपलोड करें। आपकी समीक्षा स्थानीय पारिस्थितिकी प्रणालियों में सुधार के लिए सहायक होगी। नगर वान में अनुभव किए गए पलों को साझा करें!",
+                yourName: "आपका नाम",
+                respondentCategory: "प्रतिवादी श्रेणी",
+                forResearch: "(शोध के लिए)",
+                selectCategory: "-- श्रेणी चुनें --",
+                regularVisitor: "नियमित आगंतुक",
+                localResident: "स्थानीय निवासी",
+                vendorFaaccha: "विक्रेता/फाफा",
+                studentResearcher: "छात्र/शोधकर्ता",
+                environmentalist: "पर्यावरणवादी",
+                governmentOfficial: "सरकारी अधिकारी",
+                ngoWorker: "एनजीओ कार्यकर्ता",
+                selectStateUT: "राज्य/UT चुनें",
+                chooseState: "-- राज्य चुनें --",
+                selectNagarVan: "नगर वन चुनें",
+                selectStateFirst: "-- पहले राज्य चुनें --",
+                visitFrequency: "आवृत्ति",
+                primaryPurpose: "प्राथमिक उद्देश्य",
+                durationOfStay: "रहने की अवधि",
+                selectOption: "-- चुनें --",
+                daily: "दैनिक",
+                weekly: "साप्ताहिक",
+                monthly: "मासिक",
+                occasionally: "कभी-कभी",
+                firstTime: "पहली बार",
+                recreation: "मनोरंजन",
+                exercise: "व्यायाम/योग",
+                natureStudy: "प्रकृति अध्ययन",
+                research: "शोध/सर्वे",
+                business: "विक्रेता/व्यापार",
+                commute: "आना-जाना",
+                social: "सामाजिक जमावड़ा",
+                lessThan30: "30 मिनट से कम",
+                min30to60: "30 मिनट - 1 घंटा",
+                hour1to2: "1-2 घंटे",
+                hour2to4: "2-4 घंटे",
+                moreThan4: "4 घंटे से अधिक",
+                ecosystemAesthetics: "पारिस्थितिकी और सौंदर्य",
+                cleanlinessMaintenance: "साफ-सफाई और रखरखाव",
+                safetyAccessibility: "सुरक्षा और सुलभता",
+                yourExperience: "आपका अनुभव / समीक्षा",
+                min20Words: "(न्यूनतम 20 शब्द आवश्यक)",
+                aiVerifiedPhoto: "एआई सत्यापित फोटो अपलोड (वैकल्पिक)",
+                uploadPhoto: "पार्क/प्रकृति की एक वास्तविक तस्वीर अपलोड करें जो हमारे सुरक्षित डेटाबेस में भेजी जाएगी!",
+                readyToSubmit: "जमा करने के लिए तैयार",
+                consentText: "मैं शोध उद्देश्यों के लिए अपने डेटा के संग्रह और प्रसंस्करण की सहमति देता/देती हूं। मैं समझता/समझती हूं कि मेरी व्यक्तिगत जानकारी डेटा संरक्षण नियमों के अनुसार संभाली जाएगी। मैंने गोपनीयता नीति और उपयोग की शर्तों को पढ़कर स्वीकार किया है। मैं किसी भी समय प्रशासक से संपर्क करके अपनी सहमति वापस ले सकता/सकती हूं।",
+
+                // Footer bottom
+                allRightsReserved: "सर्वाधिकार सुरक्षित।",
+                designedBy: "डिज़ाइन और विकसित द्वारा",
+                privacyPolicy: "गोपनीयता नीति",
+                termsOfUse: "उपयोग की शर्तें",
+                cookiePolicy: "कुकी नीति",
+                accessibility: "सुलभता"
             }
         };
 
@@ -1450,16 +1672,45 @@
                     btn.setAttribute('aria-pressed', 'true');
                 }
             });
+            // Apply translations to all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+            // Store preference
+            localStorage.setItem('dmrv-language', lang);
+        }
+            });
             // Store preference
             localStorage.setItem('dmrv-language', lang);
         }
 
         function setTextSize(size) {
-            document.body.classList.remove('text-size-small', 'text-size-large', 'text-size-extra-large');
+            // Apply font size to root element so it affects ALL text
+            var root = document.documentElement;
             switch(size) {
-                case 'small': document.body.classList.add('text-size-small'); break;
-                case 'large': document.body.classList.add('text-size-large'); break;
-                case 'normal': default: break;
+                case 'small':
+                    root.style.fontSize = '14px';
+                    break;
+                case 'large':
+                    root.style.fontSize = '18px';
+                    break;
+                case 'extra-large':
+                    root.style.fontSize = '20px';
+                    break;
+                case 'normal':
+                default:
+                    root.style.fontSize = '16px';
+                    break;
             }
             localStorage.setItem('dmrv-text-size', size);
         }
