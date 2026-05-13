@@ -1158,21 +1158,36 @@
             minZoom: 4, maxZoom: 18
         }).addTo(map);
 
-        // India GeoJSON with demarcated boundaries
-        const indiaGeoUrl = 'https://raw.githubusercontent.com/Arkraj7/india-states-geojson/master/india.geojson';
+        // India GeoJSON from datameet/maps with PESTEL green styling
+        const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/india.geojson';
         fetch(indiaGeoUrl)
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
                     style: {
-                        fillColor: '#10b981',
-                        fillOpacity: 0.35,
-                        color: '#065f46',
+                        fillColor: '#2E7D32',  // PESTEL green for green space
+                        fillOpacity: 0.5,
+                        color: '#1B5E20',      // Darker green border
                         weight: 2
                     }
                 }).addTo(map);
             })
-            .catch(err => console.log('Could not load India GeoJSON:', err));
+            .catch(err => {
+                console.log('Could not load India GeoJSON, trying alternate source');
+                // Fallback to alternate source
+                fetch('https://raw.githubusercontent.com/datameet/maps/master/india_states.geojson')
+                    .then(r => r.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                fillColor: '#2E7D32',
+                                fillOpacity: 0.5,
+                                color: '#1B5E20',
+                                weight: 2
+                            }
+                        }).addTo(map);
+                    });
+            });
 
         var markers = L.layerGroup().addTo(map);
 
