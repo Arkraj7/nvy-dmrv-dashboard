@@ -1159,7 +1159,7 @@
         }).addTo(map);
 
         // India GeoJSON from datameet/maps with PESTEL green styling
-        const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/india.geojson';
+        const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/Country/india-composite.geojson';
         fetch(indiaGeoUrl)
             .then(response => response.json())
             .then(data => {
@@ -1173,9 +1173,9 @@
                 }).addTo(map);
             })
             .catch(err => {
-                console.log('Could not load India GeoJSON, trying alternate source');
-                // Fallback to alternate source
-                fetch('https://raw.githubusercontent.com/datameet/maps/master/india_states.geojson')
+                console.log('Could not load India GeoJSON, trying simplified version');
+                // Fallback to simplified version
+                fetch('https://raw.githubusercontent.com/datameet/maps/master/Country/india-land-simplified.geojson')
                     .then(r => r.json())
                     .then(data => {
                         L.geoJSON(data, {
@@ -1186,7 +1186,8 @@
                                 weight: 2
                             }
                         }).addTo(map);
-                    });
+                    })
+                    .catch(e => console.log('Could not load simplified either:', e));
             });
 
         var markers = L.layerGroup().addTo(map);
