@@ -48,6 +48,98 @@
         /* Accessibility - Focus States */
         *:focus-visible { outline: 3px solid #5dc48a; outline-offset: 2px; }
 
+        /* ========== COMPREHENSIVE ACCESSIBILITY STYLES ========== */
+
+        /* Color Contrast - WCAG AA Compliant */
+        .text-gray-400 { color: #6b7280 !important; } /* Darker than default gray-400 */
+        .text-gray-500 { color: #4b5563 !important; } /* Darker than default gray-500 */
+        .text-gray-600 { color: #374151 !important; } /* Darker than default gray-600 */
+
+        /* Ensure all text meets 4.5:1 contrast ratio */
+        .contrast-safe { color: #1f2937; }
+        .contrast-medium { color: #374151; }
+        .contrast-large { color: #1b3a2d; font-weight: 600; }
+
+        /* Enhanced focus indicators for keyboard navigation */
+        .keyboard-focus { position: relative; }
+        .keyboard-focus:focus { outline: 3px solid #1b3a2d; outline-offset: 3px; }
+        .keyboard-focus:focus-visible { outline: 3px solid #1b3a2d; outline-offset: 3px; }
+
+        /* Visible focus states */
+        button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 3px solid #1b3a2d;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 6px rgba(27, 58, 45, 0.2);
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            .glass-panel { border: 2px solid #1b3a2d; }
+            * { border-color: #1b3a2d !important; }
+            .gradient-text { -webkit-text-fill-color: #1b3a2d; }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .icon-fade { transition: opacity 0.01ms; }
+            .btn-report { animation: none; }
+        }
+
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Form field accessibility */
+        label { cursor: pointer; }
+        .required-indicator::after { content: " *"; color: #dc2626; }
+
+        /* Error state styling */
+        .error-message {
+            color: #b91c1c;
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Success state styling */
+        .success-message {
+            color: #065f46;
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Interactive element hover/focus consistency */
+        .interactive-element {
+            transition: all 0.2s ease;
+        }
+        .interactive-element:hover {
+            transform: translateY(-1px);
+        }
+        .interactive-element:focus {
+            transform: translateY(-1px);
+        }
+
         /* Skip Link for Accessibility */
         .skip-link { position: absolute; top: -40px; left: 0; background: #1b3a2d; color: white; padding: 8px; z-index: 100; }
         .skip-link:focus { top: 0; }
@@ -80,33 +172,33 @@
 </head>
 <body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
 
-    <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50">
+    <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 bg-[#fdfbf7] rounded-lg p-1.5 flex items-center justify-center border border-white/30 shadow-md">
-                        <img id="animated-hero-icon" src="./assets/images/tree-svgrepo-com.svg" alt="Nagar Van Icon" class="w-full h-full object-contain icon-fade">
+                    <div class="w-11 h-11 bg-[#fdfbf7] rounded-lg p-1.5 flex items-center justify-center border border-white/30 shadow-md" role="img" aria-label="Nagar Van logo">
+                        <img id="animated-hero-icon" src="./assets/images/tree-svgrepo-com.svg" alt="Nagar Van Logo - Tree icon representing urban forest" class="w-full h-full object-contain icon-fade">
                     </div>
                     <div class="flex flex-col hidden md:flex">
-                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none">Nagar Van DMRV</a>
+                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none" aria-current="page">Nagar Van DMRV</a>
                         <span class="text-[9px] text-emerald-300 uppercase tracking-widest font-bold mt-0.5">Digital Monitoring, Reporting & Verification</span>
                     </div>
                 </div>
-                
+
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
-                    <a href="about.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors">
+                    <a href="about.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element">
                         About Project
                     </a>
-                    
-                    <a href="report.html" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block">
+
+                    <a href="report.html" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block" role="button" aria-label="Report an issue or grievance">
                         🚨 Report Issue
                     </a>
-                    
-                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all">
+
+                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all interactive-element" type="button" aria-haspopup="dialog" aria-label="Open public contribution form">
                         🌱 Public Contribution
                     </button>
-                    
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block">
+
+                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" rel="noopener noreferrer" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element" aria-label="Open admin form in new tab">
                         📝 Admin Form
                     </a>
                 </div>
@@ -119,10 +211,11 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <h1 class="text-3xl font-extrabold gradient-text">Site Insights & Verification</h1>
-                <p class="text-sm text-gray-500 mt-1">Monitoring Ecological, Social, and Infrastructural parameters.</p>
+                <p class="text-sm contrast-medium mt-1">Monitoring Ecological, Social, and Infrastructural parameters.</p>
             </div>
             <div class="w-full md:w-auto">
-                <select id="state-selector" onchange="handleStateSelectorChange()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]">
+                <label for="state-selector" class="sr-only">Select state or territory to view site data</label>
+                <select id="state-selector" onchange="handleStateSelectorChange()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]" aria-describedby="state-selector-help">
                     <option value="overview">🌐 All Sites Overview</option>
                     <option value="gujarat">📍 NVY Gujarat</option>
                     <option value="jharkhand">📍 NVY Jharkhand</option>
@@ -135,7 +228,8 @@
                     <option value="westbengal">📍 NVY West Bengal</option>
                     <option value="other">📝 Other State / UT</option>
                 </select>
-                <input type="text" id="state-other-input" class="hidden w-full md:w-64 mt-2 bg-white border-2 border-[#5dc48a] text-[#1b3a2d] font-bold py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3d9a6a] animate-pulse" placeholder="Enter State/UT name...">
+                <span id="state-selector-help" class="sr-only">Dropdown to select a specific state or territory for detailed dashboard metrics</span>
+                <input type="text" id="state-other-input" class="hidden w-full md:w-64 mt-2 bg-white border-2 border-[#5dc48a] text-[#1b3a2d] font-bold py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3d9a6a] animate-pulse" placeholder="Enter State/UT name..." aria-label="Enter custom state or union territory name">
             </div>
         </div>
 
@@ -259,72 +353,76 @@
 
         <div class="glass-panel p-6 mb-8">
             <h2 class="text-xl font-bold text-[#1b3a2d] mb-2">📸 Field Media Gallery</h2>
-            <p class="text-sm text-gray-500 mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)</p>
-            
-            <div class="flex overflow-x-auto gap-4 pb-4 media-scroll">
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+            <p class="text-sm contrast-medium mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)</p>
+
+            <div class="flex overflow-x-auto gap-4 pb-4 media-scroll" role="region" aria-label="Field media gallery - horizontal scrollable list of images and videos" aria-describedby="gallery-instructions">
+                <p id="gallery-instructions" class="sr-only">Scroll horizontally to view more field photos and videos from various Nagar Van locations across India</p>
+
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Ranchi Eco Park Jharkhand - Forest canopy with sunlight filtering through trees">
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Lush green forest at Ranchi Eco Park in Jharkhand showing dense tree cover and natural landscape">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Ranchi Eco Park, Jharkhand</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Ranchi Eco Park, Jharkhand</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Dholera Nagar Van Gujarat - Urban forest plantation with young trees">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Dholera Nagar Van in Gujarat featuring newly planted trees and urban greening initiative">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Dholera Nagar Van, Gujarat</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Dholera Nagar Van, Gujarat</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Tirupati Hill Forest Andhra Pradesh - Mountain forest with green cover">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Tirupati Hill Forest in Andhra Pradesh showing hilltop vegetation and natural forest ecosystem">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Tirupati Hill Forest, AP</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Tirupati Hill Forest, AP</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Indore Lake Forest Madhya Pradesh - Lake surrounded by trees">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Indore Lake Forest in Madhya Pradesh featuring a water body surrounded by green vegetation">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Indore Lake Forest, MP</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Indore Lake Forest, MP</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Bhopal Central Nagar Van Madhya Pradesh - Green urban space">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Bhopal Central Nagar Van in Madhya Pradesh showing urban green space and recreational area">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Bhopal Central Van, MP</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Bhopal Central Van, MP</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Asola Bhatti Delhi - Wildlife sanctuary and eco park">
+                    <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Asola Bhatti Wildlife Sanctuary in Delhi showing rocky terrain with sparse vegetation and nature trail">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Asola Bhatti, Delhi</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Asola Bhatti, Delhi</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Vizag Coastal Van Andhra Pradesh - Beach side green space">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Vizag Coastal Green Space in Andhra Pradesh featuring beachside vegetation and coastal ecosystem">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Vizag Coastal Van, AP</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Vizag Coastal Van, AP</p>
                     </div>
                 </div>
-                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Nagar Van Field Photo">
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Surat Smriti Van Gujarat - Urban forest with walking paths">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Surat Smriti Van in Gujarat showing well-maintained park with trees and walking pathways">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold">Surat Smriti Van, Gujarat</p>
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Surat Smriti Van, Gujarat</p>
                     </div>
                 </div>
 
-                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
-                    <video controls class="w-full h-full object-cover">
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group" role="region" aria-label="Field visit video documentation">
+                    <video controls class="w-full h-full object-cover" aria-label="Video of Nagar Van field visit showing park environment">
                         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        <track kind="captions" label="No captions available">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
                 </div>
 
-                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group">
-                    <video controls class="w-full h-full object-cover">
+                <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group" role="region" aria-label="Field visit video documentation">
+                    <video controls class="w-full h-full object-cover" aria-label="Video of community engagement at Nagar Van">
                         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        <track kind="captions" label="No captions available">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold">VIDEO</div>
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
                 </div>
             </div>
         </div>
@@ -374,24 +472,28 @@
         </footer>
     </div>
 
-    <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4">
-        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl relative">
-            
+    <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl relative" role="document">
+
             <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-white sticky top-0 z-10">
-                <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none">&times;</button>
-                <h2 class="text-xl font-extrabold">🌱 Civic Engagement Form</h2>
-                <p class="text-xs mt-1 opacity-90">Share your experience and upload a photo. Your review will be helpful for further improvement of local ecosystems. Share the moments you have experienced with Nagar Van!</p>
+                <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none" type="button" aria-label="Close dialog">&times;</button>
+                <h2 id="modal-title" class="text-xl font-extrabold">🌱 Civic Engagement Form</h2>
+                <p id="modal-description" class="text-xs mt-1 opacity-90">Share your experience and upload a photo. Your review will be helpful for further improvement of local ecosystems. Share the moments you have experienced with Nagar Van!</p>
             </div>
+
+            <!-- Live region for form validation messages -->
+            <div id="form-error-container" class="sr-only" role="alert" aria-live="assertive"></div>
 
             <div class="p-5 space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Your Name</label>
-                        <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma">
+                        <label for="pub-name" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Your Name</label>
+                        <input type="text" id="pub-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="e.g. Rahul Sharma" aria-required="true" aria-describedby="pub-name-help">
+                        <span id="pub-name-help" class="sr-only">Enter your full name for research documentation</span>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Respondent Category <span class="text-xs font-normal text-gray-500">(For Research)</span></label>
-                        <select id="pub-respondent-type" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <label for="pub-respondent-type" class="block text-sm font-bold text-gray-700 mb-1">Respondent Category <span class="text-xs font-normal text-gray-600">(For Research)</span></label>
+                        <select id="pub-respondent-type" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" aria-describedby="respondent-type-help">
                             <option value="">-- Select Category --</option>
                             <option value="Visitor">👤 Regular Visitor</option>
                             <option value="Resident">🏠 Local Resident</option>
@@ -402,14 +504,15 @@
                             <option value="NGO">🤝 NGO Worker</option>
                             <option value="Other">📝 Other</option>
                         </select>
-                        <input type="text" id="pub-other-respondent" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none text-sm" placeholder="Please specify...">
+                        <span id="respondent-type-help" class="sr-only">Select your role or relationship to this Nagar Van for research categorization</span>
+                        <input type="text" id="pub-other-respondent" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none text-sm" placeholder="Please specify..." aria-label="Specify other respondent category">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Select State/UT</label>
-                        <select id="pub-state" onchange="updateVanDropdown()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <label for="pub-state" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Select State/UT</label>
+                        <select id="pub-state" onchange="updateVanDropdown()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" aria-required="true" aria-describedby="pub-state-help">
                             <option value="">-- Choose State --</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Delhi">Delhi</option>
@@ -424,57 +527,58 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Select Nagar Van</label>
-                        <select id="pub-van" onchange="checkOtherVan()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none bg-gray-50" disabled>
+                        <label for="pub-van" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Select Nagar Van</label>
+                        <select id="pub-van" onchange="checkOtherVan()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none bg-gray-50" disabled aria-required="true" aria-describedby="pub-van-help">
                             <option value="">-- Select State First --</option>
                         </select>
-                        <input type="text" id="pub-other-van" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Type Nagar Van name...">
+                        <span id="pub-van-help" class="sr-only">Select the specific Nagar Van location you are providing feedback for</span>
+                        <input type="text" id="pub-other-van" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Type Nagar Van name..." aria-label="Enter custom Nagar Van name if not in list">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-y border-gray-200 py-3 my-2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-y border-gray-200 py-3 my-2" role="group" aria-label="Rating categories for ecosystem, cleanliness, and safety">
                     <div class="flex flex-col items-center">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Ecosystem & Aesthetics</label>
-                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-eco">
-                            <span onclick="setStars('eco', 1)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('eco', 2)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('eco', 3)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('eco', 4)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('eco', 5)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span class="block text-xs font-bold text-gray-700 mb-1 text-center" id="label-eco">Ecosystem & Aesthetics</span>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-eco" role="radiogroup" aria-labelledby="label-eco">
+                            <button type="button" onclick="setStars('eco', 1)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 1 star for ecosystem and aesthetics" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('eco', 2)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 2 stars for ecosystem and aesthetics" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('eco', 3)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 3 stars for ecosystem and aesthetics" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('eco', 4)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 4 stars for ecosystem and aesthetics" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('eco', 5)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 5 stars for ecosystem and aesthetics" aria-pressed="false">★</button>
                         </div>
-                        <input type="hidden" id="eco-stars" value="0">
-                    </div>
-                    
-                    <div class="flex flex-col items-center border-l border-gray-200 md:pl-2">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Cleanliness & Maintenance</label>
-                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-clean">
-                            <span onclick="setStars('clean', 1)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('clean', 2)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('clean', 3)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('clean', 4)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('clean', 5)" class="hover:text-yellow-400 transition-colors">★</span>
-                        </div>
-                        <input type="hidden" id="clean-stars" value="0">
+                        <input type="hidden" id="eco-stars" value="0" aria-required="true">
                     </div>
 
                     <div class="flex flex-col items-center border-l border-gray-200 md:pl-2">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">Safety & Accessibility</label>
-                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-safety">
-                            <span onclick="setStars('safety', 1)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('safety', 2)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('safety', 3)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('safety', 4)" class="hover:text-yellow-400 transition-colors">★</span>
-                            <span onclick="setStars('safety', 5)" class="hover:text-yellow-400 transition-colors">★</span>
+                        <span class="block text-xs font-bold text-gray-700 mb-1 text-center" id="label-clean">Cleanliness & Maintenance</span>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-clean" role="radiogroup" aria-labelledby="label-clean">
+                            <button type="button" onclick="setStars('clean', 1)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 1 star for cleanliness and maintenance" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('clean', 2)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 2 stars for cleanliness and maintenance" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('clean', 3)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 3 stars for cleanliness and maintenance" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('clean', 4)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 4 stars for cleanliness and maintenance" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('clean', 5)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 5 stars for cleanliness and maintenance" aria-pressed="false">★</button>
                         </div>
-                        <input type="hidden" id="safety-stars" value="0">
+                        <input type="hidden" id="clean-stars" value="0" aria-required="true">
+                    </div>
+
+                    <div class="flex flex-col items-center border-l border-gray-200 md:pl-2">
+                        <span class="block text-xs font-bold text-gray-700 mb-1 text-center" id="label-safety">Safety & Accessibility</span>
+                        <div class="flex gap-1 text-2xl text-gray-300 cursor-pointer" id="star-rating-safety" role="radiogroup" aria-labelledby="label-safety">
+                            <button type="button" onclick="setStars('safety', 1)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 1 star for safety and accessibility" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('safety', 2)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 2 stars for safety and accessibility" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('safety', 3)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 3 stars for safety and accessibility" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('safety', 4)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 4 stars for safety and accessibility" aria-pressed="false">★</button>
+                            <button type="button" onclick="setStars('safety', 5)" class="hover:text-yellow-400 transition-colors bg-transparent border-none p-0" aria-label="Rate 5 stars for safety and accessibility" aria-pressed="false">★</button>
+                        </div>
+                        <input type="hidden" id="safety-stars" value="0" aria-required="true">
                     </div>
                 </div>
 
                 <!-- Academic/Research Fields -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 border-t border-b border-gray-200 py-3 my-2">
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Visit Frequency</label>
-                        <select id="pub-visit-frequency" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <label for="pub-visit-frequency" class="block text-xs font-bold text-gray-700 mb-1 required-indicator">Visit Frequency</label>
+                        <select id="pub-visit-frequency" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none" aria-required="true" aria-describedby="visit-freq-help">
                             <option value="">-- Select --</option>
                             <option value="Daily">Daily</option>
                             <option value="Weekly">Weekly</option>
@@ -482,10 +586,11 @@
                             <option value="Occasionally">Occasionally</option>
                             <option value="First Time">First Time</option>
                         </select>
+                        <span id="visit-freq-help" class="sr-only">How often do you visit this Nagar Van location</span>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Primary Purpose</label>
-                        <select id="pub-purpose" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <label for="pub-purpose" class="block text-xs font-bold text-gray-700 mb-1 required-indicator">Primary Purpose</label>
+                        <select id="pub-purpose" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none" aria-required="true" aria-describedby="purpose-help">
                             <option value="">-- Select --</option>
                             <option value="Recreation">🎮 Recreation</option>
                             <option value="Exercise">🏃 Exercise/Yoga</option>
@@ -496,10 +601,11 @@
                             <option value="Social">👥 Social Gathering</option>
                             <option value="Other">📝 Other</option>
                         </select>
+                        <span id="purpose-help" class="sr-only">Select the main reason for your visit to this Nagar Van</span>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Duration of Stay</label>
-                        <select id="pub-duration" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none">
+                        <label for="pub-duration" class="block text-xs font-bold text-gray-700 mb-1 required-indicator">Duration of Stay</label>
+                        <select id="pub-duration" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-[#5dc48a] outline-none" aria-required="true" aria-describedby="duration-help">
                             <option value="">-- Select --</option>
                             <option value="< 30 min">Less than 30 min</option>
                             <option value="30-60 min">30 min - 1 hour</option>
@@ -507,29 +613,33 @@
                             <option value="2-4 hours">2-4 hours</option>
                             <option value="> 4 hours">More than 4 hours</option>
                         </select>
+                        <span id="duration-help" class="sr-only">How long do you typically spend at this Nagar Van location</span>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Experience / Review <span class="text-red-500 font-normal text-xs">(Min. 20 words required)</span></label>
-                    <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity. Please write at least 20 words..."></textarea>
-                    <p id="word-count-display" class="text-xs text-gray-500 text-right mt-1">Words: 0 / 20</p>
+                    <label for="pub-review" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Your Experience / Review <span class="text-red-500 font-normal text-xs">(Min. 20 words required)</span></label>
+                    <textarea id="pub-review" rows="3" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-[#5dc48a] outline-none" placeholder="Tell us how this park helps you or the local biodiversity. Please write at least 20 words..." aria-required="true" aria-describedby="review-help word-count-display"></textarea>
+                    <span id="review-help" class="sr-only">Describe your experience at the Nagar Van, including observations about biodiversity, community interactions, and environmental impact. Minimum 20 words required.</span>
+                    <p id="word-count-display" class="text-xs contrast-medium text-right mt-1" aria-live="polite" aria-atomic="true">Words: 0 / 20</p>
                 </div>
 
                 <div class="bg-[#f0f7f3] p-4 rounded-lg border-2 border-[#a8c4b0] flex flex-col items-center justify-center border-dashed">
-                    <label class="text-sm font-bold text-[#2d6a4f] mb-1 cursor-pointer text-center">
+                    <label for="ai-upload" class="text-sm font-bold text-[#2d6a4f] mb-1 cursor-pointer text-center">
                         🤖 AI Verified Photo Upload (Optional)
-                        <input type="file" accept="image/*" class="hidden" onchange="handleAIUpload(this)">
+                        <input type="file" id="ai-upload" accept="image/*" class="hidden" onchange="handleAIUpload(this)" aria-describedby="upload-help">
                     </label>
-                    <p class="text-xs text-[#3a8a65] text-center mb-2">Upload a real picture of the park/nature to be sent to our secure database!</p>
+                    <p id="upload-help" class="text-xs text-[#3a8a65] text-center mb-2">Upload a real picture of the park/nature to be sent to our secure database!</p>
                     <div id="ai-status-box" class="hidden w-full text-center p-2 rounded text-xs font-bold mt-2"></div>
                 </div>
             </div>
 
             <div class="p-4 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
-                <span class="text-sm text-gray-600 font-bold" id="pub-status">Ready to Submit</span>
-                <button onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
+                <span class="text-sm contrast-medium font-bold" id="pub-status" role="status" aria-live="polite">Ready to Submit</span>
+                <button type="button" onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm interactive-element" aria-describedby="submit-help">
                     🚀 Submit Feedback
+                </button>
+                <span id="submit-help" class="sr-only">Click to submit your feedback. All required fields must be filled.</span>
                 </button>
             </div>
         </div>
@@ -909,12 +1019,13 @@
         });
 
         function submitPublicData() {
-            let name = document.getElementById('pub-name').value;
+            let errorContainer = document.getElementById('form-error-container');
+            let name = document.getElementById('pub-name').value.trim();
             let respondentTypeSelect = document.getElementById('pub-respondent-type');
-            let respondentType = respondentTypeSelect.value === "Other" ? document.getElementById('pub-other-respondent').value : respondentTypeSelect.value;
+            let respondentType = respondentTypeSelect.value === "Other" ? document.getElementById('pub-other-respondent').value.trim() : respondentTypeSelect.value;
             let state = document.getElementById('pub-state').value;
-            let vanSelect = document.getElementById('pub-van').value;
-            let vanName = vanSelect === "Other" ? document.getElementById('pub-other-van').value : vanSelect;
+            let vanSelect = document.getElementById('pub-van');
+            let vanName = vanSelect.value === "Other" ? document.getElementById('pub-other-van').value.trim() : vanSelect.value;
             let visitFrequency = document.getElementById('pub-visit-frequency').value;
             let purpose = document.getElementById('pub-purpose').value;
             let duration = document.getElementById('pub-duration').value;
@@ -924,10 +1035,36 @@
             let review = document.getElementById('pub-review').value;
             let wordCount = review.trim() === "" ? 0 : review.trim().split(/\s+/).length;
 
-            if (!name || !respondentType || !state || !vanName || !visitFrequency || !purpose || !duration || eco === "0" || clean === "0" || safety === "0") {
-                alert("Please fill all required fields and rate all categories."); return;
+            // Collect validation errors
+            let errors = [];
+            if (!name) errors.push("Your name is required");
+            if (!respondentType) errors.push("Respondent category is required");
+            if (!state) errors.push("State/UT selection is required");
+            if (!vanName) errors.push("Nagar Van selection is required");
+            if (!visitFrequency) errors.push("Visit frequency is required");
+            if (!purpose) errors.push("Primary purpose is required");
+            if (!duration) errors.push("Duration of stay is required");
+            if (eco === "0") errors.push("Please rate Ecosystem & Aesthetics (minimum 1 star)");
+            if (clean === "0") errors.push("Please rate Cleanliness & Maintenance (minimum 1 star)");
+            if (safety === "0") errors.push("Please rate Safety & Accessibility (minimum 1 star)");
+            if (wordCount < 20) errors.push("Review must be at least 20 words");
+
+            if (errors.length > 0) {
+                errorContainer.innerHTML = "Error: " + errors.join(". ") + ".";
+                // Focus on the first error field for accessibility
+                if (!name) document.getElementById('pub-name').focus();
+                else if (!respondentType) document.getElementById('pub-respondent-type').focus();
+                else if (!state) document.getElementById('pub-state').focus();
+                else if (!vanName) document.getElementById('pub-van').focus();
+                else if (!visitFrequency) document.getElementById('pub-visit-frequency').focus();
+                else if (!purpose) document.getElementById('pub-purpose').focus();
+                else if (!duration) document.getElementById('pub-duration').focus();
+                else if (eco === "0") document.querySelector('#star-rating-eco button').focus();
+                else if (clean === "0") document.querySelector('#star-rating-clean button').focus();
+                else if (safety === "0") document.querySelector('#star-rating-safety button').focus();
+                else if (wordCount < 20) document.getElementById('pub-review').focus();
+                return;
             }
-            if (wordCount < 20) { alert(`Review must be at least 20 words.`); return; }
 
             document.getElementById('pub-status').innerText = "Submitting securely...";
             let payload = {

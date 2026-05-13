@@ -71,15 +71,15 @@
                             <button onclick="fetchGPSLocation()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-bold shadow-sm transition-all flex items-center gap-1">
                                 📍 Fetch My GPS Location
                             </button>
-                            <span id="gps-status" class="text-xs text-gray-500 font-semibold">Location not acquired.</span>
+                            <span id="gps-status" class="text-xs contrast-medium font-semibold" role="status" aria-live="polite">Location not acquired.</span>
                         </div>
                         <input type="hidden" id="report-lat"><input type="hidden" id="report-lon">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Issue Category</label>
-                            <select id="report-category" onchange="toggleOtherCategory()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <label for="report-category" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Issue Category</label>
+                            <select id="report-category" onchange="toggleOtherCategory()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" aria-required="true" aria-describedby="category-help">
                                 <option value="">-- Select Problem Type --</option>
                                 <option value="Solid Waste / Littering">🗑️ Solid Waste / Littering</option>
                                 <option value="Broken Infrastructure">🚧 Broken Infrastructure</option>
@@ -91,37 +91,46 @@
                                 <option value="Encroachment">🏗️ Illegal Encroachment</option>
                                 <option value="Other">📝 Other (Specify below)</option>
                             </select>
-                            <input type="text" id="report-other-category" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify the issue type...">
+                            <span id="category-help" class="sr-only">Select the type of issue you want to report</span>
+                            <input type="text" id="report-other-category" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify the issue type..." aria-label="Specify other issue type">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Severity Level</label>
-                            <select id="report-severity" onchange="toggleOtherSeverity()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                            <label for="report-severity" class="block text-sm font-bold text-gray-700 mb-1">Severity Level</label>
+                            <select id="report-severity" onchange="toggleOtherSeverity()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" aria-describedby="severity-help">
                                 <option value="Low">Low (Routine)</option>
                                 <option value="Medium" selected>Medium (Action Soon)</option>
                                 <option value="High">High (Emergency)</option>
                                 <option value="Critical">⛔ Critical (Immediate Action)</option>
                                 <option value="Other">📝 Other (Specify below)</option>
                             </select>
-                            <input type="text" id="report-other-severity" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify severity level...">
+                            <span id="severity-help" class="sr-only">Select the severity level of the issue being reported</span>
+                            <input type="text" id="report-other-severity" class="hidden w-full border border-gray-300 rounded-lg p-2 mt-2 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Please specify severity level..." aria-label="Specify other severity level">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Detailed Description <span class="text-red-500 font-normal text-xs">(Min. 20 words)</span></label>
-                        <textarea id="report-desc" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Describe the issue, landmarks, and duration..."></textarea>
-                        <p id="report-word-count" class="text-xs text-red-500 text-right mt-1 font-bold">Words: 0 / 20</p>
+                        <label for="report-desc" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Detailed Description <span class="text-red-500 font-normal text-xs">(Min. 20 words)</span></label>
+                        <textarea id="report-desc" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-400 outline-none text-sm" placeholder="Describe the issue, landmarks, and duration..." aria-required="true" aria-describedby="desc-help report-word-count"></textarea>
+                        <span id="desc-help" class="sr-only">Provide a detailed description of the issue including location landmarks and when the issue started</span>
+                        <p id="report-word-count" class="text-xs text-red-600 text-right mt-1 font-bold" aria-live="polite" aria-atomic="true">Words: 0 / 20</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Upload Photo Evidence (Optional)</label>
-                        <input type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" id="report-file" onchange="document.getElementById('report-file-status').innerText = '✅ File selected';">
-                        <p id="report-file-status" class="text-xs text-green-600 mt-1 font-bold"></p>
+                        <label for="report-file" class="block text-sm font-bold text-gray-700 mb-1">Upload Photo Evidence (Optional)</label>
+                        <input type="file" accept="image/*" class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" id="report-file" onchange="document.getElementById('report-file-status').innerText = '✅ File selected';" aria-describedby="file-help">
+                        <span id="file-help" class="sr-only">Upload a photo of the issue as evidence. Accepted formats: JPG, PNG. Optional field.</span>
+                        <p id="report-file-status" class="text-xs text-green-700 mt-1 font-bold" role="status" aria-live="polite"></p>
                     </div>
 
+                    <!-- Live region for validation errors -->
+                    <div id="report-error-container" class="sr-only" role="alert" aria-live="assertive"></div>
+
                     <div class="pt-4 border-t flex justify-between items-center">
-                        <span class="text-sm text-gray-600 font-bold" id="report-submit-status">Ready to submit</span>
-                        <button onclick="submitReportData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-md text-sm">
+                        <span class="text-sm contrast-medium font-bold" id="report-submit-status" role="status" aria-live="polite">Ready to submit</span>
+                        <button type="button" onclick="submitReportData()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-md text-sm interactive-element" aria-describedby="submit-issue-help">
                             Submit Issue
+                        </button>
+                        <span id="submit-issue-help" class="sr-only">Click to submit your issue report. You must provide GPS location, category, and description.</span>
                         </button>
                     </div>
                 </div>
