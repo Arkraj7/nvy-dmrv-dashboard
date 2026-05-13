@@ -299,6 +299,59 @@
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
 
+        /* Professional Popup Modal */
+        .popup-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .popup-modal.hidden { display: none; }
+        .popup-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 550px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            animation: popupSlide 0.4s ease;
+        }
+        @keyframes popupSlide {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .popup-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+        .popup-close:hover { background: #e5e7eb; color: #374151; }
+        .popup-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        .popup-checkbox input { width: 18px; height: 18px; accent-color: #1b3a2d; cursor: pointer; }
+        .popup-checkbox label { font-size: 13px; color: #475569; cursor: pointer; }
+
         /* Map Mode Tab Styling */
         .map-tab { transition: all 0.2s ease; }
         .map-tab:active { transform: scale(0.95); }
@@ -630,6 +683,25 @@
             </div>
         </footer>
 
+        <!-- Acknowledgment Popup Modal -->
+        <div id="acknowledgmentPopup" class="popup-modal hidden">
+            <div class="popup-content">
+                <button id="popupClose" class="popup-close" aria-label="Close popup">&times;</button>
+                <h2 style="font-size: 22px; font-weight: 800; color: #1b3a2d; margin-bottom: 6px;">Welcome to the Nagar Van DMRV Dashboard</h2>
+                <h3 style="font-size: 16px; font-weight: 600; color: #065f46; margin-bottom: 16px;">Acknowledgment & Data Disclaimer</h3>
+                <p style="font-size: 14px; color: #374151; line-height: 1.7; margin-bottom: 14px;">
+                    This platform is supported by <strong>National CAMPA</strong> under the guidance of <strong>MoEF&CC</strong> (Ministry of Environment, Forest & Climate Change). We sincerely acknowledge the support of <strong>GRAAM</strong> (Global Research Agency for Rural Development & Environment), State Forest Departments, and all field workers whose efforts make this initiative possible.
+                </p>
+                <p style="font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">
+                    Data presented on this dashboard is sourced from official government records, field surveys, and verified satellite imagery. While we strive for accuracy, users are advised to verify critical information from primary sources. This portal is intended for informational and analytical purposes.
+                </p>
+                <div class="popup-checkbox">
+                    <input type="checkbox" id="dontShowAgain">
+                    <label for="dontShowAgain">Don't show this again</label>
+                </div>
+            </div>
+        </div>
+
         <!-- Professional Footer -->
         <footer class="site-footer py-12 px-4" role="contentinfo">
             <div class="max-w-7xl mx-auto">
@@ -653,8 +725,8 @@
                             <li><a href="about.html" class="footer-link text-sm">About Project</a></li>
                             <li><a href="report.html" class="footer-link text-sm">Report Issue</a></li>
                             <li><a href="#" class="footer-link text-sm" onclick="openSitemap(event)">Sitemap</a></li>
-                            <li><a href="#" class="footer-link text-sm">Research Methodology</a></li>
-                            <li><a href="#" class="footer-link text-sm">Data Documentation</a></li>
+                            <li><a href="assets/docs/Nagar_Van_Research_Methodology.pdf" target="_blank" class="footer-link text-sm">Research Methodology</a></li>
+                            <li><a href="assets/docs/Nagar_Van_Data_Documentation.pdf" target="_blank" class="footer-link text-sm">Data Documentation</a></li>
                         </ul>
                     </div>
 
@@ -1081,10 +1153,27 @@
         map.setMaxBounds(bounds);
         map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
+        // Light grey background for neighboring countries
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
             minZoom: 4, maxZoom: 18
         }).addTo(map);
+
+        // India GeoJSON with demarcated boundaries
+        const indiaGeoUrl = 'https://raw.githubusercontent.com/Arkraj7/india-states-geojson/master/india.geojson';
+        fetch(indiaGeoUrl)
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        fillColor: '#10b981',
+                        fillOpacity: 0.35,
+                        color: '#065f46',
+                        weight: 2
+                    }
+                }).addTo(map);
+            })
+            .catch(err => console.log('Could not load India GeoJSON:', err));
 
         var markers = L.layerGroup().addTo(map);
 
@@ -1689,10 +1778,6 @@
             // Store preference
             localStorage.setItem('dmrv-language', lang);
         }
-            });
-            // Store preference
-            localStorage.setItem('dmrv-language', lang);
-        }
 
         function setTextSize(size) {
             // Apply font size to root element so it affects ALL text
@@ -1809,6 +1894,36 @@
             const savedSize = localStorage.getItem('dmrv-text-size');
             if (savedLang) setLanguage(savedLang);
             if (savedSize) setTextSize(savedSize);
+
+            // Show acknowledgment popup if not dismissed
+            const popup = document.getElementById('acknowledgmentPopup');
+            const closeBtn = document.getElementById('popupClose');
+            const dontShowAgain = document.getElementById('dontShowAgain');
+
+            if (popup && localStorage.getItem('dmrv-popup-dismissed') !== 'true') {
+                popup.classList.remove('hidden');
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    popup.classList.add('hidden');
+                    if (dontShowAgain && dontShowAgain.checked) {
+                        localStorage.setItem('dmrv-popup-dismissed', 'true');
+                    }
+                });
+            }
+
+            // Close on backdrop click
+            if (popup) {
+                popup.addEventListener('click', function(e) {
+                    if (e.target === popup) {
+                        popup.classList.add('hidden');
+                        if (dontShowAgain && dontShowAgain.checked) {
+                            localStorage.setItem('dmrv-popup-dismissed', 'true');
+                        }
+                    }
+                });
+            }
         };
     </script>
 </body>
