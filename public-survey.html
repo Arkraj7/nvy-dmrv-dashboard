@@ -277,26 +277,25 @@
             btn.disabled = true;
             btn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-            // Collect form data
+            // Build URL-encoded form data for Apps Script
+            const urlEncodedData = new URLSearchParams();
+            urlEncodedData.append('name', document.getElementById('surv-name').value);
+            urlEncodedData.append('age', document.getElementById('surv-age').value);
+            urlEncodedData.append('gender', document.getElementById('surv-gender').value);
+            urlEncodedData.append('state', document.getElementById('surv-state').value);
             const parkType = document.getElementById('surv-park-type').value;
             const parkTypeOther = document.getElementById('surv-park-type-other').value;
-            const formData = {
-                name: document.getElementById('surv-name').value,
-                age: document.getElementById('surv-age').value,
-                gender: document.getElementById('surv-gender').value,
-                state: document.getElementById('surv-state').value,
-                parkType: parkType === 'Other' ? parkTypeOther : parkType,
-                parkName: document.getElementById('surv-park-name').value,
-                latitude: document.getElementById('surv-lat').value,
-                longitude: document.getElementById('surv-lon').value,
-                visitReason: document.querySelector('input[name="visit-reason"]:checked')?.value,
-                wellbeing: document.querySelector('input[name="wellbeing"]:checked')?.value,
-                envChange: document.querySelector('input[name="env-change"]:checked')?.value,
-                facilities: document.querySelector('input[name="facilities"]:checked')?.value,
-                wtp: document.querySelector('input[name="wtp"]:checked')?.value,
-                feedback: document.getElementById('surv-feedback').value,
-                timestamp: new Date().toISOString()
-            };
+            urlEncodedData.append('parkType', parkType === 'Other' ? parkTypeOther : parkType);
+            urlEncodedData.append('parkName', document.getElementById('surv-park-name').value);
+            urlEncodedData.append('latitude', document.getElementById('surv-lat').value);
+            urlEncodedData.append('longitude', document.getElementById('surv-lon').value);
+            urlEncodedData.append('visitReason', document.querySelector('input[name="visit-reason"]:checked')?.value || '');
+            urlEncodedData.append('wellbeing', document.querySelector('input[name="wellbeing"]:checked')?.value || '');
+            urlEncodedData.append('envChange', document.querySelector('input[name="env-change"]:checked')?.value || '');
+            urlEncodedData.append('facilities', document.querySelector('input[name="facilities"]:checked')?.value || '');
+            urlEncodedData.append('wtp', document.querySelector('input[name="wtp"]:checked')?.value || '');
+            urlEncodedData.append('feedback', document.getElementById('surv-feedback').value);
+            urlEncodedData.append('timestamp', new Date().toISOString());
 
             // API URL
             const API_URL = 'https://script.google.com/macros/s/AKfycbz-ZYZdNtSiI8ruHrTsiVjnLQMM7j5Jsg0XfdmWobY6t3KD0UuGyw--y1JdURntGszk/exec';
@@ -304,8 +303,8 @@
             fetch(API_URL + '?action=submitSurvey', {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify(formData)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: urlEncodedData.toString()
             }).then(() => {
                 // Show success checkmark
                 btn.innerHTML = '<svg class="w-5 h-5 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
