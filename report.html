@@ -390,7 +390,12 @@
             if(wordCount < 20) { alert("Description must be at least 20 words."); return; }
 
             let statusBtn = document.getElementById('report-submit-status');
+            let submitBtn = document.querySelector('button[onclick="submitReportData()"]');
+            let originalBtnText = submitBtn.innerHTML;
+
             statusBtn.innerText = "Submitting securely...";
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
             let dateStr = new Date().toISOString().slice(0,10).replace(/-/g, "");
             let randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -407,18 +412,32 @@
             fetch(REPORT_API_URL, {
                 method: 'POST', mode: 'no-cors', body: formData
             }).then(() => {
-                alert(`Thank you! \nReport ID: ${reportID}\n\nYou have earned 10 Reward Points.`);
-                mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
-                drawIssues();
-                
-                document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
-                document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
-                document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
-                document.getElementById('report-file-status').innerText = "";
-                statusBtn.innerText = "Ready to submit";
+                // Show success checkmark
+                submitBtn.innerHTML = '<svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                submitBtn.classList.add('bg-green-600');
+
+                setTimeout(function() {
+                    alert(`Thank you! \nReport ID: ${reportID}\n\nYou have earned 10 Reward Points.`);
+                    mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
+                    drawIssues();
+
+                    document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
+                    document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
+                    document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
+                    document.getElementById('report-file-status').innerText = "";
+
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.classList.remove('bg-green-600');
+                    submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                    submitBtn.disabled = false;
+                    statusBtn.innerText = "Ready to submit";
+                }, 1500);
             }).catch(() => {
-                alert("Submission error. Please check your connection.");
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
                 statusBtn.innerText = "Submission Failed";
+                alert("Submission error. Please check your connection.");
             });
         }
 

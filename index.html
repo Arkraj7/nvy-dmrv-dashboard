@@ -63,6 +63,14 @@
             50% { box-shadow: 0 0 20px rgba(93, 196, 138, 0.8), 0 0 30px rgba(93, 196, 138, 0.4); }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
         /* Smooth and Slow Icon Fade */
         .icon-fade { transition: opacity 1.2s ease-in-out; }
 
@@ -237,12 +245,13 @@
 
         /* Footer styles */
         .site-footer {
-            background: linear-gradient(135deg, #1b3a2d 0%, #2d5a45 100%);
-            color: white;
+            background: linear-gradient(135deg, #a7f3d0 0%, #d1fae5 100%);
+            color: #1b3a2d;
         }
         .footer-link {
-            color: rgba(255,255,255,0.8);
+            color: #1b3a2d;
             transition: color 0.2s;
+        }
         }
         .footer-link:hover {
             color: #5dc48a;
@@ -388,12 +397,12 @@
 </head>
 <body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
 
-    <nav class="bg-[#1b3a2d] text-white shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <nav class="bg-[#a7f3d0] text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 bg-[#fdfbf7] rounded-lg p-1.5 flex items-center justify-center border border-white/30 shadow-md" role="img" aria-label="Nagar Van logo">
-                        <img id="animated-hero-icon" src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain border-2 border-white/30 icon-fade">
+                        <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
                     </div>
                     <div class="flex flex-col hidden md:flex">
                         <a href="index.html" class="font-bold text-xl tracking-wide leading-none" aria-current="page" data-i18n="dashboardTitle">Nagar Van DMRV</a>
@@ -403,21 +412,21 @@
 
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                     <!-- Home Button -->
-                    <a href="index.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element" aria-label="Go to Home">
+                    <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element" aria-label="Go to Home">
                         Home
                     </a>
 
-                    <a href="#main-content" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element" aria-label="Go to Site Insights">
+                    <a href="#main-content" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element" aria-label="Go to Site Insights">
                         Site Insights
                     </a>
 
-                    <a href="about.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element">
+                    <a href="about.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element">
                         About Me
                     </a>
 
                     <!-- Citizen Corner Dropdown -->
                     <div class="relative group">
-                        <button type="button" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
                             Citizen Corner
                             <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -497,7 +506,7 @@
 
                     <!-- Right Side: MoEF&CC Framework -->
                     <div class="space-y-6">
-                        <div class="bg-[#1b3a2d] text-white rounded-xl p-6 shadow-xl border-2 border-[#5dc48a]">
+                        <div class="bg-[#1b3a2d] text-[#1b3a2d] rounded-xl p-6 shadow-xl border-2 border-[#5dc48a]">
                             <h3 class="text-xl font-bold mb-4" data-i18n="moefFramework">MoEF&CC Operational Framework for Nagar Van</h3>
 
                             <div class="space-y-4">
@@ -708,49 +717,49 @@
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Ranchi Eco Park Jharkhand - Forest canopy with sunlight filtering through trees">
                     <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Lush green forest at Ranchi Eco Park in Jharkhand showing dense tree cover and natural landscape">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Ranchi Eco Park, Jharkhand</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Ranchi Eco Park, Jharkhand</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Dholera Nagar Van Gujarat - Urban forest plantation with young trees">
                     <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Dholera Nagar Van in Gujarat featuring newly planted trees and urban greening initiative">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Dholera Nagar Van, Gujarat</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Dholera Nagar Van, Gujarat</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Tirupati Hill Forest Andhra Pradesh - Mountain forest with green cover">
                     <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Tirupati Hill Forest in Andhra Pradesh showing hilltop vegetation and natural forest ecosystem">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Tirupati Hill Forest, AP</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Tirupati Hill Forest, AP</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Indore Lake Forest Madhya Pradesh - Lake surrounded by trees">
                     <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Indore Lake Forest in Madhya Pradesh featuring a water body surrounded by green vegetation">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Indore Lake Forest, MP</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Indore Lake Forest, MP</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Bhopal Central Nagar Van Madhya Pradesh - Green urban space">
                     <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Bhopal Central Nagar Van in Madhya Pradesh showing urban green space and recreational area">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Bhopal Central Van, MP</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Bhopal Central Van, MP</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Asola Bhatti Delhi - Wildlife sanctuary and eco park">
                     <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Asola Bhatti Wildlife Sanctuary in Delhi showing rocky terrain with sparse vegetation and nature trail">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Asola Bhatti, Delhi</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Asola Bhatti, Delhi</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Vizag Coastal Van Andhra Pradesh - Beach side green space">
                     <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Vizag Coastal Green Space in Andhra Pradesh featuring beachside vegetation and coastal ecosystem">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Vizag Coastal Van, AP</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Vizag Coastal Van, AP</p>
                     </div>
                 </div>
                 <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group" role="img" aria-label="Surat Smriti Van Gujarat - Urban forest with walking paths">
                     <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Surat Smriti Van in Gujarat showing well-maintained park with trees and walking pathways">
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
-                        <p class="text-white text-xs font-bold" aria-hidden="true">Surat Smriti Van, Gujarat</p>
+                        <p class="text-[#1b3a2d] text-xs font-bold" aria-hidden="true">Surat Smriti Van, Gujarat</p>
                     </div>
                 </div>
 
@@ -760,7 +769,7 @@
                         <track kind="captions" label="No captions available">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
+                    <div class="absolute top-2 left-2 bg-red-600 text-[#1b3a2d] text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
                 </div>
 
                 <div class="min-w-[250px] h-[180px] bg-black rounded-lg relative overflow-hidden group" role="region" aria-label="Field visit video documentation">
@@ -769,7 +778,7 @@
                         <track kind="captions" label="No captions available">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
+                    <div class="absolute top-2 left-2 bg-red-600 text-[#1b3a2d] text-[9px] px-2 py-0.5 rounded font-bold" aria-hidden="true">VIDEO</div>
                 </div>
             </div>
         </div>
@@ -843,7 +852,7 @@
                     <a href="assets/docs/NVY_Implementation_Guidelines.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border-2 border-emerald-200 hover:border-[#5dc48a] hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
                             </div>
@@ -857,7 +866,7 @@
                     <a href="assets/docs/NVY_PIB_Release_Aug2023.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                                 </svg>
                             </div>
@@ -871,7 +880,7 @@
                     <a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                                 </svg>
                             </div>
@@ -885,7 +894,7 @@
                     <a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                                 </svg>
                             </div>
@@ -905,7 +914,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     <!-- About Section -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="aboutPortal">About Nagar Van DMRV Portal</h4>
+                        <h4 class="text-lg font-bold mb-4 text-[#1b3a2d]" data-i18n="aboutPortal">About Nagar Van DMRV Portal</h4>
                         <p class="text-sm text-gray-300 leading-relaxed mb-4" data-i18n="portalDesc">
                             The Nagar Van DMRV (Digital Monitoring, Reporting & Verification) Dashboard is an AI-powered, geospatial platform designed to track and evaluate the ecological, infrastructural, and socio-economic impacts of India's urban forests.
                         </p>
@@ -916,7 +925,7 @@
 
                     <!-- Quick Links -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="quickLinks">Quick Links</h4>
+                        <h4 class="text-lg font-bold mb-4 text-[#1b3a2d]" data-i18n="quickLinks">Quick Links</h4>
                         <ul class="space-y-2">
                             <li><a href="index.html" class="footer-link text-sm">Dashboard</a></li>
                             <li><a href="about.html" class="footer-link text-sm">About Me</a></li>
@@ -928,7 +937,7 @@
 
                     <!-- Support & Feedback -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="supportFeedback">Support & Feedback</h4>
+                        <h4 class="text-lg font-bold mb-4 text-[#1b3a2d]" data-i18n="supportFeedback">Support & Feedback</h4>
                         <ul class="space-y-3">
                             <li>
                                 <a href="mailto:arkraj.biswas6@gmail.com" class="footer-link text-sm flex items-center gap-2">
@@ -959,7 +968,7 @@
 
                     <!-- Share & Connect -->
                     <div>
-                        <h4 class="text-lg font-bold mb-4 text-white" data-i18n="shareConnect">Share & Connect</h4>
+                        <h4 class="text-lg font-bold mb-4 text-[#1b3a2d]" data-i18n="shareConnect">Share & Connect</h4>
                         <p class="text-sm text-gray-300 mb-4" data-i18n="followUs">Follow us on social media for updates</p>
                         <div class="flex gap-3">
                             <a href="https://linkedin.com/in/arkraj-biswas-kugel" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
@@ -982,14 +991,14 @@
                             &copy; 2026 Nagar Van DMRV. All rights reserved.
                         </p>
                         <p class="text-xs text-gray-500 mt-1">
-                            Designed and Developed by <span class="text-white font-semibold">Arkraj Biswas</span>
+                            Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span>
                         </p>
                     </div>
                     <div class="flex gap-4 text-xs text-gray-400">
-                        <a href="#" class="hover:text-white">Privacy Policy</a>
-                        <a href="#" class="hover:text-white">Terms of Use</a>
-                        <a href="#" class="hover:text-white">Cookie Policy</a>
-                        <a href="#" class="hover:text-white">Accessibility</a>
+                        <a href="#" class="hover:text-[#1b3a2d]">Privacy Policy</a>
+                        <a href="#" class="hover:text-[#1b3a2d]">Terms of Use</a>
+                        <a href="#" class="hover:text-[#1b3a2d]">Cookie Policy</a>
+                        <a href="#" class="hover:text-[#1b3a2d]">Accessibility</a>
                     </div>
                 </div>
             </div>
@@ -999,8 +1008,8 @@
     <!-- Feedback Modal -->
     <div id="feedback-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
         <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl relative" role="document">
-            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-white rounded-t-2xl">
-                <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-2xl font-bold">&times;</button>
+            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-[#1b3a2d] rounded-t-2xl">
+                <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-[#1b3a2d] hover:text-gray-200 text-2xl font-bold">&times;</button>
                 <h2 id="feedback-title" class="text-lg font-bold">Feedback & Suggestions</h2>
             </div>
             <div class="p-5 space-y-4">
@@ -1018,7 +1027,7 @@
                     <label for="feedback-message" class="block text-sm font-bold text-gray-700 mb-1">Your Feedback</label>
                     <textarea id="feedback-message" rows="4" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Tell us how we can improve..."></textarea>
                 </div>
-                <button onclick="submitFeedback()" class="w-full bg-[#1b3a2d] text-white py-2 rounded-lg font-bold hover:bg-[#2d5a45]">Submit Feedback</button>
+                <button onclick="submitFeedback()" class="w-full bg-[#1b3a2d] text-[#1b3a2d] py-2 rounded-lg font-bold hover:bg-[#2d5a45]">Submit Feedback</button>
             </div>
         </div>
     </div>
@@ -1026,8 +1035,8 @@
     <!-- Sitemap Modal -->
     <div id="sitemap-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="sitemap-title">
         <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl" role="document">
-            <div class="bg-[#1b3a2d] p-5 text-white rounded-t-2xl">
-                <button onclick="closeSitemapModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-2xl font-bold">&times;</button>
+            <div class="bg-[#1b3a2d] p-5 text-[#1b3a2d] rounded-t-2xl">
+                <button onclick="closeSitemapModal()" class="absolute top-4 right-4 text-[#1b3a2d] hover:text-gray-200 text-2xl font-bold">&times;</button>
                 <h2 id="sitemap-title" class="text-lg font-bold">Sitemap</h2>
             </div>
             <div class="p-5">
@@ -1047,8 +1056,8 @@
     <div id="public-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[9999] hidden flex items-center justify-center backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
         <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl relative" role="document">
 
-            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-white sticky top-0 z-10">
-                <button onclick="closePublicModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 text-3xl font-bold leading-none" type="button" aria-label="Close dialog">&times;</button>
+            <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-5 text-[#1b3a2d] sticky top-0 z-10">
+                <button onclick="closePublicModal()" class="absolute top-4 right-4 text-[#1b3a2d] hover:text-gray-200 text-3xl font-bold leading-none" type="button" aria-label="Close dialog">&times;</button>
                 <h2 id="modal-title" class="text-xl font-extrabold">Civic Engagement Form</h2>
                 <p id="modal-description" class="text-xs mt-1 opacity-90">Share your experience and upload a photo. Your review will be helpful for further improvement of local ecosystems. Share the moments you have experienced with Nagar Van!</p>
             </div>
@@ -1217,7 +1226,7 @@
 
             <div class="p-4 border-t bg-gray-50 flex justify-between items-center rounded-b-2xl">
                 <span class="text-sm contrast-medium font-bold" id="pub-status" role="status" aria-live="polite">Ready to Submit</span>
-                <button type="button" onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-white px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm interactive-element" aria-describedby="submit-help">
+                <button type="button" onclick="submitPublicData()" class="bg-[#1b3a2d] hover:bg-[#2d6a4f] text-[#1b3a2d] px-5 py-2 rounded-lg font-bold transition-colors shadow-md text-sm interactive-element" aria-describedby="submit-help">
                     🚀 Submit Feedback
                 </button>
                 <span id="submit-help" class="sr-only">Click to submit your feedback. All required fields must be filled.</span>
@@ -1698,22 +1707,12 @@
             }
 
             document.getElementById('pub-status').innerText = "Submitting securely...";
-            let payload = {
-                name: name,
-                respondentType: respondentType,
-                state: state,
-                vanName: vanName,
-                visitFrequency: visitFrequency,
-                purpose: purpose,
-                duration: duration,
-                ecoRating: eco,
-                cleanRating: clean,
-                safetyRating: safety,
-                review: review,
-                imageBase64: uploadedImageData.base64,
-                mimeType: uploadedImageData.mimeType,
-                fileName: uploadedImageData.fileName
-            };
+
+            // Show loading animation
+            let submitBtn = document.querySelector('#public-modal button[onclick="submitPublicData()"]');
+            let originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
             fetch(PUBLIC_SUBMISSION_API_URL, {
                 method: 'POST',
@@ -1721,13 +1720,27 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert("Submitted! Thank you for your contribution to the green initiative.");
-                document.getElementById('pub-name').value = ""; document.getElementById('pub-review').value = "";
-                setStars('eco', 0); setStars('clean', 0); setStars('safety', 0);
-                closePublicModal(); document.getElementById('pub-status').innerText = "Ready to Submit";
-            }).catch(() => { 
-                alert("Submission error. Please try again."); 
-                document.getElementById('pub-status').innerText = "Failed"; 
+                // Show success checkmark
+                submitBtn.innerHTML = '<svg class="w-5 h-5 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                submitBtn.classList.remove('bg-[#1b3a2d]');
+                submitBtn.classList.add('bg-green-600');
+
+                setTimeout(function() {
+                    alert("Submitted! Thank you for your contribution to the green initiative.");
+                    document.getElementById('pub-name').value = ""; document.getElementById('pub-review').value = "";
+                    setStars('eco', 0); setStars('clean', 0); setStars('safety', 0);
+                    closePublicModal();
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.classList.remove('bg-green-600');
+                    submitBtn.classList.add('bg-[#1b3a2d]');
+                    submitBtn.disabled = false;
+                    document.getElementById('pub-status').innerText = "Ready to Submit";
+                }, 1500);
+            }).catch(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                document.getElementById('pub-status').innerText = "Failed";
+                alert("Submission error. Please try again.");
             });
         }
 
@@ -2144,10 +2157,43 @@
                 alert('Please fill all fields');
                 return;
             }
-            alert('Thank you for your feedback! We will review it shortly.');
-            closeFeedbackModal();
-            document.getElementById('feedback-type').value = '';
-            document.getElementById('feedback-message').value = '';
+
+            // Show loading animation
+            let submitBtn = document.querySelector('#feedback-modal button[onclick="submitFeedback()"]');
+            let originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+
+            const formData = {
+                type: type,
+                message: message,
+                timestamp: new Date().toISOString()
+            };
+
+            const API_URL = 'https://script.google.com/macros/s/AKfycbxRfMyo9NKk7jslQVLQkn4_ISbTsb4gdFdOzjyQQ-rNF0ZxK5Z5r8YQQFxjglCEuzWH/exec';
+
+            fetch(API_URL + '?action=submitFeedback', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                // Show success checkmark
+                submitBtn.innerHTML = '<svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+
+                setTimeout(function() {
+                    closeFeedbackModal();
+                    document.getElementById('feedback-type').value = '';
+                    document.getElementById('feedback-message').value = '';
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    alert('Thank you for your feedback! We will review it shortly.');
+                }, 1500);
+            }).catch(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                alert('Error submitting feedback. Please try again.');
+            });
         }
 
         // Sitemap Modal Functions
