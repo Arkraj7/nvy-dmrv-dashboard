@@ -309,13 +309,13 @@
                 // Show success checkmark
                 btn.innerHTML = '<svg class="w-5 h-5 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
                 btn.classList.remove('bg-[#1b3a2d]');
-                btn.classList.add('bg-green-600');
+                btn.classList.add('bg-[#5dc48a]');
 
                 setTimeout(function() {
                     alert('Survey submitted successfully! Thank you for your time. / सर्वेक्षण सफलतापूर्वक जमा किया गया! आपके समय के लिए धन्यवाद।');
                     form.reset();
                     btn.innerHTML = originalText;
-                    btn.classList.remove('bg-green-600');
+                    btn.classList.remove('bg-[#5dc48a]');
                     btn.classList.add('bg-[#1b3a2d]');
                     btn.disabled = false;
                 }, 1500);

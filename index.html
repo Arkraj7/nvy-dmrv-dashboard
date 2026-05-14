@@ -7,7 +7,7 @@
     <meta name="description" content="Digital Monitoring, Reporting & Verification for India's Urban Forests - Track ecological, infrastructural, and socio-economic impacts">
     <meta name="theme-color" content="#1b3a2d">
     <link rel="manifest" href="manifest.json">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -245,7 +245,7 @@
 
         /* Footer styles */
         .site-footer {
-            background: linear-gradient(135deg, #a7f3d0 0%, #d1fae5 100%);
+            background: linear-gradient(135deg, #faf5eb 0%, #f5ebe0 100%);
             color: #1b3a2d;
         }
         .footer-link {
@@ -397,7 +397,7 @@
 </head>
 <body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
 
-    <nav class="bg-[#a7f3d0] text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <nav class="bg-[#faf5eb] text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
@@ -852,56 +852,48 @@
                     <a href="assets/docs/NVY_Implementation_Guidelines.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border-2 border-emerald-200 hover:border-[#5dc48a] hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
+                                <i class="fa-solid fa-file-signature text-white text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="implementationGuidelines">Implementation Guidelines</h3>
                         </div>
                         <p class="text-sm text-gray-600" data-i18n="implementationGuidelinesDesc">Official guidelines for Nagar Van Yojana implementation across states.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-[#5dc48a] group-hover:text-[#4ab878]" data-i18n="clickToOpen">Click to open</span>
+                        <span class="inline-block mt-3 text-xs font-bold text-[#5dc48a] group-hover:text-[#4ab878]" data-i18n="clickToOpen">Click to open <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </a>
 
                     <!-- PIB Release -->
                     <a href="assets/docs/NVY_PIB_Release_Aug2023.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                                </svg>
+                                <i class="fa-solid fa-newspaper text-white text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="pibRelease">PIB Release (Aug 2023)</h3>
                         </div>
                         <p class="text-sm text-gray-600" data-i18n="pibReleaseDesc">Press Information Bureau official release announcing the scheme.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-blue-600 group-hover:text-blue-800" data-i18n="clickToOpen">Click to open</span>
+                        <span class="inline-block mt-3 text-xs font-bold text-blue-600 group-hover:text-blue-800" data-i18n="clickToOpen">Click to open <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </a>
 
                     <!-- Research Methodologies -->
                     <a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                </svg>
+                                <i class="fa-solid fa-microscope text-white text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="researchMethods">Research Methodologies</h3>
                         </div>
                         <p class="text-sm text-gray-600" data-i18n="researchMethodsDesc">DMRV study framework and data collection methodologies.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-amber-600 group-hover:text-amber-800" data-i18n="clickToOpen">Click to open</span>
+                        <span class="inline-block mt-3 text-xs font-bold text-amber-600 group-hover:text-amber-800" data-i18n="clickToOpen">Click to open <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </a>
 
                     <!-- Data Documentation -->
                     <a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="block flex-shrink-0 w-72 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-400 hover:shadow-xl transition-all group">
                         <div class="flex items-center gap-4 mb-3">
                             <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-[#1b3a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                                </svg>
+                                <i class="fa-solid fa-database text-white text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="dataDocumentation">Data Documentation</h3>
                         </div>
                         <p class="text-sm text-gray-600" data-i18n="dataDocumentationDesc">Comprehensive documentation of data sources and metrics.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-purple-600 group-hover:text-purple-800" data-i18n="clickToOpen">Click to open</span>
+                        <span class="inline-block mt-3 text-xs font-bold text-purple-600 group-hover:text-purple-800" data-i18n="clickToOpen">Click to open <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </a>
                 </div>
             </div>
@@ -1237,7 +1229,7 @@
 
     <script>
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
-        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbzTApEiuDrraUqs7r_3E2H-qNmJRHd4bBEmGlIfjoXDU9nsJ-Br_a2FUa1BtkW_Qn-FKQ/exec";
+        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbxRfMyo9NKk7jslQVLQkn4_ISbTsb4gdFdOzjyQQ-rNF0ZxK5Z5r8YQQFxjglCEuzWH/exec";
 
         // Handle "Other" state selection
         function handleStateSelectorChange() {
@@ -1723,7 +1715,8 @@
                 // Show success checkmark
                 submitBtn.innerHTML = '<svg class="w-5 h-5 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
                 submitBtn.classList.remove('bg-[#1b3a2d]');
-                submitBtn.classList.add('bg-green-600');
+                submitBtn.classList.remove('bg-[#5dc48a]');
+                submitBtn.classList.add('bg-[#5dc48a]');
 
                 setTimeout(function() {
                     alert("Submitted! Thank you for your contribution to the green initiative.");
@@ -1731,7 +1724,7 @@
                     setStars('eco', 0); setStars('clean', 0); setStars('safety', 0);
                     closePublicModal();
                     submitBtn.innerHTML = originalBtnText;
-                    submitBtn.classList.remove('bg-green-600');
+                    submitBtn.classList.remove('bg-[#5dc48a]');
                     submitBtn.classList.add('bg-[#1b3a2d]');
                     submitBtn.disabled = false;
                     document.getElementById('pub-status').innerText = "Ready to Submit";

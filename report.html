@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#1b3a2d">
     <link rel="manifest" href="manifest.json">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -415,7 +416,7 @@
                 // Show success checkmark
                 submitBtn.innerHTML = '<svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
                 submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
-                submitBtn.classList.add('bg-green-600');
+                submitBtn.classList.add('bg-[#5dc48a]');
 
                 setTimeout(function() {
                     alert(`Thank you! \nReport ID: ${reportID}\n\nYou have earned 10 Reward Points.`);
@@ -428,7 +429,7 @@
                     document.getElementById('report-file-status').innerText = "";
 
                     submitBtn.innerHTML = originalBtnText;
-                    submitBtn.classList.remove('bg-green-600');
+                    submitBtn.classList.remove('bg-[#5dc48a]');
                     submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
                     submitBtn.disabled = false;
                     statusBtn.innerText = "Ready to submit";
