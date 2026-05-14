@@ -1358,10 +1358,10 @@
             .then(data => {
                 L.geoJSON(data, {
                     style: {
-                        fillColor: '#2E7D32',  // PESTEL green for green space
-                        fillOpacity: 0.5,
-                        color: '#1B5E20',      // Darker green border
-                        weight: 2
+                        fillColor: 'transparent',
+                        fillOpacity: 0,
+                        color: '#000000',
+                        weight: 1.5
                     }
                 }).addTo(map);
             })
@@ -1373,7 +1373,7 @@
                     .then(data => {
                         L.geoJSON(data, {
                             style: {
-                                fillColor: '#2E7D32',
+                                fillColor: 'transparent',
                                 fillOpacity: 0.5,
                                 color: '#1B5E20',
                                 weight: 2
@@ -1432,7 +1432,24 @@
                         <span class="text-[10px] text-gray-400">Lat: ${loc.lat} | Lon: ${loc.lon}</span>
                     </div>`;
 
-                L.circleMarker([loc.lat, loc.lon], {color: color, fillColor: fill, fillOpacity: 0.8, radius: 8})
+                // Create custom pin marker
+                const pinIcon = L.divIcon({
+                    className: 'custom-pin',
+                    html: `<div style="
+                        width: 24px;
+                        height: 24px;
+                        background-color: ${fill};
+                        border: 2px solid ${color};
+                        border-radius: 50% 50% 50% 0;
+                        transform: rotate(-45deg);
+                        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+                    "></div>`,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 24],
+                    popupAnchor: [0, -24]
+                });
+
+                L.marker([loc.lat, loc.lon], { icon: pinIcon })
                     .addTo(markers).bindPopup(popupContent);
             });
         }
