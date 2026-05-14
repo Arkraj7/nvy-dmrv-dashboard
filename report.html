@@ -420,7 +420,7 @@
                 submitBtn.classList.add('bg-[#5dc48a]');
 
                 setTimeout(function() {
-                    alert(`Thank you! \nReport ID: ${reportID}\n\nYou have earned 10 Reward Points.`);
+                    alert(`Thank you! \nReport ID: ${reportID}`);
                     mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
                     drawIssues();
 
