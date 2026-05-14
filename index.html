@@ -1229,7 +1229,7 @@
 
     <script>
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
-        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbxRfMyo9NKk7jslQVLQkn4_ISbTsb4gdFdOzjyQQ-rNF0ZxK5Z5r8YQQFxjglCEuzWH/exec";
+        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbz-ZYZdNtSiI8ruHrTsiVjnLQMM7j5Jsg0XfdmWobY6t3KD0UuGyw--y1JdURntGszk/exec";
 
         // Handle "Other" state selection
         function handleStateSelectorChange() {
@@ -1706,7 +1706,10 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-            fetch(PUBLIC_SUBMISSION_API_URL, {
+            // Add action parameter to payload
+            payload.action = 'submitPublicContribution';
+
+            fetch(PUBLIC_SUBMISSION_API_URL + '?action=submitPublicContribution', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -2163,7 +2166,7 @@
                 timestamp: new Date().toISOString()
             };
 
-            const API_URL = 'https://script.google.com/macros/s/AKfycbxRfMyo9NKk7jslQVLQkn4_ISbTsb4gdFdOzjyQQ-rNF0ZxK5Z5r8YQQFxjglCEuzWH/exec';
+            const API_URL = 'https://script.google.com/macros/s/AKfycbz-ZYZdNtSiI8ruHrTsiVjnLQMM7j5Jsg0XfdmWobY6t3KD0UuGyw--y1JdURntGszk/exec';
 
             fetch(API_URL + '?action=submitFeedback', {
                 method: 'POST',
