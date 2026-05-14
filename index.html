@@ -384,20 +384,35 @@
                 </div>
 
                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+                    <!-- Home Button -->
+                    <a href="index.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element" aria-label="Go to Home">
+                        🏠 Home
+                    </a>
+
                     <a href="about.html" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element">
                         About Project
                     </a>
 
-                    <a href="report.html" class="btn-report px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 transition-all hidden sm:block" role="button" aria-label="Report an issue or grievance">
-                        🚨 Report Issue
-                    </a>
+                    <!-- Citizen Corner Dropdown -->
+                    <div class="relative group">
+                        <button type="button" class="text-white hover:text-[#5dc48a] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+                            👥 Citizen Corner
+                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
+                            <a href="report.html" class="block px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-t-lg transition-colors" role="menuitem">
+                                🚨 Report Issue
+                            </a>
+                            <button onclick="openPublicModal()" class="w-full text-left px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-b-lg transition-colors" role="menuitem">
+                                🌱 Public Contribution
+                            </button>
+                        </div>
+                    </div>
 
-                    <button onclick="openPublicModal()" class="animate-pulse bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold shadow-lg border-2 border-yellow-500 transition-all interactive-element" type="button" aria-haspopup="dialog" aria-label="Open public contribution form">
-                        🌱 Public Contribution
-                    </button>
-
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" rel="noopener noreferrer" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element" aria-label="Open admin form in new tab">
-                        📝 Admin Form
+                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" rel="noopener noreferrer" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element" aria-label="Open survey questionaries in new tab">
+                        📝 Survey Questionaries
                     </a>
 
                     <!-- Language & Text Size Controls -->
@@ -417,6 +432,110 @@
             </div>
         </div>
     </nav>
+
+    <!-- Home Section -->
+    <section id="home-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="region" aria-label="Home">
+        <div class="bg-gradient-to-br from-emerald-50 to-green-100 rounded-2xl shadow-xl border border-emerald-200 overflow-hidden">
+            <div class="p-6 md:p-8">
+                <h2 class="text-3xl font-extrabold text-[#1b3a2d] mb-6 text-center" data-i18n="homeTitle">🌳 Welcome to Nagar Van DMRV Dashboard</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Left Side: About Nagar Van & The Study -->
+                    <div class="space-y-6">
+                        <!-- English Content -->
+                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#5dc48a]">
+                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3" data-i18n="aboutNVY">About Nagar Van Yojana (NVY)</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm" data-i18n="aboutNVYDesc">
+                                The Nagar Van Yojana is a visionary initiative launched by the Ministry of Environment, Forest and Climate Change (MoEF&CC) with the goal of creating 1,000 Urban Forests (Nagar Vans) and Urban Gardens (Nagar Vatikas) across India. These urban forests act as essential "green lungs" for cities, mitigating the Urban Heat Island (UHI) effect, creating localized carbon sinks, and protecting native biodiversity.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#4ab878]">
+                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3" data-i18n="aboutDMRV">About this DMRV Study</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm" data-i18n="aboutDMRVDesc">
+                                This Digital Monitoring, Reporting, and Verification (DMRV) platform is a robust research initiative designed to evaluate the true on-ground impact of these urban forests. By combining geospatial mapping, AI verification, and Participatory Rural Appraisal (PRA), this study quantifies ecological benefits (like air quality and groundwater recharge) alongside socio-economic impacts (community well-being and vendor livelihoods), bridging the gap between local climate action and national NDCs.
+                            </p>
+                        </div>
+
+                        <!-- Hindi Content -->
+                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#3d9a6a]">
+                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3" data-i18n="aboutNVYHi">नगर वन योजना (NVY) के बारे में</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm" data-i18n="aboutNVYDescHi">
+                                नगर वन योजना पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय (MoEF&CC) द्वारा शुरू की गई एक दूरदर्शी पहल है, जिसका उद्देश्य पूरे भारत में 1,000 'नगर वन' और 'नगर वाटिका' विकसित करना है। ये शहरी वन शहरों के लिए आवश्यक "ग्रीन लंग्स" (हरे फेफड़े) के रूप में कार्य करते हैं, जो अर्बन हीट आइलैंड (UHI) प्रभाव को कम करते हैं, कार्बन सिंक बनाते हैं और स्थानीय जैव विविधता की रक्षा करते हैं।
+                            </p>
+                        </div>
+
+                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#2d7a5a]">
+                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3" data-i18n="aboutDMRVHi">इस DMRV अध्ययन के बारे में</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm" data-i18n="aboutDMRVDescHi">
+                                यह डिजिटल मॉनिटरिंग, रिपोर्टिंग और सत्यापन (DMRV) प्लेटफॉर्म एक मजबूत शोध पहल है जिसे इन शहरी वनों के वास्तविक जमीनी प्रभाव का मूल्यांकन करने के लिए डिज़ाइन किया गया है। भू-स्थानिक (Geospatial) मैपिंग, एआई (AI) सत्यापन और सहभागी ग्रामीण मूल्यांकन (PRA) को मिलाकर, यह अध्ययन पारिस्थितिक लाभों (जैसे वायु गुणवत्ता और भूजल पुनर्भरण) के साथ-साथ सामाजिक-आर्थिक प्रभावों का परिमाणीकरण (quantification) करता है, जो स्थानीय जलवायु कार्रवाई और राष्ट्रीय लक्ष्यों (NDCs) के बीच की खाई को पाटता है।
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: MoEF&CC Framework -->
+                    <div class="space-y-6">
+                        <div class="bg-[#1b3a2d] text-white rounded-xl p-6 shadow-xl border-2 border-[#5dc48a]">
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <span class="text-2xl">🏛️</span>
+                                <span data-i18n="moefFramework">MoEF&CC Operational Framework for Nagar Van</span>
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div class="bg-white/10 rounded-lg p-4">
+                                    <h4 class="font-bold text-[#5dc48a] mb-2" data-i18n="fundingMechanism">💰 Funding Mechanism</h4>
+                                    <p class="text-sm text-gray-200" data-i18n="fundingDesc">
+                                        Supported by the National Compensatory Afforestation Fund Management and Planning Authority (CAMPA) to ensure sustainable financial backing for initial establishment and fencing.
+                                    </p>
+                                </div>
+
+                                <div class="bg-white/10 rounded-lg p-4">
+                                    <h4 class="font-bold text-[#5dc48a] mb-2" data-i18n="collaborativeGov">🤝 Collaborative Governance (PPP Model)</h4>
+                                    <p class="text-sm text-gray-200" data-i18n="collaborativeDesc">
+                                        Implementation thrives on a Public-Private Partnership involving State Forest Departments, Urban Local Bodies (ULBs), NGOs, Corporate CSR funds, and local citizens.
+                                    </p>
+                                </div>
+
+                                <div class="bg-white/10 rounded-lg p-4">
+                                    <h4 class="font-bold text-[#5dc48a] mb-2" data-i18n="landUtilization">🗺️ Land Utilization</h4>
+                                    <p class="text-sm text-gray-200" data-i18n="landUtilDesc">
+                                        Primarily developed on degraded forest lands or vacant lands offered by local bodies within urban and peri-urban limits.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Key Strategic Pillars -->
+                        <div class="bg-gradient-to-r from-[#5dc48a] to-[#4ab878] rounded-xl p-6 shadow-lg">
+                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2">
+                                <span class="text-2xl">🎯</span>
+                                <span data-i18n="keyPillars">Key Strategic Pillars</span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
+                                    <h4 class="font-bold text-[#1b3a2d] text-sm" data-i18n="pillar1">🌲 Ecological Restoration</h4>
+                                    <p class="text-xs text-gray-600 mt-1" data-i18n="pillar1Desc">Indigenous species for local flora & fauna</p>
+                                </div>
+                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
+                                    <h4 class="font-bold text-[#1b3a2d] text-sm" data-i18n="pillar2">🌍 Climate Resilience</h4>
+                                    <p class="text-xs text-gray-600 mt-1" data-i18n="pillar2Desc">Contributes to India's NDCs via urban tree cover</p>
+                                </div>
+                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
+                                    <h4 class="font-bold text-[#1b3a2d] text-sm" data-i18n="pillar3">❤️ Community Health (WHO-5)</h4>
+                                    <p class="text-xs text-gray-600 mt-1" data-i18n="pillar3Desc">Recreational spaces for physical & mental well-being</p>
+                                </div>
+                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
+                                    <h4 class="font-bold text-[#1b3a2d] text-sm" data-i18n="pillar4">📱 Viksit Bharat Vision</h4>
+                                    <p class="text-xs text-gray-600 mt-1" data-i18n="pillar4Desc">Digital auditing (DMRV) & civic participation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content">
         
@@ -1532,7 +1651,7 @@
                 aboutProject: "About Project",
                 reportIssue: "Report Issue",
                 publicContribution: "Public Contribution",
-                adminForm: "Admin Form",
+                adminForm: "Survey Questionaries",
 
                 // Main content
                 siteInsights: "Site Insights & Verification",
@@ -1638,6 +1757,33 @@
                 // Footer bottom
                 allRightsReserved: "All rights reserved.",
                 designedBy: "Designed and Developed by",
+                // Home Section
+                homeTitle: "Welcome to Nagar Van DMRV Dashboard",
+                aboutNVY: "About Nagar Van Yojana (NVY)",
+                aboutNVYDesc: "The Nagar Van Yojana is a visionary initiative launched by the Ministry of Environment, Forest and Climate Change (MoEF&CC) with the goal of creating 1,000 Urban Forests (Nagar Vans) and Urban Gardens (Nagar Vatikas) across India. These urban forests act as essential 'green lungs' for cities, mitigating the Urban Heat Island (UHI) effect, creating localized carbon sinks, and protecting native biodiversity.",
+                aboutDMRV: "About this DMRV Study",
+                aboutDMRVDesc: "This Digital Monitoring, Reporting, and Verification (DMRV) platform is a robust research initiative designed to evaluate the true on-ground impact of these urban forests. By combining geospatial mapping, AI verification, and Participatory Rural Appraisal (PRA), this study quantifies ecological benefits (like air quality and groundwater recharge) alongside socio-economic impacts (community well-being and vendor livelihoods), bridging the gap between local climate action and national NDCs.",
+                aboutNVYHi: "नगर वन योजना (NVY) के बारे में",
+                aboutNVYDescHi: "नगर वन योजना पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय (MoEF&CC) द्वारा शुरू की गई एक दूरदर्शी पहल है, जिसका उद्देश्य पूरे भारत में 1,000 'नगर वन' और 'नगर वाटिका' विकसित करना है। ये शहरी वन शहरों के लिए आवश्यक 'ग्रीन लंग्स' (हरे फेफड़े) के रूप में कार्य करते हैं, जो अर्बन हीट आइलैंड (UHI) प्रभाव को कम करते हैं, कार्बन सिंक बनाते हैं और स्थानीय जैव विविधता की रक्षा करते हैं।",
+                aboutDMRVHi: "इस DMRV अध्ययन के बारे में",
+                aboutDMRVDescHi: "यह डिजिटल मॉनिटरिंग, रिपोर्टिंग और सत्यापन (DMRV) प्लेटफॉर्म एक मजबूत शोध पहल है जिसे इन शहरी वनों के वास्तविक जमीनी प्रभाव का मूल्यांकन करने के लिए डिज़ाइन किया गया है। भू-स्थानिक (Geospatial) मैपिंग, एआई (AI) सत्यापन और सहभागी ग्रामीण मूल्यांकन (PRA) को मिलाकर, यह अध्ययन पारिस्थितिक लाभों (जैसे वायु गुणवत्ता और भूजल पुनर्भरण) के साथ-साथ सामाजिक-आर्थिक प्रभावों का परिमाणीकरण (quantification) करता है, जो स्थानीय जलवायु कार्रवाई और राष्ट्रीय लक्ष्यों (NDCs) के बीच की खाई को पाटता है।",
+                moefFramework: "MoEF&CC Operational Framework for Nagar Van",
+                fundingMechanism: "Funding Mechanism",
+                fundingDesc: "Supported by the National Compensatory Afforestation Fund Management and Planning Authority (CAMPA) to ensure sustainable financial backing for initial establishment and fencing.",
+                collaborativeGov: "Collaborative Governance (PPP Model)",
+                collaborativeDesc: "Implementation thrives on a Public-Private Partnership involving State Forest Departments, Urban Local Bodies (ULBs), NGOs, Corporate CSR funds, and local citizens.",
+                landUtilization: "Land Utilization",
+                landUtilDesc: "Primarily developed on degraded forest lands or vacant lands offered by local bodies within urban and peri-urban limits.",
+                keyPillars: "Key Strategic Pillars",
+                pillar1: "Ecological Restoration",
+                pillar1Desc: "Indigenous species for local flora & fauna",
+                pillar2: "Climate Resilience",
+                pillar2Desc: "Contributes to India's NDCs via urban tree cover",
+                pillar3: "Community Health (WHO-5)",
+                pillar3Desc: "Recreational spaces for physical & mental well-being",
+                pillar4: "Viksit Bharat Vision",
+                pillar4Desc: "Digital auditing (DMRV) & civic participation",
+
                 privacyPolicy: "Privacy Policy",
                 termsOfUse: "Terms of Use",
                 cookiePolicy: "Cookie Policy",
@@ -1650,7 +1796,7 @@
                 aboutProject: "परियोजना के बारे में",
                 reportIssue: "समस्या रिपोर्ट करें",
                 publicContribution: "सार्वजनिक योगदान",
-                adminForm: "एडमिन फॉर्म",
+                adminForm: "सर्वेक्षण प्रश्नावली",
 
                 // Main content
                 siteInsights: "साइट अंतर्दृष्टि और सत्यापन",
@@ -1756,6 +1902,33 @@
                 // Footer bottom
                 allRightsReserved: "सर्वाधिकार सुरक्षित।",
                 designedBy: "डिज़ाइन और विकसित द्वारा",
+                // Home Section
+                homeTitle: "नगर वन DMRV डैशबोर्ड में आपका स्वागत है",
+                aboutNVY: "नगर वन योजना (NVY) के बारे में",
+                aboutNVYDesc: "नगर वन योजना पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय (MoEF&CC) द्वारा शुरू की गई एक दूरदर्शी पहल है, जिसका उद्देश्य पूरे भारत में 1,000 'नगर वन' और 'नगर वाटिका' विकसित करना है। ये शहरी वन शहरों के लिए आवश्यक 'ग्रीन लंग्स' (हरे फेफड़े) के रूप में कार्य करते हैं, जो अर्बन हीट आइलैंड (UHI) प्रभाव को कम करते हैं, कार्बन सिंक बनाते हैं और स्थानीय जैव विविधता की रक्षा करते हैं।",
+                aboutDMRV: "इस DMRV अध्ययन के बारे में",
+                aboutDMRVDesc: "यह डिजिटल मॉनिटरिंग, रिपोर्टिंग और सत्यापन (DMRV) प्लेटफॉर्म एक मजबूत शोध पहल है जिसे इन शहरी वनों के वास्तविक जमीनी प्रभाव का मूल्यांकन करने के लिए डिज़ाइन किया गया है। भू-स्थानिक (Geospatial) मैपिंग, एआई (AI) सत्यापन और सहभागी ग्रामीण मूल्यांकन (PRA) को मिलाकर, यह अध्ययन पारिस्थितिक लाभों (जैसे वायु गुणवत्ता और भूजल पुनर्भरण) के साथ-साथ सामाजिक-आर्थिक प्रभावों का परिमाणीकरण (quantification) करता है, जो स्थानीय जलवायु कार्रवाई और राष्ट्रीय लक्ष्यों (NDCs) के बीच की खाई को पाटता है।",
+                aboutNVYHi: "नगर वन योजना (NVY) के बारे में",
+                aboutNVYDescHi: "नगर वन योजना पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय (MoEF&CC) द्वारा शुरू की गई एक दूरदर्शी पहल है, जिसका उद्देश्य पूरे भारत में 1,000 'नगर वन' और 'नगर वाटिका' विकसित करना है। ये शहरी वन शहरों के लिए आवश्यक 'ग्रीन लंग्स' (हरे फेफड़े) के रूप में कार्य करते हैं, जो अर्बन हीट आइलैंड (UHI) प्रभाव को कम करते हैं, कार्बन सिंक बनाते हैं और स्थानीय जैव विविधता की रक्षा करते हैं।",
+                aboutDMRVHi: "इस DMRV अध्ययन के बारे में",
+                aboutDMRVDescHi: "यह डिजिटल मॉनिटरिंग, रिपोर्टिंग और सत्यापन (DMRV) प्लेटफॉर्म एक मजबूत शोध पहल है जिसे इन शहरी वनों के वास्तविक जमीनी प्रभाव का मूल्यांकन करने के लिए डिज़ाइन किया गया है। भू-स्थानिक (Geospatial) मैपिंग, एआई (AI) सत्यापन और सहभागी ग्रामीण मूल्यांकन (PRA) को मिलाकर, यह अध्ययन पारिस्थितिक लाभों (जैसे वायु गुणवत्ता और भूजल पुनर्भरण) के साथ-साथ सामाजिक-आर्थिक प्रभावों का परिमाणीकरण (quantification) करता है, जो स्थानीय जलवायु कार्रवाई और राष्ट्रीय लक्ष्यों (NDCs) के बीच की खाई को पाटता है।",
+                moefFramework: "नगर वन के लिए MoEF&CC परिचालन ढांचा",
+                fundingMechanism: "वित्तपोषण तंत्र",
+                fundingDesc: "प्रारंभिक स्थापना और बाड़ लगाने के लिए सतत वित्तीय सहायता सुनिश्चित करने के लिए राष्ट्रीय प्रतिपूरक वनीकरण निधि प्रबंधन और योजना प्राधिकरण (CAMPA) द्वारा समर्थित।",
+                collaborativeGov: "सहयोगी शासन (PPP मॉडल)",
+                collaborativeDesc: "कार्यान्वयन राज्य वन विभाग, शहरी स्थानीय निकाय (ULBs), गैर सरकारी संगठन, कॉर्पोरेट CSR निधियों और स्थानीय नागरिकों की सार्वजनिक-निजी भागीदारी पर पनपता है।",
+                landUtilization: "भूमि उपयोग",
+                landUtilDesc: "मुख्य रूप से शहरी और पेरि-शहरी सीमाओं के भीतर स्थानीय निकायों द्वारा प्रदान की गई क्षरित वन भूमि या खाली भूमि पर विकसित।",
+                keyPillars: "प्रमुख रणनीतिक स्तंभ",
+                pillar1: "पारिस्थितिक पुनर्स्थापना",
+                pillar1Desc: "स्थानीय वनस्पति और जीवों के लिए देशज प्रजातियां",
+                pillar2: "जलवायु लचीलापन",
+                pillar2Desc: "शहरी वृक्ष आवरण के माध्यम से भारत के NDCs में योगदान",
+                pillar3: "समुदाय स्वास्थ्य (WHO-5)",
+                pillar3Desc: "शारीरिक और मानसिक कल्याण के लिए मनोरंजन स्थान",
+                pillar4: "विकसित भारत विज़न",
+                pillar4Desc: "डिजिटल ऑडिट (DMRV) और नागरिक भागीदारी",
+
                 privacyPolicy: "गोपनीयता नीति",
                 termsOfUse: "उपयोग की शर्तें",
                 cookiePolicy: "कुकी नीति",
