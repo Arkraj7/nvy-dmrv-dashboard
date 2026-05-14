@@ -54,14 +54,13 @@
             animation: slideInRight 0.8s ease-out forwards;
         }
 
-        /* Vibrate animation */
-        @keyframes vibrate {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-1px); }
-            20%, 40%, 60%, 80% { transform: translateX(1px); }
+        .radiate {
+            animation: radiate 2s ease-in-out infinite;
         }
-        .vibrate {
-            animation: vibrate 0.15s linear infinite;
+
+        @keyframes radiate {
+            0%, 100% { box-shadow: 0 0 5px rgba(93, 196, 138, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(93, 196, 138, 0.8), 0 0 30px rgba(93, 196, 138, 0.4); }
         }
 
         /* Smooth and Slow Icon Fade */
@@ -434,7 +433,7 @@
                         </div>
                     </div>
 
-                    <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element vibrate" aria-label="Take Public Survey">
+                    <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element radiate" aria-label="Take Public Survey">
                         Take Survey
                     </a>
 
@@ -700,7 +699,7 @@
         </div>
 
         <div class="glass-panel p-6 mb-8">
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-2">📸 Field Media Gallery</h2>
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-2">Field Media Gallery</h2>
             <p class="text-sm contrast-medium mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)</p>
 
             <div class="flex overflow-x-auto gap-4 pb-4 media-scroll" role="region" aria-label="Field media gallery - horizontal scrollable list of images and videos" aria-describedby="gallery-instructions">
