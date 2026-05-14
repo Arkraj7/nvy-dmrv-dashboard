@@ -19,9 +19,15 @@
 <body class="bg-[#f4f7f6] min-h-screen flex items-center justify-center p-4 font-sans">
 
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-6 text-white text-center">
-            <h1 class="text-2xl font-extrabold mb-1">Nagar Van Public Survey</h1>
-            <p class="text-sm text-emerald-100">नगर वन सार्वजनिक सर्वेक्षण</p>
+        <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-4 text-white flex justify-between items-center">
+            <a href="index.html" class="text-white hover:text-emerald-200 font-bold text-sm flex items-center gap-1">
+                ← Home / होम
+            </a>
+            <div class="text-center">
+                <h1 class="text-xl font-extrabold">Nagar Van Public Survey</h1>
+                <p class="text-xs text-emerald-100">नगर वन सार्वजनिक सर्वेक्षण</p>
+            </div>
+            <div class="w-16"></div>
         </div>
 
         <div class="p-6 md:p-8">
@@ -74,6 +80,37 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Park Type / पार्क का प्रकार *</label>
+                            <select id="surv-park-type" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" onchange="toggleOtherParkType()">
+                                <option value="">Select / चुनें</option>
+                                <option value="Nagar Van">Nagar Van (नगर वन)</option>
+                                <option value="Nagar Vatika">Nagar Vatika (नगर वाटिका)</option>
+                                <option value="City Park">City Park (शहरी पार्क)</option>
+                                <option value="Other">Other (अन्य)</option>
+                            </select>
+                            <input type="text" id="surv-park-type-other" class="w-full border border-gray-300 rounded-lg p-2.5 mt-2 hidden" placeholder="Specify / बताएं">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Park Name / पार्क का नाम *</label>
+                            <input type="text" id="surv-park-name" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Enter park name">
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Location (Optional) / स्थान (वैकल्पिक)</label>
+                        <div class="flex gap-2 flex-wrap">
+                            <button type="button" onclick="getLocation()" class="bg-[#1b3a2d] hover:bg-[#2d5a45] text-white px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                Get Location
+                            </button>
+                            <span id="location-status" class="text-xs text-gray-500 self-center"></span>
+                        </div>
+                        <input type="hidden" id="surv-lat">
+                        <input type="hidden" id="surv-lon">
                     </div>
                 </div>
 
@@ -162,8 +199,9 @@
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
                     <h3 class="text-sm font-bold text-emerald-800 mb-2">Data Privacy & Consent Disclosure / डेटा गोपनीयता प्रकटीकरण</h3>
                     <p class="text-xs text-emerald-700 text-justify">
-                        Your privacy is our priority. The personal information collected will remain strictly confidential and will not be published, shared with third parties, or used for commercial purposes. The data is collected exclusively for academic research and environmental policy evaluation by National CAMPA, MoEF&CC to improve the Nagar Van Yojana. By submitting this form, you consent to this anonymous data processing.<br><br>
-                        <strong>हिंदी:</strong> आपकी गोपनीयता हमारी प्राथमिकता है। एकत्र की गई व्यक्तिगत जानकारी पूरी तरह से गोपनीय रहेगी और इसे किसी तीसरे पक्ष के साथ साझा नहीं किया जाएगा। यह डेटा विशेष रूप से शैक्षणिक शोध और पर्यावरण नीति मूल्यांकन के लिए National CAMPA, MoEF&CC द्वारा एकत्र किया जा रहा है। इस फॉर्म को जमा करके, आप इस गुमनाम डेटा प्रसंस्करण के लिए सहमत होते हैं।
+                        <strong>Where your data goes / आपका डेटा कहाँ जाता है:</strong> Your responses are stored securely in a Google Sheets database managed by the Nagar Van DMRV research team. The data is used solely for academic research and environmental policy evaluation by National CAMPA, MoEF&CC to improve the Nagar Van Yojana.<br><br>
+                        Your privacy is our priority. The personal information collected will remain strictly confidential and will not be published, shared with third parties, or used for commercial purposes.<br><br>
+                        <strong>हिंदी:</strong> आपके उत्तर सुरक्षित रूप से Nagar Van DMRV शोध दल द्वारा प्रबंधित Google Sheets डेटाबेस में संग्रहीत किए जाते हैं। यह डेटा केवल शैक्षणिक शोध और पर्यावरण नीति मूल्यांकन के लिए उपयोग किया जाता है। आपकी गोपनीयता हमारी प्राथमिकता है।
                     </p>
                 </div>
 
@@ -176,6 +214,40 @@
     </div>
 
     <script>
+        function toggleOtherParkType() {
+            const select = document.getElementById('surv-park-type');
+            const otherInput = document.getElementById('surv-park-type-other');
+            if (select.value === 'Other') {
+                otherInput.classList.remove('hidden');
+                otherInput.setAttribute('required', 'required');
+            } else {
+                otherInput.classList.add('hidden');
+                otherInput.removeAttribute('required');
+                otherInput.value = '';
+            }
+        }
+
+        function getLocation() {
+            const status = document.getElementById('location-status');
+            if (!navigator.geolocation) {
+                status.textContent = 'Geolocation not supported';
+                return;
+            }
+            status.textContent = 'Getting location...';
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    document.getElementById('surv-lat').value = position.coords.latitude;
+                    document.getElementById('surv-lon').value = position.coords.longitude;
+                    status.textContent = 'Location captured! ✓';
+                    status.classList.add('text-green-600');
+                },
+                (error) => {
+                    status.textContent = 'Error: ' + error.message;
+                    status.classList.add('text-red-600');
+                }
+            );
+        }
+
         function submitSurvey() {
             const form = document.getElementById('public-survey-form');
             const requiredFields = form.querySelectorAll('[required]');
@@ -196,11 +268,17 @@
             }
 
             // Collect form data
+            const parkType = document.getElementById('surv-park-type').value;
+            const parkTypeOther = document.getElementById('surv-park-type-other').value;
             const formData = {
                 name: document.getElementById('surv-name').value,
                 age: document.getElementById('surv-age').value,
                 gender: document.getElementById('surv-gender').value,
                 state: document.getElementById('surv-state').value,
+                parkType: parkType === 'Other' ? parkTypeOther : parkType,
+                parkName: document.getElementById('surv-park-name').value,
+                latitude: document.getElementById('surv-lat').value,
+                longitude: document.getElementById('surv-lon').value,
                 visitReason: document.querySelector('input[name="visit-reason"]:checked')?.value,
                 wellbeing: document.querySelector('input[name="wellbeing"]:checked')?.value,
                 envChange: document.querySelector('input[name="env-change"]:checked')?.value,
