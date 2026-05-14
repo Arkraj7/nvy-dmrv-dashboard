@@ -45,6 +45,15 @@
         }
         .btn-report { animation: blink-red 2.5s infinite; }
 
+        /* Slide in from right animation */
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
         /* Smooth and Slow Icon Fade */
         .icon-fade { transition: opacity 1.2s ease-in-out; }
 
@@ -537,73 +546,6 @@
         </div>
     </section>
 
-    <!-- Official Resources Section -->
-    <section id="official-resources" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="region" aria-label="Official Resources">
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div class="p-6 md:p-8">
-                <h2 class="text-2xl font-extrabold text-[#1b3a2d] mb-6 text-center" data-i18n="officialResources">Official Resources</h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Implementation Guidelines -->
-                    <a href="assets/docs/NVY_Implementation_Guidelines.pdf" target="_blank" class="block bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border-2 border-emerald-200 hover:border-[#5dc48a] hover:shadow-xl transition-all group">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="implementationGuidelines">Implementation Guidelines</h3>
-                        </div>
-                        <p class="text-sm text-gray-600" data-i18n="implementationGuidelinesDesc">Official guidelines for Nagar Van Yojana implementation across states.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-[#5dc48a] group-hover:text-[#4ab878]" data-i18n="clickToOpen">Click to open</span>
-                    </a>
-
-                    <!-- PIB Release -->
-                    <a href="assets/docs/NVY_PIB_Release_Aug2023.pdf" target="_blank" class="block bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all group">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="pibRelease">PIB Release (Aug 2023)</h3>
-                        </div>
-                        <p class="text-sm text-gray-600" data-i18n="pibReleaseDesc">Press Information Bureau official release announcing the scheme.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-blue-600 group-hover:text-blue-800" data-i18n="clickToOpen">Click to open</span>
-                    </a>
-
-                    <!-- Research Methodologies -->
-                    <a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="block bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 hover:shadow-xl transition-all group">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="researchMethods">Research Methodologies</h3>
-                        </div>
-                        <p class="text-sm text-gray-600" data-i18n="researchMethodsDesc">DMRV study framework and data collection methodologies.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-amber-600 group-hover:text-amber-800" data-i18n="clickToOpen">Click to open</span>
-                    </a>
-
-                    <!-- Data Documentation -->
-                    <a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="block bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-400 hover:shadow-xl transition-all group">
-                        <div class="flex items-center gap-4 mb-3">
-                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="dataDocumentation">Data Documentation</h3>
-                        </div>
-                        <p class="text-sm text-gray-600" data-i18n="dataDocumentationDesc">Comprehensive documentation of data sources and metrics.</p>
-                        <span class="inline-block mt-3 text-xs font-bold text-purple-600 group-hover:text-purple-800" data-i18n="clickToOpen">Click to open</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content">
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -871,14 +813,14 @@
 
         <!-- Acknowledgment Popup Modal -->
         <div id="acknowledgmentPopup" class="popup-modal hidden">
-            <div class="popup-content">
+            <div class="popup-content" style="max-width: 480px; padding: 24px;">
                 <button id="popupClose" class="popup-close" aria-label="Close popup">&times;</button>
-                <h2 style="font-size: 22px; font-weight: 800; color: #1b3a2d; margin-bottom: 6px;">Welcome to the Nagar Van DMRV Dashboard</h2>
-                <h3 style="font-size: 16px; font-weight: 600; color: #065f46; margin-bottom: 16px;">Acknowledgment & Data Disclaimer</h3>
-                <p style="font-size: 14px; color: #374151; line-height: 1.7; margin-bottom: 14px;">
-                    This platform is supported by <strong>National CAMPA</strong> under the guidance of <strong>MoEF&CC</strong> (Ministry of Environment, Forest & Climate Change). We sincerely acknowledge the support of <strong>GRAAM</strong> (Global Research Agency for Rural Development & Environment), State Forest Departments, and all field workers whose efforts make this initiative possible.
+                <h2 style="font-size: 18px; font-weight: 600; color: #1b3a2d; margin-bottom: 8px;">Welcome to the Nagar Van DMRV Dashboard</h2>
+                <h3 style="font-size: 14px; font-weight: 500; color: #065f46; margin-bottom: 12px;">Acknowledgment & Data Disclaimer</h3>
+                <p style="font-size: 13px; color: #374151; line-height: 1.6; margin-bottom: 12px;">
+                    This platform is supported by National CAMPA under the guidance of MoEF&CC (Ministry of Environment, Forest & Climate Change). We sincerely acknowledge the support of GRAAM (Global Research Agency for Rural Development & Environment), State Forest Departments, and all field workers whose efforts make this initiative possible.
                 </p>
-                <p style="font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">
+                <p style="font-size: 12px; color: #6b7280; line-height: 1.5; margin-bottom: 12px;">
                     Data presented on this dashboard is sourced from official government records, field surveys, and verified satellite imagery. While we strive for accuracy, users are advised to verify critical information from primary sources. This portal is intended for informational and analytical purposes.
                 </p>
                 <div class="popup-checkbox">
@@ -887,6 +829,73 @@
                 </div>
             </div>
         </div>
+
+    <!-- Official Resources Section -->
+    <section id="official-resources" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="region" aria-label="Official Resources">
+        <div class="slide-in-right bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+            <div class="p-6 md:p-8">
+                <h2 class="text-2xl font-extrabold text-[#1b3a2d] mb-6 text-center" data-i18n="officialResources">Official Resources</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Implementation Guidelines -->
+                    <a href="assets/docs/NVY_Implementation_Guidelines.pdf" target="_blank" class="block bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 border-2 border-emerald-200 hover:border-[#5dc48a] hover:shadow-xl transition-all group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="implementationGuidelines">Implementation Guidelines</h3>
+                        </div>
+                        <p class="text-sm text-gray-600" data-i18n="implementationGuidelinesDesc">Official guidelines for Nagar Van Yojana implementation across states.</p>
+                        <span class="inline-block mt-3 text-xs font-bold text-[#5dc48a] group-hover:text-[#4ab878]" data-i18n="clickToOpen">Click to open</span>
+                    </a>
+
+                    <!-- PIB Release -->
+                    <a href="assets/docs/NVY_PIB_Release_Aug2023.pdf" target="_blank" class="block bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="pibRelease">PIB Release (Aug 2023)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600" data-i18n="pibReleaseDesc">Press Information Bureau official release announcing the scheme.</p>
+                        <span class="inline-block mt-3 text-xs font-bold text-blue-600 group-hover:text-blue-800" data-i18n="clickToOpen">Click to open</span>
+                    </a>
+
+                    <!-- Research Methodologies -->
+                    <a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="block bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200 hover:border-amber-400 hover:shadow-xl transition-all group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="researchMethods">Research Methodologies</h3>
+                        </div>
+                        <p class="text-sm text-gray-600" data-i18n="researchMethodsDesc">DMRV study framework and data collection methodologies.</p>
+                        <span class="inline-block mt-3 text-xs font-bold text-amber-600 group-hover:text-amber-800" data-i18n="clickToOpen">Click to open</span>
+                    </a>
+
+                    <!-- Data Documentation -->
+                    <a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="block bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 border-2 border-purple-200 hover:border-purple-400 hover:shadow-xl transition-all group">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-[#1b3a2d] rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#1b3a2d]" data-i18n="dataDocumentation">Data Documentation</h3>
+                        </div>
+                        <p class="text-sm text-gray-600" data-i18n="dataDocumentationDesc">Comprehensive documentation of data sources and metrics.</p>
+                        <span class="inline-block mt-3 text-xs font-bold text-purple-600 group-hover:text-purple-800" data-i18n="clickToOpen">Click to open</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
         <!-- Professional Footer -->
         <footer class="site-footer py-12 px-4" role="contentinfo">
