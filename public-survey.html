@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Survey - Nagar Van</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        .vibrate {
+            animation: vibrate 0.5s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#f4f7f6] min-h-screen flex items-center justify-center p-4 font-sans">
+
+    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-6 text-white text-center">
+            <h1 class="text-2xl font-extrabold mb-1">Nagar Van Public Survey</h1>
+            <p class="text-sm text-emerald-100">नगर वन सार्वजनिक सर्वेक्षण</p>
+        </div>
+
+        <div class="p-6 md:p-8">
+            <form id="public-survey-form" class="space-y-6">
+
+                <!-- Section A: Demographics -->
+                <div class="border-b pb-4 mb-4">
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">A. Demographics & Location / जनसांख्यिकी और स्थान</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Name / नाम <span class="text-xs text-gray-400">(Optional / वैकल्पिक)</span></label>
+                            <input type="text" id="surv-name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Age Group / आयु वर्ग *</label>
+                            <select id="surv-age" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
+                                <option value="">Select / चुनें</option>
+                                <option value="<18">Below 18 (18 से कम)</option>
+                                <option value="18-30">18-30</option>
+                                <option value="31-50">31-50</option>
+                                <option value=">50">Above 50 (50 से ऊपर)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Gender / लिंग *</label>
+                            <select id="surv-gender" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
+                                <option value="">Select / चुनें</option>
+                                <option value="Male">Male (पुरुष)</option>
+                                <option value="Female">Female (महिला)</option>
+                                <option value="Prefer not to say">Prefer not to say (बताना नहीं चाहते)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">State / राज्य *</label>
+                            <select id="surv-state" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
+                                <option value="">Select State / राज्य चुनें</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section B: Usage & Well-being -->
+                <div class="border-b pb-4 mb-4">
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">B. Usage & Well-being / उपयोग और भलाई</h2>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
+                        <label class="block text-sm font-bold text-gray-800 mb-3">
+                            5. Primary reason for visiting? / इस पार्क में आने का मुख्य कारण क्या है? *
+                        </label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="visit-reason" value="Exercise" required class="accent-[#1b3a2d]"> Exercise & Walk (व्यायाम और टहलना)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="visit-reason" value="Relax" class="accent-[#1b3a2d]"> Relax in Nature (प्रकृति में आराम)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="visit-reason" value="Family" class="accent-[#1b3a2d]"> Family/Kids Time (परिवार के साथ समय)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="visit-reason" value="Commute" class="accent-[#1b3a2d]"> Commute/Pass-through (रास्ता पार करना)</label>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-800 mb-3">
+                            6. Does spending time in this park make you feel more relaxed, active, and cheerful? / क्या इस पार्क में समय बिताने से आप अधिक तनावमुक्त, सक्रिय और खुश महसूस करते हैं? *
+                        </label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="wellbeing" value="Yes" required class="accent-[#1b3a2d]"> Yes, definitely (हाँ, निश्चित रूप से)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="wellbeing" value="Sometimes" class="accent-[#1b3a2d]"> Sometimes (कभी-कभी)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="wellbeing" value="No" class="accent-[#1b3a2d]"> Not really (वास्तव में नहीं)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section C: Environment & Infrastructure -->
+                <div class="border-b pb-4 mb-4">
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">C. Environment & Infrastructure / पर्यावरण और बुनियादी ढांचा</h2>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
+                        <label class="block text-sm font-bold text-gray-800 mb-3">
+                            7. Have you noticed positive environmental changes here? / क्या आपने यहाँ पर्यावरण में सकारात्मक बदलाव देखे हैं? *
+                        </label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="env-change" value="Clear improvement" required class="accent-[#1b3a2d]"> Clear improvement (स्पष्ट सुधार)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="env-change" value="Slight improvement" class="accent-[#1b3a2d]"> Slight improvement (थोड़ा सुधार)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="env-change" value="No change" class="accent-[#1b3a2d]"> No change (कोई बदलाव नहीं)</label>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-800 mb-3">
+                            8. Are the physical facilities adequate and comfortable? / क्या यहाँ की सुविधाएँ पर्याप्त और आरामदायक हैं? *
+                        </label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="facilities" value="Excellent" required class="accent-[#1b3a2d]"> Excellent (बहुत बढ़िया)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="facilities" value="Needs Improvement" class="accent-[#1b3a2d]"> Needs Improvement (सुधार की आवश्यकता है)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="facilities" value="Poor" class="accent-[#1b3a2d]"> Poor (खराब)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section D: Civic Ownership -->
+                <div class="border-b pb-4 mb-4">
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">D. Civic Ownership / नागरिक स्वामित्व</h2>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-800 mb-3">
+                            9. Would you contribute ₹10-20 monthly for park maintenance? / क्या आप पार्क रखरखाव के लिए हर महीने ₹10-20 का योगदान करेंगे? *
+                        </label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="wtp" value="Yes" required class="accent-[#1b3a2d]"> Yes, willingly (हाँ, खुशी से)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="wtp" value="Maybe" class="accent-[#1b3a2d]"> Maybe, if funds used transparently (शायद, यदि फंड का सही उपयोग हो)</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="wtp" value="No" class="accent-[#1b3a2d]"> No, government should pay (नहीं, यह सरकार का काम है)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section E: Open Feedback -->
+                <div>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">E. Open Feedback / खुला फीडबैक</h2>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">10. Any suggestions for improvement? / सुधार के लिए कोई सुझाव?</label>
+                        <textarea id="surv-feedback" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Your suggestions / आपके सुझाव"></textarea>
+                    </div>
+                </div>
+
+                <!-- Data Privacy Disclosure -->
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="text-sm font-bold text-emerald-800 mb-2">Data Privacy & Consent Disclosure / डेटा गोपनीयता प्रकटीकरण</h3>
+                    <p class="text-xs text-emerald-700 text-justify">
+                        Your privacy is our priority. The personal information collected will remain strictly confidential and will not be published, shared with third parties, or used for commercial purposes. The data is collected exclusively for academic research and environmental policy evaluation by National CAMPA, MoEF&CC to improve the Nagar Van Yojana. By submitting this form, you consent to this anonymous data processing.<br><br>
+                        <strong>हिंदी:</strong> आपकी गोपनीयता हमारी प्राथमिकता है। एकत्र की गई व्यक्तिगत जानकारी पूरी तरह से गोपनीय रहेगी और इसे किसी तीसरे पक्ष के साथ साझा नहीं किया जाएगा। यह डेटा विशेष रूप से शैक्षणिक शोध और पर्यावरण नीति मूल्यांकन के लिए National CAMPA, MoEF&CC द्वारा एकत्र किया जा रहा है। इस फॉर्म को जमा करके, आप इस गुमनाम डेटा प्रसंस्करण के लिए सहमत होते हैं।
+                    </p>
+                </div>
+
+                <button type="button" onclick="submitSurvey()" class="w-full bg-[#1b3a2d] hover:bg-[#2d5a45] text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
+                    Submit Survey / जमा करें
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function submitSurvey() {
+            const form = document.getElementById('public-survey-form');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.classList.add('border-red-500');
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields. / कृपया सभी आवश्यक फ़ील्ड भरें।');
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('surv-name').value,
+                age: document.getElementById('surv-age').value,
+                gender: document.getElementById('surv-gender').value,
+                state: document.getElementById('surv-state').value,
+                visitReason: document.querySelector('input[name="visit-reason"]:checked')?.value,
+                wellbeing: document.querySelector('input[name="wellbeing"]:checked')?.value,
+                envChange: document.querySelector('input[name="env-change"]:checked')?.value,
+                facilities: document.querySelector('input[name="facilities"]:checked')?.value,
+                wtp: document.querySelector('input[name="wtp"]:checked')?.value,
+                feedback: document.getElementById('surv-feedback').value,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Survey submitted:', formData);
+            alert('Survey submitted successfully! Thank you for your time. / सर्वेक्षण सफलतापूर्वक जमा किया गया! आपके समय के लिए धन्यवाद।');
+            form.reset();
+        }
+    </script>
+</body>
+</html>

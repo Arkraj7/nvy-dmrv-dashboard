@@ -54,6 +54,16 @@
             animation: slideInRight 0.8s ease-out forwards;
         }
 
+        /* Vibrate animation */
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-1px); }
+            20%, 40%, 60%, 80% { transform: translateX(1px); }
+        }
+        .vibrate {
+            animation: vibrate 0.15s linear infinite;
+        }
+
         /* Smooth and Slow Icon Fade */
         .icon-fade { transition: opacity 1.2s ease-in-out; }
 
@@ -424,8 +434,8 @@
                         </div>
                     </div>
 
-                    <a href="https://arkraj7.github.io/nvy-survey/" target="_blank" rel="noopener noreferrer" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element" aria-label="Open survey questionaries in new tab">
-                        Survey Questionaries
+                    <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element vibrate" aria-label="Take Public Survey">
+                        Take Survey
                     </a>
 
                     <!-- Language & Text Size Controls -->
