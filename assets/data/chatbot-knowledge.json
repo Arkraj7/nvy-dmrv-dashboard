@@ -1,0 +1,97 @@
+[
+  {
+    "id": "nagar-van",
+    "keywords": ["nagar van", "city forest", "urban forest", "nagar van yojana", "what is nagar van"],
+    "answer": "Nagar Van (meaning 'City Forest') is a government initiative under the MoEF&CC to develop urban forests in Indian cities. It aims to increase green cover, improve air quality, and provide ecological benefits to urban populations using techniques such as Miyawaki and native species plantation."
+  },
+  {
+    "id": "dmrv",
+    "keywords": ["dmrv", "dmr", "digital monitoring", "monitoring reporting verification", "dashboard"],
+    "answer": "DMRV stands for <b>Digital Monitoring, Reporting & Verification</b>. This platform uses satellite data, AI, and geospatial tools to track ecological and socio-economic impacts of urban forests — including carbon sequestration, air quality, heat reduction, and community well-being."
+  },
+  {
+    "id": "locations",
+    "keywords": ["where", "location", "states", "sites", "map", "which state"],
+    "answer": "Nagar Van sites exist across multiple states including Andhra Pradesh, Gujarat, Jharkhand, Karnataka, Madhya Pradesh, Maharashtra, Delhi, Uttar Pradesh, and West Bengal. Use the interactive map on the dashboard to explore site-level metrics."
+  },
+  {
+    "id": "moefcc",
+    "keywords": ["moef", "moefcc", "ministry", "environment ministry", "nodal"],
+    "answer": "The <b>Ministry of Environment, Forest and Climate Change (MoEF&CC)</b> is the nodal ministry for Nagar Van Yojana. It sets policy, guidelines, and monitors urban forest implementation nationwide, with a target of hundreds of Nagar Vans across India."
+  },
+  {
+    "id": "campa",
+    "keywords": ["campa", "compensatory afforestation", "cama", "fund"],
+    "answer": "<b>CAMPA (Compensatory Afforestation Fund Management and Planning Authority)</b> manages funds from forest land diversion for compensatory afforestation, nursery development, and sustainable forest management — including support for Nagar Van projects."
+  },
+  {
+    "id": "afforestation",
+    "keywords": ["afforestation", "reforestation", "planting", "trees", "green cover"],
+    "answer": "<b>Afforestation</b> establishes forests on previously non-forested land. Nagar Van projects use native species and dense planting methods to deliver air purification, cooling, biodiversity, and community benefits in urban areas."
+  },
+  {
+    "id": "miyawaki",
+    "keywords": ["miyawaki", "japanese", "dense forest", "vertical forest"],
+    "answer": "The <b>Miyawaki Method</b> plants native species close together to form a self-sustaining, multi-layered forest quickly. Many Nagar Van sites use it to maximize ecological impact in limited urban space."
+  },
+  {
+    "id": "survey",
+    "keywords": ["survey", "public survey", "questionnaire", "feedback form", "civic"],
+    "answer": "The <b>Public Survey</b> collects visitor experiences about urban forests — wellbeing, facilities, environmental change, and willingness to pay. Open <a href=\"public-survey.html\">public-survey.html</a> or use the Civic Engagement section to contribute."
+  },
+  {
+    "id": "report",
+    "keywords": ["report", "issue", "grievance", "complaint", "problem", "gps"],
+    "answer": "To <b>report an issue</b>, go to <a href=\"report.html\">Report Issue</a>, fetch your GPS location, choose a category (e.g. solid waste, infrastructure), write a short description (20+ words), and submit. You will receive a report ID for tracking."
+  },
+  {
+    "id": "carbon",
+    "keywords": ["carbon", "sequestration", "co2", "climate", "emissions"],
+    "answer": "Urban forests absorb CO₂ and store carbon in biomass and soil. The dashboard estimates <b>carbon sequestration</b> from tree density and composition to show climate mitigation benefits of Nagar Van sites."
+  },
+  {
+    "id": "biodiversity",
+    "keywords": ["biodiversity", "wildlife", "birds", "habitat", "species"],
+    "answer": "Nagar Van sites support <b>biodiversity</b> by planting native trees that provide habitat for birds, insects, and small mammals. Ecological indicators on the dashboard help track habitat quality over time."
+  },
+  {
+    "id": "air-quality",
+    "keywords": ["air quality", "aqi", "pm2.5", "pollution", "pm 2.5"],
+    "answer": "Urban forests filter pollutants and improve <b>air quality</b>. The dashboard shows satellite-based PM2.5 near selected sites so you can see how green cover relates to local air conditions."
+  },
+  {
+    "id": "heat",
+    "keywords": ["heat", "urban heat island", "temperature", "cooling"],
+    "answer": "Trees and soil moisture reduce the <b>urban heat island</b> effect. The dashboard tracks estimated temperature reduction (°C) as one indicator of cooling benefits from Nagar Van cover."
+  },
+  {
+    "id": "water",
+    "keywords": ["water", "groundwater", "recharge", "harvesting"],
+    "answer": "Urban forests can support <b>groundwater recharge</b> and water retention through soil and canopy cover. Site panels show water-related indicators where data is available for each state."
+  },
+  {
+    "id": "ai-verification",
+    "keywords": ["ai", "tensorflow", "mobilenet", "image", "photo verification"],
+    "answer": "The portal includes <b>AI-assisted verification</b> (MobileNet via TensorFlow.js) to help classify vegetation in uploaded images as part of participatory monitoring and research workflows."
+  },
+  {
+    "id": "contact",
+    "keywords": ["contact", "email", "reach", "support", "help"],
+    "answer": "For research or technical questions, contact <b>Arkraj Biswas</b> at <b>arkraj.biswas6@gmail.com</b>, or use the <b>Submit Feedback</b> option in the footer."
+  },
+  {
+    "id": "developer",
+    "keywords": ["developer", "who made", "built", "arkraj", "creator"],
+    "answer": "This dashboard was designed and developed by <b>Arkraj Biswas</b> for the Nagar Van DMRV research initiative, combining geospatial mapping, AI, and community data for urban forest impact assessment."
+  },
+  {
+    "id": "nda",
+    "keywords": ["nda", "ndc", "climate policy", "paris"],
+    "answer": "Nagar Van contributes to India's <b>Nationally Determined Contributions (NDCs)</b> by creating urban carbon sinks, improving resilience, and linking local greening with national climate and sustainable development goals."
+  },
+  {
+    "id": "pra",
+    "keywords": ["pra", "participatory", "community", "engagement"],
+    "answer": "<b>Participatory Rural Appraisal (PRA)</b> and civic engagement tools on this portal gather community perspectives alongside satellite and AI metrics for a fuller picture of urban forest impacts."
+  }
+]

@@ -137,10 +137,12 @@ function doPost(e) {
         data.review || '',
         data.timestamp || new Date().toISOString()
       ];
+    } else if (action === 'chat') {
+      return jsonResponse(handleChatWithGemini(data.message || ''));
     } else {
       return jsonResponse({
         success: false,
-        message: 'Unknown action: "' + action + '". Use submitSurvey, submitFeedback, or submitGrievance.'
+        message: 'Unknown action: "' + action + '". Use submitSurvey, submitFeedback, submitGrievance, or chat.'
       });
     }
 
@@ -162,6 +164,68 @@ function submitSurvey(data) {
 
 function submitFeedback(data) {
   return handleDirectSubmit('submitFeedback', data);
+}
+
+/**
+ * Optional: set Script Property GEMINI_API_KEY (Project Settings → Script properties).
+ * Get a free key at https://aistudio.google.com/apikey
+ */
+function handleChatWithGemini(message) {
+  const trimmed = (message || '').trim();
+  if (!trimmed) {
+    return { success: false, useLocal: true, message: 'Empty message' };
+  }
+
+  const apiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  if (!apiKey) {
+    return { success: false, useLocal: true, message: 'GEMINI_API_KEY not configured' };
+  }
+
+  const systemPrompt =
+    'You are the Nagar Van Assistant for the Nagar Van DMRV Dashboard (India urban forests). ' +
+    'Answer clearly in 2–5 short paragraphs. Topics: Nagar Van Yojana, MoEF&CC, CAMPA, DMRV, ' +
+    'afforestation, Miyawaki, public survey (public-survey.html), issue reporting (report.html), ' +
+    'carbon sequestration, biodiversity, air quality. If unsure, suggest arkraj.biswas6@gmail.com. ' +
+    'Do not invent statistics. User question: ';
+
+  const payload = {
+    contents: [{ parts: [{ text: systemPrompt + trimmed }] }],
+    generationConfig: { temperature: 0.6, maxOutputTokens: 512 }
+  };
+
+  try {
+    const response = UrlFetchApp.fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey,
+      {
+        method: 'post',
+        contentType: 'application/json',
+        payload: JSON.stringify(payload),
+        muteHttpExceptions: true
+      }
+    );
+
+    const code = response.getResponseCode();
+    const body = JSON.parse(response.getContentText());
+
+    if (code !== 200) {
+      return { success: false, useLocal: true, message: 'Gemini API error: ' + code };
+    }
+
+    const reply = body.candidates &&
+      body.candidates[0] &&
+      body.candidates[0].content &&
+      body.candidates[0].content.parts &&
+      body.candidates[0].content.parts[0] &&
+      body.candidates[0].content.parts[0].text;
+
+    if (!reply) {
+      return { success: false, useLocal: true, message: 'No reply from Gemini' };
+    }
+
+    return { success: true, reply: String(reply).trim(), source: 'gemini' };
+  } catch (error) {
+    return { success: false, useLocal: true, message: error.toString() };
+  }
 }
 
 function handleDirectSubmit(action, data) {
