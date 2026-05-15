@@ -53,6 +53,89 @@
         .slide-in-right {
             animation: slideInRight 0.8s ease-out forwards;
         }
+        /* Survey Promotion Slide */
+        .survey-slide-panel {
+            position: fixed;
+            top: 50%;
+            right: -400px;
+            transform: translateY(-50%);
+            width: 380px;
+            background: linear-gradient(135deg, #1b3a2d 0%, #2d5a45 50%, #1b3a2d 100%);
+            border-radius: 16px 0 0 16px;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+            z-index: 9998;
+            transition: right 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+        }
+        .survey-slide-panel.show {
+            right: 0;
+        }
+        .survey-slide-panel:hover {
+            right: 0;
+        }
+        .survey-slide-content {
+            padding: 24px;
+            color: white;
+        }
+        .survey-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .survey-close-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .survey-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(93, 196, 138, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .survey-icon i {
+            font-size: 28px;
+            color: #5dc48a;
+        }
+        .survey-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .survey-text {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .survey-btn {
+            display: inline-block;
+            background: #5dc48a;
+            color: #1b3a2d;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .survey-btn:hover {
+            background: #4ab878;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(93, 196, 138, 0.4);
+        }
 
         .radiate {
             animation: radiate 2s ease-in-out infinite;
@@ -908,7 +991,20 @@
         </div>
     </section>
 
-        <!-- Professional Footer -->
+    <!-- Survey Promotion Slide Panel -->
+    <div id="surveySlidePanel" class="survey-slide-panel" role="dialog" aria-label="Take the survey">
+        <div class="survey-slide-content">
+            <button class="survey-close-btn" onclick="closeSurveySlide()" aria-label="Close">&times;</button>
+            <div class="survey-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="survey-title">Help Make Nagar Van Better!</div>
+            <p class="survey-text">Your feedback matters! Take a quick survey to share your experience and help us make India's urban forests greener and healthier.</p>
+            <a href="public-survey.html" class="survey-btn">Take Survey Now <i class="fas fa-arrow-right ml-2"></i></a>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
         <footer class="site-footer py-12 px-4" role="contentinfo">
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -1262,6 +1358,30 @@
                 });
             }
         });
+
+        // Survey Slide Panel - Show after 10 seconds
+        function initSurveySlide() {
+            // Check if user has already seen the slide (don't show again in same session)
+            if (sessionStorage.getItem('surveySlideShown')) return;
+
+            setTimeout(function() {
+                let panel = document.getElementById('surveySlidePanel');
+                if (panel) {
+                    panel.classList.add('show');
+                    sessionStorage.setItem('surveySlideShown', 'true');
+                }
+            }, 10000); // 10 seconds
+        }
+
+        function closeSurveySlide() {
+            let panel = document.getElementById('surveySlidePanel');
+            if (panel) {
+                panel.classList.remove('show');
+            }
+        }
+
+        // Initialize survey slide
+        initSurveySlide();
 
         // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
