@@ -1225,7 +1225,7 @@
 
     <script>
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
-        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbx5kGLMDsLX_quHYlzvoGqWlDtbvevl19rpA4DGXYRxVY6OgsRZHWLyusHnbT1c3nLj/exec";
+        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbwg75RRicIHpsiqgRIj1vCBr_Hf1Q6_Qmw7IRPW8BBjNNlSfytbWEzLC5uQa2vIZ1js/exec";
 
         // Handle "Other" state selection
         function handleStateSelectorChange() {
@@ -1716,8 +1716,9 @@
             payload.append('safety', safety);
             payload.append('review', review);
             payload.append('timestamp', new Date().toISOString());
+            payload.append('action', 'submitPublicContribution');
 
-            fetch(PUBLIC_SUBMISSION_API_URL + '?action=submitPublicContribution', {
+            fetch(PUBLIC_SUBMISSION_API_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -2173,10 +2174,11 @@
             formData.append('type', type);
             formData.append('message', message);
             formData.append('timestamp', new Date().toISOString());
+            formData.append('action', 'submitFeedback');
 
-            const API_URL = 'https://script.google.com/macros/s/AKfycbx5kGLMDsLX_quHYlzvoGqWlDtbvevl19rpA4DGXYRxVY6OgsRZHWLyusHnbT1c3nLj/exec';
+            const API_URL = 'https://script.google.com/macros/s/AKfycbwg75RRicIHpsiqgRIj1vCBr_Hf1Q6_Qmw7IRPW8BBjNNlSfytbWEzLC5uQa2vIZ1js/exec';
 
-            fetch(API_URL + '?action=submitFeedback', {
+            fetch(API_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

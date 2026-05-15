@@ -296,11 +296,12 @@
             urlEncodedData.append('wtp', document.querySelector('input[name="wtp"]:checked')?.value || '');
             urlEncodedData.append('feedback', document.getElementById('surv-feedback').value);
             urlEncodedData.append('timestamp', new Date().toISOString());
+            urlEncodedData.append('action', 'submitSurvey');
 
             // API URL
-            const API_URL = 'https://script.google.com/macros/s/AKfycbx5kGLMDsLX_quHYlzvoGqWlDtbvevl19rpA4DGXYRxVY6OgsRZHWLyusHnbT1c3nLj/exec';
+            const API_URL = 'https://script.google.com/macros/s/AKfycbwg75RRicIHpsiqgRIj1vCBr_Hf1Q6_Qmw7IRPW8BBjNNlSfytbWEzLC5uQa2vIZ1js/exec';
 
-            fetch(API_URL + '?action=submitSurvey', {
+            fetch(API_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
