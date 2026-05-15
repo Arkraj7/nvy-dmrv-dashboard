@@ -250,11 +250,23 @@
         }
         .footer-link {
             color: #000000;
-            transition: color 0.2s;
-        }
+            transition: all 0.2s ease;
+            position: relative;
         }
         .footer-link:hover {
             color: #1b3a2d;
+            transform: translateX(3px);
+        }
+        .footer-link:hover::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #1b3a2d;
+            border-radius: 50%;
         }
         .social-icon {
             width: 36px;
@@ -983,10 +995,10 @@
                         </p>
                     </div>
                     <div class="flex gap-4 text-xs text-black">
-                        <a href="#" class="hover:text-[#1b3a2d]">Privacy Policy</a>
-                        <a href="#" class="hover:text-[#1b3a2d]">Terms of Use</a>
-                        <a href="#" class="hover:text-[#1b3a2d]">Cookie Policy</a>
-                        <a href="#" class="hover:text-[#1b3a2d]">Accessibility</a>
+                        <a href="privacy.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Privacy Policy</a>
+                        <a href="terms.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Terms of Use</a>
+                        <a href="cookies.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Cookie Policy</a>
+                        <a href="accessibility.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Accessibility</a>
                     </div>
                 </div>
             </div>
@@ -1094,6 +1106,7 @@
                             <option value="West Bengal">West Bengal</option>
                             <option value="Other">Other State</option>
                         </select>
+                        <span id="pub-state-help" class="sr-only">Select the state or union territory where the Nagar Van is located</span>
                     </div>
                     <div>
                         <label for="pub-van" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Select Nagar Van</label>
@@ -1553,7 +1566,7 @@
         // AI Logic
         let aiModel = null;
         let uploadedImageData = { base64: "", mimeType: "", fileName: "" };
-        mobilenet.load().then(model => { aiModel = model; });
+        mobilenet.load().then(model => { aiModel = model; }).catch(err => { console.log('AI model loading skipped:', err.message); });
 
         function handleAIUpload(input) {
             let statusBox = document.getElementById('ai-status-box');

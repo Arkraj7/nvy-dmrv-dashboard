@@ -49,10 +49,23 @@
         }
         .footer-link {
             color: #000000;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
+            position: relative;
         }
         .footer-link:hover {
             color: #1b3a2d;
+            transform: translateX(3px);
+        }
+        .footer-link:hover::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #1b3a2d;
+            border-radius: 50%;
         }
         .social-icon {
             width: 36px;
@@ -274,9 +287,10 @@
                 <div>
                     <h4 class="text-md font-bold mb-2 text-black">Resources</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                        <li><a href="#" class="footer-link">Terms of Use</a></li>
-                        <li><a href="#" class="footer-link">Accessibility Statement</a></li>
+                        <li><a href="privacy.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Terms of Use</a></li>
+                        <li><a href="cookies.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Cookie Policy</a></li>
+                        <li><a href="accessibility.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Accessibility</a></li>
                     </ul>
                 </div>
                 <div>

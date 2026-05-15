@@ -92,10 +92,23 @@
         }
         .footer-link {
             color: #000000;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
+            position: relative;
         }
         .footer-link:hover {
             color: #1b3a2d;
+            transform: translateX(3px);
+        }
+        .footer-link:hover::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #1b3a2d;
+            border-radius: 50%;
         }
         .social-icon {
             width: 36px;
@@ -311,9 +324,17 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-300 pt-4 text-center">
-                <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
-                <p class="text-xs text-black mt-1">Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span></p>
+            <div class="border-t border-gray-300 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+                    <p class="text-xs text-black mt-1">Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span></p>
+                </div>
+                <div class="flex gap-4 text-xs text-black">
+                    <a href="privacy.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Terms of Use</a>
+                    <a href="cookies.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Cookie Policy</a>
+                    <a href="accessibility.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Accessibility</a>
+                </div>
             </div>
         </div>
     </footer>
