@@ -1,6 +1,7 @@
 /**
- * Nagar Van Assistant — local knowledge retrieval + optional Gemini via Apps Script.
- * Set GEMINI_API_KEY in Apps Script Project Properties to enable cloud AI replies.
+ * Nagar Van Assistant — local knowledge retrieval + OpenCode Zen via Apps Script.
+ * Set OPENCODE_API_KEY in Apps Script Project Properties (https://opencode.ai/auth).
+ * Optional: OPENCODE_MODEL (default minimax-m2.5-free). Docs: https://opencode.ai/docs/zen/
  */
 const NagarVanChat = (function () {
     const STOP_WORDS = new Set([

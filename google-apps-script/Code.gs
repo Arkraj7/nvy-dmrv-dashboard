@@ -138,7 +138,7 @@ function doPost(e) {
         data.timestamp || new Date().toISOString()
       ];
     } else if (action === 'chat') {
-      return jsonResponse(handleChatWithGemini(data.message || ''));
+      return jsonResponse(handleChatWithOpenCode(data.message || ''));
     } else {
       return jsonResponse({
         success: false,
@@ -167,62 +167,76 @@ function submitFeedback(data) {
 }
 
 /**
- * Optional: set Script Property GEMINI_API_KEY (Project Settings → Script properties).
- * Get a free key at https://aistudio.google.com/apikey
+ * OpenCode Zen — https://opencode.ai/docs/zen/
+ * Script properties (Project Settings → Script properties):
+ *   OPENCODE_API_KEY  — from https://opencode.ai/auth
+ *   OPENCODE_MODEL    — optional, default minimax-m2.5-free (free tier)
+ * Uses OpenAI-compatible POST https://opencode.ai/zen/v1/chat/completions
  */
-function handleChatWithGemini(message) {
+function handleChatWithOpenCode(message) {
   const trimmed = (message || '').trim();
   if (!trimmed) {
     return { success: false, useLocal: true, message: 'Empty message' };
   }
 
-  const apiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  const props = PropertiesService.getScriptProperties();
+  const apiKey = props.getProperty('OPENCODE_API_KEY');
   if (!apiKey) {
-    return { success: false, useLocal: true, message: 'GEMINI_API_KEY not configured' };
+    return { success: false, useLocal: true, message: 'OPENCODE_API_KEY not configured' };
   }
+
+  const model = props.getProperty('OPENCODE_MODEL') || 'minimax-m2.5-free';
 
   const systemPrompt =
     'You are the Nagar Van Assistant for the Nagar Van DMRV Dashboard (India urban forests). ' +
-    'Answer clearly in 2–5 short paragraphs. Topics: Nagar Van Yojana, MoEF&CC, CAMPA, DMRV, ' +
-    'afforestation, Miyawaki, public survey (public-survey.html), issue reporting (report.html), ' +
-    'carbon sequestration, biodiversity, air quality. If unsure, suggest arkraj.biswas6@gmail.com. ' +
-    'Do not invent statistics. User question: ';
+    'Answer clearly in 2–4 short paragraphs using plain language. Topics: Nagar Van Yojana, MoEF&CC, CAMPA, DMRV, ' +
+    'afforestation, Miyawaki method, public survey (public-survey.html), issue reporting (report.html), ' +
+    'carbon sequestration, biodiversity, air quality, urban heat island. ' +
+    'If unsure, suggest contacting arkraj.biswas6@gmail.com. Do not invent statistics or site-specific numbers.';
 
   const payload = {
-    contents: [{ parts: [{ text: systemPrompt + trimmed }] }],
-    generationConfig: { temperature: 0.6, maxOutputTokens: 512 }
+    model: model,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: trimmed }
+    ],
+    max_tokens: 512,
+    temperature: 0.6
   };
 
   try {
-    const response = UrlFetchApp.fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey,
-      {
-        method: 'post',
-        contentType: 'application/json',
-        payload: JSON.stringify(payload),
-        muteHttpExceptions: true
-      }
-    );
+    const response = UrlFetchApp.fetch('https://opencode.ai/zen/v1/chat/completions', {
+      method: 'post',
+      contentType: 'application/json',
+      headers: { Authorization: 'Bearer ' + apiKey },
+      payload: JSON.stringify(payload),
+      muteHttpExceptions: true
+    });
 
     const code = response.getResponseCode();
-    const body = JSON.parse(response.getContentText());
+    const raw = response.getContentText();
+    let body;
+    try {
+      body = JSON.parse(raw);
+    } catch (parseErr) {
+      return { success: false, useLocal: true, message: 'Invalid OpenCode response' };
+    }
 
     if (code !== 200) {
-      return { success: false, useLocal: true, message: 'Gemini API error: ' + code };
+      const errMsg = (body.error && body.error.message) ? body.error.message : raw;
+      return { success: false, useLocal: true, message: 'OpenCode API error (' + code + '): ' + errMsg };
     }
 
-    const reply = body.candidates &&
-      body.candidates[0] &&
-      body.candidates[0].content &&
-      body.candidates[0].content.parts &&
-      body.candidates[0].content.parts[0] &&
-      body.candidates[0].content.parts[0].text;
+    const reply = body.choices &&
+      body.choices[0] &&
+      body.choices[0].message &&
+      body.choices[0].message.content;
 
     if (!reply) {
-      return { success: false, useLocal: true, message: 'No reply from Gemini' };
+      return { success: false, useLocal: true, message: 'No reply from OpenCode' };
     }
 
-    return { success: true, reply: String(reply).trim(), source: 'gemini' };
+    return { success: true, reply: String(reply).trim(), source: 'opencode', model: model };
   } catch (error) {
     return { success: false, useLocal: true, message: error.toString() };
   }
