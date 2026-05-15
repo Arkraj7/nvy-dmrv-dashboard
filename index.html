@@ -628,7 +628,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            z-index: 10050;
             padding: 20px;
         }
         .popup-modal.hidden { display: none; }
@@ -1128,6 +1128,7 @@
                     <input type="checkbox" id="dontShowAgain">
                     <label for="dontShowAgain">Don't show this again</label>
                 </div>
+                <button type="button" id="popupGotIt" style="margin-top:14px;width:100%;background:#1b3a2d;color:#fff;font-weight:bold;padding:10px;border-radius:8px;border:none;cursor:pointer;">Got it</button>
             </div>
         </div>
 
@@ -1578,11 +1579,6 @@
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbypYRzGauVimfeo9fmTJJ7fuqnU_cKfGcPaPuPYdoiQeHKdjDg4Rf63rSMVyxsuj7dy/exec";
 
-        NagarVanChat.init({
-            apiUrl: PUBLIC_SUBMISSION_API_URL,
-            knowledgeUrl: 'assets/data/chatbot-knowledge.json'
-        });
-
         // Handle "Other" state selection
         function handleStateSelectorChange() {
             let selector = document.getElementById('state-selector');
@@ -1597,27 +1593,55 @@
         }
 
         // Handle custom state input
-        document.addEventListener('DOMContentLoaded', function() {
-            let otherInput = document.getElementById('state-other-input');
-            if (otherInput) {
-                otherInput.addEventListener('input', function() {
-                    // Can add custom handling for custom states here
-                });
+        function dismissAcknowledgmentPopup() {
+            const popup = document.getElementById('acknowledgmentPopup');
+            const dontShowAgain = document.getElementById('dontShowAgain');
+            if (!popup) return;
+            popup.classList.add('hidden');
+            if (dontShowAgain && dontShowAgain.checked) {
+                localStorage.setItem('dmrv-popup-dismissed', 'true');
             }
-        });
+        }
 
-        // Survey Slide Panel - Show after 10 seconds
+        function initAcknowledgmentPopup() {
+            const popup = document.getElementById('acknowledgmentPopup');
+            const closeBtn = document.getElementById('popupClose');
+            const gotItBtn = document.getElementById('popupGotIt');
+            if (!popup) return;
+
+            if (localStorage.getItem('dmrv-popup-dismissed') !== 'true') {
+                popup.classList.remove('hidden');
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', dismissAcknowledgmentPopup);
+            if (gotItBtn) gotItBtn.addEventListener('click', dismissAcknowledgmentPopup);
+
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) dismissAcknowledgmentPopup();
+            });
+        }
+
+        function initChatbot() {
+            if (typeof NagarVanChat === 'undefined') return;
+            NagarVanChat.init({
+                apiUrl: PUBLIC_SUBMISSION_API_URL,
+                knowledgeUrl: 'assets/data/chatbot-knowledge.json'
+            }).catch(function(err) {
+                console.warn('Chatbot init:', err);
+            });
+        }
+
+        // Survey slide — appears after 4 seconds (once per session)
         function initSurveySlide() {
-            // Check if user has already seen the slide (don't show again in same session)
             if (sessionStorage.getItem('surveySlideShown')) return;
 
             setTimeout(function() {
-                let panel = document.getElementById('surveySlidePanel');
+                const panel = document.getElementById('surveySlidePanel');
                 if (panel) {
                     panel.classList.add('show');
                     sessionStorage.setItem('surveySlideShown', 'true');
                 }
-            }, 10000); // 10 seconds
+            }, 4000);
         }
 
         function closeSurveySlide() {
@@ -1657,19 +1681,16 @@
         }
 
         function handleAIChatKeyPress(e) {
-            NagarVanChat.handleKeyPress(e);
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.handleKeyPress(e);
         }
 
         function sendQuickQuestion(question) {
-            NagarVanChat.sendQuickQuestion(question);
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendQuickQuestion(question);
         }
 
         function sendAIChatMessage() {
-            NagarVanChat.sendUserMessage();
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendUserMessage();
         }
-
-        // Initialize survey slide
-        initSurveySlide();
 
         // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
@@ -2667,43 +2688,25 @@
             originalSubmitPublicData();
         };
 
+        document.addEventListener('DOMContentLoaded', function() {
+            initAcknowledgmentPopup();
+            initSurveySlide();
+            initChatbot();
+
+            const otherInput = document.getElementById('state-other-input');
+            if (otherInput) {
+                otherInput.addEventListener('input', function() {
+                    // Custom state handling
+                });
+            }
+        });
+
         window.onload = () => {
             fetchLiveSampleCount();
-            // Restore saved preferences
             const savedLang = localStorage.getItem('dmrv-language');
             const savedSize = localStorage.getItem('dmrv-text-size');
-            if (savedLang) setLanguage(savedLang);
-            if (savedSize) setTextSize(savedSize);
-
-            // Show acknowledgment popup if not dismissed
-            const popup = document.getElementById('acknowledgmentPopup');
-            const closeBtn = document.getElementById('popupClose');
-            const dontShowAgain = document.getElementById('dontShowAgain');
-
-            if (popup && localStorage.getItem('dmrv-popup-dismissed') !== 'true') {
-                popup.classList.remove('hidden');
-            }
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
-                    popup.classList.add('hidden');
-                    if (dontShowAgain && dontShowAgain.checked) {
-                        localStorage.setItem('dmrv-popup-dismissed', 'true');
-                    }
-                });
-            }
-
-            // Close on backdrop click
-            if (popup) {
-                popup.addEventListener('click', function(e) {
-                    if (e.target === popup) {
-                        popup.classList.add('hidden');
-                        if (dontShowAgain && dontShowAgain.checked) {
-                            localStorage.setItem('dmrv-popup-dismissed', 'true');
-                        }
-                    }
-                });
-            }
+            if (savedLang && typeof setLanguage === 'function') setLanguage(savedLang);
+            if (savedSize && typeof setTextSize === 'function') setTextSize(savedSize);
         };
     </script>
 </body>
