@@ -137,6 +137,205 @@
             box-shadow: 0 4px 12px rgba(93, 196, 138, 0.4);
         }
 
+        /* AI Chatbot Widget */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .ai-chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1b3a2d, #5dc48a);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(27, 58, 45, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ai-chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(27, 58, 45, 0.5);
+        }
+        .ai-chat-toggle i {
+            color: white;
+            font-size: 24px;
+        }
+        .ai-chat-toggle.minimized i {
+            transform: rotate(180deg);
+        }
+        .ai-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .ai-chat-window.hidden {
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .ai-chat-header {
+            background: linear-gradient(135deg, #1b3a2d, #2d5a45);
+            padding: 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ai-chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(93, 196, 138, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ai-chat-header .avatar i {
+            color: #5dc48a;
+            font-size: 18px;
+        }
+        .ai-chat-header .info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .ai-chat-header .info p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 2px 0 0 0;
+        }
+        .ai-chat-header .close-btn {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .ai-chat-header .close-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .ai-chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: #f8faf9;
+        }
+        .ai-message, .user-message {
+            margin-bottom: 12px;
+            max-width: 85%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .ai-message {
+            background: #e8f5e9;
+            color: #1b3a2d;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+        .user-message {
+            background: #1b3a2d;
+            color: white;
+            border-bottom-right-radius: 4px;
+            margin-left: auto;
+        }
+        .ai-message .typing {
+            display: inline-block;
+        }
+        .ai-message .typing::after {
+            content: '.';
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        .ai-chat-input {
+            padding: 16px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+            background: white;
+        }
+        .ai-chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 24px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .ai-chat-input input:focus {
+            border-color: #5dc48a;
+        }
+        .ai-chat-input button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #1b3a2d;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .ai-chat-input button:hover {
+            background: #2d5a45;
+        }
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 16px 12px;
+        }
+        .quick-questions button {
+            background: #e8f5e9;
+            border: 1px solid #5dc48a;
+            color: #1b3a2d;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quick-questions button:hover {
+            background: #5dc48a;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .ai-chat-window {
+                width: calc(100vw - 40px);
+                height: 400px;
+                right: -10px;
+            }
+        }
+
         .radiate {
             animation: radiate 2s ease-in-out infinite;
         }
@@ -1004,6 +1203,48 @@
         </div>
     </div>
 
+    <!-- AI Chatbot Widget -->
+    <div class="ai-chat-widget">
+        <div id="aiChatWindow" class="ai-chat-window hidden">
+            <div class="ai-chat-header">
+                <div class="avatar">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="info">
+                    <h3>Nagar Van Assistant</h3>
+                    <p>Ask me about afforestation, Nagar Van, and more</p>
+                </div>
+                <button class="close-btn" onclick="toggleAIChat()" aria-label="Close chat">&times;</button>
+            </div>
+            <div class="quick-questions">
+                <button onclick="sendQuickQuestion('What is Nagar Van?')">What is Nagar Van?</button>
+                <button onclick="sendQuickQuestion('What is CAMPA?')">What is CAMPA?</button>
+                <button onclick="sendQuickQuestion('How to report an issue?')">How to report?</button>
+                <button onclick="sendQuickQuestion('What is the survey for?')">Survey info</button>
+            </div>
+            <div id="aiChatMessages" class="ai-chat-messages">
+                <div class="ai-message">
+                    Hello! I'm the Nagar Van Assistant. I can help you with questions about:
+                    <br>• Nagar Van DMRV Dashboard
+                    <br>• Afforestation & urban forests
+                    <br>• MoEF&CC and CAMPA
+                    <br>• Reporting issues
+                    <br>• Taking the public survey
+                    <br><br>How can I help you today?
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="aiChatInput" placeholder="Type your question..." onkeypress="handleAIChatKeyPress(event)">
+                <button onclick="sendAIChatMessage()" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button id="aiChatToggle" class="ai-chat-toggle" onclick="toggleAIChat()" aria-label="Open chat assistant">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
     <!-- Professional Footer -->
         <footer class="site-footer py-12 px-4" role="contentinfo">
             <div class="max-w-7xl mx-auto">
@@ -1378,6 +1619,148 @@
             if (panel) {
                 panel.classList.remove('show');
             }
+        }
+
+        // AI Chat Widget Functions
+        let chatMinimized = false;
+
+        function toggleAIChat() {
+            let chatWindow = document.getElementById('aiChatWindow');
+            let toggleBtn = document.getElementById('aiChatToggle');
+
+            if (chatWindow.classList.contains('hidden')) {
+                // Open chat
+                chatWindow.classList.remove('hidden');
+                toggleBtn.classList.add('minimized');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                chatMinimized = false;
+            } else {
+                // Toggle minimize
+                if (chatMinimized) {
+                    chatWindow.classList.remove('hidden');
+                    toggleBtn.classList.add('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                    chatMinimized = false;
+                } else {
+                    chatWindow.classList.add('hidden');
+                    toggleBtn.classList.remove('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-comments"></i>';
+                    chatMinimized = true;
+                }
+            }
+        }
+
+        function handleAIChatKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendAIChatMessage();
+            }
+        }
+
+        function sendQuickQuestion(question) {
+            document.getElementById('aiChatInput').value = question;
+            sendAIChatMessage();
+        }
+
+        function sendAIChatMessage() {
+            let input = document.getElementById('aiChatInput');
+            let message = input.value.trim();
+            if (!message) return;
+
+            let messagesContainer = document.getElementById('aiChatMessages');
+
+            // Add user message
+            let userDiv = document.createElement('div');
+            userDiv.className = 'user-message';
+            userDiv.textContent = message;
+            messagesContainer.appendChild(userDiv);
+
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Show typing indicator
+            let typingDiv = document.createElement('div');
+            typingDiv.className = 'ai-message';
+            typingDiv.innerHTML = '<span class="typing">Thinking</span>';
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Generate response
+            setTimeout(() => {
+                typingDiv.innerHTML = generateAIResponse(message);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function generateAIResponse(question) {
+            let q = question.toLowerCase();
+
+            // Nagar Van related
+            if (q.includes('what is nagar van') || q.includes('nagar van meaning') || q.includes('nagar van definition')) {
+                return "Nagar Van (meaning 'City Forest') is a government initiative under the MoEF&CC to develop urban forests in Indian cities. It aims to increase green cover, improve air quality, and provide ecological benefits to urban populations. The scheme focuses on creating forests on degraded land within and around cities using Miyawaki and other plantation techniques.";
+            }
+
+            if (q.includes('dmr') || q.includes('digital monitoring')) {
+                return "DMRV stands for <b>Digital Monitoring, Reporting & Verification</b>. It's a system that uses satellite data, AI, and geospatial technology to track and evaluate the ecological and socio-economic impacts of urban forests. The Nagar Van DMRV Dashboard provides real-time metrics on carbon sequestration, air quality, and community well-being.";
+            }
+
+            if (q.includes('where') && q.includes('nagar van')) {
+                return "Nagar Van sites have been established across multiple states in India including Andhra Pradesh, Gujarat, Jharkhand, Karnataka, Madhya Pradesh, Maharashtra, Delhi, Uttar Pradesh, and West Bengal. Use the dashboard to explore specific locations and their ecological metrics.";
+            }
+
+            // MoEF&CC related
+            if (q.includes('moef') || q.includes('ministry of environment') || q.includes('moefcc')) {
+                return "The <b>Ministry of Environment, Forest and Climate Change (MoEF&CC)</b> is the nodal ministry for Nagar Van Yojana. It formulates policies, provides guidelines, and monitors the implementation of urban forest projects across India. The ministry aims to create 400 Nagar Vans across the country under this scheme.";
+            }
+
+            // CAMPA related
+            if (q.includes('campa') || q.includes('compensatory afforestation')) {
+                return "<b>CAMPA (Compensatory Afforestation Fund Management and Planning Authority)</b> is a statutory body under the MoEF&CC. It manages funds collected from user agencies for compensating forest land diverted for non-forest purposes. CAMPA funds are used for afforestation, nursery development, and sustainable forest management, including Nagar Van projects.";
+            }
+
+            if (q.includes('what is cama') || q.includes('campa meaning')) {
+                return "<b>CAMPA</b> stands for <b>Compensatory Afforestation Fund Management and Planning Authority</b>. It was established to manage funds meant for compensatory afforestation and tree planting. The authority ensures that funds are utilized effectively for increasing green cover and maintaining ecological balance when forest land is diverted for development projects.";
+            }
+
+            // Afforestation related
+            if (q.includes('afforestation') || q.includes('reforestation')) {
+                return "<b>Afforestation</b> is the process of establishing and growing forests on areas that have previously not been forested. In the context of Nagar Van, it involves planting native tree species using techniques like Miyawaki (vertical forest) to create dense, multi-layered urban forests that provide ecological services like air purification, temperature reduction, and biodiversity conservation.";
+            }
+
+            if (q.includes('miyawaki') || q.includes('japanese method')) {
+                return "<b>Miyawaki Method</b> is a Japanese technique for creating dense, native forests quickly. Developed by botanist Akira Miyawaki, it involves planting native species close together, which creates a self-sustaining ecosystem similar to natural forests. This method is used in many Nagar Van sites to maximize green cover in limited urban spaces.";
+            }
+
+            // Survey related
+            if (q.includes('survey') || q.includes('public survey')) {
+                return "The <b>Public Survey</b> is your chance to contribute to Nagar Van research! Share your experience visiting urban forests, rate ecosystem quality, cleanliness, and safety, and upload photos. Your feedback helps researchers and policymakers improve urban green spaces. Fill out the survey at the Civic Engagement section or click 'Take Survey' in the footer.";
+            }
+
+            if (q.includes('how to report') || q.includes('report issue') || q.includes('report problem')) {
+                return "To report an issue about a Nagar Van site, go to the <b>Report Issue</b> page. Click 'Fetch GPS Location' to get your current position, select the issue category (e.g., Solid Waste, Broken Infrastructure), add a description, and submit. Your report helps maintenance teams address problems quickly.";
+            }
+
+            if (q.includes('carbon') || q.includes('sequestration')) {
+                return "Urban forests like Nagar Vans contribute to <b>carbon sequestration</b> by absorbing CO2 and storing carbon in trees and soil. The dashboard tracks estimated carbon sequestration rates based on tree density and species composition. This data helps evaluate the climate mitigation impact of urban greening initiatives.";
+            }
+
+            if (q.includes('biodiversity') || q.includes('wildlife') || q.includes('birds')) {
+                return "Nagar Van sites are designed to enhance <b>biodiversity</b> by creating habitats for birds, insects, and small mammals. Native tree species attract local wildlife and support ecosystem services. The dashboard monitors ecological indicators to ensure these urban forests provide suitable habitats for biodiversity.";
+            }
+
+            if (q.includes('air quality') || q.includes('aqi') || q.includes('pm2.5')) {
+                return "Nagar Van forests help improve <b>air quality</b> by filtering pollutants and releasing oxygen. The dashboard shows real-time PM2.5 data from satellite sources, helping you understand how urban green spaces impact local air quality. Lower PM2.5 levels near forests indicate better air quality.";
+            }
+
+            if (q.includes('contact') || q.includes('email') || q.includes('reach')) {
+                return "For any questions or to collaborate with the Nagar Van DMRV research team, contact the Lead Researcher, <b>Arkraj Biswas</b>, at <b>arkraj.biswas6@gmail.com</b>. You can also use the feedback form in the footer to share suggestions or report issues.";
+            }
+
+            if (q.includes('developer') || q.includes('who made') || q.includes('built')) {
+                return "This dashboard was designed and developed by <b>Arkraj Biswas</b> as part of the Nagar Van DMRV research initiative. It uses advanced technologies including satellite imagery, AI, and geospatial analysis to monitor and verify urban forest impacts across India.";
+            }
+
+            // Default response
+            return "Thank you for your question! I can help with information about:\n• Nagar Van and DMRV Dashboard\n• Afforestation and Miyawaki method\n• MoEF&CC and CAMPA\n• Reporting issues\n• Taking the public survey\n\nTry asking about any of these topics, or contact us at arkraj.biswas6@gmail.com for specific queries.";
         }
 
         // Initialize survey slide
