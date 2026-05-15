@@ -5,6 +5,20 @@
 
 const SHEET_ID = '1mjsb8S14mn5c75ahdwKblT2nVFIEnyK8QQynYk1v-38';
 
+// OpenCode Zen — set OPENCODE_API_KEY in Script Properties (recommended).
+// Model: https://opencode.ai/docs/zen/
+const OPENCODE_CONFIG = {
+  MODEL: 'minimax-m2.7'
+};
+
+function getOpenCodeCredentials() {
+  const props = PropertiesService.getScriptProperties();
+  return {
+    apiKey: props.getProperty('OPENCODE_API_KEY') || '',
+    model: props.getProperty('OPENCODE_MODEL') || OPENCODE_CONFIG.MODEL
+  };
+}
+
 function doGet() {
   return ContentService.createTextOutput('Nagar Van DMRV API is running')
     .setMimeType(ContentService.MimeType.TEXT);
@@ -179,13 +193,12 @@ function handleChatWithOpenCode(message) {
     return { success: false, useLocal: true, message: 'Empty message' };
   }
 
-  const props = PropertiesService.getScriptProperties();
-  const apiKey = props.getProperty('OPENCODE_API_KEY');
-  if (!apiKey) {
+  const creds = getOpenCodeCredentials();
+  if (!creds.apiKey) {
     return { success: false, useLocal: true, message: 'OPENCODE_API_KEY not configured' };
   }
-
-  const model = props.getProperty('OPENCODE_MODEL') || 'minimax-m2.5-free';
+  const apiKey = creds.apiKey;
+  const model = creds.model;
 
   const systemPrompt =
     'You are the Nagar Van Assistant for the Nagar Van DMRV Dashboard (India urban forests). ' +
