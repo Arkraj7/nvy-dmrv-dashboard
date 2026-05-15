@@ -313,12 +313,7 @@
     </footer>
 
     <script>
-        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbx5HTXI_xl1i2vMzIxn5U2orlcp3Jt2maAo_fEAgYR9K4UZtVbPTx6Z0tboi7xuM1AU/exec"; 
-
-        const mockIssues = [
-            { lat: 23.6102, lon: 85.2799, id: "NVY-26-A1", cat: "Solid Waste", status: "Unsolved", sev: "High" },
-            { lat: 22.2587, lon: 71.1924, id: "NVY-26-B2", cat: "Broken Fence", status: "In Process", sev: "Medium" }
-        ];
+        const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbx5HTXI_xl1i2vMzIxn5U2orlcp3Jt2maAo_fEAgYR9K4UZtVbPTx6Z0tboi7xuM1AU/exec";
 
         var map = L.map('map').setView([22.0, 79.0], 5);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -327,21 +322,55 @@
 
         var markers = L.layerGroup().addTo(map);
 
-        function drawIssues() {
+        // Fetch issues from Google Sheet
+        function fetchIssues() {
+            fetch(REPORT_API_URL + "?action=getIssues")
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        let data = JSON.parse(text);
+                        if (Array.isArray(data) && data.length > 0) {
+                            drawIssues(data);
+                        }
+                    } catch(e) {
+                        console.log('No issues found or error parsing:', e);
+                    }
+                })
+                .catch(err => {
+                    console.log('Error fetching issues:', err);
+                });
+        }
+
+        function drawIssues(issues) {
             markers.clearLayers();
-            mockIssues.forEach(iss => {
-                let color = iss.status === 'Solved' ? 'green' : (iss.status === 'In Process' ? '#facc15' : 'red');
+            if (!issues || issues.length === 0) return;
+
+            issues.forEach(iss => {
+                // Skip entries without valid coordinates
+                if (!iss.lat || !iss.lon) return;
+
+                let status = iss.status || iss[5] || 'Unsolved';
+                let color = status === 'Solved' ? 'green' : (status === 'In Process' || status === 'In Progress' ? '#facc15' : 'red');
+
+                let id = iss.id || iss[0] || 'N/A';
+                let cat = iss.category || iss[3] || 'Issue';
+                let sev = iss.severity || iss[4] || '';
+
                 let popupContent = `
-                    <div class="font-sans border-l-4 border-${color}-500 pl-2">
-                        <b class="text-gray-800 text-sm">ID: ${iss.id}</b><br>
-                        <span class="text-xs font-bold text-gray-600">Issue: ${iss.cat}</span><br>
-                        <span class="text-[10px] text-white bg-gray-800 px-1 rounded">Status: ${iss.status}</span>
+                    <div class="font-sans border-l-4 border-${color}-500 pl-2 min-w-40">
+                        <b class="text-gray-800 text-sm">ID: ${id}</b><br>
+                        <span class="text-xs font-bold text-gray-600">${cat}</span><br>
+                        ${sev ? `<span class="text-[10px] bg-gray-100 px-1 rounded">Severity: ${sev}</span><br>` : ''}
+                        <span class="text-[10px] text-white bg-gray-800 px-1 rounded">Status: ${status}</span>
                     </div>`;
 
-                L.circleMarker([iss.lat, iss.lon], {color: color, fillColor: color, fillOpacity: 0.9, radius: 8})
+                L.circleMarker([parseFloat(iss.lat), parseFloat(iss.lon)], {color: color, fillColor: color, fillOpacity: 0.9, radius: 8})
                     .addTo(markers).bindPopup(popupContent);
             });
         }
+
+        // Load issues on page load
+        fetchIssues();
 
         function toggleOtherCategory() {
             let categorySelect = document.getElementById('report-category');
@@ -435,8 +464,7 @@
 
                 setTimeout(function() {
                     alert(`Thank you! \nReport ID: ${reportID}`);
-                    mockIssues.push({ lat: parseFloat(lat), lon: parseFloat(lon), id: reportID, cat: cat, status: "Unsolved", sev: sev });
-                    drawIssues();
+                    fetchIssues(); // Reload issues from sheet
 
                     document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
                     document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
@@ -456,8 +484,6 @@
                 alert("Submission error. Please check your connection.");
             });
         }
-
-        window.onload = drawIssues;
 
         // Share functionality
         function sharePage() {
