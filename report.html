@@ -180,6 +180,43 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
+                            <label for="report-name" class="block text-sm font-bold text-gray-700 mb-1">Your Name <span class="text-xs text-gray-400">(Optional)</span></label>
+                            <input type="text" id="report-name" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label for="report-email" class="block text-sm font-bold text-gray-700 mb-1">Email <span class="text-xs text-gray-400">(Optional)</span></label>
+                            <input type="email" id="report-email" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="report-phone" class="block text-sm font-bold text-gray-700 mb-1">Phone <span class="text-xs text-gray-400">(Optional)</span></label>
+                            <input type="tel" id="report-phone" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" placeholder="Phone number">
+                        </div>
+                        <div>
+                            <label for="report-state" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">State / UT</label>
+                            <select id="report-state" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none">
+                                <option value="">-- Select State --</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="report-park" class="block text-sm font-bold text-gray-700 mb-1">Park Name <span class="text-xs text-gray-400">(Optional)</span></label>
+                            <input type="text" id="report-park" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" placeholder="Nagar Van name">
+                        </div>
+                        <div>
                             <label for="report-category" class="block text-sm font-bold text-gray-700 mb-1 required-indicator">Issue Category</label>
                             <select id="report-category" onchange="toggleOtherCategory()" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-red-400 outline-none" aria-required="true" aria-describedby="category-help">
                                 <option value="">-- Select Problem Type --</option>
@@ -428,7 +465,9 @@
             let desc = document.getElementById('report-desc').value;
             let wordCount = desc.trim() === "" ? 0 : desc.trim().split(/\s+/).length;
 
+            let state = document.getElementById('report-state').value;
             if(!lat) { alert("Please fetch GPS location first."); return; }
+            if(!state) { alert("Please select your State/UT."); return; }
             if(!cat) { alert("Please select or specify an issue category."); return; }
             if(!sev) { alert("Please select or specify severity level."); return; }
             if(wordCount < 20) { alert("Description must be at least 20 words."); return; }
@@ -448,6 +487,11 @@
             let formData = new URLSearchParams();
             formData.append("action", "submitGrievance");
             formData.append("reportID", reportID);
+            formData.append("name", document.getElementById('report-name').value);
+            formData.append("email", document.getElementById('report-email').value);
+            formData.append("phone", document.getElementById('report-phone').value);
+            formData.append("state", document.getElementById('report-state').value);
+            formData.append("parkName", document.getElementById('report-park').value);
             formData.append("category", cat);
             formData.append("severity", sev);
             formData.append("description", desc);
@@ -467,6 +511,9 @@
                     fetchIssues(); // Reload issues from sheet
 
                     document.getElementById('report-lat').value = ""; document.getElementById('report-lon').value = "";
+                    document.getElementById('report-name').value = ""; document.getElementById('report-email').value = "";
+                    document.getElementById('report-phone').value = ""; document.getElementById('report-state').value = "";
+                    document.getElementById('report-park').value = "";
                     document.getElementById('report-category').value = ""; document.getElementById('report-desc').value = "";
                     document.getElementById('gps-status').innerText = "Location not acquired."; document.getElementById('gps-status').style.color = "gray";
                     document.getElementById('report-file-status').innerText = "";

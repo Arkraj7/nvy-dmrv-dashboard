@@ -106,12 +106,16 @@
 
                     <div class="mt-4">
                         <label class="block text-sm font-bold text-gray-700 mb-2">Location (Optional) / स्थान (वैकल्पिक)</label>
-                        <div class="flex gap-2 flex-wrap">
+                        <div class="flex gap-2 flex-wrap items-center">
                             <button type="button" onclick="getLocation()" class="bg-[#1b3a2d] hover:bg-[#2d5a45] text-white px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 Get Location
                             </button>
                             <span id="location-status" class="text-xs text-gray-500 self-center"></span>
+                        </div>
+                        <div id="location-coords" class="hidden mt-2 bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm font-mono">
+                            <span class="font-bold text-gray-700">Lat:</span> <span id="surv-lat-display"></span>
+                            <span class="font-bold text-gray-700 ml-4">Lon:</span> <span id="surv-lon-display"></span>
                         </div>
                         <input type="hidden" id="surv-lat">
                         <input type="hidden" id="surv-lon">
@@ -209,9 +213,19 @@
                     </p>
                 </div>
 
-                <button type="button" onclick="submitSurvey(event)" class="w-full bg-[#1b3a2d] hover:bg-[#2d5a45] text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
-                    Submit Survey / जमा करें
-                </button>
+                <div class="flex gap-3">
+                    <button type="button" onclick="submitSurvey(event)" class="flex-1 bg-[#1b3a2d] hover:bg-[#2d5a45] text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
+                        Submit Survey / जमा करें
+                    </button>
+                    <button type="button" onclick="clearForm()" class="px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-xl font-bold shadow-sm transition-all border border-gray-300">
+                        Clear / साफ़ करें
+                    </button>
+                </div>
+                <div id="post-submit-actions" class="hidden mt-4 text-center">
+                    <a href="index.html" class="inline-block bg-[#5dc48a] hover:bg-[#4ab878] text-[#1b3a2d] px-8 py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
+                        ← Home / होम पेज
+                    </a>
+                </div>
 
             </form>
         </div>
@@ -238,16 +252,22 @@
                 return;
             }
             status.textContent = 'Getting location...';
+            status.className = 'text-xs text-blue-600 self-center font-bold';
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    document.getElementById('surv-lat').value = position.coords.latitude;
-                    document.getElementById('surv-lon').value = position.coords.longitude;
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lon = position.coords.longitude.toFixed(6);
+                    document.getElementById('surv-lat').value = lat;
+                    document.getElementById('surv-lon').value = lon;
+                    document.getElementById('surv-lat-display').textContent = lat;
+                    document.getElementById('surv-lon-display').textContent = lon;
+                    document.getElementById('location-coords').classList.remove('hidden');
                     status.textContent = 'Location captured! ✓';
-                    status.classList.add('text-green-600');
+                    status.className = 'text-xs text-green-600 self-center font-bold';
                 },
                 (error) => {
                     status.textContent = 'Error: ' + error.message;
-                    status.classList.add('text-red-600');
+                    status.className = 'text-xs text-red-600 self-center font-bold';
                 }
             );
         }
@@ -299,7 +319,7 @@
             urlEncodedData.append('action', 'submitSurvey');
 
             // API URL
-            const API_URL = 'https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec';
+            const API_URL = 'https://script.google.com/macros/s/AKfycbwMacT_h18pKgGjjIKkhgYyzC1ll3l7tY539E6m8tWWUONelUt-k89HAoTzmDSCFQeu/exec';
 
             fetch(API_URL, {
                 method: 'POST',
@@ -313,8 +333,9 @@
                 btn.classList.add('bg-[#5dc48a]');
 
                 setTimeout(function() {
-                    alert('Survey submitted successfully! Thank you for your time. / सर्वेक्षण सफलतापूर्वक जमा किया गया! आपके समय के लिए धन्यवाद।');
                     form.reset();
+                    document.getElementById('location-coords').classList.add('hidden');
+                    document.getElementById('post-submit-actions').classList.remove('hidden');
                     btn.innerHTML = originalText;
                     btn.classList.remove('bg-[#5dc48a]');
                     btn.classList.add('bg-[#1b3a2d]');
@@ -325,6 +346,13 @@
                 btn.disabled = false;
                 alert('Error submitting survey. Please try again.');
             });
+        }
+        function clearForm() {
+            document.getElementById('public-survey-form').reset();
+            document.getElementById('location-coords').classList.add('hidden');
+            document.getElementById('post-submit-actions').classList.add('hidden');
+            document.getElementById('location-status').textContent = '';
+            document.getElementById('location-status').className = 'text-xs text-gray-500 self-center';
         }
     </script>
 </body>
