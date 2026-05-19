@@ -8,7 +8,7 @@ const SHEET_ID = '1mjsb8S14mn5c75ahdwKblT2nVFIEnyK8QQynYk1v-38';
 // OpenCode Zen — set OPENCODE_API_KEY in Script Properties (recommended).
 // Model: https://opencode.ai/docs/zen/
 const OPENCODE_CONFIG = {
-  MODEL: 'minimax-m2.7'
+  MODEL: 'minimax-m2.5-free'
 };
 
 function getOpenCodeCredentials() {
@@ -19,9 +19,97 @@ function getOpenCodeCredentials() {
   };
 }
 
-function doGet() {
+function doGet(e) {
+  const action = (e && e.parameter && e.parameter.action) || '';
+  if (action === 'getCounts') {
+    return getSurveyCounts();
+  }
   return ContentService.createTextOutput('Nagar Van DMRV API is running')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+/**
+ * Returns live survey sample counts from PublicContribution sheet,
+ * organized by state/site key for the dashboard.
+ */
+function getSurveyCounts() {
+  try {
+    // Map state names from the sheet to dashboard site keys
+    const stateKeyMap = {
+      'Andhra Pradesh': 'andhra',
+      'Delhi': 'delhi',
+      'Gujarat': 'gujarat',
+      'Jharkhand': 'jharkhand',
+      'Karnataka': 'karnataka',
+      'Madhya Pradesh': 'mp',
+      'Maharashtra': 'maharashtra',
+      'Rajasthan': 'rajasthan',
+      'West Bengal': 'westbengal',
+      'Uttar Pradesh': 'up'
+    };
+
+    var sites = {
+      overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0,
+      maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0
+    };
+    var locations = [];
+    var total = 0;
+
+    // Read PublicContribution sheet: [Date, Name, RespondentType, State, VanName, ...]
+    var sheet = getSheet('PublicContribution');
+    var data = sheet.getDataRange().getValues();
+
+    // Skip header row (index 0), count data rows
+    for (var i = 1; i < data.length; i++) {
+      var row = data[i];
+      if (!row[0]) continue; // skip empty rows
+      var stateName = String(row[3] || '').trim();
+      var vanName = String(row[4] || '').trim();
+      var respondentType = String(row[2] || '').trim();
+
+      total++;
+
+      var siteKey = stateKeyMap[stateName] || 'other';
+      if (sites[siteKey] !== undefined) {
+        sites[siteKey]++;
+      }
+      sites.overview = total;
+    }
+
+    // Also count PublicSurvey sheet if it exists
+    try {
+      var surveySheet = getSheet('PublicSurvey');
+      var surveyData = surveySheet.getDataRange().getValues();
+      // Header is row 0, count from row 1
+      for (var j = 1; j < surveyData.length; j++) {
+        if (surveyData[j][0]) {
+          total++;
+          sites.overview = total;
+        }
+      }
+    } catch (e) {
+      // PublicSurvey sheet may not exist yet
+    }
+
+    return jsonResponse({
+      success: true,
+      total: total,
+      sites: sites,
+      locations: locations
+    });
+
+  } catch (error) {
+    // Return zeros on error so the dashboard doesn't break
+    return jsonResponse({
+      success: false,
+      total: 0,
+      sites: {
+        overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0,
+        maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0
+      },
+      locations: []
+    });
+  }
 }
 
 function getSheet(sheetName) {
@@ -202,10 +290,12 @@ function handleChatWithOpenCode(message) {
 
   const systemPrompt =
     'You are the Nagar Van Assistant for the Nagar Van DMRV Dashboard (India urban forests). ' +
-    'Answer clearly in 2–4 short paragraphs using plain language. Topics: Nagar Van Yojana, MoEF&CC, CAMPA, DMRV, ' +
-    'afforestation, Miyawaki method, public survey (public-survey.html), issue reporting (report.html), ' +
-    'carbon sequestration, biodiversity, air quality, urban heat island. ' +
-    'If unsure, suggest contacting arkraj.biswas6@gmail.com. Do not invent statistics or site-specific numbers.';
+    'You are a helpful, knowledgeable assistant. Answer questions clearly and concisely in 1-3 paragraphs using simple language. ' +
+    'You can help with many topics: Nagar Van Yojana, MoEF&CC, CAMPA, DMRV, afforestation, Miyawaki method, ' +
+    'carbon sequestration, biodiversity, air quality, urban heat island, water management, public survey, ' +
+    'issue reporting, site locations, tree species, environmental impact, community engagement. ' +
+    'If a question is not about these topics, politely redirect to relevant topics or suggest contacting arkraj.biswas6@gmail.com. ' +
+    'Do not invent statistics. Be friendly and helpful. Use plain text format without markdown symbols.';
 
   const payload = {
     model: model,
@@ -213,8 +303,8 @@ function handleChatWithOpenCode(message) {
       { role: 'system', content: systemPrompt },
       { role: 'user', content: trimmed }
     ],
-    max_tokens: 512,
-    temperature: 0.6
+    max_tokens: 1024,
+    temperature: 0.7
   };
 
   try {

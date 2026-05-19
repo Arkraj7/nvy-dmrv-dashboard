@@ -1576,8 +1576,8 @@
 
     <script src="assets/js/nagar-van-chatbot.js"></script>
     <script>
-        const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbwMacT_h18pKgGjjIKkhgYyzC1ll3l7tY539E6m8tWWUONelUt-k89HAoTzmDSCFQeu/exec";
-        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbwMacT_h18pKgGjjIKkhgYyzC1ll3l7tY539E6m8tWWUONelUt-k89HAoTzmDSCFQeu/exec";
+        const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
+        const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
 
         // Handle "Other" state selection
         function handleStateSelectorChange() {
@@ -1958,8 +1958,8 @@
         async function fetchLiveSampleCount() {
             try {
                 document.getElementById('metric-samples').innerText = "...";
-                let response = await fetch(ADMIN_DATA_API_URL);
-                let text = await response.text(); 
+                let response = await fetch(ADMIN_DATA_API_URL + '?action=getCounts');
+                let text = await response.text();
                 try {
                     let parsedData = JSON.parse(text);
                     if(parsedData.total !== undefined) {
@@ -1967,7 +1967,12 @@
                         updateDashboard();
                     }
                 } catch (e) { document.getElementById('metric-samples').innerText = "0"; }
-            } catch (e) { document.getElementById('metric-samples').innerText = "Offline"; }
+            } catch (e) {
+                // Show 0 instead of "Offline" on first load so the card looks live
+                if (document.getElementById('metric-samples').innerText === "...") {
+                    document.getElementById('metric-samples').innerText = "0";
+                }
+            }
         }
 
         async function fetchAirQuality(lat, lon) {
@@ -2618,7 +2623,7 @@
             formData.append('timestamp', new Date().toISOString());
             formData.append('action', 'submitFeedback');
 
-            const API_URL = 'https://script.google.com/macros/s/AKfycbwMacT_h18pKgGjjIKkhgYyzC1ll3l7tY539E6m8tWWUONelUt-k89HAoTzmDSCFQeu/exec';
+            const API_URL = ADMIN_DATA_API_URL;
 
             fetch(API_URL, {
                 method: 'POST',
@@ -2703,6 +2708,8 @@
 
         window.onload = () => {
             fetchLiveSampleCount();
+            // Poll every 30 seconds for live survey sample updates
+            setInterval(fetchLiveSampleCount, 30000);
             const savedLang = localStorage.getItem('dmrv-language');
             const savedSize = localStorage.getItem('dmrv-text-size');
             if (savedLang && typeof setLanguage === 'function') setLanguage(savedLang);
