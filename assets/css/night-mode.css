@@ -297,11 +297,68 @@ html.dark .icon-emerald { color: #34d399 !important; }
 html.dark .gradient-text {
   background: linear-gradient(90deg, #6ee7b7, #34d399) !important;
   -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
 }
 
 /* ── bg-[#f4f7f6] page backgrounds ── */
 html.dark [class*="bg-[#f4f7f6]"] {
   background-color: #0f172a !important;
+}
+
+/* ── Popup modal ── */
+html.dark .popup-content h2,
+html.dark .popup-content h3,
+html.dark .popup-content p {
+  color: #e2e8f0 !important;
+}
+html.dark .popup-got-it {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155 !important;
+}
+html.dark .popup-checkbox label {
+  color: #cbd5e1 !important;
+}
+
+/* ── Footer headings ── */
+html.dark footer h4,
+html.dark .site-footer h4 {
+  color: #e2e8f0 !important;
+}
+
+/* ── Star rating (day mode) ── */
+:root:not(.dark) .text-gray-300.star-rating,
+:root:not(.dark) [class*="star-rating-"] .text-gray-300,
+:root:not(.dark) div[id^="star-rating-"] {
+  color: #6b7280 !important;
+}
+/* Star rating dark mode */
+html.dark div[id^="star-rating-"] {
+  color: #fbbf24 !important;
+}
+
+/* ── bg-emerald-50 / border-emerald-200 → dark bg ── */
+html.dark [class*="bg-emerald-50"] {
+  background-color: #1e293b !important;
+}
+html.dark [class*="border-emerald-200"] {
+  border-color: #334155 !important;
+}
+
+/* ── Map legend ── */
+html.dark .map-legend {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155 !important;
+}
+
+/* ── Buttons with dark green bg ── */
+html.dark button[class*="bg-[#1b3a2d]"] {
+  background-color: #334155 !important;
+}
+html.dark .hover\:bg-gray-300:hover {
+  background-color: #475569 !important;
 }
 
 /* ── Text size buttons ── */
