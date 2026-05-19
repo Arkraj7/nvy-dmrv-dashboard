@@ -91,7 +91,7 @@ html.dark .theme-toggle__container:hover .theme-toggle__sun { transform: transla
 
 /* ── Dark Mode Overrides ── */
 html.dark body {
-  background-color: #0a1a2f !important;
+  background-color: #080a2f !important;
   color: #e2e8f0;
 }
 html.dark .glass-panel,
