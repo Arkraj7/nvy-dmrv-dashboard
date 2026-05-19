@@ -15,14 +15,78 @@
         .vibrate {
             animation: vibrate 0.5s linear infinite;
         }
+        .icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
+        .icon-sm { width: 16px; height: 16px; }
+        .icon-lg { width: 28px; height: 28px; }
+        .icon-xl { width: 36px; height: 36px; }
+        .icon-white { color: #fff; }
+        .icon-green { color: #6ee7b7; }
+        .icon-blue { color: #7dd3fc; }
+        .icon-amber { color: #fde68a; }
+        .icon-purple { color: #c4b5fd; }
+        .icon-teal { color: #5eead4; }
+        .icon-peach { color: #fed7aa; }
+        .icon-sky { color: #7dd3fc; }
+        .icon-dark { color: #374151; }
+        .icon-red { color: #ef4444; }
+        .icon-emerald { color: #34d399; }
+        .icon-rose { color: #fda4af; }
     </style>
 </head>
 <body class="bg-[#f4f7f6] min-h-screen flex items-center justify-center p-4 font-sans">
 
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+  <symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
+  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
+  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
+  <symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+  <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
+  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
+  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="M22 15l-5-5-7 7"/><path d="M16 13l-3 3"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
+  <symbol id="icon-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9h-9V3z"/><path d="M12 12l-4-4"/></symbol>
+  <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12c1.5 0 2.5-.5 3-1"/><path d="M3 12h16c1.5 0 2.5.5 3 1"/><path d="M5 18h10c1.5 0 2.5-.5 3-1"/></symbol>
+  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 8 5 12 5 16a7 7 0 0014 0c0-4-4-8-7-14z"/></symbol>
+  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 00-4 0v10.8"/><path d="M8 16a4 4 0 108 0 4 4 0 00-8 0z"/></symbol>
+  <symbol id="icon-seedling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-4 0-6 2-6 5"/><path d="M12 8c4 0 6 2 6 5"/><path d="M8 3c4 0 6 1.5 6 5"/><path d="M16 3c-4 0-6 1.5-6 5"/></symbol>
+  <symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
+  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 00-9-9H5a3 3 0 00-3 3v6a3 3 0 003 3h2v4l4-4h4a9 9 0 006-3z"/></symbol>
+  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
+  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .5-5.5 5 1.5 7L12 17l-6 4 1.5-7L2 9l7-.5L12 2z"/></symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a3 3 0 013-3h4l3 3h7a3 3 0 013 3v9a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"/></symbol>
+  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7a2 2 0 00-2-2h-3l-2-3H9L7 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 114 4L7 20l-4 1 1-4L17 3z"/></symbol>
+  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h0"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+  <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
+  <symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
+  <symbol id="icon-eco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c5-5 8-11 8-18"/><path d="M17 7c-2 2-4 3-8 4"/><path d="M12 12c2-2 4-3 5-7"/></symbol>
+  <symbol id="icon-clean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l15-15"/><path d="M13 3l8 8"/><path d="M4 20l3-3"/></symbol>
+  <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
+</svg>
+
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] p-4 text-white flex justify-between items-center">
             <a href="index.html" class="text-white hover:text-emerald-200 font-bold text-sm flex items-center gap-1">
-                Home
+                <svg class="icon icon-green"><use href="#icon-arrow-left"/></svg> Home
             </a>
             <div class="text-center flex items-center gap-3">
                 <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-12 h-12 object-contain border-2 border-white shadow-lg">
@@ -39,15 +103,15 @@
 
                 <!-- Section A: Demographics -->
                 <div class="border-b pb-4 mb-4">
-                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">A. Demographics & Location / जनसांख्यिकी और स्थान</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3 flex items-center gap-1.5"><svg class="icon icon-sky"><use href="#icon-user"/></svg> A. Demographics & Location / जनसांख्यिकी और स्थान</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Name / नाम <span class="text-xs text-gray-400">(Optional / वैकल्पिक)</span></label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-user"/></svg> Name / नाम <span class="text-xs text-gray-400">(Optional / वैकल्पिक)</span></label>
                             <input type="text" id="surv-name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Your Name">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Age Group / आयु वर्ग *</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-calendar"/></svg> Age Group / आयु वर्ग *</label>
                             <select id="surv-age" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
                                 <option value="">Select / चुनें</option>
                                 <option value="<18">Below 18 (18 से कम)</option>
@@ -60,7 +124,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Gender / लिंग *</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-users"/></svg> Gender / लिंग *</label>
                             <select id="surv-gender" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
                                 <option value="">Select / चुनें</option>
                                 <option value="Male">Male (पुरुष)</option>
@@ -69,7 +133,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">State / राज्य *</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-map-pin"/></svg> State / राज्य *</label>
                             <select id="surv-state" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]">
                                 <option value="">Select State / राज्य चुनें</option>
                                 <option value="Gujarat">Gujarat</option>
@@ -88,7 +152,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Park Type / पार्क का प्रकार *</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-tree"/></svg> Park Type / पार्क का प्रकार *</label>
                             <select id="surv-park-type" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" onchange="toggleOtherParkType()">
                                 <option value="">Select / चुनें</option>
                                 <option value="Nagar Van">Nagar Van (नगर वन)</option>
@@ -99,7 +163,7 @@
                             <input type="text" id="surv-park-type-other" class="w-full border border-gray-300 rounded-lg p-2.5 mt-2 hidden" placeholder="Specify / बताएं">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">Park Name / पार्क का नाम *</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-flag"/></svg> Park Name / पार्क का नाम *</label>
                             <input type="text" id="surv-park-name" required class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Enter park name">
                         </div>
                     </div>
@@ -108,7 +172,7 @@
                         <label class="block text-sm font-bold text-gray-700 mb-2">Location (Optional) / स्थान (वैकल्पिक)</label>
                         <div class="flex gap-2 flex-wrap items-center">
                             <button type="button" onclick="getLocation()" class="bg-[#1b3a2d] hover:bg-[#2d5a45] text-white px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <svg class="icon icon-white"><use href="#icon-gps"/></svg>
                                 Get Location
                             </button>
                             <span id="location-status" class="text-xs text-gray-500 self-center"></span>
@@ -124,7 +188,7 @@
 
                 <!-- Section B: Usage & Well-being -->
                 <div class="border-b pb-4 mb-4">
-                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">B. Usage & Well-being / उपयोग और भलाई</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3 flex items-center gap-1.5"><svg class="icon icon-rose"><use href="#icon-heart"/></svg> B. Usage & Well-being / उपयोग और भलाई</h2>
 
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <label class="block text-sm font-bold text-gray-800 mb-3">
@@ -152,7 +216,7 @@
 
                 <!-- Section C: Environment & Infrastructure -->
                 <div class="border-b pb-4 mb-4">
-                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">C. Environment & Infrastructure / पर्यावरण और बुनियादी ढांचा</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3 flex items-center gap-1.5"><svg class="icon icon-green"><use href="#icon-tree"/></svg> C. Environment & Infrastructure / पर्यावरण और बुनियादी ढांचा</h2>
 
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
                         <label class="block text-sm font-bold text-gray-800 mb-3">
@@ -179,7 +243,7 @@
 
                 <!-- Section D: Civic Ownership -->
                 <div class="border-b pb-4 mb-4">
-                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">D. Civic Ownership / नागरिक स्वामित्व</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3 flex items-center gap-1.5"><svg class="icon icon-teal"><use href="#icon-users"/></svg> D. Civic Ownership / नागरिक स्वामित्व</h2>
 
                     <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
                         <label class="block text-sm font-bold text-gray-800 mb-3">
@@ -195,17 +259,17 @@
 
                 <!-- Section E: Open Feedback -->
                 <div>
-                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3">E. Open Feedback / खुला फीडबैक</h2>
+                    <h2 class="text-lg font-bold text-[#1b3a2d] mb-3 flex items-center gap-1.5"><svg class="icon icon-purple"><use href="#icon-chat"/></svg> E. Open Feedback / खुला फीडबैक</h2>
 
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">10. Any suggestions for improvement? / सुधार के लिए कोई सुझाव?</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-1 flex items-center gap-1.5"><svg class="icon icon-dark"><use href="#icon-edit"/></svg> 10. Any suggestions for improvement? / सुधार के लिए कोई सुझाव?</label>
                         <textarea id="surv-feedback" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#5dc48a] focus:border-[#5dc48a]" placeholder="Your suggestions / आपके सुझाव"></textarea>
                     </div>
                 </div>
 
                 <!-- Data Privacy Disclosure -->
                 <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
-                    <h3 class="text-sm font-bold text-emerald-800 mb-2">Data Privacy & Consent Disclosure / डेटा गोपनीयता प्रकटीकरण</h3>
+                    <h3 class="text-sm font-bold text-emerald-800 mb-2 flex items-center gap-1.5"><svg class="icon icon-amber"><use href="#icon-shield"/></svg> Data Privacy & Consent Disclosure / डेटा गोपनीयता प्रकटीकरण</h3>
                     <p class="text-xs text-emerald-700 text-justify">
                         <strong>Where your data goes / आपका डेटा कहाँ जाता है:</strong> Your responses are stored securely in a Google Sheets database managed by the Nagar Van DMRV research team. The data is used solely for academic research and environmental policy evaluation by National CAMPA, MoEF&CC to improve the Nagar Van Yojana.<br><br>
                         Your privacy is our priority. The personal information collected will remain strictly confidential and will not be published, shared with third parties, or used for commercial purposes.<br><br>
@@ -214,11 +278,11 @@
                 </div>
 
                 <div class="flex gap-3">
-                    <button type="button" onclick="submitSurvey(event)" class="flex-1 bg-[#1b3a2d] hover:bg-[#2d5a45] text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5">
-                        Submit Survey / जमा करें
+                    <button type="button" onclick="submitSurvey(event)" class="flex-1 bg-[#1b3a2d] hover:bg-[#2d5a45] text-white py-3 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-1.5">
+                        <svg class="icon icon-white"><use href="#icon-send"/></svg> Submit Survey / जमा करें
                     </button>
-                    <button type="button" onclick="clearForm()" class="px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-xl font-bold shadow-sm transition-all border border-gray-300">
-                        Clear / साफ़ करें
+                    <button type="button" onclick="clearForm()" class="px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-xl font-bold shadow-sm transition-all border border-gray-300 flex items-center gap-1.5">
+                        <svg class="icon icon-white"><use href="#icon-trash"/></svg> Clear / साफ़ करें
                     </button>
                 </div>
                 <div id="post-submit-actions" class="hidden mt-4 text-center">
