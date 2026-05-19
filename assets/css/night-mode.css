@@ -364,3 +364,42 @@ html.dark td,
 html.dark th {
   color: #e2e8f0;
 }
+
+/* ── Official Resources Section ── */
+html.dark #official-resources {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #official-resources .slide-in-right {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #official-resources h2,
+html.dark #official-resources h3 {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources p {
+  color: #94a3b8 !important;
+}
+html.dark #official-resources .bg-gradient-to-br {
+  background-color: #1e3a5f !important;
+  border-color: #334155 !important;
+}
+html.dark #official-resources .hover\:border-[#5dc48a]:hover,
+html.dark #official-resources .hover\:border-blue-400:hover,
+html.dark #official-resources .hover\:border-amber-400:hover,
+html.dark #official-resources .hover\:border-purple-400:hover {
+  border-color: #9fd3c7 !important;
+}
+html.dark #official-resources .hover\:shadow-xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
+}
+html.dark #official-resources .group-hover\text-[#4ab878],
+html.dark #official-resources .group-hover\text-blue-800,
+html.dark #official-resources .group-hover\text-amber-800,
+html.dark #official-resources .group-hover\text-purple-800 {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .fa-solid {
+  color: #e2e8f0 !important;
+}
