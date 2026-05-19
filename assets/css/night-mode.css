@@ -269,6 +269,16 @@ html.dark .text-4xl {
   color: inherit;
 }
 
+/* ── Text size buttons ── */
+html.dark .text-size-btn {
+  border-color: rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.1) !important;
+  color: #e2e8f0 !important;
+}
+html.dark .text-size-btn:hover {
+  background: rgba(255,255,255,0.2) !important;
+}
+
 /* ── Table cells ── */
 html.dark td,
 html.dark th {
