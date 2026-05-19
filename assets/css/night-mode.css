@@ -77,6 +77,18 @@ html.dark .theme-toggle__container .theme-toggle__clouds { transform: translateY
 .theme-toggle__container:hover .theme-toggle__sun { transform: translateX(calc(var(--sun-offset) + 0.187em)); }
 html.dark .theme-toggle__container:hover .theme-toggle__sun { transform: translateX(calc(var(--toggle-width) - var(--sun-diameter) - var(--sun-offset) - 0.187em)); }
 
+/* ── Day-mode Icon Visibility (darker on white backgrounds) ── */
+:root:not(.dark) .icon-green { color: #059669 !important; }
+:root:not(.dark) .icon-sky { color: #0284c7 !important; }
+:root:not(.dark) .icon-amber { color: #d97706 !important; }
+:root:not(.dark) .icon-purple { color: #7c3aed !important; }
+:root:not(.dark) .icon-teal { color: #0d9488 !important; }
+:root:not(.dark) .icon-peach { color: #ea580c !important; }
+:root:not(.dark) .icon-rose { color: #e11d48 !important; }
+:root:not(.dark) .icon-pink { color: #db2777 !important; }
+:root:not(.dark) .icon-blue { color: #0284c7 !important; }
+:root:not(.dark) .icon-emerald { color: #059669 !important; }
+
 /* ── Dark Mode Overrides ── */
 html.dark body {
   background-color: #0f172a !important;
@@ -267,6 +279,29 @@ html.dark .text-3xl,
 html.dark .text-2xl,
 html.dark .text-4xl {
   color: inherit;
+}
+
+/* ── Icon colors in dark mode ── */
+html.dark .icon-green { color: #6ee7b7 !important; }
+html.dark .icon-sky { color: #7dd3fc !important; }
+html.dark .icon-amber { color: #fde68a !important; }
+html.dark .icon-purple { color: #c4b5fd !important; }
+html.dark .icon-teal { color: #5eead4 !important; }
+html.dark .icon-peach { color: #fed7aa !important; }
+html.dark .icon-rose { color: #fda4af !important; }
+html.dark .icon-pink { color: #fecaca !important; }
+html.dark .icon-blue { color: #7dd3fc !important; }
+html.dark .icon-emerald { color: #34d399 !important; }
+
+/* ── Gradient text ── */
+html.dark .gradient-text {
+  background: linear-gradient(90deg, #6ee7b7, #34d399) !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ── bg-[#f4f7f6] page backgrounds ── */
+html.dark [class*="bg-[#f4f7f6]"] {
+  background-color: #0f172a !important;
 }
 
 /* ── Text size buttons ── */
