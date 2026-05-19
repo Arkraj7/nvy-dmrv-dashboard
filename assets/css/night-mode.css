@@ -306,21 +306,6 @@ html.dark [class*="bg-[#f4f7f6]"] {
   background-color: #0f172a !important;
 }
 
-/* ── Popup modal ── */
-html.dark .popup-content h2,
-html.dark .popup-content h3,
-html.dark .popup-content p {
-  color: #e2e8f0 !important;
-}
-html.dark .popup-got-it {
-  background: #1e293b !important;
-  color: #e2e8f0 !important;
-  border: 1px solid #334155 !important;
-}
-html.dark .popup-checkbox label {
-  color: #cbd5e1 !important;
-}
-
 /* ── Footer headings ── */
 html.dark footer h4,
 html.dark .site-footer h4 {
