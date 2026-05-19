@@ -159,7 +159,7 @@
         
         <div class="mb-8">
             <h1 class="text-3xl font-extrabold text-red-800">Live Issue Tracker & Grievance Report</h1>
-            <p class="text-sm text-gray-600 mt-1">Help authorities maintain the ecosystem by reporting broken infrastructure, waste, or illegal activities. You earn 10 reward points for verified reports!</p>
+            <p class="text-sm text-gray-600 mt-1">Help authorities maintain the ecosystem by reporting broken infrastructure, waste, or illegal activities.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -353,9 +353,46 @@
         const REPORT_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
 
         var map = L.map('map').setView([22.0, 79.0], 5);
+        var southWest = L.latLng(6.0, 68.0);
+        var northEast = L.latLng(38.5, 97.5);
+        var bounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(bounds);
+        map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap', minZoom: 4, maxZoom: 18
         }).addTo(map);
+
+        // India GeoJSON shapefile (same as thematic map)
+        const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/Country/india-composite.geojson';
+        fetch(indiaGeoUrl)
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        fillColor: 'transparent',
+                        fillOpacity: 0,
+                        color: '#000000',
+                        weight: 1.5
+                    }
+                }).addTo(map);
+            })
+            .catch(err => {
+                console.log('Could not load India GeoJSON, trying simplified version');
+                fetch('https://raw.githubusercontent.com/datameet/maps/master/Country/india-land-simplified.geojson')
+                    .then(r => r.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                fillColor: 'transparent',
+                                fillOpacity: 0.5,
+                                color: '#1B5E20',
+                                weight: 2
+                            }
+                        }).addTo(map);
+                    })
+                    .catch(e => console.log('Could not load simplified either:', e));
+            });
 
         var markers = L.layerGroup().addTo(map);
 
