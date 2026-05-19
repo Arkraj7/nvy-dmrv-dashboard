@@ -291,6 +291,10 @@
                         Your privacy is our priority. The personal information collected will remain strictly confidential and will not be published, shared with third parties, or used for commercial purposes.<br><br>
                         <strong>हिंदी:</strong> आपके उत्तर सुरक्षित रूप से Nagar Van DMRV शोध दल द्वारा प्रबंधित Google Sheets डेटाबेस में संग्रहीत किए जाते हैं। यह डेटा केवल शैक्षणिक शोध और पर्यावरण नीति मूल्यांकन के लिए उपयोग किया जाता है। आपकी गोपनीयता हमारी प्राथमिकता है।
                     </p>
+                    <label class="flex items-start gap-2 mt-3 cursor-pointer">
+                        <input type="checkbox" id="surv-consent" required class="mt-0.5 accent-[#1b3a2d]">
+                        <span class="text-xs font-medium text-emerald-700">I have read and agree to the data privacy terms / मैंने डेटा गोपनीयता की शर्तों को पढ़ लिया है और सहमत हूँ *</span>
+                    </label>
                 </div>
 
                 <div class="flex gap-3">
@@ -358,7 +362,7 @@
             let isValid = true;
 
             requiredFields.forEach(field => {
-                if (!field.value) {
+                if (field.type === 'checkbox' ? !field.checked : !field.value) {
                     isValid = false;
                     field.classList.add('border-red-500');
                 } else {
@@ -395,6 +399,7 @@
             urlEncodedData.append('facilities', document.querySelector('input[name="facilities"]:checked')?.value || '');
             urlEncodedData.append('wtp', document.querySelector('input[name="wtp"]:checked')?.value || '');
             urlEncodedData.append('feedback', document.getElementById('surv-feedback').value);
+            urlEncodedData.append('consent', document.getElementById('surv-consent').checked ? 'Yes' : 'No');
             urlEncodedData.append('timestamp', new Date().toISOString());
             urlEncodedData.append('action', 'submitSurvey');
 

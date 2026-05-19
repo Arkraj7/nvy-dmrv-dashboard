@@ -338,6 +338,15 @@ html.dark .map-legend {
   border: 1px solid #334155 !important;
 }
 
+/* ── icon-dark in dark mode ── */
+html.dark .icon-dark { color: #cbd5e1 !important; }
+
+/* ── Radio / checkbox accent color in dark mode ── */
+html.dark [class*="accent-[#1b3a2d]"] { accent-color: #6ee7b7 !important; }
+
+/* ── Blue status text ── */
+html.dark .text-blue-600 { color: #7dd3fc !important; }
+
 /* ── Buttons with dark green bg ── */
 html.dark button[class*="bg-[#1b3a2d]"] {
   background-color: #334155 !important;
