@@ -93,6 +93,17 @@ html.dark nav,
 html.dark .bg-white.shadow-md {
   background-color: #1e293b !important;
 }
+html.dark [class*="bg-white/80"],
+html.dark [class*="bg-white/90"],
+html.dark [class*="bg-white/70"] {
+  background-color: #1e293b !important;
+}
+html.dark [class*="bg-white/10"] {
+  background-color: rgba(30, 41, 59, 0.5) !important;
+}
+html.dark [class*="bg-[#1b3a2d]"] {
+  background-color: #1e293b !important;
+}
 html.dark .bg-gray-50 { background-color: #1e293b !important; }
 html.dark .bg-gray-100 { background-color: #1e293b !important; }
 html.dark .bg-gray-200 { background-color: #334155 !important; }
@@ -126,9 +137,11 @@ html.dark .text-gray-500,
 html.dark .text-gray-400 {
   color: #94a3b8 !important;
 }
-html.dark .text-gray-300,
+html.dark .text-gray-300 {
+  color: #d1d5db !important;
+}
 html.dark .text-gray-200 {
-  color: #64748b !important;
+  color: #e5e7eb !important;
 }
 
 /* ── Dark green / emerald heading text → bright green ── */
@@ -232,6 +245,10 @@ html.dark .prose h4 {
 /* ── Links ── */
 html.dark a { color: #6ee7b7; }
 html.dark a:hover { color: #34d399; }
+/* Keep dark green text on the green survey button readable */
+html.dark [class~="bg-[#5dc48a]"] {
+  color: #064e3b !important;
+}
 
 /* ── Footer text ── */
 html.dark footer p,
