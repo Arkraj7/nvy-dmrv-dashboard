@@ -406,3 +406,67 @@ html.dark #official-resources .fa-solid {
 html.dark #official-resources .bg-\\[\\#1b3a2d\\] {
   background-color: #33415f !important;
 }
+
+/* ── Override resource card backgrounds in dark mode ── */
+html.dark #official-resources .bg-gradient-to-br {
+  background-color: #1e3a5f !important;
+}
+html.dark #official-resources .from-emerald-50,
+html.dark #official-resources .to-green-50,
+html.dark #official-resources .from-blue-50,
+html.dark #official-resources .to-indigo-50,
+html.dark #official-resources .from-amber-50,
+html.dark #official-resources .to-orange-50,
+html.dark #official-resources .from-purple-50,
+html.dark #official-resources .to-violet-50 {
+  background-color: #1e3a5f !important;
+}
+
+/* ── Text colors in dark mode ── */
+html.dark #official-resources .text-\\[\\#1b3a2d\\] {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .text-gray-600 {
+  color: #94a3b8 !important;
+}
+html.dark #official-resources .text-\\[\\#5dc48a\\] {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .group-hover\\:text-\\[\\#4ab878\\]:hover {
+  color: #e2e8f0 !important;
+}
+
+/* ── Icon colors in dark mode ── */
+html.dark #official-resources .fa-solid,
+html.dark #official-resources svg {
+  color: #e2e8f0 !important;
+}
+
+/* ── Key Strategic Pillars dark mode - transparent background ── */
+html.dark .bg-gradient-to-r {
+  background-color: transparent !important;
+}
+html.dark .from-\\[\\#5dc48a\\],
+html.dark .to-\\[\\#4ab878\\] {
+  background-color: transparent !important;
+}
+
+/* ── Ensure text remains visible in Key Strategic Pillars for dark mode ── */
+html.dark .bg-gradient-to-r h3 {
+  color: #e2e8f0 !important;
+}
+html.dark .bg-gradient-to-r h4 {
+  color: #e2e8f0 !important;
+}
+html.dark .bg-gradient-to-r p {
+  color: #94a3b8 !important;
+}
+
+/* ── Key Strategic Pillars dark mode ── */
+html.dark .bg-gradient-to-r {
+  background-color: transparent !important;
+}
+html.dark .from-\\[\\#5dc48a\\],
+html.dark .to-\\[\\#4ab878\\] {
+  background-color: transparent !important;
+}
