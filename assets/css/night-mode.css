@@ -157,11 +157,11 @@ html.dark .text-gray-200 {
 }
 
 /* ── Dark green / emerald heading text → bright green ── */
-html.dark .text-[#1b3a2d],
-html.dark .text-[#064e3b],
-html.dark .text-[#065f46],
-html.dark .text-[#2d6a4f],
-html.dark .text-[#3a8a65] {
+html.dark [class*="text-[#1b3a2d]"],
+html.dark [class*="text-[#064e3b]"],
+html.dark [class*="text-[#065f46]"],
+html.dark [class*="text-[#2d6a4f]"],
+html.dark [class*="text-[#3a8a65]"] {
   color: #6ee7b7 !important;
 }
 html.dark .text-emerald-700,
