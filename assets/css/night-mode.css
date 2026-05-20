@@ -413,12 +413,6 @@ html.dark #official-resources .hover\:border-purple-400:hover {
 html.dark #official-resources .hover\:shadow-xl {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
 }
-html.dark #official-resources .group-hover\text-[#4ab878],
-html.dark #official-resources .group-hover\text-blue-800,
-html.dark #official-resources .group-hover\text-amber-800,
-html.dark #official-resources .group-hover\text-purple-800 {
-  color: #e2e8f0 !important;
-}
 html.dark #official-resources .fa-solid {
   color: #e2e8f0 !important;
 }
@@ -441,6 +435,20 @@ html.dark #official-resources .to-violet-50 {
   background-color: #1e3a5f !important;
 }
 
+/* ── Card borders in dark mode ── */
+html.dark #official-resources .border-emerald-200,
+html.dark #official-resources .border-blue-200,
+html.dark #official-resources .border-amber-200,
+html.dark #official-resources .border-purple-200 {
+  border-color: #334155 !important;
+}
+html.dark #official-resources .hover\:border-emerald-200:hover,
+html.dark #official-resources .hover\:border-blue-200:hover,
+html.dark #official-resources .hover\:border-amber-200:hover,
+html.dark #official-resources .hover\:border-purple-200:hover {
+  border-color: #334155 !important;
+}
+
 /* ── Text colors in dark mode ── */
 html.dark #official-resources .text-\\[\\#1b3a2d\\] {
   color: #e2e8f0 !important;
@@ -449,10 +457,33 @@ html.dark #official-resources .text-gray-600 {
   color: #f8fafc !important;
 }
 html.dark #official-resources .text-\\[\\#5dc48a\\] {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .text-blue-600 {
+  color: #7dd3fc !important;
+}
+html.dark #official-resources .text-amber-600 {
+  color: #fde68a !important;
+}
+html.dark #official-resources .text-purple-600 {
+  color: #c4b5fd !important;
+}
+
+/* ── Hover text states ── */
+html.dark #official-resources .group-hover\\:text-\\[\\#4ab878\\]:hover,
+html.dark #official-resources .group-hover\\:text-blue-800\\:hover,
+html.dark #official-resources .group-hover\\:text-amber-800\\:hover,
+html.dark #official-resources .group-hover\\:text-purple-800\\:hover {
   color: #e2e8f0 !important;
 }
-html.dark #official-resources .group-hover\\:text-\\[\\#4ab878\\]:hover {
-  color: #e2e8f0 !important;
+
+/* ── Card heading icons ── */
+html.dark #official-resources h3 .icon-green,
+html.dark #official-resources h3 .icon-sky,
+html.dark #official-resources h3 .icon-purple,
+html.dark #official-resources h3 .icon-amber,
+html.dark #official-resources .text-2xl .icon-amber {
+  color: inherit !important;
 }
 
 /* ── Icon colors in dark mode ── */
