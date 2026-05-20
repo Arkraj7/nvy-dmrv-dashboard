@@ -461,16 +461,11 @@ html.dark #official-resources .bg-\[#1b3a2d\] {
 }
 
 /* ── Click to open text ── */
-html.dark #official-resources .bg-gradient-to-br span {
-  color: #9fd3c7 !important;
-}
-html.dark #official-resources .bg-gradient-to-br span:hover {
-  color: #e2e8f0 !important;
-}
+html.dark #official-resources .bg-gradient-to-br span { }
 
-/* ── Click to open text by color class ── */
+/* ── Click to open text by color class (override after *) ── */
 html.dark #official-resources .text-\[#5dc48a\] {
-  color: #9fd3c7 !important;
+  color: #6ee7b7 !important;
 }
 html.dark #official-resources .text-blue-600 {
   color: #7dd3fc !important;
@@ -481,12 +476,10 @@ html.dark #official-resources .text-amber-600 {
 html.dark #official-resources .text-purple-600 {
   color: #c4b5fd !important;
 }
-
-/* ── Hover states for Click to open ── */
-html.dark #official-resources .bg-gradient-to-br span:active,
-html.dark #official-resources .bg-gradient-to-br span:focus,
-html.dark #official-resources a:hover .bg-gradient-to-br span,
-html.dark #official-resources a:focus .bg-gradient-to-br span {
+html.dark #official-resources .bg-gradient-to-br span {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .bg-gradient-to-br span:hover {
   color: #e2e8f0 !important;
 }
 
@@ -498,6 +491,8 @@ html.dark #official-resources svg {
 html.dark #official-resources .text-white {
   color: #e2e8f0 !important;
 }
+
+
 
 /* ── Key Strategic Pillars dark mode - black background ── */
 html.dark .bg-gradient-to-r {
