@@ -554,3 +554,11 @@ html.dark .from-\\[\\#5dc48a\\],
 html.dark .to-\\[\\#4ab878\\] {
   background-color: transparent !important;
 }
+
+/* ── Custom checkbox in dark mode ── */
+html.dark .checkBox {
+  box-shadow: 0px 0px 0px 2px #e2e8f0 !important;
+}
+html.dark .checkBox div {
+  background-color: #e2e8f0 !important;
+}
