@@ -200,9 +200,9 @@
             right: -400px;
             transform: translateY(-50%);
             width: 380px;
-            background: linear-gradient(135deg, #1b3a2d 0%, #2d5a45 50%, #1b3a2d 100%);
+            background: #f5f0e8;
             border-radius: 16px 0 0 16px;
-            box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
             z-index: 9998;
             transition: right 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             overflow: hidden;
@@ -215,15 +215,15 @@
         }
         .survey-slide-content {
             padding: 24px;
-            color: white;
+            color: #4a3a2a;
         }
         .survey-close-btn {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.08);
             border: none;
-            color: white;
+            color: #8a7a6a;
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -232,12 +232,12 @@
             line-height: 1;
         }
         .survey-close-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.15);
         }
         .survey-icon {
             width: 60px;
             height: 60px;
-            background: rgba(93, 196, 138, 0.2);
+            background: rgba(180, 160, 140, 0.25);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -246,24 +246,26 @@
         }
         .survey-icon i {
             font-size: 28px;
-            color: #5dc48a;
+            color: #8a7a6a;
         }
         .survey-title {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 8px;
             line-height: 1.3;
+            color: #4a3a2a;
         }
         .survey-text {
             font-size: 13px;
-            opacity: 0.9;
+            opacity: 0.85;
             margin-bottom: 16px;
             line-height: 1.5;
+            color: #6a5a4a;
         }
         .survey-btn {
             display: inline-block;
-            background: #5dc48a;
-            color: #1b3a2d;
+            background: #d4c5a9;
+            color: #4a3a2a;
             padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
@@ -272,9 +274,9 @@
             transition: all 0.3s ease;
         }
         .survey-btn:hover {
-            background: #4ab878;
+            background: #c4b599;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(93, 196, 138, 0.4);
+            box-shadow: 0 4px 12px rgba(180, 160, 140, 0.4);
         }
 
         /* AI Chatbot Widget */
@@ -867,144 +869,108 @@
         }
 
         /* Weather Card */
-        /* Weather Card - Uiverse by Praashoo7 */
-        .cardm {
+        /* Weather Card */
+        .weather-card {
+          width: 100%;
+          position: relative;
+          padding: 20px;
+          color: #fff;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 170px;
+          overflow: hidden;
+          border-radius: 16px;
+        }
+        .weather-card .bg-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #5936B4 0%, #362A84 100%);
+          z-index: 0;
+        }
+        .weather-card .cloud-svg {
+          position: absolute;
+          right: 0;
+          top: -12px;
+          z-index: 1;
+          opacity: 0.15;
+        }
+        .weather-card .cloud-svg svg {
+          height: 120px;
+        }
+        .weather-card .loc-row {
           display: flex;
           align-items: center;
-          justify-content: center;
-          position: relative;
-          min-height: 190px;
-        }
-        .cardm .card {
-          position: absolute;
-          width: 250px;
-          height: 130px;
-          border-radius: 25px;
-          background: whitesmoke;
-          color: black;
+          gap: 6px;
+          font-size: 13px;
+          opacity: 0.9;
           z-index: 2;
-          transition: .4s ease-in-out;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        .cardm .weather {
           position: relative;
-          margin: 1em;
         }
-        .cardm .main {
-          font-size: 2em;
-          position: relative;
-          top: -3em;
-          left: 4.3em;
+        .weather-card .loc-row svg {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
         }
-        .cardm .mainsub {
+        .weather-card .main-temp {
+          font-size: 42px;
+          font-weight: 700;
+          z-index: 2;
           position: relative;
-          top: -10.2em;
-          left: 14em;
-          font-size: 0.6em;
+          line-height: 1.1;
         }
-        .cardm .card2 {
+        .weather-card .main-temp small {
+          font-size: 18px;
+          font-weight: 400;
+          opacity: 0.8;
+        }
+        .weather-card .weather-icon {
+          font-size: 40px;
+          z-index: 2;
           position: relative;
+        }
+        .weather-card .info-row {
           display: flex;
-          flex-direction: row;
-          width: 240px;
-          height: 130px;
-          border-radius: 35px;
-          background: white;
-          z-index: -1;
-          transition: .4s ease-in-out;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        .cardm .card:hover {
-          background-color: #FFE87C;
-          cursor: pointer;
-        }
-        .cardm .card:hover + .card2 {
-          height: 300px;
-          border-bottom-left-radius: 0px;
-          border-bottom-right-radius: 0px;
-        }
-        .cardm .card:hover + .card2 .lower {
-          top: 20.2em;
-        }
-        .cardm .upper {
-          display: flex;
-          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-end;
+          z-index: 2;
           position: relative;
-          color: black;
-          left: 1.8em;
-          top: 0.5em;
-          gap: 4em;
+          margin-top: 8px;
         }
-        .cardm .humiditytext {
-          position: relative;
-          left: 3.6em;
-          top: 2.7em;
-          font-size: 0.6em;
+        .weather-card .info-row .label {
+          color: rgba(235, 235, 245, 0.6);
+          font-size: 11px;
         }
-        .cardm .airtext {
-          position: relative;
-          left: 3.8em;
-          top: 2.7em;
-          font-size: 0.6em;
+        .weather-card .info-row .value {
+          font-size: 15px;
+          font-weight: 600;
         }
-        .cardm .lower {
+        .weather-card .info-row .right {
+          text-align: right;
+        }
+        .weather-card .left-group {
           display: flex;
-          flex-direction: row;
-          position: absolute;
-          text-align: center;
-          color: black;
-          left: 3em;
-          top: 1em;
-          margin-top: 0.7em;
-          font-size: 0.7em;
-          transition: .4s ease-in-out;
+          align-items: flex-start;
+          gap: 12px;
+          z-index: 2;
+          position: relative;
         }
-        .cardm .aqi {
-          margin-right: 3.25em;
-        }
-        .cardm .realfeel {
-          margin-right: 1.8em;
-        }
-        .cardm .card3 {
-          position: absolute;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          width: 240px;
-          height: 30px;
-          top: 4.7em;
-          left: -2.4em;
-          font-size: 1.24em;
-          border-bottom-left-radius: 35px;
-          border-bottom-right-radius: 35px;
-          background: limegreen;
-          transition: .4s ease-in-out;
-        }
-        .cardm .weather-loading {
+        .weather-loading {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
-          color: #666;
+          z-index: 2;
+          position: relative;
+          color: rgba(255,255,255,0.7);
           font-size: 13px;
           padding: 20px 0;
-          position: absolute;
-          z-index: 5;
-          background: whitesmoke;
-          width: 250px;
-          height: 130px;
-          border-radius: 25px;
-          left: 50%;
-          transform: translateX(-50%);
         }
-        .cardm .weather-loading .spinner {
+        .weather-loading .spinner {
           width: 20px;
           height: 20px;
-          border: 2px solid rgba(0,0,0,0.15);
-          border-top-color: #666;
+          border: 2px solid rgba(255,255,255,0.3);
+          border-top-color: #fff;
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
         }
@@ -1431,27 +1397,36 @@
 
                 <div class="mt-8 pt-5 border-t border-gray-200">
                     <h3 class="text-sm font-bold text-[#1b3a2d] mb-3 flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-gps"/></svg>Live Weather at Your Location</h3>
-                    <div class="cardm" id="weather-card">
+                    <div class="weather-card" id="weather-card">
+                        <div class="bg-gradient"></div>
+                        <div class="cloud-svg">
+                            <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M170 90c0-16-12-30-28-32a38 38 0 00-74-4A28 28 0 0040 82c0 2 0 4 2 6h-2a24 24 0 000 48h130a20 20 0 000-40V90z" fill="rgba(255,255,255,0.08)"/>
+                            </svg>
+                        </div>
                         <div class="weather-loading" id="weather-loading">
                             <div class="spinner"></div>
                             <span>Detecting your location...</span>
                         </div>
-                        <div class="card" id="weather-card-front">
-                            <div class="weather">
-                                <span class="main" id="weather-temp">--<small>&deg;C</small></span>
-                                <span class="mainsub" id="weather-condition">--</span>
+                        <div id="weather-content" style="display:none">
+                            <div class="loc-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></svg>
+                                <span id="weather-location">Loading...</span>
                             </div>
-                        </div>
-                        <div class="card2" id="weather-card-expand">
-                            <div class="upper">
-                                <span class="humiditytext" id="weather-detail-hum">--</span>
-                                <span class="airtext" id="weather-detail-wind">--</span>
+                            <div class="left-group">
+                                <span class="main-temp" id="weather-temp">--<small>&deg;C</small></span>
+                                <span class="weather-icon" id="weather-icon">&#9728;</span>
                             </div>
-                            <div class="lower">
-                                <div class="aqi" id="weather-feels">Feels: --</div>
-                                <div class="realfeel" id="weather-location">Loading...</div>
+                            <div class="info-row">
+                                <div>
+                                    <div class="label">Condition</div>
+                                    <div class="value" id="weather-condition">--</div>
+                                </div>
+                                <div class="right">
+                                    <div class="label">Humidity / Wind</div>
+                                    <div class="value" id="weather-detail">-- / --</div>
+                                </div>
                             </div>
-                            <div class="card3" id="weather-card3">Live Weather</div>
                         </div>
                     </div>
                 </div>
@@ -2270,18 +2245,17 @@
                             const cw = data.current_weather || {};
                             const cur = data.current || {};
                             const temp = cw.temperature != null ? Math.round(cw.temperature) : '--';
-                            const feels = cur.apparent_temperature != null ? Math.round(cur.apparent_temperature) : null;
                             const hum = cur.relative_humidity_2m != null ? cur.relative_humidity_2m + '%' : '--';
                             const wind = cw.windspeed != null ? Math.round(cw.windspeed) + ' km/h' : '--';
                             const wcode = cur.weather_code != null ? cur.weather_code : (cw.weathercode != null ? cw.weathercode : 0);
                             document.getElementById('weather-loading').style.display = 'none';
-                            document.getElementById('weather-card-front').style.display = '';
+                            document.getElementById('weather-content').style.display = '';
+                            const icons = {0:'&#9728;',1:'&#127780;',2:'&#127781;',3:'&#9729;',45:'&#127787;',48:'&#127787;',51:'&#127783;',53:'&#127783;',55:'&#127783;',61:'&#127782;',63:'&#127782;',65:'&#127782;',71:'&#127784;',73:'&#127784;',75:'&#127784;',80:'&#127782;',81:'&#127782;',82:'&#127782;',95:'&#9889;',96:'&#9889;',99:'&#9889;'};
                             const desc = {0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',48:'Rime fog',51:'Light drizzle',53:'Moderate drizzle',55:'Dense drizzle',61:'Slight rain',63:'Moderate rain',65:'Heavy rain',71:'Slight snow',73:'Moderate snow',75:'Heavy snow',80:'Slight showers',81:'Moderate showers',82:'Violent showers',95:'Thunderstorm',96:'Thunderstorm slight hail',99:'Thunderstorm heavy hail'};
+                            document.getElementById('weather-icon').innerHTML = icons[wcode] || '&#9728;';
                             document.getElementById('weather-temp').innerHTML = temp + '<small>&deg;C</small>';
-                            document.getElementById('weather-condition').textContent = '| ' + (desc[wcode] || 'Unknown');
-                            document.getElementById('weather-detail-hum').textContent = 'Humidity: ' + hum;
-                            document.getElementById('weather-detail-wind').textContent = 'Wind: ' + wind;
-                            document.getElementById('weather-feels').textContent = 'Feels: ' + (feels ? feels + '\u00B0C' : '--');
+                            document.getElementById('weather-condition').textContent = desc[wcode] || 'Unknown';
+                            document.getElementById('weather-detail').textContent = hum + ' / ' + wind;
                             fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`)
                                 .then(r => r.json())
                                 .then(geo => {

@@ -607,31 +607,39 @@ html.dark .quick-questions button:hover {
 }
 
 /* ── Weather Card dark mode ── */
-html.dark .cardm .card {
-  background: #2a2a3e !important;
+html.dark .weather-card .bg-gradient {
+  background: linear-gradient(135deg, #2a1a5a 0%, #1a1040 100%) !important;
+}
+html.dark .weather-card .loc-row,
+html.dark .weather-card .main-temp,
+html.dark .weather-card .weather-icon,
+html.dark .weather-card .info-row .value {
   color: #e0d8f0 !important;
 }
-html.dark .cardm .card2 {
-  background: #1e1e30 !important;
+html.dark .weather-card .info-row .label {
+  color: rgba(200, 190, 220, 0.5) !important;
 }
-html.dark .cardm .upper {
-  color: #c0b8d0 !important;
-}
-html.dark .cardm .lower {
-  color: #c0b8d0 !important;
-}
-html.dark .cardm .card3 {
-  background: #3a6a4a !important;
-  color: #e0e8e0 !important;
-}
-html.dark .cardm .weather-loading {
+
+/* ── Survey Slide Panel dark mode ── */
+html.dark .survey-slide-panel {
   background: #2a2a3e !important;
+}
+html.dark .survey-slide-content {
+  color: #e0d8f0 !important;
+}
+html.dark .survey-slide-content p {
   color: #c0b8d0 !important;
 }
-html.dark .cardm .weather-loading .spinner {
-  border-color: rgba(200,190,220,0.2) !important;
-  border-top-color: #c0b8d0 !important;
+html.dark .survey-slide-content .survey-title {
+  color: #e0d8f0 !important;
 }
-html.dark .cardm .card:hover {
-  background-color: #4a3a2a !important;
+html.dark .survey-slide-content .survey-text {
+  color: #b0a8c0 !important;
+}
+html.dark .survey-close-btn {
+  color: #a098b0 !important;
+  background: rgba(255,255,255,0.1) !important;
+}
+html.dark .survey-icon i {
+  color: #a098b0 !important;
 }
