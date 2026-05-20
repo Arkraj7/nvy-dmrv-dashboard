@@ -197,40 +197,7 @@
         .popup-checkbox input { width: 18px; height: 18px; accent-color: #1b3a2d; cursor: pointer; }
         .popup-checkbox label { font-size: 13px; color: #475569; cursor: pointer; }
 
-        .checkBox {
-          display: block;
-          cursor: pointer;
-          width: 30px;
-          height: 30px;
-          border: 3px solid rgba(255, 255, 255, 0);
-          border-radius: 10px;
-          position: relative;
-          overflow: hidden;
-          box-shadow: 0px 0px 0px 2px #1b3a2d;
-          flex-shrink: 0;
-        }
-        .checkBox div {
-          width: 60px;
-          height: 60px;
-          background-color: #1b3a2d;
-          top: -52px;
-          left: -52px;
-          position: absolute;
-          transform: rotateZ(45deg);
-          z-index: 100;
-        }
-        .checkBox input[type=checkbox]:checked + div {
-          left: -10px;
-          top: -10px;
-        }
-        .checkBox input[type=checkbox] {
-          position: absolute;
-          left: 50px;
-          visibility: hidden;
-        }
-        .transition {
-          transition: 300ms ease;
-        }
+
         .interactive-element {
             transition: all 0.2s ease;
         }
@@ -485,10 +452,7 @@
                 Data presented on this dashboard is sourced from official government records, field surveys, and verified satellite imagery. While we strive for accuracy, users are advised to verify critical information from primary sources. This portal is intended for informational and analytical purposes.
             </p>
             <div class="popup-checkbox">
-                <label class="checkBox">
-                    <input type="checkbox" id="dontShowAgain">
-                    <div class="transition"></div>
-                </label>
+                <input type="checkbox" id="dontShowAgain">
                 <label for="dontShowAgain">Don't show this again</label>
             </div>
         </div>
