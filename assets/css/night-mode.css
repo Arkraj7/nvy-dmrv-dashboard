@@ -131,6 +131,25 @@ html.dark .popup-content {
   background-color: #1e293b !important;
   color: #e2e8f0 !important;
 }
+/* ── Acknowledgment popup text colors in dark mode ── */
+html.dark #acknowledgmentPopup .popup-content h2,
+html.dark #acknowledgmentPopup .popup-content h3,
+html.dark #acknowledgmentPopup .popup-content p,
+html.dark #acknowledgmentPopup .popup-content strong,
+html.dark #acknowledgmentPopup .popup-content label {
+  color: #f8fafc !important;
+}
+/* ── Ensure checkbox and button are visible ── */
+html.dark #acknowledgmentPopup .popup-checkbox input[type="checkbox"] {
+  accent-color: #e2e8f0 !important;
+}
+html.dark #acknowledgmentPopup #popupGotIt {
+  background-color: #1b3a2d !important;
+  color: #fff !important;
+}
+html.dark #acknowledgmentPopup #popupClose {
+  color: #e2e8f0 !important;
+}
 html.dark .border-gray-200,
 html.dark .border-gray-300 {
   border-color: #334155 !important;
@@ -379,7 +398,7 @@ html.dark #official-resources h3 {
   color: #e2e8f0 !important;
 }
 html.dark #official-resources p {
-  color: #94a3b8 !important;
+  color: #f8fafc !important;
 }
 html.dark #official-resources .bg-gradient-to-br {
   background-color: #1e3a5f !important;
@@ -398,7 +417,7 @@ html.dark #official-resources .group-hover\text-[#4ab878],
 html.dark #official-resources .group-hover\text-blue-800,
 html.dark #official-resources .group-hover\text-amber-800,
 html.dark #official-resources .group-hover\text-purple-800 {
-  color: #9fd3c7 !important;
+  color: #e2e8f0 !important;
 }
 html.dark #official-resources .fa-solid {
   color: #e2e8f0 !important;
@@ -427,10 +446,10 @@ html.dark #official-resources .text-\\[\\#1b3a2d\\] {
   color: #e2e8f0 !important;
 }
 html.dark #official-resources .text-gray-600 {
-  color: #94a3b8 !important;
+  color: #f8fafc !important;
 }
 html.dark #official-resources .text-\\[\\#5dc48a\\] {
-  color: #9fd3c7 !important;
+  color: #e2e8f0 !important;
 }
 html.dark #official-resources .group-hover\\:text-\\[\\#4ab878\\]:hover {
   color: #e2e8f0 !important;
@@ -442,13 +461,13 @@ html.dark #official-resources svg {
   color: #e2e8f0 !important;
 }
 
-/* ── Key Strategic Pillars dark mode - transparent background ── */
+/* ── Key Strategic Pillars dark mode - black background ── */
 html.dark .bg-gradient-to-r {
-  background-color: transparent !important;
+  background-color: #000000 !important;
 }
 html.dark .from-\\[\\#5dc48a\\],
 html.dark .to-\\[\\#4ab878\\] {
-  background-color: transparent !important;
+  background-color: #000000 !important;
 }
 
 /* ── Ensure text remains visible in Key Strategic Pillars for dark mode ── */
