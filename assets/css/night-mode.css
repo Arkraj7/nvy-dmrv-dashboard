@@ -512,6 +512,14 @@ html.dark .bg-gradient-to-r p {
   color: #94a3b8 !important;
 }
 
+/* ── Get in Touch box in dark mode ── */
+html.dark #home-section .border-gray-200.bg-transparent {
+  border-color: #334155 !important;
+}
+html.dark #home-section .border-gray-200.bg-transparent p {
+  color: #e2e8f0 !important;
+}
+
 /* ── Page Loader for both day and night modes ── */
 #page-loader {
   background-color: rgba(255, 255, 255, 0.75) !important;
