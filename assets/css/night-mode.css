@@ -494,11 +494,11 @@ html.dark #official-resources svg {
 
 /* ── Key Strategic Pillars dark mode - black background ── */
 html.dark .bg-gradient-to-r {
-  background-color: #000000 !important;
+  background-color: transparent !important;
 }
 html.dark .from-\\[\\#5dc48a\\],
 html.dark .to-\\[\\#4ab878\\] {
-  background-color: #000000 !important;
+  background-color: transparent !important;
 }
 
 /* ── Ensure text remains visible in Key Strategic Pillars for dark mode ── */
