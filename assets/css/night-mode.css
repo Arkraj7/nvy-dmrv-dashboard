@@ -393,12 +393,11 @@ html.dark #official-resources .slide-in-right {
   background-color: #0f1a2f !important;
   border-color: #1e3a5f !important;
 }
-html.dark #official-resources h2,
-html.dark #official-resources h3 {
+html.dark #official-resources h2 {
   color: #e2e8f0 !important;
 }
-html.dark #official-resources p {
-  color: #f8fafc !important;
+html.dark #official-resources h2 .icon-amber {
+  color: #fde68a !important;
 }
 html.dark #official-resources .bg-gradient-to-br {
   background-color: #1e3a5f !important;
@@ -413,17 +412,8 @@ html.dark #official-resources .hover\:border-purple-400:hover {
 html.dark #official-resources .hover\:shadow-xl {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
 }
-html.dark #official-resources .fa-solid {
-  color: #e2e8f0 !important;
-}
-html.dark #official-resources .bg-\\[\\#1b3a2d\\] {
-  background-color: #33415f !important;
-}
 
-/* ── Override resource card backgrounds in dark mode ── */
-html.dark #official-resources .bg-gradient-to-br {
-  background-color: #1e3a5f !important;
-}
+/* ── Card backgrounds ── */
 html.dark #official-resources .from-emerald-50,
 html.dark #official-resources .to-green-50,
 html.dark #official-resources .from-blue-50,
@@ -435,28 +425,51 @@ html.dark #official-resources .to-violet-50 {
   background-color: #1e3a5f !important;
 }
 
-/* ── Card borders in dark mode ── */
+/* ── Card borders ── */
 html.dark #official-resources .border-emerald-200,
 html.dark #official-resources .border-blue-200,
 html.dark #official-resources .border-amber-200,
 html.dark #official-resources .border-purple-200 {
   border-color: #334155 !important;
 }
-html.dark #official-resources .hover\:border-emerald-200:hover,
-html.dark #official-resources .hover\:border-blue-200:hover,
-html.dark #official-resources .hover\:border-amber-200:hover,
-html.dark #official-resources .hover\:border-purple-200:hover {
-  border-color: #334155 !important;
-}
 
-/* ── Text colors in dark mode ── */
-html.dark #official-resources .text-\\[\\#1b3a2d\\] {
+/* ── All text inside cards ── */
+html.dark #official-resources .bg-gradient-to-br * {
   color: #e2e8f0 !important;
 }
-html.dark #official-resources .text-gray-600 {
+html.dark #official-resources .text-gray-600,
+html.dark #official-resources p {
   color: #f8fafc !important;
 }
-html.dark #official-resources .text-\\[\\#5dc48a\\] {
+
+/* ── Card headings ── */
+html.dark #official-resources .bg-gradient-to-br h3 {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .bg-gradient-to-br h3 svg {
+  color: inherit !important;
+}
+
+/* ── Card descriptions ── */
+html.dark #official-resources .bg-gradient-to-br p {
+  color: #f8fafc !important;
+}
+
+/* ── Icon containers ── */
+html.dark #official-resources .bg-\[#1b3a2d\] {
+  background-color: #33415f !important;
+}
+
+/* ── Click to open text ── */
+html.dark #official-resources .bg-gradient-to-br span {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .bg-gradient-to-br span:hover {
+  color: #e2e8f0 !important;
+}
+
+/* ── Click to open text by color class ── */
+html.dark #official-resources .text-\[#5dc48a\] {
   color: #9fd3c7 !important;
 }
 html.dark #official-resources .text-blue-600 {
@@ -469,26 +482,20 @@ html.dark #official-resources .text-purple-600 {
   color: #c4b5fd !important;
 }
 
-/* ── Hover text states ── */
-html.dark #official-resources .group-hover\\:text-\\[\\#4ab878\\]:hover,
-html.dark #official-resources .group-hover\\:text-blue-800\\:hover,
-html.dark #official-resources .group-hover\\:text-amber-800\\:hover,
-html.dark #official-resources .group-hover\\:text-purple-800\\:hover {
+/* ── Hover states for Click to open ── */
+html.dark #official-resources .bg-gradient-to-br span:active,
+html.dark #official-resources .bg-gradient-to-br span:focus,
+html.dark #official-resources a:hover .bg-gradient-to-br span,
+html.dark #official-resources a:focus .bg-gradient-to-br span {
   color: #e2e8f0 !important;
 }
 
-/* ── Card heading icons ── */
-html.dark #official-resources h3 .icon-green,
-html.dark #official-resources h3 .icon-sky,
-html.dark #official-resources h3 .icon-purple,
-html.dark #official-resources h3 .icon-amber,
-html.dark #official-resources .text-2xl .icon-amber {
-  color: inherit !important;
-}
-
-/* ── Icon colors in dark mode ── */
+/* ── Font Awesome icons ── */
 html.dark #official-resources .fa-solid,
 html.dark #official-resources svg {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .text-white {
   color: #e2e8f0 !important;
 }
 
