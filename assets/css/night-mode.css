@@ -658,3 +658,18 @@ html.dark .bg-\\[\\#f5f0e8\\] p {
 html.dark .bg-\\[\\#f5f0e8\\] a.inline-block {
   border-color: #6a5a8a !important;
 }
+
+/* ── Weather Card dark mode ── */
+html.dark .weather-card .background {
+  background: linear-gradient(90deg, #2a1a5a 0%, #1a1040 100%) !important;
+}
+html.dark .weather-card .loc-row,
+html.dark .weather-card .loc-row .loc-text,
+html.dark .weather-card .main-text,
+html.dark .weather-card .main-text #weather-temp,
+html.dark .weather-card .info .val {
+  color: #e0d8f0 !important;
+}
+html.dark .weather-card .info .text-gray {
+  color: rgba(200, 190, 220, 0.5) !important;
+}
