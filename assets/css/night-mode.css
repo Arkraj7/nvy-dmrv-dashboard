@@ -643,3 +643,18 @@ html.dark .survey-close-btn {
 html.dark .survey-icon i {
   color: #a098b0 !important;
 }
+
+/* ── Hero Box dark mode ── */
+html.dark .bg-\\[\\#f5f0e8\\] {
+  background-color: #2a2a3e !important;
+  border-color: #3a3a50 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] h1 {
+  color: #e8e0f0 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] p {
+  color: #b0a8c0 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] a.inline-block {
+  border-color: #6a5a8a !important;
+}
