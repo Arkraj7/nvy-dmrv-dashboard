@@ -613,3 +613,17 @@ html.dark .quick-questions button:hover {
   background: #5a4a6a !important;
   color: #f0e8e0 !important;
 }
+
+/* ── Weather Card dark mode ── */
+html.dark .weather-card .bg-gradient {
+  background: linear-gradient(135deg, #2a1a5a 0%, #1a1040 100%) !important;
+}
+html.dark .weather-card .loc-row,
+html.dark .weather-card .main-temp,
+html.dark .weather-card .weather-icon,
+html.dark .weather-card .info-row .value {
+  color: #e0d8f0 !important;
+}
+html.dark .weather-card .info-row .label {
+  color: rgba(200, 190, 220, 0.5) !important;
+}
