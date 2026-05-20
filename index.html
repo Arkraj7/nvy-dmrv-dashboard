@@ -825,6 +825,65 @@
         .btn-hover-effect { position: relative; overflow: hidden; }
         .btn-hover-effect::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.2); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
         .btn-hover-effect:active::after { width: 200px; height: 200px; }
+
+        .button {
+          display: inline-block;
+          padding: 12px 24px;
+          border: 1px solid #4f4f4f;
+          border-radius: 4px;
+          transition: all 0.2s ease-in;
+          position: relative;
+          overflow: hidden;
+          font-size: 19px;
+          cursor: pointer;
+          color: black;
+          z-index: 1;
+          background: white;
+          width: 100%;
+          max-width: 400px;
+        }
+        .button:before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%) scaleY(1) scaleX(1.25);
+          top: 100%;
+          width: 140%;
+          height: 180%;
+          background-color: rgba(0, 0, 0, 0.05);
+          border-radius: 50%;
+          display: block;
+          transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+          z-index: -1;
+        }
+        .button:after {
+          content: "";
+          position: absolute;
+          left: 55%;
+          transform: translateX(-50%) scaleY(1) scaleX(1.45);
+          top: 180%;
+          width: 160%;
+          height: 190%;
+          background-color: #39bda7;
+          border-radius: 50%;
+          display: block;
+          transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+          z-index: -1;
+        }
+        .button:hover {
+          color: #ffffff;
+          border: 1px solid #39bda7;
+        }
+        .button:hover:before {
+          top: -35%;
+          background-color: #39bda7;
+          transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
+        .button:hover:after {
+          top: -45%;
+          background-color: #39bda7;
+          transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
     </style>
 <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -1081,6 +1140,10 @@
                                     <h4 class="font-bold text-[#1b3a2d] text-sm" data-i18n="pillar4">Viksit Bharat Vision</h4>
                                     <p class="text-xs text-gray-600 mt-1" data-i18n="pillar4Desc">Digital auditing (DMRV) & civic participation</p>
                                 </div>
+                            </div>
+                            <p class="text-white text-sm mt-5 mb-3 text-center opacity-90">Have valuable information to share, interested in exploring a collaboration, or simply have a question? We would love to hear from you.</p>
+                            <div class="text-center">
+                                <button class="button" onclick="window.location.href='about.html#contact'">Get in Touch</button>
                             </div>
                         </div>
                     </div>
