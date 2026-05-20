@@ -137,7 +137,7 @@ html.dark #acknowledgmentPopup .popup-content h3,
 html.dark #acknowledgmentPopup .popup-content p,
 html.dark #acknowledgmentPopup .popup-content strong,
 html.dark #acknowledgmentPopup .popup-content label {
-  color: #f8fafc !important;
+  color: #000000 !important;
 }
 /* ── Ensure checkbox and button are visible ── */
 html.dark #acknowledgmentPopup .popup-checkbox input[type="checkbox"] {
