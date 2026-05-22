@@ -979,63 +979,7 @@
           transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
         }
 
-        /* From Uiverse.io by vinodjangid07 */
-        .Btn-Container {
-          display: flex;
-          width: fit-content;
-          min-width: 200px;
-          height: fit-content;
-          background-color: #1d2129;
-          border-radius: 40px;
-          box-shadow: 0px 5px 10px #bebebe;
-          justify-content: space-between;
-          align-items: center;
-          border: none;
-          cursor: pointer;
-          text-decoration: none;
-          overflow: hidden;
-        }
-        .icon-Container {
-          width: 45px;
-          height: 45px;
-          background-color: #f59aff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          border: 3px solid #1d2129;
-          flex-shrink: 0;
-          box-sizing: border-box;
-        }
-        .text {
-          flex: 1;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 1.1em;
-          letter-spacing: 1.2px;
-          padding: 0 24px;
-          white-space: nowrap;
-        }
-        .icon-Container svg {
-          transition-duration: 1.5s;
-        }
-        .Btn-Container:hover .icon-Container svg {
-          transition-duration: 1.5s;
-          animation: arrow 1s linear infinite;
-        }
-        @keyframes arrow {
-          0% {
-            opacity: 0;
-            margin-left: 0px;
-          }
-          100% {
-            opacity: 1;
-            margin-left: 10px;
-          }
-        }
+
 
         /* ========== MOBILE RESPONSIVE ENHANCEMENTS ========== */
         .mobile-menu-btn, .theme-toggle-mobile { display: none; }
@@ -1602,11 +1546,11 @@
                         Quantify the environmental impact of your urban green space. Calculate CO₂ sequestration, biodiversity potential, localised cooling, air quality improvement, stormwater runoff reduction, and your <strong class="text-[#1b3a2d]">Green Branding Score</strong> — all tailored to your site's inputs.
                     </p>
                 </div>
-                <a href="green-calculator.html" target="_blank" class="Btn-Container" aria-label="Open Green Calculator">
-                    <span class="icon-Container">
-                        <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M12 10v4"/><path d="M10 12h4"/></svg>
-                    </span>
-                    <span class="text">Open Green Calculator</span>
+                <a href="green-calculator.html" target="_blank" class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group">
+                    Open Green Calculator
+                    <svg class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" class="fill-gray-800 group-hover:fill-gray-800"></path>
+                    </svg>
                 </a>
             </div>
         </footer>

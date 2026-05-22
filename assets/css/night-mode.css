@@ -497,11 +497,16 @@ html.dark footer.glass-panel {
   background: #1e293b !important;
   border-top-color: #334155 !important;
 }
-html.dark .Btn-Container {
-  box-shadow: 0px 5px 10px rgba(0,0,0,0.3) !important;
+
+/* ── Green Calculator button (Uiverse nathAd17) dark mode ── */
+html.dark footer.glass-panel a[href="green-calculator.html"] {
+  border-color: #475569 !important;
 }
-html.dark .icon-Container {
-  border-color: #1e293b !important;
+html.dark footer.glass-panel a[href="green-calculator.html"] .fill-gray-800 {
+  fill: #e2e8f0 !important;
+}
+html.dark footer.glass-panel a[href="green-calculator.html"] svg {
+  border-color: #475569 !important;
 }
 
 /* ── Key Strategic Pillars dark mode - black background ── */
