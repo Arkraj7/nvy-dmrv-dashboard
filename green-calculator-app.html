@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Calculator Tool — Nagar Van DMRV</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="https://arkraj7.github.io/csid/Leaf-and-Ledger/style.css">
+
+</head>
+<body class="bg-light">
+
+  <div class="nav-bar bg-success">
+    <header class="py-2 pt-3 pb-3 text-center">
+      <h1 class="--fw-bold --text-success">Green Calculator Tool</h1>
+    </header>
+  </div>
+
+  <div class="--container con pb-5">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="first-row">
+          <div class="cardd p-4 mb-4">
+
+          <ul class="nav nav-tabs" id="calculatorTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="green-tab" data-bs-toggle="tab" data-bs-target="#green" type="button" role="tab">
+              Green Space & Biodiversity
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="energy-tab" data-bs-toggle="tab" data-bs-target="#energy" type="button" role="tab">
+              Energy & Built Environment
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="water-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab">
+              Water Use & Management
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="waste-tab" data-bs-toggle="tab" data-bs-target="#waste" type="button" role="tab">
+              Waste & Circularity
+            </button>
+          </li>
+        </ul>
+
+      <div class="tab-content" id="calculatorTabContent">
+        
+        <div class="tab-pane fade show active" id="green" role="tabpanel">
+          <div class="form-group">
+            <div class="title-row">
+              <label for="trees">Number of Trees</label>
+              <input type="number" id="trees" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('trees','treesRange')" readonly> 
+            </div> <div class="input-row">
+            
+
+            <input type="range" id="treesRange" class="--form-range" min="0" max="200" value="0"
+          oninput="validateNonNegative(this); syncInput('trees','treesRange');">
+            </div> 
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="species">Number of Species</label>
+              <input type="number" id="species" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('species','speciesRange')" readonly>
+            </div>
+            <div class="input-row">
+              <input type="range" id="speciesRange" class="--form-range" min="0" max="50" value="0" oninput="validateNonNegative(this); syncInput('species','speciesRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="area">Area</label>
+
+              <div class="area-div">
+                
+                <div class="unit-toggle btn-group" role="group" aria-label="Unit toggle">
+                  <input type="radio" class="btn-check" name="btnradio-area" id="btnradio1" value="m2" autocomplete="off" checked>
+                  <label class="btn unit-btn" for="btnradio1">m²</label>
+
+                  <input type="radio" class="btn-check" name="btnradio-area" id="btnradio2" value="ac" autocomplete="off">
+                  <label class="btn unit-btn" for="btnradio2">ac</label>
+                </div>
+                <div class="number-with-unit">
+                  <input type="number" id="area" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('area','areaRange')" readonly>
+                  <span id="areaUnit">m²</span>
+                </div>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="areaRange" class="--form-range" min="0" max="10000" value="0" oninput="validateNonNegative(this); syncInput('area','areaRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="duration">Project Duration</label>
+              <div class="number-with-unit">
+                <input type="number" id="duration" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('duration','durationRange')" readonly>
+                <span>yr</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="durationRange" class="--form-range" min="0" max="50" value="0" oninput="validateNonNegative(this); syncInput('duration','durationRange')">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="energy" role="tabpanel">
+          <div class="form-group">
+            <div class="title-row">
+              <label for="electricity">Electricity Consumption</label>
+              <div class="number-with-unit">
+                <input type="number" id="electricity" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('electricity','electricityRange')">
+                <span>kWh/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="electricityRange" class="--form-range" min="0" max="5000" value="0" oninput="validateNonNegative(this); syncInput('electricity','electricityRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="renewable">Renewable Electricity Used</label>
+              <div class="number-with-unit">
+                <input type="number" id="renewable" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('renewable','renewableRange')">
+                <span>kWh/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="renewableRange" class="--form-range" min="0" max="5000" value="0" oninput="validateNonNegative(this); syncInput('renewable','renewableRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="powerRating">Power Rating of Equipment</label>
+              <div class="number-with-unit">
+                <input type="number" id="powerRating" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('powerRating','powerRatingRange')">
+                <span>kW</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="powerRatingRange" class="--form-range" min="0" max="50" value="0" oninput="validateNonNegative(this); syncInput('powerRating','powerRatingRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="operatingHours">Operating Hours per Day</label>
+              <div class="number-with-unit">
+                <input type="number" id="operatingHours" class="form-control w-auto" value="0" min="0" max="24" oninput="validateNonNegative(this); syncSlider('operatingHours','operatingHoursRange')">
+                <span>Hours/day</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="operatingHoursRange" class="--form-range" min="0" max="24" value="0" oninput="validateNonNegative(this); syncInput('operatingHours','operatingHoursRange')">
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="water" role="tabpanel">
+          <div class="form-group">
+            <div class="title-row">
+              <label for="waterWithdrawal">Water Withdrawal</label>
+              <div class="number-with-unit">
+                <input type="number" id="waterWithdrawal" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('waterWithdrawal','waterWithdrawalRange')">
+                <span>Litres/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="waterWithdrawalRange" class="--form-range" min="0" max="200000" value="0" oninput="validateNonNegative(this); syncInput('waterWithdrawal','waterWithdrawalRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="waterDischarged">Water Discharged</label>
+              <div class="number-with-unit">
+                <input type="number" id="waterDischarged" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('waterDischarged','waterDischargedRange')">
+                <span>Litres/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="waterDischargedRange" class="--form-range" min="0" max="200000" value="0" oninput="validateNonNegative(this); syncInput('waterDischarged','waterDischargedRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="waterReused">Water Reused</label>
+              <div class="number-with-unit">
+                <input type="number" id="waterReused" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('waterReused','waterReusedRange')">
+                <span>Litres/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="waterReusedRange" class="--form-range" min="0" max="200000" value="0" oninput="validateNonNegative(this); syncInput('waterReused','waterReusedRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="siteArea">Site Area</label>
+
+              <div class="area-div">
+                
+                <div class="unit-toggle btn-group" role="group" aria-label="Unit toggle">
+                  <input type="radio" class="btn-check" name="btnradio-siteArea" id="btnradio3" value="m2" autocomplete="off" checked>
+                  <label class="btn unit-btn" for="btnradio3">m²</label>
+
+                  <input type="radio" class="btn-check" name="btnradio-siteArea" id="btnradio4" value="ac" autocomplete="off">
+                  <label class="btn unit-btn" for="btnradio4">ac</label>
+                </div>
+                <div class="number-with-unit">
+                  <input type="number" id="siteArea" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('siteArea','siteAreaRange')">
+                  <span id="areaUnit2">m²</span>
+                </div>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="siteAreaRange" class="--form-range" min="0" max="10000" value="0" oninput="validateNonNegative(this); syncInput('siteArea','siteAreaRange')">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="waste" role="tabpanel">
+          <div class="form-group">
+            <div class="title-row">
+              <label for="hazardousWaste">Hazardous Waste</label>
+              <div class="number-with-unit">
+                <input type="number" id="hazardousWaste" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('hazardousWaste','hazardousWasteRange')">
+                <span>kg/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="hazardousWasteRange" class="--form-range" min="0" max="200" value="0" oninput="validateNonNegative(this); syncInput('hazardousWaste','hazardousWasteRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="nonHazardousWaste">Non-Hazardous Waste</label>
+              <div class="number-with-unit">
+                <input type="number" id="nonHazardousWaste" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('nonHazardousWaste','nonHazardousWasteRange')">
+                <span>kg/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="nonHazardousWasteRange" class="--form-range" min="0" max="5000" value="0" oninput="validateNonNegative(this); syncInput('nonHazardousWaste','nonHazardousWasteRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="wasteRecycled">Waste Recycled</label>
+              <div class="number-with-unit">
+                <input type="number" id="wasteRecycled" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('wasteRecycled','wasteRecycledRange')">
+                <span>kg/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="wasteRecycledRange" class="--form-range" min="0" max="5000" value="0" oninput="validateNonNegative(this); syncInput('wasteRecycled','wasteRecycledRange')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="title-row">
+              <label for="wasteLandfill">Waste Sent to Landfill</label>
+              <div class="number-with-unit">
+                <input type="number" id="wasteLandfill" class="form-control w-auto" value="0" min="0" oninput="validateNonNegative(this); syncSlider('wasteLandfill','wasteLandfillRange')">
+                <span>kg/year</span>
+              </div>
+            </div>
+            <div class="input-row">
+              <input type="range" id="wasteLandfillRange" class="--form-range" min="0" max="5000" value="0" oninput="validateNonNegative(this); syncInput('wasteLandfill','wasteLandfillRange')">
+            </div>
+          </div>
+        </div>
+
+      </div>  
+
+
+        <div class="text-center mt-3">
+          <button class="btn btn-success rounded-pill px-4" id="watchAdBtn" onclick="startCalculations()">
+            <i class="bi bi-play-circle"></i> Generate Metrics
+          </button>
+          <button class="btn btn-outline-primary px-4" id="generateAgainBtn" style="display: none;" onclick="generateAgain()">
+              <i class="bi bi-arrow-clockwise"></i> Generate Again
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="report-section">
+      <div class="row g-4" id="results">
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🌳</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Annual CO₂<br> Sequestration</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="co2">••••</div>
+              <div class="metric-unit">kg/year</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              This metric estimates the amount of carbon dioxide absorbed from the atmosphere annually. The value of 21.8 kg is a widely used average for the annual sequestration rate of a mature tree, derived from forestry research.
+            </div>            
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🌿</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Biodiversity<br> Potential Index</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="biodiversity">••••</div>
+              <div class="metric-unit"></div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              This is a relative score indicating the complexity of the habitat. A higher variety of species in a given area generally supports a richer ecosystem. This index provides a simple measure of this potential.
+            </div>            
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🌡️</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Localized<br> Cooling Effect</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="cooling">••••</div>
+              <div class="metric-unit">°C</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              This estimates the potential reduction in local ambient air temperature. Urban green spaces can lower temperatures by 0.7°C to 1.3°C compared to open areas. This formula uses a conservative estimate based on an average reduction of 0.2°C per 100 m² of canopy cover.
+            </div>            
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">💨</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Air Quality<br> Improvement</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="air">••••</div>
+              <div class="metric-unit">kg/year</div>
+
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              This calculates the estimated annual removal of harmful fine particulate matter (PM2.5) from the air. Large, healthy trees can remove significantly more pollution than smaller trees; this formula uses a conservative average based on urban forestry studies.
+            </div>            
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">💧</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Stormwater<br> Runoff Reduction</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="stormwater">••••</div>
+              <div class="metric-unit">L/year</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              This metric estimates the volume of rainwater intercepted by vegetation, which reduces the load on drainage systems. The value is based on an average interception rate of 100 litres per square meter of green space, derived from hydrological models.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm position-relative">
+            <div class="metric-row">
+              <div class="metric-icon">⭐</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Green<br> Branding Score</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="branding">••••</div>
+              <div class="metric-unit"></div>
+            </div>
+           
+            <div class="custom-tooltip branding-tooltip">
+              A proprietary, motivational score that reflects the scale, complexity, and maturity of the greening initiative. The logarithmic scale indicates that while all contributions are valuable, sustained and diverse projects have a greater cumulative impact.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mt-5 mb-3 text-center">
+          <hr class="mx-auto" style="width: 60%; opacity: 0.3;">
+          <h5 class="fw-bold text-secondary mt-3">Top 3 Relatable Equivalents</h5>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🚗</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Cars Taken<br>Off the Road</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="cars">••••</div>
+              <div class="metric-unit">cars/year</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              Equivalent number of average petrol cars' annual CO₂ emissions avoided.
+              <br><strong>Formula:</strong> CO₂_sequestered_kg ÷ 1710 (kg CO₂ per car-year)
+            </div>
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🏠</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Household Electricity<br>Offset (Annual)</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="households">••••</div>
+              <div class="metric-unit">household-years</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              Equivalent to the annual electricity use of average households offset by saved emissions.
+              <br><strong>Formula:</strong> CO₂_sequestered_kg ÷ 3000 (kg CO₂ per household-year)
+            </div>
+          </div>
+        </div>
+
+        <div class="col-custom">
+          <div class="metric-card p-4 text-center shadow-sm">
+            <div class="metric-row">
+              <div class="metric-icon">🌲</div>
+              <i class="bi bi-info-circle info-icon branding-info"></i>
+            </div>
+            <div class="metric-label">Carbon Credits<br>(Approx.)</div>
+            <div class="metric-value-outer">
+              <div class="metric-value" id="credits">••••</div>
+              <div class="metric-unit">credits (1 tCO₂)</div>
+            </div>
+            <div class="custom-tooltip branding-tooltip">
+              Approximate number of 1-tonne CO₂ credits represented.
+              <br><strong>Formula:</strong> CO₂_sequestered_kg ÷ 1000
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="action-buttons" class="mt-4" style="display: none;">
+        <div class="row g-3">
+          
+        </div>
+      </div>
+
+    </div>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="cardd p-4 shadow-sm border-0 sticky-top" style="top: 20px; border-radius: 16px; background-color: #f8fbf9;">
+          <h4 class="fw-bold text-success mb-3" style="font-family: 'Noto Sans', sans-serif;">
+            <i class="bi bi-info-circle-fill me-2"></i>Data Guide
+          </h4>
+          <p class="text-muted small mb-4">Not sure what to enter? Here is how to find these numbers for your space.</p>
+
+          <div id="info-green" class="tab-info-content">
+            <h6 class="fw-bold text-dark">🌳 Green Space & Biodiversity</h6>
+            <ul class="list-unstyled small mt-3 space-y-3">
+              <li class="mb-3"><strong>Number of Trees:</strong> Total mature trees on the property. <br><em class="text-muted">How to find:</em> Physically count them or check landscape architectural plans.</li>
+              <li class="mb-3"><strong>Number of Species:</strong> The variety of different plants/trees. <br><em class="text-muted">How to find:</em> Ask your local gardener or estimate the distinct types of foliage.</li>
+              <li class="mb-3"><strong>Area:</strong> Total physical green space. <br><em class="text-muted">How to find:</em> Check property deeds, facility maps, or use the measure tool on Google Maps.</li>
+              <li class="mb-3"><strong>Project Duration:</strong> How long the green space has been established. <br><em class="text-muted">How to find:</em> Check planting or property acquisition records.</li>
+            </ul>
+          </div>
+
+          <div id="info-energy" class="tab-info-content" style="display: none;">
+            <h6 class="fw-bold text-dark">⚡ Energy & Built Environment</h6>
+            <ul class="list-unstyled small mt-3 space-y-3">
+              <li class="mb-3"><strong>Electricity Consumption:</strong> Total annual power used. <br><em class="text-muted">How to find:</em> Check your monthly electricity bills. Add up the 'kWh' for the last 12 months.</li>
+              <li class="mb-3"><strong>Renewable Electricity:</strong> Solar or wind power generated/purchased. <br><em class="text-muted">How to find:</em> Check your solar inverter app or green tariff details on your utility bill.</li>
+              <li class="mb-3"><strong>Power Rating:</strong> Maximum power of specific equipment. <br><em class="text-muted">How to find:</em> Look at the compliance sticker on the back of appliances (look for 'Watts' or 'kW').</li>
+              <li class="mb-3"><strong>Operating Hours:</strong> Daily usage of your space/equipment. <br><em class="text-muted">How to find:</em> Estimate based on standard office hours (e.g., 8-10 hours) or home occupancy.</li>
+            </ul>
+          </div>
+
+          <div id="info-water" class="tab-info-content" style="display: none;">
+            <h6 class="fw-bold text-dark">💧 Water Use & Management</h6>
+            <ul class="list-unstyled small mt-3 space-y-3">
+              <li class="mb-3"><strong>Water Withdrawal:</strong> Total fresh water brought into the facility. <br><em class="text-muted">How to find:</em> Check municipal water bills (often listed in Litres, cubic meters, or Gallons).</li>
+              <li class="mb-3"><strong>Water Discharged:</strong> Water sent into the sewage system. <br><em class="text-muted">How to find:</em> Usually equal to your withdrawal minus any water used purely for landscaping/gardens.</li>
+              <li class="mb-3"><strong>Water Reused:</strong> Rainwater harvested or greywater recycled. <br><em class="text-muted">How to find:</em> Check the capacity of your rainwater harvesting tanks.</li>
+              <li class="mb-3"><strong>Site Area:</strong> Total footprint of your property. <br><em class="text-muted">How to find:</em> Real estate documents, lease agreements, or Google Maps.</li>
+            </ul>
+          </div>
+
+          <div id="info-waste" class="tab-info-content" style="display: none;">
+            <h6 class="fw-bold text-dark">♻️ Waste & Circularity</h6>
+            <ul class="list-unstyled small mt-3 space-y-3">
+              <li class="mb-3"><strong>Hazardous Waste:</strong> Batteries, e-waste, chemicals, paints. <br><em class="text-muted">How to find:</em> Check disposal receipts from specialized e-waste or chemical recycling vendors.</li>
+              <li class="mb-3"><strong>Non-Hazardous Waste:</strong> Regular everyday garbage. <br><em class="text-muted">How to find:</em> Weigh a typical daily trash bag, multiply by days open per year. Or check municipal waste manifests.</li>
+              <li class="mb-3"><strong>Waste Recycled:</strong> Paper, plastic, cardboard, glass. <br><em class="text-muted">How to find:</em> Estimate the percentage of your waste that goes into the blue/green recycling bins.</li>
+              <li class="mb-3"><strong>Waste Sent to Landfill:</strong> Trash not recycled or composted. <br><em class="text-muted">How to find:</em> Subtract your recycled waste from your total non-hazardous waste.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="d-flex justify-content-center align-items-center py-3 border-top" style="background: #f8f9fa; margin-top: 20px;">
+      <span class="text-body-secondary">© 2026 Nagar Van DMRV Dashboard. All rights reserved.</span>
+    </footer>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <script src="assets/js/green-calculator.js"></script>
+
+  <!-- Thank You Modal -->
+  <div id="thank-you-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="modal-content" style="background: #fff; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+      <div style="font-size: 60px; margin-bottom: 20px;">🌿</div>
+      <h2 style="color: #198754; font-size: 24px; font-weight: bold; margin-bottom: 16px; font-family: 'Noto Sans', sans-serif;">Thank you for your concern for the environment!</h2>
+      <p id="countdown-text" style="color: #6c757d; font-size: 16px; margin-bottom: 30px; font-family: 'Noto Sans', sans-serif;">We are calculating your impact. You will be redirected in <span id="countdown-number">10</span> seconds...</p>
+      <button id="manual-redirect-btn" style="background: #198754; color: #fff; border: none; padding: 14px 32px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-family: 'Noto Sans', sans-serif;" onmouseover="this.style.background='#157347'" onmouseout="this.style.background='#198754'">Take me to results</button>
+    </div>
+  </div>
+
+</body>
+</html>
