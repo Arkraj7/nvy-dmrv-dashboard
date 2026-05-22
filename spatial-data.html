@@ -657,7 +657,9 @@ async function fetchWeather(nv) {
     const w = d.current_weather;
     const hum = d.hourly?.relativehumidity_2m?.[0] ?? '—';
     const pre = d.hourly?.precipitation_probability?.[0] ?? '—';
-    const ico = w.weathercode <= 2 ? '☀️' : w.weathercode <= 48 ? '🌤️' : w.weathercode <= 67 ? '🌧️' : '⛈️';
+    const hr = new Date().getHours();
+    const isNight = hr < 6 || hr >= 18;
+    const ico = w.weathercode <= 2 ? (isNight ? '🌙' : '☀️') : w.weathercode <= 48 ? (isNight ? '🌙' : '🌤️') : w.weathercode <= 67 ? '🌧️' : '⛈️';
     const wdesc = ({0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',51:'Light drizzle',61:'Light rain',63:'Moderate rain',80:'Rain showers',95:'Thunderstorm'})[w.weathercode] || 'WMO ' + w.weathercode;
     el.innerHTML = '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
       '<div><span style="font-size:36px">' + ico + '</span></div>' +
