@@ -386,6 +386,50 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; b
 
 <style>
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+/* ── Dark mode: Data Sources table ── */
+html.dark div[style*="background:#fff"][style*="border:1px solid #e2e8f0"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+html.dark .data-table th {
+  color: #e2e8f0 !important;
+  background: rgba(255,255,255,0.05) !important;
+  border-bottom-color: #334155 !important;
+}
+html.dark .data-table td {
+  color: #cbd5e1 !important;
+  border-bottom-color: rgba(255,255,255,0.05) !important;
+}
+html.dark .data-table a {
+  color: #6ee7b7 !important;
+}
+html.dark .data-table tr:hover td {
+  background: rgba(255,255,255,0.03) !important;
+}
+html.dark .b-live {
+  background: rgba(5,150,105,0.15) !important;
+  color: #34d399 !important;
+  border-color: rgba(5,150,105,0.3) !important;
+}
+html.dark .b-lit {
+  background: rgba(2,132,199,0.15) !important;
+  color: #7dd3fc !important;
+  border-color: rgba(2,132,199,0.3) !important;
+}
+html.dark .b-pri {
+  background: rgba(217,119,6,0.15) !important;
+  color: #fcd34d !important;
+  border-color: rgba(217,119,6,0.3) !important;
+}
+html.dark .b-mod {
+  background: rgba(255,255,255,0.06) !important;
+  color: #94a3b8 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+html.dark .section-title {
+  color: #e2e8f0 !important;
+}
 </style>
 
 <script>
