@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Calculator Tool — Nagar Van DMRV</title>
+<meta name="description" content="Quantify the environmental impact of your urban green space — CO₂ sequestration, biodiversity, cooling, air quality, stormwater, and more.">
+<meta name="theme-color" content="#1b3a2d">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="assets/css/night-mode.css">
+<style>
+body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f7f6; color: #1f2937; margin: 0; }
+.icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
+.icon-sm { width: 16px; height: 16px; }
+.calc-iframe { width: 100%; border: none; }
+.site-footer { background: #ffffff; color: #000000; }
+.footer-link { color: #000000; transition: all 0.2s ease; position: relative; text-decoration: none; }
+.footer-link:hover { color: #1b3a2d; }
+.social-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.05); display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.social-icon:hover { background: #5dc48a; transform: translateY(-2px); }
+.loading-overlay { position: fixed; inset: 0; background: rgba(244,247,246,0.92); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s; }
+.loading-overlay.hidden { opacity: 0; pointer-events: none; }
+.spinner { width: 48px; height: 48px; border: 4px solid #e2e8f0; border-top-color: #5dc48a; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.mobile-menu-btn, .theme-toggle-mobile { display: none; }
+@media (max-width: 767px) {
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 1; }
+  .theme-toggle-mobile { display: flex; align-items: center; justify-content: center; padding: 6px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 2; }
+  nav .flex-wrap { flex-wrap: nowrap !important; gap: 6px; }
+  nav [class*="hidden md:flex"] { display: none !important; }
+  .nav-items-desktop { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 1000; border-radius: 0 0 12px 12px; gap: 6px; }
+  .nav-items-desktop.open { display: flex; }
+  .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 10px 12px !important; }
+  .nav-items-desktop > *:hover { background: #f0fdf4; }
+  .nav-items-desktop .theme-toggle { display: none !important; }
+  body { overflow-x: hidden; }
+}
+@media (min-width: 768px) {
+  .mobile-menu-btn, .theme-toggle-mobile { display: none !important; }
+  .nav-items-desktop { display: flex !important; }
+}
+</style>
+<script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p class="mt-4 text-sm text-gray-600 font-medium">Loading Green Calculator...</p>
+</div>
+
+<nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center flex-wrap">
+      <div class="flex items-center gap-3">
+        <div class="w-14 h-14 flex items-center justify-center" role="img" aria-label="Nagar Van logo">
+          <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col hidden md:flex">
+          <a href="index.html" class="font-bold text-xl tracking-wide leading-none">Nagar Van DMRV</a>
+          <span class="text-[9px] text-emerald-700 uppercase tracking-widest font-bold mt-0.5">Green Calculator</span>
+        </div>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <button class="theme-toggle-mobile" id="theme-toggle-mobile" onclick="toggleMobileTheme()" aria-label="Switch to dark mode" type="button">
+        <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      </button>
+
+      <div class="nav-items-desktop flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+        <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1">
+          <svg class="icon icon-sm icon-green"><use href="#icon-home"/></svg><span>Dashboard</span>
+        </a>
+        <a href="spatial-data.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1">
+          <svg class="icon icon-sm icon-sky"><use href="#icon-globe"/></svg><span>Spatial Data</span>
+        </a>
+        <a href="about.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1">
+          <svg class="icon icon-sm icon-purple"><use href="#icon-about"/></svg><span>About</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+          <div class="theme-toggle__container"><div class="theme-toggle__clouds"></div><div class="theme-toggle__stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.93... (line truncated to 2000 chars)</svg></div><div class="theme-toggle__sun"><div class="theme-toggle__moon-mask"><div class="theme-toggle__crater"></div><div class="theme-toggle__crater"></div><div class="theme-toggle__crater"></div></div></div></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header style="background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 20px 40px;">
+  <div style="max-width: 1380px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 7px; background: rgba(27,58,45,0.06); border: 1px solid #5dc48a; border-radius: 20px; padding: 4px 14px; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #1b3a2d; margin-bottom: 8px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #5dc48a; display: inline-block;"></span> CSID Green Calculator Toolkit
+      </div>
+      <h1 style="font-size: clamp(20px, 2.5vw, 32px); font-weight: 700; color: #1b3a2d; margin: 0;">
+        Your <span style="color: #5dc48a;">Green Calculator</span> Tool
+      </h1>
+      <p style="font-size: 13px; color: #6b7280; margin-top: 4px; line-height: 1.5; max-width: 600px;">
+        Quantify CO₂ sequestration, biodiversity potential, cooling effect, air quality improvement, stormwater runoff reduction &amp; your Green Branding Score.
+      </p>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-lg text-sm font-bold text-[#1b3a2d] hover:border-[#5dc48a] transition-all">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard
+      </a>
+    </div>
+  </div>
+</header>
+
+<main style="max-width: 1400px; margin: 0 auto; padding: 0;">
+  <iframe id="calcFrame" class="calc-iframe" src="https://arkraj7.github.io/csid/Leaf-and-Ledger/calculator.html" style="min-height: 100vh;" onload="document.getElementById('loadingOverlay').classList.add('hidden'); resizeIframe(this);"></iframe>
+</main>
+
+<footer class="site-footer py-10 px-4" role="contentinfo">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">About Portal</h4>
+        <p class="text-sm text-black">The Nagar Van DMRV Dashboard is an AI-powered platform for tracking India's urban forest impacts.</p>
+      </div>
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="footer-link">Dashboard</a></li>
+          <li><a href="spatial-data.html" class="footer-link">Spatial Data</a></li>
+          <li><a href="report.html" class="footer-link">Report Issue</a></li>
+          <li><a href="mailto:arkraj.biswas6@gmail.com" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">Connect</h4>
+        <div class="flex gap-3">
+          <a href="https://linkedin.com/in/arkraj-biswas-kugel" target="_blank" class="social-icon">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-300 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+      <div class="flex gap-4 text-xs text-black">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-link">Terms of Use</a>
+        <a href="cookies.html" class="footer-link">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+<symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
+<symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+<symbol id="icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+<symbol id="icon-sky" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
+<symbol id="icon-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+</svg>
+
+<script src="assets/js/night-mode.js"></script>
+<script>
+function resizeIframe(iframe) {
+  try {
+    iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+  } catch(e) {}
+}
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'resize') {
+    document.getElementById('calcFrame').style.height = e.data.height + 'px';
+  }
+});
+
+function toggleMobileMenu() {
+  const menu = document.querySelector('.nav-items-desktop');
+  const btn = document.getElementById('mobile-menu-btn');
+  const isOpen = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+  const iconBars = btn.querySelector('svg:first-child');
+  const iconClose = btn.querySelector('svg:nth-child(2)');
+  if (iconBars) iconBars.classList.toggle('hidden', isOpen);
+  if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+}
+
+document.addEventListener('click', function(e) {
+  const menu = document.querySelector('.nav-items-desktop');
+  const btn = document.getElementById('mobile-menu-btn');
+  if (menu && btn && !btn.contains(e.target) && !menu.contains(e.target) && menu.classList.contains('open')) {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    const iconBars = btn.querySelector('svg:first-child');
+    const iconClose = btn.querySelector('svg:nth-child(2)');
+    if (iconBars) iconBars.classList.remove('hidden');
+    if (iconClose) iconClose.classList.add('hidden');
+  }
+});
+
+function toggleMobileTheme() {
+  document.getElementById('theme-toggle-btn').click();
+  const isDark = document.documentElement.classList.contains('dark');
+  const mobBtn = document.getElementById('theme-toggle-mobile');
+  if (mobBtn) {
+    const moon = mobBtn.querySelector('.moon-icon');
+    const sun = mobBtn.querySelector('.sun-icon');
+    if (moon) moon.classList.toggle('hidden', isDark);
+    if (sun) sun.classList.toggle('hidden', !isDark);
+  }
+}
+(function() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const mobBtn = document.getElementById('theme-toggle-mobile');
+  if (mobBtn) {
+    const moon = mobBtn.querySelector('.moon-icon');
+    const sun = mobBtn.querySelector('.sun-icon');
+    if (moon) moon.classList.toggle('hidden', isDark);
+    if (sun) sun.classList.toggle('hidden', !isDark);
+  }
+})();
+
+setTimeout(function() {
+  document.getElementById('loadingOverlay').classList.add('hidden');
+}, 8000);
+</script>
+
+</body>
+</html>
