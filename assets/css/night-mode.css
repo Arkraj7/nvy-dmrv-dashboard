@@ -701,3 +701,17 @@ html.dark .from-emerald-50.to-green-50 .text-gray-700 {
 html.dark .from-emerald-50.to-green-50 > .space-y-4 > div {
   background: rgba(255,255,255,0.05) !important;
 }
+
+/* ── Uiverse sekaiking View Spatial Data button dark mode ── */
+html.dark .btn-spatial {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+html.dark .btn-spatial:hover {
+  box-shadow: 2px 5px 0 0 #475569 !important;
+}
+html.dark .btn-spatial:active {
+  box-shadow: 0 0 0 0 transparent !important;
+}

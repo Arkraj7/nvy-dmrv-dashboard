@@ -1036,6 +1036,29 @@
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 16px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] [class*="text-[10px]"] { font-size: 8px; }
         }
+        /* ── Uiverse sekaiking button for View Spatial Data ── */
+        .btn-spatial {
+          background-color: white;
+          color: black;
+          border-radius: 10em;
+          font-size: 17px;
+          font-weight: 600;
+          padding: 1em 2em;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+          border: 1px solid black;
+          box-shadow: 0 0 0 0 black;
+          display: inline-block;
+          text-decoration: none;
+        }
+        .btn-spatial:hover {
+          transform: translateY(-4px) translateX(-2px);
+          box-shadow: 2px 5px 0 0 black;
+        }
+        .btn-spatial:active {
+          transform: translateY(2px) translateX(1px);
+          box-shadow: 0 0 0 0 black;
+        }
     </style>
 <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -1221,7 +1244,7 @@
             <p class="text-gray-700 text-base md:text-lg mb-8 max-w-3xl mx-auto">A comprehensive DMRV dashboard for tracking urban forestry. Monitor ecological health, socio-economic benefits, and community resilience metrics all in one centralized platform.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="#main-content" class="inline-block px-8 py-3 bg-[#1b3a2d] text-white rounded-lg font-semibold hover:bg-[#2d5a4d] transition">Enter Dashboard</a>
-                <a href="spatial-data.html" target="_blank" class="inline-block px-8 py-3 bg-white text-[#1b3a2d] border-2 border-[#1b3a2d] rounded-lg font-semibold hover:bg-[#1b3a2d] hover:text-white transition">View Spatial Data</a>
+                <a href="spatial-data.html" target="_blank" class="btn-spatial">View Spatial Data</a>
             </div>
         </div>
 
