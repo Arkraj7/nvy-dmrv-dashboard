@@ -497,13 +497,11 @@ html.dark footer.glass-panel {
   background: #1e293b !important;
   border-top-color: #334155 !important;
 }
-html.dark .calculator-btn {
-  animation: none !important;
-  border-color: #475569 !important;
-  box-shadow: none !important;
+html.dark .Btn-Container {
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.3) !important;
 }
-html.dark .calculator-btn:hover {
-  border-color: #6ee7b7 !important;
+html.dark .icon-Container {
+  border-color: #1e293b !important;
 }
 
 /* ── Key Strategic Pillars dark mode - black background ── */

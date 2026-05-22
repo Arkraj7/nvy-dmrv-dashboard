@@ -979,18 +979,62 @@
           transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
         }
 
-        .calculator-btn {
-          animation: border-cycle 4s ease-in-out infinite;
+        /* From Uiverse.io by vinodjangid07 */
+        .Btn-Container {
+          display: flex;
+          width: fit-content;
+          min-width: 200px;
+          height: fit-content;
+          background-color: #1d2129;
+          border-radius: 40px;
+          box-shadow: 0px 5px 10px #bebebe;
+          justify-content: space-between;
+          align-items: center;
+          border: none;
+          cursor: pointer;
+          text-decoration: none;
+          overflow: hidden;
         }
-        .calculator-btn:hover {
-          animation-duration: 1.5s;
+        .icon-Container {
+          width: 45px;
+          height: 45px;
+          background-color: #f59aff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          border: 3px solid #1d2129;
+          flex-shrink: 0;
+          box-sizing: border-box;
         }
-        @keyframes border-cycle {
-          0% { border-color: #5dc48a; box-shadow: 0 0 0 0 rgba(93,196,138,0.3); }
-          25% { border-color: #3d9a6a; box-shadow: 0 0 0 4px rgba(61,154,106,0.2); }
-          50% { border-color: #1b3a2d; box-shadow: 0 0 0 0 rgba(27,58,45,0.3); }
-          75% { border-color: #4ab878; box-shadow: 0 0 0 4px rgba(74,184,120,0.2); }
-          100% { border-color: #5dc48a; box-shadow: 0 0 0 0 rgba(93,196,138,0.3); }
+        .text {
+          flex: 1;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.1em;
+          letter-spacing: 1.2px;
+          padding: 0 24px;
+          white-space: nowrap;
+        }
+        .icon-Container svg {
+          transition-duration: 1.5s;
+        }
+        .Btn-Container:hover .icon-Container svg {
+          transition-duration: 1.5s;
+          animation: arrow 1s linear infinite;
+        }
+        @keyframes arrow {
+          0% {
+            opacity: 0;
+            margin-left: 0px;
+          }
+          100% {
+            opacity: 1;
+            margin-left: 10px;
+          }
         }
 
         /* ========== MOBILE RESPONSIVE ENHANCEMENTS ========== */
@@ -1558,10 +1602,11 @@
                         Quantify the environmental impact of your urban green space. Calculate CO₂ sequestration, biodiversity potential, localised cooling, air quality improvement, stormwater runoff reduction, and your <strong class="text-[#1b3a2d]">Green Branding Score</strong> — all tailored to your site's inputs.
                     </p>
                 </div>
-                <a href="green-calculator.html" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#1b3a2d] rounded-xl font-bold text-base border-2 transition-all shadow-lg hover:shadow-xl flex-shrink-0 calculator-btn">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M12 10v4"/><path d="M10 12h4"/></svg>
-                    Open Green Calculator
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                <a href="green-calculator.html" target="_blank" class="Btn-Container" aria-label="Open Green Calculator">
+                    <span class="icon-Container">
+                        <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M12 10v4"/><path d="M10 12h4"/></svg>
+                    </span>
+                    <span class="text">Open Green Calculator</span>
                 </a>
             </div>
         </footer>
