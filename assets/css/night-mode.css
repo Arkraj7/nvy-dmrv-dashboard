@@ -683,3 +683,21 @@ html.dark .weather-card .info .val {
 html.dark .weather-card .info .text-gray {
   color: rgba(200, 190, 220, 0.5) !important;
 }
+
+/* ── MoEF&CC Framework soft-green panel dark mode ── */
+html.dark .from-emerald-50.to-green-50 {
+  background: #0f1a2f !important;
+  border-color: #334155 !important;
+}
+html.dark .from-emerald-50.to-green-50 h3 {
+  color: #e2e8f0 !important;
+}
+html.dark .from-emerald-50.to-green-50 .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+html.dark .from-emerald-50.to-green-50 .text-gray-700 {
+  color: #94a3b8 !important;
+}
+html.dark .from-emerald-50.to-green-50 > .space-y-4 > div {
+  background: rgba(255,255,255,0.05) !important;
+}
