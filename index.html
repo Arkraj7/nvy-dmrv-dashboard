@@ -980,12 +980,19 @@
         }
 
         /* ========== MOBILE RESPONSIVE ENHANCEMENTS ========== */
+        .mobile-menu-btn, .theme-toggle-mobile { display: none; }
         @media (max-width: 767px) {
-          nav .flex-wrap { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 8px; }
-          nav .flex-wrap::-webkit-scrollbar { display: none; }
-          nav .flex-wrap > a, nav .flex-wrap > div, nav .flex-wrap > button { white-space: nowrap; flex-shrink: 0; }
+          .mobile-menu-btn { display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 1; }
+          .theme-toggle-mobile { display: flex; align-items: center; justify-content: center; padding: 6px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 2; }
+          nav .flex-wrap { flex-wrap: nowrap !important; gap: 6px; }
           nav [class*="hidden md:flex"] { display: none !important; }
           nav .text-size-controls { display: none !important; }
+          .nav-items-desktop { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 1000; border-radius: 0 0 12px 12px; gap: 6px; }
+          .nav-items-desktop.open { display: flex; }
+          .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 10px 12px !important; }
+          .nav-items-desktop > *:hover { background: #f0fdf4; }
+          .nav-items-desktop .theme-toggle { display: none !important; }
+          .nav-items-desktop [class*="hidden"][class*="lg:block"] { display: flex !important; }
           [class*="bg-[#f5f0e8]"][class*="rounded-2xl"] { padding: 24px 16px !important; }
           [class*="bg-[#f5f0e8]"] h1 { font-size: 20px !important; }
           [class*="grid-cols-1"][class*="lg:grid-cols-2"] { gap: 16px; }
@@ -994,7 +1001,8 @@
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .glass-panel { padding: 10px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 18px; }
           #map { height: 300px; }
-          .weather-card .main-text { font-size: 24px; }
+          .weather-card { width: 100% !important; max-width: 100% !important; }
+          .weather-card .main-text { font-size: 32px; }
           .media-scroll > div { min-width: 180px !important; height: 140px !important; }
           .site-footer { padding: 24px 16px !important; }
           .site-footer .grid { gap: 24px; }
@@ -1011,11 +1019,17 @@
           h2.text-2xl { font-size: 18px; }
           h2.text-lg { font-size: 16px; }
           #state-selector { width: 100%; }
+          body { overflow-x: hidden; }
+          .glass-panel, .bg-white, [class*="max-w-"], #weather-card, .weather-card { overflow: hidden; }
+          .glass-panel.p-6, .glass-panel.p-4, [class*="glass-panel"] { max-width: 100%; }
+          .grid { max-width: 100%; }
         }
-
+        @media (min-width: 768px) {
+          .mobile-menu-btn, .theme-toggle-mobile { display: none !important; }
+          .nav-items-desktop { display: flex !important; }
+        }
         @media (max-width: 480px) {
-          nav .flex-wrap > a, nav .flex-wrap > div, nav .flex-wrap > button { font-size: 10px !important; padding: 4px 6px; }
-          nav .flex-wrap .theme-toggle { font-size: 8px; }
+          .mobile-menu-btn, .theme-toggle-mobile { padding: 5px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] { grid-template-columns: repeat(2, 1fr); }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 16px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] [class*="text-[10px]"] { font-size: 8px; }
@@ -1112,7 +1126,17 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+
+                <button class="theme-toggle-mobile" id="theme-toggle-mobile" onclick="toggleMobileTheme()" aria-label="Switch to dark mode" type="button">
+                    <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                    <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </button>
+
+                <div class="nav-items-desktop flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                     <!-- Home Button -->
                     <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Home">
                         <svg class="icon icon-sm icon-green"><use href="#icon-home"/></svg>
@@ -2091,6 +2115,55 @@
                 panel.classList.remove('show');
             }
         }
+
+        // Mobile Theme Toggle Sync
+        function toggleMobileTheme() {
+            document.getElementById('theme-toggle-btn').click();
+            const isDark = document.documentElement.classList.contains('dark');
+            const mobBtn = document.getElementById('theme-toggle-mobile');
+            if (mobBtn) {
+                const moon = mobBtn.querySelector('.moon-icon');
+                const sun = mobBtn.querySelector('.sun-icon');
+                if (moon) moon.classList.toggle('hidden', isDark);
+                if (sun) sun.classList.toggle('hidden', !isDark);
+            }
+        }
+        // Sync mobile theme icons on load
+        (function() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const mobBtn = document.getElementById('theme-toggle-mobile');
+            if (mobBtn) {
+                const moon = mobBtn.querySelector('.moon-icon');
+                const sun = mobBtn.querySelector('.sun-icon');
+                if (moon) moon.classList.toggle('hidden', isDark);
+                if (sun) sun.classList.toggle('hidden', !isDark);
+            }
+        })();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.querySelector('.nav-items-desktop');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = menu.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen);
+            const iconBars = btn.querySelector('svg:first-child');
+            const iconClose = btn.querySelector('svg:nth-child(2)');
+            if (iconBars) iconBars.classList.toggle('hidden', isOpen);
+            if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+        }
+
+        document.addEventListener('click', function(e) {
+            const menu = document.querySelector('.nav-items-desktop');
+            const btn = document.getElementById('mobile-menu-btn');
+            if (menu && btn && !btn.contains(e.target) && !menu.contains(e.target) && menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+                const iconBars = btn.querySelector('svg:first-child');
+                const iconClose = btn.querySelector('svg:nth-child(2)');
+                if (iconBars) iconBars.classList.remove('hidden');
+                if (iconClose) iconClose.classList.add('hidden');
+            }
+        });
 
         // AI Chat Widget Functions
         let chatMinimized = false;
