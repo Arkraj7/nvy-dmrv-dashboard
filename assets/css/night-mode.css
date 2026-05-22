@@ -715,3 +715,26 @@ html.dark .btn-spatial:hover {
 html.dark .btn-spatial:active {
   box-shadow: 0 0 0 0 transparent !important;
 }
+
+/* ── Uiverse ryota1231 animated button dark mode ── */
+html.dark .btn-dashboard {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 0 2px #475569 !important;
+}
+html.dark .btn-dashboard svg {
+  fill: #e2e8f0 !important;
+}
+html.dark .btn-dashboard:hover {
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 0 12px transparent !important;
+}
+html.dark .btn-dashboard:hover svg {
+  fill: #e2e8f0 !important;
+}
+html.dark .btn-dashboard:active {
+  box-shadow: 0 0 0 4px #6ee7b7 !important;
+}
+html.dark .btn-dashboard .circle {
+  background-color: #334155 !important;
+}

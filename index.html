@@ -1036,6 +1036,83 @@
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 16px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] [class*="text-[10px]"] { font-size: 8px; }
         }
+        /* ── Uiverse ryota1231 animated button for Enter Dashboard ── */
+        .btn-dashboard {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 16px 36px;
+          border: 4px solid transparent;
+          font-size: 16px;
+          background-color: white;
+          border-radius: 100px;
+          font-weight: 600;
+          color: #1b3a2d;
+          box-shadow: 0 0 0 2px #1b3a2d;
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          text-decoration: none;
+        }
+        .btn-dashboard svg {
+          position: absolute;
+          width: 24px;
+          fill: #1b3a2d;
+          z-index: 9;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .btn-dashboard .arr-1 {
+          right: 16px;
+        }
+        .btn-dashboard .arr-2 {
+          left: -25%;
+        }
+        .btn-dashboard .circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+          height: 20px;
+          background-color: #c5e5e4;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .btn-dashboard .text {
+          position: relative;
+          z-index: 1;
+          transform: translateX(-12px);
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .btn-dashboard:hover {
+          box-shadow: 0 0 0 12px transparent;
+          color: #212121;
+          border-radius: 12px;
+        }
+        .btn-dashboard:hover .arr-1 {
+          right: -25%;
+        }
+        .btn-dashboard:hover .arr-2 {
+          left: 16px;
+        }
+        .btn-dashboard:hover .text {
+          transform: translateX(12px);
+        }
+        .btn-dashboard:hover svg {
+          fill: #1b3a2d;
+        }
+        .btn-dashboard:active {
+          scale: 0.95;
+          box-shadow: 0 0 0 4px #5dc48a;
+        }
+        .btn-dashboard:hover .circle {
+          width: 220px;
+          height: 220px;
+          opacity: 1;
+        }
+
         /* ── Uiverse sekaiking button for View Spatial Data ── */
         .btn-spatial {
           background-color: white;
@@ -1243,7 +1320,12 @@
             <h1 class="text-3xl md:text-4xl font-extrabold text-[#1b3a2d] mb-4" data-i18n="homeTitle">Nagar Van &amp; Vatika Portal</h1>
             <p class="text-gray-700 text-base md:text-lg mb-8 max-w-3xl mx-auto">A comprehensive DMRV dashboard for tracking urban forestry. Monitor ecological health, socio-economic benefits, and community resilience metrics all in one centralized platform.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#main-content" class="inline-block px-8 py-3 bg-[#1b3a2d] text-white rounded-lg font-semibold hover:bg-[#2d5a4d] transition">Enter Dashboard</a>
+                <a href="#main-content" class="btn-dashboard">
+                  <span class="circle"></span>
+                  <svg class="arr-2" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
+                  <span class="text">Enter Dashboard</span>
+                  <svg class="arr-1" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
+                </a>
                 <a href="spatial-data.html" target="_blank" class="btn-spatial">View Spatial Data</a>
             </div>
         </div>
