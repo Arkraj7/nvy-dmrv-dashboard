@@ -978,6 +978,48 @@
           background-color: #39bda7;
           transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
         }
+
+        /* ========== MOBILE RESPONSIVE ENHANCEMENTS ========== */
+        @media (max-width: 767px) {
+          nav .flex-wrap { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 8px; }
+          nav .flex-wrap::-webkit-scrollbar { display: none; }
+          nav .flex-wrap > a, nav .flex-wrap > div, nav .flex-wrap > button { white-space: nowrap; flex-shrink: 0; }
+          nav [class*="hidden md:flex"] { display: none !important; }
+          nav .text-size-controls { display: none !important; }
+          [class*="bg-[#f5f0e8]"][class*="rounded-2xl"] { padding: 24px 16px !important; }
+          [class*="bg-[#f5f0e8]"] h1 { font-size: 20px !important; }
+          [class*="grid-cols-1"][class*="lg:grid-cols-2"] { gap: 16px; }
+          [class*="xl:col-span-2"] { padding: 12px; }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] { gap: 8px; }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] .glass-panel { padding: 10px; }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 18px; }
+          #map { height: 300px; }
+          .weather-card .main-text { font-size: 24px; }
+          .media-scroll > div { min-width: 180px !important; height: 140px !important; }
+          .site-footer { padding: 24px 16px !important; }
+          .site-footer .grid { gap: 24px; }
+          .popup-content { max-width: calc(100% - 32px) !important; padding: 20px !important; margin: 0 16px; }
+          .popup-content h2 { font-size: 16px !important; }
+          .popup-content h3 { font-size: 13px !important; }
+          #feedback-modal > div { width: calc(100% - 32px) !important; margin: 0 16px; }
+          #public-modal > div { width: calc(100% - 16px) !important; margin: 0 8px; max-height: 90vh; }
+          .survey-slide-panel { width: calc(100% - 20px) !important; right: -420px; }
+          .survey-slide-panel.show { right: 10px; }
+          .ai-chat-window { width: calc(100vw - 40px) !important; height: 400px; right: -10px; }
+          .btn-report { font-size: 11px; padding: 6px 12px; }
+          .button { max-width: 100%; font-size: 16px; padding: 14px 20px; }
+          h2.text-2xl { font-size: 18px; }
+          h2.text-lg { font-size: 16px; }
+          #state-selector { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+          nav .flex-wrap > a, nav .flex-wrap > div, nav .flex-wrap > button { font-size: 10px !important; padding: 4px 6px; }
+          nav .flex-wrap .theme-toggle { font-size: 8px; }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] { grid-template-columns: repeat(2, 1fr); }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 16px; }
+          [class*="grid-cols-2"][class*="md:grid-cols-4"] [class*="text-[10px]"] { font-size: 8px; }
+        }
     </style>
 <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
