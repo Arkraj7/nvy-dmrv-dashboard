@@ -279,7 +279,7 @@
             box-shadow: 0 4px 12px rgba(180, 160, 140, 0.4);
         }
 
-        /* ── AI Chatbot Widget (Uiverse by Cobp) ── */
+        /* AI Chatbot Widget */
         .ai-chat-widget {
             position: fixed;
             bottom: 20px;
@@ -316,9 +316,13 @@
             bottom: 80px;
             right: 0;
             width: 380px;
-            height: 520px;
+            height: 500px;
+            background: #fcf9f7;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             transform-origin: bottom right;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
@@ -327,254 +331,81 @@
             opacity: 0;
             pointer-events: none;
         }
-
-        /* ── Uiverse card wrapper ── */
-        .container-wrap {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 16px;
-        }
-        .chat-mode-checkbox {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        /* ── Card ── */
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition: all 0.6s ease;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1e1e24 0%, #2a2a35 100%);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-            overflow: hidden;
-        }
-
-        /* ── Blur balls ── */
-        .background-blur-balls {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        .balls {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            animation: rotate-background-balls 10s linear infinite;
-        }
-        .container-wrap:hover .balls {
-            animation-play-state: paused;
-        }
-        .background-blur-balls .ball {
-            width: 6rem;
-            height: 6rem;
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(30px);
-        }
-        .background-blur-balls .ball.violet { top: 0; left: 50%; transform: translateX(-50%); background-color: #9147ff; }
-        .background-blur-balls .ball.green { bottom: 0; left: 50%; transform: translateX(-50%); background-color: #34d399; }
-        .background-blur-balls .ball.rosa { top: 50%; left: 0; transform: translateY(-50%); background-color: #ec4899; }
-        .background-blur-balls .ball.cyan { top: 50%; right: 0; transform: translateY(-50%); background-color: #05e0f5; }
-
-        @keyframes rotate-background-balls {
-            from { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
-            to { transform: translateX(-50%) translateY(-50%) rotate(0); }
-        }
-
-        /* ── Eyes ── */
-        .eyes {
-            position: absolute;
-            left: 50%;
-            bottom: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 52px;
-            gap: 2rem;
-            transition: all 0.3s ease;
-            z-index: 3;
-            pointer-events: none;
-        }
-        .eyes .eye {
-            width: 26px;
-            height: 52px;
-            background-color: #fff;
-            border-radius: 16px;
-            animation: animate-eyes 10s infinite linear;
-            transition: all 0.3s ease;
-        }
-        .eyes.happy {
-            display: none;
-            color: #fff;
-            gap: 0;
-        }
-        .eyes.happy svg { width: 60px; }
-        .container-wrap:hover .eyes .eye { display: none; }
-        .container-wrap:hover .eyes.happy { display: flex; }
-
-        @keyframes animate-eyes {
-            46% { height: 52px; }
-            48% { height: 20px; }
-            50% { height: 52px; }
-            96% { height: 52px; }
-            98% { height: 20px; }
-            100% { height: 52px; }
-        }
-
-        /* ── Checkbox: eyes ↔ chat ── */
-        .chat-mode-checkbox:checked + .card .eyes { opacity: 0; pointer-events: none; }
-        .chat-mode-checkbox:checked + .card .content-card {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-        }
-        .chat-mode-checkbox:not(:checked) + .card .content-card {
-            width: 12rem;
-            height: 12rem;
-            border-radius: 3rem;
-        }
-        .chat-mode-checkbox:checked + .card .container-ai-chat {
-            opacity: 1;
-            visibility: visible;
-            z-index: 5;
-        }
-
-        /* ── Content card ── */
-        .content-card {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(50px);
-            background: rgba(255,255,255,0.08);
-        }
-        .chat-mode-checkbox:not(:checked) + .card .content-card > * {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .chat-mode-checkbox:checked + .card .content-card > * {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* ── Chat header ── */
-        .chat-header {
+        .ai-chat-header {
+            background: linear-gradient(135deg, #a8d8ea, #aa96da);
+            padding: 16px;
+            color: #4a4a6a;
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            flex-shrink: 0;
         }
-        .chat-header .avatar {
-            width: 38px;
-            height: 38px;
-            background: rgba(255,255,255,0.12);
+        .ai-chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
-        .chat-header .avatar i { color: #6ee7b7; font-size: 18px; }
-        .chat-header .info { flex: 1; min-width: 0; }
-        .chat-header .info h3 { font-size: 14px; font-weight: 700; margin: 0; color: #f0f0f5; }
-        .chat-header .info p { font-size: 11px; margin: 1px 0 0; color: rgba(255,255,255,0.5); }
-        .chat-header .close-btn {
+        .ai-chat-header .avatar i {
+            color: #7c6fa0;
+            font-size: 18px;
+        }
+        .ai-chat-header .info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            color: #4a4a6a;
+        }
+        .ai-chat-header .info p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 2px 0 0 0;
+            color: #5a5a7a;
+        }
+        .ai-chat-header .close-btn {
             margin-left: auto;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.4);
             border: none;
-            color: rgba(255,255,255,0.6);
+            color: #4a4a6a;
             width: 28px;
             height: 28px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: background 0.2s;
+            font-size: 16px;
         }
-        .chat-header .close-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
-
-        /* ── Quick questions ── */
-        .quick-questions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            padding: 10px 16px 8px;
-            flex-shrink: 0;
+        .ai-chat-header .close-btn:hover {
+            background: rgba(255,255,255,0.6);
         }
-        .quick-questions button {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .quick-questions button:hover {
-            background: rgba(255,255,255,0.12);
-            color: #fff;
-        }
-
-        /* ── Messages ── */
-        .chat-messages {
+        .ai-chat-messages {
             flex: 1;
-            padding: 12px 16px;
+            padding: 16px;
             overflow-y: auto;
-            min-height: 0;
+            background: #f0eeed;
         }
-        .chat-messages::-webkit-scrollbar { width: 4px; }
-        .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
         .ai-message, .user-message {
-            margin-bottom: 10px;
-            max-width: 88%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 13px;
+            margin-bottom: 12px;
+            max-width: 85%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 14px;
             line-height: 1.5;
         }
         .ai-message {
-            background: rgba(255,255,255,0.06);
-            color: #e0e0ea;
+            background: #fbeee6;
+            color: #5a4a3a;
             border-bottom-left-radius: 4px;
             align-self: flex-start;
         }
         .user-message {
-            background: rgba(255,255,255,0.12);
-            color: #f0f0f5;
+            background: #d4c5a9;
+            color: #3a3020;
             border-bottom-right-radius: 4px;
             margin-left: auto;
+        }
+        .ai-message .typing {
+            display: inline-block;
         }
         .ai-message .typing::after {
             content: '.';
@@ -585,134 +416,68 @@
             40% { content: '..'; }
             60%, 100% { content: '...'; }
         }
-
-        /* ── Chat input (Uiverse style) ── */
-        .chat-input {
-            flex-shrink: 0;
+        .ai-chat-input {
+            padding: 16px;
+            border-top: 1px solid #e0d8d0;
             display: flex;
-            align-items: flex-end;
-            gap: 6px;
-            padding: 10px 12px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.15);
-            border-radius: 0 0 16px 16px;
+            gap: 10px;
+            background: #fcf9f7;
         }
-        .chat-input .chat-bot {
+        .ai-chat-input input {
             flex: 1;
-            position: relative;
-        }
-        .chat-input .chat-bot textarea {
-            width: 100%;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            color: #e0e0ea;
-            font-family: sans-serif;
-            font-size: 13px;
-            padding: 10px 12px;
-            resize: none;
-            outline: none;
-            line-height: 1.4;
-            max-height: 80px;
-            transition: border-color 0.2s;
-        }
-        .chat-input .chat-bot textarea:focus {
-            border-color: rgba(255,255,255,0.2);
-        }
-        .chat-input .chat-bot textarea::placeholder {
-            color: rgba(255,255,255,0.3);
-        }
-        .chat-input .chat-bot textarea::-webkit-scrollbar { width: 4px; }
-        .chat-input .chat-bot textarea::-webkit-scrollbar-track { background: transparent; }
-        .chat-input .chat-bot textarea::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
-
-        .chat-input .options {
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-        .chat-input .options .btns-add {
-            display: flex;
-            gap: 2px;
-        }
-        .chat-input .options .btns-add button {
-            display: flex;
-            color: rgba(255,255,255,0.25);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 6px;
+            padding: 12px 16px;
+            border: 2px solid #e0d8d0;
+            border-radius: 24px;
             font-size: 14px;
-            transition: all 0.2s;
-            border-radius: 8px;
-        }
-        .chat-input .options .btns-add button:hover {
-            color: rgba(255,255,255,0.6);
-            background: rgba(255,255,255,0.06);
-        }
-        .chat-input .options .btn-submit {
-            display: flex;
-            padding: 6px;
-            background-image: linear-gradient(to top, #ff4141, #9147ff, #3b82f6);
-            border-radius: 10px;
-            box-shadow: inset 0 4px 2px -3px rgba(255,255,255,0.3);
-            cursor: pointer;
-            border: none;
             outline: none;
-            opacity: 0.8;
-            transition: all 0.15s ease;
+            transition: border-color 0.3s;
         }
-        .chat-input .options .btn-submit i {
-            width: 30px;
-            height: 30px;
+        .ai-chat-input input:focus {
+            border-color: #aa96da;
+        }
+        .ai-chat-input button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a8d8ea, #aa96da);
+            border: none;
+            color: white;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.15);
-            border-radius: 8px;
-            backdrop-filter: blur(3px);
-            color: #cfcfcf;
-            font-size: 14px;
+            transition: opacity 0.3s;
         }
-        .chat-input .options .btn-submit:hover {
-            opacity: 1;
+        .ai-chat-input button:hover {
+            opacity: 0.85;
         }
-        .chat-input .options .btn-submit:hover i {
-            color: #f3f6fd;
-            filter: drop-shadow(0 0 5px #fff);
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 16px 12px;
         }
-        .chat-input .options .btn-submit:active {
-            transform: scale(0.92);
+        .quick-questions button {
+            background: #fbeee6;
+            border: 1px solid #d4c5a9;
+            color: #5a4a3a;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-
-        /* ── Container AI chat (decorative overlay) ── */
-        .container-ai-chat {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            padding: 6px;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            z-index: 4;
+        .quick-questions button:hover {
+            background: #d4c5a9;
+            color: #3a3020;
         }
 
-        /* ── 3D Tilt ── */
-        .card.tilt-active {
-            transition: transform 0.1s ease-out;
-        }
-
-        /* ── Responsive ── */
         @media (max-width: 480px) {
             .ai-chat-window {
                 width: calc(100vw - 40px);
-                height: 85vh;
+                height: 400px;
                 right: -10px;
-                bottom: 75px;
             }
-            .chat-header .info p { display: none; }
-            .quick-questions { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
         }
 
         .radiate {
@@ -1882,76 +1647,47 @@
         </div>
     </div>
 
-    <!-- AI Chatbot Widget (Uiverse by Cobp) -->
+    <!-- AI Chatbot Widget -->
     <div class="ai-chat-widget">
         <div id="aiChatWindow" class="ai-chat-window hidden">
-            <div class="container-wrap" id="chatContainerWrap">
-                <input type="checkbox" id="chatModeToggle" class="chat-mode-checkbox" checked>
-                <div class="card" id="chatCard">
-                    <div class="background-blur-balls">
-                        <div class="balls">
-                            <div class="ball violet"></div>
-                            <div class="ball green"></div>
-                            <div class="ball rosa"></div>
-                            <div class="ball cyan"></div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="chat-header">
-                            <div class="avatar"><i class="fas fa-leaf"></i></div>
-                            <div class="info">
-                                <h3>Nagar Van Assistant</h3>
-                                <p>Ask me about afforestation, Nagar Van, and more</p>
-                            </div>
-                            <button class="close-btn" onclick="toggleAIChat()" aria-label="Close chat">&times;</button>
-                        </div>
-                        <div class="quick-questions">
-                            <button onclick="sendQuickQuestion('What is Nagar Van?')">What is Nagar Van?</button>
-                            <button onclick="sendQuickQuestion('What is the Miyawaki method?')">Miyawaki method</button>
-                            <button onclick="sendQuickQuestion('Which states have Nagar Van sites?')">Locations</button>
-                            <button onclick="sendQuickQuestion('What is DMRV?')">What is DMRV?</button>
-                            <button onclick="sendQuickQuestion('How to report an issue?')">How to report?</button>
-                            <button onclick="sendQuickQuestion('What is the survey for?')">Survey info</button>
-                            <button onclick="sendQuickQuestion('What is CAMPA?')">What is CAMPA?</button>
-                            <button onclick="sendQuickQuestion('How does AI verification work?')">AI verification</button>
-                        </div>
-                        <div id="aiChatMessages" class="chat-messages">
-                            <div class="ai-message">
-                                Hello! I'm the Nagar Van Assistant. I can help you with questions about:
-                                <br>• Nagar Van Yojana & Miyawaki method
-                                <br>• DMRV dashboard metrics & indicators
-                                <br>• MoEF&CC, CAMPA, and climate policy
-                                <br>• Urban heat island & air quality
-                                <br>• Tree species, biodiversity, water
-                                <br>• Reporting issues & public survey
-                                <br>• Volunteering & getting involved
-                                <br><br>How can I help you today?
-                            </div>
-                        </div>
-                        <div class="chat-input">
-                            <div class="chat-bot">
-                                <textarea id="aiChatInput" placeholder="Type your question..." rows="1"></textarea>
-                            </div>
-                            <div class="options">
-                                <div class="btns-add">
-                                    <button type="button" aria-label="Attach file"><i class="fas fa-paperclip"></i></button>
-                                    <button type="button" aria-label="Voice input"><i class="fas fa-microphone"></i></button>
-                                </div>
-                                <button class="btn-submit" onclick="sendAIChatMessage()" aria-label="Send message">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="eyes">
-                        <div class="eye"></div>
-                        <div class="eye"></div>
-                    </div>
-                    <div class="eyes happy">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l6 6L20 6"/></svg>
-                    </div>
-                    <div class="container-ai-chat"></div>
+            <div class="ai-chat-header">
+                <div class="avatar">
+                    <i class="fas fa-leaf"></i>
                 </div>
+                <div class="info">
+                    <h3>Nagar Van Assistant</h3>
+                    <p>Ask me about afforestation, Nagar Van, and more</p>
+                </div>
+                <button class="close-btn" onclick="toggleAIChat()" aria-label="Close chat">&times;</button>
+            </div>
+            <div class="quick-questions">
+                <button onclick="sendQuickQuestion('What is Nagar Van?')">What is Nagar Van?</button>
+                <button onclick="sendQuickQuestion('What is the Miyawaki method?')">Miyawaki method</button>
+                <button onclick="sendQuickQuestion('Which states have Nagar Van sites?')">Locations</button>
+                <button onclick="sendQuickQuestion('What is DMRV?')">What is DMRV?</button>
+                <button onclick="sendQuickQuestion('How to report an issue?')">How to report?</button>
+                <button onclick="sendQuickQuestion('What is the survey for?')">Survey info</button>
+                <button onclick="sendQuickQuestion('What is CAMPA?')">What is CAMPA?</button>
+                <button onclick="sendQuickQuestion('How does AI verification work?')">AI verification</button>
+            </div>
+            <div id="aiChatMessages" class="ai-chat-messages">
+                <div class="ai-message">
+                    Hello! I'm the Nagar Van Assistant. I can help you with questions about:
+                    <br>• Nagar Van Yojana & Miyawaki method
+                    <br>• DMRV dashboard metrics & indicators
+                    <br>• MoEF&CC, CAMPA, and climate policy
+                    <br>• Urban heat island & air quality
+                    <br>• Tree species, biodiversity, water
+                    <br>• Reporting issues & public survey
+                    <br>• Volunteering & getting involved
+                    <br><br>How can I help you today?
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="aiChatInput" placeholder="Type your question..." onkeypress="handleAIChatKeyPress(event)">
+                <button onclick="sendAIChatMessage()" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
         <button id="aiChatToggle" class="ai-chat-toggle" onclick="toggleAIChat()" aria-label="Open chat assistant">
@@ -2415,77 +2151,45 @@
         });
 
         // AI Chat Widget Functions
+        let chatMinimized = false;
+
         function toggleAIChat() {
             let chatWindow = document.getElementById('aiChatWindow');
             let toggleBtn = document.getElementById('aiChatToggle');
-            let isHidden = chatWindow.classList.contains('hidden');
 
-            chatWindow.classList.toggle('hidden');
-            toggleBtn.classList.toggle('minimized', !isHidden);
-            toggleBtn.innerHTML = isHidden ? '<i class="fas fa-chevron-down"></i>' : '<i class="fas fa-comments"></i>';
-
-            if (!isHidden) {
-                document.getElementById('chatModeToggle').checked = false;
-                setTimeout(function() {
-                    document.getElementById('chatModeToggle').checked = true;
-                }, 1200);
+            if (chatWindow.classList.contains('hidden')) {
+                // Open chat
+                chatWindow.classList.remove('hidden');
+                toggleBtn.classList.add('minimized');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                chatMinimized = false;
+            } else {
+                // Toggle minimize
+                if (chatMinimized) {
+                    chatWindow.classList.remove('hidden');
+                    toggleBtn.classList.add('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                    chatMinimized = false;
+                } else {
+                    chatWindow.classList.add('hidden');
+                    toggleBtn.classList.remove('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-comments"></i>';
+                    chatMinimized = true;
+                }
             }
         }
 
         function handleAIChatKeyPress(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendAIChatMessage();
-            }
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.handleKeyPress(e);
         }
 
         function sendQuickQuestion(question) {
-            var input = document.getElementById('aiChatInput');
-            if (input) {
-                input.value = question;
-                sendAIChatMessage();
-            } else if (typeof NagarVanChat !== 'undefined') {
-                NagarVanChat.sendQuickQuestion(question);
-            }
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendQuickQuestion(question);
         }
 
         function sendAIChatMessage() {
             if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendUserMessage();
-            var ta = document.getElementById('aiChatInput');
-            if (ta) { ta.style.height = 'auto'; }
         }
-
-        // 3D Tilt on card
-        (function() {
-            var card = document.getElementById('chatCard');
-            if (!card) return;
-            card.classList.add('tilt-active');
-            card.addEventListener('mousemove', function(e) {
-                var rect = card.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                var centerX = rect.width / 2;
-                var centerY = rect.height / 2;
-                var rotateX = ((y - centerY) / centerY) * -8;
-                var rotateY = ((x - centerX) / centerX) * 8;
-                card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(10px)';
-            });
-            card.addEventListener('mouseleave', function() {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-            });
-        })();
-
-        // Textarea auto-resize + Enter to send
-        document.addEventListener('DOMContentLoaded', function() {
-            var textarea = document.getElementById('aiChatInput');
-            if (textarea) {
-                textarea.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = Math.min(this.scrollHeight, 80) + 'px';
-                });
-                textarea.addEventListener('keydown', handleAIChatKeyPress);
-            }
-        });
 
         // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
