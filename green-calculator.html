@@ -281,6 +281,18 @@ function toggleMobileTheme() {
 setTimeout(function() {
   document.getElementById('loadingOverlay').classList.add('hidden');
 }, 8000);
+
+(function() {
+  var iframe = document.getElementById('calcFrame');
+  if (!iframe) return;
+  var observer = new MutationObserver(function() {
+    var isDark = document.documentElement.classList.contains('dark');
+    try {
+      iframe.contentWindow.postMessage({ type: 'theme-changed', dark: isDark }, '*');
+    } catch(e) {}
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
 </script>
 
 </body>

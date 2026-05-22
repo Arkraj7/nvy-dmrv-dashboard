@@ -12,6 +12,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=block" rel="stylesheet">
   <link rel="stylesheet" href="https://arkraj7.github.io/csid/Leaf-and-Ledger/style.css">
 
+  <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+  <style>
+  /* ── Dark mode for green-calculator-app ── */
+  html.dark body.bg-light,
+  html.dark body { background: #0b1120 !important; }
+
+  html.dark .--container { background: #0b1120 !important; }
+
+  html.dark .cardd {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+  }
+
+  html.dark label,
+  html.dark .title-row label { color: #cbd5e1 !important; }
+
+  html.dark .form-control,
+  html.dark .form-select {
+    background: #0f172a !important;
+    border-color: #475569 !important;
+    color: #e2e8f0 !important;
+  }
+  html.dark .form-control:focus,
+  html.dark .form-select:focus {
+    border-color: #5dc48a !important;
+    box-shadow: 0 0 0 0.2rem rgba(93,196,138,0.25) !important;
+  }
+  html.dark .form-control[readonly] { background: #1e293b !important; }
+
+  html.dark .text-muted { color: #94a3b8 !important; }
+  html.dark .text-dark { color: #e2e8f0 !important; }
+  html.dark .text-body-secondary { color: #94a3b8 !important; }
+  html.dark .text-secondary { color: #94a3b8 !important; }
+
+  html.dark .nav-tabs {
+    border-bottom-color: #334155 !important;
+  }
+  html.dark .nav-tabs .nav-link {
+    color: #94a3b8 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+  }
+  html.dark .nav-tabs .nav-link:hover {
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+  }
+  html.dark .nav-tabs .nav-link.active {
+    color: #6ee7b7 !important;
+    background: #1e293b !important;
+    border-color: #334155 #334155 #1e293b !important;
+  }
+
+  html.dark .unit-btn {
+    background: #1e293b !important;
+    border-color: #475569 !important;
+    color: #cbd5e1 !important;
+  }
+  html.dark .btn-check:checked + .unit-btn {
+    background: #5dc48a !important;
+    border-color: #5dc48a !important;
+    color: #0f172a !important;
+  }
+
+  html.dark .number-with-unit span {
+    color: #cbd5e1 !important;
+  }
+
+  html.dark .input-group-text {
+    background: #0f172a !important;
+    border-color: #475569 !important;
+    color: #e2e8f0 !important;
+  }
+
+  html.dark .metric-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+  }
+  html.dark .metric-label { color: #cbd5e1 !important; }
+  html.dark .metric-value { color: #6ee7b7 !important; }
+  html.dark .metric-unit { color: #94a3b8 !important; }
+  html.dark .custom-tooltip {
+    background: #0f172a !important;
+    color: #cbd5e1 !important;
+    border-color: #334155 !important;
+  }
+  html.dark .branding-info { color: #6ee7b7 !important; }
+
+  html.dark .tab-info-content h6 { color: #e2e8f0 !important; }
+  html.dark .tab-info-content li { color: #cbd5e1 !important; }
+  html.dark .tab-info-content li strong { color: #e2e8f0 !important; }
+  html.dark .tab-info-content em { color: #94a3b8 !important; }
+
+  html.dark footer,
+  html.dark footer.border-top { background: #0f172a !important; border-top-color: #334155 !important; }
+  html.dark footer span { color: #94a3b8 !important; }
+
+  html.dark hr { border-color: #334155 !important; opacity: 0.3 !important; }
+
+  html.dark .modal-content {
+    background: #1e293b !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+  }
+  html.dark .modal-content h2 { color: #6ee7b7 !important; }
+  html.dark #countdown-text { color: #94a3b8 !important; }
+
+  html.dark .form-check-label { color: #cbd5e1 !important; }
+  html.dark .form-check-input { background: #0f172a !important; border-color: #475569 !important; }
+
+  html.dark .first-row,
+  html.dark .second-row { background: transparent !important; }
+
+  html.dark .btn-success {
+    background: #5dc48a !important;
+    border-color: #5dc48a !important;
+    color: #0f172a !important;
+  }
+  html.dark .btn-success:hover {
+    background: #6ee7b7 !important;
+    border-color: #6ee7b7 !important;
+  }
+  html.dark .btn-outline-primary {
+    color: #60a5fa !important;
+    border-color: #60a5fa !important;
+  }
+  html.dark .btn-outline-primary:hover {
+    background: #60a5fa !important;
+    color: #0f172a !important;
+  }
+
+  html.dark .col-custom .metric-card { background: #1e293b !important; }
+
+  html.dark .--form-range {
+    accent-color: #5dc48a !important;
+  }
+  </style>
 </head>
 <body class="bg-light">
 
@@ -553,5 +689,12 @@
     </div>
   </div>
 
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'theme-changed') {
+    document.documentElement.classList.toggle('dark', e.data.dark);
+  }
+});
+</script>
 </body>
 </html>
