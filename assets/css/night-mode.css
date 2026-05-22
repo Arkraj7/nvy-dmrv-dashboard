@@ -400,7 +400,7 @@ html.dark #official-resources h2 .icon-amber {
   color: #fde68a !important;
 }
 html.dark #official-resources .bg-gradient-to-br {
-  background-color: #1e3a5f !important;
+  background: #1e3a5f !important;
   border-color: #334155 !important;
 }
 html.dark #official-resources .hover\:border-[#5dc48a]:hover,
@@ -492,7 +492,19 @@ html.dark #official-resources .text-white {
   color: #e2e8f0 !important;
 }
 
-
+/* ── Green Calculator promo footer dark mode ── */
+html.dark footer.glass-panel {
+  background: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+html.dark .calculator-btn {
+  animation: none !important;
+  border-color: #475569 !important;
+  box-shadow: none !important;
+}
+html.dark .calculator-btn:hover {
+  border-color: #6ee7b7 !important;
+}
 
 /* ── Key Strategic Pillars dark mode - black background ── */
 html.dark .bg-gradient-to-r {
