@@ -1054,7 +1054,7 @@
 const path = window.location.pathname;
 const isIndexPage = path.endsWith("index.html") || path.endsWith("/") || path === "" || path.includes("index");
 const isReportPage = path.includes("report");
-const isCalculatorPage = () => window.location.pathname.includes("calculator.html");
+const isCalculatorPage = () => window.location.pathname.includes("calculator.html") || window.location.pathname.includes("green-calculator-app.html");
 
 let chart;
 let areaUnit = "m2";
@@ -1659,7 +1659,7 @@ function generateAgain() {
 
 
 async function generatePDFBlob() {
-  const response = await fetch("https://arkraj7.github.io/csid/Leaf-and-Ledger/report.html");
+  const response = await fetch("green-calculator-report.html");
   const html = await response.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");

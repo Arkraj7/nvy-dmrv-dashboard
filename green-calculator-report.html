@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Green Calculator Tool — Report</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="https://arkraj7.github.io/csid/Leaf-and-Ledger/style.css">
+
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    
+
+  </style>
+</head>
+<body>
+
+  <div id="report">
+    
+    <div class="header-section">
+      <div class="logo-container">
+      
+        <img src="https://arkraj7.github.io/csid/assets/images/app_logo.png" alt="Nagar Van DMRV" class="logo">
+        <div>Nagar Van DMRV</div>
+      </div>
+      <div class="report-title">Green Calculator Tool — Report</div>
+      <div class="report-date" id="report-date">11.11.2025, 20:28:50</div>
+    </div>
+
+    <div class="section-intro">
+     <div class="section-header preview-header">Green Space & Biodiversity</div>
+      <div class="preview-content">
+        This category reflects the quantity and diversity of natural areas, which are vital for supporting ecosystems, species, and urban well-being.
+        Measuring it helps assess how well a site preserves nature and promotes resilience against urban and climate pressures.
+      </div>
+    </div>
+
+    
+    <div class="section-header">OVERVIEW</div>
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="overview-label">Number of trees</div>
+        <div class="overview-value" id="overview-trees">393 <span></span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">Number of species</div>
+        <div class="overview-value" id="overview-species">14 <span></span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">Area</div>
+        <div class="overview-value" id="overview-area">5775 <span>m²</span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">Project Duration</div>
+        <div class="overview-value" id="overview-duration">11 <span>years</span></div>
+      </div>
+    </div>
+
+    
+    <div class="impact-section">
+      <div class="section-header">Your Impact in numbers</div>
+      <div class="impact-grid">
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons-removebg-preview.png" alt="">
+          <div class="impact-label">Annual CO₂ Sequestration</div>
+          <div><span class="impact-value" id="co2-value">8,567.40</span> <span class="impact-unit">kg/year</span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy-removebg-preview.png" alt="">
+          <div class="impact-label">Biodiversity Potential Index</div>
+          <div><span class="impact-value" id="biodiversity-value">0.24</span> <span class="impact-unit"></span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_3-removebg-preview.png" alt="">
+          <div class="impact-label">Localized Cooling Effect</div>
+          <div><span class="impact-value" id="cooling-value">11.55</span> <span class="impact-unit">°C</span></div>
+        </div>
+        <div class="impact-card">
+          <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_4-removebg-preview.png" alt="">
+          <div class="impact-label">Air Quality Improvement</div>
+          <div><span class="impact-value" id="air-value">47.16</span> <span class="impact-unit">kg/year</span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_2-removebg-preview.png" alt="">
+          <div class="impact-label">Stormwater Runoff Reduction</div>
+          <div><span class="impact-value" id="stormwater-value">577,500.00</span> <span class="impact-unit">L/year</span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_5-removebg-preview.png" alt="">
+          <div class="impact-label">Green Branding Score</div>
+          <div><span class="impact-value" id="branding-value">6.04</span> <span class="impact-unit"></span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_7-removebg-preview.png" alt="">
+          <div class="impact-label">Cars Taken Off the Road</div>
+          <div><span class="impact-value" id="car-value">19.31</span> <span class="impact-unit">Cars/year</span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_6-removebg-preview.png" alt="">
+          <div class="impact-label">Household Electricity Offset (Annual)</div>
+          <div><span class="impact-value" id="electricity-value">11.01</span> <span class="impact-unit">household years</span></div>
+        </div>
+        <div class="impact-card">
+           <img src="https://arkraj7.github.io/csid/Leaf-and-Ledger/images/icons_copy_8-removebg-preview.png" alt="">
+          <div class="impact-label">Carbon Credits (Approx.)</div>
+          <div><span class="impact-value" id="credit-value">33.03</span> <span class="impact-unit">credits (1 tCO₂)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="equivalents-section">
+      <div class="equivalents-title">RELATABLE EQUIVALENTS</div>
+      <div class="equivalents-container">
+        
+        <div class="equivalent-group">
+          <div class="equivalent-item">
+            <div class="equivalent-icon">🌳</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq1-value">150 tonnes</div>
+              <div class="equivalent-label">CO2 sequestered</div>
+            </div>
+          </div>
+          <div class="equals-sign">=</div>
+          <div class="equivalent-item">
+            <div class="equivalent-icon">🚗</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq2-value">50 car off road</div>
+              <div class="equivalent-label">per year</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        
+        <div class="equivalent-group">
+          <div class="equivalent-item">
+            <div class="equivalent-icon">🌡️</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq3-value">1°C localized</div>
+              <div class="equivalent-label">cooling effect</div>
+            </div>
+          </div>
+          <div class="equals-sign">=</div>
+          <div class="equivalent-item" id="snowflake">
+            <div class="equivalent-icon">❄️</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq4-value">20-25 air</div>
+              <div class="equivalent-label">conditioners</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        
+        <div class="equivalent-group">
+          <div class="equivalent-item">
+            <div class="equivalent-icon">💧</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq5-value">50,000 liters</div>
+              <div class="equivalent-label">stormwater runoff reduction</div>
+            </div>
+          </div>
+          <div class="equals-sign">=</div>
+          <div class="equivalent-item">
+            <div class="equivalent-icon">🏠</div>
+            <div class="equivalent-content">
+              <div class="equivalent-value" id="eq6-value">200 household</div>
+              <div class="equivalent-label">showers supply.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="footer">
+      Generated by Nagar Van DMRV Green Calculator Tool — © 2026 Nagar Van DMRV Dashboard. All rights reserved.
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
