@@ -567,53 +567,50 @@ html.dark .to-\\[\\#4ab878\\] {
 
 /* ── AI Chat Widget dark mode ── */
 html.dark .ai-chat-window {
-  background: #2a2a3e !important;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important;
 }
-html.dark .ai-chat-header {
-  background: linear-gradient(135deg, #5a7a8a, #7a6a9a) !important;
+html.dark .card {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08) !important;
 }
-html.dark .ai-chat-header .info h3,
-html.dark .ai-chat-header .info p {
-  color: #e8e0f0 !important;
+html.dark .content-card {
+  background: rgba(0,0,0,0.3) !important;
 }
-html.dark .ai-chat-header .close-btn {
-  color: #e8e0f0 !important;
-}
-html.dark .ai-chat-messages {
-  background: #1e1e30 !important;
+html.dark .chat-messages {
+  background: transparent !important;
 }
 html.dark .ai-message {
-  background: #3a2a3a !important;
-  color: #e8d8c8 !important;
+  background: rgba(255,255,255,0.08) !important;
+  color: #e8d8d0 !important;
 }
 html.dark .user-message {
-  background: #4a3a5a !important;
-  color: #e8e0f0 !important;
-}
-html.dark .ai-chat-input {
-  background: #2a2a3e !important;
-  border-top-color: #3a3a50 !important;
-}
-html.dark .ai-chat-input input {
-  background: #1e1e30 !important;
-  border-color: #3a3a50 !important;
-  color: #e0d8d0 !important;
-}
-html.dark .ai-chat-input input:focus {
-  border-color: #aa96da !important;
-}
-html.dark .ai-chat-input button {
-  background: linear-gradient(135deg, #5a7a8a, #7a6a9a) !important;
+  background: rgba(255,255,255,0.15) !important;
+  color: #f0e8f0 !important;
 }
 html.dark .quick-questions button {
-  background: #3a2a3a !important;
-  border-color: #5a4a6a !important;
-  color: #e8d8c8 !important;
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.65) !important;
 }
 html.dark .quick-questions button:hover {
-  background: #5a4a6a !important;
-  color: #f0e8e0 !important;
+  background: rgba(255,255,255,0.12) !important;
+  color: #fff !important;
+}
+html.dark .chat-input {
+  border-top-color: rgba(255,255,255,0.08) !important;
+}
+html.dark .chat-input .chat-bot textarea {
+  background: rgba(0,0,0,0.25) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #e0d8d0 !important;
+}
+html.dark .chat-input .options .btn-submit {
+  opacity: 0.9 !important;
+}
+html.dark .chat-header .info h3 {
+  color: #e8e0f0 !important;
+}
+html.dark .chat-header .info p {
+  color: rgba(255,255,255,0.5) !important;
 }
 
 /* ── Weather Card dark mode ── */
