@@ -42,6 +42,10 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; b
 }
 
 /* ── Dark mode overrides for this page ── */
+html.dark nav {
+  background-color: #0f1a2f !important;
+  color: #e2e8f0 !important;
+}
 html.dark .mobile-menu-btn,
 html.dark .theme-toggle-mobile {
   color: #e2e8f0 !important;
@@ -52,6 +56,14 @@ html.dark .nav-items-desktop {
 }
 html.dark .nav-items-desktop > *:hover {
   background: #1e293b !important;
+}
+html.dark nav .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+html.dark nav .icon-green,
+html.dark nav .icon-sky,
+html.dark nav .icon-purple {
+  color: #e2e8f0 !important;
 }
 html.dark #calc-header {
   background: #1e293b !important;
@@ -107,7 +119,7 @@ html.dark .social-icon {
   <p class="mt-4 text-sm text-gray-600 font-medium">Loading Green Calculator...</p>
 </div>
 
-<nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+<nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0" style="z-index: 10000;" role="navigation" aria-label="Main navigation">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16 items-center flex-wrap">
       <div class="flex items-center gap-3">
