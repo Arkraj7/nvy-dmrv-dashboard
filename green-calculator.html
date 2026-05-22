@@ -40,6 +40,63 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; b
   .mobile-menu-btn, .theme-toggle-mobile { display: none !important; }
   .nav-items-desktop { display: flex !important; }
 }
+
+/* ── Dark mode overrides for this page ── */
+html.dark .mobile-menu-btn,
+html.dark .theme-toggle-mobile {
+  color: #e2e8f0 !important;
+}
+html.dark .nav-items-desktop {
+  background: #0f1a2f !important;
+  border-top-color: #334155 !important;
+}
+html.dark .nav-items-desktop > *:hover {
+  background: #1e293b !important;
+}
+html.dark #calc-header {
+  background: #1e293b !important;
+  border-bottom-color: #334155 !important;
+}
+html.dark #calc-header h1 {
+  color: #e2e8f0 !important;
+}
+html.dark #calc-header h1 span {
+  color: #6ee7b7 !important;
+}
+html.dark #calc-header .calc-badge {
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+  background: rgba(255,255,255,0.05) !important;
+}
+html.dark #calc-header .calc-dot {
+  background: #6ee7b7 !important;
+}
+html.dark #calc-header p {
+  color: #94a3b8 !important;
+}
+html.dark #calc-header a[href="index.html"] {
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+  background-color: #1e293b !important;
+}
+html.dark .loading-overlay {
+  background: rgba(8,10,47,0.92) !important;
+}
+html.dark .loading-overlay p {
+  color: #cbd5e1 !important;
+}
+html.dark .site-footer h4,
+html.dark .site-footer p,
+html.dark .site-footer .text-black,
+html.dark .site-footer .footer-link {
+  color: #cbd5e1 !important;
+}
+html.dark .site-footer .border-gray-300 {
+  border-color: #334155 !important;
+}
+html.dark .social-icon {
+  background: rgba(255,255,255,0.05) !important;
+}
 </style>
 <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -91,11 +148,11 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; b
   </div>
 </nav>
 
-<header style="background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 20px 40px;">
+<header id="calc-header" style="background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 20px 40px;">
   <div style="max-width: 1380px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
     <div>
-      <div style="display: inline-flex; align-items: center; gap: 7px; background: rgba(27,58,45,0.06); border: 1px solid #5dc48a; border-radius: 20px; padding: 4px 14px; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #1b3a2d; margin-bottom: 8px;">
-        <span style="width: 7px; height: 7px; border-radius: 50%; background: #5dc48a; display: inline-block;"></span> Green Calculator Tool
+      <div class="calc-badge" style="display: inline-flex; align-items: center; gap: 7px; background: rgba(27,58,45,0.06); border: 1px solid #5dc48a; border-radius: 20px; padding: 4px 14px; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #1b3a2d; margin-bottom: 8px;">
+        <span class="calc-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #5dc48a; display: inline-block;"></span> Green Calculator Tool
       </div>
       <h1 style="font-size: clamp(20px, 2.5vw, 32px); font-weight: 700; color: #1b3a2d; margin: 0;">
         Your <span style="color: #5dc48a;">Green Calculator</span> Tool
