@@ -509,24 +509,22 @@ html.dark footer.glass-panel a[href="green-calculator.html"] svg {
   border-color: #475569 !important;
 }
 
-/* ── Key Strategic Pillars dark mode - black background ── */
-html.dark .bg-gradient-to-r {
-  background-color: transparent !important;
+/* ── Key Strategic Pillars dark mode ── */
+html.dark #key-pillars {
+  background: #0f1a2f !important;
+  border-color: #334155 !important;
 }
-html.dark .from-\\[\\#5dc48a\\],
-html.dark .to-\\[\\#4ab878\\] {
-  background-color: transparent !important;
-}
-
-/* ── Ensure text remains visible in Key Strategic Pillars for dark mode ── */
-html.dark .bg-gradient-to-r h3 {
+html.dark #key-pillars h3 {
   color: #e2e8f0 !important;
 }
-html.dark .bg-gradient-to-r h4 {
+html.dark #key-pillars h4 {
   color: #e2e8f0 !important;
 }
-html.dark .bg-gradient-to-r p {
+html.dark #key-pillars p {
   color: #94a3b8 !important;
+}
+html.dark #key-pillars > div > div {
+  background: #1e293b !important;
 }
 
 /* ── Get in Touch box in dark mode ── */
@@ -554,15 +552,6 @@ html.dark .side-right {
 }
 html.dark .side-top {
   background-color: #fde68a !important;
-}
-
-/* ── Key Strategic Pillars dark mode ── */
-html.dark .bg-gradient-to-r {
-  background-color: transparent !important;
-}
-html.dark .from-\\[\\#5dc48a\\],
-html.dark .to-\\[\\#4ab878\\] {
-  background-color: transparent !important;
 }
 
 /* ── AI Chat Widget dark mode ── */
