@@ -2698,11 +2698,6 @@
             drawMarkers(selected);
             document.getElementById('map-title').innerText = "Thematic Map: " + data.title + " (Nagar Van Study)";
             
-            if (window.liveData) {
-                let currentCount = window.liveData.sites[selected] || 0;
-                document.getElementById('metric-samples').innerText = currentCount;
-            }
-
             document.getElementById('metric-eco').innerText = data.eco;
             document.getElementById('metric-socio').innerText = data.socio;
             document.getElementById('metric-wtp').innerText = data.wtp;
@@ -2740,12 +2735,14 @@
                     let parsedData = JSON.parse(text);
                     if(parsedData.total !== undefined) {
                         window.liveData = parsedData;
+                        document.getElementById('metric-samples').innerText = window.liveData.total;
                         updateDashboard();
                         return;
                     }
                 } catch (e) {}
             } catch (e) {}
             window.liveData = getFallbackLiveData();
+            document.getElementById('metric-samples').innerText = window.liveData.total;
             updateDashboard();
         }
 

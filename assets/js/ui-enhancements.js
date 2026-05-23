@@ -81,7 +81,6 @@
     // 3. Number Counting Animation
     function setupNumberCounting() {
         const metrics = [
-            { id: 'metric-samples', target: 1250, suffix: '+' },
             { id: 'metric-aqi', target: 42, suffix: '' },
             { id: 'metric-carbon', target: 1240, suffix: '' },
             { id: 'metric-water', target: 45, suffix: 'k' },
