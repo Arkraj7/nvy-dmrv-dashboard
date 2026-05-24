@@ -11,7 +11,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="assets/css/night-mode.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
@@ -280,114 +279,206 @@
             box-shadow: 0 4px 12px rgba(180, 160, 140, 0.4);
         }
 
-        /* ── Climate AI Chatbot (CRAVIS-inspired) ── */
-        .ca-widget { position:fixed; bottom:20px; right:20px; z-index:9999; font-family:'Inter','Segoe UI',sans-serif; }
-        .ca-toggle {
-            width:56px; height:56px; border-radius:50%; border:none; cursor:pointer;
-            background:linear-gradient(135deg,#1b3a2d,#3d9a6a);
-            box-shadow:0 4px 20px rgba(27,58,45,0.4);
-            display:flex; align-items:center; justify-content:center;
-            transition:all 0.3s; color:#fff; font-size:22px;
+        /* AI Chatbot Widget */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .ca-toggle:hover { transform:scale(1.1); box-shadow:0 6px 28px rgba(27,58,45,0.5); }
-        .ca-toggle.hidden { display:none; }
-        .ca-window {
-            position:absolute; bottom:72px; right:0; width:400px; height:560px;
-            background:#fff; border-radius:18px; box-shadow:0 12px 48px rgba(0,0,0,0.18);
-            display:none; flex-direction:column; overflow:hidden;
-            transform-origin:bottom right;
+        .ai-chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a8d8ea, #aa96da);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(168, 216, 234, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .ca-window.open { display:flex; }
-        .ca-head {
-            background:linear-gradient(135deg,#0f2a1f,#1b4a33); padding:14px 18px;
-            display:flex; align-items:center; gap:12px;
+        .ai-chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(168, 216, 234, 0.6);
         }
-        .ca-head-icon {
-            width:38px; height:38px; border-radius:10px;
-            background:rgba(93,196,138,0.2); display:flex; align-items:center; justify-content:center;
-            color:#5dc48a; font-size:18px;
+        .ai-chat-toggle i {
+            color: #fff;
+            font-size: 24px;
         }
-        .ca-head-info h3 { margin:0; font-size:15px; font-weight:700; color:#fff; }
-        .ca-head-info p { margin:1px 0 0; font-size:11px; color:rgba(255,255,255,0.6); }
-        .ca-head-close {
-            margin-left:auto; background:rgba(255,255,255,0.1); border:none; color:#fff;
-            width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:16px;
-            display:flex; align-items:center; justify-content:center; transition:background 0.2s;
+        .ai-chat-toggle.minimized i {
+            transform: rotate(180deg);
         }
-        .ca-head-close:hover { background:rgba(255,255,255,0.2); }
-        .ca-msgs {
-            flex:1; padding:14px; overflow-y:auto; background:#f8faf9;
-            display:flex; flex-direction:column; gap:8px;
+        .ai-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: #fcf9f7;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        .ca-msg { display:flex; gap:8px; align-items:flex-start; max-width:100%; }
-        .ca-msg.ca-user { justify-content:flex-end; }
-        .ca-avatar {
-            width:28px; height:28px; border-radius:8px; flex-shrink:0;
-            background:linear-gradient(135deg,#1b3a2d,#3d9a6a);
-            display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px;
+        .ai-chat-window.hidden {
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
         }
-        .ca-bubble {
-            padding:10px 14px; border-radius:14px; font-size:13px; line-height:1.6;
-            max-width:88%; word-wrap:break-word;
+        .ai-chat-header {
+            background: linear-gradient(135deg, #a8d8ea, #aa96da);
+            padding: 16px;
+            color: #4a4a6a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .ca-user-bubble {
-            background:#1b3a2d; color:#fff;
-            border-bottom-right-radius:4px;
+        .ai-chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .ca-ai-bubble {
-            background:#fff; color:#1f2937;
-            border:1px solid #e5e7eb; border-bottom-left-radius:4px;
-            box-shadow:0 1px 3px rgba(0,0,0,0.04);
+        .ai-chat-header .avatar i {
+            color: #7c6fa0;
+            font-size: 18px;
         }
-        .ca-ai-bubble b { color:#1b3a2d; }
-        .ca-ai-bubble ul { margin:4px 0; padding-left:16px; }
-        .ca-ai-bubble li { margin:2px 0; }
-        .ca-chart-btn {
-            display:inline-flex; align-items:center; gap:6px;
-            background:linear-gradient(135deg,#1b3a2d,#3d9a6a); color:#fff; border:none;
-            padding:6px 14px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer;
-            transition:all 0.2s; margin-top:6px;
+        .ai-chat-header .info h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            color: #4a4a6a;
         }
-        .ca-chart-btn:hover { transform:translateY(-1px); box-shadow:0 3px 10px rgba(27,58,45,0.3); }
-        .ca-input-area {
-            padding:12px 14px; border-top:1px solid #e5e7eb; display:flex; gap:8px;
-            background:#fff;
+        .ai-chat-header .info p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin: 2px 0 0 0;
+            color: #5a5a7a;
         }
-        .ca-input-area input {
-            flex:1; padding:10px 16px; border:2px solid #e5e7eb; border-radius:12px;
-            font-size:13px; outline:none; transition:border-color 0.2s; font-family:inherit;
+        .ai-chat-header .close-btn {
+            margin-left: auto;
+            background: rgba(255,255,255,0.4);
+            border: none;
+            color: #4a4a6a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
         }
-        .ca-input-area input:focus { border-color:#5dc48a; }
-        .ca-input-area button {
-            width:40px; height:40px; border-radius:12px; border:none;
-            background:linear-gradient(135deg,#1b3a2d,#3d9a6a); color:#fff; cursor:pointer;
-            display:flex; align-items:center; justify-content:center;
-            transition:all 0.2s; flex-shrink:0;
+        .ai-chat-header .close-btn:hover {
+            background: rgba(255,255,255,0.6);
         }
-        .ca-input-area button:hover { opacity:0.9; transform:scale(1.05); }
-        .ca-quick {
-            display:flex; flex-wrap:wrap; gap:6px; padding:6px 14px 10px;
-            border-top:1px solid #f0f0f0;
+        .ai-chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: #f0eeed;
         }
-        .ca-quick button {
-            background:#f0fdf4; border:1px solid #bbf7d0; color:#1b3a2d;
-            padding:4px 10px; border-radius:12px; font-size:11px; font-weight:600; cursor:pointer;
-            transition:all 0.2s;
+        .ai-message, .user-message {
+            margin-bottom: 12px;
+            max-width: 85%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.5;
         }
-        .ca-quick button:hover { background:#bbf7d0; }
-        @media (max-width:480px) {
-            .ca-window { width:calc(100vw - 32px); height:480px; right:-8px; }
+        .ai-message {
+            background: #fbeee6;
+            color: #5a4a3a;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
         }
-        /* Dark mode overrides */
-        html.dark .ca-window { background:#1e293b; }
-        html.dark .ca-msgs { background:#0f172a; }
-        html.dark .ca-ai-bubble { background:#1e293b; border-color:#334155; color:#e2e8f0; }
-        html.dark .ca-ai-bubble b { color:#6ee7b7; }
-        html.dark .ca-input-area { background:#1e293b; border-top-color:#334155; }
-        html.dark .ca-input-area input { background:#0f172a; border-color:#334155; color:#e2e8f0; }
-        html.dark .ca-quick { border-top-color:#334155; }
-        html.dark .ca-quick button { background:rgba(27,58,45,0.3); border-color:#334155; color:#6ee7b7; }
-        html.dark .ca-quick button:hover { background:rgba(27,58,45,0.6); }
+        .user-message {
+            background: #d4c5a9;
+            color: #3a3020;
+            border-bottom-right-radius: 4px;
+            margin-left: auto;
+        }
+        .ai-message .typing {
+            display: inline-block;
+        }
+        .ai-message .typing::after {
+            content: '.';
+            animation: dots 1.5s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        .ai-chat-input {
+            padding: 16px;
+            border-top: 1px solid #e0d8d0;
+            display: flex;
+            gap: 10px;
+            background: #fcf9f7;
+        }
+        .ai-chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0d8d0;
+            border-radius: 24px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .ai-chat-input input:focus {
+            border-color: #aa96da;
+        }
+        .ai-chat-input button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a8d8ea, #aa96da);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+        .ai-chat-input button:hover {
+            opacity: 0.85;
+        }
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 16px 12px;
+        }
+        .quick-questions button {
+            background: #fbeee6;
+            border: 1px solid #d4c5a9;
+            color: #5a4a3a;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quick-questions button:hover {
+            background: #d4c5a9;
+            color: #3a3020;
+        }
+
+        @media (max-width: 480px) {
+            .ai-chat-window {
+                width: calc(100vw - 40px);
+                height: 400px;
+                right: -10px;
+            }
+        }
 
         .radiate {
             animation: radiate 2s ease-in-out infinite;
@@ -1661,54 +1752,52 @@
         </div>
     </div>
 
-    <!-- Climate AI Chatbot (CRAVIS-inspired) -->
-    <div class="ca-widget">
-      <div id="ca-chat-window" class="ca-window">
-        <div class="ca-head">
-          <div class="ca-head-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <div class="ca-head-info">
-            <h3>Climate AI</h3>
-            <p>Ask about Nagar Van climate data & charts</p>
-          </div>
-          <button class="ca-head-close" onclick="ClimateAI.toggle()" aria-label="Close chat">&times;</button>
-        </div>
-        <div class="ca-msgs" id="ca-chat-msgs">
-          <div class="ca-msg ca-ai">
-            <div class="ca-avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <!-- AI Chatbot Widget -->
+    <div class="ai-chat-widget">
+        <div id="aiChatWindow" class="ai-chat-window hidden">
+            <div class="ai-chat-header">
+                <div class="avatar">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="info">
+                    <h3>Nagar Van Assistant</h3>
+                    <p>Ask me about afforestation, Nagar Van, and more</p>
+                </div>
+                <button class="close-btn" onclick="toggleAIChat()" aria-label="Close chat">&times;</button>
             </div>
-            <div class="ca-bubble ca-ai-bubble">
-              <b>Namaste!</b> I'm your Climate AI assistant — inspired by CRAVIS. I answer questions about Nagar Van climate data and can generate charts.<br><br>
-              <b>Try asking:</b><br>
-              🌡️ "Show temperature for Rajasthan"<br>
-              🌧️ "Rainfall chart for UP sites"<br>
-              🌲 "Carbon sequestration comparison"<br>
-              📍 "Tell me about Kaylana Nagar Van"<br>
-              🧠 "What is UHI effect?"<br>
-              ❓ Type <b>"help"</b> for all commands
+            <div class="quick-questions">
+                <button onclick="sendQuickQuestion('What is Nagar Van?')">What is Nagar Van?</button>
+                <button onclick="sendQuickQuestion('What is the Miyawaki method?')">Miyawaki method</button>
+                <button onclick="sendQuickQuestion('Which states have Nagar Van sites?')">Locations</button>
+                <button onclick="sendQuickQuestion('What is DMRV?')">What is DMRV?</button>
+                <button onclick="sendQuickQuestion('How to report an issue?')">How to report?</button>
+                <button onclick="sendQuickQuestion('What is the survey for?')">Survey info</button>
+                <button onclick="sendQuickQuestion('What is CAMPA?')">What is CAMPA?</button>
+                <button onclick="sendQuickQuestion('How does AI verification work?')">AI verification</button>
             </div>
-          </div>
+            <div id="aiChatMessages" class="ai-chat-messages">
+                <div class="ai-message">
+                    Hello! I'm the Nagar Van Assistant. I can help you with questions about:
+                    <br>• Nagar Van Yojana & Miyawaki method
+                    <br>• DMRV dashboard metrics & indicators
+                    <br>• MoEF&CC, CAMPA, and climate policy
+                    <br>• Urban heat island & air quality
+                    <br>• Tree species, biodiversity, water
+                    <br>• Reporting issues & public survey
+                    <br>• Volunteering & getting involved
+                    <br><br>How can I help you today?
+                </div>
+            </div>
+            <div class="ai-chat-input">
+                <input type="text" id="aiChatInput" placeholder="Type your question..." onkeypress="handleAIChatKeyPress(event)">
+                <button onclick="sendAIChatMessage()" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
-        <div class="ca-quick">
-          <button onclick="ClimateAI.quick('Show temperature for Rajasthan sites')">🌡️ Temp</button>
-          <button onclick="ClimateAI.quick('Show rainfall for Madhya Pradesh')">🌧️ Rainfall</button>
-          <button onclick="ClimateAI.quick('Show carbon chart for all sites')">🌲 Carbon</button>
-          <button onclick="ClimateAI.quick('Tell me about Kaylana Nagar Van')">📍 Kaylana</button>
-          <button onclick="ClimateAI.quick('What is UHI effect?')">🧠 UHI</button>
-          <button onclick="ClimateAI.quick('Compare MP vs UP carbon')">📊 Compare</button>
-        </div>
-        <div class="ca-input-area">
-          <input type="text" id="ca-chat-input" placeholder="Ask about climate data..." onkeydown="ClimateAI.handleKey(event)">
-          <button onclick="ClimateAI.send()" aria-label="Send">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          </button>
-        </div>
-      </div>
-      <button id="ca-chat-toggle" class="ca-toggle" onclick="ClimateAI.toggle()" aria-label="Open Climate AI">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </button>
+        <button id="aiChatToggle" class="ai-chat-toggle" onclick="toggleAIChat()" aria-label="Open chat assistant">
+            <i class="fas fa-comments"></i>
+        </button>
     </div>
 
     <!-- Professional Footer -->
@@ -2157,7 +2246,7 @@
         </div>
     </div>
 
-    <script src="assets/js/climate-ai.js"></script>
+    <script src="assets/js/nagar-van-chatbot.js"></script>
     <script>
         const ADMIN_DATA_API_URL = "https://script.google.com/macros/s/AKfycbx-u7f1C-HTQbL6M_RvrfJBdmpTiIkJPqaNbxtT4FAsmsR263oStYHO8eor8-QcbmyQ/exec";
         const PUBLIC_SUBMISSION_API_URL = "https://script.google.com/macros/s/AKfycbwMacT_h18pKgGjjIKkhgYyzC1ll3l7tY539E6m8tWWUONelUt-k89HAoTzmDSCFQeu/exec";
@@ -2205,7 +2294,13 @@
         }
 
         function initChatbot() {
-            if (typeof ClimateAI !== 'undefined') ClimateAI.init();
+            if (typeof NagarVanChat === 'undefined') return;
+            NagarVanChat.init({
+                apiUrl: PUBLIC_SUBMISSION_API_URL,
+                knowledgeUrl: 'assets/data/chatbot-knowledge.json'
+            }).catch(function(err) {
+                console.warn('Chatbot init:', err);
+            });
         }
 
         // Survey slide — appears after 4 seconds (once per session)
@@ -2276,6 +2371,47 @@
                 if (iconClose) iconClose.classList.add('hidden');
             }
         });
+
+        // AI Chat Widget Functions
+        let chatMinimized = false;
+
+        function toggleAIChat() {
+            let chatWindow = document.getElementById('aiChatWindow');
+            let toggleBtn = document.getElementById('aiChatToggle');
+
+            if (chatWindow.classList.contains('hidden')) {
+                // Open chat
+                chatWindow.classList.remove('hidden');
+                toggleBtn.classList.add('minimized');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                chatMinimized = false;
+            } else {
+                // Toggle minimize
+                if (chatMinimized) {
+                    chatWindow.classList.remove('hidden');
+                    toggleBtn.classList.add('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+                    chatMinimized = false;
+                } else {
+                    chatWindow.classList.add('hidden');
+                    toggleBtn.classList.remove('minimized');
+                    toggleBtn.innerHTML = '<i class="fas fa-comments"></i>';
+                    chatMinimized = true;
+                }
+            }
+        }
+
+        function handleAIChatKeyPress(e) {
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.handleKeyPress(e);
+        }
+
+        function sendQuickQuestion(question) {
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendQuickQuestion(question);
+        }
+
+        function sendAIChatMessage() {
+            if (typeof NagarVanChat !== 'undefined') NagarVanChat.sendUserMessage();
+        }
 
         // Hero Icon Animation Logic - Smooth & Slow
         const svgFiles = [
