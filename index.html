@@ -2516,6 +2516,8 @@
             minZoom: 4, maxZoom: 18
         }).addTo(map);
 
+        var markers = L.layerGroup().addTo(map);
+
         // India GeoJSON from datameet/maps with PESTEL green styling
         const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/Country/india-composite.geojson';
         fetch(indiaGeoUrl)
