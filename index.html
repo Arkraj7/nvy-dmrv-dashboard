@@ -2437,7 +2437,8 @@
             }, 4000); // Wait 4 seconds between swaps
         }
 
-        window.liveData = { total: 0, sites: { overview: 0, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0, maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0 }, locations: [] };
+        const cachedTotal = parseInt(localStorage.getItem('dmrv-live-survey-total') || '0', 10);
+        window.liveData = { total: cachedTotal, sites: { overview: cachedTotal, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0, maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0 }, locations: [] };
 
         const siteData = {
             overview: { 
@@ -2719,22 +2720,25 @@
         }
 
         function getFallbackLiveData() {
+            const cached = localStorage.getItem('dmrv-live-survey-total');
+            const total = cached ? parseInt(cached, 10) : 0;
             return {
-                total: 1250,
-                sites: { overview: 1250, gujarat: 180, jharkhand: 140, andhra: 120, mp: 150, maharashtra: 160, karnataka: 130, rajasthan: 100, delhi: 110, westbengal: 160 },
+                total: total,
+                sites: { overview: total, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0, maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0 },
                 locations: []
             };
         }
 
         async function fetchLiveSampleCount() {
             try {
-                document.getElementById('metric-samples').innerText = "...";
+                document.getElementById('metric-samples').innerText = window.liveData ? window.liveData.total : "...";
                 let response = await fetch(ADMIN_DATA_API_URL + '?action=getCounts');
                 let text = await response.text();
                 try {
                     let parsedData = JSON.parse(text);
                     if(parsedData.total !== undefined) {
                         window.liveData = parsedData;
+                        localStorage.setItem('dmrv-live-survey-total', String(parsedData.total));
                         document.getElementById('metric-samples').innerText = window.liveData.total;
                         updateDashboard();
                         return;
