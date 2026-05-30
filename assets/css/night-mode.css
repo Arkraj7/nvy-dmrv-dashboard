@@ -727,3 +727,41 @@ html.dark .btn-dashboard:active {
 html.dark .btn-dashboard .circle {
   background-color: #334155 !important;
 }
+
+/* ── FAQ Section dark mode ── */
+html.dark #faq-section {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #faq-section .slide-in-right {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #faq-section h2 {
+  color: #e2e8f0 !important;
+}
+html.dark #faq-section .faq-item {
+  border-color: #334155 !important;
+  background-color: #1e293b !important;
+}
+html.dark #faq-section .faq-question {
+  background-color: #1e293b !important;
+}
+html.dark #faq-section .faq-question:hover {
+  background-color: #334155 !important;
+}
+html.dark #faq-section .faq-question span {
+  color: #e2e8f0 !important;
+}
+html.dark #faq-section .faq-icon {
+  color: #6ee7b7 !important;
+}
+html.dark #faq-section .faq-answer {
+  border-color: #334155 !important;
+}
+html.dark #faq-section .faq-answer div {
+  color: #94a3b8 !important;
+}
+html.dark #faq-section .faq-answer strong {
+  color: #e2e8f0 !important;
+}
