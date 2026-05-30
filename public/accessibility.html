@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility - Nagar Van DMRV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/night-mode.css">
+    <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
+        .icon-sm { width: 16px; height: 16px; }
+        .icon-lg { width: 28px; height: 28px; }
+        .icon-white { color: #fff; }
+        .icon-green { color: #6ee7b7; }
+        .icon-blue { color: #7dd3fc; }
+        .icon-amber { color: #fde68a; }
+        .icon-purple { color: #c4b5fd; }
+        .icon-teal { color: #5eead4; }
+        .icon-peach { color: #fed7aa; }
+        .icon-sky { color: #7dd3fc; }
+        .icon-dark { color: #374151; }
+        .icon-red { color: #ef4444; }
+        .icon-rose { color: #fda4af; }
+    </style>
+</head>
+<body class="bg-[#f4f7f6] min-h-screen">
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+  <symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
+  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
+  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
+  <symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+  <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
+  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
+  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="M22 15l-5-5-7 7"/><path d="M16 13l-3 3"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
+  <symbol id="icon-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9h-9V3z"/><path d="M12 12l-4-4"/></symbol>
+  <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12c1.5 0 2.5-.5 3-1"/><path d="M3 12h16c1.5 0 2.5.5 3 1"/><path d="M5 18h10c1.5 0 2.5-.5 3-1"/></symbol>
+  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 8 5 12 5 16a7 7 0 0014 0c0-4-4-8-7-14z"/></symbol>
+  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 00-4 0v10.8"/><path d="M8 16a4 4 0 108 0 4 4 0 00-8 0z"/></symbol>
+  <symbol id="icon-seedling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-4 0-6 2-6 5"/><path d="M12 8c4 0 6 2 6 5"/><path d="M8 3c4 0 6 1.5 6 5"/><path d="M16 3c-4 0-6 1.5-6 5"/></symbol>
+  <symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
+  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 00-9-9H5a3 3 0 00-3 3v6a3 3 0 003 3h2v4l4-4h4a9 9 0 006-3z"/></symbol>
+  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
+  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .5-5.5 5 1.5 7L12 17l-6 4 1.5-7L2 9l7-.5L12 2z"/></symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a3 3 0 013-3h4l3 3h7a3 3 0 013 3v9a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"/></symbol>
+  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7a2 2 0 00-2-2h-3l-2-3H9L7 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 114 4L7 20l-4 1 1-4L17 3z"/></symbol>
+  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h0"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+  <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
+  <symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
+  <symbol id="icon-eco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c5-5 8-11 8-18"/><path d="M17 7c-2 2-4 3-8 4"/><path d="M12 12c2-2 4-3 5-7"/></symbol>
+  <symbol id="icon-clean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l15-15"/><path d="M13 3l8 8"/><path d="M4 20l3-3"/></symbol>
+  <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
+</svg>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] text-white py-8">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="inline-flex items-center gap-2 text-white hover:text-emerald-200">
+                    <svg class="icon icon-green"><use href="#icon-arrow-left"/></svg> Back to Dashboard
+                </a>
+                <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+                  <div class="theme-toggle__container">
+                    <div class="theme-toggle__clouds"></div>
+                    <div class="theme-toggle__stars">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 88.5976 25.602 87.9802 26.0053C87.3716 26.3995 86.8864 26.9312 86.5248 27.5913C86.172 28.2513 85.9956 28.9572 85.9956 29.7273C85.9956 28.563 85.6075 27.5546 84.8313 26.7112C84.0551 25.8587 83.1114 25.4095 81 25.3545ZM104 22.3545C105.111 22.2995 106.055 21.8503 106.831 21.0069C107.607 20.1635 107.996 19.1642 107.996 18C107.996 19.1642 108.384 20.1635 109.16 21.0069C109.936 21.8503 110.88 22.2903 112 22.3545C111.268 22.3911 110.598 22.602 109.98 23.0053C109.372 23.3995 108.886 23.9312 108.525 24.5913C108.172 25.2513 107.996 25.9572 107.996 26.7273C107.996 25.563 107.607 24.5546 106.831 23.7112C106.055 22.8587 105.111 22.4095 104 22.3545ZM123.168 9.00688C122.392 9.85027 121.448 10.2995 120.337 10.3545C121.448 10.4095 122.392 10.8587 123.168 11.7112C123.944 12.5546 124.332 13.563 124.332 14.7273C124.332 13.9572 124.509 13.2513 124.861 12.5913C125.223 11.9312 125.708 11.3995 126.317 11.0053C126.934 10.602 127.605 10.3911 128.337 10.3545C127.217 10.2903 126.273 9.85027 125.497 9.00688C124.721 8.16348 124.332 7.16425 124.332 6C124.332 7.16425 123.944 8.16348 123.168 9.00688Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="theme-toggle__sun">
+                      <div class="theme-toggle__moon-mask">
+                        <div class="theme-toggle__crater"></div>
+                        <div class="theme-toggle__crater"></div>
+                        <div class="theme-toggle__crater"></div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+            </div>
+            <h1 class="text-3xl font-bold flex items-center gap-2"><svg class="icon icon-teal"><use href="#icon-users"/></svg>Accessibility Statement</h1>
+            <p class="text-emerald-100 mt-2">Nagar Van Digital Monitoring, Reporting & Verification</p>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-rose"><use href="#icon-heart"/></svg>Our Commitment</h2>
+            <p class="text-gray-700 mb-6">The Nagar Van DMRV initiative is committed to ensuring digital accessibility for all citizens, including individuals with disabilities. We believe that civic participation in climate action should be inclusive and barrier-free.</p>
+
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-green"><use href="#icon-check"/></svg>Steps We Have Taken</h2>
+            <p class="text-gray-700 mb-6">We are actively working to align this dashboard with the Web Content Accessibility Guidelines (WCAG) 2.1. Current features include:</p>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex items-start gap-4 p-4 bg-emerald-50 rounded-lg">
+                    <i class="fas fa-language text-[#1b3a2d] text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-[#1b3a2d] flex items-center gap-2"><svg class="icon icon-green"><use href="#icon-globe"/></svg>Bilingual Support</h3>
+                        <p class="text-gray-700 text-sm">Core public interfaces, such as the public survey, are provided in both English and Hindi.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 bg-emerald-50 rounded-lg">
+                    <i class="fas fa-eye text-[#1b3a2d] text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-[#1b3a2d] flex items-center gap-2"><svg class="icon icon-amber"><use href="#icon-thermometer"/></svg>Color Contrast</h3>
+                        <p class="text-gray-700 text-sm">The dashboard utilizes high-contrast green and gray palettes to ensure text is readable against backgrounds.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 bg-emerald-50 rounded-lg">
+                    <i class="fas fa-mobile-alt text-[#1b3a2d] text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-[#1b3a2d] flex items-center gap-2"><svg class="icon icon-purple"><use href="#icon-phone"/></svg>Mobile Responsiveness</h3>
+                        <p class="text-gray-700 text-sm">The interface is designed to be fully navigable and readable on all smartphone devices, recognizing that most field data and citizen engagement occurs via mobile.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-chat"/></svg>Feedback</h2>
+            <p class="text-gray-700 mb-6">Accessibility is an ongoing effort. If you encounter any barriers while using this dashboard or have suggestions for improvement, please reach out to us. Your feedback is vital to building a more inclusive platform.</p>
+
+            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
+                <p class="text-gray-700">Contact: <a href="mailto:arkraj.biswas6@gmail.com" class="text-[#1b3a2d] hover:underline font-semibold">arkraj.biswas6@gmail.com</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="max-w-4xl mx-auto px-4 text-center text-sm text-gray-600">
+            <p>&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="privacy.html" class="text-[#1b3a2d] hover:underline">Privacy Policy</a>
+                <a href="terms.html" class="text-[#1b3a2d] hover:underline">Terms of Use</a>
+                <a href="cookies.html" class="text-[#1b3a2d] hover:underline">Cookie Policy</a>
+                <a href="index.html" class="text-[#1b3a2d] hover:underline">Dashboard</a>
+            </div>
+        </div>
+    </footer>
+<script src="assets/js/night-mode.js"></script>
+</body>
+</html>

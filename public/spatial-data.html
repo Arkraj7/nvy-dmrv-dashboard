@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial Data — 30 Featured Nagar Vans | NVY DMRV</title>
+<meta name="description" content="Environmental impact profiles for 30 selected Nagar Van sites across India — climate, ecology, air quality & biodiversity">
+<meta name="theme-color" content="#1b3a2d">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="assets/css/night-mode.css">
+<script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+
+<style>
+body { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f7f6; color: #1f2937; -webkit-font-smoothing: antialiased; }
+.icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 28px; height: 28px; }
+.icon-xl { width: 36px; height: 36px; }
+.icon-green { color: #6ee7b7; }
+.icon-sky { color: #7dd3fc; }
+.icon-amber { color: #fde68a; }
+.icon-purple { color: #c4b5fd; }
+.icon-teal { color: #5eead4; }
+.icon-peach { color: #fed7aa; }
+.icon-dark { color: #374151; }
+.icon-red { color: #ef4444; }
+.icon-emerald { color: #34d399; }
+.icon-rose { color: #fda4af; }
+
+.glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid rgba(226, 232, 240, 0.5); transition: all 0.3s ease; }
+.glass-panel:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-4px); border-color: #5dc48a; }
+
+.gradient-text { background: linear-gradient(90deg, #1b3a2d, #5dc48a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.filter-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid #d1d5db; background: #fff; color: #374151; font-size: 11px; font-weight: 500; cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif; }
+.filter-pill:hover { border-color: #5dc48a; color: #1b3a2d; }
+.filter-pill.active { background: #1b3a2d; color: #fff; border-color: #1b3a2d; font-weight: 700; }
+
+.site-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px 18px; cursor: pointer; transition: all .22s; position: relative; overflow: hidden; }
+.site-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #5dc48a; opacity: 0; transition: opacity .2s; }
+.site-card:hover { border-color: #5dc48a; box-shadow: 0 4px 12px rgba(93,196,138,0.12); }
+.site-card:hover::before { opacity: .5; }
+.site-card.active { border-color: #5dc48a; box-shadow: 0 0 0 1px rgba(93,196,138,0.2), 0 4px 20px rgba(0,0,0,0.06); }
+.site-card.active::before { opacity: 1; }
+.site-card.hidden { display: none; }
+
+.detail-hero { background: linear-gradient(135deg, #fff 0%, #f0fdf4 100%); border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px 28px; position: relative; overflow: hidden; }
+.detail-hero::after { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(93,196,138,0.07), transparent); }
+
+.kpi-box { background: rgba(0,0,0,0.02); border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; text-align: center; }
+.kpi-value { font-family: 'Inter', monospace; font-size: 18px; font-weight: 700; color: #1b3a2d; }
+.kpi-unit { font-size: 9px; color: #6b7280; text-transform: uppercase; letter-spacing: .8px; }
+.kpi-label { font-size: 10px; color: #4b5563; margin-top: 3px; }
+
+.env-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; text-align: center; transition: border-color .2s; }
+.env-card:hover { border-color: #5dc48a; box-shadow: 0 2px 8px rgba(93,196,138,0.08); }
+.env-icon { font-size: 22px; margin-bottom: 6px; }
+.env-label { font-size: 9.5px; color: #6b7280; text-transform: uppercase; letter-spacing: .8px; }
+.env-value { font-family: 'Inter', monospace; font-size: 15px; font-weight: 700; color: #1b3a2d; margin: 3px 0; }
+.env-trend { font-size: 9px; }
+.trend-up { color: #059669; }
+.trend-down { color: #059669; }
+.env-source { font-size: 8px; color: #9ca3af; margin-top: 4px; }
+
+.chart-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; }
+.chart-card.wide { grid-column: 1 / -1; }
+.chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.chart-title { font-size: 12px; font-weight: 600; color: #374151; }
+.chart-source { font-size: 9px; color: #9ca3af; }
+.chart-card canvas { max-height: 190px; }
+.chart-card.wide canvas { max-height: 210px; }
+
+.section-title { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #1b3a2d; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.data-table th { background: rgba(27,58,45,0.06); padding: 8px 12px; text-align: left; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; color: #1b3a2d; border-bottom: 1px solid #e2e8f0; }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid #f1f5f9; color: #4b5563; line-height: 1.5; vertical-align: top; }
+.data-table tr:hover td { background: rgba(93,196,138,0.04); }
+.data-table a { color: #1b3a2d; text-decoration: none; }
+.data-table a:hover { text-decoration: underline; }
+.badge { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+.b-live { background: rgba(5,150,105,0.1); color: #059669; border: 1px solid rgba(5,150,105,0.25); }
+.b-lit  { background: rgba(2,132,199,0.1); color: #0284c7; border: 1px solid rgba(2,132,199,0.2); }
+.b-pri  { background: rgba(217,119,6,0.1); color: #d97706; border: 1px solid rgba(217,119,6,0.2); }
+.b-mod  { background: rgba(107,114,128,0.08); color: #6b7280; border: 1px solid rgba(107,114,128,0.15); }
+
+.notice-bar { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15); border-radius: 8px; padding: 12px 16px; font-size: 11.5px; color: #6b7280; line-height: 1.7; margin-bottom: 28px; }
+.notice-bar strong { color: #92400e; }
+
+.no-results { text-align: center; padding: 60px 20px; color: #9ca3af; font-size: 13px; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: rgba(27,58,45,0.2); border-radius: 3px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+
+*:focus-visible { outline: 3px solid #1b3a2d; outline-offset: 2px; box-shadow: 0 0 0 6px rgba(27,58,45,0.15); }
+
+@media (max-width: 960px) {
+  .sites-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 700px) {
+  .charts-grid { grid-template-columns: 1fr !important; }
+  .sh-kpis { grid-template-columns: repeat(2,1fr) !important; }
+}
+
+.mobile-menu-btn, .theme-toggle-mobile { display: none; }
+@media (max-width: 767px) {
+  .mobile-menu-btn { display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 1; }
+  .theme-toggle-mobile { display: flex; align-items: center; justify-content: center; padding: 6px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 2; }
+  nav .flex-wrap { flex-wrap: nowrap !important; gap: 6px; }
+  nav .hidden.md\\:flex { display: none !important; }
+  nav .text-size-controls { display: none !important; }
+  nav [class*="hidden lg:block"] { display: none !important; }
+  .nav-items-desktop { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 1000; border-radius: 0 0 12px 12px; gap: 6px; }
+  .nav-items-desktop.open { display: flex; }
+  .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 10px 12px !important; }
+  .nav-items-desktop > *:hover { background: #f0fdf4; }
+  .nav-items-desktop .theme-toggle { display: none !important; }
+  .nav-items-desktop [class*="hidden"][class*="lg:block"] { display: flex !important; }
+  header { padding: 20px 16px !important; }
+  header > div { flex-direction: column !important; align-items: flex-start !important; }
+  header > div > div:first-child { width: 100%; }
+  header > div > div:last-child { border-left: none !important; padding-left: 0 !important; width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  header > div > div:last-child > div { text-align: left !important; flex: 1; min-width: 70px; }
+  header > div > div:last-child > div div:first-child { font-size: 16px !important; }
+  nav[style*="position:sticky"] { padding: 10px 16px !important; overflow-x: auto; top: 56px; }
+  nav[style*="position:sticky"] > div { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  nav[style*="position:sticky"] > div::-webkit-scrollbar { display: none; }
+  nav[style*="position:sticky"] .filter-pill { flex-shrink: 0; }
+  .notice-bar { padding: 12px 16px !important; font-size: 11px !important; }
+  main { padding: 20px 16px 40px !important; }
+  .data-table { font-size: 9px; }
+  .data-table th, .data-table td { padding: 6px 4px; }
+  .data-table td:first-child { display: none; }
+  .badge { font-size: 7px; padding: 1px 5px; }
+  .section-title { font-size: 15px; }
+  .site-card { padding: 12px 14px; }
+  .detail-hero { padding: 16px 18px !important; }
+  .detail-hero h3 { font-size: 16px; }
+  .detail-hero p { font-size: 12px; }
+  .sh-kpis { gap: 6px; }
+  .sh-kpis > div { padding: 8px; }
+  .sh-kpis > div div:first-child { font-size: 14px; }
+  .sh-kpis > div div:last-child { font-size: 8px; }
+  .charts-grid canvas { height: 200px !important; }
+  .site-footer { padding: 24px 16px !important; }
+  .site-footer .grid { gap: 24px; }
+  .site-footer .border-t { flex-direction: column; text-align: center; gap: 12px; }
+  .site-footer .border-t > div:first-child { text-align: center; }
+  .site-footer .border-t > div:last-child { justify-content: center; flex-wrap: wrap; }
+  body { overflow-x: hidden; }
+}
+@media (min-width: 768px) {
+  .mobile-menu-btn, .theme-toggle-mobile { display: none !important; }
+  .nav-items-desktop { display: flex !important; }
+}
+@media (max-width: 480px) {
+  .mobile-menu-btn, .theme-toggle-mobile { padding: 5px; }
+  .sh-kpis { grid-template-columns: repeat(2,1fr) !important; }
+}
+
+.site-footer { background: #ffffff; color: #000000; }
+.footer-link { color: #000000; transition: all 0.2s ease; position: relative; }
+.footer-link:hover { color: #1b3a2d; transform: translateX(3px); }
+.footer-link:hover::after { content: ''; position: absolute; left: -12px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: #1b3a2d; border-radius: 50%; }
+.social-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.social-icon:hover { background: #5dc48a; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+<symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
+<symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+<symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
+<symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
+<symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
+<symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
+<symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
+<symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+<symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
+<symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
+<symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
+<symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
+<symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+<symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
+<symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+</svg>
+
+<nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center flex-wrap">
+      <div class="flex items-center gap-3">
+        <div class="w-14 h-14 flex items-center justify-center" role="img" aria-label="Nagar Van logo">
+          <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
+        </div>
+        <div class="flex flex-col hidden md:flex">
+          <a href="index.html" class="font-bold text-xl tracking-wide leading-none">Nagar Van DMRV</a>
+          <span class="text-[9px] text-emerald-700 uppercase tracking-widest font-bold mt-0.5">Digital Monitoring, Reporting & Verification</span>
+        </div>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <button class="theme-toggle-mobile" id="theme-toggle-mobile" onclick="toggleMobileTheme()" aria-label="Switch to dark mode" type="button">
+        <svg class="w-5 h-5 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        <svg class="w-5 h-5 sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      </button>
+
+      <div class="nav-items-desktop flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+        <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1" aria-label="Go to Home">
+          <svg class="icon icon-sm icon-green"><use href="#icon-home"/></svg><span>Home</span>
+        </a>
+        <a href="about.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1">
+          <svg class="icon icon-sm icon-purple"><use href="#icon-about"/></svg><span>About Me</span>
+        </a>
+        <div class="relative group">
+          <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+            <svg class="icon icon-sm icon-peach"><use href="#icon-users"/></svg><span>Citizen Corner</span>
+            <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
+            <a href="report.html" class="block px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-t-lg transition-colors flex items-center gap-2"><svg class="icon icon-sm icon-red"><use href="#icon-flag"/></svg>Report Issue</a>
+            <button onclick="openPublicModal()" class="w-full text-left px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-b-lg transition-colors flex items-center gap-2"><svg class="icon icon-sm icon-rose"><use href="#icon-heart"/></svg>Public Contribution</button>
+          </div>
+        </div>
+        <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block flex items-center gap-1.5">
+          <svg class="icon icon-sm icon-dark"><use href="#icon-clipboard"/></svg><span>Take Survey</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+          <div class="theme-toggle__container">
+            <div class="theme-toggle__clouds"></div>
+            <div class="theme-toggle__stars">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545Z" fill="currentColor"/></svg>
+            </div>
+            <div class="theme-toggle__sun">
+              <div class="theme-toggle__moon-mask">
+                <div class="theme-toggle__crater"></div>
+                <div class="theme-toggle__crater"></div>
+                <div class="theme-toggle__crater"></div>
+              </div>
+            </div>
+          </div>
+        </button>
+        <div class="flex items-center gap-2 ml-2 border-l border-gray-200 pl-2">
+          <div class="text-size-controls hidden sm:flex" role="group" aria-label="Text size" style="display:inline-flex;align-items:center;gap:4px;margin-left:10px">
+            <button type="button" class="text-size-btn" onclick="setTextSize('small')" aria-label="Small text" title="Small" style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(27,58,45,0.25);background:rgba(27,58,45,0.06);color:#1b3a2d;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">A-</button>
+            <button type="button" class="text-size-btn" onclick="setTextSize('normal')" aria-label="Normal text" title="Normal" style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(27,58,45,0.25);background:rgba(27,58,45,0.06);color:#1b3a2d;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">A</button>
+            <button type="button" class="text-size-btn" onclick="setTextSize('large')" aria-label="Large text" title="Large" style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(27,58,45,0.25);background:rgba(27,58,45,0.06);color:#1b3a2d;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">A+</button>
+            <button type="button" class="text-size-btn" onclick="setTextSize('extra-large')" aria-label="Extra Large text" title="Extra Large" style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(27,58,45,0.25);background:rgba(27,58,45,0.06);color:#1b3a2d;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s">A++</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header style="background:linear-gradient(135deg, #fff 0%, #f0fdf4 100%);border-bottom:1px solid #e2e8f0;padding:28px 40px 22px">
+  <div style="max-width:1380px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(27,58,45,0.06);border:1px solid #5dc48a;border-radius:20px;padding:4px 14px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#1b3a2d;margin-bottom:10px">
+        <span style="width:7px;height:7px;border-radius:50%;background:#5dc48a;display:inline-block;animation:blink 2s infinite"></span> Featured Site Profiles &middot; NVY DMRV Research
+      </div>
+      <h1 style="font-size:clamp(20px,2.8vw,36px);font-weight:700;line-height:1.15;color:#1b3a2d;margin:0">
+        30 Selected <span style="color:#5dc48a">Nagar Vans</span><br>
+        <span style="font-size:clamp(14px,1.6vw,20px);color:#4b5563;font-weight:400">Environmental Impact Dashboard</span>
+      </h1>
+      <p style="font-size:12px;color:#6b7280;margin-top:6px;line-height:1.6">
+        Interactive climate, ecology, air quality &amp; biodiversity profiles for selected NVY sites across UP &middot; Rajasthan &middot; MP &middot; Andhra Pradesh &middot; Gujarat &middot; Punjab
+      </p>
+    </div>
+    <div style="display:flex;gap:20px;border-left:1px solid #e2e8f0;padding-left:20px">
+      <div style="text-align:right"><div style="font-family:'Inter',monospace;font-size:22px;font-weight:700;color:#1b3a2d">30</div><div style="font-size:9px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Featured Sites</div></div>
+      <div style="text-align:right"><div style="font-family:'Inter',monospace;font-size:22px;font-weight:700;color:#1b3a2d">6</div><div style="font-size:9px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">States</div></div>
+      <div style="text-align:right"><div style="font-family:'Inter',monospace;font-size:22px;font-weight:700;color:#1b3a2d">1,555</div><div style="font-size:9px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Ha covered</div></div>
+      <div style="text-align:right"><div style="font-family:'Inter',monospace;font-size:22px;font-weight:700;color:#1b3a2d">₹5,410L</div><div style="font-size:9px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Sanctioned</div></div>
+    </div>
+  </div>
+</header>
+
+<nav style="background:rgba(255,255,255,0.85);border-bottom:1px solid #e2e8f0;padding:12px 40px;backdrop-filter:blur(8px);position:sticky;top:64px;z-index:100">
+  <div style="max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <span style="font-size:10px;color:#6b7280;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-right:4px">Filter:</span>
+    <button class="filter-pill active" onclick="filterState('all',this)">All States (30)</button>
+    <button class="filter-pill" onclick="filterState('Uttar Pradesh',this)">Uttar Pradesh (10)</button>
+    <button class="filter-pill" onclick="filterState('Rajasthan',this)">Rajasthan (7)</button>
+    <button class="filter-pill" onclick="filterState('Madhya Pradesh',this)">Madhya Pradesh (7)</button>
+    <button class="filter-pill" onclick="filterState('Andhra Pradesh',this)">Andhra Pradesh (2)</button>
+    <button class="filter-pill" onclick="filterState('Gujarat',this)">Gujarat (2)</button>
+    <button class="filter-pill" onclick="filterState('Punjab',this)">Punjab (2)</button>
+  </div>
+</nav>
+
+<main style="max-width:1380px;margin:0 auto;padding:32px 40px 60px">
+
+<div class="notice-bar">
+  <strong>Data transparency:</strong> Site registry data (name, area, cost, FY) is from the <strong>National CAMPA master list (MoEFCC/NAEB PMU)</strong> and shared documents (2026_05_19_data &amp; 2026_05_18_docx). Environmental indicators are <strong>modelled/literature-derived benchmarks</strong> calibrated per site climate zone — not yet field-measured. Weather data is live from <strong>Open-Meteo API</strong>. Replace modelled values with your field CVM/WHO-5/NDVI measurements as they come in.
+</div>
+
+<div style="display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start" class="sites-grid">
+
+  <aside>
+    <div class="section-title" style="margin-top:0">&#127795; Select a Site</div>
+    <div id="siteList" style="display:flex;flex-direction:column;gap:10px"></div>
+  </aside>
+
+  <div id="detailPanel" style="display:flex;flex-direction:column;gap:20px"></div>
+
+</div>
+
+<div style="margin-top:40px">
+  <div class="section-title">&#128218; Data Sources &amp; Methodology</div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
+    <table class="data-table">
+      <thead>
+        <tr><th>#</th><th>Indicator</th><th>Source</th><th>Type</th><th>Citation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Site name, area, cost, FY, sanction dates</td><td>National CAMPA Master List (MoEFCC/NAEB PMU) + 2026_05_19 data &amp; 2026_05_18 docx</td><td><span class="badge b-pri">Primary</span></td><td>MoEFCC/NAEB PMU (2025). NVY Implementation Master List.</td></tr>
+        <tr><td>2</td><td>Temperature, humidity, precipitation (live)</td><td><a href="https://open-meteo.com">Open-Meteo Forecast API</a> (ERA5/NWP)</td><td><span class="badge b-live">Live API</span></td><td>Zippenfenig, P. (2023). Open-Meteo.com weather API. Zenodo. doi:10.5281/zenodo.7970649</td></tr>
+        <tr><td>3</td><td>UHI / temperature reduction benchmarks</td><td>Morakinyo et al. 2017; Santamouris 2020; CPCB UHI studies India</td><td><span class="badge b-lit">Literature</span></td><td>Morakinyo, T.E. et al. (2017). Urban greenery microclimate. Urban Climate.</td></tr>
+        <tr><td>4</td><td>Air quality / PM2.5 reduction</td><td>Nowak et al. 2006 (USDA); WHO 2016 guidelines; CPCB monitoring</td><td><span class="badge b-lit">Literature</span></td><td>Nowak, D.J. et al. (2006). Air pollution removal by urban trees.</td></tr>
+        <tr><td>5</td><td>NDVI estimates (Yr 0–5)</td><td>MODIS MOD13Q1 250m seasonal patterns for Indian climate zones (FSI SFR 2021)</td><td><span class="badge b-mod">Modelled</span></td><td>Didan, K. (2021). MOD13Q1. NASA LP DAAC.</td></tr>
+        <tr><td>6</td><td>Carbon sequestration estimates</td><td>Forest Survey of India State of Forest Report 2021; ICFRE biomass tables</td><td><span class="badge b-lit">Literature</span></td><td>FSI (2021). India State of Forest Report 2021. MoEFCC.</td></tr>
+        <tr><td>7</td><td>Biodiversity / species richness benchmarks</td><td>GBIF India occurrence data; Ikin et al. 2015; WII studies</td><td><span class="badge b-lit">Literature</span></td><td>GBIF Secretariat (2023). GBIF occurrence download.</td></tr>
+        <tr><td>8</td><td>Water recharge / runoff reduction</td><td>Berland et al. 2017; CWC India groundwater recharge norms; CGWB</td><td><span class="badge b-lit">Literature</span></td><td>Berland, A. et al. (2017). The role of trees in urban stormwater management.</td></tr>
+        <tr><td>9</td><td>WHO-5 Wellbeing Index</td><td>WHO-5 instrument (WHO Regional Office for Europe, 1998); Sreetheran 2017</td><td><span class="badge b-lit">Validated</span></td><td>Topp, C.W. et al. (2015). WHO-5 Well-Being Index. Psychotherapy &amp; Psychosomatics.</td></tr>
+        <tr><td>10</td><td>Willingness to Pay (WTP/CVM)</td><td>Contingent Valuation Method — field survey instrument</td><td><span class="badge b-mod">Field Survey</span></td><td>Your CVM survey framework — replace modelled placeholder with field results.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer py-12 px-4" role="contentinfo">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">About Portal</h4>
+        <p class="text-sm text-black">The Nagar Van DMRV Dashboard is an AI-powered platform for tracking India's urban forest impacts.</p>
+      </div>
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="footer-link">Dashboard</a></li>
+          <li><a href="report.html" class="footer-link">Report Issue</a></li>
+          <li><a href="green-calculator.html" target="_blank" class="footer-link">Green Calculator</a></li>
+          <li><a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="footer-link">Research Methodology</a></li>
+          <li><a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="footer-link">Data Documentation</a></li>
+          <li><a href="mailto:arkraj.biswas6@gmail.com" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-md font-bold mb-2 text-black">Connect</h4>
+        <div class="flex gap-3">
+          <a href="https://linkedin.com/in/arkraj-biswas-kugel" target="_blank" class="social-icon">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <button onclick="sharePage()" class="social-icon" aria-label="Share">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-300 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-center md:text-left">
+        <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+        <p class="text-xs text-black mt-1">Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span></p>
+      </div>
+      <div class="flex gap-4 text-xs text-black">
+        <a href="privacy.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Privacy Policy</a>
+        <a href="terms.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Terms of Use</a>
+        <a href="cookies.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Cookie Policy</a>
+        <a href="accessibility.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+/* ── Dark mode: Data Sources table ── */
+html.dark div[style*="background:#fff"][style*="border:1px solid #e2e8f0"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+html.dark .data-table th {
+  color: #e2e8f0 !important;
+  background: rgba(255,255,255,0.05) !important;
+  border-bottom-color: #334155 !important;
+}
+html.dark .data-table td {
+  color: #cbd5e1 !important;
+  border-bottom-color: rgba(255,255,255,0.05) !important;
+}
+html.dark .data-table a {
+  color: #6ee7b7 !important;
+}
+html.dark .data-table tr:hover td {
+  background: rgba(255,255,255,0.03) !important;
+}
+html.dark .b-live {
+  background: rgba(5,150,105,0.15) !important;
+  color: #34d399 !important;
+  border-color: rgba(5,150,105,0.3) !important;
+}
+html.dark .b-lit {
+  background: rgba(2,132,199,0.15) !important;
+  color: #7dd3fc !important;
+  border-color: rgba(2,132,199,0.3) !important;
+}
+html.dark .b-pri {
+  background: rgba(217,119,6,0.15) !important;
+  color: #fcd34d !important;
+  border-color: rgba(217,119,6,0.3) !important;
+}
+html.dark .b-mod {
+  background: rgba(255,255,255,0.06) !important;
+  color: #94a3b8 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+html.dark .section-title {
+  color: #e2e8f0 !important;
+}
+
+/* ── Dark mode: Header / stats / filter / notice ── */
+html.dark header[style*="linear-gradient"] {
+  background: #1e293b !important;
+  border-bottom-color: #334155 !important;
+}
+html.dark header[style*="linear-gradient"] h1 {
+  color: #e2e8f0 !important;
+}
+html.dark header[style*="linear-gradient"] h1 span[style*="color:#5dc48a"] {
+  color: #6ee7b7 !important;
+}
+html.dark header[style*="linear-gradient"] h1 span[style*="color:#4b5563"] {
+  color: #94a3b8 !important;
+}
+html.dark header[style*="linear-gradient"] p {
+  color: #94a3b8 !important;
+}
+html.dark header[style*="linear-gradient"] [style*="background:rgba(27,58,45,0.06)"] {
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+  background: rgba(255,255,255,0.05) !important;
+}
+html.dark header[style*="linear-gradient"] [style*="background:rgba(27,58,45,0.06)"] span {
+  background: #6ee7b7 !important;
+}
+html.dark header[style*="linear-gradient"] [style*="border-left:1px solid #e2e8f0"] {
+  border-left-color: #334155 !important;
+}
+html.dark header[style*="linear-gradient"] [style*="font-size:22px"][style*="color:#1b3a2d"] {
+  color: #e2e8f0 !important;
+}
+html.dark header[style*="linear-gradient"] [style*="font-size:9px"][style*="color:#6b7280"] {
+  color: #94a3b8 !important;
+}
+html.dark nav[style*="background:rgba(255,255,255,0.85)"] {
+  background: rgba(15,26,47,0.92) !important;
+  border-bottom-color: #334155 !important;
+}
+html.dark nav[style*="background:rgba(255,255,255,0.85)"] span {
+  color: #94a3b8 !important;
+}
+html.dark .filter-pill {
+  background: transparent !important;
+  border-color: #475569 !important;
+  color: #94a3b8 !important;
+}
+html.dark .filter-pill:hover {
+  border-color: #6ee7b7 !important;
+  color: #e2e8f0 !important;
+}
+html.dark .filter-pill.active {
+  background: #6ee7b7 !important;
+  border-color: #6ee7b7 !important;
+  color: #064e3b !important;
+}
+html.dark .notice-bar {
+  background: rgba(255,255,255,0.03) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #94a3b8 !important;
+}
+html.dark .notice-bar strong {
+  color: #fcd34d !important;
+}
+</style>
+
+<script>
+// ───── 10 SELECTED NAGAR VANS DATA ─────
+const NV = [
+  { id:1, name:"Gorakhpur I Nagar Van", state:"Uttar Pradesh", district:"Gorakhpur", area:50, cost:200, fy:"2022-23", lat:26.7606, lon:83.3732, climate:"Humid Subtropical (IGP)", zone:"Indo-Gangetic Plain", ndvi0:0.21, color:"#4fc3f7", desc:"Located in eastern UP's Gorakhpur district, this site sits in the Indo-Gangetic plain — one of India's most densely populated and air-polluted zones. The forest provides critical green infrastructure for a rapidly urbanising Tier-2 city with high PM2.5 levels and limited tree cover.", env:{ uhi:"−1.4°C", pm25:"−18%", ndvi:"0.21→0.52", carbon:"4.1 t/ha/yr", birds:"+28%", wtp:"₹22/mo", who5:"+16 pts", water:"12k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.6,0.7,1.0,1.4,1.9,2.0,1.8,1.7,1.4,1.0,0.7,0.5], pm25Site:[68,72,58,42,38,30,28,32,40,55,75,90], pm25City:[84,90,72,52,46,36,34,38,49,67,92,112], ndviMon:[0.28,0.30,0.40,0.52,0.58,0.60,0.62,0.60,0.54,0.46,0.34,0.28], bioQ:[14,22,31,26], rainfall:[8,12,18,22,32,180,220,200,110,30,8,5], carbonYr:[0,0.8,2.1,3.8,5.8,8.2,11.0,14.2,17.8,21.8,26.2,31.0,36.2], who5V:72, who5NV:56 },
+  { id:2, name:"Gorakhpur II Nagar Van", state:"Uttar Pradesh", district:"Gorakhpur", area:50, cost:200, fy:"2022-23", lat:26.7606, lon:83.3832, climate:"Humid Subtropical (IGP)", zone:"Indo-Gangetic Plain", ndvi0:0.20, color:"#4fc3f7", desc:"Companion site to Gorakhpur I, this second Nagar Van expands the urban forest network across the district. Both Gorakhpur sites together represent a ~100ha connected urban forest corridor — significant for wildlife movement and cumulative UHI mitigation in a city of 1.1 million.", env:{ uhi:"−1.3°C", pm25:"−17%", ndvi:"0.20→0.50", carbon:"3.9 t/ha/yr", birds:"+25%", wtp:"₹21/mo", who5:"+15 pts", water:"11.5k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.5,0.6,0.9,1.3,1.8,1.9,1.7,1.6,1.3,0.9,0.6,0.4], pm25Site:[70,74,60,44,40,32,30,34,42,57,77,92], pm25City:[84,90,72,52,46,36,34,38,49,67,92,112], ndviMon:[0.26,0.28,0.38,0.50,0.56,0.58,0.60,0.58,0.52,0.44,0.32,0.26], bioQ:[12,20,28,24], rainfall:[8,12,18,22,32,180,220,200,110,30,8,5], carbonYr:[0,0.7,1.9,3.6,5.5,7.8,10.4,13.4,16.8,20.6,24.8,29.4,34.4], who5V:70, who5NV:55 },
+  { id:3, name:"Kaylana Nagar Van", state:"Rajasthan", district:"Jodhpur (North)", area:50, cost:200.5, fy:"2021-22", lat:26.2936, lon:72.9617, climate:"Arid / Thar Desert Fringe", zone:"Western Rajasthan", ndvi0:0.12, color:"#ffd54f", desc:"Adjacent to the iconic Kaylana Lake, this is one of the most ecologically significant NVY sites in arid India. Jodhpur is one of India's hottest cities (summer max 45–48°C). This forest — confirmed sanctioned Dec 2021 and 2nd instalment June 2025 per CAMPA records — directly cools the lake's microclimate and provides critical shade for an otherwise bare Thar landscape.", env:{ uhi:"−2.8°C", pm25:"−22%", ndvi:"0.12→0.38", carbon:"2.8 t/ha/yr", birds:"+42%", wtp:"₹19/mo", who5:"+20 pts", water:"8k L/yr/ha" }, envSrc:["Santamouris 2020","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.8,1.0,1.6,2.4,3.5,3.8,3.2,3.0,2.4,1.6,1.0,0.7], pm25Site:[55,58,48,38,32,26,28,30,36,48,62,72], pm25City:[70,74,60,48,40,32,34,37,44,58,76,88], ndviMon:[0.16,0.18,0.22,0.28,0.24,0.20,0.30,0.38,0.32,0.24,0.18,0.15], bioQ:[18,28,42,36], rainfall:[2,3,4,4,5,12,60,55,20,6,2,1], carbonYr:[0,0.5,1.3,2.4,3.6,5.0,6.8,8.7,10.8,13.2,15.8,18.6,21.6], who5V:76, who5NV:56 },
+  { id:4, name:"Machla Magra Nagar Van", state:"Rajasthan", district:"Udaipur", area:50, cost:200.5, fy:"2021-22", lat:24.5854, lon:73.7125, climate:"Semi-Arid / Aravalli Hills", zone:"Southern Rajasthan", ndvi0:0.18, color:"#ffd54f", desc:"Set in the Aravalli hills surrounding Udaipur's famous lakes, Machla Magra has strong ecological baseline due to existing rocky-scrub vegetation. The NVY site enhances the city's 'City of Lakes' identity, reduces erosion on the fragile Aravalli slopes, and provides biodiversity corridor connectivity.", env:{ uhi:"−2.1°C", pm25:"−20%", ndvi:"0.18→0.44", carbon:"3.2 t/ha/yr", birds:"+38%", wtp:"₹24/mo", who5:"+22 pts", water:"14k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.7,0.8,1.2,1.8,2.6,3.0,2.6,2.4,2.0,1.4,0.8,0.6], pm25Site:[40,42,36,28,24,20,22,24,28,36,48,56], pm25City:[52,55,46,36,30,25,27,29,34,44,58,68], ndviMon:[0.22,0.24,0.30,0.38,0.34,0.28,0.40,0.48,0.42,0.34,0.26,0.20], bioQ:[22,34,46,40], rainfall:[4,5,6,5,6,40,120,100,40,8,3,2], carbonYr:[0,0.6,1.6,2.9,4.4,6.2,8.2,10.4,12.8,15.5,18.4,21.5,24.8], who5V:78, who5NV:56 },
+  { id:5, name:"Devguradiya Nagar Van", state:"Madhya Pradesh", district:"Indore", area:100, cost:58, fy:"2022-23", cat:"NCAP", lat:22.7196, lon:75.8577, climate:"Humid Subtropical / Plateau", zone:"Central India — NCAP city", ndvi0:0.22, color:"#ce93d8", desc:"At 100 hectares, Devguradiya is the largest site in this selection and one of the most significant urban forests in MP. Indore — India's cleanest city — uses this forest as a key NCAP green infrastructure asset. This NCAP-funded site is critical for Indore's air quality goals and urban cooling along the Deccan Plateau edge.", env:{ uhi:"−2.2°C", pm25:"−28%", ndvi:"0.22→0.58", carbon:"4.6 t/ha/yr", birds:"+35%", wtp:"₹28/mo", who5:"+19 pts", water:"18k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.8,0.9,1.3,1.8,2.5,2.8,2.5,2.3,1.9,1.4,0.9,0.7], pm25Site:[42,45,36,28,26,20,22,24,30,40,52,62], pm25City:[58,62,50,38,34,26,28,31,39,52,68,82], ndviMon:[0.30,0.32,0.44,0.56,0.60,0.58,0.62,0.62,0.56,0.48,0.36,0.30], bioQ:[20,32,44,38], rainfall:[6,8,10,8,14,100,180,160,80,18,5,4], carbonYr:[0,1.0,2.6,4.6,7.0,9.8,13.0,16.6,20.6,25.0,29.8,35.0,40.6], who5V:74, who5NV:55 },
+  { id:6, name:"Shahpura Village Nagar Van", state:"Madhya Pradesh", district:"Bhopal", area:50, cost:200.5, fy:"2020-21", cat:"NCAP", lat:23.2599, lon:77.4126, climate:"Humid Subtropical / Plateau", zone:"Central India — NCAP city", ndvi0:0.24, color:"#ce93d8", desc:"One of the earliest NVY sites nationally, sanctioned in FY 2020-21 making it 4–5 years old. This makes Shahpura one of the few sites where real multi-year NDVI growth can already be measured and verified via NASA AppEEARS. Being NCAP-funded and in Bhopal — the state capital — it also has the strongest PPP governance framework and institutional visibility.", env:{ uhi:"−2.0°C", pm25:"−25%", ndvi:"0.24→0.60", carbon:"4.8 t/ha/yr", birds:"+40%", wtp:"₹26/mo", who5:"+21 pts", water:"16k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.7,0.8,1.2,1.7,2.3,2.6,2.3,2.1,1.7,1.3,0.8,0.6], pm25Site:[45,48,38,30,27,22,24,26,32,42,55,65], pm25City:[60,64,50,38,34,27,29,32,40,53,70,84], ndviMon:[0.32,0.34,0.46,0.58,0.62,0.60,0.64,0.64,0.58,0.50,0.38,0.32], bioQ:[24,36,50,44], rainfall:[6,8,10,8,14,100,180,160,80,18,5,4], carbonYr:[0,1.0,2.8,5.0,7.6,10.6,14.0,17.8,22.0,26.6,31.6,37.0,42.8], who5V:76, who5NV:55 },
+  { id:7, name:"Sri Venkateswara Divyaramam", state:"Andhra Pradesh", district:"Tirupati", area:50, cost:200, fy:"2023-24", lat:13.6288, lon:79.4192, climate:"Tropical / Eastern Ghats", zone:"Coastal AP — High Pilgrim Footfall", ndvi0:0.28, color:"#4db6ac", desc:"Adjacent to the world's most visited religious site (Tirupati Balaji draws 50,000–100,000 pilgrims daily), this Nagar Van has extraordinary WHO-5 wellbeing and WTP potential given the volume of high-income visitors. The Eastern Ghats climate supports faster tree growth and higher NDVI baseline.", env:{ uhi:"−1.8°C", pm25:"−22%", ndvi:"0.28→0.62", carbon:"5.2 t/ha/yr", birds:"+30%", wtp:"₹35/mo", who5:"+24 pts", water:"20k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.8,0.9,1.2,1.6,2.0,1.8,1.6,1.6,1.5,1.3,1.0,0.8], pm25Site:[30,32,28,22,20,18,20,22,24,28,34,38], pm25City:[38,40,35,28,25,22,25,27,30,34,42,48], ndviMon:[0.40,0.42,0.50,0.58,0.56,0.54,0.58,0.60,0.56,0.52,0.46,0.40], bioQ:[28,40,52,46], rainfall:[18,14,10,12,18,60,80,100,140,120,60,30], carbonYr:[0,1.1,2.8,5.0,7.6,10.6,14.0,17.8,22.0,26.6,31.6,37.0,43.0], who5V:80, who5NV:56 },
+  { id:8, name:"Nellore Nagar Van", state:"Andhra Pradesh", district:"Nellore", area:50, cost:200, fy:"2023-24", cat:"NCAP", lat:14.4426, lon:79.9865, climate:"Tropical / Coastal AP", zone:"NCAP designated coastal city", ndvi0:0.26, color:"#4db6ac", desc:"An NCAP-designated site in coastal Andhra, Nellore's tropical coastal climate drives rapid vegetation establishment. With higher annual rainfall (~1,000mm) and warm year-round temperatures, this site is expected to achieve the highest biomass accumulation rate in this selection.", env:{ uhi:"−1.5°C", pm25:"−20%", ndvi:"0.26→0.60", carbon:"5.5 t/ha/yr", birds:"+32%", wtp:"₹20/mo", who5:"+17 pts", water:"22k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.6,0.7,1.0,1.3,1.6,1.5,1.4,1.4,1.3,1.1,0.8,0.6], pm25Site:[28,30,26,20,18,16,18,20,22,26,32,36], pm25City:[36,38,33,26,23,20,22,25,28,32,40,46], ndviMon:[0.38,0.40,0.48,0.56,0.54,0.52,0.56,0.58,0.54,0.50,0.44,0.38], bioQ:[26,38,48,42], rainfall:[20,16,12,14,20,70,90,110,150,130,70,35], carbonYr:[0,1.1,3.0,5.4,8.2,11.4,15.0,19.0,23.5,28.4,33.8,39.6,45.8], who5V:73, who5NV:56 },
+  { id:9, name:"Dumas Forest Area Nagar Van", state:"Gujarat", district:"Surat", area:40, cost:160, fy:"2021-22", cat:"NCAP", lat:21.0773, lon:72.7131, climate:"Tropical Dry / Coastal Gujarat", zone:"Coastal — NCAP, Diamond City", ndvi0:0.23, color:"#81c784", desc:"Surat's Dumas Forest Area is situated along the Gulf of Khambhat coastline — a rare urban coastal forest. As one of Gujarat's fastest-growing industrial cities (textiles, diamonds), Surat's NCAP status means air quality targets drive this investment. The coastal location provides additional ecosystem services: protection from cyclonic wind, coastal erosion prevention, and mangrove connectivity.", env:{ uhi:"−1.9°C", pm25:"−26%", ndvi:"0.23→0.55", carbon:"4.2 t/ha/yr", birds:"+36%", wtp:"₹30/mo", who5:"+18 pts", water:"16k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.8,0.9,1.2,1.6,2.2,2.4,2.0,2.0,1.8,1.4,1.0,0.8], pm25Site:[35,38,30,22,20,16,18,20,24,32,44,52], pm25City:[48,52,40,29,26,20,22,25,31,42,58,68], ndviMon:[0.30,0.32,0.42,0.52,0.54,0.50,0.54,0.56,0.52,0.46,0.36,0.30], bioQ:[22,34,46,40], rainfall:[4,3,4,3,6,80,220,180,90,20,5,3], carbonYr:[0,0.9,2.3,4.1,6.2,8.7,11.5,14.6,18.0,21.8,26.0,30.6,35.6], who5V:74, who5NV:56 },
+  { id:10, name:"Aranya Udhyan-Indroda Nature Park", state:"Gujarat", district:"Gandhinagar", area:50, cost:200, fy:"2021-22", lat:23.2156, lon:72.6369, climate:"Semi-Arid / Central Gujarat", zone:"Gujarat Capital Region", ndvi0:0.25, color:"#81c784", desc:"One of India's most prestigious urban nature parks, Indroda Nature Park already hosts a dinosaur fossil park and crocodile research centre. The NVY investment transforms additional degraded land within the Gandhinagar capital precinct into managed urban forest. Being in the Gujarat capital — with direct political visibility — this site has the strongest potential for inter-departmental convergence and PPP model replication.", env:{ uhi:"−2.0°C", pm25:"−24%", ndvi:"0.25→0.57", carbon:"4.4 t/ha/yr", birds:"+44%", wtp:"₹32/mo", who5:"+23 pts", water:"17k L/yr/ha" }, envSrc:["Morakinyo 2017","Nowak 2006","MOD13Q1","FSI SFR 2021","GBIF","CVM survey","WHO-5","CWC norms"], tempRed:[0.8,0.9,1.3,1.8,2.4,2.6,2.2,2.1,1.8,1.4,0.9,0.7], pm25Site:[32,35,28,20,18,14,16,18,22,30,40,48], pm25City:[44,48,38,27,24,18,20,23,29,39,54,64], ndviMon:[0.32,0.34,0.44,0.54,0.56,0.52,0.56,0.58,0.54,0.48,0.38,0.32], bioQ:[28,42,58,50], rainfall:[4,3,4,3,6,80,220,180,90,20,5,3], carbonYr:[0,0.9,2.4,4.3,6.5,9.1,12.0,15.2,18.8,22.7,27.0,31.8,36.9], who5V:79, who5NV:56 },
+
+  // ── BATCH 2 — 20 New Sites (IDs 11–30) ──────────────────────
+  // Sources: National CAMPA Master List (MoEFCC/NAEB PMU)
+  //          2026_05_19_data_to_arkraj_biswas.xlsx
+  //          2026_05_18_data_shared_with_arakraj.docx
+  //          WhatsApp screenshot 22-05-2026
+
+  // ── UTTAR PRADESH (8 sites) ──
+  { id:11, name:"Kakretha Nagar Van", state:"Uttar Pradesh", district:"Agra", area:50, cost:200.5, fy:"2021-22", lat:27.1767, lon:78.0081, climate:"Semi-arid / IGP", ndvi0:0.20, color:"#4fc3f7", desc:"Agra district forest on the IGP's semi-arid fringe. The Taj city faces severe seasonal particulate pollution — this 50ha forest provides a measurable PM2.5 buffer. 2nd instalment confirmed released 05.03.2026 per CAMPA records.", env:{ uhi:"−1.4°C", pm25:"−18%", ndvi:"0.20→0.50", carbon:"3.8 t/ha/yr", birds:"+26%", wtp:"₹21/mo", who5:"+15 pts", water:"11k L/yr/ha" }, tempRed:[0.6,0.7,1.0,1.4,2.0,2.1,1.9,1.7,1.4,1.0,0.7,0.5], pm25Site:[72,76,62,46,40,32,30,34,42,58,78,94], pm25City:[88,93,76,56,49,39,36,41,52,70,96,115], ndviMon:[0.26,0.28,0.38,0.50,0.56,0.58,0.60,0.58,0.52,0.44,0.32,0.26], bioQ:[13,21,29,25], rainfall:[7,10,16,20,28,170,210,190,105,28,7,4], carbonYr:[0,0.8,2.0,3.6,5.5,7.8,10.4,13.4,16.8,20.6,24.8,29.4,34.4], who5V:71, who5NV:56 },
+  { id:12, name:"Fisher Forest Nagar Van", state:"Uttar Pradesh", district:"Etawah", area:50, cost:200.5, fy:"2021-22", lat:26.7753, lon:79.0224, climate:"Humid subtropical / IGP", ndvi0:0.22, color:"#4fc3f7", desc:"Etawah is on the Chambal ravines edge — one of UP's most ecologically sensitive landscapes. Full 2nd instalment (₹60L) confirmed released. Strategic location for wildlife corridor connectivity between ravine and alluvial ecosystems.", env:{ uhi:"−1.5°C", pm25:"−19%", ndvi:"0.22→0.52", carbon:"4.0 t/ha/yr", birds:"+30%", wtp:"₹22/mo", who5:"+16 pts", water:"12k L/yr/ha" }, tempRed:[0.6,0.7,1.0,1.5,2.0,2.2,2.0,1.8,1.5,1.1,0.7,0.5], pm25Site:[68,72,58,42,36,28,26,30,38,54,74,90], pm25City:[84,89,72,52,44,34,32,37,47,66,91,111], ndviMon:[0.28,0.30,0.40,0.52,0.58,0.60,0.62,0.60,0.54,0.46,0.34,0.28], bioQ:[15,24,33,28], rainfall:[8,11,17,21,30,175,215,195,108,29,8,5], carbonYr:[0,0.8,2.1,3.8,5.8,8.2,11.0,14.2,17.8,21.8,26.2,31.0,36.2], who5V:72, who5NV:56 },
+  { id:13, name:"Merui Lalganj Nagar Van", state:"Uttar Pradesh", district:"Raebareli", area:50, cost:200.5, fy:"2021-22", lat:26.2345, lon:81.2429, climate:"Humid subtropical / IGP", ndvi0:0.21, color:"#4fc3f7", desc:"NCAP-designated Raebareli forest in the politically significant Amethi-Raebareli corridor. One of three NVY sites in Raebareli district — together creating a 150ha urban forest network. 1st instalment fully utilised; 2nd pending as of record date.", env:{ uhi:"−1.4°C", pm25:"−17%", ndvi:"0.21→0.51", carbon:"4.1 t/ha/yr", birds:"+28%", wtp:"₹21/mo", who5:"+16 pts", water:"11.5k L/yr/ha" }, tempRed:[0.5,0.6,0.9,1.3,1.8,2.0,1.8,1.6,1.3,0.9,0.6,0.4], pm25Site:[70,74,60,44,38,30,28,32,40,56,76,92], pm25City:[86,91,74,54,46,36,34,39,49,68,93,113], ndviMon:[0.27,0.29,0.39,0.51,0.57,0.59,0.61,0.59,0.53,0.45,0.33,0.27], bioQ:[14,22,30,26], rainfall:[8,11,17,21,30,175,215,195,108,29,8,5], carbonYr:[0,0.8,2.1,3.8,5.8,8.2,11.0,14.2,17.8,21.8,26.2,31.0,36.2], who5V:72, who5NV:56 },
+  { id:14, name:"Rajapur Nagar Van", state:"Uttar Pradesh", district:"Raebareli", area:50, cost:200.5, fy:"2021-22", lat:26.2245, lon:81.2329, climate:"Humid subtropical / IGP", ndvi0:0.21, color:"#4fc3f7", desc:"NCAP site in Raebareli — full 2nd instalment (₹60L) released 05.03.2026. Part of the Raebareli urban forest cluster (3 contiguous sites). The NCAP designation means real-time AQI monitoring is available from nearby CPCB stations for before/after analysis.", env:{ uhi:"−1.5°C", pm25:"−18%", ndvi:"0.21→0.52", carbon:"4.1 t/ha/yr", birds:"+29%", wtp:"₹22/mo", who5:"+17 pts", water:"12k L/yr/ha" }, tempRed:[0.5,0.6,0.9,1.4,1.9,2.1,1.9,1.7,1.4,1.0,0.6,0.5], pm25Site:[69,73,59,43,37,29,27,31,39,55,75,91], pm25City:[85,90,73,53,45,35,33,38,48,67,92,112], ndviMon:[0.27,0.29,0.39,0.51,0.57,0.59,0.61,0.59,0.53,0.45,0.33,0.27], bioQ:[14,23,31,27], rainfall:[8,11,17,21,30,175,215,195,108,29,8,5], carbonYr:[0,0.8,2.1,3.8,5.8,8.2,11.0,14.2,17.8,21.8,26.2,31.0,36.2], who5V:73, who5NV:56 },
+  { id:15, name:"Sihali Nagar Van", state:"Uttar Pradesh", district:"Amroha", area:25, cost:98.08, fy:"2021-22", lat:28.9040, lon:78.4683, climate:"Humid subtropical / IGP", ndvi0:0.20, color:"#4fc3f7", desc:"Western UP forest in Amroha — one of four NVY sites in the district forming a 130ha cluster. Amroha is an emerging tier-3 city with heavy agricultural smoke pollution seasonally. Precise cost (₹98.08L) and instalment data verified from Excel.", env:{ uhi:"−1.3°C", pm25:"−16%", ndvi:"0.20→0.48", carbon:"3.7 t/ha/yr", birds:"+24%", wtp:"₹20/mo", who5:"+14 pts", water:"10k L/yr/ha" }, tempRed:[0.5,0.6,0.9,1.3,1.7,1.9,1.7,1.5,1.2,0.9,0.6,0.4], pm25Site:[82,86,70,52,44,36,34,38,46,64,86,104], pm25City:[98,103,84,62,53,43,41,46,56,77,103,125], ndviMon:[0.26,0.28,0.36,0.47,0.53,0.55,0.57,0.55,0.49,0.41,0.31,0.25], bioQ:[12,19,27,23], rainfall:[9,12,18,22,32,180,220,200,110,30,8,5], carbonYr:[0,0.7,1.9,3.4,5.2,7.4,9.9,12.8,16.0,19.6,23.6,27.9,32.6], who5V:70, who5NV:56 },
+  { id:16, name:"Daulatpur Nagar Van", state:"Uttar Pradesh", district:"Amroha", area:50, cost:200.5, fy:"2021-22", lat:28.9140, lon:78.4783, climate:"Humid subtropical / IGP", ndvi0:0.21, color:"#4fc3f7", desc:"Largest of the Amroha cluster at 50ha with full 2nd instalment released. Western UP's sugarcane-belt cities face stubble-burning smoke peaks (Oct-Nov) — this forest provides seasonal PM2.5 mitigation exactly when urban air quality is worst.", env:{ uhi:"−1.4°C", pm25:"−18%", ndvi:"0.21→0.51", carbon:"4.0 t/ha/yr", birds:"+26%", wtp:"₹21/mo", who5:"+15 pts", water:"11k L/yr/ha" }, tempRed:[0.5,0.6,0.9,1.4,1.8,2.0,1.8,1.6,1.3,1.0,0.7,0.5], pm25Site:[80,84,68,50,42,34,32,36,44,62,84,102], pm25City:[98,103,84,62,53,43,41,46,56,77,103,125], ndviMon:[0.27,0.29,0.39,0.51,0.57,0.59,0.61,0.59,0.53,0.45,0.33,0.27], bioQ:[13,21,29,25], rainfall:[9,12,18,22,32,180,220,200,110,30,8,5], carbonYr:[0,0.8,2.0,3.6,5.5,7.8,10.4,13.4,16.8,20.6,24.8,29.4,34.4], who5V:71, who5NV:56 },
+  { id:17, name:"Datauji Nagar Van", state:"Uttar Pradesh", district:"Firozabad", area:20, cost:80.5, fy:"2021-22", lat:27.1521, lon:78.3955, climate:"Semi-arid / IGP", ndvi0:0.18, color:"#4fc3f7", desc:"NCAP-designated site in Firozabad — India's glass and bangle capital. Industrial glass furnaces make Firozabad one of UP's most polluted cities (PM10 regularly >300 µg/m³). This urban forest is adjacent to industrial corridors, making it one of the highest-impact NVY sites for air quality research.", env:{ uhi:"−1.6°C", pm25:"−22%", ndvi:"0.18→0.46", carbon:"3.5 t/ha/yr", birds:"+22%", wtp:"₹19/mo", who5:"+18 pts", water:"9k L/yr/ha" }, tempRed:[0.6,0.7,1.1,1.6,2.2,2.4,2.1,1.9,1.6,1.1,0.7,0.5], pm25Site:[90,96,78,58,50,40,38,42,52,72,98,118], pm25City:[115,122,99,74,64,51,48,54,67,92,125,151], ndviMon:[0.24,0.26,0.34,0.44,0.50,0.52,0.54,0.52,0.46,0.38,0.28,0.22], bioQ:[11,18,25,21], rainfall:[6,9,14,18,26,160,200,180,98,25,6,4], carbonYr:[0,0.7,1.8,3.2,4.9,7.0,9.4,12.2,15.4,18.9,22.8,27.1,31.8], who5V:74, who5NV:56 },
+  { id:18, name:"Sarnath Nagar Van", state:"Uttar Pradesh", district:"Varanasi", area:2, cost:8, fy:"2022-23", lat:25.3176, lon:83.0130, climate:"Humid subtropical / Heritage zone", ndvi0:0.24, color:"#4fc3f7", desc:"Smallest site in the dataset at just 2ha — but its location adjacent to Sarnath (UNESCO tentative list, 5 million visitors/year) gives it extraordinary WHO-5 and WTP research value. A living laboratory for spiritual wellbeing and urban green space. Sanction date 22.06.2022 confirmed in records.", env:{ uhi:"−0.8°C", pm25:"−10%", ndvi:"0.24→0.50", carbon:"3.2 t/ha/yr", birds:"+20%", wtp:"₹40/mo", who5:"+28 pts", water:"5k L/yr/ha" }, tempRed:[0.3,0.4,0.5,0.7,1.0,1.0,0.9,0.9,0.7,0.5,0.3,0.2], pm25Site:[78,82,66,48,42,34,32,36,44,60,82,98], pm25City:[88,93,75,54,47,38,36,41,50,68,93,111], ndviMon:[0.30,0.32,0.40,0.50,0.54,0.52,0.54,0.52,0.48,0.42,0.34,0.30], bioQ:[16,24,30,26], rainfall:[10,13,18,22,30,170,210,190,105,28,8,5], carbonYr:[0,0.6,1.6,2.9,4.4,6.2,8.4,10.8,13.5,16.6,20.0,23.7,27.8], who5V:84, who5NV:56 },
+
+  // ── RAJASTHAN (5 sites) ──
+  { id:19, name:"Awali Rojhadi Nagar Van", state:"Rajasthan", district:"Kota (South)", area:50, cost:200, fy:"2022-23", lat:25.1538, lon:75.8548, climate:"Semi-arid / Hadoti plateau", ndvi0:0.16, color:"#ffd54f", desc:"Sanctioned 24.08.2022 — confirmed in docx. Kota is Rajasthan's industrial hub (fertiliser plants, coaching institutes for 2L+ students). The Chambal river ecosystem nearby makes this a high-biodiversity baseline site.", env:{ uhi:"−2.4°C", pm25:"−21%", ndvi:"0.16→0.42", carbon:"3.4 t/ha/yr", birds:"+36%", wtp:"₹24/mo", who5:"+20 pts", water:"10k L/yr/ha" }, tempRed:[0.8,1.0,1.5,2.2,3.2,3.4,2.8,2.6,2.1,1.5,1.0,0.7], pm25Site:[52,56,46,36,30,24,26,28,34,46,60,70], pm25City:[66,71,58,45,38,30,32,35,43,58,76,89], ndviMon:[0.20,0.22,0.28,0.36,0.32,0.26,0.38,0.46,0.40,0.30,0.22,0.18], bioQ:[20,32,44,38], rainfall:[4,5,7,5,8,50,130,110,45,10,3,2], carbonYr:[0,0.6,1.6,2.9,4.4,6.2,8.2,10.4,12.8,15.5,18.4,21.5,24.8], who5V:76, who5NV:56 },
+  { id:20, name:"Depalsar Nagar Van", state:"Rajasthan", district:"Churu", area:50, cost:200, fy:"2022-23", lat:28.3065, lon:74.9713, climate:"Arid / Thar Desert", ndvi0:0.08, color:"#ffd54f", desc:"Churu is one of India's hottest cities — summer temperatures regularly exceed 50°C. The Thar Desert fringe makes this a critical climate-science site: NDVI growth from near-zero baseline, extreme UHI mitigation value, and maximum contrast between forested and bare land.", env:{ uhi:"−3.8°C", pm25:"−24%", ndvi:"0.08→0.34", carbon:"2.6 t/ha/yr", birds:"+48%", wtp:"₹18/mo", who5:"+22 pts", water:"6k L/yr/ha" }, tempRed:[1.0,1.2,2.0,3.0,4.2,4.5,3.8,3.5,2.8,2.0,1.2,0.9], pm25Site:[48,52,42,32,28,22,24,26,30,42,56,66], pm25City:[62,67,54,41,36,28,30,33,39,54,72,85], ndviMon:[0.12,0.14,0.16,0.20,0.16,0.12,0.22,0.38,0.30,0.20,0.14,0.10], bioQ:[20,30,44,38], rainfall:[1,2,3,3,4,10,55,50,18,5,1,1], carbonYr:[0,0.4,1.1,2.0,3.0,4.2,5.6,7.1,8.8,10.6,12.6,14.7,17.0], who5V:78, who5NV:56 },
+  { id:21, name:"Buntiya Nagar Van", state:"Rajasthan", district:"Churu", area:40, cost:160, fy:"2022-23", lat:28.2965, lon:74.9613, climate:"Arid / Thar Desert", ndvi0:0.08, color:"#ffd54f", desc:"Second Churu site alongside Depalsar — together creating a 90ha arid urban forest. Both sites share the extreme climate context (Thar Desert edge, 50°C+ summers), representing the most challenging yet scientifically significant NVY sites for demonstrating afforestation viability in arid India.", env:{ uhi:"−3.5°C", pm25:"−22%", ndvi:"0.08→0.32", carbon:"2.5 t/ha/yr", birds:"+44%", wtp:"₹17/mo", who5:"+21 pts", water:"5.5k L/yr/ha" }, tempRed:[0.9,1.1,1.8,2.8,4.0,4.2,3.5,3.2,2.6,1.8,1.1,0.8], pm25Site:[50,54,44,34,30,24,26,28,32,44,58,68], pm25City:[64,69,56,43,38,30,32,35,41,56,74,87], ndviMon:[0.12,0.14,0.16,0.20,0.16,0.12,0.22,0.36,0.28,0.18,0.13,0.10], bioQ:[18,28,40,34], rainfall:[1,2,3,3,4,10,55,50,18,5,1,1], carbonYr:[0,0.4,1.0,1.8,2.8,4.0,5.4,6.9,8.6,10.5,12.5,14.7,17.1], who5V:77, who5NV:56 },
+  { id:22, name:"Muhana Nagar Van", state:"Rajasthan", district:"Jaipur", area:26, cost:104, fy:"2022-23", lat:26.9124, lon:75.7873, climate:"Semi-arid / Aravalli", ndvi0:0.15, color:"#ffd54f", desc:"Jaipur's Pink City urban forest — Muhana is on the southern outskirts of the Rajasthan capital, adjacent to the Muhana Mandi (Asia's second-largest vegetable market). High footfall area, strong WTP potential from the city's 3.5M population.", env:{ uhi:"−2.2°C", pm25:"−20%", ndvi:"0.15→0.40", carbon:"3.0 t/ha/yr", birds:"+34%", wtp:"₹26/mo", who5:"+20 pts", water:"9k L/yr/ha" }, tempRed:[0.7,0.9,1.4,2.0,2.8,3.0,2.5,2.3,1.9,1.4,0.9,0.6], pm25Site:[58,62,50,38,32,26,28,30,36,50,64,76], pm25City:[74,79,63,48,40,32,35,38,46,64,82,97], ndviMon:[0.19,0.21,0.26,0.34,0.30,0.24,0.36,0.44,0.38,0.28,0.21,0.17], bioQ:[16,26,36,30], rainfall:[3,4,5,4,7,30,100,85,35,8,2,2], carbonYr:[0,0.5,1.4,2.5,3.8,5.4,7.2,9.2,11.4,13.8,16.4,19.2,22.2], who5V:76, who5NV:56 },
+  { id:23, name:"Devli Areb Nagar Van", state:"Rajasthan", district:"Kota (North)", area:32, cost:128, fy:"2022-23", lat:25.2138, lon:75.8648, climate:"Semi-arid / Hadoti plateau", ndvi0:0.15, color:"#ffd54f", desc:"Kota North urban forest in the coaching capital of India — 2 lakh+ students reside here annually. High density urban population, intense academic stress environment. This makes it one of the most powerful WHO-5 wellbeing research sites: student mental health + green space access.", env:{ uhi:"−2.2°C", pm25:"−19%", ndvi:"0.15→0.40", carbon:"3.1 t/ha/yr", birds:"+32%", wtp:"₹27/mo", who5:"+24 pts", water:"9.5k L/yr/ha" }, tempRed:[0.7,0.9,1.4,2.0,2.9,3.1,2.6,2.4,2.0,1.4,0.9,0.6], pm25Site:[54,58,46,36,30,24,26,28,34,46,60,72], pm25City:[68,73,58,45,38,30,32,35,43,58,76,91], ndviMon:[0.19,0.21,0.27,0.34,0.30,0.24,0.36,0.44,0.38,0.28,0.21,0.17], bioQ:[15,24,34,29], rainfall:[4,5,7,5,8,50,130,110,45,10,3,2], carbonYr:[0,0.6,1.5,2.7,4.1,5.8,7.8,9.9,12.3,14.9,17.8,20.9,24.2], who5V:80, who5NV:56 },
+
+  // ── PUNJAB (2 sites) ──
+  { id:24, name:"Rakh Nehar Ki Bir Reserve Forest", state:"Punjab", district:"Pathankot", area:50, cost:205.3, fy:"2021-22", lat:32.2643, lon:75.6524, climate:"Sub-humid / Shivalik foothills", ndvi0:0.28, color:"#ffcc02", desc:"Only Punjab site confirmed in the docx with both sanction date (02.11.2021) and 2nd instalment released FY 2023-24 — making it one of the most financially advanced sites. Pathankot sits at the Shivalik foothills edge, giving this site the highest NDVI baseline and biodiversity potential of all Punjab sites.", env:{ uhi:"−1.8°C", pm25:"−22%", ndvi:"0.28→0.60", carbon:"4.8 t/ha/yr", birds:"+45%", wtp:"₹28/mo", who5:"+20 pts", water:"18k L/yr/ha" }, tempRed:[0.5,0.6,1.0,1.5,2.0,2.2,2.0,1.9,1.6,1.2,0.7,0.5], pm25Site:[55,60,48,36,30,22,24,26,32,46,65,78], pm25City:[70,76,61,46,38,28,30,33,41,59,83,100], ndviMon:[0.36,0.38,0.48,0.58,0.60,0.58,0.62,0.62,0.58,0.52,0.44,0.38], bioQ:[30,46,62,52], rainfall:[20,22,28,22,30,80,200,180,100,30,12,18], carbonYr:[0,1.0,2.6,4.6,7.0,9.8,13.0,16.6,20.6,25.0,29.8,35.0,40.6], who5V:76, who5NV:56 },
+  { id:25, name:"Mullanpur FDA Nagar Van", state:"Punjab", district:"SAS Nagar (Mohali)", area:15, cost:60.5, fy:"2021-22", lat:30.7046, lon:76.7179, climate:"Semi-arid / Punjab plains", ndvi0:0.22, color:"#ffcc02", desc:"Situated within the Mullanpur New Chandigarh smart city development zone — one of India's actively planned new urban areas. The FDA site has significant policy value as a green infrastructure precedent for smart city development, with strong institutional visibility from proximity to Chandigarh.", env:{ uhi:"−1.5°C", pm25:"−18%", ndvi:"0.22→0.52", carbon:"3.8 t/ha/yr", birds:"+30%", wtp:"₹30/mo", who5:"+18 pts", water:"12k L/yr/ha" }, tempRed:[0.5,0.6,0.9,1.3,1.8,2.0,1.8,1.7,1.4,1.0,0.6,0.4], pm25Site:[65,70,56,42,35,26,28,30,38,55,76,90], pm25City:[82,88,71,53,44,33,35,38,48,69,96,114], ndviMon:[0.28,0.30,0.40,0.50,0.54,0.52,0.56,0.56,0.52,0.44,0.36,0.30], bioQ:[16,26,36,30], rainfall:[18,20,25,18,26,70,170,155,90,26,10,16], carbonYr:[0,0.8,2.0,3.6,5.5,7.7,10.3,13.2,16.5,20.2,24.2,28.6,33.4], who5V:74, who5NV:56 },
+
+  // ── MADHYA PRADESH (5 sites) ──
+  { id:26, name:"Navalakhi Nagar Van", state:"Madhya Pradesh", district:"Ujjain", area:50, cost:200.5, fy:"2021-22", lat:23.1765, lon:75.7885, climate:"Humid subtropical / Malwa plateau", ndvi0:0.23, color:"#ce93d8", desc:"NCAP-designated Ujjain site — one of Hinduism's 7 sacred cities and host to Kumbh Mela (largest human gathering on earth). Ujjain has massive religious tourism footfall. Strong institutional co-investment for NVY PPP model research.", env:{ uhi:"−2.0°C", pm25:"−24%", ndvi:"0.23→0.56", carbon:"4.4 t/ha/yr", birds:"+36%", wtp:"₹29/mo", who5:"+22 pts", water:"15k L/yr/ha" }, tempRed:[0.7,0.8,1.2,1.7,2.4,2.6,2.3,2.1,1.8,1.3,0.8,0.6], pm25Site:[44,47,38,30,26,20,22,24,30,40,52,62], pm25City:[58,62,50,38,33,25,27,30,38,51,67,80], ndviMon:[0.30,0.32,0.44,0.56,0.60,0.58,0.62,0.62,0.56,0.48,0.36,0.30], bioQ:[18,30,42,36], rainfall:[5,7,9,7,12,90,165,148,72,16,4,3], carbonYr:[0,0.9,2.3,4.1,6.2,8.7,11.5,14.6,18.0,21.8,26.0,30.6,35.6], who5V:78, who5NV:56 },
+  { id:27, name:"Purva Nagar Van", state:"Madhya Pradesh", district:"Jabalpur", area:50, cost:200.5, fy:"2021-22", lat:23.1815, lon:79.9864, climate:"Humid subtropical / Mahakoshal", ndvi0:0.26, color:"#ce93d8", desc:"NCAP-designated in Jabalpur — MP's marble city, cultural capital, and a major cantonment hub. The Narmada-Son watershed location gives this site excellent water recharge potential. Jabalpur Municipal Corporation as co-investor makes PPP governance documentation straightforward.", env:{ uhi:"−2.2°C", pm25:"−26%", ndvi:"0.26→0.58", carbon:"4.6 t/ha/yr", birds:"+38%", wtp:"₹27/mo", who5:"+21 pts", water:"16k L/yr/ha" }, tempRed:[0.8,0.9,1.3,1.8,2.5,2.7,2.4,2.2,1.9,1.4,0.9,0.7], pm25Site:[40,43,34,26,24,18,20,22,28,38,50,60], pm25City:[54,58,46,35,32,24,26,29,38,51,68,81], ndviMon:[0.32,0.34,0.46,0.58,0.62,0.60,0.64,0.64,0.58,0.50,0.38,0.32], bioQ:[20,32,46,40], rainfall:[6,8,10,8,14,105,185,165,82,18,5,4], carbonYr:[0,1.0,2.5,4.5,6.8,9.5,12.6,16.0,19.8,24.0,28.6,33.6,39.0], who5V:77, who5NV:56 },
+  { id:28, name:"Palnagar Nagar Van", state:"Madhya Pradesh", district:"Dewas", area:49.78, cost:199.62, fy:"2021-22", lat:22.9676, lon:76.0534, climate:"Humid subtropical / Malwa plateau", ndvi0:0.24, color:"#ce93d8", desc:"NCAP site in Dewas — one of MP's fastest-growing pharmaceutical and industrial cities. Precise cost of ₹199.62L (not the standard 200) confirms granular financial data from original sanction order. Dewas Municipal Corporation as co-investor.", env:{ uhi:"−2.0°C", pm25:"−24%", ndvi:"0.24→0.57", carbon:"4.4 t/ha/yr", birds:"+36%", wtp:"₹26/mo", who5:"+21 pts", water:"15k L/yr/ha" }, tempRed:[0.7,0.8,1.2,1.7,2.4,2.6,2.3,2.1,1.7,1.3,0.8,0.6], pm25Site:[42,45,36,28,25,20,22,24,30,40,52,62], pm25City:[55,59,47,36,32,25,27,30,38,51,67,80], ndviMon:[0.30,0.32,0.44,0.57,0.61,0.59,0.63,0.63,0.57,0.49,0.37,0.30], bioQ:[18,30,42,36], rainfall:[5,7,9,7,12,90,165,148,72,16,4,3], carbonYr:[0,0.9,2.3,4.1,6.2,8.7,11.5,14.6,18.0,21.8,26.0,30.6,35.6], who5V:77, who5NV:56 },
+  { id:29, name:"Sirol Pahadi Nagar Van", state:"Madhya Pradesh", district:"Gwalior", area:26, cost:109.3, fy:"2020-21", lat:26.2183, lon:78.1828, climate:"Semi-arid / Chambal-Gwalior", ndvi0:0.20, color:"#ce93d8", desc:"The oldest MP site in the dataset — sanctioned 01.03.2021 (FY 2020-21). At 4+ years old, Sirol Pahadi has the most mature vegetation of any MP site and is the best candidate for actual NDVI satellite verification via NASA AppEEARS time-series analysis. NCAP-designated.", env:{ uhi:"−1.8°C", pm25:"−22%", ndvi:"0.20→0.56", carbon:"4.2 t/ha/yr", birds:"+38%", wtp:"₹24/mo", who5:"+20 pts", water:"13k L/yr/ha" }, tempRed:[0.7,0.8,1.2,1.7,2.4,2.6,2.2,2.0,1.7,1.3,0.8,0.6], pm25Site:[56,60,48,36,30,24,26,28,35,48,64,76], pm25City:[72,77,62,46,39,31,33,36,45,62,82,98], ndviMon:[0.26,0.28,0.40,0.54,0.58,0.56,0.60,0.60,0.54,0.46,0.34,0.28], bioQ:[18,28,40,34], rainfall:[5,7,10,8,14,95,170,152,76,18,5,4], carbonYr:[0,0.9,2.3,4.1,6.2,8.7,11.6,14.8,18.4,22.4,26.8,31.6,36.8], who5V:76, who5NV:56 },
+  { id:30, name:"Vaishnodevi Temple Seeladehi Nagar Van", state:"Madhya Pradesh", district:"Seoni", area:40, cost:156.89, fy:"2022-23", lat:22.0954, lon:79.5563, climate:"Humid subtropical / Satpura foothills", ndvi0:0.26, color:"#ce93d8", desc:"Named after the Vaishnodevi temple complex — a religious-ecological convergence site in Seoni, near Pench Tiger Reserve buffer zone. This site has exceptional biodiversity research potential given its Satpura-Maikal landscape connectivity. Both instalments released.", env:{ uhi:"−2.1°C", pm25:"−23%", ndvi:"0.26→0.58", carbon:"5.0 t/ha/yr", birds:"+50%", wtp:"₹22/mo", who5:"+22 pts", water:"18k L/yr/ha" }, tempRed:[0.8,0.9,1.3,1.8,2.4,2.6,2.3,2.2,1.8,1.4,0.9,0.7], pm25Site:[36,38,30,24,22,18,20,22,26,34,44,52], pm25City:[47,50,40,32,29,24,26,29,34,44,57,68], ndviMon:[0.32,0.34,0.44,0.56,0.60,0.58,0.62,0.62,0.56,0.48,0.38,0.32], bioQ:[28,44,62,52], rainfall:[7,9,12,10,16,120,200,178,90,22,6,5], carbonYr:[0,1.0,2.6,4.7,7.2,10.1,13.5,17.2,21.4,26.0,31.1,36.7,42.8], who5V:78, who5NV:56 },
+];
+
+const SCOL = { "Uttar Pradesh":"#4fc3f7", "Rajasthan":"#ffd54f", "Madhya Pradesh":"#ce93d8", "Andhra Pradesh":"#4db6ac", "Gujarat":"#81c784", "Punjab":"#ffcc02" };
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const QUARTERS = ['Q1 (Jan–Mar)','Q2 (Apr–Jun)','Q3 (Jul–Sep)','Q4 (Oct–Dec)'];
+const YEARS = ['Yr 0','Yr 1','Yr 2','Yr 3','Yr 4','Yr 5','Yr 6','Yr 7','Yr 8','Yr 9','Yr 10','Yr 11','Yr 12'];
+let activeId = 1, activeCharts = [];
+const CO = { plugins:{ legend:{ labels:{ color:'#6b7280', font:{family:'Inter',size:10}, boxWidth:12 } } }, scales:{ x:{ ticks:{ color:'#9ca3af', font:{size:10}, maxTicksLimit:12 }, grid:{ color:'rgba(27,58,45,0.06)' } }, y:{ ticks:{ color:'#9ca3af', font:{size:10} }, grid:{ color:'rgba(27,58,45,0.06)' } } } };
+
+function renderList(sites) {
+  const list = document.getElementById('siteList');
+  list.innerHTML = '';
+  sites.forEach(nv => {
+    const col = SCOL[nv.state];
+    const div = document.createElement('div');
+    div.className = 'site-card' + (nv.id === activeId ? ' active' : '');
+    div.dataset.id = nv.id; div.dataset.state = nv.state;
+    div.innerHTML = '<div class="sc-head" style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">' +
+      '<span style="font-family:\'Inter\',monospace;font-size:10px;color:#1b3a2d;font-weight:700;letter-spacing:1px">NV·' + String(nv.id).padStart(2,'0') + '</span>' +
+      '<span style="font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.5px;background:' + col + '22;color:' + col + ';border:1px solid ' + col + '44">' + nv.state + '</span></div>' +
+      '<div style="font-size:13px;font-weight:600;color:#1f2937;margin:5px 0 3px;line-height:1.3">' + nv.name + '</div>' +
+      '<div style="font-size:11px;color:#6b7280">📍 ' + nv.district + '</div>' +
+      '<div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">' +
+      '<span style="font-size:10px;color:#4b5563;display:flex;align-items:center;gap:4px">🌳 ' + nv.area + ' ha</span>' +
+      '<span style="font-size:10px;color:#4b5563;display:flex;align-items:center;gap:4px">📅 FY ' + nv.fy + '</span>' +
+      '<span style="font-size:10px;color:#4b5563;display:flex;align-items:center;gap:4px">₹' + nv.cost + 'L</span>' +
+      (nv.cat ? '<span style="font-size:10px;color:#d97706;display:flex;align-items:center;gap:4px">⭐ ' + nv.cat + '</span>' : '') + '</div>';
+    div.onclick = () => selectSite(nv.id);
+    list.appendChild(div);
+  });
+}
+
+function selectSite(id) {
+  activeId = id;
+  document.querySelectorAll('.site-card').forEach(c => c.classList.toggle('active', +c.dataset.id === id));
+  renderDetail(NV.find(n => n.id === id));
+  const panel = document.getElementById('detailPanel');
+  window.scrollTo({ top: panel.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+}
+
+function renderDetail(nv) {
+  activeCharts.forEach(c => { try { c.destroy(); } catch(e){} }); activeCharts = [];
+  const col = SCOL[nv.state] || '#5dc48a';
+  const panel = document.getElementById('detailPanel');
+  panel.innerHTML =
+    '<div class="detail-hero">' +
+      '<div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#1b3a2d;font-weight:700;margin-bottom:6px">🌿 Featured Nagar Van Profile</div>' +
+      '<div style="font-size:clamp(18px,2.5vw,26px);font-weight:700;line-height:1.2;color:#1b3a2d;margin-bottom:4px">' + nv.name + '</div>' +
+      '<div style="font-size:12px;color:#6b7280;margin-bottom:18px">📍 ' + nv.district + ', ' + nv.state + ' &nbsp;·&nbsp; ' + nv.climate + ' &nbsp;·&nbsp; FY ' + nv.fy + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px" class="sh-kpis">' +
+        '<div class="kpi-box"><div class="kpi-value">' + nv.area + '</div><div class="kpi-unit">Hectares</div><div class="kpi-label">Sanctioned area</div></div>' +
+        '<div class="kpi-box"><div class="kpi-value">₹' + nv.cost + 'L</div><div class="kpi-unit">Cost</div><div class="kpi-label">Approved budget</div></div>' +
+        '<div class="kpi-box"><div class="kpi-value">' + nv.ndvi0 + '</div><div class="kpi-unit">NDVI Baseline</div><div class="kpi-label">Pre-planting (est.)</div></div>' +
+        '<div class="kpi-box"><div class="kpi-value">' + nv.lat + '°N</div><div class="kpi-unit">Latitude</div><div class="kpi-label">' + nv.lon + '°E longitude</div></div>' +
+      '</div>' +
+      '<p style="font-size:12px;color:#4b5563;margin-top:16px;line-height:1.7">' + nv.desc + '</p>' +
+    '</div>' +
+    '<div class="chart-card" id="weatherCard_' + nv.id + '">' +
+      '<div class="chart-header"><span class="chart-title">🌤 Live Weather at Site</span><span class="chart-source">Open-Meteo API · ERA5/NWP · Live</span></div>' +
+      '<div id="weatherData_' + nv.id + '" style="color:#6b7280;font-size:12px">Fetching live weather…</div>' +
+    '</div>' +
+    '<div>' +
+      '<div class="section-title">📊 Environmental Impact Indicators <span style="font-weight:400;color:#9ca3af;font-size:9px">(modelled benchmarks — replace with field data)</span></div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px" class="env-row">' +
+        '<div class="env-card"><div class="env-icon">🌡️</div><div class="env-label">UHI Reduction</div><div class="env-value">' + nv.env.uhi + '</div><div class="env-trend trend-up">▼ vs unvegetated</div><div class="env-source">Morakinyo 2017</div></div>' +
+        '<div class="env-card"><div class="env-icon">💨</div><div class="env-label">PM2.5 Reduction</div><div class="env-value">' + nv.env.pm25 + '</div><div class="env-trend trend-up">▼ vs city avg</div><div class="env-source">Nowak et al. 2006</div></div>' +
+        '<div class="env-card"><div class="env-icon">🌿</div><div class="env-label">NDVI Trajectory</div><div class="env-value" style="font-size:12px">' + nv.env.ndvi + '</div><div class="env-trend trend-up">▲ Yr 0 → Yr 3 est.</div><div class="env-source">MODIS MOD13Q1</div></div>' +
+        '<div class="env-card"><div class="env-icon">🌲</div><div class="env-label">Carbon Seq.</div><div class="env-value" style="font-size:12px">' + nv.env.carbon + '</div><div class="env-trend trend-up">▲ Annual est.</div><div class="env-source">FSI SFR 2021</div></div>' +
+        '<div class="env-card"><div class="env-icon">🐦</div><div class="env-label">Bird Species +</div><div class="env-value">' + nv.env.birds + '</div><div class="env-trend trend-up">▲ vs bare land</div><div class="env-source">GBIF / Ikin 2015</div></div>' +
+        '<div class="env-card"><div class="env-icon">💧</div><div class="env-label">Water Recharge</div><div class="env-value" style="font-size:12px">' + nv.env.water + '</div><div class="env-trend trend-up">▲ Groundwater</div><div class="env-source">CWC / CGWB norms</div></div>' +
+        '<div class="env-card"><div class="env-icon">😊</div><div class="env-label">WHO-5 Boost</div><div class="env-value">' + nv.env.who5 + '</div><div class="env-trend trend-up">▲ Visitors vs non</div><div class="env-source">WHO-5 instrument</div></div>' +
+        '<div class="env-card"><div class="env-icon">💰</div><div class="env-label">WTP (CVM)</div><div class="env-value">' + nv.env.wtp + '</div><div class="env-trend trend-up">▲ Avg per month</div><div class="env-source">CVM survey est.</div></div>' +
+      '</div>' +
+    '</div>' +
+    '<div>' +
+      '<div class="section-title">📈 Interactive Environmental Time-Series</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="charts-grid">' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">🌡️ Temperature Reduction (°C) — Monthly</span><span class="chart-source">Modelled · Morakinyo 2017</span></div><canvas id="c_temp_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">💨 PM2.5 — Site vs City (µg/m³)</span><span class="chart-source">Modelled · Nowak 2006</span></div><canvas id="c_pm_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card wide"><div class="chart-header"><span class="chart-title">🌿 NDVI Seasonal Pattern — Post-Planting (Yr 3 est.)</span><span class="chart-source">Modelled · MODIS MOD13Q1 · FSI 2021</span></div><canvas id="c_ndvi_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">🐦 Bird Species Count — Quarterly</span><span class="chart-source">Modelled · GBIF India · Ikin et al. 2015</span></div><canvas id="c_bio_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">🌧️ Monthly Rainfall (mm)</span><span class="chart-source">Open-Meteo ERA5 · CWC norms</span></div><canvas id="c_rain_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card wide"><div class="chart-header"><span class="chart-title">🌲 Cumulative Carbon Sequestration (t CO₂/ha)</span><span class="chart-source">Modelled · FSI SFR 2021 · ICFRE · 12-year projection</span></div><canvas id="c_carbon_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">😊 WHO-5 Wellbeing — Visitors vs Non-Visitors</span><span class="chart-source">WHO-5 · Sreetheran 2017</span></div><canvas id="c_who_' + nv.id + '"></canvas></div>' +
+        '<div class="chart-card"><div class="chart-header"><span class="chart-title">💰 WTP Distribution — Willingness to Pay</span><span class="chart-source">Contingent Valuation Method est.</span></div><canvas id="c_wtp_' + nv.id + '"></canvas></div>' +
+      '</div>' +
+    '</div>';
+
+  setTimeout(() => {
+    const ac = col;
+    const c1 = new Chart(document.getElementById('c_temp_' + nv.id), { type:'line', data:{ labels:MONTHS, datasets:[{ label:'Cooling effect (°C)', data:nv.tempRed, borderColor:ac, backgroundColor:ac+'22', fill:true, tension:0.4, pointRadius:3, pointBackgroundColor:ac }] }, options:{...CO, plugins:{...CO.plugins, legend:{display:false}} } });
+    const c2 = new Chart(document.getElementById('c_pm_' + nv.id), { type:'bar', data:{ labels:MONTHS, datasets:[ { label:'Site PM2.5', data:nv.pm25Site, backgroundColor:'rgba(27,58,45,0.55)', borderWidth:0 }, { label:'City avg', data:nv.pm25City, backgroundColor:'rgba(239,83,80,0.3)', borderWidth:0 } ] }, options:{...CO, scales:{...CO.scales, x:{...CO.scales.x, stacked:false}, y:{...CO.scales.y, stacked:false}} } });
+    const c3 = new Chart(document.getElementById('c_ndvi_' + nv.id), { type:'line', data:{ labels:MONTHS, datasets:[ { label:'NDVI (Yr 3)', data:nv.ndviMon, borderColor:'#059669', backgroundColor:'rgba(5,150,105,0.12)', fill:true, tension:0.4, pointRadius:3 }, { label:'Baseline (Yr 0)', data:Array(12).fill(nv.ndvi0), borderColor:'rgba(107,114,128,0.3)', borderDash:[6,4], pointRadius:0 } ] }, options:CO });
+    const c4 = new Chart(document.getElementById('c_bio_' + nv.id), { type:'bar', data:{ labels:QUARTERS, datasets:[{ label:'Bird species', data:nv.bioQ, backgroundColor:[ac+'99',ac+'bb',ac+'dd',ac], borderRadius:4, borderWidth:0 }] }, options:{...CO, plugins:{...CO.plugins, legend:{display:false}} } });
+    const c5 = new Chart(document.getElementById('c_rain_' + nv.id), { type:'bar', data:{ labels:MONTHS, datasets:[{ label:'Rainfall (mm)', data:nv.rainfall, backgroundColor:'rgba(79,195,247,0.5)', borderRadius:3, borderWidth:0 }] }, options:{...CO, plugins:{...CO.plugins, legend:{display:false}} } });
+    const c6 = new Chart(document.getElementById('c_carbon_' + nv.id), { type:'line', data:{ labels:YEARS, datasets:[{ label:'Cumulative carbon (t CO₂/ha)', data:nv.carbonYr, borderColor:'#059669', backgroundColor:'rgba(5,150,105,0.1)', fill:true, tension:0.35, pointRadius:3, pointBackgroundColor:'#059669' }] }, options:{...CO, plugins:{...CO.plugins, legend:{display:false}} } });
+    const c7 = new Chart(document.getElementById('c_who_' + nv.id), { type:'radar', data:{ labels:['Energy','Interest','Calm','Rested','Cheerful'], datasets:[ { label:'Visitors', data:[nv.who5V,nv.who5V-4,nv.who5V+6,nv.who5V-8,nv.who5V+2], backgroundColor:ac+'25', borderColor:ac, pointBackgroundColor:ac }, { label:'Non-visitors', data:[nv.who5NV,nv.who5NV-2,nv.who5NV+4,nv.who5NV-6,nv.who5NV+1], backgroundColor:'rgba(239,83,80,0.08)', borderColor:'rgba(239,83,80,0.4)', pointBackgroundColor:'rgba(239,83,80,0.4)' } ] }, options:{ plugins:{ legend:{ labels:{ color:'#6b7280', font:{size:10,family:'Inter'} } } }, scales:{ r:{ ticks:{ color:'#9ca3af', backdropColor:'transparent', font:{size:9,family:'Inter'} }, grid:{ color:'rgba(27,58,45,0.08)' }, pointLabels:{ color:'#4b5563', font:{size:10,family:'Inter'} }, suggestedMin:40, suggestedMax:90 } } } });
+    const wtpMid = parseInt(nv.env.wtp.replace(/[^0-9]/g,''));
+    const c8 = new Chart(document.getElementById('c_wtp_' + nv.id), { type:'bar', data:{ labels:['<₹10','₹10–20','₹20–30','₹30–40','>₹40'], datasets:[{ label:'% respondents (est.)', data:[8,22,38,24,8], backgroundColor:['rgba(27,58,45,0.2)','rgba(27,58,45,0.4)','rgba(27,58,45,0.7)','rgba(27,58,45,0.4)','rgba(27,58,45,0.2)'], borderRadius:3, borderWidth:0 }] }, options:{...CO, plugins:{...CO.plugins, legend:{display:false}}, scales:{...CO.scales, y:{...CO.scales.y, title:{display:true, text:'% respondents', color:'#9ca3af', font:{size:9,family:'Inter'} } } } } });
+    activeCharts = [c1,c2,c3,c4,c5,c6,c7,c8];
+    fetchWeather(nv);
+  }, 50);
+}
+
+async function fetchWeather(nv) {
+  const el = document.getElementById('weatherData_' + nv.id);
+  if (!el) return;
+  try {
+    const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + nv.lat + '&longitude=' + nv.lon + '&current_weather=true&hourly=relativehumidity_2m,precipitation_probability&timezone=Asia/Kolkata&forecast_days=1');
+    const d = await r.json();
+    const w = d.current_weather;
+    const hum = d.hourly?.relativehumidity_2m?.[0] ?? '—';
+    const pre = d.hourly?.precipitation_probability?.[0] ?? '—';
+    const hr = new Date().getHours();
+    const isNight = hr < 6 || hr >= 18;
+    const ico = w.weathercode <= 2 ? (isNight ? '🌙' : '☀️') : w.weathercode <= 48 ? (isNight ? '🌙' : '🌤️') : w.weathercode <= 67 ? '🌧️' : '⛈️';
+    const wdesc = ({0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Foggy',51:'Light drizzle',61:'Light rain',63:'Moderate rain',80:'Rain showers',95:'Thunderstorm'})[w.weathercode] || 'WMO ' + w.weathercode;
+    el.innerHTML = '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
+      '<div><span style="font-size:36px">' + ico + '</span></div>' +
+      '<div><div style="font-family:\'Inter\',monospace;font-size:28px;font-weight:700;color:#1b3a2d">' + Math.round(w.temperature) + '°C</div><div style="font-size:12px;color:#6b7280">' + wdesc + ' · Wind ' + w.windspeed + ' km/h</div></div>' +
+      '<div style="display:flex;gap:18px;font-size:12px;color:#6b7280"><div>💧 <strong style="color:#1f2937">' + hum + '%</strong> RH</div><div>🌧 <strong style="color:#1f2937">' + pre + '%</strong> rain prob.</div><div>📍 <strong style="color:#1f2937">' + nv.lat + '°N, ' + nv.lon + '°E</strong></div></div>' +
+      '<div style="margin-left:auto;font-size:9px;color:#9ca3af">Open-Meteo (ERA5/NWP) · Live · ' + new Date().toLocaleTimeString('en-IN') + '</div></div>';
+  } catch(e) {
+    el.innerHTML = '<span style="color:#dc2626;font-size:11px">⚠ Weather fetch error — check network connection.</span>';
+  }
+}
+
+function filterState(state, btn) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = state === 'all' ? NV : NV.filter(n => n.state === state);
+  renderList(filtered);
+  if (filtered.length > 0) {
+    activeId = filtered[0].id;
+    document.querySelectorAll('.site-card').forEach(c => c.classList.toggle('active', +c.dataset.id === filtered[0].id));
+    renderDetail(NV.find(n => n.id === filtered[0].id));
+  }
+}
+
+function sharePage() {
+  if (navigator.share) { navigator.share({ title:'Nagar Van DMRV — Spatial Data', text:'Explore environmental impact profiles for 30 selected Nagar Vans across 6 states', url:window.location.href }); }
+  else { navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')); }
+}
+
+function setTextSize(size) {
+  document.body.classList.remove('text-size-small','text-size-large','text-size-extra-large');
+  if (size !== 'normal') document.body.classList.add('text-size-' + size);
+  try { localStorage.setItem('dmrv-text-size', size); } catch(e) {}
+}
+
+(function(){ try { const s=localStorage.getItem('dmrv-text-size'); if(s && s!=='normal') setTextSize(s); } catch(e){} })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderList(NV);
+  renderDetail(NV[0]);
+});
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+  const menu = document.querySelector('.nav-items-desktop');
+  const btn = document.getElementById('mobile-menu-btn');
+  const isOpen = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+  const iconBars = btn.querySelector('svg:first-child');
+  const iconClose = btn.querySelector('svg:nth-child(2)');
+  if (iconBars) iconBars.classList.toggle('hidden', isOpen);
+  if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+}
+
+document.addEventListener('click', function(e) {
+  const menu = document.querySelector('.nav-items-desktop');
+  const btn = document.getElementById('mobile-menu-btn');
+  if (menu && btn && !btn.contains(e.target) && !menu.contains(e.target) && menu.classList.contains('open')) {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    const iconBars = btn.querySelector('svg:first-child');
+    const iconClose = btn.querySelector('svg:nth-child(2)');
+    if (iconBars) iconBars.classList.remove('hidden');
+    if (iconClose) iconClose.classList.add('hidden');
+  }
+});
+
+// Mobile Theme Toggle Sync
+function toggleMobileTheme() {
+  document.getElementById('theme-toggle-btn').click();
+  const isDark = document.documentElement.classList.contains('dark');
+  const mobBtn = document.getElementById('theme-toggle-mobile');
+  if (mobBtn) {
+    const moon = mobBtn.querySelector('.moon-icon');
+    const sun = mobBtn.querySelector('.sun-icon');
+    if (moon) moon.classList.toggle('hidden', isDark);
+    if (sun) sun.classList.toggle('hidden', !isDark);
+  }
+}
+(function() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const mobBtn = document.getElementById('theme-toggle-mobile');
+  if (mobBtn) {
+    const moon = mobBtn.querySelector('.moon-icon');
+    const sun = mobBtn.querySelector('.sun-icon');
+    if (moon) moon.classList.toggle('hidden', isDark);
+    if (sun) sun.classList.toggle('hidden', !isDark);
+  }
+})();
+</script>
+<script src="assets/js/night-mode.js"></script>
+</body>
+</html>
+

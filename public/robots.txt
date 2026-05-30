@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arkraj7.github.io/nvy-dmrv-dashboard/sitemap.xml

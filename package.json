@@ -1,0 +1,29 @@
+{
+  "name": "nvy-dmrv-dashboard",
+  "version": "1.0.0",
+  "description": "Nagar Van DMRV Dashboard - Digital Monitoring, Reporting & Verification for India's Urban Forests",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run tailwind:build && astro dev",
+    "build": "npm run tailwind:build && astro build",
+    "preview": "astro preview",
+    "tailwind:build": "tailwindcss -i src/tailwind-input.css -o public/assets/css/tailwind.css --content \"./src/**/*.{astro,html}\" --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arkraj7/nvy-dmrv-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arkraj7/nvy-dmrv-dashboard/issues"
+  },
+  "homepage": "https://github.com/Arkraj7/nvy-dmrv-dashboard#readme",
+  "dependencies": {
+    "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

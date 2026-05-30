@@ -8,14 +8,21 @@
   "theme_color": "#1b3a2d",
   "icons": [
     {
-      "src": "./assets/images/tree-svgrepo-com.svg",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
-      "src": "./assets/images/tree-svgrepo-com.svg",
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

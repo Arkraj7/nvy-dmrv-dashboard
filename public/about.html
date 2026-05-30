@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Initiative - Nagar Van</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/night-mode.css">
+    <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: #fdfbf7;
+        }
+
+        .icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
+        .icon-sm { width: 16px; height: 16px; }
+        .icon-lg { width: 28px; height: 28px; }
+        .icon-xl { width: 36px; height: 36px; }
+        .icon-white { color: #fff; }
+        .icon-green { color: #6ee7b7; }
+        .icon-blue { color: #7dd3fc; }
+        .icon-amber { color: #fde68a; }
+        .icon-purple { color: #c4b5fd; }
+        .icon-teal { color: #5eead4; }
+        .icon-peach { color: #fed7aa; }
+        .icon-sky { color: #7dd3fc; }
+        .icon-dark { color: #374151; }
+        .icon-red { color: #ef4444; }
+        .icon-emerald { color: #34d399; }
+        .icon-rose { color: #fda4af; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        .glass-panel:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #065f46, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 0.15em;
+            line-height: 1.2;
+        }
+
+        /* Accessibility */
+        *:focus-visible { outline: 3px solid #10b981; outline-offset: 2px; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #1b3a2d; color: white; padding: 8px; z-index: 100; }
+        .skip-link:focus { top: 0; }
+
+        /* Card hover effects */
+        .info-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .info-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Button animations */
+        .social-btn {
+            transition: all 0.2s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        .social-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Color contrast improvements */
+        .contrast-medium { color: #374151; }
+        .contrast-large { color: #1b3a2d; font-weight: 600; }
+
+        /* Visible focus states for keyboard navigation */
+        *:focus-visible {
+            outline: 3px solid #10b981;
+            outline-offset: 2px;
+        }
+
+        /* Footer styles */
+        .site-footer {
+            background: #ffffff;
+            color: #000000;
+        }
+        .footer-link {
+            color: #000000;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .footer-link:hover {
+            color: #1b3a2d;
+            transform: translateX(3px);
+        }
+        .footer-link:hover::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #1b3a2d;
+            border-radius: 50%;
+        }
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .social-icon:hover {
+            background: #5dc48a;
+            transform: translateY(-2px);
+        }
+
+        /* Professional Popup Modal */
+        .popup-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .popup-modal.hidden { display: none; }
+        .popup-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 550px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            animation: popupSlide 0.4s ease;
+        }
+        @keyframes popupSlide {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .popup-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+        .popup-close:hover { background: #e5e7eb; color: #374151; }
+        .popup-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        .popup-checkbox input { width: 18px; height: 18px; accent-color: #1b3a2d; cursor: pointer; }
+        .popup-checkbox label { font-size: 13px; color: #475569; cursor: pointer; }
+
+
+        .interactive-element {
+            transition: all 0.2s ease;
+        }
+        .interactive-element:hover {
+            transform: translateY(-1px);
+        }
+        .interactive-element:focus {
+            transform: translateY(-1px);
+        }
+        .text-size-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 10px;
+        }
+        .text-size-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid rgba(27,58,45,0.25);
+            background: rgba(27,58,45,0.06);
+            color: #1b3a2d;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .text-size-btn:hover {
+            background: rgba(27,58,45,0.12);
+        }
+    </style>
+<!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+</head>
+<body class="text-gray-800 relative min-h-screen flex flex-col" role="main">
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+  <symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
+  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
+  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
+  <symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+  <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
+  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
+  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="M22 15l-5-5-7 7"/><path d="M16 13l-3 3"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
+  <symbol id="icon-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9h-9V3z"/><path d="M12 12l-4-4"/></symbol>
+  <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12c1.5 0 2.5-.5 3-1"/><path d="M3 12h16c1.5 0 2.5.5 3 1"/><path d="M5 18h10c1.5 0 2.5-.5 3-1"/></symbol>
+  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 8 5 12 5 16a7 7 0 0014 0c0-4-4-8-7-14z"/></symbol>
+  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 00-4 0v10.8"/><path d="M8 16a4 4 0 108 0 4 4 0 00-8 0z"/></symbol>
+  <symbol id="icon-seedling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-4 0-6 2-6 5"/><path d="M12 8c4 0 6 2 6 5"/><path d="M8 3c4 0 6 1.5 6 5"/><path d="M16 3c-4 0-6 1.5-6 5"/></symbol>
+  <symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
+  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 00-9-9H5a3 3 0 00-3 3v6a3 3 0 003 3h2v4l4-4h4a9 9 0 006-3z"/></symbol>
+  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
+  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .5-5.5 5 1.5 7L12 17l-6 4 1.5-7L2 9l7-.5L12 2z"/></symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a3 3 0 013-3h4l3 3h7a3 3 0 013 3v9a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"/></symbol>
+  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7a2 2 0 00-2-2h-3l-2-3H9L7 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 114 4L7 20l-4 1 1-4L17 3z"/></symbol>
+  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h0"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+  <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
+  <symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
+  <symbol id="icon-eco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c5-5 8-11 8-18"/><path d="M17 7c-2 2-4 3-8 4"/><path d="M12 12c2-2 4-3 5-7"/></symbol>
+  <symbol id="icon-clean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l15-15"/><path d="M13 3l8 8"/><path d="M4 20l3-3"/></symbol>
+  <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
+</svg>
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="assets/images/Men and women walking, having picnic and doing exercises in park.jpg"
+             alt=""
+             role="presentation"
+             class="w-full h-full object-cover object-top opacity-90"
+             aria-hidden="true" />
+             
+        <div class="absolute inset-0 bg-[#fcfbf5]/75 backdrop-blur-[3px]"></div>
+    </div>
+
+    <nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center flex-wrap">
+                <div class="flex items-center gap-3">
+                    <div class="w-14 h-14 bg-[#fdfbf7] rounded-lg p-1 flex items-center justify-center border border-white/30 shadow-md" role="img" aria-label="Nagar Van logo">
+                        <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex flex-col hidden md:flex">
+                        <a href="index.html" class="font-bold text-xl tracking-wide leading-none" aria-current="page" data-i18n="dashboardTitle">Nagar Van DMRV</a>
+                        <span class="text-[9px] text-emerald-700 uppercase tracking-widest font-bold mt-0.5">Digital Monitoring, Reporting & Verification</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+                    <!-- Home Button -->
+                    <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Home">
+                        <svg class="icon icon-sm icon-green"><use href="#icon-home"/></svg>
+                        <span>Home</span>
+                    </a>
+
+                    <a href="about.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1">
+                        <svg class="icon icon-sm icon-purple"><use href="#icon-about"/></svg>
+                        <span>About Me</span>
+                    </a>
+
+                    <!-- Citizen Corner Dropdown -->
+                    <div class="relative group">
+                        <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+                            <svg class="icon icon-sm icon-peach"><use href="#icon-users"/></svg>
+                            <span>Citizen Corner</span>
+                            <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
+                            <a href="report.html" class="block px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-t-lg transition-colors flex items-center gap-2" role="menuitem">
+                                <svg class="icon icon-sm icon-red"><use href="#icon-flag"/></svg>
+                                Report Issue
+                            </a>
+                            <button onclick="openPublicModal()" class="w-full text-left px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-b-lg transition-colors flex items-center gap-2" role="menuitem">
+                                <svg class="icon icon-sm icon-rose"><use href="#icon-heart"/></svg>
+                                Public Contribution
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element radiate flex items-center gap-1.5" aria-label="Take Public Survey">
+                        <svg class="icon icon-sm icon-dark"><use href="#icon-clipboard"/></svg>
+                        <span>Take Survey</span>
+                    </a>
+
+                    <!-- Night Mode Toggle -->
+                    <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+                      <div class="theme-toggle__container">
+                        <div class="theme-toggle__clouds"></div>
+                        <div class="theme-toggle__stars">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 2... (line truncated to 2000 chars)
+                        </div>
+                        <div class="theme-toggle__sun">
+                          <div class="theme-toggle__moon-mask">
+                            <div class="theme-toggle__crater"></div>
+                            <div class="theme-toggle__crater"></div>
+                            <div class="theme-toggle__crater"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+
+                    <!-- Text Size Controls -->
+                    <div class="flex items-center gap-2 ml-2 border-l border-gray-200 pl-2">
+                        <div class="text-size-controls hidden sm:flex" role="group" aria-label="Text size">
+                            <button type="button" class="text-size-btn" onclick="setTextSize('small')" aria-label="Small text" title="Small">A-</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('normal')" aria-label="Normal text" title="Normal">A</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('large')" aria-label="Large text" title="Large">A+</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('extra-large')" aria-label="Extra Large text" title="Extra Large">A++</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10 flex-grow" role="main">
+
+        <div class="glass-panel p-6 md:p-10 transition-all duration-500 hover:shadow-2xl hover:bg-white/50">
+            <div class="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
+
+                <div class="relative w-36 h-36 md:w-40 md:h-40 flex-shrink-0">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-300 to-teal-200 rounded-full animate-spin" style="animation-duration: 20s;"></div>
+                    <div class="absolute inset-1 bg-white rounded-full flex items-center justify-center overflow-hidden border-[3px] border-white shadow-inner">
+                        <img src="assets/images/WhatsApp Image 2026-02-09 at 8_imgupscaler.ai_Sharpener_2K (1) (1).png" alt="Portrait photo of Arkraj Biswas" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="text-center md:text-left flex-1">
+                    <h2 class="text-3xl md:text-4xl font-black gradient-text tracking-tight pb-1">Arkraj Biswas</h2>
+                    <p class="text-[#065f46] font-bold text-sm md:text-base mb-3 bg-emerald-50/80 inline-block px-4 py-1 rounded-full border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+                        Director - Sustainability | Embark India Development Fellow
+                    </p>
+                    <p class="text-sm md:text-[15px] text-gray-800 leading-relaxed mb-5 font-medium">
+                        Welcome! This initiative is a vibrant stepping stone towards actionable grassroots implementation and localized policy change. My core motivation is bridging the gap between national environmental goals and on-ground ecological realities.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="https://www.linkedin.com/in/arkraj-biswas-kugel/" target="_blank" class="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <svg class="icon icon-blue"><use href="#icon-share"/></svg>
+                            Connect on LinkedIn
+                        </a>
+                        <a href="mailto:arkraj.biswas6@gmail.com" class="bg-white hover:bg-gray-50 text-gray-800 px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 border border-gray-200">
+                            <svg class="icon icon-sky"><use href="#icon-mail"/></svg>
+                            Email Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5 text-gray-800 mt-6">
+
+                <div class="bg-white/50 p-5 md:p-6 rounded-xl border border-white/60 shadow-sm relative overflow-hidden group hover:bg-white/70 transition-colors backdrop-blur-md">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500/80"></div>
+                    <h3 class="font-extrabold text-[#064e3b] mb-2 text-lg flex items-center gap-2">
+                        <svg class="icon icon-purple"><use href="#icon-about"/></svg>
+                        Academic & Professional Background
+                    </h3>
+                    <p class="leading-relaxed font-medium text-[14px] md:text-[15px]">
+                        I hold a Master of Science in Environmental & Sustainable Development (Earth & Atmospheric Sciences) from Banaras Hindu University and a Bachelor of Science in Agricultural Sciences from UAS Dharwad. I am currently pursuing a Post Graduate Diploma in Environmental Law and Policy from WWF-India and National Law University, Delhi.
+                        <br><br>
+                        Presently, I serve as the Director - Sustainability at the EcoServe Development Foundation and as an Embark India Development Fellow placed at National CAMPA (MoEF&CC). My work focuses on strengthening the Nagar Van Yojana, advancing ecosystem restoration, and developing Digital Monitoring, Reporting, and Verification (DMRV) systems that bridge grassroots implementation with national-level policy and governance. I integrate geospatial analysis, mixed-methods evaluation, and environmental law perspectives to build transparent, scalable, and community-centered climate solutions.
+                    </p>
+                </div>
+
+                <div class="bg-white/60 p-5 md:p-6 rounded-xl border border-white/60 shadow-sm relative overflow-hidden group hover:bg-white/80 transition-shadow backdrop-blur-md">
+                    <h3 class="font-extrabold text-[#064e3b] mb-2 text-lg border-b border-emerald-900/10 pb-2 flex items-center gap-2 relative z-10">
+                        <svg class="icon icon-teal"><use href="#icon-globe"/></svg>
+                        Vision for a Viksit Bharat & Sustainability
+                    </h3>
+                    <p class="leading-relaxed mb-3 font-medium relative z-10 text-[14px] md:text-[15px]">
+                        India's commitment to its Nationally Determined Contributions (NDCs) requires decentralized, data-driven action. Urban forestry via Nagar Vans and Nagar Vatikas represents a crucial, lively strategy to create carbon sinks, combat the Urban Heat Island effect, and foster vibrant community resilience alongside local vendors and citizens.
+                    </p>
+                    <p class="leading-relaxed font-medium relative z-10 text-[14px] md:text-[15px]">
+                        This platform empowers everyone—from park visitors to policymakers—to monitor real-time metrics, effectively driving us collectively towards a truly sustainable, developed nation: a Viksit Bharat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Acknowledgment Popup Modal -->
+    <div id="acknowledgmentPopup" class="popup-modal hidden">
+        <div class="popup-content">
+            <button id="popupClose" class="popup-close" aria-label="Close popup">&times;</button>
+<h2 style="font-size: 22px; font-weight: 800; color: #1b3a2d; margin-bottom: 6px;">Welcome to the Nagar Van DMRV Dashboard</h2>
+<h3 style="font-size: 16px; font-weight: 600; color: #065f46; margin-bottom: 16px;">Acknowledgment & Data Disclaimer</h3>
+<p style="font-size: 14px; color: #374151; line-height: 1.7; margin-bottom: 14px;">
+<p style="font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">
+                Data presented on this dashboard is sourced from official government records, field surveys, and verified satellite imagery. While we strive for accuracy, users are advised to verify critical information from primary sources. This portal is intended for informational and analytical purposes.
+            </p>
+            <div class="popup-checkbox">
+                <input type="checkbox" id="dontShowAgain">
+                <label for="dontShowAgain">Don't show this again</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="site-footer py-8 px-4 mt-8" role="contentinfo">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                    <h4 class="text-md font-bold mb-2 text-black">About Portal</h4>
+                    <p class="text-sm text-black">The Nagar Van DMRV Dashboard is an AI-powered platform for tracking India's urban forest impacts.</p>
+                </div>
+                <div>
+                    <h4 class="text-md font-bold mb-2 text-black">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="footer-link">Dashboard</a></li>
+                        <li><a href="report.html" class="footer-link">Report Issue</a></li>
+                        <li><a href="assets/docs/NVY_Research_Methodologies.pdf" target="_blank" class="footer-link">Research Methodology</a></li>
+                        <li><a href="assets/docs/Nagar_Van_DMRV_Data_Documentation.pdf" target="_blank" class="footer-link">Data Documentation</a></li>
+                        <li><a href="mailto:arkraj.biswas6@gmail.com" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-md font-bold mb-2 text-black">Connect</h4>
+                    <div class="flex gap-3">
+                        <a href="https://linkedin.com/in/arkraj-biswas-kugel" target="_blank" class="social-icon">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <button onclick="sharePage()" class="social-icon" aria-label="Share">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-300 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+                    <p class="text-xs text-black mt-1">Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span></p>
+                </div>
+                <div class="flex gap-4 text-xs text-black">
+                    <a href="privacy.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Terms of Use</a>
+                    <a href="cookies.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Cookie Policy</a>
+                    <a href="accessibility.html" class="footer-link hover:underline hover:text-[#1b3a2d] hover:font-medium">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Nagar Van DMRV - About',
+                    text: 'Learn about the Digital Monitoring, Reporting & Verification platform for India\'s Urban Forests',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+
+        // Popup Modal
+        window.onload = function() {
+            var popup = document.getElementById('acknowledgmentPopup');
+            var closeBtn = document.getElementById('popupClose');
+            var dontShowAgain = document.getElementById('dontShowAgain');
+
+            if (popup && localStorage.getItem('dmrv-popup-dismissed') !== 'true') {
+                popup.classList.remove('hidden');
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    popup.classList.add('hidden');
+                    if (dontShowAgain && dontShowAgain.checked) {
+                        localStorage.setItem('dmrv-popup-dismissed', 'true');
+                    }
+                });
+            }
+
+            if (popup) {
+                popup.addEventListener('click', function(e) {
+                    if (e.target === popup) {
+                        popup.classList.add('hidden');
+                        if (dontShowAgain && dontShowAgain.checked) {
+                            localStorage.setItem('dmrv-popup-dismissed', 'true');
+                        }
+                    }
+                });
+            }
+        };
+
+        function setTextSize(size) {
+            document.body.classList.remove('text-size-small', 'text-size-large', 'text-size-extra-large');
+            if (size !== 'normal') {
+                document.body.classList.add('text-size-' + size);
+            }
+            try { localStorage.setItem('dmrv-text-size', size); } catch(e) {}
+        }
+        (function() {
+            try {
+                var saved = localStorage.getItem('dmrv-text-size');
+                if (saved && saved !== 'normal') setTextSize(saved);
+            } catch(e) {}
+        })();
+
+        function openPublicModal() {
+            var m = document.getElementById('public-modal');
+            if (m) {
+                m.classList.remove('hidden');
+                m.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+    </script>
+
+<script src="assets/js/night-mode.js"></script>
+</body>
+</html>
+

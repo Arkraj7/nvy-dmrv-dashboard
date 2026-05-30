@@ -1,0 +1,729 @@
+/* ── Night Mode Toggle ── */
+.theme-toggle {
+  --base-scale: 11px;
+  --toggle-width: 5.625em;
+  --toggle-height: 2.5em;
+  --radius-pill: 100em;
+  --sun-diameter: 2.125em;
+  --sun-offset: calc((var(--toggle-height) - var(--sun-diameter)) / 2);
+  --bg-toggle-light: #3d7eae;
+  --bg-toggle-dark: #1d1f2c;
+  --color-sun: #ecca2f;
+  --color-moon: #c4c9d1;
+  --color-crater: #959db1;
+  --color-star: #fff;
+  --color-cloud-front: #f3fdff;
+  --color-cloud-back: #aacadf;
+  --shadow-primary: rgba(0, 0, 0, 0.25);
+  --shadow-highlight: rgba(255, 255, 255, 0.94);
+  --halo-color: rgba(255, 255, 255, 0.1);
+  font-size: var(--base-scale);
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.theme-toggle__container {
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  background-color: var(--bg-toggle-light);
+  border-radius: var(--radius-pill);
+  position: relative;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0.06em 0.06em 0.125em var(--shadow-highlight);
+}
+html.dark .theme-toggle__container { background-color: var(--bg-toggle-dark); }
+.theme-toggle__container::after {
+  content: ""; position: absolute; inset: 0;
+  box-shadow: 0em 0.05em 0.187em rgba(0,0,0,0.5) inset;
+  border-radius: var(--radius-pill); pointer-events: none;
+}
+.theme-toggle__sun {
+  width: var(--sun-diameter); height: var(--sun-diameter);
+  background-color: var(--color-sun); border-radius: 50%;
+  position: absolute; top: var(--sun-offset);
+  transform: translateX(var(--sun-offset));
+  box-shadow: 0.05em 0.125em 0.125em var(--shadow-primary), 0em 0.05em 0.125em var(--shadow-primary), 0.05em 0.05em 0.05em 0em rgba(254,255,239,0.61) inset, 0em -0.05em 0.05em 0em #a1872a inset, 0 0 0 0.625em var(--halo-color), 0 0 0 1.25em var(--halo-color), 0 0 0 1.875em var(--halo-color);
+  transition: transform 0.3s ease; overflow: hidden;
+}
+html.dark .theme-toggle__container .theme-toggle__sun {
+  transform: translateX(calc(var(--toggle-width) - var(--sun-diameter) - var(--sun-offset)));
+}
+.theme-toggle__moon-mask {
+  position: relative; width: 100%; height: 100%;
+  background-color: var(--color-moon); border-radius: inherit;
+  transform: translateX(100%); transition: transform 0.3s ease;
+  box-shadow: 0.062em 0.062em 0.062em 0em rgba(254,255,239,0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+}
+html.dark .theme-toggle__container .theme-toggle__moon-mask { transform: translateX(0); }
+.theme-toggle__crater { position: absolute; background-color: var(--color-crater); border-radius: 50%; box-shadow: 0em 0.03em 0.06em var(--shadow-primary) inset; }
+.theme-toggle__crater:nth-of-type(1) { top: 0.75em; left: 0.3em; width: 0.75em; height: 0.75em; }
+.theme-toggle__crater:nth-of-type(2) { top: 0.9em; left: 1.375em; width: 0.375em; height: 0.375em; }
+.theme-toggle__crater:nth-of-type(3) { top: 0.3em; left: 0.8em; width: 0.25em; height: 0.25em; }
+.theme-toggle__stars {
+  position: absolute; left: 0.3em; transform: translateY(-2em);
+  transition: transform 0.3s ease; width: 2.75em; color: var(--color-star);
+}
+html.dark .theme-toggle__container .theme-toggle__stars { transform: translateY(0.5em); }
+.theme-toggle__clouds {
+  position: absolute; left: 0.3em; top: 2em; transform: translateY(0);
+  width: 1.25em; height: 1.25em; background-color: var(--color-cloud-front);
+  border-radius: 50%;
+  box-shadow: 0.937em 0.312em var(--color-cloud-front), 1.437em 0.375em var(--color-cloud-front), 2.187em 0 var(--color-cloud-front), 2.937em 0.312em var(--color-cloud-front), 3.625em -0.062em var(--color-cloud-front), 4.5em -0.312em var(--color-cloud-front), 4.625em -1.75em 0 0.437em var(--color-cloud-front), -0.312em -0.312em var(--color-cloud-back), 0.5em -0.125em var(--color-cloud-back), 1.25em -0.062em var(--color-cloud-back), 2em -0.312em var(--color-cloud-back), 2.625em 0em var(--color-cloud-back), 3.375em -0.437em var(--color-cloud-back), 4em -0.625em var(--color-cloud-back), 4.125em -2.125em 0 0.437em var(--color-cloud-back);
+  transition: transform 0.3s ease;
+}
+html.dark .theme-toggle__container .theme-toggle__clouds { transform: translateY(3em); }
+.theme-toggle__container:hover .theme-toggle__sun { transform: translateX(calc(var(--sun-offset) + 0.187em)); }
+html.dark .theme-toggle__container:hover .theme-toggle__sun { transform: translateX(calc(var(--toggle-width) - var(--sun-diameter) - var(--sun-offset) - 0.187em)); }
+
+/* ── Day-mode Icon Visibility (darker on white backgrounds) ── */
+:root:not(.dark) .icon-green { color: #059669 !important; }
+:root:not(.dark) .icon-sky { color: #0284c7 !important; }
+:root:not(.dark) .icon-amber { color: #d97706 !important; }
+:root:not(.dark) .icon-purple { color: #7c3aed !important; }
+:root:not(.dark) .icon-teal { color: #0d9488 !important; }
+:root:not(.dark) .icon-peach { color: #ea580c !important; }
+:root:not(.dark) .icon-rose { color: #e11d48 !important; }
+:root:not(.dark) .icon-pink { color: #db2777 !important; }
+:root:not(.dark) .icon-blue { color: #0284c7 !important; }
+:root:not(.dark) .icon-emerald { color: #059669 !important; }
+
+/* ── Dark Mode Overrides ── */
+html.dark body {
+  background-color: #080a2f !important;
+  color: #e2e8f0;
+}
+html.dark .glass-panel,
+html.dark .bg-white {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* ── Backgrounds ── */
+html.dark nav,
+html.dark .bg-white.shadow-md {
+  background-color: #0f1a2f !important;
+}
+html.dark [class*="bg-white/80"],
+html.dark [class*="bg-white/90"],
+html.dark [class*="bg-white/70"] {
+  background-color: #0f1a2f !important;
+}
+html.dark [class*="bg-white/10"] {
+  background-color: rgba(15, 26, 47, 0.5) !important;
+}
+html.dark [class*="bg-[#1b3a2d]"] {
+  background-color: #0f1a2f !important;
+}
+html.dark .bg-gray-50 { background-color: #0f1a2f !important; }
+html.dark .bg-gray-100 { background-color: #0f1a2f !important; }
+html.dark .bg-gray-200 { background-color: #1e3a5f !important; }
+html.dark .site-footer { background-color: #0f1a2f !important; }
+html.dark footer {
+  background-color: #0f1a2f !important;
+  border-top-color: #1e3a5f !important;
+}
+html.dark .hover\:bg-gray-100:hover { background-color: #1e3a5f !important; }
+html.dark .bg-red-600 { background-color: #b91c1c !important; }
+html.dark .bg-red-500 { background-color: #991b1b !important; }
+html.dark .popup-content {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+/* ── Acknowledgment popup text colors in dark mode ── */
+html.dark #acknowledgmentPopup .popup-content h2,
+html.dark #acknowledgmentPopup .popup-content h3,
+html.dark #acknowledgmentPopup .popup-content p,
+html.dark #acknowledgmentPopup .popup-content strong,
+html.dark #acknowledgmentPopup .popup-content label {
+  color: #000000 !important;
+}
+/* ── Ensure checkbox and button are visible ── */
+html.dark #acknowledgmentPopup .popup-checkbox input[type="checkbox"] {
+  accent-color: #e2e8f0 !important;
+}
+html.dark #acknowledgmentPopup #popupGotIt {
+  background-color: #1b3a2d !important;
+  color: #fff !important;
+}
+html.dark #acknowledgmentPopup #popupClose {
+  color: #e2e8f0 !important;
+}
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #334155 !important;
+}
+
+/* ── Gray text ── */
+html.dark .text-gray-900 {
+  color: #f8fafc !important;
+}
+html.dark .text-gray-800,
+html.dark .text-gray-700,
+html.dark .text-gray-600 {
+  color: #94a3b8 !important;
+}
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: #94a3b8 !important;
+}
+html.dark .text-gray-300 {
+  color: #d1d5db !important;
+}
+html.dark .text-gray-200 {
+  color: #e5e7eb !important;
+}
+
+/* ── Headings and text elements → light blue-gray mist ── */
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
+  color: #e2e8f0 !important;
+}
+html.dark nav a, html.dark nav button {
+  color: #e2e8f0 !important;
+}
+html.dark strong[class*="text-[#1b3a2d]"] {
+  color: #cbd5e1 !important;
+}
+html.dark .text-emerald-700,
+html.dark .text-emerald-800 {
+  color: #e2e8f0 !important;
+}
+html.dark .text-green-600,
+html.dark .text-green-700,
+html.dark .text-green-800,
+html.dark .text-green-900 {
+  color: #e2e8f0 !important;
+}
+
+/* ── Dark accent colors → light blue-gray mist ── */
+html.dark .text-red-700,
+html.dark .text-red-800,
+html.dark .text-red-600 {
+  color: #94a3b8 !important;
+}
+html.dark .text-blue-800,
+html.dark .text-blue-900 {
+  color: #e2e8f0 !important;
+}
+html.dark .text-purple-900 {
+  color: #e2e8f0 !important;
+}
+html.dark .text-orange-900 {
+  color: #e2e8f0 !important;
+}
+html.dark .text-pink-900 {
+  color: #e2e8f0 !important;
+}
+html.dark .text-teal-900 {
+  color: #e2e8f0 !important;
+}
+
+/* ── Inputs ── */
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+}
+
+/* ── Headings inside panels ── */
+html.dark .glass-panel h1,
+html.dark .glass-panel h2,
+html.dark .glass-panel h3,
+html.dark .glass-panel h4,
+html.dark .glass-panel h5,
+html.dark .glass-panel h6 {
+  color: inherit;
+}
+
+/* ── Paragraphs, labels, list items inside panels ── */
+html.dark .glass-panel p,
+html.dark .glass-panel li,
+html.dark .glass-panel label,
+html.dark .glass-panel .text-sm,
+html.dark .glass-panel .text-xs,
+html.dark .glass-panel .font-bold:not(a),
+html.dark .glass-panel .font-extrabold:not(a),
+html.dark .glass-panel strong,
+html.dark .glass-panel b {
+  color: #e2e8f0;
+}
+html.dark .glass-panel label {
+  color: #cbd5e1;
+}
+
+/* ── Prose / long-form content (policy pages) ── */
+html.dark .prose,
+html.dark .prose p,
+html.dark .prose li,
+html.dark .prose strong,
+html.dark .prose b,
+html.dark .prose h1,
+html.dark .prose h2,
+html.dark .prose h3,
+html.dark .prose h4 {
+  color: #e2e8f0 !important;
+}
+
+/* ── Links ── */
+html.dark a { color: #6ee7b7; }
+html.dark a:hover { color: #34d399; }
+/* Keep dark green text on the green survey button readable */
+html.dark [class~="bg-[#5dc48a]"] {
+  color: #064e3b !important;
+}
+
+/* ── Footer text ── */
+html.dark footer p,
+html.dark footer li,
+html.dark footer a,
+html.dark footer span,
+html.dark .site-footer p,
+html.dark .site-footer li,
+html.dark .site-footer a,
+html.dark .site-footer span {
+  color: #cbd5e1 !important;
+}
+
+/* ── Metric cards ── */
+html.dark .text-3xl,
+html.dark .text-2xl,
+html.dark .text-4xl {
+  color: inherit;
+}
+
+/* ── Icon colors in dark mode ── */
+html.dark .icon-green { color: #6ee7b7 !important; }
+html.dark .icon-sky { color: #7dd3fc !important; }
+html.dark .icon-amber { color: #fde68a !important; }
+html.dark .icon-purple { color: #c4b5fd !important; }
+html.dark .icon-teal { color: #5eead4 !important; }
+html.dark .icon-peach { color: #fed7aa !important; }
+html.dark .icon-rose { color: #fda4af !important; }
+html.dark .icon-pink { color: #fecaca !important; }
+html.dark .icon-blue { color: #7dd3fc !important; }
+html.dark .icon-emerald { color: #34d399 !important; }
+
+/* ── Gradient text ── */
+html.dark .gradient-text {
+  background-image: linear-gradient(90deg, #6ee7b7, #34d399) !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* ── bg-[#f4f7f6] page backgrounds ── */
+html.dark [class*="bg-[#f4f7f6]"] {
+  background-color: #0f172a !important;
+}
+
+/* ── Footer headings ── */
+html.dark footer h4,
+html.dark .site-footer h4 {
+  color: #e2e8f0 !important;
+}
+
+/* ── Star rating (day mode) ── */
+:root:not(.dark) .text-gray-300.star-rating,
+:root:not(.dark) [class*="star-rating-"] .text-gray-300,
+:root:not(.dark) div[id^="star-rating-"] {
+  color: #6b7280 !important;
+}
+/* Star rating dark mode */
+html.dark div[id^="star-rating-"] {
+  color: #fbbf24 !important;
+}
+
+/* ── bg-emerald-50 / border-emerald-200 → dark bg ── */
+html.dark [class*="bg-emerald-50"] {
+  background-color: #1e293b !important;
+}
+html.dark [class*="border-emerald-200"] {
+  border-color: #334155 !important;
+}
+
+/* ── Map legend ── */
+html.dark .map-legend {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155 !important;
+}
+
+/* ── icon-dark in dark mode ── */
+html.dark .icon-dark { color: #cbd5e1 !important; }
+
+/* ── Radio / checkbox accent color in dark mode ── */
+html.dark [class*="accent-[#1b3a2d]"] { accent-color: #6ee7b7 !important; }
+
+/* ── Blue status text ── */
+html.dark .text-blue-600 { color: #7dd3fc !important; }
+
+/* ── Buttons with dark green bg ── */
+html.dark button[class*="bg-[#1b3a2d]"] {
+  background-color: #334155 !important;
+}
+html.dark .hover\:bg-gray-300:hover {
+  background-color: #475569 !important;
+}
+
+/* ── Text size buttons ── */
+html.dark .text-size-btn {
+  border-color: rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.1) !important;
+  color: #e2e8f0 !important;
+}
+html.dark .text-size-btn:hover {
+  background: rgba(255,255,255,0.2) !important;
+}
+
+/* ── Table cells ── */
+html.dark td,
+html.dark th {
+  color: #e2e8f0;
+}
+
+/* ── Official Resources Section ── */
+html.dark #official-resources {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #official-resources .slide-in-right {
+  background-color: #0f1a2f !important;
+  border-color: #1e3a5f !important;
+}
+html.dark #official-resources h2 {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources h2 .icon-amber {
+  color: #fde68a !important;
+}
+html.dark #official-resources .bg-gradient-to-br {
+  background: #1e3a5f !important;
+  border-color: #334155 !important;
+}
+html.dark #official-resources .hover\:border-[#5dc48a]:hover,
+html.dark #official-resources .hover\:border-blue-400:hover,
+html.dark #official-resources .hover\:border-amber-400:hover,
+html.dark #official-resources .hover\:border-purple-400:hover {
+  border-color: #9fd3c7 !important;
+}
+html.dark #official-resources .hover\:shadow-xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ── Card backgrounds ── */
+html.dark #official-resources .from-emerald-50,
+html.dark #official-resources .to-green-50,
+html.dark #official-resources .from-blue-50,
+html.dark #official-resources .to-indigo-50,
+html.dark #official-resources .from-amber-50,
+html.dark #official-resources .to-orange-50,
+html.dark #official-resources .from-purple-50,
+html.dark #official-resources .to-violet-50 {
+  background-color: #1e3a5f !important;
+}
+
+/* ── Card borders ── */
+html.dark #official-resources .border-emerald-200,
+html.dark #official-resources .border-blue-200,
+html.dark #official-resources .border-amber-200,
+html.dark #official-resources .border-purple-200 {
+  border-color: #334155 !important;
+}
+
+/* ── All text inside cards ── */
+html.dark #official-resources .bg-gradient-to-br * {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .text-gray-600,
+html.dark #official-resources p {
+  color: #f8fafc !important;
+}
+
+/* ── Card headings ── */
+html.dark #official-resources .bg-gradient-to-br h3 {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .bg-gradient-to-br h3 svg {
+  color: inherit !important;
+}
+
+/* ── Card descriptions ── */
+html.dark #official-resources .bg-gradient-to-br p {
+  color: #f8fafc !important;
+}
+
+/* ── Icon containers ── */
+html.dark #official-resources .bg-\[#1b3a2d\] {
+  background-color: #33415f !important;
+}
+
+/* ── Click to open text ── */
+html.dark #official-resources .bg-gradient-to-br span { }
+
+/* ── Click to open text by color class (override after *) ── */
+html.dark #official-resources .text-\[#5dc48a\] {
+  color: #6ee7b7 !important;
+}
+html.dark #official-resources .text-blue-600 {
+  color: #7dd3fc !important;
+}
+html.dark #official-resources .text-amber-600 {
+  color: #fde68a !important;
+}
+html.dark #official-resources .text-purple-600 {
+  color: #c4b5fd !important;
+}
+html.dark #official-resources .bg-gradient-to-br span {
+  color: #9fd3c7 !important;
+}
+html.dark #official-resources .bg-gradient-to-br span:hover {
+  color: #e2e8f0 !important;
+}
+
+/* ── Font Awesome icons ── */
+html.dark #official-resources .fa-solid,
+html.dark #official-resources svg {
+  color: #e2e8f0 !important;
+}
+html.dark #official-resources .text-white {
+  color: #e2e8f0 !important;
+}
+
+/* ── Green Calculator promo footer dark mode ── */
+html.dark footer.glass-panel {
+  background: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+
+/* ── Green Calculator button (Uiverse nathAd17) dark mode ── */
+html.dark footer.glass-panel a[href="green-calculator.html"] {
+  border-color: #475569 !important;
+}
+html.dark footer.glass-panel a[href="green-calculator.html"] .fill-gray-800 {
+  fill: #e2e8f0 !important;
+}
+html.dark footer.glass-panel a[href="green-calculator.html"] svg {
+  border-color: #475569 !important;
+}
+
+/* ── Key Strategic Pillars dark mode ── */
+html.dark #key-pillars {
+  background: #0f1a2f !important;
+  border-color: #334155 !important;
+}
+html.dark #key-pillars h3 {
+  color: #e2e8f0 !important;
+}
+html.dark #key-pillars h4 {
+  color: #e2e8f0 !important;
+}
+html.dark #key-pillars p {
+  color: #94a3b8 !important;
+}
+html.dark #key-pillars > div > div {
+  background: #1e293b !important;
+}
+
+/* ── Get in Touch box in dark mode ── */
+html.dark #home-section .border-gray-200.bg-transparent {
+  border-color: #334155 !important;
+}
+html.dark #home-section .border-gray-200.bg-transparent p {
+  color: #e2e8f0 !important;
+}
+
+/* ── Page Loader for both day and night modes ── */
+#page-loader {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+html.dark #page-loader {
+  background-color: rgba(15, 26, 47, 0.75) !important;
+}
+
+/* Loader colors for night mode */
+html.dark .side-left {
+  background-color: #6ee7b7 !important;
+}
+html.dark .side-right {
+  background-color: #7dd3fc !important;
+}
+html.dark .side-top {
+  background-color: #fde68a !important;
+}
+
+/* ── AI Chat Widget dark mode ── */
+html.dark .ai-chat-window {
+  background: #2a2a3e !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+}
+html.dark .ai-chat-header {
+  background: linear-gradient(135deg, #5a7a8a, #7a6a9a) !important;
+}
+html.dark .ai-chat-header .info h3,
+html.dark .ai-chat-header .info p {
+  color: #e8e0f0 !important;
+}
+html.dark .ai-chat-header .close-btn {
+  color: #e8e0f0 !important;
+}
+html.dark .ai-chat-messages {
+  background: #1e1e30 !important;
+}
+html.dark .ai-message {
+  background: #3a2a3a !important;
+  color: #e8d8c8 !important;
+}
+html.dark .user-message {
+  background: #4a3a5a !important;
+  color: #e8e0f0 !important;
+}
+html.dark .ai-chat-input {
+  background: #2a2a3e !important;
+  border-top-color: #3a3a50 !important;
+}
+html.dark .ai-chat-input input {
+  background: #1e1e30 !important;
+  border-color: #3a3a50 !important;
+  color: #e0d8d0 !important;
+}
+html.dark .ai-chat-input input:focus {
+  border-color: #aa96da !important;
+}
+html.dark .ai-chat-input button {
+  background: linear-gradient(135deg, #5a7a8a, #7a6a9a) !important;
+}
+html.dark .quick-questions button {
+  background: #3a2a3a !important;
+  border-color: #5a4a6a !important;
+  color: #e8d8c8 !important;
+}
+html.dark .quick-questions button:hover {
+  background: #5a4a6a !important;
+  color: #f0e8e0 !important;
+}
+
+/* ── Weather Card dark mode ── */
+html.dark .weather-card .bg-gradient {
+  background: linear-gradient(135deg, #2a1a5a 0%, #1a1040 100%) !important;
+}
+html.dark .weather-card .loc-row,
+html.dark .weather-card .main-temp,
+html.dark .weather-card .weather-icon,
+html.dark .weather-card .info-row .value {
+  color: #e0d8f0 !important;
+}
+html.dark .weather-card .info-row .label {
+  color: rgba(200, 190, 220, 0.5) !important;
+}
+
+/* ── Survey Slide Panel dark mode ── */
+html.dark .survey-slide-panel {
+  background: #2a2a3e !important;
+}
+html.dark .survey-slide-content {
+  color: #e0d8f0 !important;
+}
+html.dark .survey-slide-content p {
+  color: #c0b8d0 !important;
+}
+html.dark .survey-slide-content .survey-title {
+  color: #e0d8f0 !important;
+}
+html.dark .survey-slide-content .survey-text {
+  color: #b0a8c0 !important;
+}
+html.dark .survey-close-btn {
+  color: #a098b0 !important;
+  background: rgba(255,255,255,0.1) !important;
+}
+html.dark .survey-icon i {
+  color: #a098b0 !important;
+}
+
+/* ── Hero Box dark mode ── */
+html.dark .bg-\\[\\#f5f0e8\\] {
+  background-color: #2a2a3e !important;
+  border-color: #3a3a50 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] h1 {
+  color: #e8e0f0 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] p {
+  color: #b0a8c0 !important;
+}
+html.dark .bg-\\[\\#f5f0e8\\] a.inline-block {
+  border-color: #6a5a8a !important;
+}
+
+/* ── Weather Card dark mode ── */
+html.dark .weather-card .background {
+  background: linear-gradient(90deg, #2a1a5a 0%, #1a1040 100%) !important;
+}
+html.dark .weather-card .loc-row,
+html.dark .weather-card .loc-row .loc-text,
+html.dark .weather-card .main-text,
+html.dark .weather-card .main-text #weather-temp,
+html.dark .weather-card .info .val {
+  color: #e0d8f0 !important;
+}
+html.dark .weather-card .info .text-gray {
+  color: rgba(200, 190, 220, 0.5) !important;
+}
+
+/* ── MoEF&CC Framework soft-green panel dark mode ── */
+html.dark .from-emerald-50.to-green-50 {
+  background: #0f1a2f !important;
+  border-color: #334155 !important;
+}
+html.dark .from-emerald-50.to-green-50 h3 {
+  color: #e2e8f0 !important;
+}
+html.dark .from-emerald-50.to-green-50 .text-emerald-700 {
+  color: #6ee7b7 !important;
+}
+html.dark .from-emerald-50.to-green-50 .text-gray-700 {
+  color: #94a3b8 !important;
+}
+html.dark .from-emerald-50.to-green-50 > .space-y-4 > div {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* ── Uiverse sekaiking View Spatial Data button dark mode ── */
+html.dark .btn-spatial {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+html.dark .btn-spatial:hover {
+  box-shadow: 2px 5px 0 0 #475569 !important;
+}
+html.dark .btn-spatial:active {
+  box-shadow: 0 0 0 0 transparent !important;
+}
+
+/* ── Uiverse ryota1231 animated button dark mode ── */
+html.dark .btn-dashboard {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 0 2px #475569 !important;
+}
+html.dark .btn-dashboard svg {
+  fill: #e2e8f0 !important;
+}
+html.dark .btn-dashboard:hover {
+  color: #e2e8f0 !important;
+  box-shadow: 0 0 0 12px transparent !important;
+}
+html.dark .btn-dashboard:hover svg {
+  fill: #e2e8f0 !important;
+}
+html.dark .btn-dashboard:active {
+  box-shadow: 0 0 0 4px #6ee7b7 !important;
+}
+html.dark .btn-dashboard .circle {
+  background-color: #334155 !important;
+}
