@@ -7,6 +7,7 @@
     "dev": "npm run tailwind:build && astro dev",
     "build": "npm run tailwind:build && astro build",
     "preview": "astro preview",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=nvy-dmrv-dashboard --commit-dirty=true",
     "tailwind:build": "tailwindcss -i src/tailwind-input.css -o public/assets/css/tailwind.css --content \"./src/**/*.{astro,html}\" --minify"
   },
   "repository": {
