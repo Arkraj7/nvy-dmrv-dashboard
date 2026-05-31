@@ -992,17 +992,26 @@
         /* ========== MOBILE RESPONSIVE ENHANCEMENTS ========== */
         .mobile-menu-btn, .theme-toggle-mobile { display: none; }
         @media (max-width: 767px) {
-          .mobile-menu-btn { display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 1; }
-          .theme-toggle-mobile { display: flex; align-items: center; justify-content: center; padding: 6px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 2; }
+          .mobile-menu-btn { display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 1; min-width: 44px; min-height: 44px; }
+          .theme-toggle-mobile { display: flex; align-items: center; justify-content: center; padding: 6px; background: none; border: none; cursor: pointer; color: #1b3a2d; order: 2; min-width: 44px; min-height: 44px; }
           nav .flex-wrap { flex-wrap: nowrap !important; gap: 6px; }
           nav [class*="hidden md:flex"] { display: none !important; }
           nav .text-size-controls { display: none !important; }
-          .nav-items-desktop { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 1000; border-radius: 0 0 12px 12px; gap: 6px; }
-          .nav-items-desktop.open { display: flex; }
-          .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 10px 12px !important; }
+          .nav-items-desktop { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 1000; border-radius: 0 0 12px 12px; gap: 4px; opacity: 0; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; pointer-events: none; max-height: calc(100vh - 80px); overflow-y: auto; }
+          .nav-items-desktop.open { display: flex; opacity: 1; transform: translateY(0); pointer-events: auto; }
+          .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 12px 14px !important; min-height: 44px; }
           .nav-items-desktop > *:hover { background: #f0fdf4; }
           .nav-items-desktop .theme-toggle { display: none !important; }
           .nav-items-desktop [class*="hidden"][class*="lg:block"] { display: flex !important; }
+          .nav-items-desktop .citizen-mobile-dropdown { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none !important; border: none !important; border-radius: 0 !important; width: 100% !important; margin-top: 0 !important; display: none; background: #f8fafc; padding: 4px 0 4px 12px; }
+          .nav-items-desktop .citizen-mobile-dropdown.open { display: block; }
+          .nav-items-desktop .citizen-mobile-dropdown a,
+          .nav-items-desktop .citizen-mobile-dropdown button { padding: 10px 12px !important; min-height: 44px; font-size: 13px !important; border-radius: 6px; }
+          .nav-items-desktop .citizen-mobile-dropdown a:hover,
+          .nav-items-desktop .citizen-mobile-dropdown button:hover { background: #e2e8f0; }
+          .nav-items-desktop .mobile-theme-row { display: flex !important; align-items: center; justify-content: space-between; padding: 8px 14px !important; border-top: 1px solid #e2e8f0; margin-top: 4px; }
+          .nav-items-desktop .mobile-text-size { display: flex !important; align-items: center; gap: 6px; }
+          .nav-items-desktop .mobile-text-size button { min-width: 36px; min-height: 36px; }
           [class*="bg-[#f5f0e8]"][class*="rounded-2xl"] { padding: 24px 16px !important; }
           [class*="bg-[#f5f0e8]"] h1 { font-size: 20px !important; }
           [class*="grid-cols-1"][class*="lg:grid-cols-2"] { gap: 16px; }
@@ -1024,7 +1033,7 @@
           .survey-slide-panel { width: calc(100% - 20px) !important; right: -420px; }
           .survey-slide-panel.show { right: 10px; }
           .ai-chat-window { width: calc(100vw - 40px) !important; height: 400px; right: -10px; }
-          .btn-report { font-size: 11px; padding: 6px 12px; }
+          .btn-report { font-size: 11px; padding: 6px 12px; min-height: 44px; }
           .button { max-width: 100%; font-size: 16px; padding: 14px 20px; }
           h2.text-2xl { font-size: 18px; }
           h2.text-lg { font-size: 16px; }
@@ -1033,13 +1042,15 @@
           .glass-panel, .bg-white, [class*="max-w-"], #weather-card, .weather-card { overflow: hidden; }
           .glass-panel.p-6, .glass-panel.p-4, [class*="glass-panel"] { max-width: 100%; }
           .grid { max-width: 100%; }
+          .nav-items-desktop .nav-citizen-btn svg:last-child { transition: transform 0.2s ease; }
+          .nav-items-desktop .nav-citizen-btn.open svg:last-child { transform: rotate(180deg); }
         }
         @media (min-width: 768px) {
           .mobile-menu-btn, .theme-toggle-mobile { display: none !important; }
           .nav-items-desktop { display: flex !important; }
         }
         @media (max-width: 480px) {
-          .mobile-menu-btn, .theme-toggle-mobile { padding: 5px; }
+          .mobile-menu-btn, .theme-toggle-mobile { padding: 5px; min-width: 44px; min-height: 44px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] { grid-template-columns: repeat(2, 1fr); }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] .text-2xl { font-size: 16px; }
           [class*="grid-cols-2"][class*="md:grid-cols-4"] [class*="text-[10px]"] { font-size: 8px; }
@@ -1145,10 +1156,15 @@
           box-shadow: 0 0 0 0 black;
         }
     </style>
-<!-- Skip Link for Accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 </head>
-<body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
+<body class="text-gray-800" role="document">
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#home-section" class="skip-link" style="top:-40px;left:auto;right:0;">Skip to Dashboard</a>
+    <!-- Page navigation landmark -->
+    <nav aria-label="Breadcrumb navigation" class="sr-only" role="navigation">
+        <ol><li><a href="index.html">Home</a></li></ol>
+    </nav>
   <!-- 3D Tower Loader -->
   <div id="page-loader" class="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-75">
     <div class="loader">
@@ -1223,7 +1239,7 @@
   <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
 </svg>
 
-    <nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <nav class="bg-white text-[#1b3a2d] shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation" id="site-navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
@@ -1248,7 +1264,7 @@
 
                 <div class="nav-items-desktop flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
                     <!-- Home Button -->
-                    <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Home">
+                    <a href="index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Home" aria-current="page">
                         <svg class="icon icon-sm icon-green"><use href="#icon-home"/></svg>
                         <span>Home</span>
                     </a>
@@ -1263,16 +1279,16 @@
                         <span>About Me</span>
                     </a>
 
-                    <!-- Citizen Corner Dropdown -->
-                    <div class="relative group">
-                        <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+                    <!-- Citizen Corner Dropdown (Desktop) -->
+                    <div class="relative group hidden sm:block" id="citizen-dropdown-desktop">
+                        <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1 nav-citizen-btn" aria-expanded="false" aria-haspopup="true">
                             <svg class="icon icon-sm icon-peach"><use href="#icon-users"/></svg>
                             <span>Citizen Corner</span>
                             <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200" role="menu" aria-label="Citizen Corner submenu">
                             <a href="report.html" class="block px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-t-lg transition-colors flex items-center gap-2" role="menuitem">
                                 <svg class="icon icon-sm icon-red"><use href="#icon-flag"/></svg>
                                 Report Issue
@@ -1282,6 +1298,85 @@
                                 Public Contribution
                             </button>
                         </div>
+                    </div>
+
+                    <!-- Citizen Corner (Mobile - click-to-toggle inside menu) -->
+                    <div class="sm:hidden">
+                        <button type="button" onclick="toggleCitizenMobile(this)" class="nav-citizen-btn text-[#1b3a2d] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1 w-full" aria-expanded="false" aria-haspopup="true">
+                            <svg class="icon icon-sm icon-peach"><use href="#icon-users"/></svg>
+                            <span>Citizen Corner</span>
+                            <svg class="w-3 h-3 ml-auto transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="citizen-mobile-dropdown" role="menu" aria-label="Citizen Corner submenu">
+                            <a href="report.html" class="flex items-center gap-2 px-4 py-3 text-sm font-bold text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" role="menuitem">
+                                <svg class="icon icon-sm icon-red"><use href="#icon-flag"/></svg>
+                                Report Issue
+                            </a>
+                            <button onclick="openPublicModal()" class="flex items-center gap-2 w-full text-left px-4 py-3 text-sm font-bold text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" role="menuitem">
+                                <svg class="icon icon-sm icon-rose"><use href="#icon-heart"/></svg>
+                                Public Contribution
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element radiate flex items-center gap-1.5" aria-label="Take Public Survey">
+                        <svg class="icon icon-sm icon-dark"><use href="#icon-clipboard"/></svg>
+                        <span>Take Survey</span>
+                    </a>
+
+                    <!-- Night Mode Toggle (Desktop) -->
+                    <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+                      <div class="theme-toggle__container">
+                        <div class="theme-toggle__clouds"></div>
+                        <div class="theme-toggle__stars">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 2... (line truncated to 2000 chars)
+                        </div>
+                        <div class="theme-toggle__sun">
+                          <div class="theme-toggle__moon-mask">
+                            <div class="theme-toggle__crater"></div>
+                            <div class="theme-toggle__crater"></div>
+                            <div class="theme-toggle__crater"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+
+                    <!-- Text Size Controls (Desktop) -->
+                    <div class="flex items-center gap-2 ml-2 border-l border-white/20 pl-2">
+                        <div class="text-size-controls hidden sm:flex" role="group" aria-label="Text size">
+                            <button type="button" class="text-size-btn" onclick="setTextSize('small')" aria-label="Small text" title="Small">A-</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('normal')" aria-label="Normal text" title="Normal">A</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('large')" aria-label="Large text" title="Large">A+</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('extra-large')" aria-label="Extra Large text" title="Extra Large">A++</button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Theme + Text Size (shown inside mobile menu) -->
+                    <div class="mobile-theme-row hidden">
+                        <button class="theme-toggle" id="theme-toggle-btn-mobile" role="switch" aria-checked="false" aria-label="Switch to dark mode">
+                          <div class="theme-toggle__container">
+                            <div class="theme-toggle__clouds"></div>
+                            <div class="theme-toggle__stars">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 2... (line truncated to 2000 chars)
+                            </div>
+                            <div class="theme-toggle__sun">
+                              <div class="theme-toggle__moon-mask">
+                                <div class="theme-toggle__crater"></div>
+                                <div class="theme-toggle__crater"></div>
+                                <div class="theme-toggle__crater"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </button>
+                        <div class="mobile-text-size" role="group" aria-label="Text size">
+                            <button type="button" class="text-size-btn" onclick="setTextSize('small')" aria-label="Small text" title="Small">A-</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('normal')" aria-label="Normal text" title="Normal">A</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('large')" aria-label="Large text" title="Large">A+</button>
+                            <button type="button" class="text-size-btn" onclick="setTextSize('extra-large')" aria-label="Extra Large text" title="Extra Large">A++</button>
+                        </div>
+                    </div>
                     </div>
 
                     <a href="public-survey.html" class="bg-[#5dc48a] text-[#1b3a2d] hover:bg-[#4ab878] px-3 py-2 rounded-md text-xs sm:text-sm font-bold transition-all shadow-sm hidden lg:block interactive-element radiate flex items-center gap-1.5" aria-label="Take Public Survey">
@@ -1443,7 +1538,7 @@
         </div>
     </section>
 
-    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content">
+    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content" tabindex="-1">
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
@@ -2529,20 +2624,108 @@
             const iconClose = btn.querySelector('svg:nth-child(2)');
             if (iconBars) iconBars.classList.toggle('hidden', isOpen);
             if (iconClose) iconClose.classList.toggle('hidden', !isOpen);
+            if (isOpen) {
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => { const firstLink = menu.querySelector('a, button'); if (firstLink) firstLink.focus(); }, 100);
+            } else {
+                document.body.style.overflow = '';
+                btn.focus();
+            }
+            // Close citizen dropdown submenu when closing main menu
+            if (!isOpen) {
+                const submenu = menu.querySelector('.citizen-mobile-dropdown');
+                const citBtn = menu.querySelector('.nav-citizen-btn');
+                if (submenu) submenu.classList.remove('open');
+                if (citBtn) citBtn.classList.remove('open');
+            }
         }
 
+        // Citizen Corner dropdown toggle for mobile
+        function toggleCitizenMobile(btn) {
+            const menu = btn.closest('.nav-items-desktop');
+            const dropdown = menu ? menu.querySelector('.citizen-mobile-dropdown') : null;
+            if (!dropdown) return;
+            const isOpen = dropdown.classList.toggle('open');
+            btn.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen);
+            // Close other open submenus
+            menu.querySelectorAll('.citizen-mobile-dropdown.open').forEach(function(el) {
+                if (el !== dropdown) el.classList.remove('open');
+            });
+        }
+
+        // Close mobile menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.querySelector('.nav-items-desktop');
+                const btn = document.getElementById('mobile-menu-btn');
+                if (menu && menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                    const iconBars = btn.querySelector('svg:first-child');
+                    const iconClose = btn.querySelector('svg:nth-child(2)');
+                    if (iconBars) iconBars.classList.remove('hidden');
+                    if (iconClose) iconClose.classList.add('hidden');
+                    btn.focus();
+                }
+            }
+        });
+
+        // Close mobile menu on click outside
         document.addEventListener('click', function(e) {
             const menu = document.querySelector('.nav-items-desktop');
             const btn = document.getElementById('mobile-menu-btn');
             if (menu && btn && !btn.contains(e.target) && !menu.contains(e.target) && menu.classList.contains('open')) {
                 menu.classList.remove('open');
                 btn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
                 const iconBars = btn.querySelector('svg:first-child');
                 const iconClose = btn.querySelector('svg:nth-child(2)');
                 if (iconBars) iconBars.classList.remove('hidden');
                 if (iconClose) iconClose.classList.add('hidden');
+                // Close citizen submenu
+                const submenu = menu.querySelector('.citizen-mobile-dropdown');
+                const citBtn = menu.querySelector('.nav-citizen-btn');
+                if (submenu) submenu.classList.remove('open');
+                if (citBtn) citBtn.classList.remove('open');
             }
         });
+
+        // Focus trap for modals
+        function trapFocus(container) {
+            const focusable = container.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            if (focusable.length === 0) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            function handleTab(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+                if (e.key === 'Escape') {
+                    container.classList.add('hidden');
+                }
+            }
+            container.addEventListener('keydown', handleTab);
+            setTimeout(function() { first.focus(); }, 50);
+            return function() { container.removeEventListener('keydown', handleTab); };
+        }
+
+        // Enhance existing modal open/close with focus trap
+        var _origOpenFeedback = openFeedbackModal;
+        if (typeof openFeedbackModal === 'function') {
+            openFeedbackModal = function() {
+                _origOpenFeedback();
+                var modal = document.getElementById('feedback-modal');
+                if (modal && !modal.classList.contains('hidden')) trapFocus(modal);
+            };
+        }
 
         // AI Chat Widget Functions
         let chatMinimized = false;
