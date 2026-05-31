@@ -572,6 +572,31 @@ const YEARS = ['Yr 0','Yr 1','Yr 2','Yr 3','Yr 4','Yr 5','Yr 6','Yr 7','Yr 8','Y
 let activeId = 1, activeCharts = [];
 const CO = { plugins:{ legend:{ labels:{ color:'#6b7280', font:{family:'Inter',size:10}, boxWidth:12 } } }, scales:{ x:{ ticks:{ color:'#9ca3af', font:{size:10}, maxTicksLimit:12 }, grid:{ color:'rgba(27,58,45,0.06)' } }, y:{ ticks:{ color:'#9ca3af', font:{size:10} }, grid:{ color:'rgba(27,58,45,0.06)' } } } };
 
+// Slug generation for van-specific URLs
+function slugify(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+const NV_SLUGS = Object.fromEntries(NV.map(n => [n.id, slugify(n.name)]));
+const NV_FROM_SLUG = Object.fromEntries(NV.map(n => [slugify(n.name), n.id]));
+
+function getVanURL(id) {
+  return 'spatial-data.html?van=' + NV_SLUGS[id];
+}
+
+function updateVanURL(id) {
+  const url = new URL(window.location);
+  url.searchParams.set('van', NV_SLUGS[id]);
+  history.replaceState({ vanId: id }, '', url);
+}
+
+function getVanIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('van');
+  if (slug && NV_FROM_SLUG[slug]) return NV_FROM_SLUG[slug];
+  return null;
+}
+
 function renderList(sites) {
   const list = document.getElementById('siteList');
   list.innerHTML = '';
@@ -601,6 +626,7 @@ function selectSite(id) {
   renderDetail(NV.find(n => n.id === id));
   const panel = document.getElementById('detailPanel');
   window.scrollTo({ top: panel.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+  updateVanURL(id);
 }
 
 function renderDetail(nv) {
@@ -699,6 +725,7 @@ function filterState(state, btn) {
     activeId = filtered[0].id;
     document.querySelectorAll('.site-card').forEach(c => c.classList.toggle('active', +c.dataset.id === filtered[0].id));
     renderDetail(NV.find(n => n.id === filtered[0].id));
+    updateVanURL(filtered[0].id);
   }
 }
 
@@ -717,7 +744,14 @@ function setTextSize(size) {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderList(NV);
-  renderDetail(NV[0]);
+  const vanId = getVanIdFromURL();
+  const target = vanId && NV.find(n => n.id === vanId) ? vanId : 1;
+  activeId = target;
+  renderDetail(NV.find(n => n.id === target));
+  setTimeout(() => {
+    document.querySelectorAll('.site-card').forEach(c => c.classList.toggle('active', +c.dataset.id === target));
+  }, 0);
+  if (vanId && target === vanId) updateVanURL(target);
 });
 
 // Mobile Menu Toggle
