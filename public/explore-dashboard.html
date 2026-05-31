@@ -9,42 +9,43 @@
       gtag('js', new Date());
       gtag('config', 'G-4E7BLPFWP7');
     </script>
-    <meta name="description" content="Digital Monitoring, Reporting & Verification for India's Urban Forests. Track ecological, infrastructural, and socio-economic impacts of Nagar Van Yojana across India.">
-    <link rel="canonical" href="https://www.urbanforestpark.com/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live dMRV Dashboard — Nagar Van Site Insights & Verification</title>
+    <meta name="description" content="Interactive dMRV dashboard with live ecological metrics, thematic maps, weather data, and regional insights for Nagar Van Yojana urban forests across India.">
+    <link rel="canonical" href="https://www.urbanforestpark.com/explore-dashboard">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Nagar Van DMRV Dashboard — Urban Forest Monitoring">
-    <meta property="og:description" content="Digital Monitoring, Reporting & Verification for India's Urban Forests. Track ecological, infrastructural, and socio-economic impacts of Nagar Van Yojana.">
-    <meta property="og:url" content="https://www.urbanforestpark.com/">
+    <meta property="og:title" content="Live dMRV Dashboard — Nagar Van Site Insights & Verification">
+    <meta property="og:description" content="Interactive dMRV dashboard with live ecological metrics, thematic maps, weather data, and regional insights for Nagar Van Yojana urban forests across India.">
+    <meta property="og:url" content="https://www.urbanforestpark.com/explore-dashboard">
     <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <meta property="og:site_name" content="Nagar Van DMRV Dashboard">
     <meta property="og:locale" content="en_IN">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nagar Van DMRV Dashboard — Urban Forest Monitoring">
-    <meta name="twitter:description" content="Digital Monitoring, Reporting & Verification for India's Urban Forests. Track ecological, infrastructural, and socio-economic impacts of Nagar Van Yojana.">
+    <meta name="twitter:title" content="Live dMRV Dashboard — Nagar Van Site Insights & Verification">
+    <meta name="twitter:description" content="Interactive dMRV dashboard with live ecological metrics, thematic maps, weather data, and regional insights for Nagar Van Yojana urban forests across India.">
     <meta name="twitter:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Nagar Van DMRV Dashboard",
-      "url": "https://www.urbanforestpark.com/",
-      "description": "Digital Monitoring, Reporting & Verification for India's Urban Forests",
+      "@type": "WebPage",
+      "name": "Live dMRV Dashboard — Nagar Van Site Insights & Verification",
+      "url": "https://www.urbanforestpark.com/explore-dashboard",
+      "description": "Interactive dMRV dashboard with live ecological metrics, thematic maps, weather data, and regional insights for Nagar Van Yojana urban forests across India.",
       "author": {
         "@type": "Person",
         "name": "Arkraj Biswas"
       }
     }
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nagar Van DMRV Dashboard</title>
-    <meta name="description" content="Digital Monitoring, Reporting & Verification for India's Urban Forests - Track ecological, infrastructural, and socio-economic impacts">
     <meta name="theme-color" content="#1b3a2d">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="assets/css/night-mode.css">
     <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
 
@@ -1026,13 +1027,13 @@
           .nav-items-desktop > * { width: 100%; border-radius: 8px; padding: 10px 12px !important; }
           .nav-items-desktop > *:hover { background: #f0fdf4; }
           .nav-items-desktop .theme-toggle { display: none !important; }
-           .nav-items-desktop [class*="hidden"][class*="lg:block"] { display: flex !important; }
-           .nav-items-desktop .citizen-dropdown { position: static !important; opacity: 1 !important; visibility: visible !important; box-shadow: none !important; border: none !important; margin-top: 0 !important; transform: none !important; background: transparent !important; padding-left: 16px !important; }
-           .nav-items-desktop .citizen-dropdown a,
-           .nav-items-desktop .citizen-dropdown button { font-size: 13px !important; padding: 8px 12px !important; border-radius: 6px !important; }
-           .nav-items-desktop .citizen-dropdown.hidden-dropdown { display: none !important; }
-           .nav-items-desktop .rotate-arrow { transform: rotate(180deg) !important; }
-           [class*="bg-[#f5f0e8]"][class*="rounded-2xl"] { padding: 24px 16px !important; }
+          .nav-items-desktop [class*="hidden"][class*="lg:block"] { display: flex !important; }
+          .nav-items-desktop .citizen-dropdown { position: static !important; opacity: 1 !important; visibility: visible !important; box-shadow: none !important; border: none !important; margin-top: 0 !important; transform: none !important; background: transparent !important; padding-left: 16px !important; }
+          .nav-items-desktop .citizen-dropdown a,
+          .nav-items-desktop .citizen-dropdown button { font-size: 13px !important; padding: 8px 12px !important; border-radius: 6px !important; }
+          .nav-items-desktop .citizen-dropdown.hidden-dropdown { display: none !important; }
+          .nav-items-desktop .rotate-arrow { transform: rotate(180deg) !important; }
+          [class*="bg-[#f5f0e8]"][class*="rounded-2xl"] { padding: 24px 16px !important; }
           [class*="bg-[#f5f0e8]"] h1 { font-size: 20px !important; }
           [class*="grid-cols-1"][class*="lg:grid-cols-2"] { gap: 16px; }
           [class*="xl:col-span-2"] { padding: 12px; }
@@ -1282,9 +1283,9 @@
                         <span>Home</span>
                     </a>
 
-                    <a href="explore-dashboard.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Live Dashboard">
+                    <a href="#main-content" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-label="Go to Site Insights" aria-current="page">
                         <svg class="icon icon-sm icon-sky"><use href="#icon-insights"/></svg>
-                        <span>Live Dashboard</span>
+                        <span>Dashboard</span>
                     </a>
 
                     <a href="about.html" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1">
@@ -1349,204 +1350,224 @@
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="region" aria-label="Home">
-
-        <!-- Hero Box -->
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden mb-6 p-8 md:p-12 text-center">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-[#1b3a2d] mb-4">Advanced dMRV Dashboard for Nagar Van &amp; Urban Forests</h1>
-            <p class="text-gray-700 text-base md:text-lg mb-8 max-w-3xl mx-auto text-center">Quantifying the ecological and socio-economic impact of India's city forest initiatives. We integrate geospatial mapping, AI verification, and community data to track climate resilience and urban greening under the National CAMPA framework.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="explore-dashboard.html" class="btn-dashboard">
-                  <span class="circle"></span>
-                  <svg class="arr-2" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
-                  <span class="text">Explore the Live Dashboard</span>
-                  <svg class="arr-1" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
-                </a>
-                <a href="spatial-data.html" target="_blank" class="btn-spatial">View City Park Data</a>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div class="p-6 md:p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Left Side: About Nagar Van & The Study -->
-                    <div class="space-y-6">
-                        <!-- English Content -->
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#5dc48a]">
-                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3 flex items-center gap-2"><svg class="icon icon-green"><use href="#icon-leaf"/></svg>About the Nagar Van Yojana (NVY)</h3>
-                            <p class="text-gray-700 leading-relaxed text-sm text-justify">
-                                The Nagar Van Yojana is a visionary initiative launched by the Ministry of Environment, Forest and Climate Change (MoEF&CC) to cultivate 1,000 Nagar Vans (Urban Forests) and Nagar Vatikas across India. Designed to function as vital 'green lungs,' these city forest ecosystems actively mitigate the Urban Heat Island (UHI) effect, establish localized carbon sinks, and protect native urban biodiversity.
-                            </p>
-                        </div>
-
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#4ab878]">
-                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3 flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-info"/></svg>Driving Accountability with dMRV Technology</h3>
-                            <p class="text-gray-700 leading-relaxed text-sm text-justify">
-                                This Digital Monitoring, Reporting, and Verification (dMRV) platform is a robust research initiative engineered to evaluate the true on-ground impact of every urban forest park. By converging geospatial mapping, AI-backed canopy verification, and Participatory Rural Appraisal (PRA), this study delivers verifiable data. We quantify critical ecological metrics—such as air quality improvement and groundwater recharge—alongside socio-economic impacts like community well-being and vendor livelihoods. This comprehensive approach bridges the gap between local city park development and India's National Determined Contributions (NDCs).
-                            </p>
-                        </div>
-
-                        <!-- Hindi Content -->
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#3d9a6a]">
-                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3">नगर वन योजना (NVY) के बारे में</h3>
-                            <p class="text-gray-700 leading-relaxed text-sm text-justify">
-                                नगर वन योजना पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय (MoEF&CC) द्वारा शुरू की गई एक दूरदर्शी पहल है, जिसका उद्देश्य पूरे भारत में 1,000 नगर वन (Urban Forests) और नगर वाटिका विकसित करना है। ये शहरी वन शहरों के लिए आवश्यक 'ग्रीन लंग्स' (हरे फेफड़े) के रूप में कार्य करते हैं, जो अर्बन हीट आइलैंड (UHI) प्रभाव को कम करते हैं, कार्बन सिंक बनाते हैं और स्थानीय जैव विविधता की रक्षा करते हैं।
-                            </p>
-                        </div>
-
-                        <div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-md border-l-4 border-[#2d7a5a]">
-                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-3">इस dMRV अध्ययन के बारे में</h3>
-                            <p class="text-gray-700 leading-relaxed text-sm text-justify">
-                                यह डिजिटल मॉनिटरिंग, रिपोर्टिंग और सत्यापन (dMRV) प्लेटफॉर्म एक मजबूत शोध पहल है जिसे इन शहरी वनों के वास्तविक जमीनी प्रभाव का मूल्यांकन करने के लिए डिज़ाइन किया गया है। भू-स्थानिक (Geospatial) मैपिंग, एआई (AI) सत्यापन और सहभागी ग्रामीण मूल्यांकन (PRA) को मिलाकर, यह अध्ययन पारिस्थितिक लाभों (जैसे वायु गुणवत्ता और भूजल पुनर्भरण) के साथ-साथ सामाजिक-आर्थिक प्रभावों का परिमाणीकरण करता है, जो स्थानीय जलवायु कार्रवाई और राष्ट्रीय लक्ष्यों (NDCs) के बीच की खाई को पाटता है।
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Right Side: MoEF&CC Framework -->
-                    <div class="space-y-6">
-                        <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-6 shadow-xl border-2 border-emerald-200">
-                            <h3 class="text-xl font-bold mb-4 text-[#1b3a2d]">MoEF&CC Operational Framework</h3>
-
-                            <div class="space-y-4">
-                                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
-                                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2" data-i18n="fundingMechanism"><svg class="icon icon-amber"><use href="#icon-coin"/></svg>Funding Mechanism</h4>
-                                    <p class="text-sm text-gray-700 text-justify" data-i18n="fundingDesc">
-                                        Supported by the National Compensatory Afforestation Fund Management and Planning Authority (CAMPA) to ensure sustainable financial backing for site establishment and fencing.
-                                    </p>
-                                </div>
-
-                                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
-                                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2" data-i18n="collaborativeGov"><svg class="icon icon-teal"><use href="#icon-users"/></svg>Collaborative Governance (PPP Model)</h4>
-                                    <p class="text-sm text-gray-700 text-justify" data-i18n="collaborativeDesc">
-                                        Implementation thrives on a Public-Private Partnership uniting State Forest Departments, Urban Local Bodies (ULBs), NGOs, Corporate CSR funds, and local citizens.
-                                    </p>
-                                </div>
-
-                                <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm">
-                                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2" data-i18n="landUtilization"><svg class="icon icon-green"><use href="#icon-map"/></svg>Land Utilization</h4>
-                                    <p class="text-sm text-gray-700 text-justify" data-i18n="landUtilDesc">
-                                        Strategically developed on degraded forest lands or vacant plots allocated by local bodies within urban and peri-urban limits.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Key Strategic Pillars -->
-                        <div id="key-pillars" class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-lg border border-blue-200">
-                            <h3 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-purple"><use href="#icon-chart"/></svg>Key Strategic Pillars</h3>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
-                                    <h4 class="font-bold text-[#1b3a2d] text-sm">Ecological Restoration</h4>
-                                    <p class="text-xs text-gray-600 mt-1">Focus: Native Flora &amp; Fauna</p>
-                                    <p class="text-xs text-gray-500 mt-1">Restores indigenous biodiversity in degraded urban zones.</p>
-                                </div>
-                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
-                                    <h4 class="font-bold text-[#1b3a2d] text-sm">Climate Resilience</h4>
-                                    <p class="text-xs text-gray-600 mt-1">Focus: Carbon Sequestration</p>
-                                    <p class="text-xs text-gray-500 mt-1">Expands urban tree cover to directly support India's NDCs.</p>
-                                </div>
-                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
-                                    <h4 class="font-bold text-[#1b3a2d] text-sm">Community Health</h4>
-                                    <p class="text-xs text-gray-600 mt-1">Index: WHO-5 Well-being Index</p>
-                                    <p class="text-xs text-gray-500 mt-1">Provides accessible recreational spaces for physical and mental health.</p>
-                                </div>
-                                <div class="bg-white/90 rounded-lg p-3 shadow-sm">
-                                    <h4 class="font-bold text-[#1b3a2d] text-sm">Viksit Bharat Vision</h4>
-                                    <p class="text-xs text-gray-600 mt-1">Focus: Digital Auditing &amp; Transparency</p>
-                                    <p class="text-xs text-gray-500 mt-1">Enables civic participation and verifiable tracking through the dMRV platform.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Get in Touch Box -->
-                        <div class="rounded-xl p-6 border border-gray-200 bg-transparent">
-                            <p class="text-sm text-center text-gray-700 mb-4">Have valuable information to share, interested in exploring a collaboration, or simply have a question? We would love to hear from you.</p>
-                            <div class="text-center">
-                                <button class="button" onclick="window.location.href='mailto:arkraj.biswas6@gmail.com'">Get in Touch</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Dashboard Hero -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6" role="region" aria-label="Dashboard controls">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden p-6 md:p-8 text-center">
+            <h1 class="text-2xl md:text-3xl font-extrabold gradient-text flex items-center justify-center gap-2 mb-2">
+                <svg class="icon icon-green"><use href="#icon-globe"/></svg>Live dMRV Dashboard
+            </h1>
+            <p class="text-gray-600 text-sm">Real-time ecological, social, and infrastructural monitoring of Nagar Van Yojana urban forests across India.</p>
         </div>
     </section>
 
-    <!-- SEO-Optimized Site Insights Section -->
-    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Site Insights Overview">
+    <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main" aria-label="Dashboard Content">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold gradient-text flex items-center gap-2" data-i18n="siteInsights"><svg class="icon icon-sky"><use href="#icon-insights"/></svg>Site Insights & Verification</h1>
+                <p class="text-sm contrast-medium mt-1" data-i18n="monitoring">Monitoring Ecological, Social, and Infrastructural parameters.</p>
+            </div>
+            <div class="w-full md:w-auto">
+                <label for="state-selector" class="sr-only">Select state or territory to view site data</label>
+                <select id="state-selector" onchange="handleStateSelectorChange()" class="w-full md:w-64 bg-white border border-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a]" aria-describedby="state-selector-help">
+                    <option value="overview">All Sites Overview</option>
+                    <option value="gujarat">NVY Gujarat</option>
+                    <option value="jharkhand">NVY Jharkhand</option>
+                    <option value="andhra">NVY Andhra Pradesh</option>
+                    <option value="mp">NVY Madhya Pradesh</option>
+                    <option value="maharashtra">NVY Maharashtra</option>
+                    <option value="karnataka">NVY Karnataka</option>
+                    <option value="rajasthan">NVY Rajasthan</option>
+                    <option value="delhi">NVY Delhi</option>
+                    <option value="westbengal">NVY West Bengal</option>
+                    <option value="other">Other State / UT</option>
+                </select>
+                <span id="state-selector-help" class="sr-only">Dropdown to select a specific state or territory for detailed dashboard metrics</span>
+                <input type="text" id="state-other-input" class="hidden w-full md:w-64 mt-2 bg-white border-2 border-[#5dc48a] text-[#1b3a2d] font-bold py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3d9a6a] animate-pulse" placeholder="Enter State/UT name..." aria-label="Enter custom state or union territory name">
+            </div>
+        </div>
 
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden mb-8">
-            <div class="p-8 md:p-10">
-                <div class="text-center mb-10">
-                    <h1 class="text-3xl font-extrabold gradient-text flex items-center justify-center gap-2 mb-3" data-i18n="siteInsights">
-                        <svg class="icon icon-sky"><use href="#icon-insights"/></svg>Unified dMRV Tracking for India's Urban Forests
-                    </h1>
-                    <p class="text-gray-700 text-base max-w-3xl mx-auto">
-                        Track the ecological, socio-economic, and infrastructural impact of the Nagar Van Yojana. Our digital monitoring reporting and verification (dMRV) platform provides verifiable data for city forest parks nationwide.
-                    </p>
-                    <div class="mt-6 flex justify-center">
-                        <a href="explore-dashboard.html" class="btn-dashboard">
-                            <span class="circle"></span>
-                            <svg class="arr-2" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
-                            <span class="text">Explore the Live Dashboard & Site Insights ➔</span>
-                            <svg class="arr-1" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
-                        </a>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-panel p-4 border-b-4 border-[#5dc48a]">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-blue icon-sm"><use href="#icon-users"/></svg>Live Survey Samples</h3>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-extrabold text-[#1b3a2d]" id="metric-samples">--</span>
+                    <span class="text-[9px] text-green-700 bg-green-100 px-2 py-0.5 rounded-full animate-pulse">Live</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-teal-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-green icon-sm"><use href="#icon-wind"/></svg>Air Quality (PM2.5)</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-teal-900" id="metric-aqi">...</span>
+                    <span class="text-[10px] text-gray-500 font-bold">µg/m³</span>
+                </div>
+                <p class="text-[9px] text-gray-500 mt-1 font-bold" id="aqi-status">Connecting...</p>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-green-600">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-emerald icon-sm"><use href="#icon-seedling"/></svg>Carbon Sequestration</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-green-900" id="metric-carbon">1,240</span>
+                    <span class="text-[10px] text-gray-500 font-bold">Tons CO₂e</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-blue-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-peach icon-sm"><use href="#icon-thermometer"/></svg>Urban Heat Reduction</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-blue-900" id="metric-heat">-2.4</span>
+                    <span class="text-[10px] text-gray-500 font-bold">°C</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-blue-400">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-blue icon-sm"><use href="#icon-droplet"/></svg>Water Recharged</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-blue-800" id="metric-water">45k</span>
+                    <span class="text-[10px] text-gray-500 font-bold">Liters</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-purple-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-green icon-sm"><use href="#icon-leaf"/></svg>Ecological Index</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-purple-900" id="metric-eco">7.8</span>
+                    <span class="text-[10px] text-gray-500 font-bold">/ 10</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-pink-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-purple icon-sm"><use href="#icon-pie"/></svg>Socio-Economic</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-pink-900" id="metric-socio">High</span>
+                </div>
+            </div>
+            <div class="glass-panel p-4 border-b-4 border-orange-500">
+                <h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1 flex items-center gap-1"><svg class="icon icon-amber icon-sm"><use href="#icon-coin"/></svg>Avg. WTP (CVM)</h3>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-2xl font-extrabold text-orange-900" id="metric-wtp">₹25</span>
+                    <span class="text-[10px] text-gray-500 font-bold">/ mo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
+            <div class="xl:col-span-2 glass-panel p-4 flex flex-col relative">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 px-2 border-b pb-2 gap-3">
+                    <h2 class="text-lg font-bold text-[#1b3a2d] flex items-center gap-2" id="map-title"><svg class="icon icon-green"><use href="#icon-globe"/></svg>Thematic Map: Overview (Nagar Van Study)</h2>
+                    <div class="flex bg-gray-100 rounded-lg p-1 border border-gray-200 shadow-inner w-full sm:w-auto">
+                        <button onclick="setMapMode('ecology')" id="tab-ecology" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold bg-white text-[#1b3a2d] shadow-sm transition-all flex items-center gap-1"><svg class="icon icon-green"><use href="#icon-leaf"/></svg>Ecology Map</button>
+                        <button onclick="setMapMode('issues')" id="tab-issues" class="flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-bold text-gray-500 hover:text-gray-800 transition-all flex items-center gap-1"><svg class="icon icon-red"><use href="#icon-flag"/></svg>Issue Tracker</button>
                     </div>
                 </div>
 
-                <div class="border-t border-gray-200 pt-8">
-                    <h2 class="text-xl font-bold text-[#1b3a2d] mb-6 flex items-center gap-2">
-                        <svg class="icon icon-green"><use href="#icon-leaf"/></svg>What We Monitor Across City Parks
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="glass-panel p-5 border-l-4 border-[#5dc48a]">
-                            <h3 class="font-bold text-[#1b3a2d] flex items-center gap-2 mb-2"><svg class="icon icon-emerald"><use href="#icon-seedling"/></svg>Carbon &amp; Climate Metrics</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">Tracking verifiable <strong>carbon sequestration</strong> and above-ground biomass growth to support voluntary carbon markets and India's NDCs.</p>
+                <div id="map"></div>
+                
+                <div id="map-legend" class="absolute bottom-6 left-6 map-legend z-[1000]">
+                    </div>
+            </div>
+
+            <div class="glass-panel p-6">
+                <h2 class="text-lg font-bold text-[#1b3a2d] mb-6 flex items-center gap-2" id="panel-title"><svg class="icon icon-sky"><use href="#icon-chart"/></svg>Regional Metrics</h2>
+                
+                <div class="space-y-5" id="indicator-bars">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Governance (PPP Efficacy)</span>
+                            <span class="text-[#5dc48a] font-bold" id="bar-gov-val">85%</span>
                         </div>
-                        <div class="glass-panel p-5 border-l-4 border-blue-500">
-                            <h3 class="font-bold text-[#1b3a2d] flex items-center gap-2 mb-2"><svg class="icon icon-peach"><use href="#icon-thermometer"/></svg>Urban Heat Island (UHI) Mitigation</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">Measuring localized temperature reductions and <strong>urban heat reduction</strong> provided by mature city forest canopies.</p>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-[#5dc48a] h-2.5 rounded-full transition-all duration-1000" id="bar-gov" style="width: 85%"></div>
                         </div>
-                        <div class="glass-panel p-5 border-l-4 border-purple-500">
-                            <h3 class="font-bold text-[#1b3a2d] flex items-center gap-2 mb-2"><svg class="icon icon-blue"><use href="#icon-droplet"/></svg>Hydrological &amp; Ecological Health</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">Monitoring <strong>groundwater recharge</strong> capacities, soil moisture conservation, and biodiversity influx using our proprietary Ecological Index.</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Community Well-being (WHO-5)</span>
+                            <span class="text-blue-500 font-bold" id="bar-who-val">68%</span>
                         </div>
-                        <div class="glass-panel p-5 border-l-4 border-pink-500">
-                            <h3 class="font-bold text-[#1b3a2d] flex items-center gap-2 mb-2"><svg class="icon icon-purple"><use href="#icon-pie"/></svg>Socio-Economic Impact (PRA)</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">Evaluating Community Well-being (WHO-5 index), vendor livelihoods, and public Willingness-To-Pay (WTP) through Participatory Rural Appraisal.</p>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000" id="bar-who" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-bold text-gray-700">Infrastructure Quality</span>
+                            <span class="text-purple-500 font-bold" id="bar-infra-val">72%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000" id="bar-infra" style="width: 72%"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t border-gray-200 pt-8 mt-8">
-                    <h2 class="text-xl font-bold text-[#1b3a2d] mb-6 flex items-center gap-2">
-                        <svg class="icon icon-sky"><use href="#icon-map"/></svg>Explore Regional Nagar Van Projects
-                    </h2>
-                    <p class="text-sm text-gray-600 mb-4">View baseline surveys, AI canopy verification, and live ecological data across active regions:</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Gujarat Nagar Van Projects
-                        </a>
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Jharkhand City Forest Data
-                        </a>
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Madhya Pradesh Urban Forestry
-                        </a>
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Andhra Pradesh dMRV Sites
-                        </a>
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Maharashtra &amp; Karnataka
-                        </a>
-                        <a href="explore-dashboard.html" class="block px-4 py-3 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors border border-[#bbf7d0] text-sm font-bold text-[#1b3a2d] flex items-center gap-2">
-                            <svg class="icon icon-green icon-sm"><use href="#icon-map-pin"/></svg> Delhi NCR &amp; Rajasthan
-                        </a>
+                <div class="mt-8 pt-5 border-t border-gray-200">
+                    <h3 class="text-sm font-bold text-[#1b3a2d] mb-3 flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-gps"/></svg>Live Weather at Your Location</h3>
+                    <div class="weather-card" id="weather-card">
+                        <div class="background"></div>
+                        <div class="cloud">
+                            <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M170 90c0-16-12-30-28-32a38 38 0 00-74-4A28 28 0 0040 82c0 2 0 4 2 6h-2a24 24 0 000 48h130a20 20 0 000-40V90z" fill="rgba(255,255,255,0.15)"/>
+                            </svg>
+                        </div>
+                        <div class="weather-loading" id="weather-loading">
+                            <div class="spinner"></div>
+                            <span>Detecting your location...</span>
+                        </div>
+                        <div id="weather-content" style="display:none">
+                            <div class="loc-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></svg>
+                                <span class="loc-text" id="weather-location">Loading...</span>
+                            </div>
+                            <div class="main-text"><span id="weather-icon">&#9728;</span> <span id="weather-temp">--<small>&deg;C</small></span></div>
+                            <div class="info">
+                                <div>
+                                    <p class="text-gray">Condition</p>
+                                    <p class="val" id="weather-condition">--</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="text-gray">Humidity / Wind</p>
+                                    <p class="val" id="weather-detail">-- / --</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+
+        <div class="glass-panel p-6 mb-8">
+            <h2 class="text-xl font-bold text-[#1b3a2d] mb-2 flex items-center gap-2"><svg class="icon icon-teal"><use href="#icon-image"/></svg>Field Media Gallery</h2>
+            <p class="text-sm contrast-medium mb-4">A collection of on-ground photos and videos from Nagar Vans and Vatikas captured during field visits. (Admin uploads only)</p>
+
+            <div class="flex overflow-x-auto gap-4 pb-4 media-scroll" role="region" aria-label="Field media gallery - horizontal scrollable list of images from Indian Nagar Vans" aria-describedby="gallery-instructions">
+                <p id="gallery-instructions" class="sr-only">Scroll horizontally to view more field photos from various Nagar Van locations across India</p>
+
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group flex-shrink-0" role="img" aria-label="Eco Park New Town Kolkata - Lake and greenery">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Eco_park-1-new_town_smart_city-kolkata-India.jpg/960px-Eco_park-1-new_town_smart_city-kolkata-India.jpg" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="New Town Eco Park in Kolkata showing the large lake surrounded by green landscaping" loading="lazy">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold" aria-hidden="true">New Town Eco Park, Kolkata</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group flex-shrink-0" role="img" aria-label="Asola Bhatti Wildlife Sanctuary Delhi - Forest trail">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/A_side_trail_climbing_down_towards_the_lake_%2819898618251%29.jpg/960px-A_side_trail_climbing_down_towards_the_lake_%2819898618251%29.jpg" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="A trail descending toward a lake inside Asola Bhatti Wildlife Sanctuary, Delhi" loading="lazy">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Asola Bhatti Sanctuary, Delhi</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group flex-shrink-0" role="img" aria-label="Sanjay Van Delhi - Deer in forest">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Deer_at_Sanjay_van_2016.jpg/960px-Deer_at_Sanjay_van_2016.jpg" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Spotted deer at Sanjay Van urban forest in South Delhi" loading="lazy">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Sanjay Van, Delhi</p>
+                    </div>
+                </div>
+                <div class="min-w-[250px] h-[180px] bg-gray-200 rounded-lg relative overflow-hidden group flex-shrink-0" role="img" aria-label="Turahalli Forest Bangalore - Rocky hill forest">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Forest_in_the_city-_Turahalli_Forest.jpg/960px-Forest_in_the_city-_Turahalli_Forest.jpg" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Turahalli Forest in Bangalore showing rocky hills and dense deciduous trees" loading="lazy">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 pt-8">
+                        <p class="text-white text-xs font-bold" aria-hidden="true">Turahalli Forest, Bangalore</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <p class="text-[10px] text-gray-400 mt-2">Wikimedia Commons images: Eco Park (Biswarup Ganguly, CC-BY-SA 4.0), Asola Bhatti (Sayanroy123, CC-BY-SA 4.0), Sanjay Van (Vis M, CC-BY-SA 4.0), Turahalli (Vikram S, CC-BY-SA 4.0)</p>
+        </div>
+        </main>
 
         <footer class="glass-panel p-6 mb-8 bg-gradient-to-br from-[#f0fdf4] to-white border-t-4 border-[#5dc48a] max-w-7xl mx-auto" role="contentinfo" aria-label="Green Calculator">
             <div class="flex flex-col md:flex-row items-center gap-6">
@@ -2321,7 +2342,6 @@
 
         // Handle "Other" state selection
         function handleStateSelectorChange() {
-            if (!dashboardActive) return;
             let selector = document.getElementById('state-selector');
             let otherInput = document.getElementById('state-other-input');
             if (selector.value === 'other') {
@@ -2454,14 +2474,17 @@
             }
         });
 
-        // Citizen Corner Dropdown Toggle
+        // Mobile Citizen Corner Dropdown Toggle
         function toggleCitizenDropdown() {
             const dropdown = document.getElementById('citizen-corner-dropdown');
             const arrow = document.getElementById('citizen-arrow');
-            if (dropdown && arrow) {
-                dropdown.classList.toggle('hidden-dropdown');
-                arrow.classList.toggle('rotate-arrow');
-            }
+            const btn = document.getElementById('citizen-corner-btn');
+            if (!dropdown) return;
+            if (window.innerWidth >= 768) return;
+            const isOpen = dropdown.classList.toggle('hidden-dropdown');
+            dropdown.classList.toggle('citizen-dropdown', !isOpen);
+            if (arrow) arrow.classList.toggle('rotate-arrow');
+            if (btn) btn.setAttribute('aria-expanded', !isOpen);
         }
 
         // AI Chat Widget Functions
@@ -2532,8 +2555,6 @@
         const cachedTotal = parseInt(localStorage.getItem('dmrv-live-survey-total') || '0', 10);
         window.liveData = { total: cachedTotal, sites: { overview: cachedTotal, gujarat: 0, jharkhand: 0, andhra: 0, mp: 0, maharashtra: 0, karnataka: 0, rajasthan: 0, delhi: 0, westbengal: 0 }, locations: [] };
 
-        var dashboardActive = document.getElementById('state-selector') !== null;
-
         const siteData = {
             overview: { 
                 center: [22.0, 79.0], zoom: 5, title: "Overview (All States)",
@@ -2597,58 +2618,57 @@
             }
         };
 
-        if (dashboardActive) {
-            var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
-            var southWest = L.latLng(6.0, 68.0);
-            var northEast = L.latLng(38.5, 97.5);
-            var bounds = L.latLngBounds(southWest, northEast);
-            map.setMaxBounds(bounds);
-            map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
+        var map = L.map('map').setView(siteData.overview.center, siteData.overview.zoom);
+        var southWest = L.latLng(6.0, 68.0);
+        var northEast = L.latLng(38.5, 97.5);
+        var bounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(bounds);
+        map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© OpenStreetMap, © CARTO',
-                minZoom: 4, maxZoom: 18
-            }).addTo(map);
+        // Light grey background for neighboring countries
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            minZoom: 4, maxZoom: 18
+        }).addTo(map);
 
-            var markers = L.layerGroup().addTo(map);
+        var markers = L.layerGroup().addTo(map);
 
-            const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/Country/india-composite.geojson';
-            fetch(indiaGeoUrl)
-                .then(response => response.json())
-                .then(data => {
-                    L.geoJSON(data, {
-                        style: {
-                            fillColor: 'transparent',
-                            fillOpacity: 0,
-                            color: '#000000',
-                            weight: 1.5
-                        }
-                    }).addTo(map);
-                })
-                .catch(err => {
-                    console.log('Could not load India GeoJSON, trying simplified version');
-                    fetch('https://raw.githubusercontent.com/datameet/maps/master/Country/india-land-simplified.geojson')
-                        .then(r => r.json())
-                        .then(data => {
-                            L.geoJSON(data, {
-                                style: {
-                                    fillColor: 'transparent',
-                                    fillOpacity: 0.5,
-                                    color: '#1B5E20',
-                                    weight: 2
-                                }
-                            }).addTo(map);
-                        })
-                        .catch(e => console.log('Could not load simplified either:', e));
-                });
-        }
+        // India GeoJSON from datameet/maps with PESTEL green styling
+        const indiaGeoUrl = 'https://raw.githubusercontent.com/datameet/maps/master/Country/india-composite.geojson';
+        fetch(indiaGeoUrl)
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        fillColor: 'transparent',
+                        fillOpacity: 0,
+                        color: '#000000',
+                        weight: 1.5
+                    }
+                }).addTo(map);
+            })
+            .catch(err => {
+                console.log('Could not load India GeoJSON, trying simplified version');
+                // Fallback to simplified version
+                fetch('https://raw.githubusercontent.com/datameet/maps/master/Country/india-land-simplified.geojson')
+                    .then(r => r.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                fillColor: 'transparent',
+                                fillOpacity: 0.5,
+                                color: '#1B5E20',
+                                weight: 2
+                            }
+                        }).addTo(map);
+                    })
+                    .catch(e => console.log('Could not load simplified either:', e));
+            });
 
         /* Weather Widget */
         function initWeather() {
-            var el = document.getElementById('weather-loading');
-            if (!el) return;
             if (!navigator.geolocation) {
-                el.innerHTML = '<span>Geolocation not supported</span>';
+                document.getElementById('weather-loading').innerHTML = '<span>Geolocation not supported</span>';
                 return;
             }
             navigator.geolocation.getCurrentPosition(
@@ -2692,10 +2712,9 @@
                 { enableHighAccuracy: false, timeout: 8000 }
             );
         }
-        if (dashboardActive) document.addEventListener('DOMContentLoaded', initWeather);
+        document.addEventListener('DOMContentLoaded', initWeather);
 
         function setMapMode(mode) {
-            if (!dashboardActive) return;
             let tabEco = document.getElementById('tab-ecology');
             let tabIss = document.getElementById('tab-issues');
             
@@ -2722,7 +2741,6 @@
         }
 
         function drawMarkers(state) {
-            if (!dashboardActive || typeof markers === 'undefined') return;
             markers.clearLayers();
             const locs = window.liveData && window.liveData.locations && window.liveData.locations.length
                 ? window.liveData.locations
@@ -2756,7 +2774,6 @@
         }
 
         function updateDashboard() {
-            if (!dashboardActive) return;
             var selected = document.getElementById('state-selector').value;
             // Handle "Other" state selection - show a message instead of failing
             if (selected === 'other') {
@@ -2830,7 +2847,6 @@
         }
 
         async function fetchLiveSampleCount() {
-            if (!dashboardActive) return;
             try {
                 document.getElementById('metric-samples').innerText = window.liveData ? window.liveData.total : "...";
                 let response = await fetch(ADMIN_DATA_API_URL + '?action=getCounts');
@@ -2852,7 +2868,6 @@
         }
 
         async function fetchAirQuality(lat, lon) {
-            if (!dashboardActive) return;
             try {
                 document.getElementById('metric-aqi').innerText = "...";
                 document.getElementById('aqi-status').innerText = "Fetching satellite data...";
@@ -3590,10 +3605,9 @@
         });
 
         window.onload = () => {
-            if (dashboardActive) {
-                fetchLiveSampleCount();
-                setInterval(fetchLiveSampleCount, 30000);
-            }
+            fetchLiveSampleCount();
+            // Poll every 30 seconds for live survey sample updates
+            setInterval(fetchLiveSampleCount, 30000);
             const savedLang = localStorage.getItem('dmrv-language');
             const savedSize = localStorage.getItem('dmrv-text-size');
             if (savedLang && typeof setLanguage === 'function') setLanguage(savedLang);
