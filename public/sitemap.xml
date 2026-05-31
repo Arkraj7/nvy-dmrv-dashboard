@@ -7,57 +7,69 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/about</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/about.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/spatial-data.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/green-calculator.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/green-calculator-report.html</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/report</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/green-calculator-app.html</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/public-survey</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/report.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/public-survey.html</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/green-calculator</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/accessibility.html</loc>
     <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/spatial-data</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/accessibility</loc>
-    <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/cookies</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/privacy.html</loc>
     <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/privacy</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/terms.html</loc>
     <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/terms</loc>
+    <loc>https://arkraj7.github.io/nvy-dmrv-dashboard/cookies.html</loc>
     <lastmod>2026-05-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 </urlset>

@@ -335,14 +335,14 @@
 
                     <!-- Citizen Corner Dropdown -->
                     <div class="relative group">
-                        <button type="button" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" id="citizen-corner-btn" onclick="toggleCitizenDropdown()" class="text-[#1b3a2d] hover:text-[#065f46] font-bold text-xs sm:text-sm transition-colors interactive-element flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
                             <svg class="icon icon-sm icon-peach"><use href="#icon-users"/></svg>
                             <span>Citizen Corner</span>
-                            <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg id="citizen-arrow" class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
+                        <div id="citizen-corner-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50 border border-gray-200">
                             <a href="report.html" class="block px-4 py-3 text-sm font-bold text-gray-800 hover:bg-[#5dc48a] hover:text-[#1b3a2d] rounded-t-lg transition-colors flex items-center gap-2" role="menuitem">
                                 <svg class="icon icon-sm icon-red"><use href="#icon-flag"/></svg>
                                 Report Issue
@@ -583,6 +583,16 @@
                 m.classList.remove('hidden');
                 m.classList.add('flex');
                 document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Citizen Corner Dropdown Toggle
+        function toggleCitizenDropdown() {
+            const dropdown = document.getElementById('citizen-corner-dropdown');
+            const arrow = document.getElementById('citizen-arrow');
+            if (dropdown && arrow) {
+                dropdown.classList.toggle('hidden-dropdown');
+                arrow.classList.toggle('rotate-arrow');
             }
         }
     </script>
