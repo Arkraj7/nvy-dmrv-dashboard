@@ -1,4 +1,2 @@
-# Cloudflare Pages configuration for static HTML site
-build:
-  command: ""
-  destination: "public"
+name = "nvy-dmrv-dashboard"
+pages_build_output_dir = "dist"
