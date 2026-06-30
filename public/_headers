@@ -18,6 +18,7 @@
 /accessibility.html
 /green-calculator.html
   X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Cache static assets
 /assets/*
