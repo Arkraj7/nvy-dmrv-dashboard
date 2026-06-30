@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/Arkraj7/nvy-dmrv-dashboard#readme",
   "dependencies": {
-    "astro": "^6.4.2"
+    "astro": "^6.4.2",
+    "pdfjs-dist": "^4.0.379"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"

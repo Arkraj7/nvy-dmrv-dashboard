@@ -1,5 +1,8 @@
-# Redirect non-www to www (301 permanent)
-urbanforestpark.com/* https://www.urbanforestpark.com/:splat 301
+# Redirect www to non-www (or vice versa based on your preference)
+https://www.urbanforestpark.com/* https://urbanforestpark.com/:splat 301
 
 # Redirect old GitHub Pages URLs to custom domain
-https://arkraj7.github.io/nvy-dmrv-dashboard/* https://www.urbanforestpark.com/:splat 301
+https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/nvy-dmrv-dashboard/:splat 301
+
+# SPA fallback for Netlify/Cloudflare Pages
+/* /nvy-dmrv-dashboard/index.html 200

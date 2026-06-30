@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E7BLPFWP7"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4E7BLPFWP7');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Nearest Nagar Van — Urban Forest Park</title>
+    <meta name="description" content="Find Nagar Van urban forest sites nearest to your location. Explore parks across Madhya Pradesh, Andhra Pradesh, Gujarat, and Jharkhand.">
+    <link rel="canonical" href="https://www.urbanforestpark.com/nagar-van-finder">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Find Your Nearest Nagar Van — Urban Forest Park">
+    <meta property="og:description" content="Find Nagar Van urban forest sites nearest to your location across India.">
+    <meta property="og:url" content="https://www.urbanforestpark.com/nagar-van-finder">
+    <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#1b3a2d">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="assets/css/night-mode.css">
+    <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*:focus-visible{outline:3px solid #5dc48a;outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:#1b3a2d;color:white;padding:8px;z-index:100}
+.skip-link:focus{top:0}
+.icon{width:20px;height:20px;vertical-align:middle;display:inline-block;flex-shrink:0}
+.icon-sm{width:16px;height:16px}
+.icon-lg{width:28px;height:28px}
+.icon-xl{width:36px;height:36px}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:#f4f7f6;color:#1f2937}
+.glass-panel{background:#ffffff;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.05);border:1px solid #e2e8f0;transition:all 0.3s ease}
+.glass-panel:hover{box-shadow:0 8px 25px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.gradient-text{background:linear-gradient(90deg,#1b3a2d,#5dc48a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#map{height:100%;width:100%;min-height:400px;border-radius:0;z-index:1}
+#page-loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background-color:rgba(255,255,255,0.75)}
+.loader{scale:3;height:50px;width:40px}
+.box{position:relative;opacity:0;left:10px}
+.side-left{position:absolute;background-color:#286cb5;width:19px;height:5px;transform:skew(0deg,-25deg);top:14px;left:10px}
+.side-right{position:absolute;background-color:#2f85e0;width:19px;height:5px;transform:skew(0deg,25deg);top:14px;left:-9px}
+.side-top{position:absolute;background-color:#5fa8f5;width:20px;height:20px;rotate:45deg;transform:skew(-20deg,-20deg)}
+.box-1{animation:from-left 4s infinite}
+.box-2{animation:from-right 4s infinite;animation-delay:1s}
+.box-3{animation:from-left 4s infinite;animation-delay:2s}
+.box-4{animation:from-right 4s infinite;animation-delay:3s}
+@keyframes from-left{0%{z-index:20;opacity:0;translate:-20px -6px}20%{z-index:10;opacity:1;translate:0px 0px}40%{z-index:9;translate:0px 4px}60%{z-index:8;translate:0px 8px}80%{z-index:7;opacity:1;translate:0px 12px}100%{z-index:5;translate:0px 30px;opacity:0}}
+@keyframes from-right{0%{z-index:20;opacity:0;translate:20px -6px}20%{z-index:10;opacity:1;translate:0px 0px}40%{z-index:9;translate:0px 4px}60%{z-index:8;translate:0px 8px}80%{z-index:7;opacity:1;translate:0px 12px}100%{z-index:5;translate:0px 30px;opacity:0}}
+@keyframes gradient-move{0%{background-position:0% center}100%{background-position:200% center}}
+.gradient-text-animated{background:linear-gradient(90deg,#1b3a2d,#5dc48a,#1b3a2d);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradient-move 3s linear infinite}
+html{scroll-behavior:smooth}
+button,a{transition:all 0.2s ease}
+.navbar{background:#fff;border-bottom:2px solid #e2e8f0}
+.finder-container{display:flex;height:calc(100vh - 64px);margin-top:64px}
+.sidebar{width:32%;min-width:340px;overflow-y:auto;background:#fff;border-right:1px solid #e2e8f0;padding:16px}
+.map-area{flex:1;position:relative}
+.result-item{cursor:pointer;transition:all 0.2s ease;border-radius:10px}
+.result-item:hover{background:#f0fdf4;border-color:#5dc48a}
+.result-item.active{background:#f0fdf4;border-color:#5dc48a;border-width:2px}
+.leaflet-popup-content-wrapper{border-radius:10px}
+.leaflet-popup-content{margin:10px 14px;font-family:'Inter','Segoe UI',sans-serif}
+.nominatim-dropdown{position:absolute;top:100%;left:0;right:0;z-index:1000;background:#fff;border:1px solid #e2e8f0;border-radius:0 0 10px 10px;max-height:200px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,0.1)}
+.nominatim-dropdown div{padding:10px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #f1f5f9}
+.nominatim-dropdown div:hover{background:#f0fdf4}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:10050;padding:20px;backdrop-filter:blur(4px)}
+.modal-backdrop.hidden{display:none}
+.modal-content{background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:popupSlide 0.4s ease;position:relative}
+@keyframes popupSlide{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:16px;right:16px;background:#f3f4f6;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:20px;color:#6b7280;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:#e5e7eb;color:#374151}
+.site-marker-icon{background:none;border:none}
+.site-marker-icon div{width:28px;height:36px;display:flex;align-items:center;justify-content:center}
+.user-marker{background:#3b82f6;border:3px solid #fff;border-radius:50%;width:16px;height:16px;box-shadow:0 0 10px rgba(59,130,246,0.5)}
+.radius-circle{fill:rgba(34,197,94,0.08);stroke:rgba(34,197,94,0.4);stroke-width:2}
+.spinner{border:3px solid #e2e8f0;border-top:3px solid #5dc48a;border-radius:50%;width:24px;height:24px;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.site-footer{background:#ffffff;color:#000}
+.footer-link{color:#000;transition:all 0.2s ease;position:relative}
+.footer-link:hover{color:#1b3a2d;transform:translateX(3px)}
+.social-icon{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.social-icon:hover{background:#5dc48a;transform:translateY(-2px)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.govt-badge{font-size:10px;background:#dcfce7;color:#166534;padding:2px 8px;border-radius:4px;font-weight:600}
+.ncap-badge{font-size:10px;background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:4px;font-weight:600}
+.dark .glass-panel{background:#1e293b;border-color:#334155;color:#e2e8f0}
+.dark .sidebar{background:#0f172a;border-color:#334155;color:#e2e8f0}
+.dark .navbar{background:#0f172a;border-color:#334155}
+.dark .navbar a,.dark .navbar button{color:#e2e8f0}
+.dark .result-item:hover{background:#1e293b}
+.dark .nominatim-dropdown{background:#1e293b;border-color:#334155}
+.dark .nominatim-dropdown div{border-color:#334155;color:#e2e8f0}
+.dark .nominatim-dropdown div:hover{background:#0f172a}
+.dark .modal-content{background:#1e293b;color:#e2e8f0}
+.dark .modal-close{background:#334155;color:#94a3b8}
+.dark .site-footer{background:#0f172a;color:#e2e8f0}
+.dark .footer-link{color:#94a3b8}
+.dark .site-footer .text-black{color:#e2e8f0}
+.dark .bg-white{background:#1e293b}
+.dark .text-gray-800{color:#e2e8f0}
+.dark select,.dark input{background:#1e293b;color:#e2e8f0;border-color:#475569}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+@media(max-width:1023px){.finder-container{flex-direction:column;height:auto}.sidebar{width:100%;min-width:unset;border-right:none;border-bottom:1px solid #e2e8f0;max-height:none}.map-area{height:50vh;min-height:350px}}
+@media(max-width:767px){.map-area{height:40vh;min-height:280px}.sidebar{padding:12px}}
+@media(max-width:480px){.modal-content{padding:20px;max-width:calc(100% - 32px)}}
+</style>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+</head>
+<body class="text-gray-800">
+<div id="page-loader">
+    <div class="loader">
+        <div class="box box-1"><div class="side-left"></div><div class="side-right"></div><div class="side-top"></div></div>
+        <div class="box box-2"><div class="side-left"></div><div class="side-right"></div><div class="side-top"></div></div>
+        <div class="box box-3"><div class="side-left"></div><div class="side-right"></div><div class="side-top"></div></div>
+        <div class="box box-4"><div class="side-left"></div><div class="side-right"></div><div class="side-top"></div></div>
+    </div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
+<symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
+<symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
+<symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
+<symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
+<symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
+<symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
+<symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
+<symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
+<symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
+<symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
+<symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
+<symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
+<symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
+<symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
+<symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+<symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
+</svg>
+
+<nav class="navbar fixed top-0 left-0 right-0 z-50 h-16" role="navigation" aria-label="Main navigation">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div class="flex justify-between h-full items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 flex items-center justify-center" role="img" aria-label="Nagar Van logo">
+                    <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
+                </div>
+                <a href="/" class="font-bold text-lg text-[#1b3a2d] tracking-wide leading-none">Nagar Van DMRV</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/nvy-dmrv-dashboard/index.html" class="text-[#1b3a2d] hover:text-[#065f46] font-semibold text-sm transition-colors flex items-center gap-1">
+                    <svg class="icon icon-sm"><use href="#icon-home"/></svg><span class="hidden sm:inline">Home</span>
+                </a>
+                <a href="/nvy-dmrv-dashboard/explore-dashboard.html" class="text-[#1b3a2d] hover:text-[#065f46] font-semibold text-sm transition-colors flex items-center gap-1">
+                    <svg class="icon icon-sm"><use href="#icon-map-pin"/></svg><span class="hidden sm:inline">Dashboard</span>
+                </a>
+                <button id="theme-toggle-btn" class="text-[#1b3a2d] hover:text-[#065f46]" aria-label="Toggle night mode" type="button">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main id="main-content" class="finder-container">
+    <aside class="sidebar" role="region" aria-label="Search and filters">
+        <div class="mb-4">
+            <h1 class="text-xl font-extrabold gradient-text flex items-center gap-2 mb-1">
+                <svg class="icon"><use href="#icon-tree"/></svg>Nagar Van Finder
+            </h1>
+            <p class="text-xs text-gray-500">Find urban forest parks near you</p>
+        </div>
+
+        <div class="relative mb-3">
+            <label for="address-input" class="sr-only">Enter your location or address</label>
+            <div class="flex gap-2">
+                <div class="relative flex-1">
+                    <input type="text" id="address-input" autocomplete="off" placeholder="Search city, locality..." class="w-full border border-[#5dc48a] rounded-lg py-2.5 px-3 pr-9 text-sm focus:outline-none focus:ring-2 focus:ring-[#5dc48a] bg-white">
+                    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><use href="#icon-search"/></svg>
+                    <div id="address-dropdown" class="nominatim-dropdown hidden"></div>
+                </div>
+                <button id="locate-btn" onclick="getUserLocation()" class="bg-[#1b3a2d] text-white px-3 rounded-lg hover:bg-[#2d5a45] transition-colors text-sm font-semibold whitespace-nowrap" title="Use my current location" aria-label="Use my current location">
+                    <i class="fas fa-crosshairs"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="coordinate-fallback" class="mb-3">
+            <div class="flex gap-2">
+                <div class="flex-1">
+                    <label for="state-select" class="text-xs font-semibold text-gray-600 mb-1 block">State</label>
+                    <select id="state-select" class="w-full border border-gray-300 rounded-lg py-2 px-2 text-sm bg-white">
+                        <option value="">All States</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label for="district-select" class="text-xs font-semibold text-gray-600 mb-1 block">District</label>
+                    <select id="district-select" class="w-full border border-gray-300 rounded-lg py-2 px-2 text-sm bg-white">
+                        <option value="">All Districts</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 flex items-center gap-3">
+            <div class="flex-1">
+                <label for="radius-select" class="text-xs font-semibold text-gray-600 mb-1 block">Search Radius</label>
+                <select id="radius-select" onchange="findParks()" class="w-full border border-gray-300 rounded-lg py-2 px-2 text-sm bg-white">
+                    <option value="25">25 km</option>
+                    <option value="50" selected>50 km</option>
+                    <option value="100">100 km</option>
+                    <option value="200">200 km</option>
+                    <option value="99999">Show All</option>
+                </select>
+            </div>
+            <div class="flex-1">
+                <label for="area-filter" class="text-xs font-semibold text-gray-600 mb-1 block">Area</label>
+                <select id="area-filter" onchange="findParks()" class="w-full border border-gray-300 rounded-lg py-2 px-2 text-sm bg-white">
+                    <option value="all">All</option>
+                    <option value="small">Small (&lt;10 Ha)</option>
+                    <option value="medium">Medium (10–40 Ha)</option>
+                    <option value="large">Large (&gt;40 Ha)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="sort-select" class="text-xs font-semibold text-gray-600 mb-1 block">Sort By</label>
+            <select id="sort-select" onchange="findParks()" class="w-full border border-gray-300 rounded-lg py-2 px-2 text-sm bg-white">
+                <option value="nearest">Nearest First</option>
+                <option value="largest">Largest Area First</option>
+                <option value="recent">Most Recently Sanctioned</option>
+            </select>
+        </div>
+
+        <div id="status-bar" class="text-sm font-semibold text-[#1b3a2d] mb-3"></div>
+
+        <div id="loading-spinner" class="hidden text-center py-4">
+            <div class="spinner"></div>
+            <p class="text-xs text-gray-500 mt-2">Searching parks...</p>
+        </div>
+
+        <div id="error-message" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3 mb-3"></div>
+
+        <div id="results-container" class="space-y-2"></div>
+    </aside>
+
+    <section class="map-area" aria-label="Interactive map">
+        <div id="map"></div>
+        <div id="map-legend" class="absolute bottom-6 left-4 z-[1000] bg-white rounded-lg shadow-md px-3 py-2 text-xs border border-gray-200">
+            <div class="flex items-center gap-2 mb-1"><span class="inline-block w-3 h-3 rounded-full bg-[#5dc48a]"></span> Nagar Van Site</div>
+            <div class="flex items-center gap-2 mb-1"><span class="inline-block w-3 h-3 rounded-full bg-blue-500 border-2 border-white"></span> Your Location</div>
+            <div class="flex items-center gap-2"><span class="inline-block w-6 h-0.5 bg-green-400 opacity-60"></span> Search Radius</div>
+        </div>
+    </section>
+</main>
+
+<div id="detail-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-site-name">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<footer class="site-footer py-8 px-4" role="contentinfo">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+                <h4 class="text-lg font-bold mb-3 text-black">About Nagar Van DMRV Portal</h4>
+                <p class="text-sm text-black leading-relaxed">The Nagar Van DMRV Dashboard is an AI-powered, geospatial platform designed to track and evaluate the ecological, infrastructural, and socio-economic impacts of India's urban forests under the Nagar Van Yojana.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3 text-black">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="/nvy-dmrv-dashboard/index.html" class="footer-link text-sm">Home</a></li>
+                    <li><a href="/nvy-dmrv-dashboard/explore-dashboard.html" class="footer-link text-sm">Dashboard</a></li>
+                    <li><a href="/nvy-dmrv-dashboard/report.html" class="footer-link text-sm">Report Issue</a></li>
+                    <li><a href="/nvy-dmrv-dashboard/green-calculator.html" class="footer-link text-sm" target="_blank">Green Calculator</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-3 text-black">Share & Connect</h4>
+                <div class="flex gap-3">
+                    <a href="https://linkedin.com/in/arkraj-biswas-kugel" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <button onclick="sharePage()" class="social-icon" aria-label="Share"><i class="fas fa-share-alt"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-300 pt-4 flex flex-col md:flex-row justify-between items-center gap-3">
+            <p class="text-sm text-black">&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
+            <p class="text-xs text-black">Designed and Developed by <span class="text-[#1b3a2d] font-semibold">Arkraj Biswas</span></p>
+            <div class="flex gap-4 text-xs text-black">
+                <a href="/nvy-dmrv-dashboard/privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="/nvy-dmrv-dashboard/terms.html" class="footer-link">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+var map, markersLayer, userMarker, radiusCircle, userLatLng = null, tileLayer;
+var allSites = [], filteredSites = [], selectedSiteId = null;
+var debounceTimer = null;
+var INDIA_BOUNDS = {minLat:6,maxLat:37,minLng:68,maxLng:98};
+
+function haversine(lat1,lng1,lat2,lng2){
+    var R=6371;var dLat=(lat2-lat1)*Math.PI/180;var dLng=(lng2-lng1)*Math.PI/180;
+    var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+function parseDateStr(s){
+    var parts=s.split(/[.\/-]/);
+    if(parts.length<3)return null;
+    var d=parseInt(parts[0],10),m=parseInt(parts[1],10)-1,y=parseInt(parts[2],10);
+    if(y<100)y+=2000;
+    return new Date(y,m,d);
+}
+
+function makeTreeIcon(){
+    return L.divIcon({
+        className:'site-marker-icon',
+        html:'<div><svg viewBox="0 0 24 24" fill="#5dc48a" stroke="#1b3a2d" stroke-width="1.5" width="28" height="36"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></svg></div>',
+        iconSize:[28,36],iconAnchor:[14,36],popupAnchor:[0,-36]
+    });
+}
+
+function setMapTheme(dark){
+    if(tileLayer)map.removeLayer(tileLayer);
+    var url=dark?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png':'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+    tileLayer=L.tileLayer(url,{
+        attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>, &copy; <a href="https://carto.com/">CARTO</a>',
+        minZoom:4,maxZoom:18
+    }).addTo(map);
+}
+
+function initMap(){
+    map=L.map('map',{zoomControl:true,attributionControl:false}).setView([20.5,78.9],5);
+    setMapTheme(document.documentElement.classList.contains('dark'));
+    L.control.zoom({position:'bottomright'}).addTo(map);
+    L.control.attribution({position:'bottomleft',prefix:false}).addTo(map);
+    var southWest=L.latLng(6,68);var northEast=L.latLng(38,98);
+    map.setMaxBounds(L.latLngBounds(southWest,northEast));
+    map.on('drag',function(){map.panInsideBounds(L.latLngBounds(southWest,northEast),{animate:false})});
+    markersLayer=L.layerGroup().addTo(map);
+}
+
+function showError(msg){
+    var el=document.getElementById('error-message');
+    el.textContent=msg;el.classList.remove('hidden');
+}
+
+function hideError(){
+    document.getElementById('error-message').classList.add('hidden');
+}
+
+function validateCoords(lat,lng){
+    return lat>=INDIA_BOUNDS.minLat&&lat<=INDIA_BOUNDS.maxLat&&lng>=INDIA_BOUNDS.minLng&&lng<=INDIA_BOUNDS.maxLng;
+}
+
+function getUserLocation(){
+    if(!navigator.geolocation){
+        showError('Geolocation is not supported by your browser. Use the search or dropdown instead.');
+        return;
+    }
+    showLoading(true);
+    document.getElementById('locate-btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>';
+    navigator.geolocation.getCurrentPosition(function(pos){
+        var lat=pos.coords.latitude,lng=pos.coords.longitude;
+        document.getElementById('locate-btn').innerHTML='<i class="fas fa-crosshairs"></i>';
+        if(!validateCoords(lat,lng)){
+            showError('Your location appears to be outside India. The Nagar Van Finder currently supports sites in India.');
+            showLoading(false);return;
+        }
+        userLatLng=[lat,lng];
+        placeUserMarker(lat,lng);
+        reverseGeocode(lat,lng);
+        findParks();
+        hideError();
+        showLoading(false);
+    },function(err){
+        document.getElementById('locate-btn').innerHTML='<i class="fas fa-crosshairs"></i>';
+        showError('Could not get your location. Please search manually or use the state/district dropdown.');
+        showLoading(false);
+    },{enableHighAccuracy:true,timeout:10000});
+}
+
+function reverseGeocode(lat,lng){
+    fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lng+'&format=json&zoom=10')
+    .then(function(r){return r.json()})
+    .then(function(data){
+        var addr=data.address||{};
+        var city=addr.city||addr.town||addr.village||addr.county||addr.state||'';
+        if(city)document.getElementById('address-input').value=city;
+    }).catch(function(){});
+}
+
+function placeUserMarker(lat,lng){
+    if(userMarker)map.removeLayer(userMarker);
+    userMarker=L.circleMarker([lat,lng],{
+        radius:8,fillColor:'#3b82f6',color:'#fff',weight:3,fillOpacity:1
+    }).addTo(map).bindPopup('<div style="font-family:sans-serif;font-size:13px"><b>Your Location</b><br><span style="color:#6b7280;font-size:11px">'+lat.toFixed(4)+', '+lng.toFixed(4)+'</span></div>');
+    map.setView([lat,lng],8);
+}
+
+function drawRadiusCircle(lat,lng,radiusKm){
+    if(radiusCircle)map.removeLayer(radiusCircle);
+    if(radiusKm>=99999)return;
+    radiusCircle=L.circle([lat,lng],{
+        radius:radiusKm*1000,fillColor:'rgba(34,197,94,0.08)',color:'rgba(34,197,94,0.4)',weight:2,fillOpacity:1
+    }).addTo(map);
+}
+
+function showLoading(show){
+    document.getElementById('loading-spinner').classList.toggle('hidden',!show);
+}
+
+function getDistrictsByState(state){
+    var dists={};
+    allSites.forEach(function(s){
+        if(state&&s.state!==state)return;
+        if(!dists[s.district])dists[s.district]=true;
+    });
+    return Object.keys(dists).sort();
+}
+
+function populateDistrictDropdown(state){
+    var sel=document.getElementById('district-select');
+    sel.innerHTML='<option value="">All Districts</option>';
+    var dists=getDistrictsByState(state);
+    dists.forEach(function(d){
+        var opt=document.createElement('option');
+        opt.value=d;opt.textContent=d;sel.appendChild(opt);
+    });
+    sel.disabled=(dists.length===0);
+}
+
+function parseSanctionDateForSort(site){
+    var d1=parseDateStr(site.iInstSanctionDate);
+    var d2=parseDateStr(site.iiInstSanctionDate);
+    return d2||d1||new Date(0);
+}
+
+function findParks(){
+    hideError();
+    if(!userLatLng){
+        showError('Please search a location or use "Use My Current Location" first.');
+        return;
+    }
+    showLoading(true);
+    var radius=parseInt(document.getElementById('radius-select').value,10);
+    var areaFilter=document.getElementById('area-filter').value;
+    var sortBy=document.getElementById('sort-select').value;
+    var stateFilter=document.getElementById('state-select').value;
+    var districtFilter=document.getElementById('district-select').value;
+
+    var sites=allSites.filter(function(s){
+        if(stateFilter&&s.state!==stateFilter)return false;
+        if(districtFilter&&s.district!==districtFilter)return false;
+        return true;
+    });
+
+    var withDist=sites.map(function(s){
+        var d=haversine(userLatLng[0],userLatLng[1],s.lat,s.lng);
+        return {site:s,distKm:d};
+    });
+
+    if(radius<99999)withDist=withDist.filter(function(w){return w.distKm<=radius;});
+
+    if(areaFilter==='small')withDist=withDist.filter(function(w){return w.site.areaHa<10;});
+    else if(areaFilter==='medium')withDist=withDist.filter(function(w){return w.site.areaHa>=10&&w.site.areaHa<=40;});
+    else if(areaFilter==='large')withDist=withDist.filter(function(w){return w.site.areaHa>40;});
+
+    if(sortBy==='nearest')withDist.sort(function(a,b){return a.distKm-b.distKm;});
+    else if(sortBy==='largest')withDist.sort(function(a,b){return b.site.areaHa-a.site.areaHa;});
+    else if(sortBy==='recent')withDist.sort(function(a,b){return parseSanctionDateForSort(b.site)-parseSanctionDateForSort(a.site);});
+
+    filteredSites=withDist;
+    renderResults(withDist);
+    renderMapMarkers(withDist,radius);
+    showLoading(false);
+
+    var statusEl=document.getElementById('status-bar');
+    var count=withDist.length;
+    var radiusText=radius>=99999?'any distance':radius+' km';
+    statusEl.textContent=count+' park'+(count!==1?'s':'')+' found within '+radiusText;
+
+    if(count===0){
+        statusEl.textContent+='. Try increasing the radius or changing filters.';
+    }
+}
+
+function renderResults(withDist){
+    var container=document.getElementById('results-container');
+    if(withDist.length===0){
+        container.innerHTML='<div class="text-center py-8 text-gray-500"><i class="fas fa-tree text-3xl text-gray-300 mb-2"></i><p class="text-sm">No parks found</p><p class="text-xs mt-1">Try increasing the search radius or changing filters.</p></div>';
+        return;
+    }
+    var html='';
+    withDist.forEach(function(w){
+        var s=w.site;
+        var distText=w.distKm<1?'<1 km':w.distKm.toFixed(1)+' km away';
+        var badge=s.category==='NCAP'?'<span class="ncap-badge"><i class="fas fa-shield-alt mr-0.5"></i>NCAP</span>':'<span class="govt-badge"><i class="fas fa-tree mr-0.5"></i>General</span>';
+        html+='<div class="result-item glass-panel p-3 border" data-id="'+s.id+'" onclick="selectResult('+s.id+')" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')selectResult('+s.id+')">';
+        html+='<div class="flex justify-between items-start gap-2"><h3 class="font-bold text-sm text-[#1b3a2d] leading-tight">'+escapeHtml(s.siteName)+'</h3>'+badge+'</div>';
+        html+='<div class="flex items-center text-xs text-gray-500 mt-1 gap-1"><i class="fas fa-location-dot text-[#5dc48a]"></i>'+distText+'</div>';
+        html+='<div class="flex flex-wrap gap-x-4 gap-y-1 mt-1.5 text-xs text-gray-600"><span><i class="far fa-map mr-0.5"></i>'+s.areaHa+' Ha</span><span><i class="fas fa-rupee-sign mr-0.5"></i>₹ '+s.approvedCostLakhs+' L</span>';
+        var city=s.municipalCorp||s.city||'';
+        if(city)html+='<span><i class="fas fa-city mr-0.5"></i>'+escapeHtml(city)+'</span>';
+        html+='</div></div>';
+    });
+    container.innerHTML=html;
+}
+
+function renderMapMarkers(withDist,radius){
+    markersLayer.clearLayers();
+    withDist.forEach(function(w){
+        var s=w.site;
+        var distText=w.distKm<1?'<1 km':w.distKm.toFixed(1)+' km';
+        var popupContent='<div style="font-family:sans-serif;min-width:180px">';
+        popupContent+='<b style="color:#1b3a2d;font-size:14px">'+escapeHtml(s.siteName)+'</b>';
+        popupContent+='<br><span style="color:#6b7280;font-size:12px">'+distText+' away</span>';
+        popupContent+='<br><span style="font-size:11px;color:#374151">'+s.district+', '+s.state+'</span>';
+        if(s.municipalCorp)popupContent+='<br><span style="font-size:11px;color:#374151">'+escapeHtml(s.municipalCorp)+'</span>';
+        popupContent+='<br><a href="https://www.google.com/maps/dir/?api=1&origin='+userLatLng[0]+','+userLatLng[1]+'&destination='+s.lat+','+s.lng+'&travelmode=driving" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;background:#5dc48a;color:#1b3a2d;padding:4px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600"><i class="fas fa-directions mr-1"></i>Get Directions</a>';
+        popupContent+='</div>';
+        L.marker([s.lat,s.lng],{icon:makeTreeIcon()}).addTo(markersLayer).bindPopup(popupContent);
+    });
+    if(userLatLng)drawRadiusCircle(userLatLng[0],userLatLng[1],radius);
+}
+
+function selectResult(id){
+    var w=filteredSites.find(function(f){return f.site.id===id;});
+    if(!w)return;
+    selectedSiteId=id;
+    document.querySelectorAll('.result-item').forEach(function(el){
+        el.classList.toggle('active',parseInt(el.dataset.id,10)===id);
+    });
+    map.setView([w.site.lat,w.site.lng],12);
+    openDetailModal(w);
+}
+
+function openDetailModal(w){
+    var s=w.site;
+    var distText=w.distKm<1?'<1 km':w.distKm.toFixed(1)+' km';
+    var html='';
+    html+='<h2 id="modal-site-name" class="text-xl font-bold text-[#1b3a2d] mb-1">'+escapeHtml(s.siteName)+'</h2>';
+    html+='<div class="flex gap-2 mb-3">'+((s.category==='NCAP')?'<span class="ncap-badge"><i class="fas fa-shield-alt"></i> NCAP Site</span>':'<span class="govt-badge"><i class="fas fa-tree"></i> General Site</span>')+'</div>';
+    html+='<div class="grid grid-cols-2 gap-3 text-sm mb-4">';
+    html+='<div><span class="text-gray-500 text-xs">District</span><p class="font-semibold">'+escapeHtml(s.district)+'</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">Municipal Corporation</span><p class="font-semibold">'+escapeHtml(s.municipalCorp||'N/A')+'</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">State</span><p class="font-semibold">'+escapeHtml(s.state)+'</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">Distance</span><p class="font-semibold text-[#5dc48a]">'+distText+'</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">GPS Coordinates</span><p class="font-semibold text-xs font-mono">'+s.lat.toFixed(4)+', '+s.lng.toFixed(4)+'</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">Area</span><p class="font-semibold">'+s.areaHa+' Hectares</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">Approved Cost</span><p class="font-semibold">₹ '+s.approvedCostLakhs+' Lakhs</p></div>';
+    html+='<div><span class="text-gray-500 text-xs">Total Released</span><p class="font-semibold">₹ '+(s.totalRelease||'--')+' Lakhs</p></div>';
+    html+='</div>';
+    html+='<h3 class="font-bold text-sm text-[#1b3a2d] mb-2">Financial Release Schedule</h3>';
+    html+='<div class="bg-gray-50 rounded-lg p-3 text-sm mb-4">';
+    html+='<div class="flex justify-between items-center border-b border-gray-200 pb-2 mb-2"><div><span class="font-semibold">1st Instalment</span><br><span class="text-xs text-gray-500">'+escapeHtml(s.iInstReleaseYear||'--')+'</span></div><div class="text-right"><span class="font-semibold">₹ '+(s.iInstAmount||'--')+' L</span><br><span class="text-xs text-gray-500">'+escapeHtml(s.iInstSanctionDate||'--')+'</span></div></div>';
+    html+='<div class="flex justify-between items-center"><div><span class="font-semibold">2nd Instalment</span><br><span class="text-xs text-gray-500">'+escapeHtml(s.iiInstReleaseYear||'--')+'</span></div><div class="text-right"><span class="font-semibold">₹ '+(s.iiInstAmount||'--')+' L</span><br><span class="text-xs text-gray-500">'+escapeHtml(s.iiInstSanctionDate||'--')+'</span></div></div>';
+    html+='</div>';
+    html+='<div class="flex gap-3">';
+    html+='<a href="https://www.google.com/maps/dir/?api=1&origin='+userLatLng[0]+','+userLatLng[1]+'&destination='+s.lat+','+s.lng+'&travelmode=driving" target="_blank" rel="noopener" class="flex-1 bg-[#5dc48a] text-[#1b3a2d] font-bold py-2.5 rounded-lg text-sm text-center hover:bg-[#4ab878] transition-colors"><i class="fas fa-directions mr-1"></i>Get Directions</a>';
+    html+='<button onclick="shareSite(\''+escapeHtml(s.siteName)+'\','+s.lat+','+s.lng+')" class="flex-1 bg-[#1b3a2d] text-white font-bold py-2.5 rounded-lg text-sm hover:bg-[#2d5a45] transition-colors"><i class="fas fa-share-alt mr-1"></i>Share</button>';
+    html+='</div>';
+    document.getElementById('modal-body').innerHTML=html;
+    document.getElementById('detail-modal').classList.remove('hidden');
+    document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+    document.getElementById('detail-modal').classList.add('hidden');
+    document.body.style.overflow='';
+}
+
+document.getElementById('detail-modal').addEventListener('click',function(e){
+    if(e.target===this)closeModal();
+});
+document.addEventListener('keydown',function(e){
+    if(e.key==='Escape')closeModal();
+});
+
+function shareSite(name,lat,lng){
+    var url='https://www.google.com/maps?q='+lat+','+lng;
+    if(navigator.share){
+        navigator.share({title:name,text:'Check out this Nagar Van on the map',url:url});
+    }else{
+        navigator.clipboard.writeText(url).then(function(){
+            alert('Location link copied to clipboard!');
+        });
+    }
+}
+
+function sharePage(){
+    if(navigator.share){
+        navigator.share({title:'Nagar Van Finder',text:'Find Nagar Van urban forest sites near you',url:window.location.href});
+    }else{
+        navigator.clipboard.writeText(window.location.href).then(function(){
+            alert('Link copied to clipboard!');
+        });
+    }
+}
+
+function escapeHtml(str){
+    if(!str)return'';
+    var div=document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+function initAddressAutocomplete(){
+    var input=document.getElementById('address-input');
+    var dropdown=document.getElementById('address-dropdown');
+    input.addEventListener('input',function(){
+        var q=this.value.trim();
+        if(q.length<3){dropdown.classList.add('hidden');return;}
+        clearTimeout(debounceTimer);
+        debounceTimer=setTimeout(function(){
+            fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(q)+'&format=json&limit=5&countrycodes=in')
+            .then(function(r){return r.json()})
+            .then(function(data){
+                dropdown.innerHTML='';
+                if(!data||data.length===0){dropdown.classList.add('hidden');return;}
+                dropdown.classList.remove('hidden');
+                data.forEach(function(item){
+                    var div=document.createElement('div');
+                    div.textContent=item.display_name;
+                    div.addEventListener('click',function(){
+                        var lat=parseFloat(item.lat),lng=parseFloat(item.lon);
+                        if(!validateCoords(lat,lng)){
+                            showError('Location outside India coverage. Select a valid Indian location.');
+                            dropdown.classList.add('hidden');return;
+                        }
+                        input.value=item.display_name.split(',')[0];
+                        dropdown.classList.add('hidden');
+                        userLatLng=[lat,lng];
+                        placeUserMarker(lat,lng);
+                        hideError();
+                        findParks();
+                    });
+                    dropdown.appendChild(div);
+                });
+            }).catch(function(){dropdown.classList.add('hidden');});
+        },300);
+    });
+    document.addEventListener('click',function(e){
+        if(!input.contains(e.target)&&!dropdown.contains(e.target)){
+            dropdown.classList.add('hidden');
+        }
+    });
+    input.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){
+            dropdown.classList.add('hidden');
+            var q=this.value.trim();
+            if(!q)return;
+            fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(q)+'&format=json&limit=1&countrycodes=in')
+            .then(function(r){return r.json()})
+            .then(function(data){
+                if(data&&data.length>0){
+                    var lat=parseFloat(data[0].lat),lng=parseFloat(data[0].lon);
+                    if(validateCoords(lat,lng)){
+                        userLatLng=[lat,lng];
+                        placeUserMarker(lat,lng);
+                        hideError();
+                        findParks();
+                    }else{showError('Location outside India coverage.');}
+                }
+            }).catch(function(){});
+        }
+    });
+}
+
+function initStateDistrict(){
+    var stateSel=document.getElementById('state-select');
+    stateSel.addEventListener('change',function(){
+        populateDistrictDropdown(this.value);
+        if(userLatLng)findParks();
+    });
+    document.getElementById('district-select').addEventListener('change',function(){
+        if(userLatLng)findParks();
+    });
+}
+
+function loadSites(){
+    showLoading(true);
+    fetch('assets/data/nvy-sites.json')
+    .then(function(r){return r.json()})
+    .then(function(data){
+        allSites=data.sites||[];
+        showLoading(false);
+        populateDistrictDropdown('');
+        var loader=document.getElementById('page-loader');
+        if(loader)loader.style.display='none';
+        if(allSites.length>0){
+            document.getElementById('status-bar').textContent=allSites.length+' parks loaded. Enter a location to find nearby parks.';
+        }
+    }).catch(function(err){
+        showLoading(false);
+        showError('Failed to load park data. Please try refreshing the page.');
+        var loader=document.getElementById('page-loader');
+        if(loader)loader.style.display='none';
+        console.error('Failed to load sites:',err);
+    });
+}
+function initNightMode(){
+    var btn=document.getElementById('theme-toggle-btn');
+    if(!btn)return;
+    var isDark=localStorage.getItem('app-theme')==='dark';
+    if(isDark){
+        document.documentElement.classList.add('dark');
+        btn.innerHTML='<i class="fas fa-sun"></i>';
+    }
+    btn.addEventListener('click',function(){
+        var dark=document.documentElement.classList.toggle('dark');
+        localStorage.setItem('app-theme',dark?'dark':'light');
+        btn.innerHTML=dark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+        if(map)setMapTheme(dark);
+    });
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+    initNightMode();
+    initMap();
+    initAddressAutocomplete();
+    initStateDistrict();
+    loadSites();
+});
+
+window.onload=function(){
+    var loader=document.getElementById('page-loader');
+    if(loader)loader.style.display='none';
+};
+</script>
+</body>
+</html>
