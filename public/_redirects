@@ -4,7 +4,7 @@ https://www.urbanforestpark.com/* https://urbanforestpark.com/:splat 301
 # Redirect old GitHub Pages URLs to custom domain
 https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/:splat 301
 
-# Clean URL redirects (without .html) - now served from root
+# Clean URL redirects (without .html extension)
 /about /about.html 301
 /report /report.html 301
 /explore-dashboard /explore-dashboard.html 301
@@ -16,6 +16,3 @@ https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/:spla
 /terms /terms.html 301
 /cookies /cookies.html 301
 /accessibility /accessibility.html 301
-
-# SPA fallback for Cloudflare Pages - serve index.html for all non-asset routes
-/* /index.html 200

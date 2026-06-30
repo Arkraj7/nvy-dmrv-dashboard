@@ -3,7 +3,6 @@ export default {
     const url = new URL(request.url);
     const response = await env.ASSETS.fetch(request);
 
-    // Only apply noindex for .pages.dev subdomain, strip for custom domains
     if (!url.hostname.endsWith('.pages.dev')) {
       const headers = new Headers(response.headers);
       headers.delete('X-Robots-Tag');
