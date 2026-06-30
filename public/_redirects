@@ -1,18 +1,15 @@
-# Redirect www to non-www
-https://www.urbanforestpark.com/* https://urbanforestpark.com/:splat 301
+# Internal rewrites (200) — no browser redirects, no loop possible
+/about /about.html 200
+/report /report.html 200
+/explore-dashboard /explore-dashboard.html 200
+/spatial-data /spatial-data.html 200
+/nagar-van-finder /nagar-van-finder.html 200
+/green-calculator /green-calculator.html 200
+/public-survey /public-survey.html 200
+/privacy /privacy.html 200
+/terms /terms.html 200
+/cookies /cookies.html 200
+/accessibility /accessibility.html 200
 
-# Redirect old GitHub Pages URLs to custom domain
-https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/:splat 301
-
-# Clean URL redirects (without .html extension)
-/about /about.html 301
-/report /report.html 301
-/explore-dashboard /explore-dashboard.html 301
-/spatial-data /spatial-data.html 301
-/nagar-van-finder /nagar-van-finder.html 301
-/green-calculator /green-calculator.html 301
-/public-survey /public-survey.html 301
-/privacy /privacy.html 301
-/terms /terms.html 301
-/cookies /cookies.html 301
-/accessibility /accessibility.html 301
+# SPA fallback — all other unknown paths serve index.html (200 rewrite, no redirect)
+/* /index.html 200
