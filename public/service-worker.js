@@ -1,48 +1,78 @@
-const CACHE_NAME = 'nagar-van-dmrv-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/about.html',
-  '/report.html',
-  './assets/images/tree-svgrepo-com.svg'
+const CACHE_NAME = 'nagar-van-dmrv-v2';
+const STATIC_CACHE = 'nagar-van-static-v2';
+
+const STATIC_ASSETS = [
+  '/assets/images/tree-svgrepo-com.svg',
+  '/assets/css/night-mode.css'
 ];
 
-// Install event - cache resources
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(STATIC_CACHE).then(cache => cache.addAll(STATIC_ASSETS))
   );
 });
 
-// Fetch event - serve from cache, fallback to network
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
-  );
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then(names => Promise.all(
+      names.filter(n => n !== CACHE_NAME && n !== STATIC_CACHE).map(n => caches.delete(n))
+    )).then(() => self.clients.claim())
   );
 });
+
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  // Only handle same-origin requests
+  if (url.origin !== self.location.origin) return;
+
+  const path = url.pathname;
+
+  // Static assets from assets/ folder - cache-first
+  if (path.startsWith('/assets/')) {
+    event.respondWith(
+      caches.match(event.request).then(cached => cached || fetchAndCache(event.request, STATIC_CACHE))
+    );
+    return;
+  }
+
+  // HTML pages and navigation - network-first
+  if (path.endsWith('.html') || event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const cloned = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, cloned));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Everything else - network-first
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
+        const cloned = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, cloned));
+        return response;
+      })
+      .catch(() => caches.match(event.request))
+  );
+});
+
+function fetchAndCache(request, cacheName) {
+  return fetch(request).then(response => {
+    const cloned = response.clone();
+    caches.open(cacheName).then(cache => cache.put(request, cloned));
+    return response;
+  });
+}

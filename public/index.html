@@ -1154,8 +1154,14 @@
           box-shadow: 0 0 0 0 black;
         }
     </style>
-<!-- Skip Link for Accessibility -->
+ <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Update Notification Banner -->
+    <div id="update-banner" class="hidden fixed top-0 left-0 right-0 z-[9999] bg-[#1b3a2d] text-white text-center text-sm py-2 px-4 shadow-lg">
+        A new version is available.
+        <button onclick="applyUpdate()" class="ml-2 bg-[#5dc48a] text-[#1b3a2d] font-bold px-3 py-1 rounded-md hover:bg-[#4ab878] transition-colors">Update</button>
+        <button onclick="dismissUpdate()" class="ml-1 text-gray-300 hover:text-white">&times;</button>
+    </div>
 </head>
 <body class="text-gray-800" role="main" aria-label="Nagar Van Dashboard">
   <!-- 3D Tower Loader -->
@@ -3413,17 +3419,56 @@
             localStorage.setItem('dmrv-text-size', size);
         }
 
-        // PWA Service Worker Registration
+        // PWA Service Worker Registration with update detection
+        var swRegistration = null;
+        var swWaiting = null;
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
                     .then(registration => {
+                        swRegistration = registration;
                         console.log('SW registered:', registration);
+
+                        if (registration.waiting) {
+                            swWaiting = registration.waiting;
+                            showUpdateBanner();
+                        }
+
+                        registration.addEventListener('updatefound', () => {
+                            swWaiting = registration.installing;
+                            swWaiting.addEventListener('statechange', () => {
+                                if (swWaiting.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showUpdateBanner();
+                                }
+                            });
+                        });
                     })
                     .catch(error => {
                         console.log('SW registration failed:', error);
                     });
             });
+
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
+            });
+        }
+
+        function showUpdateBanner() {
+            document.getElementById('update-banner').classList.remove('hidden');
+        }
+
+        function dismissUpdate() {
+            document.getElementById('update-banner').classList.add('hidden');
+        }
+
+        function applyUpdate() {
+            if (swWaiting) {
+                swWaiting.postMessage({ type: 'SKIP_WAITING' });
+            } else if (swRegistration && swRegistration.waiting) {
+                swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+            dismissUpdate();
         }
 
         // Restore preferences
