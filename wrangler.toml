@@ -1,0 +1,4 @@
+# Cloudflare Pages configuration for static HTML site
+build:
+  command: ""
+  destination: "public"

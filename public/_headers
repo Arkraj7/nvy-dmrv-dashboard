@@ -1,2 +1,28 @@
 /*
-  X-Robots-Tag: noindex
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Allow indexing of main pages
+/index.html
+/about.html
+/report.html
+/nagar-van-finder.html
+/explore-dashboard.html
+/spatial-data.html
+/public-survey.html
+/privacy.html
+/terms.html
+/cookies.html
+/accessibility.html
+/green-calculator.html
+  X-Robots-Tag: index, follow
+
+# Cache static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/manifest.json
+/site.webmanifest
+/favicon*
+  Cache-Control: public, max-age=86400

@@ -2,20 +2,20 @@
 https://www.urbanforestpark.com/* https://urbanforestpark.com/:splat 301
 
 # Redirect old GitHub Pages URLs to custom domain
-https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/nvy-dmrv-dashboard/:splat 301
+https://arkraj7.github.io/nvy-dmrv-dashboard/* https://urbanforestpark.com/:splat 301
 
-# Ensure trailing slashes for directory-like paths
-/nvy-dmrv-dashboard/about /nvy-dmrv-dashboard/about.html 301
-/nvy-dmrv-dashboard/report /nvy-dmrv-dashboard/report.html 301
-/nvy-dmrv-dashboard/explore-dashboard /nvy-dmrv-dashboard/explore-dashboard.html 301
-/nvy-dmrv-dashboard/spatial-data /nvy-dmrv-dashboard/spatial-data.html 301
-/nvy-dmrv-dashboard/nagar-van-finder /nvy-dmrv-dashboard/nagar-van-finder.html 301
-/nvy-dmrv-dashboard/green-calculator /nvy-dmrv-dashboard/green-calculator.html 301
-/nvy-dmrv-dashboard/public-survey /nvy-dmrv-dashboard/public-survey.html 301
-/nvy-dmrv-dashboard/privacy /nvy-dmrv-dashboard/privacy.html 301
-/nvy-dmrv-dashboard/terms /nvy-dmrv-dashboard/terms.html 301
-/nvy-dmrv-dashboard/cookies /nvy-dmrv-dashboard/cookies.html 301
-/nvy-dmrv-dashboard/accessibility /nvy-dmrv-dashboard/accessibility.html 301
+# Clean URL redirects (without .html) - now served from root
+/about /about.html 301
+/report /report.html 301
+/explore-dashboard /explore-dashboard.html 301
+/spatial-data /spatial-data.html 301
+/nagar-van-finder /nagar-van-finder.html 301
+/green-calculator /green-calculator.html 301
+/public-survey /public-survey.html 301
+/privacy /privacy.html 301
+/terms /terms.html 301
+/cookies /cookies.html 301
+/accessibility /accessibility.html 301
 
 # SPA fallback for Cloudflare Pages - serve index.html for all non-asset routes
 /* /index.html 200
