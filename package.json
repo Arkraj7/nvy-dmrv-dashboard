@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run tailwind:build && astro dev",
-    "build": "npm run tailwind:build && astro build",
+    "build": "npm run tailwind:build && astro build && xcopy /E /I /Y dist\\assets dist\\nagar-van-finder\\assets >nul 2>&1",
     "preview": "astro preview",
     "deploy": "npm run build && npx wrangler pages deploy dist --project-name=nvy-dmrv-dashboard --commit-dirty=true",
     "tailwind:build": "tailwindcss -i src/tailwind-input.css -o public/assets/css/tailwind.css --content \"./src/**/*.{astro,html}\" --minify"
