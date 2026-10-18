@@ -2090,3 +2090,69 @@ body.view-detail .telemetry-band { display: none; }
   text-decoration: underline;
 }
 .footer-col .footer-link-btn:focus-visible { outline: 2px solid var(--emerald); outline-offset: 2px; }
+
+/* ===================== Bilingual interface (EN | हिंदी) ===================== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--card);
+}
+.lang-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 11px;
+  cursor: pointer;
+  line-height: 1;
+}
+.lang-btn.active {
+  background: #14532d;
+  color: #ffffff;
+}
+html[data-theme="dark"] .lang-btn.active {
+  background: #34d399;
+  color: #06210f;
+}
+.lang-sep {
+  color: var(--border);
+  font-size: 11px;
+  user-select: none;
+}
+html[data-lang="hi"] body,
+html[data-lang="hi"] .brand-sub,
+html[data-lang="hi"] button,
+html[data-lang="hi"] input,
+html[data-lang="hi"] select,
+html[data-lang="hi"] textarea {
+  font-family: 'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.detail-title-en,
+.jc-title-en {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #64748b;
+}
+html[data-theme="dark"] .detail-title-en,
+html[data-theme="dark"] .jc-title-en {
+  color: #94a3b8;
+}
+.detail-section-hi {
+  border-left: 3px solid #14532d;
+  padding-left: 14px;
+}
+html[data-theme="dark"] .detail-section-hi {
+  border-left-color: #34d399;
+}
+@media (max-width: 640px) {
+  .lang-btn { padding: 7px 9px; font-size: 12px; }
+}
+/* end ufp-i18n-bilingual */

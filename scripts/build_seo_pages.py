@@ -608,6 +608,11 @@ def footer_html(current_hub: Optional[str] = None) -> str:
         <ul>
 {hubs_block}
         </ul>
+        <h3 style="margin-top:16px;">Regional &amp; Multilingual Portals (भारत / हिंदी)</h3>
+        <ul>
+          <li><a href="/hindi-environment-forestry-jobs.html">हिंदी करियर पोर्टल — पर्यावरण एवं वानिकी भर्तियाँ</a></li>
+          <li><a href="/bharat-regional-green-jobs.html">Bharat Regional &amp; State-Wise Green Jobs</a></li>
+        </ul>
       </div>
 
       <div class="footer-col">
@@ -922,6 +927,9 @@ def build_hub_page(
     <meta name="description" content="{esc(hub['desc'])}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{hub['canonical']}">
+    <link rel="alternate" hreflang="en-IN" href="{hub['canonical']}">
+    <link rel="alternate" hreflang="hi-IN" href="https://www.urbanforestpark.com/hindi-environment-forestry-jobs.html">
+    <link rel="alternate" hreflang="x-default" href="{hub['canonical']}">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
@@ -1068,7 +1076,21 @@ def main(argv: Optional[List[str]] = None) -> int:
         out_path.write_text(page, encoding="utf-8")
         log.info("Wrote %s (%d active match(es))", hub["file"], hub_counts[hub["file"]])
 
-    log.info("SEO surface rebuilt: 1 snapshot + %d hub page(s)", len(HUBS))
+    # ---- multilingual & regional portals --------------------------------
+    import seo_portals  # lazy import: reuses this module's helpers/constants
+
+    hindi_page = seo_portals.build_hindi_hub_page(active, archived, hub_counts, today)
+    (public / seo_portals.HINDI_HUB_FILE).write_text(hindi_page, encoding="utf-8")
+    log.info("Wrote %s", seo_portals.HINDI_HUB_FILE)
+
+    regional_page = seo_portals.build_regional_hub_page(active, today)
+    (public / seo_portals.REGIONAL_HUB_FILE).write_text(regional_page, encoding="utf-8")
+    log.info("Wrote %s", seo_portals.REGIONAL_HUB_FILE)
+
+    log.info(
+        "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s)",
+        len(HUBS),
+    )
     return 0
 
 

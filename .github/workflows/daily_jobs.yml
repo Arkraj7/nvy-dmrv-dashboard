@@ -4,9 +4,11 @@ name: Daily India Green Jobs Update
 # 07:00 AM IST (01:30 UTC), humanizes them with Gemini, merges them into
 # public/jobs.json, expires closed mandates into public/archive.json,
 # refreshes public/stats.json (weekly hiring telemetry), regenerates
-# public/sitemap.xml, rebuilds the static SEO surface (the pre-rendered
-# snapshot inside public/index.html and the five career-pathway hub pages),
-# commits them, and then builds + deploys the live site to Cloudflare Pages.
+# public/sitemap.xml, backfills bilingual (Hindi) metadata for new mandates,
+# rebuilds the static SEO surface (the pre-rendered snapshot inside
+# public/index.html, the five career-pathway hub pages and the two
+# multilingual/regional portals), commits them, and then builds + deploys
+# the live site to Cloudflare Pages.
 
 on:
   schedule:
@@ -52,7 +54,15 @@ jobs:
           WHATSAPP_GROUP_URL: ${{ secrets.WHATSAPP_GROUP_URL }}
         run: python scripts/fetch_and_humanize.py
 
-      - name: Rebuild static SEO pages (index snapshot + career-pathway hubs)
+      - name: Backfill bilingual (Hindi) metadata for new mandates
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        # Idempotent: fills title_hi / summary_hi only where missing, with
+        # Gemini when the key/quota allows and the built-in glossary
+        # otherwise. Never fails the run.
+        run: python scripts/backfill_hindi.py
+
+      - name: Rebuild static SEO pages (snapshot + hubs + multilingual portals)
         run: python scripts/build_seo_pages.py
 
       - name: Commit updated registry data (jobs, archive, stats, sitemap, SEO pages)
@@ -63,7 +73,8 @@ jobs:
           # public/jobs.json, public/archive.json, public/stats.json,
           # public/sitemap.xml, public/daily_digest.json and
           # public/whatsapp_digest.txt; build_seo_pages.py rewrites
-          # public/index.html and the five career-pathway hub pages.
+          # public/index.html, the five career-pathway hub pages and the two
+          # multilingual/regional portals (Hindi hub + Bharat regional hub).
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
                   public/daily_digest.json public/whatsapp_digest.txt \
                   public/index.html \
@@ -71,7 +82,9 @@ jobs:
                   public/phd-fellowships-climate-sustainability.html \
                   public/forestry-wildlife-government-jobs.html \
                   public/gis-remote-sensing-climate-jobs.html \
-                  public/esg-carbon-sustainability-jobs.html
+                  public/esg-carbon-sustainability-jobs.html \
+                  public/hindi-environment-forestry-jobs.html \
+                  public/bharat-regional-green-jobs.html
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else

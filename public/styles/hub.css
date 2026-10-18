@@ -195,3 +195,101 @@
   .hub-list { grid-template-columns: minmax(0, 1fr); }
   .hub-cta { flex-direction: column; align-items: flex-start; }
 }
+
+/* ===================== Multilingual & regional portals ===================== */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu',
+    'Noto Sans Kannada', 'Noto Sans Bengali', 'Noto Sans Gujarati', system-ui,
+    -apple-system, 'Segoe UI', sans-serif;
+}
+.hub-lang-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  opacity: 0.85;
+  max-width: 760px;
+}
+.hi-card .hi-card-en {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #64748b;
+}
+html[data-theme="dark"] .hi-card .hi-card-en {
+  color: #94a3b8;
+}
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.region-card {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+html[data-theme="dark"] .region-card {
+  background: #111827;
+  border-color: #1f2937;
+}
+.region-card h2 {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+.region-total {
+  font-size: 13px;
+  margin: 0 0 10px;
+  opacity: 0.85;
+}
+.region-states {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.region-states li {
+  margin: 0;
+}
+.region-states a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.region-cnt {
+  font-size: 11.5px;
+  font-weight: 700;
+  background: rgba(20, 83, 45, 0.12);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+html[data-theme="dark"] .region-cnt {
+  background: rgba(52, 211, 153, 0.18);
+}
+.region-note {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  opacity: 0.8;
+}
+.region-hub {
+  margin: 12px 0 0;
+  font-weight: 600;
+}
+.region-empty {
+  font-size: 13px;
+  opacity: 0.7;
+}
+/* end ufp-multilingual-portals */

@@ -283,6 +283,13 @@ SEO_HUB_PAGES = [
     "/esg-carbon-sustainability-jobs.html",
 ]
 
+# Multilingual & regional portals (Hindi + pan-India regional hubs),
+# pre-rendered by scripts/build_seo_pages.py on every pipeline run.
+MULTILINGUAL_PORTAL_PAGES = [
+    "/hindi-environment-forestry-jobs.html",
+    "/bharat-regional-green-jobs.html",
+]
+
 # How many state landing views the sitemap lists (busiest states first).
 SITEMAP_TOP_STATES = 25
 
@@ -607,6 +614,11 @@ if BaseModel is not None:
         qualification_summary: str = ""
         compensation_or_fellowship: str = ""
         role_summary: str = ""
+        # Bilingual (Hindi) metadata: shown when the interface is switched
+        # to हिंदी and on the Hindi SEO hub page. Acronyms (JRF, SRF, GIS,
+        # ESG, PhD, BRSR ...) and organisation names stay in Latin script.
+        title_hi: str = ""
+        summary_hi: str = ""
         key_responsibilities: List[str] = Field(default_factory=list)
         must_have_skills: List[str] = Field(default_factory=list)
         application_tip: str = ""
@@ -676,6 +688,14 @@ Otherwise write "As per institute norms" for academic / contractual roles, or \
 figures.
 - role_summary: exactly 3 sentences, 45-70 words, concrete and specific \
 to THIS role (team, mandate, location, impact). No generic filler.
+- title_hi: the job title written in formal Hindi (Devanagari script), \
+keeping the organisation name in its original Latin form and keeping \
+acronyms (JRF, SRF, GIS, ESG, PhD, BRSR, IIT, IISc, IIFM, WII ...) in Latin \
+script. Example: "जूनियर रिसर्च फेलो (JRF) - बाघ पारिस्थितिकी एवं परिदृश्य कनेक्टिविटी - Wildlife Institute of India (WII)". Use natural formal Hindi as \
+printed in Indian government recruitment notices - never romanised English.
+- summary_hi: exactly 2 formal Hindi sentences (Devanagari) summarising the \
+role and its eligibility for Hindi-speaking candidates. Keep technical \
+terms and acronyms in Latin script and organisation names in English.
 - key_responsibilities: 4-5 short bullets, each a plain sentence fragment \
 starting with a verb. Only what the source posting supports.
 - must_have_skills: 5-7 short skill tags (e.g. "ESG reporting (BRSR)", \
@@ -2759,8 +2779,8 @@ def build_whatsapp_digest_text(
     """Ready-to-paste WhatsApp/Telegram bulletin covering the listed jobs."""
     whatsapp, telegram = _community_links()
     parts = [
-        "🌱 *URBAN FOREST PARK — GREEN & RESEARCH JOB ALERT*",
-        f"🗓️ {today} · {len(jobs)} mandate(s)",
+        "🌱 *India Green, Forestry, JRF & ESG Jobs | पर्यावरण एवं अनुसंधान भर्ती अपडेट*",
+        f"🗓️ {today} · {len(jobs)} mandate(s) · {len(jobs)} भर्तियाँ",
         "━━━━━━━━━━━━━━━━━━━━",
         "",
     ]
@@ -2785,8 +2805,8 @@ def build_telegram_digest_html(
     """Telegram-flavoured (HTML parse_mode) version of the same digest."""
     whatsapp, telegram = _community_links()
     lines = [
-        "🌱 <b>Urban Forest Park — Green &amp; Research Job Alert</b>",
-        f"<i>{_html_escape_text(today)} · {len(jobs)} mandate(s)</i>",
+        "🌱 <b>India Green, Forestry, JRF &amp; ESG Jobs</b> | पर्यावरण एवं अनुसंधान भर्ती अपडेट",
+        f"<i>{_html_escape_text(today)} · {len(jobs)} mandate(s) · {len(jobs)} भर्तियाँ</i>",
         "",
         f"<b>{_html_escape_text(heading)}</b>",
         "",
@@ -3080,6 +3100,14 @@ def write_sitemap(
     # Career-pathway hub pages (pre-rendered by scripts/build_seo_pages.py
     # on every pipeline run, so they always exist when this runs).
     for page_path in SEO_HUB_PAGES:
+        entries[SITE_BASE_URL + page_path] = {
+            "lastmod": today,
+            "changefreq": "weekly",
+            "priority": "0.9",
+        }
+
+    # Multilingual & regional portals (Hindi hub + state-wise regional hub).
+    for page_path in MULTILINGUAL_PORTAL_PAGES:
         entries[SITE_BASE_URL + page_path] = {
             "lastmod": today,
             "changefreq": "weekly",

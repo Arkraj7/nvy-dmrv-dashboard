@@ -235,24 +235,47 @@ def fetch_csv_recipients(url: str) -> List[Dict[str, str]]:
     return out
 
 
+def _looks_like_test_email(email: str) -> bool:
+    """True for obvious QA / placeholder addresses that should not be mailed."""
+    return bool(
+        re.search(
+            r"(^qa[._-]|^test[-._@]|smoke|@example\.|@test\.|\.invalid$|@localhost)",
+            email,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
 def load_recipients(override: Optional[str] = None) -> Tuple[List[Dict[str, str]], str]:
-    """Return (recipients, human-readable source label)."""
+    """Return (recipients, human-readable source label).
+
+    Owner fallback: when no subscriber list is configured yet - or every
+    configured address is a QA/placeholder entry - the site owner's own
+    mailbox (NEWSLETTER_OWNER_EMAIL, else SMTP_USER, else
+    NEWSLETTER_FROM_EMAIL) is substituted as the primary dispatch recipient,
+    so the 3-day digest lands in the owner's inbox for verification and
+    forwarding until real subscribers are collected.
+    """
     if override:
         return _dedupe_valid(_coerce_recipients(override)), "--to override"
+
+    recipients: List[Dict[str, str]] = []
+    source = "none configured"
 
     env_json = os.environ.get("NEWSLETTER_SUBSCRIBERS", "").strip()
     if env_json:
         recipients = _dedupe_valid(_coerce_recipients(env_json))
         if recipients:
-            return recipients, "NEWSLETTER_SUBSCRIBERS"
+            source = "NEWSLETTER_SUBSCRIBERS"
 
-    csv_url = os.environ.get("NEWSLETTER_SUBSCRIBERS_CSV", "").strip()
-    if csv_url:
-        recipients = _dedupe_valid(fetch_csv_recipients(csv_url))
-        if recipients:
-            return recipients, "NEWSLETTER_SUBSCRIBERS_CSV"
+    if not recipients:
+        csv_url = os.environ.get("NEWSLETTER_SUBSCRIBERS_CSV", "").strip()
+        if csv_url:
+            recipients = _dedupe_valid(fetch_csv_recipients(csv_url))
+            if recipients:
+                source = "NEWSLETTER_SUBSCRIBERS_CSV"
 
-    if SUBSCRIBERS_FILE.exists():
+    if not recipients and SUBSCRIBERS_FILE.exists():
         try:
             raw = json.loads(SUBSCRIBERS_FILE.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
@@ -260,9 +283,32 @@ def load_recipients(override: Optional[str] = None) -> Tuple[List[Dict[str, str]
             raw = []
         recipients = _dedupe_valid(_coerce_recipients(raw))
         if recipients:
-            return recipients, str(SUBSCRIBERS_FILE.relative_to(REPO_ROOT))
+            source = str(SUBSCRIBERS_FILE.relative_to(REPO_ROOT))
 
-    return [], "none configured"
+    usable = [record for record in recipients if not _looks_like_test_email(record["email"])]
+    dropped = len(recipients) - len(usable)
+    if dropped:
+        logging.info("Excluded %d test/placeholder address(es) from delivery.", dropped)
+
+    if not usable:
+        owner = (
+            os.environ.get("NEWSLETTER_OWNER_EMAIL", "").strip()
+            or os.environ.get("SMTP_USER", "").strip()
+            or os.environ.get("NEWSLETTER_FROM_EMAIL", "").strip()
+        ).lower()
+        if owner and EMAIL_RE.match(owner):
+            note = (
+                "owner copy via SMTP_USER (no subscriber list yet)"
+                if source == "none configured"
+                else f"owner copy via SMTP_USER ({source} held only test entries)"
+            )
+            logging.info(
+                "No mailable subscribers - routing this dispatch to the owner mailbox (%s).", owner
+            )
+            return [{"email": owner}], note
+        return [], source
+
+    return usable, source
 
 
 # --------------------------------------------------------------------------
@@ -561,7 +607,7 @@ def detect_channel() -> Tuple[Optional[str], Dict[str, str]]:
     if smtp_host and smtp_user and smtp_password:
         return "smtp", {
             "host": smtp_host,
-            "port": os.environ.get("SMTP_PORT", "465").strip() or "465",
+            "port": os.environ.get("SMTP_PORT", "587").strip() or "587",
             "user": smtp_user,
             "password": smtp_password,
             "from_name": from_name,
