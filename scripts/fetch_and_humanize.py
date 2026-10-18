@@ -55,6 +55,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import inspect
 import json
 import logging
 import math
@@ -83,6 +84,13 @@ try:
 except Exception:  # pragma: no cover
     scrape_jobs = None
 
+_JOBSPY_PARAMS: Set[str] = set()
+if scrape_jobs is not None:
+    try:
+        _JOBSPY_PARAMS = set(inspect.signature(scrape_jobs).parameters)
+    except (TypeError, ValueError):  # pragma: no cover
+        _JOBSPY_PARAMS = set()
+
 try:
     from pydantic import BaseModel, Field
 except Exception:  # pragma: no cover
@@ -108,12 +116,18 @@ log = logging.getLogger("ufp-jobs")
 # ---------------------------------------------------------------------------
 SITE_BASE_URL = "https://www.urbanforestpark.com"
 
-# Gemini model order: the first entry is tried first; if Google retires it
-# for this API key ("404 ... no longer available") the humanizer falls back
-# to the next entry automatically. "gemini-flash-latest" is a stable alias
-# that always points at the current recommended Flash model. GEMINI_MODEL
-# (env or .env) overrides the order entirely.
-MODEL_CANDIDATES = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-2.5-flash"]
+# Gemini model order: the first entry is tried first. The humanizer falls
+# back to the next entry when a model is retired for this key ("404 ... no
+# longer available") or keeps returning rate-limit/overload errors. The
+# "latest" alias tracks the current recommended Flash model, and the lite
+# model adds an independent quota bucket. GEMINI_MODEL (env or .env)
+# overrides the order entirely.
+MODEL_CANDIDATES = [
+    "gemini-3.8-flash",
+    "gemini-flash-latest",
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash",
+]
 
 DEFAULT_JOBS_PATH = Path("public/jobs.json")
 DEFAULT_SITEMAP_PATH = Path("public/sitemap.xml")
@@ -122,6 +136,8 @@ RESULTS_PER_QUERY = 25          # jobspy results wanted per search query
 HOURS_OLD = 72                  # only consider postings newer than N hours
 DEFAULT_MAX_NEW_PER_RUN = 12    # cap on Gemini calls per run (cost control)
 GEMINI_SLEEP_SECONDS = 4.0      # gentle rate limit between model calls
+GEMINI_RATE_LIMIT_SLEEP = 25.0  # longer pause when rate-limited/overloaded
+GEMINI_RATE_LIMIT_ABORT_AFTER = 3  # consecutive rate-limited candidates -> stop run
 REQUEST_TIMEOUT = 30            # seconds, ReliefWeb HTTP timeout
 
 # Board coverage: prefer all three; if any single board throws (upstream
@@ -437,15 +453,21 @@ def scrape_board_candidates() -> List[Dict[str, Any]]:
         for site_list in (PRIMARY_SITES, FALLBACK_SITES):
             try:
                 log.info("Scraping [%s] for %r", ", ".join(site_list), query)
-                frame = scrape_jobs(
-                    site_name=site_list,
-                    search_term=query,
-                    location="India",
-                    results_wanted=RESULTS_PER_QUERY,
-                    hours_old=HOURS_OLD,
-                    country_indeed="India",
-                    linkedin_fetch_description=True,
-                )
+                jobspy_kwargs: Dict[str, Any] = {
+                    "site_name": site_list,
+                    "search_term": query,
+                    "location": "India",
+                    "results_wanted": RESULTS_PER_QUERY,
+                    "hours_old": HOURS_OLD,
+                    "country_indeed": "India",
+                }
+                # The fetch-description option was renamed across jobspy
+                # releases; pass whichever name this version accepts.
+                if "fetch_description" in _JOBSPY_PARAMS:
+                    jobspy_kwargs["fetch_description"] = True
+                elif "linkedin_fetch_description" in _JOBSPY_PARAMS:
+                    jobspy_kwargs["linkedin_fetch_description"] = True
+                frame = scrape_jobs(**jobspy_kwargs)
                 break
             except Exception as exc:
                 log.warning(
@@ -598,12 +620,34 @@ def fetch_reliefweb_india_jobs() -> List[Dict[str, Any]]:
 # ---------------------------------------------------------------------------
 # Gemini humanizer
 # ---------------------------------------------------------------------------
+RETIRED_MARKERS = ("404", "not_found", "no longer available")
+THROTTLE_MARKERS = (
+    "429",
+    "resource_exhausted",
+    "rate limit",
+    "rate_limit",
+    "quota",
+    "too many requests",
+    "high demand",
+    "overloaded",
+    "unavailable",
+    "503",
+    "500",
+    "deadline",
+)
+
+
+class GeminiRateLimited(RuntimeError):
+    """Raised when every candidate Gemini model is rate-limited/overloaded."""
+
+
 class GeminiHumanizer:
     """Thin adapter over either google-genai (new) or google-generativeai.
 
     Tries the models in MODEL_CANDIDATES in order and automatically moves to
-    the next one when a model is retired ("404 ... no longer available"), so
-    the daily pipeline survives Google's model deprecations without edits.
+    the next one when a model is retired ("404 ... no longer available") or
+    keeps returning rate-limit/overload errors, so the daily pipeline
+    survives both model deprecations and quota hiccups without edits.
     """
 
     def __init__(self, api_key: str, today: str) -> None:
@@ -620,6 +664,7 @@ class GeminiHumanizer:
             name for name in ordered if name and not (name in seen or seen.add(name))
         ]
         self.active_model: Optional[str] = None
+        self.retired: Set[str] = set()
         if self.mode == "google-genai":
             self._client = _genai_new.Client(api_key=api_key)
         else:  # legacy google-generativeai
@@ -654,11 +699,12 @@ class GeminiHumanizer:
         return response.text or ""
 
     def complete(self, user_prompt: str) -> str:
-        order = list(self.model_candidates)
+        order = [name for name in self.model_candidates if name not in self.retired]
         if self.active_model and self.active_model in order:
             order.remove(self.active_model)
             order.insert(0, self.active_model)
         last_error: Optional[Exception] = None
+        throttle_error: Optional[Exception] = None
         for index, model_name in enumerate(order):
             has_next = index < len(order) - 1
             for attempt in (1, 2):
@@ -671,39 +717,35 @@ class GeminiHumanizer:
                 except Exception as exc:
                     last_error = exc
                     message = str(exc).lower()
-                    retired = (
-                        "404" in message
-                        or "not_found" in message
-                        or "no longer available" in message
-                    )
-                    transient = any(
-                        marker in message
-                        for marker in (
-                            "503", "unavailable", "429", "resource_exhausted",
-                            "500", "overloaded", "deadline",
-                        )
-                    )
-                    if retired:
+                    if any(marker in message for marker in RETIRED_MARKERS):
+                        self.retired.add(model_name)
                         if has_next:
                             log.warning(
                                 "Gemini model %s is retired for this key; switching to the next candidate",
                                 model_name,
                             )
-                            break
-                        raise
-                    if transient and attempt == 1:
-                        log.warning(
-                            "%s is overloaded right now (%s); retrying in 5s",
-                            model_name, type(exc).__name__,
-                        )
-                        time.sleep(5)
-                        continue
-                    if transient and has_next:
-                        log.warning(
-                            "%s still overloaded; trying the next candidate", model_name
-                        )
+                        break
+                    if any(marker in message for marker in THROTTLE_MARKERS):
+                        throttle_error = exc
+                        if attempt == 1:
+                            log.warning(
+                                "%s is rate-limited or overloaded (%s); retrying in %.0fs | %s",
+                                model_name,
+                                type(exc).__name__,
+                                GEMINI_RATE_LIMIT_SLEEP,
+                                str(exc)[:140].replace("\n", " "),
+                            )
+                            time.sleep(GEMINI_RATE_LIMIT_SLEEP)
+                            continue
+                        if has_next:
+                            log.warning(
+                                "%s still rate-limited or overloaded; trying the next candidate",
+                                model_name,
+                            )
                         break
                     raise
+        if throttle_error is not None and last_error is not None:
+            raise GeminiRateLimited(str(throttle_error)[:300]) from last_error
         if last_error is not None:
             raise last_error
         raise RuntimeError("No Gemini model candidates configured")
@@ -1048,20 +1090,40 @@ def main(argv: Optional[List[str]] = None) -> int:
     humanizer = GeminiHumanizer(api_key, today)
     taken_ids: Set[str] = {str(job.get("id") or "") for job in existing}
     accepted: List[Dict[str, Any]] = []
+    rate_limit_streak = 0
     for index, candidate in enumerate(fresh, start=1):
         label = squash(candidate.get("title"))[:70]
         try:
             reply = humanizer.complete(build_user_prompt(candidate, today))
             data = parse_model_json(reply)
             record, reason = coerce_to_job_record(data, candidate, today)
+            rate_limit_streak = 0
             if record is None:
                 log.info("[%d/%d] skipped %r - %s", index, len(fresh), label, reason)
             else:
                 record["id"] = unique_id(record["id"], taken_ids)
                 accepted.append(record)
                 log.info("[%d/%d] accepted %s", index, len(fresh), record["id"])
+        except GeminiRateLimited as exc:
+            rate_limit_streak += 1
+            log.warning(
+                "[%d/%d] Gemini rate-limited for %r (%d in a row) | %s",
+                index, len(fresh), label, rate_limit_streak, str(exc)[:180],
+            )
+            if rate_limit_streak >= GEMINI_RATE_LIMIT_ABORT_AFTER:
+                log.warning(
+                    "Gemini rate limit persists after %d candidates in a row; "
+                    "stopping this run early. Unprocessed candidates remain for "
+                    "the next run.",
+                    rate_limit_streak,
+                )
+                break
         except Exception as exc:
-            log.warning("[%d/%d] humanizer failed for %r: %s", index, len(fresh), label, exc)
+            rate_limit_streak = 0
+            log.warning(
+                "[%d/%d] humanizer failed for %r: %s | %s",
+                index, len(fresh), label, type(exc).__name__, str(exc)[:180],
+            )
         time.sleep(GEMINI_SLEEP_SECONDS)
 
     # 4. Merge (newest first) and persist.
@@ -1073,6 +1135,12 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.dry_run:
         log.info("DRY RUN: %d new listing(s) accepted; nothing written.", len(accepted))
+        return 0
+
+    if not accepted:
+        log.info(
+            "No new listings accepted this run - jobs.json and sitemap.xml unchanged."
+        )
         return 0
 
     write_jobs(merged, jobs_path)
