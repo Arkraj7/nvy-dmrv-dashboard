@@ -1,5 +1,5 @@
-const CACHE_NAME = 'nagar-van-dmrv-v2';
-const STATIC_CACHE = 'nagar-van-static-v2';
+const CACHE_NAME = 'nagar-van-dmrv-v4';
+const STATIC_CACHE = 'nagar-van-static-v4';
 
 const STATIC_ASSETS = [
   '/assets/images/tree-svgrepo-com.svg',

@@ -1,0 +1,12 @@
+# ads.txt - Authorized Digital Sellers for urbanforestpark.com
+# -------------------------------------------------------------
+# Google AdSense requires a public ads.txt so buyers know who may sell
+# this site's ad inventory. After the AdSense application is approved:
+#
+#   1. Find your Publisher ID in AdSense -> Account -> Account information
+#      (it looks like pub-XXXXXXXXXXXXXXXX).
+#   2. Replace pub-XXXXXXXXXXXXXXXX below and remove the leading "# " to
+#      activate the line.
+#   3. Redeploy the site so the live ads.txt updates.
+#
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,14 @@
+# India Green Jobs pipeline (scripts/fetch_and_humanize.py)
+# Install with:  pip install -r scripts/requirements.txt
+#
+# NOTE for dev machines that also run GIS packages (geopandas, rasterio):
+# python-jobspy ships a conservative numpy<2 metadata pin, while those GIS
+# packages need numpy>=2. jobspy works fine on numpy 2 (pip only warns), but
+# for a zero-conflict local setup, prefer a virtualenv for the scraper:
+#   py -m venv .venv-jobs
+#   .venv-jobs\Scripts\pip install -r scripts/requirements.txt
+
+python-jobspy>=1.1.82     # LinkedIn / Indeed / Naukri scraping
+requests>=2.31.0          # ReliefWeb API
+pydantic>=2.5             # structured Gemini output validation
+google-genai>=1.0.0       # Gemini Flash humanizer (model order lives in scripts/fetch_and_humanize.py; GEMINI_MODEL overrides)

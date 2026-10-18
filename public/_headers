@@ -6,6 +6,7 @@
 
 # Allow indexing of main pages
 /index.html
+/dashboard.html
 /about.html
 /report.html
 /nagar-van-finder.html
@@ -23,6 +24,11 @@
 # Cache static assets
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Job listings: short cache so new roles appear quickly
+/jobs.json
+  Cache-Control: public, max-age=300
+  Access-Control-Allow-Origin: "*"
 
 /manifest.json
 /site.webmanifest

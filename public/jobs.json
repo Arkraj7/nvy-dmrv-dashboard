@@ -1,0 +1,276 @@
+[
+  {
+    "id": "gis-uhi-research-associate-wri-new-delhi",
+    "date_added": "2026-10-12",
+    "clean_title": "GIS & Urban Heat Island Research Associate",
+    "organization": "WRI India / Climate Centre for Cities",
+    "state": "Delhi NCR",
+    "city": "New Delhi",
+    "category": "GIS, Remote Sensing & UHI",
+    "experience_level": "1-3 Years",
+    "role_summary": "Join the team that helps Indian cities plan for extreme heat using satellite data and a lot of patience with municipal records. You will build land surface temperature layers from Landsat and ECOSTRESS imagery, map tree cover across municipal wards, and translate the results into ward-level heat action plans. The role sits between the GIS team and city government partners, so expect a mix of analysis and workshops.",
+    "key_responsibilities": [
+      "Process Landsat 8/9 and Sentinel-2 imagery to derive land surface temperature (LST) and vegetation indices for partner cities",
+      "Map urban tree cover, green cover gaps and heat hotspots at ward level using Google Earth Engine and QGIS",
+      "Build and maintain spatial databases of cooling centres, water bodies and shade infrastructure",
+      "Prepare data visualisations and fact sheets for city officials and public consultations",
+      "Support capacity-building workshops for municipal GIS staff on heat mapping workflows"
+    ],
+    "must_have_skills": [
+      "Google Earth Engine",
+      "QGIS / ArcGIS",
+      "Python (geopandas, rasterio)",
+      "Landsat & Sentinel LST workflows",
+      "Urban heat island analysis",
+      "Data visualisation (Flourish / Datawrapper)"
+    ],
+    "application_tip": "In your cover letter, name one Indian city heat action plan you have read closely and explain what your mapping work would add to it. Concrete dataset choices (why ECOSTRESS over MODIS for a specific analysis) carry more weight than a list of tools.",
+    "apply_url": "https://example.com/apply/wri-india-gis-uhi-associate"
+  },
+  {
+    "id": "senior-program-officer-urban-forestry-wwf-lucknow",
+    "date_added": "2026-10-09",
+    "clean_title": "Senior Program Officer — Urban Forestry & Afforestation",
+    "organization": "WWF-India (Terai Arc Landscape)",
+    "state": "Uttar Pradesh",
+    "city": "Lucknow",
+    "category": "Forestry & Afforestation",
+    "experience_level": "Senior",
+    "role_summary": "Lead a portfolio of urban forestry and afforestation projects across Uttar Pradesh, from nursery management to five-year survival monitoring. You will work with municipal corporations, forest divisions and community groups to move plantation targets into verified canopy outcomes. This is a senior role for someone who has run field programmes and can handle donors, budgets and government coordination in the same week.",
+    "key_responsibilities": [
+      "Design and implement urban forestry plans for four partner cities in coordination with state forest departments",
+      "Oversee nursery operations, species selection and plantation quality audits across project sites",
+      "Set up survival-rate and canopy-growth monitoring protocols, including geotagged field data collection",
+      "Manage project budgets, donor reporting and compliance for an annual portfolio of ₹4–6 crore",
+      "Represent the organisation in state-level CAMPA and Nagar Van Yojana consultations"
+    ],
+    "must_have_skills": [
+      "Urban forestry & plantation management",
+      "CAMPA / Green India Mission procedures",
+      "Project & budget management",
+      "Coordination with forest departments",
+      "Field monitoring & survival audits",
+      "Donor reporting"
+    ],
+    "application_tip": "Quantify outcomes you owned rather than activities you attended: hectares planted, survival rates above benchmarks, species mix, nursery throughput. A reference who can speak to your government coordination will help your case.",
+    "apply_url": "https://example.com/apply/wwf-india-senior-urban-forestry"
+  },
+  {
+    "id": "esg-carbon-markets-analyst-cbalance-mumbai",
+    "date_added": "2026-10-11",
+    "clean_title": "ESG & Carbon Markets Analyst",
+    "organization": "cBalance Solutions",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "category": "ESG & Carbon Markets",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "cBalance works with companies, cooperatives and government partners to measure emissions and structure carbon projects across India. As an analyst, you will run GHG inventories against the GHG Protocol, screen carbon offset portfolios, and support BRSR-aligned ESG disclosures for listed clients. Expect roughly half your time on data and half on client meetings and reports.",
+    "key_responsibilities": [
+      "Prepare Scope 1, 2 and 3 greenhouse gas inventories for corporate and institutional clients",
+      "Evaluate carbon offset projects (cookstoves, agroforestry, biochar) for additionality and co-benefits",
+      "Draft ESG disclosure sections aligned to BRSR Core and GRI standards",
+      "Build data collection templates and quality-check client-supplied activity data",
+      "Track CCTS and Article 6 developments and brief internal teams on market implications"
+    ],
+    "must_have_skills": [
+      "GHG Protocol & ISO 14064",
+      "Carbon markets (VCS / Gold Standard / CCTS)",
+      "BRSR reporting",
+      "Advanced Excel & data validation",
+      "LCA basics (SimaPro / openLCA)",
+      "Client communication"
+    ],
+    "application_tip": "Bring one fully worked example, such as an emissions baseline or a BRSR gap analysis, as a short appendix to your application. Show your unit conversions and assumptions; reviewers check exactly there.",
+    "apply_url": "https://example.com/apply/cbalance-esg-carbon-analyst"
+  },
+  {
+    "id": "research-associate-climate-ecosystems-atree-bengaluru",
+    "date_added": "2026-10-06",
+    "clean_title": "Research Associate — Climate & Ecosystems",
+    "organization": "ATREE (Ashoka Trust for Research in Ecology and the Environment)",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "category": "Climate & Sustainability",
+    "experience_level": "1-3 Years",
+    "role_summary": "ATREE seeks a research associate for its climate adaptation programme working at the intersection of forests, water and farming landscapes in the Western Ghats. You will collect and analyse field data, support participatory research with local communities, and contribute to peer-reviewed publications. Fieldwork blocks of two to three weeks are part of the job, not an exception.",
+    "key_responsibilities": [
+      "Collect ecological and socio-economic data across study landscapes in Karnataka and Kerala",
+      "Clean, analyse and document datasets in R or Python following reproducible workflows",
+      "Support participatory mapping and focus group discussions with community institutions",
+      "Co-author research papers, policy briefs and donor reports",
+      "Coordinate field logistics, research permits and data-sharing agreements"
+    ],
+    "must_have_skills": [
+      "Field ecology & survey methods",
+      "R or Python data analysis",
+      "Qualitative research / FGDs",
+      "QGIS basics",
+      "Scientific writing",
+      "Kannada or Malayalam (working proficiency)"
+    ],
+    "application_tip": "Attach a writing sample and describe a dataset you cleaned yourself. The strongest applicants explain how they handled messy field data — missing values, inconsistent plots, GPS drift — not just the final results.",
+    "apply_url": "https://example.com/apply/atree-research-associate-climate"
+  },
+  {
+    "id": "jrf-urban-forest-carbon-icfre-dehradun",
+    "date_added": "2026-10-03",
+    "clean_title": "Junior Research Fellow — Urban Forest Carbon & Canopy Mapping",
+    "organization": "ICFRE / Forest Research Institute",
+    "state": "Uttarakhand",
+    "city": "Dehradun",
+    "category": "Forestry & Afforestation",
+    "experience_level": "Entry Level / Fellowship",
+    "role_summary": "The Forest Research Institute is inviting Junior Research Fellows to support a study on carbon sequestration and canopy structure in urban and peri-urban forests. You will assist with plot-level measurements, allometric modelling and remote sensing validation across Dehradun and neighbouring districts. The fellowship suits a recent postgraduate preparing for research or a specialisation in forestry and remote sensing.",
+    "key_responsibilities": [
+      "Lay out and measure permanent sampling plots; record DBH, height and species data",
+      "Process drone and satellite imagery to validate canopy cover estimates",
+      "Maintain carbon stock datasets and support allometric model development",
+      "Help prepare progress reports for the sponsor and conference abstracts"
+    ],
+    "must_have_skills": [
+      "Forest mensuration & plot surveys",
+      "Basic remote sensing (QGIS / SNAP)",
+      "MS Excel / Google Sheets",
+      "Botanical identification (basic)",
+      "Scientific writing basics"
+    ],
+    "application_tip": "State your NET, GATE or equivalent credentials in the first paragraph, since shortlisting weighs them heavily. If your dissertation involved field plots or imagery, summarise it in three sentences with numbers.",
+    "apply_url": "https://example.com/apply/icfre-jrf-urban-forest-carbon"
+  },
+  {
+    "id": "policy-research-fellow-urban-green-iifm-bhopal",
+    "date_added": "2026-09-30",
+    "clean_title": "Policy Research Fellow — Urban Green Infrastructure",
+    "organization": "IIFM & State Partners",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "category": "Environmental Policy & Fellowships",
+    "experience_level": "Entry Level / Fellowship",
+    "role_summary": "A twelve-month policy fellowship hosted at IIFM, working with the Madhya Pradesh forest department on urban green infrastructure, from Nagar Van site reviews to state-level mission documentation. Fellows review schemes, run stakeholder interviews and produce briefs that feed directly into budget and planning notes. This is a writing-heavy role with structured mentoring from faculty and departmental officers.",
+    "key_responsibilities": [
+      "Review central and state schemes (Nagar Van Yojana, CAMPA, Smart Cities) for alignment with urban green infrastructure goals",
+      "Conduct stakeholder interviews with municipal and forest officials across five to six cities",
+      "Draft policy briefs, budget notes and implementation checklists",
+      "Maintain a documented evidence base with sources for every claim in the briefs"
+    ],
+    "must_have_skills": [
+      "Policy research & secondary sources",
+      "Structured interviews",
+      "Policy brief writing",
+      "Excel basics",
+      "Hindi & English drafting"
+    ],
+    "application_tip": "Send one short policy brief of two to three pages on any urban environmental scheme you have studied. Fellowship panels almost always ask what you wrote and who used it, so have a specific answer ready.",
+    "apply_url": "https://example.com/apply/iifm-policy-fellow-urban-green"
+  },
+  {
+    "id": "urban-heat-green-cover-associate-cept-ahmedabad",
+    "date_added": "2026-10-14",
+    "clean_title": "Urban Heat & Green Cover Mapping Associate",
+    "organization": "CEPT University — Research & Development",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "category": "GIS, Remote Sensing & UHI",
+    "experience_level": "1-3 Years",
+    "role_summary": "CEPT is building ward-level heat and green cover baselines for Gujarat cities ahead of the next heat season. You will run the geospatial pipeline — LST retrieval, tree crown delineation, change detection — and package results as open dashboards for city engineers. The role suits a GIS analyst who wants municipal-level impact and is comfortable iterating with planners.",
+    "key_responsibilities": [
+      "Produce LST and NDVI/NDBI layers for partner cities using open satellite archives",
+      "Delineate tree crowns and green cover with a mix of manual QA and semi-automated methods",
+      "Build ward-level dashboards and map atlases for city engineers",
+      "Document methods so municipal teams can reproduce the results independently"
+    ],
+    "must_have_skills": [
+      "QGIS / ArcGIS Pro",
+      "Google Earth Engine",
+      "Python geospatial stack",
+      "Heat island & green cover metrics",
+      "Dashboard building (Dash / Streamlit)",
+      "Technical documentation"
+    ],
+    "application_tip": "Share a live link or repository for any map or dashboard you have built, even a course project. Reviewers here prefer seeing a reproducible workflow over a portfolio of static PDF maps.",
+    "apply_url": "https://example.com/apply/cept-heat-green-cover-associate"
+  },
+  {
+    "id": "climate-risk-adaptation-specialist-anna-university-chennai",
+    "date_added": "2026-10-07",
+    "clean_title": "Climate Risk & Adaptation Specialist",
+    "organization": "Anna University — Centre for Climate Change & Adaptation Research",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "category": "Climate & Sustainability",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "The Centre for Climate Change and Adaptation Research works on coastal city adaptation, monsoon variability and heat-health early warning systems in Tamil Nadu. As a specialist, you will lead vulnerability assessments, contribute to state climate action updates, and anchor a small team of analysts and interns. You will also be the bridge between model outputs and what district officials can actually use.",
+    "key_responsibilities": [
+      "Lead city-level climate vulnerability and risk assessments for coastal Tamil Nadu",
+      "Translate downscaled climate projections into ward and sector-level risk maps",
+      "Support preparation and revision of state and city climate action plans",
+      "Supervise analysts and interns and set quality standards for data and deliverables",
+      "Publish findings in journals and present at state technical committees"
+    ],
+    "must_have_skills": [
+      "Climate risk & vulnerability assessment",
+      "Climate projections (CMIP / CORDEX outputs)",
+      "GIS & statistical analysis (R / Python)",
+      "Urban adaptation planning",
+      "Team supervision",
+      "Tamil & English communication"
+    ],
+    "application_tip": "Show one deliverable that made it into a government process, such as a plan chapter, a committee note or a budget line. Be explicit about modelling choices as well; reviewers here care about how you communicate uncertainty, not only the model you used.",
+    "apply_url": "https://example.com/apply/anna-university-climate-risk-specialist"
+  },
+  {
+    "id": "senior-manager-carbon-markets-eki-jaipur",
+    "date_added": "2026-10-15",
+    "clean_title": "Senior Manager — Carbon Markets & Climate Advisory",
+    "organization": "EKI Energy Services Ltd.",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "category": "ESG & Carbon Markets",
+    "experience_level": "Senior",
+    "role_summary": "EKI is one of India's larger carbon credit players, and this role leads client engagements from carbon footprint assessments to CCTS readiness. You will manage project delivery, negotiate offset transactions and mentor analysts across multiple projects. The position covers one of the fastest-moving areas in Indian climate policy, the compliance carbon market, so appetite for continuous reading is essential.",
+    "key_responsibilities": [
+      "Lead a portfolio of carbon footprint, offset sourcing and CCTS readiness projects",
+      "Structure carbon transactions with rigorous additionality documentation",
+      "Own client relationships across manufacturing, energy and agri-processing sectors",
+      "Mentor analysts and enforce quality assurance on inventories, projections and registry filings",
+      "Track policy developments (CCTS, Article 6) and adjust service offerings accordingly"
+    ],
+    "must_have_skills": [
+      "Carbon markets & registry processes",
+      "Lead-level GHG inventory experience",
+      "Client & team management",
+      "Offset methodologies (VCS / Gold Standard)",
+      "Contract structuring basics",
+      "Presentation & negotiation"
+    ],
+    "application_tip": "Lead with transaction and delivery numbers: volumes, values, methodologies used, registries navigated. A clear account of one complex deal or filing you carried end to end will do more than a general career summary.",
+    "apply_url": "https://example.com/apply/eki-carbon-markets-senior-manager"
+  },
+  {
+    "id": "commons-governance-fellowship-fes-multiple-states",
+    "date_added": "2026-10-01",
+    "clean_title": "Environmental Policy & Governance Fellowship — Commons",
+    "organization": "Foundation for Ecological Security (FES)",
+    "state": "Multiple States / Remote",
+    "city": "Field locations across 8 states",
+    "category": "Environmental Policy & Fellowships",
+    "experience_level": "Entry Level / Fellowship",
+    "role_summary": "FES works on commons governance, forests, pastures and water bodies, with village institutions across eight Indian states. This fellowship places early-career researchers with field teams for eighteen months, combining policy analysis with lived practice. Fellows spend significant time at field locations and contribute to both village-level agreements and state-level policy notes.",
+    "key_responsibilities": [
+      "Document commons governance arrangements and their environmental outcomes across partner states",
+      "Support policy analysis on forest rights, FRA implementation and commons-linked schemes",
+      "Facilitate workshops with village institutions and panchayats",
+      "Produce field notes, case studies and policy commentary",
+      "Maintain data records for long-term monitoring studies"
+    ],
+    "must_have_skills": [
+      "Field research & community engagement",
+      "Policy analysis & writing",
+      "Hindi plus one regional language (working proficiency)",
+      "Basic quantitative analysis",
+      "Willingness to travel extensively"
+    ],
+    "application_tip": "The fellowship values demonstrated field time over academic pedigree. Mention concrete village or community-level work, and be honest about your language range, because field placements are matched to it.",
+    "apply_url": "https://example.com/apply/fes-commons-governance-fellowship"
+  }
+]
