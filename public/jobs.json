@@ -109,6 +109,42 @@
     "source_portal": "LinkedIn"
   },
   {
+    "id": "simons-postdoctoral-fellowships-plant-biology",
+    "date_added": "2026-10-18",
+    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
+    "organization": "Simons Foundation",
+    "state": "Multiple States / Remote",
+    "city": "Remote (India)",
+    "category": "Academic, JRF, SRF & PhD Positions",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "qualification_summary": "PhD in Plant Biology, Botany, or related life sciences disciplines.",
+    "compensation_or_fellowship": "As per institute norms",
+    "role_summary": "The Simons Foundation invites applications for postdoctoral fellowships focused on fundamental research in plant biology. This program supports early-career scientists conducting innovative studies that advance our understanding of plant systems and environmental adaptation. Successful fellows will work on high-impact research projects that contribute to broader ecological and agricultural knowledge bases while building their own independent research portfolios.",
+    "key_responsibilities": [
+      "Conduct independent research in plant biology",
+      "Develop novel experimental methodologies",
+      "Collaborate with leading international research groups",
+      "Publish findings in peer-reviewed scientific journals",
+      "Present research at academic conferences"
+    ],
+    "must_have_skills": [
+      "Plant physiology",
+      "Molecular biology",
+      "Genomics",
+      "Experimental design",
+      "Scientific writing",
+      "Data analysis"
+    ],
+    "application_tip": "Ensure your research proposal clearly outlines the scientific impact of your work on plant systems. Highlight any interdisciplinary experience that bridges plant biology with broader ecological or climate-related research.",
+    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+    "org_website": "https://www.simonsfoundation.org",
+    "org_domain": "simonsfoundation.org",
+    "source_portal": "Official Organization Website",
+    "valid_through": "2026-11-17",
+    "status": "active"
+  },
+  {
     "id": "senior-sector-expert-building-energy-efficiency-asci",
     "date_added": "2026-10-18",
     "clean_title": "Senior Sector Expert – Building Energy Efficiency",
@@ -431,6 +467,42 @@
     "org_website": "https://nextpower.in",
     "org_domain": "nextpower.in",
     "source_portal": "LinkedIn"
+  },
+  {
+    "id": "research-analyst-technology-futures-ceew",
+    "date_added": "2026-10-18",
+    "clean_title": "Research Analyst / Programme Associate - Technology Futures",
+    "organization": "Council on Energy, Environment and Water (CEEW)",
+    "state": "Multiple States / Remote",
+    "city": "Remote (India)",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "experience_level": "1-3 Years",
+    "position_type": "Full-Time Corporate / NGO",
+    "qualification_summary": "Master's degree in Engineering, Economics, Public Policy, or Environmental Science.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Technology Futures team at CEEW focuses on the intersection of emerging technologies and climate action. You will conduct rigorous research to support policy frameworks for low-carbon transitions across energy and industrial sectors. This role involves data analysis and stakeholder engagement to influence national climate strategies while working within a leading Indian policy think-tank.",
+    "key_responsibilities": [
+      "Conduct quantitative and qualitative research on emerging climate technologies.",
+      "Draft policy briefs and research reports for government and industry stakeholders.",
+      "Analyze data trends related to energy transitions and industrial decarbonization.",
+      "Support the team in organizing workshops and high-level policy dialogues.",
+      "Monitor global developments in clean technology and climate policy."
+    ],
+    "must_have_skills": [
+      "Policy analysis",
+      "Energy modeling",
+      "Data visualization",
+      "Technical writing",
+      "Climate change mitigation",
+      "Stakeholder management"
+    ],
+    "application_tip": "Highlight your previous experience with policy research or technical report writing in your cover letter. Ensure your resume clearly lists any quantitative modeling tools or programming languages you are proficient in.",
+    "apply_url": "https://www.ceew.in/careers/research-analyst-programme-associate-technology-futures",
+    "org_website": "https://www.ceew.in",
+    "org_domain": "ceew.in",
+    "source_portal": "Official Organization Website",
+    "valid_through": "2026-11-17",
+    "status": "active"
   },
   {
     "id": "renewable-energy-program-manager-pwc-patna",
