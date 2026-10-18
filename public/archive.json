@@ -31,7 +31,10 @@
     "apply_url": "https://www.atree.org/careers",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.atree.org",
+    "org_domain": "atree.org",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "research-associate-climate-policy-governance-wri-india-bengaluru",
@@ -65,7 +68,10 @@
     "apply_url": "https://www.wri.org/careers",
     "position_type": "Project Associate / Research Associate",
     "qualification_summary": "M.Sc. / M.Tech. / B.Tech. in the relevant discipline, as per the project advertisement",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://wri-india.org",
+    "org_domain": "wri-india.org",
+    "source_portal": "Official Organisation Website"
   },
   {
     "id": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
@@ -99,7 +105,10 @@
     "apply_url": "https://www.wwfindia.org/about_wwf/careers/",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.wwfindia.org",
+    "org_domain": "wwfindia.org",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "consultant-esg-disclosures-brsr-reporting-ceew-new-delhi",
@@ -133,7 +142,10 @@
     "apply_url": "https://www.ceew.in/careers",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.ceew.in",
+    "org_domain": "ceew.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "research-fellowship-environmental-policy-teri-new-delhi",
@@ -167,7 +179,10 @@
     "apply_url": "https://www.teriin.org/careers",
     "position_type": "Fellowship / Internship",
     "qualification_summary": "Recent graduate / postgraduate in the relevant discipline, as per the fellowship norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.teriin.org",
+    "org_domain": "teriin.org",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "manager-carbon-credit-origination-eki-energy-services-indore",
@@ -201,6 +216,9 @@
     "apply_url": "https://enkingint.org/careers",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://enkingint.org",
+    "org_domain": "enkingint.org",
+    "source_portal": "Official Organization Website"
   }
 ]

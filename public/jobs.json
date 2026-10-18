@@ -1,5 +1,77 @@
 [
   {
+    "id": "satluj-river-basin-assessment-tnc",
+    "date_added": "2026-10-19",
+    "clean_title": "Consultant for Satluj River Basin Assessment",
+    "organization": "The Nature Conservancy (TNC)",
+    "state": "Punjab",
+    "city": "Remote (India)",
+    "category": "Forestry, Wildlife & Afforestation",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "qualification_summary": "Master's in Forestry, Environmental Science, Hydrology, or related natural resource management fields.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Nature Conservancy is seeking a consultant to conduct a comprehensive assessment of the Satluj River Basin in Punjab. This project focuses on integrating agroforestry practices, freshwater conservation strategies, and ecological restoration initiatives. The selected agency will provide actionable data to guide sustainable land and water management interventions across the river basin to improve regional biodiversity and agricultural resilience.",
+    "key_responsibilities": [
+      "Assess current land-use patterns and agroforestry potential in the Satluj basin",
+      "Evaluate freshwater conservation needs and existing water management challenges",
+      "Develop a restoration framework for degraded ecosystem patches",
+      "Synthesize field data into a comprehensive technical report for stakeholders",
+      "Coordinate with local partners to ensure alignment with regional conservation goals"
+    ],
+    "must_have_skills": [
+      "River basin management",
+      "Agroforestry systems",
+      "Freshwater ecology",
+      "Ecological restoration",
+      "Technical report writing",
+      "Stakeholder engagement"
+    ],
+    "application_tip": "Highlight your previous experience with river basin assessments or large-scale ecological mapping in your proposal. Ensure your submission clearly outlines the methodology you intend to use for integrating agroforestry with freshwater conservation goals.",
+    "apply_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+    "org_website": "https://www.nature.org",
+    "org_domain": "nature.org",
+    "source_portal": "Official Organisation Website",
+    "valid_through": "2026-11-18",
+    "status": "active"
+  },
+  {
+    "id": "programme-associate-energy-transitions-ceew",
+    "date_added": "2026-10-19",
+    "clean_title": "Programme Associate – Energy Transitions",
+    "organization": "Council on Energy, Environment and Water (CEEW)",
+    "state": "Multiple States / Remote",
+    "city": "Remote (India)",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "experience_level": "1-3 Years",
+    "position_type": "Full-Time Corporate / NGO",
+    "qualification_summary": "Master's degree in Energy, Economics, Public Policy, or Environmental Science.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Council on Energy, Environment and Water is seeking a Programme Associate to support its energy transitions team. You will contribute to rigorous research and policy analysis aimed at accelerating India's shift toward sustainable energy systems. This role involves working closely with senior researchers to produce evidence-based insights that inform national climate policy and infrastructure development strategies.",
+    "key_responsibilities": [
+      "Conduct quantitative and qualitative research on energy transition pathways.",
+      "Analyze policy frameworks and regulatory mechanisms for renewable energy integration.",
+      "Prepare high-quality reports, policy briefs, and presentations for stakeholders.",
+      "Support project management tasks and coordinate with internal research teams.",
+      "Monitor developments in global and domestic energy markets."
+    ],
+    "must_have_skills": [
+      "Energy policy analysis",
+      "Quantitative research methods",
+      "Data modeling",
+      "Technical writing",
+      "Renewable energy systems",
+      "Stakeholder engagement"
+    ],
+    "application_tip": "Highlight your experience with energy modeling tools or specific policy research projects in your cover letter. Ensure your writing samples demonstrate an ability to translate complex technical data into clear policy recommendations.",
+    "apply_url": "https://www.ceew.in/careers/programme-associate-%E2%80%93-energy-transitions",
+    "org_website": "https://www.ceew.in",
+    "org_domain": "ceew.in",
+    "source_portal": "Official Organization Website",
+    "valid_through": "2026-11-18",
+    "status": "active"
+  },
+  {
     "id": "team-member-green-steel-jsw-steel-chennai",
     "date_added": "2026-10-18",
     "clean_title": "Team Member - Green Steel",
@@ -31,7 +103,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.jsw.in",
+    "org_domain": "jsw.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "senior-sector-expert-building-energy-efficiency-asci",
@@ -63,7 +138,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.asci.org.in",
+    "org_domain": "asci.org.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "senior-regulatory-specialist-toxicology-ecolab-pune",
@@ -96,7 +174,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.ecolab.com",
+    "org_domain": "ecolab.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "senior-leadership-energy-transition-new-delhi",
@@ -129,7 +210,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "senior-consultant-ccass-ey-chennai",
@@ -162,7 +246,10 @@
     "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.ey.com/en_in",
+    "org_domain": "ey.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "senior-associate-pwc-india",
@@ -195,7 +282,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.pwc.in",
+    "org_domain": "pwc.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "scientist-innovation-systems-icrisat",
@@ -229,7 +319,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.icrisat.org",
+    "org_domain": "icrisat.org",
+    "source_portal": "Indeed"
   },
   {
     "id": "sales-manager-sustainability-intertek-india",
@@ -262,7 +355,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.intertek.com",
+    "org_domain": "intertek.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "sales-consultant-quantum-sustainability-consulting",
@@ -295,7 +391,10 @@
     "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.sustainablebuildingfrontiers.com",
+    "org_domain": "sustainablebuildingfrontiers.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "sales-analyst-nextpower",
@@ -328,7 +427,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://nextpower.in",
+    "org_domain": "nextpower.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "renewable-energy-program-manager-pwc-patna",
@@ -361,7 +463,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.pwc.in",
+    "org_domain": "pwc.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "quality-assurance-manager-naandi-water",
@@ -395,7 +500,10 @@
     "application_tip": "Highlight your experience with water safety standards or food and beverage manufacturing audits. Emphasize your ability to translate technical quality data into actionable operational improvements.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478238129",
     "valid_through": "2026-11-17",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.naandi.org",
+    "org_domain": "naandi.org",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "project-lead-access-development-services",
@@ -429,7 +537,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.accessdev.org",
+    "org_domain": "accessdev.org",
+    "source_portal": "Indeed"
   },
   {
     "id": "project-coordinator-yclc-bindi-international",
@@ -462,7 +573,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.bindi-international.org",
+    "org_domain": "bindi-international.org",
+    "source_portal": "Indeed"
   },
   {
     "id": "project-associate-assistant-wii",
@@ -493,9 +607,12 @@
       "Scientific research methodology"
     ],
     "application_tip": "Ensure your CV highlights specific field experience or taxonomic expertise relevant to the project themes. Prepare to discuss your familiarity with ecological sampling techniques during the selection process.",
-    "apply_url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOS0lWNmZsTEdvb1AyM28weGtZR3FHQ29wOWlON1dQcFNKUXo5d3cwLW1aS1RLVENqbWw3Ykh3RHJydDV2cWVHWFVQSlJkU2pELWFTa3lGTGVwNGdPbXpJaWNGVzZCYnJ5U1dtS0w5LXF6V0l1WDdRSVh3STNDSlM1Q2E2MDBGWkN4RmhvSzBLOWxLVnl4LXRzWFZPdHRObUZvZnVpcDhsRmdsV3JGYXUxYVowQWRUQnkzcV9fVkQ1QTdjR1J6Z3ppbnBELTVMdWV0RjRz?oc=5",
+    "apply_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
     "valid_through": "2026-11-17",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://wii.gov.in",
+    "org_domain": "wii.gov.in",
+    "source_portal": "freejobalert.com"
   },
   {
     "id": "programme-associate-industrial-heat-decarbonisation-iforest",
@@ -528,7 +645,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://iforest.in",
+    "org_domain": "iforest.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "programme-associate-industrial-decarbonisation-iforest",
@@ -561,7 +681,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://iforest.in",
+    "org_domain": "iforest.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "program-partnership-manager-equilibrium",
@@ -594,7 +717,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.equilibriumclimate.com",
+    "org_domain": "equilibriumclimate.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "program-manager-sustainability-fleet-electrification-amazon",
@@ -627,7 +753,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.amazon.in",
+    "org_domain": "amazon.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "program-manager-disaster-climate-resilience-selco",
@@ -661,7 +790,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://selcofoundation.org",
+    "org_domain": "selcofoundation.org",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "program-coordinator-climate-health-path-mumbai",
@@ -694,7 +826,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.path.org",
+    "org_domain": "path.org",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "process-engineer-electrification-quest-global",
@@ -728,7 +863,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.quest-global.com",
+    "org_domain": "quest-global.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "partnerships-outreach-manager-liter-of-light-mumbai",
@@ -761,7 +899,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://literoflight.org",
+    "org_domain": "literoflight.org",
+    "source_portal": "Indeed"
   },
   {
     "id": "mechanical-design-engineer-saltech-design-labs",
@@ -794,7 +935,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://saltechlabs.com",
+    "org_domain": "saltechlabs.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "manager-sustainability-aditya-birla-fashion-and-retail",
@@ -827,7 +971,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.abfrl.com",
+    "org_domain": "abfrl.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "manager-program-development-geapp-india",
@@ -860,7 +1007,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://energyalliance.org",
+    "org_domain": "energyalliance.org",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "manager-esg-sustainability-scimplify-bengaluru",
@@ -893,7 +1043,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.scimplify.com",
+    "org_domain": "scimplify.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "management-trainee-climate-smart-agriculture-cosmosgreen",
@@ -926,7 +1079,10 @@
     "status": "active",
     "position_type": "Fellowship / Internship",
     "qualification_summary": "Recent graduate / postgraduate in the relevant discipline, as per the fellowship norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.cosmosgreenenergy.com",
+    "org_domain": "cosmosgreenenergy.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "lead-infrastructure-and-climate-iihs",
@@ -959,7 +1115,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://iihs.co.in",
+    "org_domain": "iihs.co.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "head-projects-operations-suninfra-energies",
@@ -993,7 +1152,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://suninfra.co.in",
+    "org_domain": "suninfra.co.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "head-esg-yulu",
@@ -1026,7 +1188,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.yulu.bike",
+    "org_domain": "yulu.bike",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "global-logistics-sustainability-sme-castrol",
@@ -1059,7 +1224,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.castrol.com",
+    "org_domain": "castrol.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "esg-manager-redington-limited",
@@ -1092,7 +1260,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.redingtongroup.com",
+    "org_domain": "redingtongroup.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "esg-data-evidence-architect-ntt-data",
@@ -1125,7 +1296,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.nttdata.com",
+    "org_domain": "nttdata.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "esg-analyst-metro-global-solution-center",
@@ -1158,7 +1332,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.metro.co.in",
+    "org_domain": "metro.co.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "environmental-analyst-olive-recruitment-kochi",
@@ -1190,7 +1367,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.oliverecruitment.com",
+    "org_domain": "oliverecruitment.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "emissions-executive-accelleron",
@@ -1223,7 +1403,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.accelleron.com",
+    "org_domain": "accelleron.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "doctoral-student-iit-guwahati",
@@ -1256,7 +1439,10 @@
     "status": "active",
     "position_type": "PhD / Doctoral Fellowship",
     "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.iitg.ac.in",
+    "org_domain": "iitg.ac.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "deputy-vice-president-energy-environment-sambodhi",
@@ -1290,7 +1476,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://sambodhi.co.in",
+    "org_domain": "sambodhi.co.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "dean-anant-school-for-climate-action-ahmedabad",
@@ -1323,7 +1512,10 @@
     "status": "active",
     "position_type": "Faculty / Academic",
     "qualification_summary": "Ph.D. in the relevant discipline with teaching / research experience, as per UGC norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://anu.edu.in",
+    "org_domain": "anu.edu.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "coordinator-tea-wwf-india",
@@ -1356,7 +1548,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.wwfindia.org",
+    "org_domain": "wwfindia.org",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "consultant-ccass-ey-mumbai",
@@ -1389,7 +1584,10 @@
     "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.ey.com/en_in",
+    "org_domain": "ey.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "consultant-ccass-ey-chennai",
@@ -1422,7 +1620,10 @@
     "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
+    "compensation_or_fellowship": "As per institute norms",
+    "org_website": "https://www.ey.com/en_in",
+    "org_domain": "ey.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "compliance-executive-peregreen-enviro",
@@ -1455,7 +1656,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://peregreen.in",
+    "org_domain": "peregreen.in",
+    "source_portal": "Indeed"
   },
   {
     "id": "co-founder-dhartiamrit-ecoservices",
@@ -1488,7 +1692,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://dhartiamrit.com",
+    "org_domain": "dhartiamrit.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "climate-nature-social-risk-analyst-jpmorganchase",
@@ -1521,7 +1728,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.jpmorganchase.com",
+    "org_domain": "jpmorganchase.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "business-head-textile-circularity-hospitality-2",
@@ -1554,7 +1764,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://tinyurl.com",
+    "org_domain": "tinyurl.com",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "business-head-textile-circularity-hospitality",
@@ -1588,7 +1801,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://tinyurl.com",
+    "org_domain": "tinyurl.com",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "business-development-marketing-associate-flora-carbon-ai",
@@ -1621,7 +1837,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://floracarbon.ai",
+    "org_domain": "floracarbon.ai",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "business-development-manager-renewable-energy-deif",
@@ -1654,7 +1873,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.deif.com",
+    "org_domain": "deif.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "building-automation-engineer-cundall-chennai",
@@ -1687,7 +1909,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.cundall.com",
+    "org_domain": "cundall.com",
+    "source_portal": "Indeed"
   },
   {
     "id": "auditor-sustainability-services-cotecna",
@@ -1720,7 +1945,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.cotecna.com",
+    "org_domain": "cotecna.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram-2",
@@ -1754,7 +1982,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.tuvsud.com",
+    "org_domain": "tuvsud.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram",
@@ -1788,7 +2019,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.tuvsud.com",
+    "org_domain": "tuvsud.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "associate-team-lead-supplier-compliance-colgate-palmolive",
@@ -1821,7 +2055,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.colgatepalmolive.com",
+    "org_domain": "colgatepalmolive.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "associate-power-utility-transformation-pwc-india",
@@ -1853,7 +2090,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.pwc.in",
+    "org_domain": "pwc.in",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "associate-analyst-supplier-compliance-colgate-palmolive",
@@ -1886,7 +2126,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.colgatepalmolive.com",
+    "org_domain": "colgatepalmolive.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "assistant-manager-csr-social-innovation",
@@ -1919,7 +2162,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "Indeed"
   },
   {
     "id": "assistant-associate-esg-lic-housing-finance",
@@ -1952,7 +2198,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.lichousing.com",
+    "org_domain": "lichousing.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "area-sales-manager-loom-solar",
@@ -1985,7 +2234,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.loomsolar.com",
+    "org_domain": "loomsolar.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor-2",
@@ -2018,7 +2270,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.avantorsciences.com",
+    "org_domain": "avantorsciences.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor",
@@ -2051,7 +2306,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.avantorsciences.com",
+    "org_domain": "avantorsciences.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "analyst-civil-design-desri-hyderabad",
@@ -2084,7 +2342,10 @@
     "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-    "compensation_or_fellowship": "Not disclosed - see official portal"
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "org_website": "https://www.desri.com",
+    "org_domain": "desri.com",
+    "source_portal": "LinkedIn"
   },
   {
     "id": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
@@ -2117,7 +2378,10 @@
     "application_tip": "Attach a short note listing every field survey you have joined, the terrains covered and the datasets you processed yourself. Panels weigh hands-on camera-trap and analysis experience far above coursework.",
     "apply_url": "https://wii.gov.in/recruitments",
     "valid_through": "2026-11-16",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://wii.gov.in",
+    "org_domain": "wii.gov.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
@@ -2149,7 +2413,10 @@
     "application_tip": "Name the instruments you have personally operated in your cover letter. For project JRF posts at IITs, interview panels also ask standard questions on aerosol fundamentals, so revise secondary aerosol pathways.",
     "apply_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
     "valid_through": "2026-11-15",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://home.iitd.ac.in",
+    "org_domain": "iitd.ac.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "jrf-avian-ecology-habitat-assessment-sacon-coimbatore",
@@ -2181,7 +2448,10 @@
     "application_tip": "Keep a species list from your field surveys ready and be specific about the number of survey days and habitats covered. SACON panels check whether you can work independently in humid, leech-prone field stations.",
     "apply_url": "https://www.sacon.in/careers/",
     "valid_through": "2026-11-14",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://sacon.in",
+    "org_domain": "sacon.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp",
@@ -2213,7 +2483,10 @@
     "application_tip": "Lead with your three strongest publications and the datasets or models you can reuse immediately. Postdoc selections at IITs favour candidates who arrive with a concrete plan for the first year.",
     "apply_url": "https://www.iitkgp.ac.in/careers",
     "valid_through": "2026-11-13",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.iitkgp.ac.in",
+    "org_domain": "iitkgp.ac.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "research-associate-biodiversity-ecological-genomics-ncbs",
@@ -2245,7 +2518,10 @@
     "application_tip": "State the exact wet-lab protocols you can run unaided and name the bioinformatics tools you have actually used. For NCBS project posts, clarity about what you can do on day one matters more than publication count.",
     "apply_url": "https://www.ncbs.res.in/careers",
     "valid_through": "2026-11-12",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.ncbs.res.in",
+    "org_domain": "ncbs.res.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "phd-climate-dynamics-earth-system-modelling-iisc-bengaluru",
@@ -2277,7 +2553,10 @@
     "application_tip": "Write to prospective supervisors only after studying their recent papers, and articulate one concrete question you would like to model. Reviewers respond to specificity, not general enthusiasm for climate science.",
     "apply_url": "https://iisc.ac.in/careers/",
     "valid_through": "2026-11-11",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://iisc.ac.in",
+    "org_domain": "iisc.ac.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "doctoral-fellowship-climate-policy-sustainable-development-teri",
@@ -2309,7 +2588,10 @@
     "application_tip": "Pitch a research question that connects to TERI's live projects - carbon markets, BRSR, or just transition - and show earlier evidence of independent writing. A crisp two-page proposal beats a long generic statement.",
     "apply_url": "https://www.teriin.org/careers",
     "valid_through": "2026-11-10",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.teriin.org",
+    "org_domain": "teriin.org",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "young-professional-forest-policy-climate-finance-iifm-bhopal",
@@ -2341,7 +2623,10 @@
     "application_tip": "Include one writing sample - a policy note or dissertation chapter - that shows you can compress evidence into decision-ready briefs. IIFM values clarity for forest officers who read quickly.",
     "apply_url": "https://www.iifm.ac.in/career",
     "valid_through": "2026-11-08",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.iifm.ac.in",
+    "org_domain": "iifm.ac.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "young-professional-climate-change-campa-moefcc",
@@ -2373,7 +2658,10 @@
     "application_tip": "Follow the vacancy circular's exact format - government screening is procedural. Underline any prior experience with state climate action plans or CAMPA documentation.",
     "apply_url": "https://moef.gov.in/vacancy-circulars",
     "valid_through": "2026-11-07",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://moef.gov.in",
+    "org_domain": "moef.gov.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "project-associate-geospatial-modelling-urban-heat-island-nrsc",
@@ -2405,7 +2693,10 @@
     "application_tip": "Bring one worked example - code or a map portfolio - showing an urban heat or land-surface analysis you completed end to end. ISRO project teams check the workflow, not just the output.",
     "apply_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
     "valid_through": "2026-11-06",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.nrsc.gov.in",
+    "org_domain": "nrsc.gov.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "project-associate-himalayan-ecology-climate-adaptation-gbpnihe",
@@ -2437,7 +2728,10 @@
     "application_tip": "Highlight any Himalayan field experience and your ability to work at altitude for extended periods. Government institute panels also value Hindi proficiency for community-facing work.",
     "apply_url": "https://gbpihed.gov.in/vacancy.html",
     "valid_through": "2026-11-05",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://gbpihed.gov.in",
+    "org_domain": "gbpihed.gov.in",
+    "source_portal": "Official Organization Website"
   },
   {
     "id": "project-associate-geospatial-urban-green-infrastructure-atree",
@@ -2469,6 +2763,9 @@
     "application_tip": "A portfolio link with two or three urban analysis maps - canopy, heat or access - works better than a long CV. Mention how you validate classifications; ATREE reviews accuracy methods closely.",
     "apply_url": "https://www.atree.org/careers/",
     "valid_through": "2026-11-04",
-    "status": "active"
+    "status": "active",
+    "org_website": "https://www.atree.org",
+    "org_domain": "atree.org",
+    "source_portal": "Official Organization Website"
   }
 ]

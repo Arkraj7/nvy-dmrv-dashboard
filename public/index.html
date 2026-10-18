@@ -46,6 +46,11 @@
     <meta name="twitter:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
+    <!-- Community channels used by the job-alert network (edit these two lines to
+         point at the real invite links; js/jobs.js reads them automatically). -->
+    <meta name="ufp-whatsapp-group" content="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw">
+    <meta name="ufp-telegram-channel" content="https://t.me/urbanforestpark_jobs">
+
     <!-- Favicons (same set as the rest of the site) -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -181,6 +186,27 @@
         <div class="hero-actions">
           <a class="btn btn-primary" href="#filter-bar">Browse Active Mandates</a>
           <a class="btn btn-outline" href="/?view=archive">Historical Mandate Archive</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COMMUNITY: WHATSAPP / TELEGRAM JOB ALERTS ================= -->
+    <section class="community-strip" aria-label="Join the green &amp; academic job alert network">
+      <div class="cs-inner">
+        <div class="cs-copy">
+          <strong>Join India&rsquo;s Green &amp; Academic Job Alert Network</strong>
+          <span>Daily JRF, forestry, GIS, ESG and climate mandates &mdash; verified and broadcast every morning at 7 AM IST.</span>
+        </div>
+        <div class="cs-actions">
+          <a class="cs-btn cs-wa" href="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.5 14.1c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1-1.7-.5-4.7-2.6-6-5.2-.4-.8-.6-1.6-.4-2.3.1-.5.7-1.3 1.1-1.5.3-.2.8-.2 1 0 .2.2 1 1.7 1.1 1.9.1.2.1.4 0 .6-.1.2-.5.7-.6.9-.1.1-.2.3-.1.5.4.8 1.7 2.3 2.8 2.8.2.1.4.1.5-.1.2-.2.7-.7.9-.9.2-.2.4-.2.6-.1.2.1 1.6.9 1.8 1.1.2.2.2.7-.2 1.1z"/></svg>
+            Join WhatsApp Job Group
+          </a>
+          <a class="cs-btn cs-tg" href="https://t.me/urbanforestpark_jobs" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.6c.3-1.2-.4-1.7-1.2-1.4L2.6 9.1c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.5c.2.6.4.8 1 .3l2.6-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3-16.3zM9.4 12.5l8.4-5.3c.4-.2.7-.1.4.2l-7.2 6.5-.3 3-1.3-4.4z"/></svg>
+            Join Telegram Channel
+          </a>
+          <button class="cs-btn cs-digest" id="copy-daily-digest-strip" type="button">Copy Today&rsquo;s Broadcast</button>
         </div>
       </div>
     </section>
@@ -369,11 +395,13 @@
       <div class="seo-pr-inner">
         <p class="eyebrow">Pre-Rendered Registry Snapshot</p>
         <h2 id="seo-pr-title">Complete List of Active Environmental &amp; Academic Mandates in India</h2>
-        <p class="seo-pr-intro">The complete static index of active environmental, forestry, geospatial and academic research mandates tracked by Urban Forest Park — climate, forestry, wildlife, ESG, carbon market, GIS, remote sensing, earth observation, JRF, SRF, PhD, postdoctoral, project associate, young professional and faculty vacancies across Indian states and cities. Every entry links to the live position dossier with the official application portal. Snapshot updated 18 October 2026 (IST) — 75 active and 6 recently archived mandates.</p>
+        <p class="seo-pr-intro">The complete static index of active environmental, forestry, geospatial and academic research mandates tracked by Urban Forest Park — climate, forestry, wildlife, ESG, carbon market, GIS, remote sensing, earth observation, JRF, SRF, PhD, postdoctoral, project associate, young professional and faculty vacancies across Indian states and cities. Every entry links to the live position dossier with the official application portal. Snapshot updated 19 October 2026 (IST) — 77 active and 6 recently archived mandates.</p>
         <div class="seo-pr-grid">
           <div class="seo-pr-col">
-            <h3>Active Opportunities (75)</h3>
+            <h3>Active Opportunities (77)</h3>
             <ul class="seo-pr-list">
+            <li><a href="/?job=programme-associate-energy-transitions-ceew">Programme Associate – Energy Transitions — Council on Energy, Environment and Water (CEEW) (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=satluj-river-basin-assessment-tnc">Consultant for Satluj River Basin Assessment — The Nature Conservancy (TNC) (Punjab | Young Professional / Consultant (Contractual))</a></li>
             <li><a href="/?job=team-member-green-steel-jsw-steel-chennai">Team Member - Green Steel — JSW Steel (Tamil Nadu | Full-Time Corporate / NGO)</a></li>
             <li><a href="/?job=senior-sector-expert-building-energy-efficiency-asci">Senior Sector Expert – Building Energy Efficiency — ASCI (Delhi NCR | Full-Time Corporate / NGO)</a></li>
             <li><a href="/?job=senior-regulatory-specialist-toxicology-ecolab-pune">Senior Regulatory Specialist - Toxicology — Ecolab (Maharashtra | Full-Time Corporate / NGO)</a></li>
@@ -593,6 +621,17 @@
           <li><a href="mailto:arkraj.biswas6@gmail.com">Contact the Registry</a></li>
         </ul>
       </div>
+    </div>
+
+    <div class="footer-broadcast">
+      <div class="fb-copy">
+        <span class="fb-title">Daily WhatsApp / Telegram Broadcast</span>
+        <span class="fb-sub">Copy the ready-to-forward digest of today&rsquo;s verified mandates and post it to any WhatsApp group or Telegram channel.</span>
+      </div>
+      <button class="digest-copy-btn" id="copy-daily-digest" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg>
+        Copy Today&rsquo;s WhatsApp / Telegram Broadcast
+      </button>
     </div>
 
     <div class="footer-bottom">

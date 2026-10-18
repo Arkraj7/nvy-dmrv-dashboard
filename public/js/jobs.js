@@ -25,6 +25,36 @@
     SITE_NAME: 'Urban Forest Park'
   };
 
+  /* WhatsApp / Telegram job-alert network. The owner can point these at the
+     real invite links in one line by editing the two <meta> tags in
+     index.html (<meta name="ufp-whatsapp-group"> / ufp-telegram-channel). */
+  var COMMUNITY_CHANNELS = (function () {
+    function metaValue(name, fallback) {
+      var el = document.querySelector('meta[name="' + name + '"]');
+      var content = el && el.getAttribute('content');
+      return (content && content.trim()) || fallback;
+    }
+    return {
+      whatsapp_group_url: metaValue('ufp-whatsapp-group', 'https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw'),
+      telegram_channel_url: metaValue('ufp-telegram-channel', 'https://t.me/urbanforestpark_jobs')
+    };
+  })();
+
+  function isPlaceholderChannel(url, kind) {
+    if (!url) return true;
+    if (kind === 'whatsapp') {
+      return /0029VaGreenJobsIndia|your[-_]|placeholder|example/i.test(url);
+    }
+    return false;
+  }
+
+  function communityGuardAttr(kind) {
+    var url = kind === 'whatsapp'
+      ? COMMUNITY_CHANNELS.whatsapp_group_url
+      : COMMUNITY_CHANNELS.telegram_channel_url;
+    return isPlaceholderChannel(url, kind) ? ' data-community-guard="' + kind + '"' : '';
+  }
+
   var CATEGORY_SLUGS = {
     'Academic, JRF, SRF & PhD Positions': 'academic-jrf-srf-phd',
     'Research Associate & Project Staff (Contractual)': 'research-associate-project-staff',
@@ -117,7 +147,9 @@
       bulb: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-4 10.5c.7.7 1 1.6 1 2.5h6c0-.9.3-1.8 1-2.5A6 6 0 0012 3z"/></svg>',
       archive: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 001 1h12a1 1 0 001-1V8"/><path d="M10 12h4"/></svg>',
       cap: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9.5L12 5 2 9.5l10 4.5 10-4.5z"/><path d="M6 11.6V16c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.4"/><path d="M22 9.5v4.6"/></svg>',
-      rupee: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 8h12"/><path d="M6 13h4a5 5 0 000-10H6"/><path d="M6 13l8.5 8"/></svg>'
+      rupee: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 8h12"/><path d="M6 13h4a5 5 0 000-10H6"/><path d="M6 13l8.5 8"/></svg>',
+      telegram: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.6c.3-1.2-.4-1.7-1.2-1.4L2.6 9.1c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.5c.2.6.4.8 1 .3l2.6-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3-16.3zM9.4 12.5l8.4-5.3c.4-.2.7-.1.4.2l-7.2 6.5-.3 3-1.3-4.4z"/></svg>',
+      bell: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>'
     };
     return icons[name] || '';
   }
@@ -132,6 +164,216 @@
   };
 
   function catClass(category) { return CATEGORY_CLASS[category] || 'cat-policy'; }
+
+  /* ------------------------------------------------------------------ */
+  /* Topic figures (right-side square visual), readable links & sharing  */
+  /* ------------------------------------------------------------------ */
+  var TOPIC_META = {
+    'Academic, JRF, SRF & PhD Positions': { key: 'academic', label: 'JRF / PHD', emblem: 'cap' },
+    'Research Associate & Project Staff (Contractual)': { key: 'research', label: 'RESEARCH', emblem: 'beaker' },
+    'Forestry, Wildlife & Afforestation': { key: 'forestry', label: 'FORESTRY', emblem: 'canopy' },
+    'GIS, Remote Sensing & Earth Observation': { key: 'gis', label: 'GIS & EO', emblem: 'satellite' },
+    'ESG, Carbon Markets & Corporate Sustainability': { key: 'esg', label: 'ESG & CARBON', emblem: 'leaf' },
+    'Climate Policy, Think-Tanks & Fellowships': { key: 'policy', label: 'CLIMATE', emblem: 'globe' }
+  };
+
+  function topicMetaFor(job) {
+    if (TOPIC_META[job.category]) return TOPIC_META[job.category];
+    var pt = positionTypeOf(job);
+    if (pt === 'JRF / SRF' || pt === 'PhD / Doctoral Fellowship' || pt === 'Faculty / Academic') {
+      return TOPIC_META['Academic, JRF, SRF & PhD Positions'];
+    }
+    if (pt === 'Project Associate / Research Associate') {
+      return TOPIC_META['Research Associate & Project Staff (Contractual)'];
+    }
+    return { key: 'policy', label: 'CLIMATE', emblem: 'globe' };
+  }
+
+  /* High-contrast topic emblems shown when no institution logo is available. */
+  var EMBLEM_SVGS = {
+    cap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 1.8 8.6 12 13.7l10.2-5.1L12 3.5z"/><path d="M6 11v4.2c0 1.8 2.7 3.3 6 3.3s6-1.5 6-3.3V11"/><path d="M22.2 8.6v4.9"/></svg>',
+    beaker: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.3L4.9 17.2A2 2 0 0 0 6.6 20h10.8a2 2 0 0 0 1.7-2.8L14 9.3V3"/><path d="M7.6 14.6h8.8"/></svg>',
+    canopy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 6.8 10h10.4L12 3z"/><path d="M12 8 4.8 16h14.4L12 8z"/><path d="M12 16v5"/></svg>',
+    satellite: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="6.4"/><path d="M5.6 13h12.8"/><path d="M12 6.6c-2.1 2.3-3.1 4.4-3.1 6.4s1 4.1 3.1 6.4c2.1-2.3 3.1-4.4 3.1-6.4s-1-4.1-3.1-6.4z"/><ellipse cx="12" cy="11.4" rx="10.3" ry="4.6" transform="rotate(-18 12 11.4)"/><circle cx="21.5" cy="5.4" r="1.3" fill="currentColor" stroke="none"/></svg>',
+    leaf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 19.2C4.8 10 10.8 4.8 20 4.8c0 9.2-5.2 15.2-14.4 15.2z"/><path d="M4.8 19.2c2-2.6 4.9-4.8 8.7-6.4"/></svg>',
+    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2"/><path d="M12 3.4c-2.7 2.5-3.9 5.4-3.9 8.6s1.2 6.1 3.9 8.6c2.7-2.5 3.9-5.4 3.9-8.6s-1.2-6.1-3.9-8.6z"/></svg>'
+  };
+
+  function emblemSvg(name) { return EMBLEM_SVGS[name] || EMBLEM_SVGS.globe; }
+
+  function orgMonogram(organization) {
+    var words = String(organization || '')
+      .replace(/[^A-Za-z0-9 ]/g, ' ')
+      .split(/\s+/)
+      .filter(function (w) {
+        return w && !/^(the|of|and|for|at|in|india|limited|pvt|ltd|private)$/i.test(w);
+      });
+    if (!words.length) return 'UFP';
+    if (words.length === 1) return words[0].slice(0, 3).toUpperCase();
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+
+  function orgDomainOf(job) {
+    if (job.org_domain) return String(job.org_domain).replace(/^www\./i, '');
+    var match = String(job.org_website || '').match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i);
+    return match ? match[1].toLowerCase() : '';
+  }
+
+  function applyHostOf(job) {
+    var match = String(job.apply_url || '').match(/^https?:\/\/(?:www\.)?([^\/?#]+)/i);
+    return match ? match[1].toLowerCase() : '';
+  }
+
+  function sourcePortalOf(job) {
+    if (job.source_portal) return job.source_portal;
+    var host = applyHostOf(job);
+    if (/linkedin\./.test(host)) return 'LinkedIn';
+    if (/indeed\./.test(host)) return 'Indeed';
+    if (/naukri\./.test(host)) return 'Naukri';
+    if (/news\.google\./.test(host)) return 'News Announcement';
+    if (/reliefweb\./.test(host)) return 'ReliefWeb';
+    if (/\.(gov\.in|nic\.in|ac\.in|res\.in|edu\.in)$/.test(host)) return 'Official Institute Portal';
+    return host || 'Official Portal';
+  }
+
+  /* Square institution-logo / topic-emblem figure used on cards & dossiers.
+     Tries the organisation's favicon first and swaps to the topic emblem
+     (via the delegated .fig-logo error handler) when no logo loads. */
+  function logoFigureHtml(job, variant) {
+    var topic = topicMetaFor(job);
+    var domain = orgDomainOf(job);
+    var fallback = domain ? '' : ' fig-fallback';
+    var media = '';
+    if (domain) {
+      media += '<img class="fig-logo" src="https://www.google.com/s2/favicons?domain=' +
+        encodeURIComponent(domain) + '&sz=128" alt="" loading="lazy" decoding="async" ' +
+        'referrerpolicy="no-referrer" width="64" height="64">';
+    }
+    media += '<span class="fig-emblem" aria-hidden="true">' + emblemSvg(topic.emblem) +
+      '<span class="fig-monogram">' + escapeHtml(orgMonogram(job.organization)) + '</span></span>';
+    var strip = '<figcaption class="fig-strip"><span class="fig-topic">' +
+      escapeHtml(topic.label) + '</span>' +
+      (domain ? '<span class="fig-domain">' + escapeHtml(domain) + '</span>' : '') +
+      '</figcaption>';
+    var aria = topic.label + ' \u00b7 ' + (job.organization || '') + (domain ? ' (' + domain + ')' : '');
+    return '<figure class="job-figure job-figure--' + variant + ' fig-' + topic.key + fallback +
+      '" data-cat="' + topic.key + '" role="img" aria-label="' + escapeHtml(aria) + '">' +
+      '<span class="fig-media">' + media + '</span>' + strip + '</figure>';
+  }
+
+  /* Turn any raw URL inside body copy into a readable pill link. */
+  function formatReadableText(text) {
+    var src = String(text == null ? '' : text);
+    var re = /https?:\/\/[^\s<>"')\]]+/g;
+    var out = '';
+    var last = 0;
+    var match;
+    while ((match = re.exec(src)) !== null) {
+      var url = match[0].replace(/[.,;:]+$/, '');
+      out += escapeHtml(src.slice(last, match.index));
+      var host = url.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[\/?#]/)[0];
+      out += '<a class="inline-doc-link" href="' + escapeHtml(url) +
+        '" target="_blank" rel="noopener noreferrer nofollow">Official Link (' +
+        escapeHtml(host) + ') \u2197</a>';
+      last = match.index + match[0].length;
+    }
+    out += escapeHtml(src.slice(last));
+    return out;
+  }
+
+  /* Rich, forward-ready WhatsApp alert for one mandate. */
+  function whatsappAlertText(job) {
+    var location = job.state === 'Multiple States / Remote'
+      ? 'Multiple States / Remote (India)'
+      : (job.city ? job.city + ', ' + job.state : (job.state || 'India'));
+    var lines = [
+      '\ud83c\udf31 *NEW GREEN / RESEARCH JOB ALERT*',
+      '',
+      '\ud83d\udccc *Role:* ' + (job.clean_title || ''),
+      '\ud83c\udfdb\ufe0f *Organization:* ' + (job.organization || ''),
+      '\ud83d\udccd *Location:* ' + location,
+      '\ud83c\udf93 *Eligibility:* ' + (job.qualification_summary || 'As per institute norms'),
+      '\ud83d\udcb0 *Fellowship/Pay:* ' + (job.compensation_or_fellowship || 'As per institute norms')
+    ];
+    if (job.valid_through) lines.push('\u23f3 *Apply before:* ' + job.valid_through);
+    lines.push('');
+    lines.push('\ud83d\udd17 *Full Details & Apply:* ' + shareableUrl(job.id));
+    if (job.org_website) lines.push('\ud83c\udf10 *Official Site:* ' + job.org_website);
+    return lines.join('\n');
+  }
+
+  function whatsappShareHref(job) {
+    return 'https://api.whatsapp.com/send?text=' + encodeURIComponent(whatsappAlertText(job));
+  }
+
+  function telegramShareHref(job) {
+    var text = job.clean_title + ' at ' + job.organization + ' \u2014 India green & research jobs registry';
+    return 'https://t.me/share/url?url=' + encodeURIComponent(shareableUrl(job.id)) +
+      '&text=' + encodeURIComponent(text);
+  }
+
+  /* "Get Daily Alerts" callout embedded in every dossier. */
+  function communityCalloutHtml(job) {
+    return '' +
+      '<div class="community-callout">' +
+        '<div class="cc-copy">' +
+          '<strong class="cc-title">' + iconSvg('bell') + ' Get Daily JRF, Forestry, GIS &amp; ESG Job Alerts</strong>' +
+          '<span class="cc-sub">Join India&rsquo;s green &amp; academic job-alert network \u2014 verified mandates delivered every morning at 7 AM IST.</span>' +
+        '</div>' +
+        '<div class="cc-actions">' +
+          '<a class="cc-btn cc-wa" href="' + escapeHtml(COMMUNITY_CHANNELS.whatsapp_group_url) +
+            '" target="_blank" rel="noopener"' + communityGuardAttr('whatsapp') + '>' +
+            iconSvg('whatsapp') + 'Join WhatsApp Job Group \u2197</a>' +
+          '<a class="cc-btn cc-tg" href="' + escapeHtml(COMMUNITY_CHANNELS.telegram_channel_url) +
+            '" target="_blank" rel="noopener"' + communityGuardAttr('telegram') + '>' +
+            iconSvg('telegram') + 'Join Telegram Job Channel \u2197</a>' +
+          '<a class="cc-btn cc-share" href="' + escapeHtml(whatsappShareHref(job)) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            iconSvg('whatsapp') + 'Share Formatted Alert to WhatsApp</a>' +
+          '<a class="cc-btn cc-share-tg" href="' + escapeHtml(telegramShareHref(job)) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            iconSvg('telegram') + 'Share to Telegram</a>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* "Official Verification & Application Portal" card: Apply on <portal> +
+     Visit Official Website, always with readable labels. */
+  function verifyCardHtml(job, isArchived) {
+    var portal = sourcePortalOf(job);
+    var orgDomain = orgDomainOf(job);
+    var applyHost = applyHostOf(job);
+    var primaryLabel = isArchived ? 'View Original Application Portal' : 'Apply on ' + portal;
+    var secondary;
+    if (job.org_website) {
+      secondary = '<a class="verify-btn verify-btn-org" href="' + escapeHtml(job.org_website) +
+        '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="vb-label">Visit Official Website ' + iconSvg('external') + '</span>' +
+        '<span class="vb-sub">' + escapeHtml(orgDomain || 'official portal') + '</span></a>';
+    } else {
+      secondary = '<span class="verify-btn verify-btn-org is-empty">' +
+        '<span class="vb-label">Official Website</span>' +
+        '<span class="vb-sub">Not listed \u2014 use the source portal</span></span>';
+    }
+    var note = isArchived
+      ? 'This mandate is archived \u2014 the application window has closed. Both links open the original portal for institutional reference only.'
+      : 'Both links open in a new tab. Always verify eligibility, fellowship norms and deadlines on the employer&rsquo;s page before applying.';
+    return '' +
+      '<div class="verify-card' + (isArchived ? ' is-archived' : '') + '">' +
+        '<div class="verify-head">' +
+          '<span class="verify-kicker">Official Verification &amp; Application Portal</span>' +
+          '<span class="verify-source">Source: <strong>' + escapeHtml(portal) + '</strong></span>' +
+        '</div>' +
+        '<div class="verify-actions">' +
+          '<a class="verify-btn verify-btn-apply' + (isArchived ? ' is-closed' : '') + '" href="' +
+            escapeHtml(job.apply_url) + '" target="_blank" rel="noopener noreferrer nofollow">' +
+            '<span class="vb-label">' + escapeHtml(primaryLabel) + ' ' + iconSvg('external') + '</span>' +
+            '<span class="vb-sub">Source: ' + escapeHtml(applyHost || 'external portal') + '</span></a>' +
+          secondary +
+        '</div>' +
+        '<p class="apply-note">' + note + '</p>' +
+      '</div>';
+  }
 
   /* Position-type inference mirrors scripts/fetch_and_humanize.py so even a
      pre-migration record still lands in an accurate career track. */
@@ -660,14 +902,19 @@
           '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
           statusBadge +
         '</div>' +
-        '<h3 class="jc-title">' + escapeHtml(job.clean_title) + '</h3>' +
-        '<p class="jc-org">' + escapeHtml(job.organization) + '</p>' +
-        '<div class="jc-meta">' +
-          '<span>' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
-          '<span>' + dateMeta + '</span>' +
+        '<div class="jc-main">' +
+          '<div class="jc-main-text">' +
+            '<h3 class="jc-title">' + escapeHtml(job.clean_title) + '</h3>' +
+            '<p class="jc-org">' + escapeHtml(job.organization) + '</p>' +
+            '<div class="jc-meta">' +
+              '<span>' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
+              '<span>' + dateMeta + '</span>' +
+            '</div>' +
+            jcEligibilityHtml(job) +
+            '<div class="jc-skills">' + chips + '</div>' +
+          '</div>' +
+          logoFigureHtml(job, 'card') +
         '</div>' +
-        jcEligibilityHtml(job) +
-        '<div class="jc-skills">' + chips + '</div>' +
         '<div class="jc-foot">' +
           '<span class="jc-date">' + footDate + '</span>' +
           '<span class="jc-view">' + ctaLabel + ' ' + iconSvg('arrow') + '</span>' +
@@ -850,7 +1097,7 @@
     }).join('');
 
     var responsibilities = (job.key_responsibilities || []).map(function (r) {
-      return '<li>' + escapeHtml(r) + '</li>';
+      return '<li>' + formatReadableText(r) + '</li>';
     }).join('');
 
     var shareUrl = shareableUrl(job.id);
@@ -876,26 +1123,7 @@
       ? '<span>' + iconSvg('clock') + escapeHtml(formatClosed(job.date_archived)) + '</span>'
       : '<span>' + iconSvg('calendar') + escapeHtml(formatPosted(job.date_added)) + '</span>';
 
-    var applyBlock;
-    if (isArchived) {
-      applyBlock = '' +
-        '<div class="apply-block">' +
-          '<a class="btn-apply btn-apply-closed" href="' + escapeHtml(job.apply_url) + '" target="_blank" rel="nofollow noopener">' +
-            'Application Window Closed (View Organization Portal ' + iconSvg('external') + ')' +
-          '</a>' +
-          '<p class="apply-note">This mandate is archived \u2014 the deadline has passed. The link opens the ' +
-            'organisation&rsquo;s portal for institutional reference only.</p>' +
-        '</div>';
-    } else {
-      applyBlock = '' +
-        '<div class="apply-block">' +
-          '<a class="btn-apply" href="' + escapeHtml(job.apply_url) + '" target="_blank" rel="noopener noreferrer nofollow">' +
-            'Open Official Application Portal ' + iconSvg('external') +
-          '</a>' +
-          '<p class="apply-note">Opens the official application portal in a new tab. Always verify eligibility ' +
-            'and deadlines on the employer&rsquo;s page.</p>' +
-        '</div>';
-    }
+    var applyBlock = verifyCardHtml(job, isArchived);
 
     var suggestions = isArchived ? suggestionsHtml(job) : '';
 
@@ -912,26 +1140,33 @@
       banner +
 
       '<div class="detail-card">' +
-        '<div class="detail-kicker">' +
-          '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
-          '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
-          '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
-          '<span class="badge badge-state">' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
-          archiveBadge +
-        '</div>' +
+        '<div class="detail-head">' +
+          '<div class="detail-head-main">' +
+            '<div class="detail-kicker">' +
+              '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
+              '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
+              '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
+              '<span class="badge badge-state">' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
+              archiveBadge +
+            '</div>' +
 
-        '<h1>' + escapeHtml(job.clean_title) + '</h1>' +
-        '<p class="detail-org">' + escapeHtml(job.organization) + '</p>' +
-        '<div class="detail-meta">' +
-          dateLine +
-          '<span>Ref: ' + escapeHtml(String(job.id).slice(0, 24)) + '</span>' +
-          (isArchived ? '<span>Archived ' + escapeHtml(job.date_archived || '') + '</span>' : '<span>Valid through ' + escapeHtml(job.valid_through || '') + '</span>') +
+            '<h1>' + escapeHtml(job.clean_title) + '</h1>' +
+            '<p class="detail-org">' + escapeHtml(job.organization) + '</p>' +
+            '<div class="detail-meta">' +
+              dateLine +
+              '<span>Ref: ' + escapeHtml(String(job.id).slice(0, 24)) + '</span>' +
+              (isArchived ? '<span>Archived ' + escapeHtml(job.date_archived || '') + '</span>' : '<span>Valid through ' + escapeHtml(job.valid_through || '') + '</span>') +
+            '</div>' +
+          '</div>' +
+          logoFigureHtml(job, 'detail') +
         '</div>' +
 
         '<div class="detail-section">' +
           '<h2>Mandate Summary</h2>' +
-          '<p>' + escapeHtml(job.role_summary) + '</p>' +
+          '<p>' + formatReadableText(job.role_summary) + '</p>' +
         '</div>' +
+
+        communityCalloutHtml(job) +
 
         eligibilitySectionHtml(job) +
 
@@ -949,7 +1184,7 @@
 
         '<div class="tip-callout">' +
           '<span class="tip-title">' + iconSvg('bulb') + ' Candidate Advisory</span>' +
-          '<p>' + escapeHtml(job.application_tip) + '</p>' +
+          '<p>' + formatReadableText(job.application_tip) + '</p>' +
         '</div>' +
 
         adDetailHtml() +
@@ -1024,16 +1259,45 @@
     }
   }
 
-  function fallbackCopy(text) {
+  function fallbackCopy(text, message) {
     var ta = document.createElement('textarea');
     ta.value = text;
     ta.style.position = 'fixed';
     ta.style.opacity = '0';
     document.body.appendChild(ta);
     ta.select();
-    try { document.execCommand('copy'); toast('Direct link copied'); }
+    try { document.execCommand('copy'); toast(message || 'Direct link copied'); }
     catch (e) { toast('Copy failed \u2014 please copy from the address bar'); }
     document.body.removeChild(ta);
+  }
+
+  function copyTextToClipboard(text, okMessage) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { toast(okMessage); },
+        function () { fallbackCopy(text, okMessage); }
+      );
+    } else {
+      fallbackCopy(text, okMessage);
+    }
+  }
+
+  /* Footer button: copies today's ready-to-forward WhatsApp/Telegram digest
+     generated by the daily pipeline (public/daily_digest.json). */
+  function copyDailyDigest() {
+    fetch('daily_digest.json', { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (digest) {
+        var text = digest && digest.whatsapp_text;
+        if (!text) throw new Error('digest empty');
+        copyTextToClipboard(text, 'Today\u2019s WhatsApp / Telegram broadcast copied \u2014 forward it to any group');
+      })
+      .catch(function () {
+        toast('The daily broadcast is generated by the 7 AM IST pipeline run \u2014 please try again later.');
+      });
   }
 
   /* ------------------------------------------------------------------ */
@@ -1576,6 +1840,36 @@
     });
   }
 
+  /* Community channels, digest copy button & logo-fallback delegation. */
+  function bindCommunityEvents() {
+    var digestBtn = document.getElementById('copy-daily-digest');
+    if (digestBtn) digestBtn.addEventListener('click', copyDailyDigest);
+
+    var stripDigestBtn = document.getElementById('copy-daily-digest-strip');
+    if (stripDigestBtn) stripDigestBtn.addEventListener('click', copyDailyDigest);
+
+    /* Institution logo failed to load -> swap to the topic emblem. */
+    document.addEventListener('error', function (event) {
+      var img = event.target;
+      if (!img || !img.classList || !img.classList.contains('fig-logo')) return;
+      var figure = img.closest ? img.closest('.job-figure') : null;
+      if (figure) figure.classList.add('fig-fallback');
+    }, true);
+
+    /* Owner placeholder guard: instructs where to paste the real invite link. */
+    document.addEventListener('click', function (event) {
+      var target = event.target && event.target.closest
+        ? event.target.closest('[data-community-guard]')
+        : null;
+      if (!target) return;
+      event.preventDefault();
+      var kind = target.getAttribute('data-community-guard');
+      toast(kind === 'whatsapp'
+        ? 'Owner: paste your real WhatsApp invite link into <meta name="ufp-whatsapp-group"> on index.html to activate this button.'
+        : 'Owner: paste the channel link into <meta name="ufp-telegram-channel"> on index.html to activate this button.');
+    }, false);
+  }
+
   /* ------------------------------------------------------------------ */
   /* Boot                                                                */
   /* ------------------------------------------------------------------ */
@@ -1599,6 +1893,7 @@
       toast: document.getElementById('toast')
     };
     bindEvents();
+    bindCommunityEvents();
     initTheme();
     loadAll();
   });

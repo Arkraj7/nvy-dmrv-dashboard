@@ -1452,3 +1452,350 @@ body.view-detail .telemetry-band { display: none; }
 @media (max-width: 430px) {
   .theme-label { display: none; }
 }
+
+/* ==========================================================================
+   15. Official institution figures, verification card & community blocks
+   ========================================================================== */
+
+/* ---------- 15a. Square topic / institution-logo figure ---------- */
+.job-figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  flex: none;
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 10px 22px -18px rgba(15, 23, 42, 0.35);
+}
+.job-figure--card { width: 56px; height: 56px; }
+.job-figure--detail { width: 116px; height: 116px; }
+
+.fig-media {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-2);
+  padding: 3px;
+}
+.job-figure .fig-logo {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  display: block;
+}
+.job-figure .fig-emblem {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--cat-policy-ink);
+}
+.job-figure.fig-fallback .fig-emblem { display: flex; }
+.job-figure.fig-fallback .fig-logo { display: none; }
+.job-figure--card .fig-emblem svg { width: 20px; height: 20px; }
+.job-figure--detail .fig-emblem svg { width: 44px; height: 44px; }
+.job-figure--card .fig-emblem { gap: 1px; }
+.fig-monogram {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.job-figure--card .fig-monogram { font-size: 7px; }
+.job-figure--detail .fig-monogram { font-size: 12px; margin-top: 3px; }
+
+.fig-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 3px 5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  background: var(--cat-policy-ink);
+  color: #FFFFFF;
+}
+.job-figure--card .fig-strip { padding: 1.5px 3px; font-size: 6.5px; letter-spacing: 0.04em; }
+.job-figure--detail .fig-strip { padding: 4px 7px; font-size: 8.5px; }
+.fig-topic { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fig-domain {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.92em;
+}
+.job-figure--card .fig-domain { display: none; }
+
+/* Sector tinting of the media area + solid topic strip */
+.job-figure.fig-academic .fig-media { background: var(--cat-academic-bg); }
+.job-figure.fig-research .fig-media { background: var(--cat-research-bg); }
+.job-figure.fig-forestry .fig-media { background: var(--cat-forestry-bg); }
+.job-figure.fig-esg .fig-media { background: var(--cat-esg-bg); }
+.job-figure.fig-gis .fig-media { background: var(--cat-gis-bg); }
+.job-figure.fig-policy .fig-media { background: var(--cat-policy-bg); }
+.job-figure.fig-academic .fig-emblem { color: var(--cat-academic-ink); }
+.job-figure.fig-research .fig-emblem { color: var(--cat-research-ink); }
+.job-figure.fig-forestry .fig-emblem { color: var(--cat-forestry-ink); }
+.job-figure.fig-esg .fig-emblem { color: var(--cat-esg-ink); }
+.job-figure.fig-gis .fig-emblem { color: var(--cat-gis-ink); }
+.job-figure.fig-policy .fig-emblem { color: var(--cat-policy-ink); }
+.job-figure.fig-academic .fig-strip { background: var(--cat-academic-ink); }
+.job-figure.fig-research .fig-strip { background: var(--cat-research-ink); }
+.job-figure.fig-forestry .fig-strip { background: var(--cat-forestry-ink); }
+.job-figure.fig-esg .fig-strip { background: var(--cat-esg-ink); }
+.job-figure.fig-gis .fig-strip { background: var(--cat-gis-ink); }
+.job-figure.fig-policy .fig-strip { background: var(--cat-policy-ink); }
+
+[data-theme="dark"] .job-figure { box-shadow: none; }
+[data-theme="dark"] .job-figure .fig-strip { color: inherit; }
+[data-theme="dark"] .job-figure.fig-academic .fig-strip { background: var(--cat-academic-bg); color: var(--cat-academic-ink); }
+[data-theme="dark"] .job-figure.fig-research .fig-strip { background: var(--cat-research-bg); color: var(--cat-research-ink); }
+[data-theme="dark"] .job-figure.fig-forestry .fig-strip { background: var(--cat-forestry-bg); color: var(--cat-forestry-ink); }
+[data-theme="dark"] .job-figure.fig-esg .fig-strip { background: var(--cat-esg-bg); color: var(--cat-esg-ink); }
+[data-theme="dark"] .job-figure.fig-gis .fig-strip { background: var(--cat-gis-bg); color: var(--cat-gis-ink); }
+[data-theme="dark"] .job-figure.fig-policy .fig-strip { background: var(--cat-policy-bg); color: var(--cat-policy-ink); }
+
+/* ---------- 15b. Feed-card layout with the figure on the right ---------- */
+.jc-main { display: flex; align-items: flex-start; gap: 12px; }
+.jc-main-text { flex: 1; min-width: 0; }
+
+/* ---------- 15c. Dossier header with the figure on the right ---------- */
+.detail-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+}
+.detail-head-main { min-width: 0; }
+
+@media (max-width: 720px) {
+  .detail-head { gap: 14px; }
+  .job-figure--detail { width: 84px; height: 84px; }
+  .job-figure--detail .fig-emblem svg { width: 30px; height: 30px; }
+  .job-figure--detail .fig-monogram { font-size: 9.5px; }
+  .job-figure--detail .fig-strip { font-size: 7px; padding: 3px 4px; }
+}
+
+/* ---------- 15d. "Get Daily Alerts" community callout (in every dossier) ---------- */
+.community-callout {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-2) 100%);
+  display: grid;
+  gap: 12px;
+}
+.cc-copy { display: grid; gap: 3px; }
+.cc-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.cc-title svg { color: var(--accent); flex: none; }
+.cc-sub { font-size: 12.5px; line-height: 1.55; color: var(--ink-3); }
+.cc-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+.cc-btn svg { flex: none; }
+.cc-btn:hover { transform: translateY(-1px); border-color: var(--accent); color: var(--accent); }
+.cc-wa { background: #25D366; border-color: #1FB959; color: #073B1E; }
+.cc-wa:hover { background: #1FC65C; border-color: #178A44; color: #073B1E; }
+.cc-tg { background: #229ED9; border-color: #1B8ABF; color: #FFFFFF; }
+.cc-tg:hover { background: #1E92C9; border-color: #166E9B; color: #FFFFFF; }
+
+/* ---------- 15e. Official Verification & Application Portal card ---------- */
+.verify-card {
+  margin-top: 28px;
+  padding: 16px 18px 12px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.verify-card.is-archived { background: var(--amber-bg); border-color: var(--amber-border); }
+.verify-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 14px;
+  margin-bottom: 12px;
+}
+.verify-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.verify-source { font-size: 12px; color: var(--ink-3); }
+.verify-source strong { color: var(--accent); font-weight: 800; }
+.verify-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.verify-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 0;
+  padding: 13px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+.verify-btn .vb-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.verify-btn .vb-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.85;
+  overflow-wrap: anywhere;
+}
+.verify-btn-apply { background: var(--accent); color: var(--accent-ink); }
+.verify-btn-apply:hover { background: var(--accent-2); transform: translateY(-1px); }
+.verify-btn-apply.is-closed { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber-ink); }
+.verify-btn-apply.is-closed:hover { background: var(--amber-bg); filter: brightness(0.98); }
+.verify-btn-org { background: var(--bg-2); border-color: var(--border-2); color: var(--ink); }
+.verify-btn-org:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.verify-btn-org.is-empty { opacity: 0.72; cursor: default; }
+.verify-card .apply-note { margin: 10px 0 0; text-align: left; }
+
+/* ---------- 15f. Readable inline URL pills inside dossier copy ---------- */
+.inline-doc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 9px;
+  margin: 0 1px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.86em;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+.inline-doc-link:hover { border-color: var(--accent); background: var(--accent-soft-2); }
+[data-theme="dark"] .inline-doc-link { border-color: var(--accent); }
+
+/* ---------- 15g. Top community strip (homepage) ---------- */
+.community-strip { padding: 12px 24px 0; }
+.cs-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-2) 100%);
+  box-shadow: var(--shadow-card);
+}
+.cs-copy { display: grid; gap: 2px; min-width: 0; }
+.cs-copy strong { font-size: 14.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
+.cs-copy span { font-size: 12.5px; color: var(--ink-3); }
+.cs-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cs-btn:hover { transform: translateY(-1px); }
+.cs-btn svg { flex: none; }
+.cs-wa { background: #25D366; color: #073B1E; }
+.cs-wa:hover { background: #1FC65C; color: #073B1E; }
+.cs-tg { background: #229ED9; color: #FFFFFF; }
+.cs-tg:hover { background: #1E92C9; color: #FFFFFF; }
+.cs-digest {
+  background: transparent;
+  border: 1px dashed var(--border-2);
+  color: var(--ink-3);
+  cursor: pointer;
+  font-family: inherit;
+}
+.cs-digest:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- 15h. Footer broadcast copy row ---------- */
+.footer-broadcast {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--footer-line);
+}
+.footer-broadcast .fb-copy { display: grid; gap: 2px; }
+.footer-broadcast .fb-title { font-size: 13.5px; font-weight: 700; color: var(--footer-ink); }
+.footer-broadcast .fb-sub { font-size: 12px; color: var(--footer-ink-2); }
+.digest-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid var(--footer-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--footer-ink);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+.digest-copy-btn:hover { border-color: var(--emerald); color: var(--emerald); background: rgba(16, 185, 129, 0.08); }
+
+@media (max-width: 720px) {
+  .cs-inner { flex-direction: column; align-items: flex-start; }
+  .cs-actions { width: 100%; }
+  .footer-broadcast { flex-direction: column; align-items: flex-start; }
+}

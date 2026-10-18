@@ -44,7 +44,12 @@ jobs:
       - name: Fetch, humanize & publish green jobs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          LOOKBACK_HOURS: "24"
+          LOOKBACK_HOURS: "72"
+          # Optional automated broadcasting (safe no-ops when unset):
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WHATSAPP_WEBHOOK_URL: ${{ secrets.WHATSAPP_WEBHOOK_URL }}
+          WHATSAPP_GROUP_URL: ${{ secrets.WHATSAPP_GROUP_URL }}
         run: python scripts/fetch_and_humanize.py
 
       - name: Rebuild static SEO pages (index snapshot + career-pathway hubs)
@@ -55,10 +60,12 @@ jobs:
           git config user.name "urbanforestpark-bot"
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
           # The deployed site root is public/, so the pipeline writes to
-          # public/jobs.json, public/archive.json, public/stats.json and
-          # public/sitemap.xml; build_seo_pages.py rewrites public/index.html
-          # and the five career-pathway hub pages.
+          # public/jobs.json, public/archive.json, public/stats.json,
+          # public/sitemap.xml, public/daily_digest.json and
+          # public/whatsapp_digest.txt; build_seo_pages.py rewrites
+          # public/index.html and the five career-pathway hub pages.
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
+                  public/daily_digest.json public/whatsapp_digest.txt \
                   public/index.html \
                   public/jrf-srf-project-associate-jobs.html \
                   public/phd-fellowships-climate-sustainability.html \

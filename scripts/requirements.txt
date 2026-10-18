@@ -13,3 +13,4 @@ pydantic>=2.5             # structured Gemini output validation
 google-genai>=1.0.0       # Gemini Flash humanizer (model order lives in scripts/fetch_and_humanize.py; GEMINI_MODEL overrides)
 requests>=2.31.0          # ReliefWeb v2 API + public India RSS fetch
 feedparser>=6.0.11        # ReliefWeb public India jobs RSS parsing
+beautifulsoup4>=4.12      # direct careers-page parsing (WRI India, CEEW, ATREE, WWF-India)

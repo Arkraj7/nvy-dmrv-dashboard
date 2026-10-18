@@ -91,6 +91,7 @@ Environment
 from __future__ import annotations
 
 import argparse
+import base64
 import html
 import inspect
 import json
@@ -103,7 +104,7 @@ import time
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
-from urllib.parse import quote, urlencode, urlparse
+from urllib.parse import quote, urlencode, urljoin, urlparse
 from xml.etree import ElementTree as ET
 
 # ---------------------------------------------------------------------------
@@ -133,6 +134,11 @@ try:
     import feedparser
 except Exception:  # pragma: no cover
     feedparser = None
+
+try:
+    from bs4 import BeautifulSoup
+except Exception:  # pragma: no cover
+    BeautifulSoup = None
 
 try:
     from pydantic import BaseModel, Field
@@ -176,15 +182,21 @@ DEFAULT_JOBS_PATH = Path("public/jobs.json")
 DEFAULT_SITEMAP_PATH = Path("public/sitemap.xml")
 DEFAULT_ARCHIVE_PATH = Path("public/archive.json")
 DEFAULT_STATS_PATH = Path("public/stats.json")
+DEFAULT_DIGEST_JSON_PATH = Path("public/daily_digest.json")
+DEFAULT_WHATSAPP_DIGEST_PATH = Path("public/whatsapp_digest.txt")
+
+# Community channels printed inside every digest (override via env or .env).
+WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw"
+TELEGRAM_CHANNEL_URL = "https://t.me/urbanforestpark_jobs"
 
 # Job lifecycle: a listing stays "active" in jobs.json for VALID_DAYS after
 # its date_added; once valid_through has passed it moves into archive.json
 # (status "archived", date_archived stamped) and is never deleted.
 VALID_DAYS = 30
 
-RESULTS_PER_QUERY = 25          # jobspy results wanted per search query
+RESULTS_PER_QUERY = 15          # jobspy results wanted per search query
 REQUEST_TIMEOUT = 30            # seconds; HTTP timeout for ReliefWeb calls
-DEFAULT_LOOKBACK_HOURS = 24     # posting-age window; LOOKBACK_HOURS env overrides
+DEFAULT_LOOKBACK_HOURS = 72     # posting-age window; LOOKBACK_HOURS env overrides
 DEFAULT_MAX_NEW_PER_RUN = 12    # cap on Gemini calls per run (cost control)
 GEMINI_SLEEP_SECONDS = 4.0      # gentle rate limit between model calls
 GEMINI_RATE_LIMIT_SLEEP = 25.0  # longer pause when rate-limited/overloaded
@@ -196,19 +208,21 @@ GEMINI_RATE_LIMIT_ABORT_AFTER = 3  # consecutive rate-limited candidates -> stop
 PRIMARY_SITES = ["linkedin", "indeed", "naukri"]
 FALLBACK_SITES = ["linkedin", "indeed"]
 
-# India-specific high-intent search queries. The second block extends the
-# rotation to academic, JRF/SRF, PhD and contractual institute roles so the
-# board covers the research workforce alongside corporate mandates.
+# India-specific high-intent search queries covering every pillar of the
+# registry: climate/ESG/carbon, forestry & wildlife, GIS & remote sensing,
+# JRF/SRF project staff, research fellowships, PhD/postdoc, environmental
+# engineering/EHS, CSR & livelihoods, and urban planning/green building.
 SEARCH_QUERIES = [
     "Climate Change Sustainability India",
-    "ESG BRSR Carbon Credits Sustainability",
-    "Forestry Wildlife Afforestation Ecology CAMPA",
-    "GIS Remote Sensing Earth Engine Environment",
-    "Urban Heat Island Urban Planner Sustainability",
-    "CSR Environment Sustainability Manager",
-    "JRF SRF Project Associate Environment Forestry Climate India",
-    "Research Associate Young Professional Environment Agriculture Forestry",
-    "PhD Postdoctoral Fellowship Climate Sustainability Ecology India",
+    "ESG BRSR Carbon Credits Net Zero India",
+    "Forestry Wildlife Afforestation Ecology Conservation India",
+    "GIS Remote Sensing Earth Engine Geoinformatics India",
+    "JRF SRF Project Associate Environmental Science Forestry",
+    "Research Associate Fellow Climate Ecology Agriculture India",
+    "PhD Postdoctoral Fellowship Environmental Climate Sustainability",
+    "Environmental Engineer EHS Sustainability Manager India",
+    "CSR Development Sector Environment Livelihoods India",
+    "Urban Planner Green Building Urban Heat Island Sustainability",
     "Walk in Interview Project Associate GIS Remote Sensing Forestry",
     "Faculty Assistant Professor Environmental Science Sustainability India",
 ]
@@ -330,6 +344,244 @@ STATIC_SITEMAP_PAGES = [
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 # ---------------------------------------------------------------------------
+# Indian institution & company domain directory.
+#
+# Maps the organisations this board publishes most often onto their exact
+# official website + clean root domain. Records matched here always carry a
+# verified org_website/org_domain, which powers the "Visit Official Website"
+# button, the readable link pills and the official institution logo lookup.
+# Entries are `(alias, website, domain)`; the alias is matched against the
+# lowercased organisation name on word boundaries. Longer aliases win.
+# ---------------------------------------------------------------------------
+KNOWN_INDIAN_ORGS: List[Tuple[str, str, str]] = [
+    # Forests, wildlife & environment (institutes and regulators)
+    ("wildlife institute of india", "https://wii.gov.in", "wii.gov.in"),
+    ("wii dehradun", "https://wii.gov.in", "wii.gov.in"),
+    ("wii", "https://wii.gov.in", "wii.gov.in"),
+    ("indian council of forestry research and education", "https://icfre.gov.in", "icfre.gov.in"),
+    ("indian council of forestry research & education", "https://icfre.gov.in", "icfre.gov.in"),
+    ("icfre", "https://icfre.gov.in", "icfre.gov.in"),
+    ("forest research institute", "https://fridu.edu.in", "fridu.edu.in"),
+    ("indian institute of forest management", "https://www.iifm.ac.in", "iifm.ac.in"),
+    ("iifm", "https://www.iifm.ac.in", "iifm.ac.in"),
+    ("forest survey of india", "https://fsi.nic.in", "fsi.nic.in"),
+    ("ministry of environment, forest and climate change", "https://moef.gov.in", "moef.gov.in"),
+    ("ministry of environment forest and climate change", "https://moef.gov.in", "moef.gov.in"),
+    ("moefcc", "https://moef.gov.in", "moef.gov.in"),
+    ("central pollution control board", "https://cpcb.nic.in", "cpcb.nic.in"),
+    ("cpcb", "https://cpcb.nic.in", "cpcb.nic.in"),
+    ("g.b. pant", "https://gbpihed.gov.in", "gbpihed.gov.in"),
+    ("gbpnihe", "https://gbpihed.gov.in", "gbpihed.gov.in"),
+    ("gbpihed", "https://gbpihed.gov.in", "gbpihed.gov.in"),
+    ("salim ali centre", "https://sacon.in", "sacon.in"),
+    ("sacon", "https://sacon.in", "sacon.in"),
+    ("wildlife trust of india", "https://www.wti.org.in", "wti.org.in"),
+    ("wildlife conservation society", "https://india.wcs.org", "wcs.org"),
+    ("bombay natural history society", "https://www.bnhs.org", "bnhs.org"),
+    ("bnhs", "https://www.bnhs.org", "bnhs.org"),
+    ("nature conservation foundation", "https://www.ncf-india.org", "ncf-india.org"),
+    ("foundation for ecological security", "https://fes.org.in", "fes.org.in"),
+    ("centre for wildlife studies", "https://cwsindia.org", "cwsindia.org"),
+    ("centre for science and environment", "https://www.cseindia.org", "cseindia.org"),
+    ("cse india", "https://www.cseindia.org", "cseindia.org"),
+    # Geospatial & earth observation
+    ("indian institute of remote sensing", "https://www.iirs.gov.in", "iirs.gov.in"),
+    ("iirs", "https://www.iirs.gov.in", "iirs.gov.in"),
+    ("national remote sensing cent", "https://www.nrsc.gov.in", "nrsc.gov.in"),
+    ("nrsc", "https://www.nrsc.gov.in", "nrsc.gov.in"),
+    ("indian space research organisation", "https://www.isro.gov.in", "isro.gov.in"),
+    ("isro", "https://www.isro.gov.in", "isro.gov.in"),
+    ("indian institute of tropical meteorology", "https://www.tropmet.res.in", "tropmet.res.in"),
+    ("national institute of oceanography", "https://www.nio.org", "nio.org"),
+    ("wadia institute", "https://www.wihg.res.in", "wihg.res.in"),
+    ("birbal sahni", "https://bsip.res.in", "bsip.res.in"),
+    # Research councils & funders
+    ("indian council of agricultural research", "https://icar.org.in", "icar.org.in"),
+    ("icar", "https://icar.org.in", "icar.org.in"),
+    ("council of scientific and industrial research", "https://www.csir.res.in", "csir.res.in"),
+    ("csir", "https://www.csir.res.in", "csir.res.in"),
+    ("department of biotechnology", "https://dbtindia.gov.in", "dbtindia.gov.in"),
+    ("department of science and technology", "https://dst.gov.in", "dst.gov.in"),
+    ("niti aayog", "https://niti.gov.in", "niti.gov.in"),
+    # Universities & academia
+    ("indian institute of science", "https://iisc.ac.in", "iisc.ac.in"),
+    ("iisc", "https://iisc.ac.in", "iisc.ac.in"),
+    ("iit delhi", "https://home.iitd.ac.in", "iitd.ac.in"),
+    ("iit bombay", "https://www.iitb.ac.in", "iitb.ac.in"),
+    ("iit madras", "https://www.iitm.ac.in", "iitm.ac.in"),
+    ("iit kharagpur", "https://www.iitkgp.ac.in", "iitkgp.ac.in"),
+    ("iit roorkee", "https://www.iitr.ac.in", "iitr.ac.in"),
+    ("iit kanpur", "https://www.iitk.ac.in", "iitk.ac.in"),
+    ("iit guwahati", "https://www.iitg.ac.in", "iitg.ac.in"),
+    ("banaras hindu university", "https://www.bhu.ac.in", "bhu.ac.in"),
+    ("bhu", "https://www.bhu.ac.in", "bhu.ac.in"),
+    ("tata institute of social sciences", "https://www.tiss.edu", "tiss.edu"),
+    ("tiss", "https://www.tiss.edu", "tiss.edu"),
+    ("azim premji university", "https://azimpremjiuniversity.edu.in", "azimpremjiuniversity.edu.in"),
+    ("azim premji foundation", "https://azimpremjifoundation.org", "azimpremjifoundation.org"),
+    ("jawaharlal nehru university", "https://www.jnu.ac.in", "jnu.ac.in"),
+    ("jnu", "https://www.jnu.ac.in", "jnu.ac.in"),
+    ("university of delhi", "https://www.du.ac.in", "du.ac.in"),
+    ("delhi university", "https://www.du.ac.in", "du.ac.in"),
+    ("jamia millia islamia", "https://jmi.ac.in", "jmi.ac.in"),
+    ("aligarh muslim university", "https://www.amu.ac.in", "amu.ac.in"),
+    ("indira gandhi national open university", "https://ignou.ac.in", "ignou.ac.in"),
+    ("ignou", "https://ignou.ac.in", "ignou.ac.in"),
+    ("national centre for biological sciences", "https://www.ncbs.res.in", "ncbs.res.in"),
+    ("ncbs", "https://www.ncbs.res.in", "ncbs.res.in"),
+    ("teri school", "https://www.terisas.ac.in", "terisas.ac.in"),
+    ("terisas", "https://www.terisas.ac.in", "terisas.ac.in"),
+    # Think tanks, NGOs & foundations
+    ("council on energy, environment and water", "https://www.ceew.in", "ceew.in"),
+    ("ceew", "https://www.ceew.in", "ceew.in"),
+    ("wri india", "https://wri-india.org", "wri-india.org"),
+    ("world resources institute", "https://wri-india.org", "wri-india.org"),
+    ("the energy and resources institute", "https://www.teriin.org", "teriin.org"),
+    ("teri", "https://www.teriin.org", "teriin.org"),
+    ("wwf-india", "https://www.wwfindia.org", "wwfindia.org"),
+    ("wwf india", "https://www.wwfindia.org", "wwfindia.org"),
+    ("atree", "https://www.atree.org", "atree.org"),
+    ("ashoka trust for research in ecology", "https://www.atree.org", "atree.org"),
+    ("cstep", "https://cstep.in", "cstep.in"),
+    ("development alternatives", "https://www.devalt.org", "devalt.org"),
+    ("vasudha foundation", "https://www.vasudhafoundation.in", "vasudhafoundation.in"),
+    ("shakti sustainable energy foundation", "https://shaktifoundation.in", "shaktifoundation.in"),
+    ("centre for policy research", "https://cprindia.org", "cprindia.org"),
+    ("observer research foundation", "https://www.orfonline.org", "orfonline.org"),
+    ("india climate collaborative", "https://indiaclimatecollaborative.org", "indiaclimatecollaborative.org"),
+    ("nrdc india", "https://www.nrdc.org", "nrdc.org"),
+    # International agencies
+    ("united nations development programme", "https://www.undp.org/india", "undp.org"),
+    ("undp", "https://www.undp.org/india", "undp.org"),
+    ("united nations environment programme", "https://www.unep.org", "unep.org"),
+    ("unep", "https://www.unep.org", "unep.org"),
+    ("iucn", "https://www.iucn.org", "iucn.org"),
+    ("world bank", "https://www.worldbank.org", "worldbank.org"),
+    ("international finance corporation", "https://www.ifc.org", "ifc.org"),
+    ("asian development bank", "https://www.adb.org", "adb.org"),
+    ("global environment facility", "https://www.thegef.org", "thegef.org"),
+    ("international water management institute", "https://www.iwmi.cgiar.org", "iwmi.cgiar.org"),
+    ("iwmi", "https://www.iwmi.cgiar.org", "iwmi.cgiar.org"),
+    ("icrisat", "https://www.icrisat.org", "icrisat.org"),
+    ("cgiar", "https://www.cgiar.org", "cgiar.org"),
+    # Corporate sustainability, ESG & consultancy
+    ("ernst & young", "https://www.ey.com/en_in", "ey.com"),
+    ("ernst and young", "https://www.ey.com/en_in", "ey.com"),
+    ("ey india", "https://www.ey.com/en_in", "ey.com"),
+    ("kpmg", "https://kpmg.com/in", "kpmg.com"),
+    ("deloitte", "https://www2.deloitte.com/in", "deloitte.com"),
+    ("pricewaterhousecoopers", "https://www.pwc.in", "pwc.in"),
+    ("pwc", "https://www.pwc.in", "pwc.in"),
+    ("jpmorgan", "https://www.jpmorganchase.com", "jpmorganchase.com"),
+    ("j.p. morgan", "https://www.jpmorganchase.com", "jpmorganchase.com"),
+    ("larsen & toubro", "https://www.larsentoubro.com", "larsentoubro.com"),
+    ("larsen and toubro", "https://www.larsentoubro.com", "larsentoubro.com"),
+    ("l&t", "https://www.larsentoubro.com", "larsentoubro.com"),
+    ("jsw", "https://www.jsw.in", "jsw.in"),
+    ("tata steel", "https://www.tatasteel.com", "tatasteel.com"),
+    ("tata power", "https://www.tatapower.com", "tatapower.com"),
+    ("itc limited", "https://www.itcportal.com", "itcportal.com"),
+    ("itc", "https://www.itcportal.com", "itcportal.com"),
+    ("godrej", "https://www.godrej.com", "godrej.com"),
+    ("hindustan unilever", "https://www.hul.co.in", "hul.co.in"),
+    ("schneider electric", "https://www.se.com/in", "se.com"),
+    ("siemens", "https://www.siemens.com", "siemens.com"),
+    ("arcadis", "https://www.arcadis.com", "arcadis.com"),
+    ("arup", "https://www.arup.com", "arup.com"),
+    ("ramboll", "https://www.ramboll.com", "ramboll.com"),
+    ("erm", "https://www.erm.com", "erm.com"),
+    ("wsp", "https://www.wsp.com", "wsp.com"),
+    # Energy & PSUs
+    ("ntpc", "https://www.ntpc.co.in", "ntpc.co.in"),
+    ("nhpc", "https://www.nhpcindia.com", "nhpcindia.com"),
+    ("ongc", "https://ongcindia.com", "ongcindia.com"),
+    ("gail", "https://gailonline.com", "gailonline.com"),
+    ("indian oil", "https://iocl.com", "iocl.com"),
+    ("bharat petroleum", "https://www.bharatpetroleum.in", "bharatpetroleum.in"),
+    ("steel authority of india", "https://sail.co.in", "sail.co.in"),
+    ("power grid corporation", "https://www.powergrid.in", "powergrid.in"),
+    # Additional employers observed in the live registry (verified domains)
+    ("indian institute of technology guwahati", "https://www.iitg.ac.in", "iitg.ac.in"),
+    ("indian institute of technology delhi", "https://home.iitd.ac.in", "iitd.ac.in"),
+    ("indian institute of technology bombay", "https://www.iitb.ac.in", "iitb.ac.in"),
+    ("indian institute of technology madras", "https://www.iitm.ac.in", "iitm.ac.in"),
+    ("indian institute of technology kharagpur", "https://www.iitkgp.ac.in", "iitkgp.ac.in"),
+    ("indian institute of technology roorkee", "https://www.iitr.ac.in", "iitr.ac.in"),
+    ("indian institute of technology kanpur", "https://www.iitk.ac.in", "iitk.ac.in"),
+    ("indian institute for human settlements", "https://iihs.co.in", "iihs.co.in"),
+    ("international crops research institute", "https://www.icrisat.org", "icrisat.org"),
+    ("international forum for environment, sustainability & technology", "https://iforest.in", "iforest.in"),
+    ("iforest", "https://iforest.in", "iforest.in"),
+    ("tüv süd", "https://www.tuvsud.com", "tuvsud.com"),
+    ("tuv sud", "https://www.tuvsud.com", "tuvsud.com"),
+    ("colgate-palmolive", "https://www.colgatepalmolive.com", "colgatepalmolive.com"),
+    ("colgate", "https://www.colgatepalmolive.com", "colgatepalmolive.com"),
+    ("avantor", "https://www.avantorsciences.com", "avantorsciences.com"),
+    ("ecolab", "https://www.ecolab.com", "ecolab.com"),
+    ("intertek", "https://www.intertek.com", "intertek.com"),
+    ("amazon", "https://www.amazon.in", "amazon.in"),
+    ("castrol", "https://www.castrol.com", "castrol.com"),
+    ("ntt data", "https://www.nttdata.com", "nttdata.com"),
+    ("redington", "https://www.redingtongroup.com", "redingtongroup.com"),
+    ("accelleron", "https://www.accelleron.com", "accelleron.com"),
+    ("quest global", "https://www.quest-global.com", "quest-global.com"),
+    ("aditya birla fashion", "https://www.abfrl.com", "abfrl.com"),
+    ("yulu", "https://www.yulu.bike", "yulu.bike"),
+    ("selco foundation", "https://selcofoundation.org", "selcofoundation.org"),
+    ("global energy alliance for people and planet", "https://energyalliance.org", "energyalliance.org"),
+    ("sambodhi research", "https://sambodhi.co.in", "sambodhi.co.in"),
+    ("anant national university", "https://anu.edu.in", "anu.edu.in"),
+    ("administrative staff college", "https://www.asci.org.in", "asci.org.in"),
+    ("access development services", "https://www.accessdev.org", "accessdev.org"),
+    ("liter of light", "https://literoflight.org", "literoflight.org"),
+    ("jpmorganchase", "https://www.jpmorganchase.com", "jpmorganchase.com"),
+    ("jpmorgan chase", "https://www.jpmorganchase.com", "jpmorganchase.com"),
+    ("metro global solution center", "https://www.metro.co.in", "metro.co.in"),
+    ("lic housing", "https://www.lichousing.com", "lichousing.com"),
+    ("loom solar", "https://www.loomsolar.com", "loomsolar.com"),
+    ("cundall", "https://www.cundall.com", "cundall.com"),
+    ("cotecna", "https://www.cotecna.com", "cotecna.com"),
+    ("deif", "https://www.deif.com", "deif.com"),
+    ("desri", "https://www.desri.com", "desri.com"),
+    ("naandi", "https://www.naandi.org", "naandi.org"),
+]
+
+# Aliases too short/ambiguous for substring matching: the organisation name
+# must match the full normalized string exactly.
+EXACT_ORG_NAMES: Dict[str, Tuple[str, str]] = {
+    "path": ("https://www.path.org", "path.org"),
+    "asci": ("https://www.asci.org.in", "asci.org.in"),
+    "ey": ("https://www.ey.com/en_in", "ey.com"),
+}
+
+# Hosts that are job boards / aggregators / social platforms - never used as
+# an organisation's own website, and matched for readable source labels.
+JOB_BOARD_HOSTS = (
+    "linkedin.com", "indeed.com", "naukri.com", "news.google.com", "google.com",
+    "reliefweb.int", "glassdoor.com", "glassdoor.co.in", "monsterindia.com",
+    "foundit.in", "shine.com", "timesjobs.com", "internshala.com", "unstop.com",
+    "freshersworld.com", "hirist.com", "cutshort.io", "upwork.com",
+    "facebook.com", "twitter.com", "x.com", "t.me", "instagram.com",
+    "youtube.com", "indeed.co.in",
+)
+
+# Readable portal names keyed by host suffix for the "Apply on ..." button.
+SOURCE_PORTAL_BY_HOST = (
+    ("linkedin.com", "LinkedIn"),
+    ("indeed.com", "Indeed"),
+    ("naukri.com", "Naukri"),
+    ("news.google.com", "News Announcement"),
+    ("reliefweb.int", "ReliefWeb"),
+    ("indiabioscience.org", "IndiaBioscience"),
+    ("unstop.com", "Unstop"),
+    ("internshala.com", "Internshala"),
+    ("glassdoor.com", "Glassdoor"),
+    ("foundit.in", "Foundit"),
+    ("shine.com", "Shine"),
+    ("timesjobs.com", "TimesJobs"),
+)
+
+# ---------------------------------------------------------------------------
 # Structured output schema (validated with pydantic before anything is
 # written to jobs.json).
 # ---------------------------------------------------------------------------
@@ -359,6 +611,9 @@ if BaseModel is not None:
         must_have_skills: List[str] = Field(default_factory=list)
         application_tip: str = ""
         apply_url: str = ""
+        org_website: str = ""
+        org_domain: str = ""
+        source_portal: str = ""
 
 else:  # pragma: no cover - only hit when pydantic is missing
     GreenJob = None  # type: ignore[assignment]
@@ -429,6 +684,16 @@ starting with a verb. Only what the source posting supports.
 Indian applicant (portfolio, GIS samples, BRSR familiarity, fieldwork \
 experience, certifications). Never mention that this tip was AI-written.
 - apply_url: copy the source URL EXACTLY as provided.
+- org_website: the hiring organisation's official website or careers page, \
+ONLY when you are genuinely confident it is theirs (e.g. "https://wii.gov.in" \
+for Wildlife Institute of India, "https://www.ceew.in", "https://icfre.gov.in"). \
+Use an empty string when unsure - never guess a domain.
+- org_domain: the root domain of org_website without "https://" or "www." \
+(e.g. "wii.gov.in", "ceew.in", "ey.com"). Empty string when org_website is empty.
+- source_portal: where apply_url points; exactly one of "LinkedIn", "Indeed", \
+"Naukri", "ReliefWeb", "IndiaBioscience", "Official Institute Portal", \
+"Official Organization Website", "News Announcement", or the bare domain \
+(e.g. "careers.example.org") when it is none of those.
 
 STYLE RULES: Write like a thoughtful human editor. Plain, concrete \
 English; vary sentence length. Never use the words "delve", "leverage", \
@@ -652,8 +917,9 @@ def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
 
     Maps pre-upgrade category names onto the current six-category list and
     backfills position_type / qualification_summary / compensation_or_fellowship
-    so that every record - including historical archive entries - carries the
-    fields the front-end filters, badges and JSON-LD builders expect.
+    / org_website / org_domain / source_portal so that every record - including
+    historical archive entries - carries the fields the front-end filters,
+    badges, readable links, official-logo figures and JSON-LD builders expect.
     """
     category = squash(job.get("category"))
     if category in LEGACY_CATEGORY_MAP:
@@ -668,6 +934,22 @@ def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
         job["qualification_summary"] = default_qualification_summary(position_type)
     if not squash(job.get("compensation_or_fellowship")):
         job["compensation_or_fellowship"] = default_compensation(position_type)
+
+    # Official institution website + readable link identity. Best-effort and
+    # non-destructive: verified directory hits always win, existing valid
+    # values are preserved, and nothing is ever dropped for missing identity.
+    website, domain = finalize_org_identity(
+        squash(job.get("organization")),
+        squash(job.get("apply_url")),
+        squash(job.get("org_website")),
+        squash(job.get("org_domain")),
+    )
+    job["org_website"] = website
+    job["org_domain"] = domain
+    if not squash(job.get("source_portal")):
+        job["source_portal"] = infer_source_portal(
+            squash(job.get("apply_url")), domain
+        )
     return job
 
 
@@ -715,6 +997,400 @@ def is_valid_apply_url(url: Optional[str]) -> bool:
         host == placeholder or host.endswith("." + placeholder)
         for placeholder in PLACEHOLDER_HOSTS
     )
+
+
+# ---------------------------------------------------------------------------
+# Organisation identity, readable links & URL verification
+# ---------------------------------------------------------------------------
+BROWSER_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
+HTTP_SIMPLE_HEADERS = {
+    "User-Agent": BROWSER_USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-IN,en;q=0.8",
+}
+
+_KNOWN_ORGS_SORTED = sorted(KNOWN_INDIAN_ORGS, key=lambda item: -len(item[0]))
+
+
+def host_of(url: str) -> str:
+    """Lowercase hostname of a URL (empty string when unusable)."""
+    raw = str(url or "").strip()
+    if not raw:
+        return ""
+    try:
+        parsed = urlparse(raw if "://" in raw else "https://" + raw)
+    except ValueError:
+        return ""
+    return (parsed.netloc or "").split("@")[-1].split(":")[0].strip(".").lower()
+
+
+def strip_www(host: str) -> str:
+    host = (host or "").lower()
+    return host[4:] if host.startswith("www.") else host
+
+
+def is_board_host(host: str) -> bool:
+    """True when the host belongs to a job board / aggregator / social site."""
+    host = (host or "").lower()
+    return any(host == board or host.endswith("." + board) for board in JOB_BOARD_HOSTS)
+
+
+def is_google_news_url(url: str) -> bool:
+    return host_of(url) == "news.google.com"
+
+
+def decode_google_news_link(url: str) -> Optional[str]:
+    """Best-effort offline unwrap of a news.google.com/rss/articles/... link.
+
+    Google News item ids embed the target URL inside a base64 protobuf
+    payload. Decoding happens locally (no network call) and frequently
+    recovers the publisher's real article URL.
+    """
+    match = re.search(r"/articles/([A-Za-z0-9_\-]+)", str(url or ""))
+    if not match:
+        return None
+    token = match.group(1)
+    padded = token + "=" * (-len(token) % 4)
+    try:
+        raw = base64.urlsafe_b64decode(padded)
+    except Exception:
+        return None
+    for candidate_match in re.finditer(rb"https?://[\x21-\x7e]{8,}", raw):
+        candidate = candidate_match.group(0).decode("ascii", "ignore")
+        candidate = candidate.rstrip("\\\"'.,);]")
+        if is_valid_apply_url(candidate) and not is_google_news_url(candidate):
+            return candidate
+    return None
+
+
+def _unwrap_google_news_via_http(url: str, timeout: int = 12) -> Optional[str]:
+    """Follow a Google News link once and mine the destination URL from HTML."""
+    if requests is None:
+        return None
+    try:
+        response = requests.get(
+            url, headers=HTTP_SIMPLE_HEADERS, timeout=timeout, allow_redirects=True
+        )
+    except Exception:
+        return None
+    text = (response.text or "")[:400000]
+    for pattern in (r'data-n-au="(https?://[^"]+)"', r'<a[^>]+href="(https?://[^"]+)"'):
+        for match in re.finditer(pattern, text):
+            href = html.unescape(match.group(1)).strip()
+            if is_valid_apply_url(href) and not is_google_news_url(href):
+                return href
+    return None
+
+
+GOOGLE_NEWS_BATCHEXECUTE = "https://news.google.com/_/DotsSplashUi/data/batchexecute"
+
+
+def _resolve_google_news_via_batchexecute(
+    article_id: str, timeout: int = 15
+) -> Optional[str]:
+    """Resolve an opaque Google News article id to the publisher URL.
+
+    Newer Google News ids (AU_yqL... style) no longer embed the destination
+    inside the base64 payload. The article shell page carries a signature +
+    timestamp pair that the public DotsSplashUi batchexecute endpoint (the
+    same RPC the Google News web app uses) exchanges for the real URL.
+    """
+    if requests is None or not article_id:
+        return None
+    try:
+        shell = requests.get(
+            "https://news.google.com/rss/articles/" + article_id,
+            headers=HTTP_SIMPLE_HEADERS,
+            timeout=timeout,
+        )
+    except Exception:
+        return None
+    shell_text = shell.text or ""
+    signature = re.search(r'data-n-a-sg="([^"]+)"', shell_text)
+    timestamp = re.search(r'data-n-a-ts="([^"]+)"', shell_text)
+    if not signature or not timestamp:
+        return None
+    request_body = [
+        "Fbv4je",
+        json.dumps(
+            [
+                "garturlreq",
+                [
+                    [
+                        "X",
+                        "X",
+                        ["X", "X"],
+                        None,
+                        None,
+                        1,
+                        1,
+                        "US:en",
+                        1,
+                        1,
+                        None,
+                        None,
+                        None,
+                        None,
+                        None,
+                        0,
+                        1,
+                    ],
+                    "X",
+                    "X",
+                    1,
+                    [1, 1, 1],
+                    1,
+                    1,
+                    None,
+                    0,
+                    0,
+                    None,
+                    0,
+                ],
+                article_id,
+                timestamp.group(1),
+                signature.group(1),
+            ]
+        ),
+    ]
+    payload = "f.req=" + quote(json.dumps([[request_body]]))
+    try:
+        response = requests.post(
+            GOOGLE_NEWS_BATCHEXECUTE,
+            data=payload,
+            headers={
+                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                "User-Agent": HTTP_SIMPLE_HEADERS["User-Agent"],
+                "Referer": "https://news.google.com/",
+            },
+            timeout=timeout,
+        )
+    except Exception:
+        return None
+    for part in (response.text or "").split("\n\n"):
+        try:
+            data = json.loads(part)
+            inner = json.loads(data[0][2])
+            url = inner[1]
+        except Exception:
+            continue
+        if (
+            isinstance(url, str)
+            and is_valid_apply_url(url)
+            and not is_google_news_url(url)
+        ):
+            return url
+    return None
+
+
+def resolve_google_news_link(url: str, timeout: int = 12) -> Optional[str]:
+    """Best-effort unwrap of a news.google.com link to the publisher URL.
+
+    Tries the free offline base64 decode first, then the batchexecute
+    resolver for opaque ids, then a single HTTP pass over the article shell.
+    """
+    raw = squash(url)
+    if not is_google_news_url(raw):
+        return raw if is_valid_apply_url(raw) else None
+    decoded = decode_google_news_link(raw)
+    if decoded:
+        return decoded
+    match = re.search(r"/articles/([A-Za-z0-9_\-]+)", raw)
+    if match:
+        resolved = _resolve_google_news_via_batchexecute(match.group(1), timeout=timeout)
+        if resolved:
+            return resolved
+    return _unwrap_google_news_via_http(raw, timeout=timeout)
+
+
+def verify_and_resolve_url(url: str, timeout: int = 12) -> Optional[str]:
+    """Resolve a URL to its final destination, or None when conclusively dead.
+
+    Follows redirects (including unwrapping news.google.com wrappers) and
+    rejects HTTP 404/410 destinations. Timeouts, TLS quirks and bot-blocks on
+    government portals are deliberately NOT treated as dead - the listing is
+    kept with the original URL so slow official servers never erase a vacancy.
+    """
+    raw = squash(url)
+    if not is_valid_apply_url(raw):
+        return None
+    if is_google_news_url(raw):
+        resolved = resolve_google_news_link(raw, timeout=timeout)
+        if resolved:
+            raw = resolved
+    if requests is None:
+        return raw
+    try:
+        response = requests.get(
+            raw,
+            headers=HTTP_SIMPLE_HEADERS,
+            timeout=timeout,
+            allow_redirects=True,
+            stream=True,
+        )
+        status = response.status_code
+        final = response.url or raw
+        response.close()
+    except requests.exceptions.SSLError:
+        return raw
+    except Exception:
+        # Unreachable / timed out / DNS flake: keep the listing, cannot
+        # confirm it is dead.
+        return raw
+    if status in (404, 410):
+        return None
+    if not is_valid_apply_url(final):
+        return raw
+    if is_google_news_url(final):
+        return raw
+    return final
+
+
+def known_org_identity(organization: str) -> Optional[Tuple[str, str]]:
+    """Verified (website, domain) for a known Indian organisation, if any."""
+    name = squash(organization).lower()
+    if not name:
+        return None
+    name = re.sub(r"[^\w&\s]", " ", name, flags=re.UNICODE)
+    name = re.sub(r"\s+", " ", name).strip()
+    if not name:
+        return None
+    exact = EXACT_ORG_NAMES.get(name)
+    if exact is not None:
+        return exact
+    for alias, website, domain in _KNOWN_ORGS_SORTED:
+        pattern = r"(?<![a-z0-9])" + re.escape(alias) + r"(?![a-z0-9])"
+        if re.search(pattern, name):
+            return website, domain
+    return None
+
+
+def derive_org_site_from_apply_url(apply_url: str) -> Optional[str]:
+    """When the apply link already lives on the organisation's own domain,
+    that domain is its official website."""
+    host = host_of(apply_url)
+    if not host or is_board_host(host):
+        return None
+    site = "https://" + strip_www(host)
+    return site if is_valid_apply_url(site) else None
+
+
+def finalize_org_identity(
+    organization: str,
+    apply_url: str = "",
+    current_website: str = "",
+    current_domain: str = "",
+) -> Tuple[str, str]:
+    """Return the best known (org_website, org_domain) for a record.
+
+    Priority: the verified directory -> a model-provided website on the same
+    official domain -> the model-provided website -> the apply link's own
+    domain (when it is not a job board) -> the model-provided bare domain.
+    """
+    website = squash(current_website)
+    domain = squash(current_domain).strip(".").lower()
+    if website and not is_valid_apply_url(website):
+        website = ""
+
+    known = known_org_identity(organization)
+    if known is not None:
+        known_site, known_domain = known
+        if website:
+            host = host_of(website)
+            if host == known_domain or host.endswith("." + known_domain):
+                return website, known_domain  # deeper page on the official domain
+        return known_site, known_domain
+
+    if website:
+        host = strip_www(host_of(website))
+        if host and not is_board_host(host):
+            return website, host
+
+    derived = derive_org_site_from_apply_url(apply_url)
+    if derived:
+        return derived, strip_www(host_of(derived))
+
+    if domain and "." in domain and is_valid_apply_url("https://" + domain):
+        return "https://" + domain, domain
+    return "", ""
+
+
+def infer_source_portal(apply_url: str, org_domain: str = "") -> str:
+    """Readable label for wherever the apply link points."""
+    host = strip_www(host_of(apply_url))
+    if not host:
+        return ""
+    for board, label in SOURCE_PORTAL_BY_HOST:
+        if host == board or host.endswith("." + board):
+            return label
+    if org_domain and (host == org_domain or host.endswith("." + org_domain)):
+        return "Official Organization Website"
+    if re.search(r"\.(gov\.in|nic\.in|ac\.in|res\.in|edu\.in|ernet\.in|gov)$", host):
+        return "Official Institute Portal"
+    if host.endswith((".org", ".org.in", ".ngo", ".int")):
+        return "Official Organisation Website"
+    return host
+
+
+BAD_ORG_MARKERS = (
+    "unknown", "confidential", "see announcement", "recruiter",
+    "not disclosed", "undisclosed", "employer", "various",
+)
+
+
+def is_verifiable_job(job: Dict[str, Any]) -> Tuple[bool, str]:
+    """Strict publish gate: real apply link, real employer, official website."""
+    apply_url = squash(job.get("apply_url"))
+    if not is_valid_apply_url(apply_url):
+        return False, "apply URL missing or invalid"
+    if is_google_news_url(apply_url):
+        return False, "apply link is still an unresolved news redirect"
+    org = squash(job.get("organization")).lower().strip(" .,-")
+    if len(org) < 3 or re.fullmatch(r"[^a-z0-9]+", org):
+        return False, "organization is not a named entity"
+    if any(marker in org for marker in BAD_ORG_MARKERS):
+        return False, "organization is not a named entity"
+    if not is_valid_apply_url(squash(job.get("org_website"))):
+        return False, "org_website missing or invalid"
+    return True, ""
+
+
+def resolve_and_verify_record(
+    record: Dict[str, Any],
+) -> Tuple[Optional[Dict[str, Any]], str]:
+    """Resolve the apply link, fill org identity fields, then gate the record."""
+    resolved = verify_and_resolve_url(squash(record.get("apply_url")))
+    if resolved is None:
+        return None, "apply URL is dead (HTTP 404/410 or invalid)"
+    record["apply_url"] = resolved
+
+    website, domain = finalize_org_identity(
+        squash(record.get("organization")),
+        resolved,
+        squash(record.get("org_website")),
+        squash(record.get("org_domain")),
+    )
+    # A model-guessed website that no longer resolves is dropped in favour of
+    # the deterministic derivation; directory-matched sites are trusted.
+    known = known_org_identity(squash(record.get("organization")))
+    trusted = known is not None and domain == known[1]
+    if website and not trusted and verify_and_resolve_url(website, timeout=8) is None:
+        website, domain = finalize_org_identity(
+            squash(record.get("organization")), resolved, "", ""
+        )
+    record["org_website"] = website
+    record["org_domain"] = domain
+    record["source_portal"] = (
+        infer_source_portal(resolved, domain)
+        or squash(record.get("source_portal"))
+    )
+    ok, why = is_verifiable_job(record)
+    if not ok:
+        return None, why
+    return record, ""
 
 
 def resolve_lookback_hours() -> int:
@@ -893,14 +1569,15 @@ INDIAN_ACADEMIC_NEWS_QUERIES = [
     '("Junior Research Fellow" OR "JRF" OR "Project Associate" OR "Research Associate")'
     ' AND ("Environmental" OR "Forestry" OR "Climate" OR "Remote Sensing" OR "GIS"'
     ' OR "Ecology") India',
+    '(JRF OR "Project Associate" OR "Research Fellow" OR "Field Assistant")'
+    ' recruitment when:7d',
     '("WII Dehradun" OR "ICFRE" OR "IIFM Bhopal" OR "IIRS" OR "NRSC" OR "ATREE"'
     ' OR "CEEW" OR "TERI" OR "GBPNIHE" OR "ICAR") AND ("Recruitment" OR "Vacancy"'
     ' OR "Position" OR "Fellow" OR "Associate")',
     '("Young Professional" OR "Contractual" OR "Consultant") AND ("MoEFCC" OR "Forest"'
     ' OR "Climate Change" OR "Sustainability" OR "CAMPA" OR "Pollution Control") India',
-    '("PhD Position" OR "PhD Fellowship" OR "Junior Research Fellowship")'
-    ' AND ("Climate" OR "Sustainability" OR "Forestry" OR "Earth Sciences"'
-    ' OR "Atmospheric") India',
+    '("PhD Fellowship" OR "Postdoctoral" OR "PhD Position")'
+    ' (Climate OR Forestry OR Environment OR Ecology OR "Earth Sciences") when:7d',
 ]
 
 # Optional extra academic-job RSS feeds (labelled). Best-effort: unreachable
@@ -927,6 +1604,23 @@ NEWS_NOISE_TITLE_RE = re.compile(
     r"to prepare for)",
     re.I,
 )
+
+# Google News wrappers are unwrapped offline; the recovered destination must
+# land on a verifiable Indian institutional / academic / organisation domain
+# (or an official job board) or the headline is not publishable.
+NEWS_VERIFIABLE_HOST_RE = re.compile(
+    r"\.(gov\.in|ac\.in|res\.in|edu\.in|nic\.in|ernet\.in|org|in)$", re.I
+)
+NEWS_VERIFIABLE_DOMAINS = ("linkedin.com", "naukri.com", "indeed.com")
+
+
+def _is_verifiable_news_host(url: str) -> bool:
+    host = host_of(url)
+    if not host:
+        return False
+    if any(host == d or host.endswith("." + d) for d in NEWS_VERIFIABLE_DOMAINS):
+        return True
+    return bool(NEWS_VERIFIABLE_HOST_RE.search(host))
 
 
 def _google_news_query_url(query: str) -> str:
@@ -967,6 +1661,18 @@ def _news_entry_to_candidate(entry: Dict[str, Any], query: str) -> Optional[Dict
         age_cutoff = (date.today() - timedelta(days=GOOGLE_NEWS_MAX_AGE_DAYS)).isoformat()
         if date_posted < age_cutoff:
             return None
+    # Strict verifiability (last, so resolution cost only hits real ads):
+    # unwrap the Google News shell - offline base64, then the batchexecute
+    # resolver for opaque ids, then one HTTP pass - and keep the announcement
+    # only when it lands on a verifiable institution / academic / organisation
+    # domain (or an official job board).
+    if is_google_news_url(link):
+        resolved = resolve_google_news_link(link)
+        if not resolved:
+            return None
+        link = resolved
+    if not _is_verifiable_news_host(link):
+        return None
     return {
         "source": "google-news",
         "title": title,
@@ -1065,6 +1771,245 @@ def fetch_indian_academic_and_institute_jobs() -> List[Dict[str, Any]]:
         harvest(feed_url, feed_label, feed_label)
 
     log.info("Institute news harvest produced %d candidate(s)", len(candidates))
+    return candidates
+
+
+# ---------------------------------------------------------------------------
+# Source 3b: direct verifiable Indian environmental & academic career portals
+# ---------------------------------------------------------------------------
+INDIABIOSCIENCE_FEED = "https://indiabioscience.org/feed"
+
+# Direct careers pages of flagship Indian climate / conservation
+# organisations. Listings are discovered as links on the page, then flow
+# through the same Gemini humanizer + strict verifiability gate as every
+# other source.
+VERIFIED_PORTAL_PAGES: List[Dict[str, str]] = [
+    # wri-india.org/careers sits behind a bot wall; the global WRI careers
+    # board is public and carries the India postings with location = India.
+    {
+        "name": "WRI India",
+        "organization": "WRI India",
+        "url": "https://www.wri.org/careers",
+        "slug": "wri-india",
+    },
+    {
+        "name": "CEEW",
+        "organization": "Council on Energy, Environment and Water (CEEW)",
+        "url": "https://www.ceew.in/careers",
+        "slug": "ceew",
+    },
+    {
+        "name": "ATREE",
+        "organization": "ATREE",
+        "url": "https://www.atree.org/careers/",
+        "slug": "atree",
+    },
+    {
+        "name": "WWF-India",
+        "organization": "WWF-India",
+        "url": "https://www.wwfindia.org/engage_with_us/get_involved/jobs/",
+        "slug": "wwf-india",
+    },
+]
+
+INDIABIOSCIENCE_JOB_TITLE_RE = re.compile(
+    r"(job|vacanc|career|position|opening|fellow|fellowship|postdoc|phd|"
+    r"jrf|srf|research associate|project associate|recruit|intern|hiring|"
+    r"walk-?in|scientist)",
+    re.I,
+)
+GREEN_FIELD_RE = re.compile(
+    r"(environment|ecolog|climate|forest|wildlife|sustainab|conservation|"
+    r"biodiversity|earth|water|agricultur|geospatial|remote sensing|gis|"
+    r"natural resource|planetary|green)",
+    re.I,
+)
+PORTAL_LINK_TEXT_RE = re.compile(
+    r"(\bjobs?\b|vacanc|\bpositions?\b|\bopenings?\b|fellowship|"
+    r"\bassociates?\b|\banalysts?\b|\bofficers?\b|\bcoordinators?\b|"
+    r"\bconsultants?\b|\bmanagers?\b|\bspecialists?\b|\binterns?\b|"
+    r"\bresearch\b|\bscientists?\b|\badvis[eo]rs?\b|\bdirectors?\b|"
+    r"\bengineers?\b|\bassistants?\b|\blead\b|\bhiring\b|\bcareers?\b|"
+    r"\bfellows?\b|\bexecutives?\b|\btrainees?\b)",
+    re.I,
+)
+PORTAL_LINK_SKIP_RE = re.compile(
+    r"(read more|learn more|view all|see all|sign in|log ?in|donate|subscribe|"
+    r"newsletter|privacy|terms|cookie|sitemap|contact|about|facebook|twitter|"
+    r"instagram|linkedin\.com|youtube|mailto:|/tag/|/category/)",
+    re.I,
+)
+
+
+def _fetch_rss_entries(feed_url: str, label: str, browser_ua: bool = False) -> List[Any]:
+    """Fetch + parse a public RSS/Atom feed with graceful failure."""
+    if feedparser is None:
+        log.warning("feedparser is not installed - skipping %s", label)
+        return []
+    parsed = None
+    if requests is not None:
+        try:
+            headers = dict(HTTP_SIMPLE_HEADERS) if browser_ua else {
+                "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8"
+            }
+            if not browser_ua:
+                headers["User-Agent"] = requests.utils.default_headers().get(
+                    "User-Agent", ""
+                )
+            response = requests.get(feed_url, headers=headers, timeout=REQUEST_TIMEOUT)
+            if response.status_code != 200:
+                log.warning("%s feed returned HTTP %s - skipping", label, response.status_code)
+                return []
+            parsed = feedparser.parse(response.content)
+        except Exception as exc:
+            log.warning("%s feed request failed: %s", label, str(exc)[:160])
+            return []
+    else:
+        try:
+            parsed = feedparser.parse(feed_url)
+        except Exception as exc:
+            log.warning("%s feed fetch via feedparser failed: %s", label, str(exc)[:160])
+            return []
+    entries = list(getattr(parsed, "entries", []) or [])
+    if not entries and getattr(parsed, "bozo", False):
+        log.warning(
+            "%s feed could not be parsed (%s) - skipping",
+            label, str(parsed.get("bozo_exception"))[:140],
+        )
+    return entries
+
+
+def _entry_date_iso(entry: Dict[str, Any]) -> str:
+    published = entry.get("published_parsed") or entry.get("updated_parsed")
+    if published is None:
+        return ""
+    try:
+        return date(published[0], published[1], published[2]).isoformat()
+    except (TypeError, ValueError, IndexError, AttributeError):
+        return ""
+
+
+def fetch_indiabioscience_jobs() -> List[Dict[str, Any]]:
+    """IndiaBioscience jobs & announcement feed filtered for green roles."""
+    entries = _fetch_rss_entries(INDIABIOSCIENCE_FEED, "IndiaBioscience")
+    candidates: List[Dict[str, Any]] = []
+    for entry in entries[:GOOGLE_NEWS_RESULTS_PER_QUERY]:
+        title = squash(strip_html(entry.get("title") or ""))
+        link = str(entry.get("link") or "").strip()
+        if not title or not link.lower().startswith("http"):
+            continue
+        if not INDIABIOSCIENCE_JOB_TITLE_RE.search(title):
+            continue
+        summary = strip_html(entry.get("summary") or entry.get("description") or "")
+        if not GREEN_FIELD_RE.search(title + " " + summary[:600]):
+            continue
+        candidates.append(
+            {
+                "source": "portal:indiabioscience",
+                "title": title,
+                "organization": "IndiaBioscience partner institute",
+                "location_raw": "India",
+                "description": (summary or "")[:4000],
+                "apply_url": link,
+                "date_posted": _entry_date_iso(entry),
+                "matched_query": "indiabioscience-feed",
+            }
+        )
+    log.info("IndiaBioscience produced %d candidate(s)", len(candidates))
+    return candidates
+
+
+def _extract_portal_links(
+    page_url: str, html_text: str, limit: int = 20
+) -> List[Tuple[str, str]]:
+    """Pull job-looking same-site links off a careers page."""
+    anchors: List[Tuple[str, str]] = []
+    if BeautifulSoup is not None:
+        soup = BeautifulSoup(html_text, "html.parser")
+        for anchor in soup.find_all("a", href=True):
+            anchors.append((squash(anchor.get_text(" ")), str(anchor.get("href") or "")))
+    else:  # pragma: no cover - regex fallback when bs4 is missing
+        for match in re.finditer(
+            r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', html_text, re.I | re.S
+        ):
+            anchors.append((squash(strip_html(match.group(2))), html.unescape(match.group(1))))
+
+    page_host = host_of(page_url)
+    kept: List[Tuple[str, str]] = []
+    seen: Set[str] = set()
+    for text, href in anchors:
+        if not text or len(text) < 8 or len(text) > 140:
+            continue
+        if not PORTAL_LINK_TEXT_RE.search(text):
+            continue
+        if PORTAL_LINK_SKIP_RE.search(text) or PORTAL_LINK_SKIP_RE.search(href):
+            continue
+        absolute = urljoin(page_url, href.strip())
+        if not is_valid_apply_url(absolute):
+            continue
+        target_host = host_of(absolute)
+        if target_host != page_host and not target_host.endswith("." + page_host):
+            continue
+        if absolute.rstrip("/") == page_url.rstrip("/"):
+            continue
+        key = normalize_key(absolute)
+        if key in seen:
+            continue
+        seen.add(key)
+        kept.append((text, absolute))
+        if len(kept) >= limit:
+            break
+    return kept
+
+
+def fetch_portal_page_candidates(page: Dict[str, str]) -> List[Dict[str, Any]]:
+    """Scrape one official careers page for job-looking links."""
+    if requests is None:
+        return []
+    try:
+        response = requests.get(
+            page["url"], headers=HTTP_SIMPLE_HEADERS, timeout=REQUEST_TIMEOUT
+        )
+    except Exception as exc:
+        log.warning("%s careers page request failed: %s", page["name"], str(exc)[:140])
+        return []
+    if response.status_code != 200:
+        log.warning(
+            "%s careers page returned HTTP %s - skipping", page["name"], response.status_code
+        )
+        return []
+    html_text = response.text or ""
+    if len(html_text) < 500:
+        log.warning("%s careers page returned too little content - skipping", page["name"])
+        return []
+    rows = _extract_portal_links(page["url"], html_text)
+    candidates = [
+        {
+            "source": "portal:" + page["slug"],
+            "title": text,
+            "organization": page["organization"],
+            "location_raw": "India",
+            "description": (
+                f"Live listing discovered on the official {page['name']} careers page. "
+                "Confirm eligibility and deadlines on the destination page."
+            ),
+            "apply_url": href,
+            "date_posted": "",
+            "matched_query": page["slug"] + "-careers",
+        }
+        for text, href in rows
+    ]
+    log.info("%s careers page produced %d candidate(s)", page["name"], len(candidates))
+    return candidates
+
+
+def fetch_verified_indian_portals() -> List[Dict[str, Any]]:
+    """Aggregate the direct verifiable Indian environmental career portals."""
+    candidates: List[Dict[str, Any]] = []
+    candidates.extend(fetch_indiabioscience_jobs())
+    for page in VERIFIED_PORTAL_PAGES:
+        candidates.extend(fetch_portal_page_candidates(page))
+    log.info("Direct Indian portals produced %d candidate(s)", len(candidates))
     return candidates
 
 
@@ -1555,6 +2500,9 @@ def coerce_to_job_record(
         "must_have_skills": skills,
         "application_tip": application_tip,
         "apply_url": apply_url,
+        "org_website": squash(job.org_website),
+        "org_domain": squash(job.org_domain).strip(".").lower(),
+        "source_portal": squash(job.source_portal),
     }
     return record, ""
 
@@ -1752,6 +2700,289 @@ def write_stats(stats: Dict[str, Any], path: Path) -> None:
         stats.get("total_archived_jobs", 0),
         stats.get("passed_this_week", 0),
     )
+
+
+# ---------------------------------------------------------------------------
+# Community broadcasting: daily WhatsApp bulletin + Telegram channel post
+# ---------------------------------------------------------------------------
+TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/sendMessage"
+TELEGRAM_MESSAGE_LIMIT = 3900   # Telegram hard limit is 4096; keep headroom
+DIGEST_MAX_JOBS = 10            # jobs listed per digest / broadcast
+
+
+def _community_links() -> Tuple[str, str]:
+    whatsapp = (os.environ.get("WHATSAPP_GROUP_URL") or "").strip() or WHATSAPP_GROUP_URL
+    telegram = (os.environ.get("TELEGRAM_CHANNEL_URL") or "").strip() or TELEGRAM_CHANNEL_URL
+    return whatsapp, telegram
+
+
+def _html_escape_text(value: Any) -> str:
+    text = str(value if value is not None else "")
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _location_line(job: Dict[str, Any]) -> str:
+    city = squash(job.get("city"))
+    state = squash(job.get("state"))
+    if city and state:
+        return f"{city}, {state}"
+    return city or state or "India"
+
+
+def build_whatsapp_job_block(job: Dict[str, Any], index: Optional[int] = None) -> str:
+    """One rich, forward-ready WhatsApp alert block for a single job."""
+    share_url = f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}"
+    lines = []
+    if index is not None:
+        lines.append(f"{index}. *{squash(job.get('clean_title'))}*")
+    else:
+        lines += ["🌱 *NEW GREEN / RESEARCH JOB ALERT*", ""]
+        lines.append(f"📌 *Role:* {squash(job.get('clean_title'))}")
+    lines.append(f"🏛️ *Organization:* {squash(job.get('organization'))}")
+    lines.append(f"📍 *Location:* {_location_line(job)}")
+    lines.append(f"🎓 *Eligibility:* {squash(job.get('qualification_summary')) or 'As per institute norms'}")
+    lines.append(f"💰 *Fellowship/Pay:* {squash(job.get('compensation_or_fellowship')) or 'As per institute norms'}")
+    valid_through = squash(job.get("valid_through"))[:10]
+    if valid_through:
+        lines.append(f"🕒 *Apply before:* {valid_through}")
+    lines.append("")
+    lines.append(f"🔗 *Full Details & Apply:* {share_url}")
+    org_website = squash(job.get("org_website"))
+    if org_website:
+        lines.append(f"🌐 *Official Site:* {org_website}")
+    return "\n".join(lines)
+
+
+def build_whatsapp_digest_text(
+    jobs: List[Dict[str, Any]], today: str, heading: str
+) -> str:
+    """Ready-to-paste WhatsApp/Telegram bulletin covering the listed jobs."""
+    whatsapp, telegram = _community_links()
+    parts = [
+        "🌱 *URBAN FOREST PARK — GREEN & RESEARCH JOB ALERT*",
+        f"🗓️ {today} · {len(jobs)} mandate(s)",
+        "━━━━━━━━━━━━━━━━━━━━",
+        "",
+    ]
+    parts.append(f"*{heading}*")
+    parts.append("")
+    for position, job in enumerate(jobs, start=1):
+        parts.append(build_whatsapp_job_block(job, index=position))
+        parts.append("")
+    parts += [
+        "━━━━━━━━━━━━━━━━━━━━",
+        "📡 *Never miss a verified green job:*",
+        f"• WhatsApp group: {whatsapp}",
+        f"• Telegram channel: {telegram}",
+        f"• Full registry: {SITE_BASE_URL}",
+    ]
+    return "\n".join(parts).strip() + "\n"
+
+
+def build_telegram_digest_html(
+    jobs: List[Dict[str, Any]], today: str, heading: str
+) -> str:
+    """Telegram-flavoured (HTML parse_mode) version of the same digest."""
+    whatsapp, telegram = _community_links()
+    lines = [
+        "🌱 <b>Urban Forest Park — Green &amp; Research Job Alert</b>",
+        f"<i>{_html_escape_text(today)} · {len(jobs)} mandate(s)</i>",
+        "",
+        f"<b>{_html_escape_text(heading)}</b>",
+        "",
+    ]
+    for position, job in enumerate(jobs, start=1):
+        share_url = f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}"
+        org_website = squash(job.get("org_website"))
+        links = f'<a href="{_html_escape_text(share_url)}">Full details &amp; apply</a>'
+        if org_website:
+            links += f' · <a href="{_html_escape_text(org_website)}">Official website</a>'
+        lines += [
+            f"<b>{position}. {_html_escape_text(squash(job.get('clean_title')))}</b> — "
+            f"{_html_escape_text(squash(job.get('organization')))} "
+            f"({_html_escape_text(_location_line(job))})",
+            f"🎓 {_html_escape_text(squash(job.get('qualification_summary')))}",
+            f"💰 {_html_escape_text(squash(job.get('compensation_or_fellowship')))}",
+            f"🔗 {links}",
+            "",
+        ]
+    lines += [
+        "📡 <b>Never miss an alert:</b>",
+        f'• <a href="{_html_escape_text(whatsapp)}">WhatsApp group</a>',
+        f'• <a href="{_html_escape_text(telegram)}">Telegram channel</a>',
+        f'• <a href="{SITE_BASE_URL}/">{SITE_BASE_URL.replace("https://", "")}</a>',
+    ]
+    return "\n".join(lines)
+
+
+def _chunk_text(text: str, limit: int) -> List[str]:
+    """Split a message into Telegram-safe chunks on line boundaries."""
+    chunks: List[str] = []
+    current = ""
+    for line in text.splitlines(True):
+        if current and len(current) + len(line) > limit:
+            chunks.append(current.rstrip("\n"))
+            current = ""
+        current += line
+    if current.strip():
+        chunks.append(current.rstrip("\n"))
+    return chunks
+
+
+def write_digests(
+    active: List[Dict[str, Any]],
+    new_jobs: List[Dict[str, Any]],
+    today: str,
+    digest_path: Path,
+    whatsapp_path: Path,
+) -> Dict[str, Any]:
+    """Generate daily_digest.json + whatsapp_digest.txt for the site owner.
+
+    `new_jobs` are the listings accepted by this run; on maintenance-only
+    runs the digest falls back to the freshest active mandates so the files
+    (and the footer copy button) are refreshed on every run.
+    """
+    if new_jobs:
+        listed = new_jobs[:DIGEST_MAX_JOBS]
+        heading = f"{len(new_jobs)} new verified mandate(s) added today"
+    else:
+        listed = sorted(
+            active,
+            key=lambda job: (
+                str(job.get("date_added") or ""),
+                str(job.get("id") or ""),
+            ),
+            reverse=True,
+        )[:DIGEST_MAX_JOBS]
+        heading = "Latest verified mandates on the registry"
+
+    jobs_payload = []
+    for job in listed:
+        jobs_payload.append(
+            {
+                "id": squash(job.get("id")),
+                "clean_title": squash(job.get("clean_title")),
+                "organization": squash(job.get("organization")),
+                "city": squash(job.get("city")),
+                "state": squash(job.get("state")),
+                "category": squash(job.get("category")),
+                "position_type": squash(job.get("position_type")),
+                "qualification_summary": squash(job.get("qualification_summary")),
+                "compensation_or_fellowship": squash(job.get("compensation_or_fellowship")),
+                "valid_through": squash(job.get("valid_through"))[:10],
+                "apply_url": squash(job.get("apply_url")),
+                "org_website": squash(job.get("org_website")),
+                "org_domain": squash(job.get("org_domain")),
+                "source_portal": squash(job.get("source_portal")),
+                "url": f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}",
+            }
+        )
+
+    whatsapp_text = build_whatsapp_digest_text(listed, today, heading)
+    telegram_html = build_telegram_digest_html(listed, today, heading)
+    digest = {
+        "generated_at": today,
+        "new_count": len(new_jobs),
+        "count": len(jobs_payload),
+        "heading": heading,
+        "site": SITE_BASE_URL,
+        "jobs": jobs_payload,
+        "whatsapp_text": whatsapp_text,
+        "telegram_html": telegram_html,
+    }
+
+    digest_path.parent.mkdir(parents=True, exist_ok=True)
+    digest_path.write_text(
+        json.dumps(digest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    whatsapp_path.parent.mkdir(parents=True, exist_ok=True)
+    whatsapp_path.write_text(whatsapp_text, encoding="utf-8")
+    log.info(
+        "Wrote daily digest (%d job(s)) to %s + %s",
+        len(jobs_payload), digest_path, whatsapp_path,
+    )
+    return digest
+
+
+def send_telegram_digest(telegram_html: str) -> bool:
+    """Post the digest to the configured Telegram channel (no-op without env)."""
+    token = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip()
+    chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
+    if not token or not chat_id:
+        log.info(
+            "Telegram broadcast skipped (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set)"
+        )
+        return False
+    if requests is None:
+        log.warning("requests is not installed - cannot broadcast to Telegram")
+        return False
+    delivered = 0
+    for chunk in _chunk_text(telegram_html, TELEGRAM_MESSAGE_LIMIT):
+        try:
+            response = requests.post(
+                TELEGRAM_API_URL.format(token=token),
+                json={
+                    "chat_id": chat_id,
+                    "text": chunk,
+                    "parse_mode": "HTML",
+                    "disable_web_page_preview": False,
+                },
+                timeout=REQUEST_TIMEOUT,
+            )
+            if response.status_code == 200:
+                delivered += 1
+            else:
+                log.warning(
+                    "Telegram API returned HTTP %s: %s",
+                    response.status_code, (response.text or "")[:200],
+                )
+        except Exception as exc:
+            log.warning("Telegram broadcast failed: %s", str(exc)[:160])
+    if delivered:
+        log.info("Telegram broadcast delivered (%d message chunk(s))", delivered)
+    return delivered > 0
+
+
+def send_whatsapp_webhook(whatsapp_text: str) -> bool:
+    """Optional headless WhatsApp delivery via WHATSAPP_WEBHOOK_URL."""
+    webhook = (os.environ.get("WHATSAPP_WEBHOOK_URL") or "").strip()
+    if not webhook:
+        log.info("WhatsApp webhook not configured (WHATSAPP_WEBHOOK_URL unset) - digest file only")
+        return False
+    if requests is None:
+        return False
+    try:
+        response = requests.post(
+            webhook,
+            json={"message": whatsapp_text, "text": whatsapp_text},
+            timeout=REQUEST_TIMEOUT,
+        )
+        if 200 <= response.status_code < 300:
+            log.info("WhatsApp webhook accepted the digest (HTTP %s)", response.status_code)
+            return True
+        log.warning(
+            "WhatsApp webhook returned HTTP %s: %s",
+            response.status_code, (response.text or "")[:200],
+        )
+    except Exception as exc:
+        log.warning("WhatsApp webhook failed: %s", str(exc)[:160])
+    return False
+
+
+def broadcast_new_jobs(
+    active: List[Dict[str, Any]],
+    new_jobs: List[Dict[str, Any]],
+    today: str,
+    digest_path: Path,
+    whatsapp_path: Path,
+) -> None:
+    """Regenerate the digest files and broadcast new listings when possible."""
+    digest = write_digests(active, new_jobs, today, digest_path, whatsapp_path)
+    if not new_jobs:
+        log.info("No new listings this run - Telegram/WhatsApp broadcast skipped")
+        return
+    send_telegram_digest(digest["telegram_html"])
+    send_whatsapp_webhook(digest["whatsapp_text"])
 
 
 # ---------------------------------------------------------------------------
@@ -1981,6 +3212,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         "--sitemap", help="Path to sitemap.xml (default: public/sitemap.xml)"
     )
     parser.add_argument(
+        "--digest-json",
+        help="Path to daily_digest.json (default: public/daily_digest.json)",
+    )
+    parser.add_argument(
+        "--digest-txt",
+        help="Path to whatsapp_digest.txt (default: public/whatsapp_digest.txt)",
+    )
+    parser.add_argument(
         "--max-new",
         type=int,
         default=DEFAULT_MAX_NEW_PER_RUN,
@@ -2033,6 +3272,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     sitemap_path = (
         Path(args.sitemap) if args.sitemap else resolve_default(DEFAULT_SITEMAP_PATH)
     )
+    digest_json_path = (
+        Path(args.digest_json) if args.digest_json else resolve_default(DEFAULT_DIGEST_JSON_PATH)
+    )
+    whatsapp_digest_path = (
+        Path(args.digest_txt) if args.digest_txt else resolve_default(DEFAULT_WHATSAPP_DIGEST_PATH)
+    )
 
     existing = [normalize_job_fields(job) for job in load_jobs(jobs_path)]
     archive = [normalize_job_fields(job) for job in load_jobs(archive_path)]
@@ -2057,6 +3302,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         write_archive(archive, archive_path)
         write_stats(stats, stats_path)
         write_sitemap(active, archive, sitemap_path)
+        write_digests(active, [], today, digest_json_path, whatsapp_digest_path)
         log.info(
             "Sync complete: %d active, %d archived (%d newly archived this run).",
             len(active), len(archive), newly_archived,
@@ -2082,14 +3328,22 @@ def main(argv: Optional[List[str]] = None) -> int:
     targeted_candidates = fetch_targeted_green_jobs()
     reliefweb_candidates = fetch_reliefweb_jobs()
     academic_candidates = fetch_indian_academic_and_institute_jobs()
+    portal_candidates = fetch_verified_indian_portals()
     candidates = interleave_candidates(
-        [academic_candidates, reliefweb_candidates, targeted_candidates, board_candidates]
+        [
+            academic_candidates,
+            portal_candidates,
+            reliefweb_candidates,
+            targeted_candidates,
+            board_candidates,
+        ]
     )
     log.info(
         "Collected %d raw candidate(s) from all sources "
-        "(institute-news=%d, reliefweb=%d, targeted=%d, boards=%d)",
+        "(institute-news=%d, portals=%d, reliefweb=%d, targeted=%d, boards=%d)",
         len(candidates),
         len(academic_candidates),
+        len(portal_candidates),
         len(reliefweb_candidates),
         len(targeted_candidates),
         len(board_candidates),
@@ -2139,6 +3393,10 @@ def main(argv: Optional[List[str]] = None) -> int:
             rate_limit_streak = 0
             if record is not None and not is_valid_apply_url(record.get("apply_url")):
                 record, reason = None, "apply URL failed validation"
+            if record is not None:
+                # Resolve redirects, attach the official institution website
+                # and enforce the strict verifiability gate before publishing.
+                record, reason = resolve_and_verify_record(record)
             if record is not None:
                 # The humanizer may resolve two different source links to the
                 # same vacancy (e.g. a job board and a news announcement);
@@ -2200,6 +3458,10 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # 5. Regenerate the sitemap for Google Jobs indexing.
     write_sitemap(active, archive, sitemap_path)
+
+    # 6. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
+    #    TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (or a WhatsApp webhook) are set.
+    broadcast_new_jobs(active, accepted, today, digest_json_path, whatsapp_digest_path)
 
     log.info(
         "Done: %d active listing(s) (%d new this run), %d archived (%d newly archived).",
