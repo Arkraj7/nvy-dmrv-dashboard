@@ -991,6 +991,22 @@ def load_env_file() -> None:
         return
 
 
+def sanitize_ca_bundle_env() -> None:
+    """Ignore stale CA-bundle env paths so TLS keeps working.
+
+    Some Windows installs leave CURL_CA_BUNDLE / REQUESTS_CA_BUNDLE / 
+    SSL_CERT_FILE pointing at a certificate file that no longer exists (e.g.
+    an old PostgreSQL path), which makes every requests/urllib call fail TLS
+    verification. When the configured path is missing, drop the variable and
+    let certifi's default bundle apply.
+    """
+    for var in ("CURL_CA_BUNDLE", "REQUESTS_CA_BUNDLE", "SSL_CERT_FILE"):
+        value = (os.environ.get(var) or "").strip()
+        if value and not Path(value).exists():
+            log.warning("%s points to a missing file (%s); ignoring it", var, value)
+            os.environ.pop(var, None)
+
+
 # ---------------------------------------------------------------------------
 # Main pipeline
 # ---------------------------------------------------------------------------
@@ -1039,6 +1055,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         logging.getLogger(noisy).setLevel(noise_level)
 
     load_env_file()
+    sanitize_ca_bundle_env()
 
     jobs_path = Path(args.jobs) if args.jobs else resolve_default(DEFAULT_JOBS_PATH)
     sitemap_path = (
