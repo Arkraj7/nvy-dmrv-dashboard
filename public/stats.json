@@ -1,0 +1,46 @@
+{
+  "last_updated": "2026-10-18T21:41:38",
+  "active_open_jobs": 61,
+  "opened_this_week": 61,
+  "passed_this_week": 6,
+  "total_archived_jobs": 6,
+  "total_historical_indexed": 67,
+  "by_category": {
+    "Climate & Sustainability": {
+      "active": 31,
+      "archived": 1
+    },
+    "ESG & Carbon Markets": {
+      "active": 26,
+      "archived": 2
+    },
+    "Forestry & Afforestation": {
+      "active": 3,
+      "archived": 1
+    },
+    "Environmental Policy & Fellowships": {
+      "active": 1,
+      "archived": 1
+    },
+    "GIS, Remote Sensing & UHI": {
+      "active": 0,
+      "archived": 1
+    }
+  },
+  "by_state": {
+    "Maharashtra": 13,
+    "Delhi NCR": 12,
+    "Karnataka": 8,
+    "Tamil Nadu": 7,
+    "Gujarat": 3,
+    "Telangana": 3,
+    "Assam": 2,
+    "West Bengal": 2,
+    "Bihar": 1,
+    "Chhattisgarh": 1,
+    "Kerala": 1,
+    "Odisha": 1,
+    "Punjab": 1,
+    "Rajasthan": 1
+  }
+}

@@ -2,8 +2,10 @@ name: Daily India Green Jobs Update
 
 # Fetches new India climate/forestry/ESG/GIS jobs every morning at
 # 07:00 AM IST (01:30 UTC), humanizes them with Gemini, merges them into
-# public/jobs.json, regenerates public/sitemap.xml, commits both, and then
-# builds + deploys the live site to Cloudflare Pages.
+# public/jobs.json, expires closed mandates into public/archive.json,
+# refreshes public/stats.json (weekly hiring telemetry), regenerates
+# public/sitemap.xml, commits them, and then builds + deploys the live
+# site to Cloudflare Pages.
 
 on:
   schedule:
@@ -12,7 +14,7 @@ on:
   workflow_dispatch: {}   # allows a manual run from the Actions tab
 
 permissions:
-  contents: write         # the bot commits jobs.json + sitemap.xml
+  contents: write         # the bot commits jobs.json + archive.json + stats.json + sitemap.xml
 
 concurrency:
   group: daily-jobs
@@ -44,17 +46,18 @@ jobs:
           LOOKBACK_HOURS: "24"
         run: python scripts/fetch_and_humanize.py
 
-      - name: Commit updated listings & sitemap
+      - name: Commit updated registry data (jobs, archive, stats, sitemap)
         run: |
           git config user.name "urbanforestpark-bot"
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
           # The deployed site root is public/, so the pipeline writes to
-          # public/jobs.json and public/sitemap.xml.
-          git add public/jobs.json public/sitemap.xml
+          # public/jobs.json, public/archive.json, public/stats.json and
+          # public/sitemap.xml.
+          git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml
           if git diff --cached --quiet; then
-            echo "No new listings today - nothing to commit."
+            echo "No registry changes today - nothing to commit."
           else
-            git commit -m "chore(jobs): daily green jobs update ($(date -u +'%Y-%m-%d'))"
+            git commit -m "chore(jobs): daily registry update ($(date -u +'%Y-%m-%d'))"
             git pull --rebase --autostash
             git push
           fi

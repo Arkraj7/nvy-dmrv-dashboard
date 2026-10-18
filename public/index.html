@@ -13,20 +13,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>India Green Jobs Board — Climate, Forestry, ESG &amp; GIS Careers | UrbanForestPark</title>
-    <meta name="description" id="meta-desc" content="Explore curated climate, forestry, ESG, carbon markets and GIS jobs across India. Green job listings, fellowships and consultancies from leading organisations — apply via official portals.">
+    <!-- Theme bootstrap: applied before stylesheets to prevent flicker.
+         Persisted choice in localStorage ('ufp_theme'); defaults to the
+         user's operating-system preference. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('ufp_theme');
+          if (t !== 'dark' && t !== 'light') {
+            t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* default rendering: light */ }
+      })();
+    </script>
+
+    <title>India Climate, Forestry, ESG &amp; GIS Career Registry | Urban Forest Park</title>
+    <meta name="description" id="meta-desc" content="The national registry of active climate, forestry, ESG, carbon-market and geospatial mandates across India — curated listings with direct links to official application portals.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.urbanforestpark.com/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="UrbanForestPark">
-    <meta property="og:title" content="India Green Jobs Board — Climate, Forestry, ESG &amp; GIS Careers | UrbanForestPark">
-    <meta property="og:description" content="Curated climate, forestry, ESG, carbon markets and GIS jobs across India. Apply via official portals.">
+    <meta property="og:site_name" content="Urban Forest Park — India Career Registry">
+    <meta property="og:title" content="India Climate, Forestry, ESG &amp; GIS Career Registry | Urban Forest Park">
+    <meta property="og:description" content="Institutional registry of active climate, forestry, ESG and geospatial mandates across India. Direct links to official application portals.">
     <meta property="og:url" content="https://www.urbanforestpark.com/">
     <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <meta name="twitter:card" content="summary">
-    <meta name="theme-color" content="#1b3a2d">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons (same set as the rest of the site) -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -36,12 +51,12 @@
     <meta name="apple-mobile-web-app-title" content="UrbanPark" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Typography -->
+    <!-- Typography: Inter (UI) + IBM Plex Mono (registry metrics) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
 
-    <!-- Job board styles -->
+    <!-- Career registry styles -->
     <link rel="stylesheet" href="styles/jobs.css">
 
     <!-- Google AdSense -->
@@ -52,9 +67,9 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "UrbanForestPark",
+      "name": "Urban Forest Park",
       "url": "https://www.urbanforestpark.com/",
-      "description": "India's Climate, Forestry, ESG & Geospatial job portal, and home of the Nagar Van dMRV Dashboard & Green Calculator.",
+      "description": "National Climate, Forestry, ESG & Geospatial Career Registry (India), and home of the Nagar Van dMRV Dashboard & Green Calculator.",
       "sameAs": ["https://www.urbanforestpark.com/dashboard.html"]
     }
     </script>
@@ -62,7 +77,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "UrbanForestPark — India Green Jobs Board",
+      "name": "Urban Forest Park — National Climate, Forestry, ESG & Geospatial Career Registry (India)",
       "url": "https://www.urbanforestpark.com/",
       "inLanguage": "en-IN"
     }
@@ -72,83 +87,126 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#feed-home">Skip to job listings</a>
+  <a class="skip-link" href="#jobs-feed">Skip to registry listings</a>
 
   <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="/" aria-label="UrbanForestPark home — India Green Jobs Board">
-        <span class="brand-mark" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21V9"/>
-            <path d="M12 9c-4.4 0-6.8 2.3-6.8 5.7C8.6 14.7 11 12.6 12 9z"/>
-            <path d="M12 9c4.4 0 6.8 2.3 6.8 5.7C15.4 14.7 13 12.6 12 9z"/>
-            <path d="M12 9C12 4.8 9.6 2.5 6 2.5c0 4.2 2.4 6.5 6 6.5z"/>
-            <path d="M12 9c0-4.2 2.4-6.5 6-6.5 0 4.2-2.4 6.5-6 6.5z"/>
-          </svg>
-        </span>
-        <span class="brand-text">
-          <span class="brand-name">UrbanForestPark</span>
-          <span class="brand-sub">India&rsquo;s Climate, Forestry, ESG &amp; Geospatial Job Portal</span>
-        </span>
+      <a class="brand" href="/" aria-label="Urban Forest Park — National Climate, Forestry, ESG and Geospatial Career Registry, India">
+        <span class="brand-word">Urban Forest Park</span>
+        <span class="brand-sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
       </a>
 
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-
-      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        <a class="nav-link active" href="/" aria-current="page">Green Jobs (Home)</a>
-        <a class="nav-link" href="/dashboard.html">Nagar Van dMRV Dashboard &amp; Green Calculator <span class="live-tool-badge">Live Tool</span></a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a class="nav-link" id="nav-registry" href="/">Career Registry</a>
+        <a class="nav-link" id="nav-archive" href="/?view=archive">Historical Archive</a>
         <a class="nav-link" id="nav-browse" href="#filter-bar">Browse by State</a>
-        <button class="btn btn-moss nav-cta" type="button" data-open-modal>Post a Job / Partner</button>
+        <a class="nav-link" href="/dashboard.html">dMRV Dashboard <span class="live-tool-badge">Live Tool</span></a>
       </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-outline nav-cta" type="button" data-open-modal>Publish a Vacancy</button>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to night mode">
+          <svg class="theme-icon icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3 17 7M7 17l-1.7 1.7"/></svg>
+          <svg class="theme-icon icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.2A8.5 8.5 0 1 1 9.8 3.6a7 7 0 0 0 10.6 10.6z"/></svg>
+          <span class="theme-label" id="theme-label">Night</span>
+        </button>
+
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- ================= HOME VIEW (hero, filters, feed) ================= -->
+  <!-- ================= WEEKLY HIRING TELEMETRY ================= -->
+  <section class="telemetry-band" aria-label="Weekly hiring telemetry">
+    <div class="telemetry-inner">
+      <div class="telemetry-head">
+        <span class="eyebrow">Weekly Hiring Telemetry</span>
+        <span class="mono-note">Registry updated <span id="tel-updated">&mdash;</span></span>
+      </div>
+      <div class="telemetry-grid">
+        <div class="tel-card">
+          <span class="tel-label">Active Open Positions <span class="pulse" aria-hidden="true"></span></span>
+          <span class="tel-value" id="tel-active">&mdash;</span>
+          <span class="tel-note">Live registry-wide count</span>
+        </div>
+        <div class="tel-card">
+          <span class="tel-label">New Roles Added (Last 7 Days)</span>
+          <span class="tel-value" id="tel-new">&mdash;</span>
+          <span class="tel-note">Weekly inflow of mandates</span>
+        </div>
+        <div class="tel-card">
+          <span class="tel-label">Positions Closed / Passed (Last 7 Days)</span>
+          <span class="tel-value" id="tel-passed">&mdash;</span>
+          <span class="tel-note">Weekly outflow to the archive</span>
+        </div>
+        <div class="tel-card">
+          <span class="tel-label">Cumulative Career Archive</span>
+          <span class="tel-value" id="tel-archive">&mdash;</span>
+          <span class="tel-note">Total historical roles tracked</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOME VIEW (hero, tabs, filters, feed) ================= -->
   <div id="feed-home">
 
     <section class="hero">
       <div class="hero-inner">
-        <p class="hero-kicker">For India&rsquo;s environmental workforce</p>
-        <h1>India&rsquo;s <span class="accent">Green Jobs</span> Board — Climate, Forestry, ESG &amp; GIS</h1>
+        <p class="hero-kicker">National Registry of Environmental Mandates — India</p>
+        <h1 id="hero-heading">India&rsquo;s Climate, Forestry, ESG &amp; Geospatial <span class="accent">Career Registry</span></h1>
         <p class="hero-sub">
-          Curated openings from forest departments, research institutions, sustainability teams
-          and climate organisations across the country. <strong>Every listing links straight to the
-          official application portal</strong> — no middlemen, no fees.
+          A continuously monitored index of active positions with forest departments, research
+          institutions, sustainability teams and climate organisations across the country.
+          <strong>Every listing links straight to the official application portal</strong> — no
+          intermediaries, no fees. Closed mandates are preserved in the Historical Archive for
+          compensation, skills and institutional reference.
         </p>
-        <div class="hero-stats">
-          <div class="stat"><div class="num" id="stat-jobs">&mdash;</div><div class="lbl">Open roles</div></div>
-          <div class="stat"><div class="num" id="stat-states">&mdash;</div><div class="lbl">States &amp; regions</div></div>
-          <div class="stat"><div class="num" id="stat-orgs">&mdash;</div><div class="lbl">Hiring organisations</div></div>
-          <div class="stat"><div class="num">5</div><div class="lbl">Career tracks</div></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#filter-bar">Browse Active Mandates</a>
+          <a class="btn btn-outline" href="/?view=archive">Historical Mandate Archive</a>
         </div>
       </div>
     </section>
+
+    <!-- ================= ACTIVE / ARCHIVED VIEW SWITCHER ================= -->
+    <div class="tabs-wrap">
+      <div class="seg-tabs" role="tablist" aria-label="Registry view">
+        <button class="seg-tab active" id="tab-active" type="button" role="tab" aria-selected="true">
+          Active Opportunities <span class="seg-cnt" id="tab-active-count">&mdash;</span>
+        </button>
+        <button class="seg-tab" id="tab-archive" type="button" role="tab" aria-selected="false">
+          Archived / Past Positions <span class="seg-cnt" id="tab-archive-count">&mdash;</span>
+        </button>
+      </div>
+    </div>
 
     <!-- ================= FILTER & SEARCH BAR ================= -->
     <div class="filter-wrap" id="filter-bar">
       <div class="filter-card">
         <div class="filter-row">
           <div class="field field-search">
-            <label for="jobs-search">Search roles</label>
+            <label for="jobs-search">Search the registry</label>
             <div class="search-box">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-              <input id="jobs-search" type="search" placeholder="Try &lsquo;GIS&rsquo;, &lsquo;CAMPA&rsquo;, &lsquo;Carbon&rsquo;, &lsquo;ESG&rsquo;&hellip;" autocomplete="off" aria-label="Search jobs by role title, organisation or skills">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input id="jobs-search" type="search" placeholder="Search title, organisation or competency&hellip;" autocomplete="off" aria-label="Search registry by position title, organisation or competency">
             </div>
           </div>
 
           <div class="field">
-            <label for="state-filter">State / region</label>
-            <select id="state-filter" aria-label="Filter jobs by Indian state">
+            <label for="state-filter">State / Region</label>
+            <select id="state-filter" aria-label="Filter mandates by Indian state or region">
               <option value="all">All India</option>
             </select>
           </div>
 
-          <div class="field">
-            <label for="experience-filter">Experience</label>
-            <select id="experience-filter" aria-label="Filter jobs by experience level">
+          <div class="field" id="experience-field">
+            <label for="experience-filter">Experience Tier</label>
+            <select id="experience-filter" aria-label="Filter mandates by experience tier">
               <option value="all">All Levels</option>
               <option value="Entry Level / Fellowship">Entry Level / Fellowship</option>
               <option value="1-3 Years">1-3 Years</option>
@@ -157,13 +215,21 @@
             </select>
           </div>
 
+          <div class="field hidden" id="archive-range-field">
+            <label id="archive-range-label">Application Window</label>
+            <div class="range-seg" role="group" aria-labelledby="archive-range-label">
+              <button class="range-btn active" type="button" data-range="all" aria-pressed="true">All Past Records</button>
+              <button class="range-btn" type="button" data-range="recent" aria-pressed="false">Closed in Last 7 Days</button>
+            </div>
+          </div>
+
           <div class="field">
-            <button class="btn btn-ghost" id="clear-filters" type="button">Reset filters</button>
+            <button class="btn btn-ghost" id="clear-filters" type="button">Reset Filters</button>
           </div>
         </div>
 
-        <div class="pill-row" id="category-pills" role="group" aria-label="Filter jobs by category">
-          <button class="cat-pill active" type="button" data-cat="all">All Roles <span class="cnt"></span></button>
+        <div class="pill-row" id="category-pills" role="group" aria-label="Filter mandates by sector">
+          <button class="cat-pill active" type="button" data-cat="all">All Sectors <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="Climate &amp; Sustainability">Climate &amp; Sustainability <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="Forestry &amp; Afforestation">Forestry &amp; Afforestation <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="ESG &amp; Carbon Markets">ESG &amp; Carbon Markets <span class="cnt"></span></button>
@@ -175,30 +241,63 @@
 
     <!-- ================= AD SLOT 1: TOP LEADERBOARD ================= -->
     <div class="ad-container ad-leaderboard" aria-label="Sponsored placement">
-      <span class="ad-label">Sponsored &middot; Environmental Partner Space</span>
+      <span class="ad-label">Sponsored &middot; Institutional Partner Space</span>
       <!-- Google AdSense: paste the leaderboard <ins class="adsbygoogle" ...> unit inside .ad-slot below -->
       <div class="ad-slot">
-        <span>Leaderboard space — put your green brand in front of India&rsquo;s environmental workforce.</span>
+        <span>Leaderboard space — place your organisation in front of India&rsquo;s environmental workforce.</span>
         <a class="ad-cta" href="mailto:arkraj.biswas6@gmail.com?subject=Advertising%20%2F%20Partnership%20on%20UrbanForestPark%20Jobs%20Board">Sponsor this space &rarr;</a>
       </div>
     </div>
 
-    <!-- ================= JOB FEED ================= -->
+    <!-- ================= MANDATE FEED ================= -->
     <main class="feed-wrap" id="jobs-feed">
       <div class="feed-head">
-        <h2>Open Green Roles</h2>
-        <span class="feed-note"><span id="results-count" aria-live="polite">Loading&hellip;</span> &middot; Newest first</span>
+        <div>
+          <p class="eyebrow" id="feed-eyebrow">Active Sector Mandates</p>
+          <h2 id="feed-title">Active Opportunities</h2>
+        </div>
+        <span class="feed-note"><span id="results-count" aria-live="polite">Loading&hellip;</span> &middot; Ordered by publication date</span>
       </div>
 
       <div id="jobs-grid" aria-busy="true">
-        <div class="loading-state" role="status">Loading green jobs&hellip;</div>
+        <div class="loading-state" role="status">Loading registry mandates&hellip;</div>
       </div>
     </main>
 
+    <!-- ================= SEO DIRECTORY: STATE & SECTOR LANDING VIEWS ================= -->
+    <section class="seo-directory" aria-labelledby="seo-dir-title">
+      <div class="seo-dir-inner">
+        <p class="eyebrow">Registry Directory</p>
+        <h2 id="seo-dir-title">Browse Opportunities by Indian State &amp; Sector</h2>
+        <p class="seo-dir-sub">
+          Formal landing views for every sector and region covered by the registry — updated as
+          mandates are published and archived.
+        </p>
+        <div class="seo-dir-grid">
+          <div class="seo-col">
+            <h3>By Sector</h3>
+            <ul class="seo-links" id="seo-categories">
+              <li><a href="?category=climate-sustainability">Climate &amp; Sustainability</a></li>
+              <li><a href="?category=forestry-afforestation">Forestry &amp; Afforestation</a></li>
+              <li><a href="?category=esg-carbon-markets">ESG &amp; Carbon Markets</a></li>
+              <li><a href="?category=gis-remote-sensing-uhi">GIS, Remote Sensing &amp; UHI</a></li>
+              <li><a href="?category=environmental-policy-fellowships">Environmental Policy &amp; Fellowships</a></li>
+            </ul>
+          </div>
+          <div class="seo-col">
+            <h3>By State &amp; Region</h3>
+            <ul class="seo-links" id="seo-states">
+              <li class="seo-loading">Loading regional directory&hellip;</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div><!-- /feed-home -->
 
-  <!-- ================= JOB DETAIL VIEW (rendered via #/job/<id>) ================= -->
-  <section id="job-detail" class="detail-wrap" aria-live="polite" aria-label="Job details">
+  <!-- ================= POSITION DOSSIER (rendered via ?job=<id>) ================= -->
+  <section id="job-detail" class="detail-wrap" aria-live="polite" aria-label="Position dossier">
     <div id="job-detail-content"></div>
   </section>
 
@@ -206,11 +305,11 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-col">
-        <h3>UrbanForestPark</h3>
+        <h3>Urban Forest Park</h3>
         <p>
-          India&rsquo;s job board for climate, forestry, ESG and geospatial professionals. We curate
-          openings from official portals, research institutions, consultancies and NGOs — and link
-          you straight to the source.
+          National Climate, Forestry, ESG &amp; Geospatial Career Registry (India). We monitor
+          official portals, research institutions, consultancies and development organisations —
+          and publish verified mandates that link straight to the source.
         </p>
         <p style="margin-top:10px;">
           Also home of the <a href="/dashboard.html">Nagar Van dMRV Dashboard &amp; Green Calculator</a>.
@@ -218,10 +317,21 @@
       </div>
 
       <div class="footer-col">
-        <h3>Explore Jobs</h3>
+        <h3>Registry</h3>
         <ul>
-          <li><a href="/">Green Jobs (Home)</a></li>
+          <li><a href="/">Active Opportunities</a></li>
+          <li><a href="/?view=archive">Historical Mandate Archive</a></li>
           <li><a href="#filter-bar">Browse by State</a></li>
+          <li><a href="#seo-dir-title">Browse by Sector</a></li>
+          <li><a href="#" data-open-modal>Publish a Vacancy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Institutional Tools</h3>
+        <ul>
+          <li><a href="/dashboard.html">Live dMRV Dashboard</a></li>
+          <li><a href="/green-calculator.html">Green Calculator</a></li>
           <li><a href="/nagar-van-finder.html">Nagar Van Finder</a></li>
           <li><a href="/spatial-data.html">Spatial Data Explorer</a></li>
           <li><a href="/public-survey.html">Public Survey</a></li>
@@ -229,66 +339,58 @@
       </div>
 
       <div class="footer-col">
-        <h3>Tools &amp; Platform</h3>
-        <ul>
-          <li><a href="/dashboard.html">Live dMRV Dashboard</a></li>
-          <li><a href="/green-calculator.html">Green Calculator</a></li>
-          <li><a href="/about.html">About Me</a></li>
-          <li><a href="#" data-open-modal>Post a Job</a></li>
-          <li><a href="mailto:arkraj.biswas6@gmail.com?subject=Partnership%20with%20UrbanForestPark%20Jobs%20Board">Partner / Advertise</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
         <h3>Legal &amp; Contact</h3>
         <ul>
+          <li><a href="/about.html">About</a></li>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
           <li><a href="/cookies.html">Cookie Policy</a></li>
           <li><a href="/accessibility.html">Accessibility</a></li>
           <li><a href="/report.html">Report an Issue</a></li>
-          <li><a href="mailto:arkraj.biswas6@gmail.com">Contact us</a></li>
+          <li><a href="mailto:arkraj.biswas6@gmail.com">Contact the Registry</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      &copy; 2026 UrbanForestPark.com<span class="dot">&bull;</span>India&rsquo;s Climate, Forestry, ESG &amp; Geospatial Job Portal
+      &copy; 2026 Urban Forest Park<span class="dot">&bull;</span>National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)
       <span class="dot">&bull;</span>All listings link to official application portals &mdash; please verify details before applying.
     </div>
   </footer>
 
-  <!-- ================= POST A JOB / PARTNER MODAL ================= -->
+  <!-- ================= PUBLISH A VACANCY / PARTNERSHIP MODAL ================= -->
   <div class="modal-overlay hidden" id="post-job-modal" role="dialog" aria-modal="true" aria-labelledby="post-job-title">
     <div class="modal-card">
       <button class="modal-close" id="modal-close" type="button" aria-label="Close dialog">&times;</button>
-      <h2 id="post-job-title">Post a Green Job / Partner with us</h2>
+      <p class="eyebrow">Institutional Partnership Desk</p>
+      <h2 id="post-job-title">Publish a Vacancy / Institutional Partnership</h2>
       <p class="modal-sub">
-        Reach India&rsquo;s climate, forestry, ESG and GIS professionals. Fill this in and we&rsquo;ll
-        open your email app with the details — or write to us directly.
+        Reach India&rsquo;s climate, forestry, ESG and geospatial professionals. Submit the mandate
+        details below and our editorial desk will respond with publication and verification
+        requirements.
       </p>
 
       <form id="post-job-form">
         <div class="form-field">
           <label for="pj-org">Organisation</label>
-          <input id="pj-org" name="org" type="text" placeholder="e.g. State Forest Department / NGO / Company" required>
+          <input id="pj-org" name="org" type="text" placeholder="e.g. State Forest Department / Research Institute / Company" required>
         </div>
         <div class="form-field">
-          <label for="pj-role">Role title</label>
+          <label for="pj-role">Position Title</label>
           <input id="pj-role" name="role" type="text" placeholder="e.g. Urban Forestry Programme Officer">
         </div>
         <div class="form-field">
-          <label for="pj-email">Work email</label>
+          <label for="pj-email">Work Email</label>
           <input id="pj-email" name="email" type="email" placeholder="you@organisation.in" required>
         </div>
         <div class="form-field">
-          <label for="pj-message">Details (location, experience, application window)</label>
-          <textarea id="pj-message" name="message" rows="4" placeholder="Brief description of the role, location, eligibility and last date to apply."></textarea>
+          <label for="pj-message">Mandate Details (location, experience tier, application window)</label>
+          <textarea id="pj-message" name="message" rows="4" placeholder="Brief description of the position, location, eligibility and last date to apply."></textarea>
         </div>
-        <button class="btn btn-primary" type="submit" style="width:100%;">Compose email &amp; send</button>
+        <button class="btn btn-primary" type="submit" style="width:100%;">Compose Inquiry Email</button>
         <p class="modal-mailto-note">
           Prefer email? Write to <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>.
-          Posting of listings is subject to verification.
+          Publication of listings is subject to editorial verification.
         </p>
       </form>
     </div>

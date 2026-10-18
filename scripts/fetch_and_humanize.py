@@ -27,11 +27,14 @@ forestry, ESG and geospatial job board). It:
      that leaked through keyword search are marked is_relevant_green_job
      = false and never written to jobs.json.
   5. MERGES accepted listings into public/jobs.json (the file the job board
-     reads at runtime; see js/jobs.js).
-  6. REGENERATES public/sitemap.xml, listing the homepage, dashboard.html
-     and every active job as https://www.urbanforestpark.com/?job=<id>
-     with <lastmod> set to the job's date_added (plus any pre-existing
-     non-job URLs are preserved).
+     reads at runtime; see js/jobs.js), stamps every listing with its
+     lifecycle fields (status + valid_through) and MOVES listings whose
+     30-day window has passed into public/archive.json - past mandates are
+     preserved for institutional reference and never deleted.
+  6. REGENERATES public/sitemap.xml (homepage, dashboard, archive view,
+     category/state landing views, active and archived job URLs) and
+     public/stats.json (weekly hiring telemetry: active / opened / passed
+     counts plus per-category and per-state breakdowns).
 
 Typical usage
 -------------
@@ -40,6 +43,11 @@ Typical usage
 
     # Rebuild sitemap.xml from jobs.json only (no API key needed)
     python scripts/fetch_and_humanize.py --sitemap-only
+
+    # Maintenance-only run: expire listings into archive.json, refresh
+    # stats.json and rewrite jobs.json / archive.json / stats.json /
+    # sitemap.xml (no scraping, no Gemini calls)
+    python scripts/fetch_and_humanize.py --sync-only
 
     # Full run without writing anything
     python scripts/fetch_and_humanize.py --dry-run
@@ -79,10 +87,10 @@ import os
 import re
 import sys
 import time
-from datetime import date
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 from xml.etree import ElementTree as ET
 
 # ---------------------------------------------------------------------------
@@ -153,6 +161,13 @@ MODEL_CANDIDATES = [
 
 DEFAULT_JOBS_PATH = Path("public/jobs.json")
 DEFAULT_SITEMAP_PATH = Path("public/sitemap.xml")
+DEFAULT_ARCHIVE_PATH = Path("public/archive.json")
+DEFAULT_STATS_PATH = Path("public/stats.json")
+
+# Job lifecycle: a listing stays "active" in jobs.json for VALID_DAYS after
+# its date_added; once valid_through has passed it moves into archive.json
+# (status "archived", date_archived stamped) and is never deleted.
+VALID_DAYS = 30
 
 RESULTS_PER_QUERY = 25          # jobspy results wanted per search query
 REQUEST_TIMEOUT = 30            # seconds; HTTP timeout for ReliefWeb calls
@@ -186,6 +201,19 @@ CATEGORIES = [
     "Forestry & Afforestation",
     "GIS, Remote Sensing & UHI",
 ]
+
+# URL slugs for the crawlable category landing views (?category=<slug>).
+# js/jobs.js maps the same slugs back to the display names above.
+CATEGORY_SLUGS = {
+    "Climate & Sustainability": "climate-sustainability",
+    "Environmental Policy & Fellowships": "environmental-policy-fellowships",
+    "ESG & Carbon Markets": "esg-carbon-markets",
+    "Forestry & Afforestation": "forestry-afforestation",
+    "GIS, Remote Sensing & UHI": "gis-remote-sensing-uhi",
+}
+
+# How many state landing views the sitemap lists (busiest states first).
+SITEMAP_TOP_STATES = 25
 
 EXPERIENCE_LEVELS = [
     "Entry Level / Fellowship",
@@ -1154,13 +1182,166 @@ def write_jobs(jobs: List[Dict[str, Any]], path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Job lifecycle: active -> archived (records are never deleted) + stats.json
+# ---------------------------------------------------------------------------
+def parse_iso_date(value: Any) -> Optional[date]:
+    """Parse an ISO ``YYYY-MM-DD`` date, returning None when unusable."""
+    text = str(value or "").strip()[:10]
+    if not text:
+        return None
+    try:
+        return date.fromisoformat(text)
+    except ValueError:
+        return None
+
+
+def apply_job_lifecycle(
+    jobs: List[Dict[str, Any]],
+    archive: List[Dict[str, Any]],
+    today: str,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], int]:
+    """Normalize lifecycle fields and move passed listings to the archive.
+
+    Every active listing carries ``status: "active"`` and a ``valid_through``
+    date exactly VALID_DAYS after ``date_added``. Once ``valid_through`` has
+    passed, the listing moves into the archive (deduplicated by id) with
+    ``status: "archived"`` and a ``date_archived`` stamp, and is never
+    deleted from the registry. Returns ``(active, archive, newly_archived)``.
+    """
+    today_value = parse_iso_date(today) or date.today()
+
+    archive_by_id: Dict[str, Dict[str, Any]] = {}
+    for record in archive:
+        record_id = str(record.get("id") or "").strip()
+        if not record_id:
+            continue
+        record["status"] = "archived"
+        record.setdefault("date_archived", today)
+        added = parse_iso_date(record.get("date_added"))
+        if added is not None and not record.get("valid_through"):
+            record["valid_through"] = (added + timedelta(days=VALID_DAYS)).isoformat()
+        archive_by_id.setdefault(record_id, record)  # dedupe by id
+
+    active: List[Dict[str, Any]] = []
+    newly_archived = 0
+    for job in jobs:
+        job_id = str(job.get("id") or "").strip()
+        if not job_id:
+            continue
+        added = parse_iso_date(job.get("date_added")) or today_value
+        job["date_added"] = added.isoformat()
+        valid_through = added + timedelta(days=VALID_DAYS)
+        job["valid_through"] = valid_through.isoformat()
+
+        if valid_through < today_value:
+            job["status"] = "archived"
+            job.setdefault("date_archived", today)
+            existing = archive_by_id.get(job_id)
+            if existing is None:
+                archive_by_id[job_id] = job
+                newly_archived += 1
+            else:
+                existing.setdefault("date_archived", job.get("date_archived") or today)
+        else:
+            job["status"] = "active"
+            active.append(job)
+
+    archive_out = sorted(
+        archive_by_id.values(),
+        key=lambda record: (
+            str(record.get("date_archived") or ""),
+            str(record.get("id") or ""),
+        ),
+        reverse=True,
+    )
+    return active, archive_out, newly_archived
+
+
+def compute_stats(
+    active: List[Dict[str, Any]],
+    archive: List[Dict[str, Any]],
+    today: str,
+) -> Dict[str, Any]:
+    """Weekly hiring telemetry written to stats.json for the front-end."""
+    today_value = parse_iso_date(today) or date.today()
+    week_ago = (today_value - timedelta(days=7)).isoformat()
+
+    by_category: Dict[str, Dict[str, int]] = {}
+    for job in active:
+        category = squash(job.get("category")) or "Uncategorised"
+        by_category.setdefault(category, {"active": 0, "archived": 0})
+        by_category[category]["active"] += 1
+    for job in archive:
+        category = squash(job.get("category")) or "Uncategorised"
+        by_category.setdefault(category, {"active": 0, "archived": 0})
+        by_category[category]["archived"] += 1
+
+    by_state: Dict[str, int] = {}
+    for job in active:
+        state = squash(job.get("state"))
+        if state and state != "Multiple States / Remote":
+            by_state[state] = by_state.get(state, 0) + 1
+
+    return {
+        "last_updated": datetime.now().isoformat(timespec="seconds"),
+        "active_open_jobs": len(active),
+        "opened_this_week": sum(
+            1 for job in active if str(job.get("date_added") or "") >= week_ago
+        ),
+        "passed_this_week": sum(
+            1 for job in archive if str(job.get("date_archived") or "") >= week_ago
+        ),
+        "total_archived_jobs": len(archive),
+        "total_historical_indexed": len(active) + len(archive),
+        "by_category": by_category,
+        "by_state": dict(
+            sorted(by_state.items(), key=lambda item: (-item[1], item[0]))
+        ),
+    }
+
+
+def write_archive(jobs: List[Dict[str, Any]], path: Path) -> None:
+    jobs = filter_valid_jobs(jobs)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(jobs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    log.info("Wrote %d archived listing(s) to %s", len(jobs), path)
+
+
+def write_stats(stats: Dict[str, Any], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    log.info(
+        "Wrote weekly telemetry to %s (%d active, %d archived, %d passed this week)",
+        path,
+        stats.get("active_open_jobs", 0),
+        stats.get("total_archived_jobs", 0),
+        stats.get("passed_this_week", 0),
+    )
+
+
+# ---------------------------------------------------------------------------
 # sitemap.xml generation
 # ---------------------------------------------------------------------------
-def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
-    """Regenerate sitemap.xml: homepage + dashboard + every job as
-    /?job=<id> (lastmod = date_added). Any other pre-existing URLs (e.g.
-    spatial-data.html?van=...) are preserved untouched."""
-    jobs = filter_valid_jobs(jobs)
+def write_sitemap(
+    active_jobs: List[Dict[str, Any]],
+    archive_jobs: List[Dict[str, Any]],
+    path: Path,
+) -> None:
+    """Regenerate sitemap.xml for the registry.
+
+    Includes the homepage, dashboard.html, the archive view
+    (/?view=archive), the category landing views (/?category=<slug>), the
+    busiest state landing views (/?state=<State>), every active listing
+    (/?job=<id>, priority 0.8, lastmod = date_added) and every archived
+    listing (priority 0.5, lastmod = date_archived). Any other pre-existing
+    URLs (e.g. spatial-data.html?van=...) are preserved untouched.
+    """
+    jobs = filter_valid_jobs(active_jobs)
+    archive = filter_valid_jobs(archive_jobs)
     today = date.today().isoformat()
 
     preserved: Dict[str, Dict[str, str]] = {}
@@ -1184,8 +1365,10 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
 
     home_url = SITE_BASE_URL + "/"
     dash_url = SITE_BASE_URL + "/dashboard.html"
+    archive_url = SITE_BASE_URL + "/?view=archive"
     home_prev = preserved.pop(home_url, {})
     dash_prev = preserved.pop(dash_url, {})
+    archive_prev = preserved.pop(archive_url, {})
     entries[home_url] = {
         "lastmod": home_prev.get("lastmod") or today,
         "changefreq": "weekly",
@@ -1196,11 +1379,19 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
         "changefreq": "weekly",
         "priority": "0.9",
     }
+    latest_archived = max(
+        (str(job.get("date_archived") or "") for job in archive), default=""
+    )
+    entries[archive_url] = {
+        "lastmod": latest_archived or archive_prev.get("lastmod") or today,
+        "changefreq": "weekly",
+        "priority": "0.7",
+    }
 
-    # Preserve everything else that is not a job URL.
+    # Preserve everything else that is not a generated registry URL.
     for loc, meta in preserved.items():
-        if "?job=" in loc:
-            continue  # regenerated from jobs.json below
+        if "?job=" in loc or "?category=" in loc or "?state=" in loc or "?view=" in loc:
+            continue  # regenerated from the data below
         entries[loc] = {
             "lastmod": meta.get("lastmod") or today,
             "changefreq": meta.get("changefreq") or "monthly",
@@ -1208,7 +1399,7 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
         }
 
     # Fresh checkout: seed the known static pages.
-    if len(entries) <= 2:
+    if len(entries) <= 3:
         for page_path, changefreq, priority in STATIC_SITEMAP_PAGES:
             entries[SITE_BASE_URL + page_path] = {
                 "lastmod": today,
@@ -1216,7 +1407,29 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
                 "priority": priority,
             }
 
-    # Every active listing, in feed order.
+    # Crawlable category landing views (?category=<slug>).
+    for slug in CATEGORY_SLUGS.values():
+        entries[SITE_BASE_URL + "/?category=" + slug] = {
+            "lastmod": today,
+            "changefreq": "weekly",
+            "priority": "0.7",
+        }
+
+    # Busiest state landing views (?state=<State>), in rank order.
+    state_counts: Dict[str, int] = {}
+    for job in jobs:
+        state = squash(job.get("state"))
+        if state and state != "Multiple States / Remote":
+            state_counts[state] = state_counts.get(state, 0) + 1
+    ranked_states = sorted(state_counts.items(), key=lambda item: (-item[1], item[0]))
+    for state, _count in ranked_states[:SITEMAP_TOP_STATES]:
+        entries[SITE_BASE_URL + "/?state=" + quote(state)] = {
+            "lastmod": today,
+            "changefreq": "weekly",
+            "priority": "0.7",
+        }
+
+    # Every active listing, in feed order (feed order = newest first).
     for job in jobs:
         job_id = (job.get("id") or "").strip()
         if not job_id:
@@ -1225,6 +1438,17 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
             "lastmod": (job.get("date_added") or today),
             "changefreq": "daily",
             "priority": "0.8",
+        }
+
+    # Every archived listing stays in the registry as a historical record.
+    for job in archive:
+        job_id = (job.get("id") or "").strip()
+        if not job_id:
+            continue
+        entries[SITE_BASE_URL + "/?job=" + job_id] = {
+            "lastmod": (job.get("date_archived") or job.get("date_added") or today),
+            "changefreq": "monthly",
+            "priority": "0.5",
         }
 
     ET.register_namespace("", SITEMAP_NS)
@@ -1242,8 +1466,8 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tree.write(path, encoding="utf-8", xml_declaration=True)
     log.info(
-        "Wrote sitemap with %d URL(s) to %s (%d job listing(s))",
-        len(entries), path, len(jobs),
+        "Wrote sitemap with %d URL(s) to %s (%d active, %d archived listing(s))",
+        len(entries), path, len(jobs), len(archive),
     )
 
 
@@ -1302,10 +1526,17 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Fetch India green jobs, humanize them with Gemini and publish "
-            "jobs.json + sitemap.xml for urbanforestpark.com."
+            "jobs.json + archive.json + stats.json + sitemap.xml for "
+            "urbanforestpark.com."
         )
     )
     parser.add_argument("--jobs", help="Path to jobs.json (default: public/jobs.json)")
+    parser.add_argument(
+        "--archive", help="Path to archive.json (default: public/archive.json)"
+    )
+    parser.add_argument(
+        "--stats", help="Path to stats.json (default: public/stats.json)"
+    )
     parser.add_argument(
         "--sitemap", help="Path to sitemap.xml (default: public/sitemap.xml)"
     )
@@ -1318,12 +1549,21 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument(
         "--sitemap-only",
         action="store_true",
-        help="Only regenerate sitemap.xml from the current jobs.json (no scraping, no API key needed)",
+        help="Only regenerate sitemap.xml from the current jobs.json + archive.json (no scraping, no API key needed)",
+    )
+    parser.add_argument(
+        "--sync-only",
+        action="store_true",
+        help=(
+            "Only apply lifecycle maintenance (expire passed listings into "
+            "archive.json, refresh stats.json) and rewrite jobs.json / "
+            "archive.json / stats.json / sitemap.xml (no scraping, no API key)"
+        ),
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Run the full pipeline but do not write jobs.json or sitemap.xml",
+        help="Run the full pipeline but do not write jobs.json, archive.json, stats.json or sitemap.xml",
     )
     parser.add_argument("--verbose", action="store_true", help="Debug logging")
     return parser.parse_args(argv)
@@ -1346,23 +1586,48 @@ def main(argv: Optional[List[str]] = None) -> int:
     sanitize_ca_bundle_env()
 
     jobs_path = Path(args.jobs) if args.jobs else resolve_default(DEFAULT_JOBS_PATH)
+    archive_path = (
+        Path(args.archive) if args.archive else resolve_default(DEFAULT_ARCHIVE_PATH)
+    )
+    stats_path = Path(args.stats) if args.stats else resolve_default(DEFAULT_STATS_PATH)
     sitemap_path = (
         Path(args.sitemap) if args.sitemap else resolve_default(DEFAULT_SITEMAP_PATH)
     )
 
     existing = load_jobs(jobs_path)
-    log.info("Loaded %d existing listing(s) from %s", len(existing), jobs_path)
-
-    if args.sitemap_only:
-        write_sitemap(existing, sitemap_path)
-        return 0
+    archive = load_jobs(archive_path)
+    log.info(
+        "Loaded %d active listing(s) from %s and %d archived listing(s) from %s",
+        len(existing), jobs_path, len(archive), archive_path,
+    )
 
     today = date.today().isoformat()
+
+    if args.sitemap_only:
+        write_sitemap(existing, archive, sitemap_path)
+        return 0
+
+    if args.sync_only:
+        # Maintenance-only run: expire passed listings into the archive,
+        # refresh the weekly telemetry and rewrite every published data file.
+        # No scraping and no Gemini calls, so it works without an API key.
+        active, archive, newly_archived = apply_job_lifecycle(existing, archive, today)
+        stats = compute_stats(active, archive, today)
+        write_jobs(active, jobs_path)
+        write_archive(archive, archive_path)
+        write_stats(stats, stats_path)
+        write_sitemap(active, archive, sitemap_path)
+        log.info(
+            "Sync complete: %d active, %d archived (%d newly archived this run).",
+            len(active), len(archive), newly_archived,
+        )
+        return 0
+
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         log.error(
             "GEMINI_API_KEY is not set. Add it to your .env file, export it as "
-            "an environment variable, or use --sitemap-only / --dry-run."
+            "an environment variable, or use --sitemap-only / --sync-only / --dry-run."
         )
         return 1
     if GreenJob is None:
@@ -1405,7 +1670,11 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # 3. Humanize + strict India green filter with Gemini.
     humanizer = GeminiHumanizer(api_key, today)
-    taken_ids: Set[str] = {str(job.get("id") or "") for job in existing}
+    taken_ids: Set[str] = {
+        str(job.get("id") or "")
+        for job in existing + archive
+        if job.get("id")
+    }
     accepted: List[Dict[str, Any]] = []
     rate_limit_streak = 0
     for index, candidate in enumerate(fresh, start=1):
@@ -1445,7 +1714,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             )
         time.sleep(GEMINI_SLEEP_SECONDS)
 
-    # 4. Merge (newest first) and persist.
+    # 4. Merge (newest first), apply the lifecycle and persist everything.
     merged = accepted + existing
     merged.sort(
         key=lambda job: (str(job.get("date_added") or ""), str(job.get("id") or "")),
@@ -1456,20 +1725,19 @@ def main(argv: Optional[List[str]] = None) -> int:
         log.info("DRY RUN: %d new listing(s) accepted; nothing written.", len(accepted))
         return 0
 
-    if not accepted:
-        log.info(
-            "No new listings accepted this run - jobs.json and sitemap.xml unchanged."
-        )
-        return 0
+    active, archive, newly_archived = apply_job_lifecycle(merged, archive, today)
+    stats = compute_stats(active, archive, today)
 
-    write_jobs(merged, jobs_path)
+    write_jobs(active, jobs_path)
+    write_archive(archive, archive_path)
+    write_stats(stats, stats_path)
 
     # 5. Regenerate the sitemap for Google Jobs indexing.
-    write_sitemap(merged, sitemap_path)
+    write_sitemap(active, archive, sitemap_path)
 
     log.info(
-        "Done: %d listing(s) in the feed (%d new this run).",
-        len(merged), len(accepted),
+        "Done: %d active listing(s) (%d new this run), %d archived (%d newly archived).",
+        len(active), len(accepted), len(archive), newly_archived,
     )
     return 0
 
