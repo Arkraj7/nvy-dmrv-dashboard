@@ -11,11 +11,11 @@ forestry, ESG and geospatial job board). It:
      (LinkedIn + Indeed + Naukri, automatically falling back to
      LinkedIn + Indeed if any board errors mid-run) across six
      high-intent India search queries.
-  2. FETCHES development-sector India vacancies from the public ReliefWeb
-     API (https://api.reliefweb.int/v2/jobs; since Nov 2025 this requires a
-     pre-approved appname - request one at https://reliefweb.int/contact),
-     filtered for country=India and climate / environment / forestry /
-     disaster-management / GIS themes and keywords.
+  2. RUNS a second zero-key sweep with organisation- and sector-targeted
+     India queries (WWF / WRI / CEEW / TERI / ATREE / UNDP, government
+     environment & forest bodies, remote-sensing / GIS forestry, ESG / CSR
+     management, carbon and net-zero roles) so the whole climate and
+     conservation economy is covered without extra API credentials.
   3. HUMANIZES every candidate with a Gemini Flash model (newest working
      version, with automatic fallback if one is retired). The model also runs
      a strict India + green-relevance check first: off-topic software/IT jobs
@@ -39,6 +39,9 @@ Typical usage
     # Full run without writing anything
     python scripts/fetch_and_humanize.py --dry-run
 
+    # 7-day backfill sweep (bash; PowerShell: $env:LOOKBACK_HOURS="168")
+    LOOKBACK_HOURS=168 python scripts/fetch_and_humanize.py
+
 Environment
 -----------
     GEMINI_API_KEY    Google AI Studio key with Gemini API access.
@@ -46,6 +49,9 @@ Environment
     GEMINI_MODEL      Optional. Force one specific Gemini model (e.g.
                       gemini-3.8-flash). By default the newest working
                       candidate in MODEL_CANDIDATES is used automatically.
+    LOOKBACK_HOURS    Optional posting-age window in hours (default 24 for
+                      daily runs; set 168 to cover a full week). Applies to
+                      both the broad and targeted jobspy sweeps.
     A local .env file (git-ignored) is loaded automatically when present,
     so you can keep GEMINI_API_KEY=... next to your other dev secrets
     without exporting it in every terminal.
@@ -65,7 +71,8 @@ import sys
 import time
 from datetime import date
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set, Tuple
+from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
 
 # ---------------------------------------------------------------------------
@@ -74,11 +81,6 @@ from xml.etree import ElementTree as ET
 # bare Python environment (useful for regenerating the sitemap locally
 # without installing the scrapers or the Gemini SDK).
 # ---------------------------------------------------------------------------
-try:
-    import requests
-except ImportError:  # pragma: no cover
-    requests = None
-
 try:
     from jobspy import scrape_jobs
 except Exception:  # pragma: no cover
@@ -133,12 +135,11 @@ DEFAULT_JOBS_PATH = Path("public/jobs.json")
 DEFAULT_SITEMAP_PATH = Path("public/sitemap.xml")
 
 RESULTS_PER_QUERY = 25          # jobspy results wanted per search query
-HOURS_OLD = 72                  # only consider postings newer than N hours
+DEFAULT_LOOKBACK_HOURS = 24     # posting-age window; LOOKBACK_HOURS env overrides
 DEFAULT_MAX_NEW_PER_RUN = 12    # cap on Gemini calls per run (cost control)
 GEMINI_SLEEP_SECONDS = 4.0      # gentle rate limit between model calls
 GEMINI_RATE_LIMIT_SLEEP = 25.0  # longer pause when rate-limited/overloaded
 GEMINI_RATE_LIMIT_ABORT_AFTER = 3  # consecutive rate-limited candidates -> stop run
-REQUEST_TIMEOUT = 30            # seconds, ReliefWeb HTTP timeout
 
 # Board coverage: prefer all three; if any single board throws (upstream
 # layout changes happen), retry the query with the stable pair so the
@@ -354,7 +355,7 @@ def _clean_cell(value: Any) -> str:
 
 
 def strip_html(value: str) -> str:
-    """Crude HTML-to-text for ReliefWeb bodies."""
+    """Crude HTML-to-text for raw job descriptions."""
     text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", value or "", flags=re.S | re.I)
     text = re.sub(r"<[^>]+>", " ", text)
     text = html.unescape(text)
@@ -434,21 +435,73 @@ def jobspy_row_to_candidate(row: Dict[str, Any], query: str) -> Dict[str, Any]:
     }
 
 
-def scrape_board_candidates() -> List[Dict[str, Any]]:
-    """Scrape the India-focused queries with python-jobspy.
+# ---------------------------------------------------------------------------
+# Validation & configuration helpers
+# ---------------------------------------------------------------------------
+PLACEHOLDER_HOSTS = ("example.com", "example.org", "example.net")
+
+
+def is_valid_apply_url(url: Optional[str]) -> bool:
+    """Reject empty, malformed or placeholder apply URLs.
+
+    A listing must always link to a real, clickable posting: anything with an
+    empty URL, a non-http(s) scheme, a host without a dot or a reserved
+    placeholder host (example.com/.org/.net) is refused before it can ever
+    reach jobs.json or sitemap.xml.
+    """
+    raw = str(url or "").strip()
+    if not raw.lower().startswith(("http://", "https://")):
+        return False
+    try:
+        parsed = urlparse(raw)
+    except ValueError:
+        return False
+    host = (parsed.netloc or "").split("@")[-1].split(":")[0].strip(".").lower()
+    if not host or "." not in host:
+        return False
+    return not any(
+        host == placeholder or host.endswith("." + placeholder)
+        for placeholder in PLACEHOLDER_HOSTS
+    )
+
+
+def resolve_lookback_hours() -> int:
+    """Posting-age window in hours: LOOKBACK_HOURS env var, else 24.
+
+    Set LOOKBACK_HOURS=168 to sweep the last seven days (backfill); values
+    are clamped to a sane 1..720-hour range.
+    """
+    raw = (os.environ.get("LOOKBACK_HOURS") or "").strip()
+    if raw:
+        try:
+            value = int(float(raw))
+        except ValueError:
+            log.warning("Ignoring invalid LOOKBACK_HOURS=%r", raw)
+        else:
+            if value > 0:
+                return min(value, 24 * 30)
+    return DEFAULT_LOOKBACK_HOURS
+
+
+def scrape_jobspy_queries(
+    queries: List[str],
+) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
+    """Run python-jobspy for every query over the India board set.
 
     Each query first tries the full three-board set; if that call raises
     (one board's page layout changed, rate limiting, etc.) it retries with
-    the stable LinkedIn + Indeed pair so the pipeline never halts.
+    the stable LinkedIn + Indeed pair so the pipeline never halts. Returns
+    the raw candidates plus per-board counts for logging.
     """
     if scrape_jobs is None:
         log.warning("python-jobspy is not installed - skipping job-board scraping")
-        return []
+        return [], {}
 
     candidates: List[Dict[str, Any]] = []
     site_counts: Dict[str, int] = {}
+    hours_old = resolve_lookback_hours()
 
-    for query in SEARCH_QUERIES:
+    for query in queries:
         frame = None
         for site_list in (PRIMARY_SITES, FALLBACK_SITES):
             try:
@@ -458,7 +511,7 @@ def scrape_board_candidates() -> List[Dict[str, Any]]:
                     "search_term": query,
                     "location": "India",
                     "results_wanted": RESULTS_PER_QUERY,
-                    "hours_old": HOURS_OLD,
+                    "hours_old": hours_old,
                     "country_indeed": "India",
                 }
                 # The fetch-description option was renamed across jobspy
@@ -491,15 +544,25 @@ def scrape_board_candidates() -> List[Dict[str, Any]]:
 
         time.sleep(2)  # be polite between queries
 
+    return candidates, site_counts
+
+
+def format_source_counts(site_counts: Dict[str, int]) -> str:
+    """Render per-board candidate counts as a single 'linkedin=12, ...' line."""
+    return ", ".join(
+        f"{name}={count}"
+        for name, count in sorted(site_counts.items(), key=lambda item: -item[1])
+    )
+
+
+def scrape_board_candidates() -> List[Dict[str, Any]]:
+    """Primary sweep across the six broad India green searches."""
+    candidates, site_counts = scrape_jobspy_queries(SEARCH_QUERIES)
     if site_counts:
-        distribution = ", ".join(
-            f"{name}={count}"
-            for name, count in sorted(site_counts.items(), key=lambda item: -item[1])
-        )
         log.info(
             "Job boards produced %d raw candidate(s) (%s)",
             len(candidates),
-            distribution,
+            format_source_counts(site_counts),
         )
     else:
         log.info("Job boards produced 0 raw candidate(s)")
@@ -507,113 +570,34 @@ def scrape_board_candidates() -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Source 2: ReliefWeb (development sector, India)
+# Source 2: targeted green-sector sweep (zero-key public job boards)
 # ---------------------------------------------------------------------------
-RELIEFWEB_JOBS_API = "https://api.reliefweb.int/v2/jobs"
-RELIEFWEB_APP_NAME = "urbanforestpark"
-RELIEFWEB_KEYWORDS = (
-    'climate OR "climate change" OR environment OR forestry OR afforestation OR '
-    'wildlife OR ecology OR conservation OR sustainability OR ESG OR carbon OR '
-    'water OR agriculture OR "disaster management" OR "disaster risk reduction" OR '
-    'GIS OR geospatial OR "remote sensing"'
-)
-RELIEFWEB_THEMES = [
-    "climate change and environment",
-    "disaster management",
-    "agriculture",
-    "water sanitation hygiene",
+TARGETED_QUERIES = [
+    "WWF WRI CEEW TERI ATREE UNDP India",
+    "Ministry of Environment Forest Climate Change",
+    "Remote Sensing GIS Forestry India",
+    "Sustainability ESG CSR Manager India",
+    "Carbon Footprinting Net Zero India",
 ]
 
 
-def fetch_reliefweb_india_jobs() -> List[Dict[str, Any]]:
-    """Pull India vacancies from the public ReliefWeb API.
+def fetch_targeted_green_jobs() -> List[Dict[str, Any]]:
+    """Second zero-key sweep with organisation- and sector-targeted queries.
 
-    Tries country=India AND a green-theme OR filter; if the API rejects the
-    nested filter, retries with the country filter plus keyword query only.
+    Covers conservation NGOs and climate think tanks (WWF, WRI, CEEW, TERI,
+    ATREE, UNDP India), government environment / forest / climate bodies,
+    remote-sensing and GIS forestry roles, ESG / CSR management and carbon /
+    net-zero positions - all via public job boards, no credentials required.
     """
-    if requests is None:
-        log.warning("`requests` is not installed - skipping ReliefWeb fetch")
-        return []
-
-    base_payload: Dict[str, Any] = {
-        "appname": RELIEFWEB_APP_NAME,
-        "limit": 60,
-        "profile": "full",
-        "query": {"value": RELIEFWEB_KEYWORDS, "fields": ["title", "body"]},
-        "sort": ["date.created:desc"],
-    }
-    country_condition = {"field": "country", "value": "india"}
-    theme_condition = {
-        "operator": "OR",
-        "conditions": [{"field": "theme", "value": theme} for theme in RELIEFWEB_THEMES],
-    }
-    filter_attempts = [
-        {"operator": "AND", "conditions": [country_condition, theme_condition]},
-        {"operator": "AND", "conditions": [country_condition]},
-    ]
-
-    items: Optional[List[Dict[str, Any]]] = None
-    for index, filter_obj in enumerate(filter_attempts, start=1):
-        payload = dict(base_payload, filter=filter_obj)
-        try:
-            response = requests.post(
-                RELIEFWEB_JOBS_API,
-                params={"appname": RELIEFWEB_APP_NAME},
-                json=payload,
-                timeout=REQUEST_TIMEOUT,
-            )
-            response.raise_for_status()
-            items = response.json().get("data") or []
-            break
-        except Exception as exc:
-            response = getattr(exc, "response", None)
-            if getattr(response, "status_code", None) == 403:
-                log.warning(
-                    "ReliefWeb rejected appname %r: the v2 API requires a "
-                    "pre-approved appname (request one at "
-                    "https://reliefweb.int/contact). Skipping this source "
-                    "for this run.",
-                    RELIEFWEB_APP_NAME,
-                )
-                break
-            log.warning("ReliefWeb query attempt %d failed: %s", index, exc)
-
-    if not items:
-        log.info("ReliefWeb returned no usable jobs this run")
-        return []
-
-    candidates: List[Dict[str, Any]] = []
-    for item in items:
-        fields = item.get("fields") or {}
-        title = _clean_cell(fields.get("title"))
-        url = _clean_cell(fields.get("url"))
-        if not (title and url):
-            continue
-
-        source = fields.get("source") or []
-        organisation = (
-            _clean_cell(source[0].get("name")) if source else "ReliefWeb partner organisation"
+    candidates, site_counts = scrape_jobspy_queries(TARGETED_QUERIES)
+    if site_counts:
+        log.info(
+            "Targeted sweep produced %d raw candidate(s) (%s)",
+            len(candidates),
+            format_source_counts(site_counts),
         )
-        cities = fields.get("city") or []
-        city = _clean_cell(cities[0].get("name")) if cities else ""
-        created = _clean_cell((fields.get("date") or {}).get("created"))[:10]
-        themes = [t.get("name", "") for t in (fields.get("theme") or [])]
-        description = strip_html(fields.get("body") or "")[:4000]
-
-        candidates.append(
-            {
-                "source": "reliefweb",
-                "title": title,
-                "organization": organisation,
-                "location_raw": ", ".join(part for part in (city, "India") if part),
-                "description": description or "; ".join(themes),
-                "apply_url": url,
-                "date_posted": created,
-                "matched_query": "reliefweb",
-            }
-        )
-
-    log.info("ReliefWeb produced %d India candidate(s)", len(candidates))
+    else:
+        log.info("Targeted sweep produced 0 raw candidate(s)")
     return candidates
 
 
@@ -856,7 +840,24 @@ def load_jobs(path: Path) -> List[Dict[str, Any]]:
     return [row for row in data if isinstance(row, dict)]
 
 
+def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Final gate: legacy/imported listings with invalid URLs never persist."""
+    valid: List[Dict[str, Any]] = []
+    dropped = 0
+    for job in jobs:
+        if is_valid_apply_url(job.get("apply_url")):
+            valid.append(job)
+        else:
+            dropped += 1
+    if dropped:
+        log.warning(
+            "Dropped %d listing(s) with empty/placeholder apply URLs", dropped
+        )
+    return valid
+
+
 def write_jobs(jobs: List[Dict[str, Any]], path: Path) -> None:
+    jobs = filter_valid_jobs(jobs)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(jobs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -871,6 +872,7 @@ def write_sitemap(jobs: List[Dict[str, Any]], path: Path) -> None:
     """Regenerate sitemap.xml: homepage + dashboard + every job as
     /?job=<id> (lastmod = date_added). Any other pre-existing URLs (e.g.
     spatial-data.html?van=...) are preserved untouched."""
+    jobs = filter_valid_jobs(jobs)
     today = date.today().isoformat()
 
     preserved: Dict[str, Dict[str, str]] = {}
@@ -1063,22 +1065,31 @@ def main(argv: Optional[List[str]] = None) -> int:
         return 1
 
     # 1. Gather raw candidates from all sources.
+    log.info("Lookback window for this run: %d hour(s)", resolve_lookback_hours())
     candidates: List[Dict[str, Any]] = []
     candidates.extend(scrape_board_candidates())
-    candidates.extend(fetch_reliefweb_india_jobs())
+    candidates.extend(fetch_targeted_green_jobs())
     log.info("Collected %d raw candidate(s) from all sources", len(candidates))
 
     # 2. De-duplicate against the live feed and within this run.
     seen = existing_keys(existing)
     fresh: List[Dict[str, Any]] = []
+    invalid_urls = 0
     for candidate in candidates:
         if not (candidate.get("title") and candidate.get("apply_url")):
+            continue
+        if not is_valid_apply_url(candidate.get("apply_url")):
+            invalid_urls += 1
             continue
         key = dedupe_key(candidate)
         if not key or key in seen:
             continue
         seen.add(key)
         fresh.append(candidate)
+    if invalid_urls:
+        log.warning(
+            "Skipped %d candidate(s) with empty/placeholder apply URLs", invalid_urls
+        )
     total_fresh = len(fresh)
     fresh = fresh[: max(0, args.max_new)]
     log.info(
@@ -1098,6 +1109,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             data = parse_model_json(reply)
             record, reason = coerce_to_job_record(data, candidate, today)
             rate_limit_streak = 0
+            if record is not None and not is_valid_apply_url(record.get("apply_url")):
+                record, reason = None, "apply URL failed validation"
             if record is None:
                 log.info("[%d/%d] skipped %r - %s", index, len(fresh), label, reason)
             else:
