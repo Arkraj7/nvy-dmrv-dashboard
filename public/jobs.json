@@ -1,5 +1,61 @@
 [
   {
+    "id": "team-member-green-steel-jsw-steel-chennai",
+    "date_added": "2026-10-18",
+    "clean_title": "Team Member - Green Steel",
+    "organization": "JSW Steel",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "category": "Climate & Sustainability",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "This role involves managing the end-to-end setup and operations of a new scrap processing facility near Chennai. You will oversee the entire value chain, from conducting market analysis and building business cases to supervising plant installation and commissioning. The position focuses on strengthening the scrap supply chain to support JSW Steel's commitment to sustainable recycling and circular economy practices.",
+    "key_responsibilities": [
+      "Analyze scrap market dynamics, pricing trends, and regulatory changes",
+      "Identify and onboard partners including yards, dismantlers, and logistics providers",
+      "Prepare project capex, business cases, and technical specifications for processing units",
+      "Supervise site installation, commissioning, and performance testing of mechanical systems",
+      "Monitor project timelines, budgets, and operational risks to ensure timely delivery"
+    ],
+    "must_have_skills": [
+      "Mechanical Engineering",
+      "Project Management",
+      "Supply Chain Management",
+      "Waste Management",
+      "Vendor Management",
+      "SAP",
+      "Regulatory Compliance"
+    ],
+    "application_tip": "Highlight your specific experience with industrial supply chains or waste processing infrastructure in your resume. Be ready to discuss your technical proficiency in mechanical systems during the interview.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4468549980"
+  },
+  {
+    "id": "senior-sector-expert-building-energy-efficiency-asci",
+    "date_added": "2026-10-18",
+    "clean_title": "Senior Sector Expert – Building Energy Efficiency",
+    "organization": "ASCI",
+    "state": "Delhi NCR",
+    "city": "New Delhi",
+    "category": "Climate & Sustainability",
+    "experience_level": "Senior",
+    "role_summary": "ASCI is hiring a Senior Sector Expert to advance building energy efficiency initiatives in New Delhi. The role leads technical advisory on building energy codes, high-performance architecture, and decarbonisation strategies for the built environment. Working closely with government bodies, the expert will drive scalable energy-saving interventions across commercial and residential sectors.",
+    "key_responsibilities": [
+      "Provide technical expertise on the implementation of building energy efficiency codes and standards.",
+      "Advise government agencies and urban local bodies on energy-efficient building policies.",
+      "Evaluate energy conservation measures and retrofitting strategies for commercial and residential buildings.",
+      "Facilitate stakeholder consultations and capacity-building programs with industry partners."
+    ],
+    "must_have_skills": [
+      "Building energy efficiency",
+      "Energy Conservation Building Code (ECBC)",
+      "Eco-Niwas Samhita",
+      "Building energy modeling",
+      "Policy advisory",
+      "Stakeholder management"
+    ],
+    "application_tip": "Highlight your direct experience with ECBC compliance, Eco-Niwas Samhita, or building energy simulation tools like eQUEST and EnergyPlus. Reference any previous engagements with BEE or state designated agencies to strengthen your candidacy.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4478230249"
+  },
+  {
     "id": "senior-regulatory-specialist-toxicology-ecolab-pune",
     "date_added": "2026-10-18",
     "clean_title": "Senior Regulatory Specialist - Toxicology",
@@ -195,6 +251,34 @@
     ],
     "application_tip": "Highlight any academic projects or internships related to energy markets or environmental economics in your resume. Be prepared to discuss your understanding of current carbon pricing mechanisms during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477380037"
+  },
+  {
+    "id": "sales-analyst-nextpower",
+    "date_added": "2026-10-18",
+    "clean_title": "Sales Analyst",
+    "organization": "Nextpower",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "category": "Climate & Sustainability",
+    "experience_level": "1-3 Years",
+    "role_summary": "This role supports global sales programs by creating complex financial and energy models for utility-scale solar projects. You will collaborate with engineering and finance teams to generate accurate proposals and track sales performance metrics. Based in Hyderabad, the position focuses on optimizing deal structures and bid strategies to advance clean energy infrastructure development.",
+    "key_responsibilities": [
+      "Develop financial and energy modeling tools for solar project proposals.",
+      "Coordinate sales quotations and maintain revenue forecasts.",
+      "Manage CRM reporting and data improvements within Salesforce.",
+      "Analyze sales orders and market segments to improve hit rates.",
+      "Collaborate with business development teams on creative deal structuring."
+    ],
+    "must_have_skills": [
+      "Financial modeling",
+      "Business analysis",
+      "Salesforce CRM",
+      "Advanced Excel",
+      "Solar industry knowledge",
+      "Data visualization"
+    ],
+    "application_tip": "Highlight your experience with financial modeling for infrastructure or energy projects in your resume. If you have worked with Salesforce or similar CRM platforms, explicitly mention how you used data to improve sales reporting or forecasting.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4416196729"
   },
   {
     "id": "renewable-energy-program-manager-pwc-patna",
@@ -508,6 +592,34 @@
     "apply_url": "https://in.indeed.com/viewjob?jk=a0e7ff5168a92b88"
   },
   {
+    "id": "mechanical-design-engineer-saltech-design-labs",
+    "date_added": "2026-10-18",
+    "clean_title": "Mechanical Design Engineer",
+    "organization": "Saltech Design Labs",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "category": "Climate & Sustainability",
+    "experience_level": "1-3 Years",
+    "role_summary": "Saltech Design Labs seeks a mechanical engineer to develop recycling machinery that converts plastic and industrial waste into building materials. You will work on-site in Ahmedabad to design, prototype, and test systems for circular economy applications. This role requires hands-on involvement in the full product lifecycle, from initial conceptualization to manufacturing and field-testing of waste-to-infrastructure solutions.",
+    "key_responsibilities": [
+      "Conceptualize and design dry-waste recycling machines and sorting systems.",
+      "Draft assembly drawings and produce comprehensive bills of materials.",
+      "Lead prototype fabrication and conduct functional performance testing.",
+      "Implement quality control protocols to ensure adherence to engineering standards.",
+      "Create technical manuals and maintenance plans for field operations."
+    ],
+    "must_have_skills": [
+      "Mechanical Design",
+      "SolidWorks",
+      "AutoCAD",
+      "Prototype Development",
+      "Circular Economy",
+      "GD&T Standards"
+    ],
+    "application_tip": "Prepare a portfolio showcasing your previous mechanical designs or prototypes, as the firm specifically requests samples of your work. Highlight any past projects involving waste management or sustainable materials to stand out.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4465527088"
+  },
+  {
     "id": "manager-sustainability-aditya-birla-fashion-and-retail",
     "date_added": "2026-10-18",
     "clean_title": "Manager Sustainability (Disclosure)",
@@ -646,6 +758,35 @@
     ],
     "application_tip": "Highlight your experience in bridging the gap between academic research and on-ground policy implementation. Showcase specific examples where your work influenced municipal or state-level urban infrastructure decisions.",
     "apply_url": "https://www.linkedin.com/jobs/view/4453978704"
+  },
+  {
+    "id": "head-projects-operations-suninfra-energies",
+    "date_added": "2026-10-18",
+    "clean_title": "Head – Projects & Operations (Renewable Energy)",
+    "organization": "SunInfra Energies Ltd",
+    "state": "Maharashtra",
+    "city": "Thane",
+    "category": "Climate & Sustainability",
+    "experience_level": "Senior",
+    "role_summary": "SunInfra Energies Ltd seeks a senior leader to oversee project execution and operational performance across their renewable energy portfolio. You will report directly to the CEO, managing the full lifecycle of solar and storage projects from initial engineering to long-term asset maintenance. This role requires frequent site travel to ensure project profitability, safety, and technical excellence across diverse locations.",
+    "key_responsibilities": [
+      "Manage project lifecycles from engineering coordination through to commissioning and client handover.",
+      "Establish project schedules, resource plans, and budgets to ensure timely and profitable delivery.",
+      "Oversee contractor performance, procurement, and technical site inspections to maintain quality standards.",
+      "Direct operations and maintenance teams to optimize plant performance and ensure system reliability.",
+      "Develop internal SOPs and reporting dashboards to improve team accountability and operational efficiency."
+    ],
+    "must_have_skills": [
+      "EPC project management",
+      "Renewable energy systems",
+      "Contract administration",
+      "Project budgeting and cost control",
+      "Operations and maintenance (O&M)",
+      "Stakeholder management",
+      "Technical commissioning"
+    ],
+    "application_tip": "Highlight specific solar or storage projects you have led from inception to commercial closure in your resume. Emphasize your experience in managing large-scale contractor networks and resolving complex site-level bottlenecks.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4477715492"
   },
   {
     "id": "head-esg-yulu",
@@ -788,6 +929,33 @@
     "apply_url": "https://www.linkedin.com/jobs/view/4476655607"
   },
   {
+    "id": "environmental-analyst-olive-recruitment-kochi",
+    "date_added": "2026-10-18",
+    "clean_title": "Environmental Analyst",
+    "organization": "Olive Recruitment",
+    "state": "Kerala",
+    "city": "Kochi",
+    "category": "Climate & Sustainability",
+    "experience_level": "1-3 Years",
+    "role_summary": "Based at an office in Angamaly, Kochi, this position supports an Australian environmental consultancy across planning and assessment projects. The analyst will draft ecological assessments, vegetation management plans, bushfire risk reports, and environmental offset documentation. Candidates will also run GIS spatial mapping and assist with technical proposals under standard Australian planning frameworks.",
+    "key_responsibilities": [
+      "Draft environmental planning documents, including ecological assessments and bushfire hazard management plans",
+      "Prepare vegetation and fauna management plans, revegetation schemes, and biodiversity offset strategies",
+      "Conduct spatial mapping and environmental data analysis using ESRI GIS software",
+      "Assist with project proposals, tenders, and regulatory research across local planning databases"
+    ],
+    "must_have_skills": [
+      "Ecological impact assessment",
+      "GIS & spatial analysis",
+      "ESRI ArcGIS",
+      "Technical report writing",
+      "Flora and fauna surveys",
+      "Environmental planning"
+    ],
+    "application_tip": "Highlight any portfolio samples showing ESRI GIS mapping alongside technical writing in ecology or environmental science. Ensure you are comfortable with the early working schedule (7:30 am to 4:30 pm IST) aligned with Australian hours.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4480914131"
+  },
+  {
     "id": "emissions-executive-accelleron",
     "date_added": "2026-10-18",
     "clean_title": "Emissions Executive",
@@ -814,6 +982,34 @@
     ],
     "application_tip": "Highlight any academic projects or internships involving maritime engineering or data analysis. Familiarize yourself with the specific requirements of IMO DCS and EU ETS before your interview to demonstrate immediate technical readiness.",
     "apply_url": "https://www.linkedin.com/jobs/view/4471426627"
+  },
+  {
+    "id": "doctoral-student-iit-guwahati",
+    "date_added": "2026-10-18",
+    "clean_title": "Doctoral Student (Energy and Sustainability)",
+    "organization": "Indian Institute of Technology, Guwahati",
+    "state": "Assam",
+    "city": "Guwahati",
+    "category": "Climate & Sustainability",
+    "experience_level": "Entry Level / Fellowship",
+    "role_summary": "This doctoral position at IIT Guwahati focuses on advanced research in renewable energy technologies including perovskite solar cells and solar water splitting. You will conduct experimental work and numerical modeling while contributing to life cycle assessments and AI-assisted design. The role requires full-time campus presence to engage with international collaborators and faculty on cutting-edge sustainability solutions.",
+    "key_responsibilities": [
+      "Design and execute experimental or theoretical research models",
+      "Perform life cycle assessment and data analysis for energy systems",
+      "Document research findings for publication in peer-reviewed journals",
+      "Collaborate with international research partners and faculty members",
+      "Participate in departmental seminars and academic workshops"
+    ],
+    "must_have_skills": [
+      "Renewable energy research",
+      "Life cycle assessment (LCA)",
+      "Numerical modeling",
+      "Scientific writing",
+      "Data analysis",
+      "Experimental design"
+    ],
+    "application_tip": "Highlight any prior publications or specific experience with solar cell characterization in your statement of purpose. Ensure you follow the mandatory application portal instructions for the School of Energy Science and Engineering before the October 28 deadline.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4478208160"
   },
   {
     "id": "deputy-vice-president-energy-environment-sambodhi",
@@ -843,6 +1039,34 @@
     ],
     "application_tip": "Highlight your specific experience in securing funding or managing large-scale M&E projects for bilateral agencies. Ensure your resume clearly demonstrates your ability to bridge technical environmental research with business development outcomes.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477505089"
+  },
+  {
+    "id": "dean-anant-school-for-climate-action-ahmedabad",
+    "date_added": "2026-10-18",
+    "clean_title": "Dean, Anant School for Climate Action",
+    "organization": "Anant National University",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "category": "Climate & Sustainability",
+    "experience_level": "Senior",
+    "role_summary": "Anant National University is seeking a visionary leader to head the Anant School for Climate Action in Ahmedabad. This role oversees the BTech in Climate Change program, the Anant Centre for Sustainability, and the Climate Lab. You will drive academic excellence and innovation in climate technologies to prepare students for the global climate economy.",
+    "key_responsibilities": [
+      "Lead academic and research initiatives within the School of Climate Action",
+      "Oversee the BTech in Climate Change curriculum and student development",
+      "Manage the Anant Centre for Sustainability and internal Climate Lab operations",
+      "Foster industry partnerships to enhance student placement and research impact",
+      "Direct faculty recruitment and promote interdisciplinary collaboration"
+    ],
+    "must_have_skills": [
+      "Climate change education",
+      "Academic leadership",
+      "Sustainability research",
+      "Curriculum development",
+      "Climate technology",
+      "Strategic institutional planning"
+    ],
+    "application_tip": "Highlight your experience in bridging technical engineering education with climate policy and sustainability research. Ensure your application emphasizes your ability to build institutional partnerships and manage complex academic departments.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4478208572"
   },
   {
     "id": "coordinator-tea-wwf-india",
@@ -1098,6 +1322,34 @@
     "apply_url": "https://www.linkedin.com/jobs/view/4477060386"
   },
   {
+    "id": "business-development-manager-renewable-energy-deif",
+    "date_added": "2026-10-18",
+    "clean_title": "Business Development Manager – Renewable Energy & BESS",
+    "organization": "DEIF",
+    "state": "Delhi NCR",
+    "city": "Faridabad",
+    "category": "Climate & Sustainability",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "This role focuses on expanding DEIF's market presence in renewable energy, battery energy storage, and microgrid sectors across India. You will identify new business opportunities and build strategic relationships with EPC contractors, developers, and utilities. The position requires regular travel to engage with clients and support the transition toward smarter, more sustainable power management systems.",
+    "key_responsibilities": [
+      "Drive business development initiatives within the BESS and hybrid power sectors.",
+      "Build and maintain relationships with renewable energy developers and EPC contractors.",
+      "Promote intelligent control solutions for microgrids and renewable energy integration.",
+      "Lead commercial negotiations and contract discussions with strategic partners.",
+      "Provide market intelligence and customer feedback to the product management team."
+    ],
+    "must_have_skills": [
+      "Renewable energy market knowledge",
+      "Battery Energy Storage Systems (BESS)",
+      "Business development",
+      "Technical sales",
+      "Microgrid control solutions",
+      "Stakeholder management"
+    ],
+    "application_tip": "Highlight your specific experience with BESS or hybrid power projects in your resume. Be prepared to discuss your track record of managing technical sales cycles with EPCs and utility-scale developers.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4436768027"
+  },
+  {
     "id": "building-automation-engineer-cundall-chennai",
     "date_added": "2026-10-18",
     "clean_title": "Engineer/Senior Engineer - Building Automation, ELV/ICT",
@@ -1351,6 +1603,34 @@
     "apply_url": "https://www.linkedin.com/jobs/view/4479268259"
   },
   {
+    "id": "area-sales-manager-loom-solar",
+    "date_added": "2026-10-18",
+    "clean_title": "Area Sales Manager",
+    "organization": "Loom Solar Pvt. Ltd.",
+    "state": "Chhattisgarh",
+    "city": "Bastar",
+    "category": "Climate & Sustainability",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "This role involves driving revenue growth for solar energy solutions across the Bastar region. You will manage a B2B sales team to expand market presence among commercial and industrial clients. The position focuses on advancing renewable energy adoption by delivering customized solar PV installations and financial models to enterprise customers.",
+    "key_responsibilities": [
+      "Develop and execute regional sales strategies for solar energy products.",
+      "Lead and mentor a team of B2B sales representatives to meet growth targets.",
+      "Build relationships with facility managers and sustainability officers at enterprise accounts.",
+      "Collaborate with technical teams to design solar solutions for manufacturing and institutional clients.",
+      "Analyze market trends and competitor activity to refine sales approaches."
+    ],
+    "must_have_skills": [
+      "B2B sales management",
+      "Solar PV technology",
+      "Financial modeling for solar",
+      "CRM software",
+      "Renewable energy market analysis",
+      "Complex contract negotiation"
+    ],
+    "application_tip": "Highlight your specific experience with solar financing models like PPA or lease agreements in your resume. Be prepared to discuss how you have managed long-cycle B2B negotiations in the renewable energy sector.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4480875543"
+  },
+  {
     "id": "analyst-sustainable-sourcing-avantor-2",
     "date_added": "2026-10-18",
     "clean_title": "Analyst - Sustainable Sourcing",
@@ -1405,5 +1685,33 @@
     ],
     "application_tip": "Highlight your specific experience with supplier assessment platforms like EcoVadis in your resume. Be prepared to discuss how you have managed large datasets to track environmental or social compliance indicators.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480516769"
+  },
+  {
+    "id": "analyst-civil-design-desri-hyderabad",
+    "date_added": "2026-10-18",
+    "clean_title": "Analyst/Senior Analyst - Civil Design Engineering",
+    "organization": "DESRI",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "category": "Climate & Sustainability",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "role_summary": "This role supports the civil engineering design for utility-scale solar and renewable energy projects within the DESRI India team. You will manage site layouts, grading, and drainage analysis while coordinating with international teams to ensure project constructability. The position requires technical expertise in civil design software to optimize site performance and manage complex infrastructure constraints for renewable energy assets.",
+    "key_responsibilities": [
+      "Design utility-scale PV layouts including grading, drainage, and access roads.",
+      "Perform hydrologic and stormwater analyses to propose effective erosion mitigation.",
+      "Optimize earthwork balance and site layouts using AutoCAD Civil 3D.",
+      "Coordinate civil datasets with electrical, structural, and GIS engineering teams.",
+      "Manage technical handoffs to EPC partners for construction readiness."
+    ],
+    "must_have_skills": [
+      "AutoCAD Civil 3D",
+      "GIS (ArcGIS/QGIS)",
+      "Hydrologic analysis",
+      "Utility-scale solar design",
+      "Grading and drainage design",
+      "Earthwork optimization"
+    ],
+    "application_tip": "Highlight your specific experience with large-scale solar site optimization and any past projects involving complex terrain analysis. Ensure your portfolio or resume clearly demonstrates proficiency in Civil 3D and your ability to manage large topographic datasets.",
+    "apply_url": "https://www.linkedin.com/jobs/view/4434358804"
   }
 ]
