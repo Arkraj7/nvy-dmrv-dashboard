@@ -1,11 +1,12 @@
 name: Daily India Green Jobs Update
 
-# Fetches new India climate/forestry/ESG/GIS jobs every morning at
+# Fetches new India climate/forestry/ESG/GIS/academic jobs every morning at
 # 07:00 AM IST (01:30 UTC), humanizes them with Gemini, merges them into
 # public/jobs.json, expires closed mandates into public/archive.json,
 # refreshes public/stats.json (weekly hiring telemetry), regenerates
-# public/sitemap.xml, commits them, and then builds + deploys the live
-# site to Cloudflare Pages.
+# public/sitemap.xml, rebuilds the static SEO surface (the pre-rendered
+# snapshot inside public/index.html and the five career-pathway hub pages),
+# commits them, and then builds + deploys the live site to Cloudflare Pages.
 
 on:
   schedule:
@@ -14,7 +15,7 @@ on:
   workflow_dispatch: {}   # allows a manual run from the Actions tab
 
 permissions:
-  contents: write         # the bot commits jobs.json + archive.json + stats.json + sitemap.xml
+  contents: write         # the bot commits registry + SEO page updates
 
 concurrency:
   group: daily-jobs
@@ -46,18 +47,28 @@ jobs:
           LOOKBACK_HOURS: "24"
         run: python scripts/fetch_and_humanize.py
 
-      - name: Commit updated registry data (jobs, archive, stats, sitemap)
+      - name: Rebuild static SEO pages (index snapshot + career-pathway hubs)
+        run: python scripts/build_seo_pages.py
+
+      - name: Commit updated registry data (jobs, archive, stats, sitemap, SEO pages)
         run: |
           git config user.name "urbanforestpark-bot"
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
           # The deployed site root is public/, so the pipeline writes to
           # public/jobs.json, public/archive.json, public/stats.json and
-          # public/sitemap.xml.
-          git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml
+          # public/sitemap.xml; build_seo_pages.py rewrites public/index.html
+          # and the five career-pathway hub pages.
+          git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
+                  public/index.html \
+                  public/jrf-srf-project-associate-jobs.html \
+                  public/phd-fellowships-climate-sustainability.html \
+                  public/forestry-wildlife-government-jobs.html \
+                  public/gis-remote-sensing-climate-jobs.html \
+                  public/esg-carbon-sustainability-jobs.html
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else
-            git commit -m "chore(jobs): daily registry update ($(date -u +'%Y-%m-%d'))"
+            git commit -m "chore(jobs): daily registry update + SEO rebuild ($(date -u +'%Y-%m-%d'))"
             git pull --rebase --autostash
             git push
           fi

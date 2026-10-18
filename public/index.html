@@ -28,19 +28,22 @@
       })();
     </script>
 
-    <title>India Climate, Forestry, ESG &amp; GIS Career Registry | Urban Forest Park</title>
-    <meta name="description" id="meta-desc" content="The national registry of active climate, forestry, ESG, carbon-market and geospatial mandates across India — curated listings with direct links to official application portals.">
+    <title>India Climate, Forestry, ESG, GIS &amp; Academic Career Registry | Urban Forest Park</title>
+    <meta name="description" id="meta-desc" content="The national registry of active climate, forestry, ESG, carbon-market, geospatial and academic (JRF / SRF / PhD / project-staff) mandates across India — curated listings with direct links to official application portals.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.urbanforestpark.com/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Urban Forest Park — India Career Registry">
-    <meta property="og:title" content="India Climate, Forestry, ESG &amp; GIS Career Registry | Urban Forest Park">
-    <meta property="og:description" content="Institutional registry of active climate, forestry, ESG and geospatial mandates across India. Direct links to official application portals.">
+    <meta property="og:title" content="India Climate, Forestry, ESG, GIS &amp; Academic Career Registry | Urban Forest Park">
+    <meta property="og:description" content="Institutional registry of active climate, forestry, ESG, geospatial and academic research mandates across India. Direct links to official application portals.">
     <meta property="og:url" content="https://www.urbanforestpark.com/">
     <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="India Climate, Forestry, ESG, GIS &amp; Academic Career Registry | Urban Forest Park">
+    <meta name="twitter:description" content="Active climate, forestry, ESG, geospatial and academic (JRF / SRF / PhD) mandates across India - direct links to official application portals.">
+    <meta name="twitter:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons (same set as the rest of the site) -->
@@ -79,7 +82,15 @@
       "@type": "WebSite",
       "name": "Urban Forest Park — National Climate, Forestry, ESG & Geospatial Career Registry (India)",
       "url": "https://www.urbanforestpark.com/",
-      "inLanguage": "en-IN"
+      "inLanguage": "en-IN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.urbanforestpark.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
 
@@ -158,10 +169,11 @@
     <section class="hero">
       <div class="hero-inner">
         <p class="hero-kicker">National Registry of Environmental Mandates — India</p>
-        <h1 id="hero-heading">India&rsquo;s Climate, Forestry, ESG &amp; Geospatial <span class="accent">Career Registry</span></h1>
+        <h1 id="hero-heading">India&rsquo;s Climate, Forestry, ESG, Geospatial &amp; Academic <span class="accent">Career Registry</span></h1>
         <p class="hero-sub">
-          A continuously monitored index of active positions with forest departments, research
-          institutions, sustainability teams and climate organisations across the country.
+          A continuously monitored index of active positions with forest departments, universities
+          and research institutions (JRF / SRF / PhD / project staff), sustainability teams and
+          climate organisations across the country.
           <strong>Every listing links straight to the official application portal</strong> — no
           intermediaries, no fees. Closed mandates are preserved in the Historical Archive for
           compensation, skills and institutional reference.
@@ -228,13 +240,24 @@
           </div>
         </div>
 
+        <div class="track-row" id="career-tracks" role="group" aria-label="Filter mandates by career track">
+          <span class="track-label">Career Track</span>
+          <button class="track-btn active" type="button" data-track="all" aria-pressed="true">All Mandates <span class="cnt"></span></button>
+          <button class="track-btn" type="button" data-track="research" aria-pressed="false">JRF / SRF &amp; Project Associates <span class="cnt"></span></button>
+          <button class="track-btn" type="button" data-track="phd" aria-pressed="false">PhD &amp; Postdoctoral Fellowships <span class="cnt"></span></button>
+          <button class="track-btn" type="button" data-track="contractual" aria-pressed="false">Young Professional &amp; Govt Contractual <span class="cnt"></span></button>
+          <button class="track-btn" type="button" data-track="corporate" aria-pressed="false">Corporate ESG &amp; Sustainability <span class="cnt"></span></button>
+          <button class="track-btn" type="button" data-track="thinktank" aria-pressed="false">Think-Tanks, NGOs &amp; Policy <span class="cnt"></span></button>
+        </div>
+
         <div class="pill-row" id="category-pills" role="group" aria-label="Filter mandates by sector">
           <button class="cat-pill active" type="button" data-cat="all">All Sectors <span class="cnt"></span></button>
-          <button class="cat-pill" type="button" data-cat="Climate &amp; Sustainability">Climate &amp; Sustainability <span class="cnt"></span></button>
-          <button class="cat-pill" type="button" data-cat="Forestry &amp; Afforestation">Forestry &amp; Afforestation <span class="cnt"></span></button>
-          <button class="cat-pill" type="button" data-cat="ESG &amp; Carbon Markets">ESG &amp; Carbon Markets <span class="cnt"></span></button>
-          <button class="cat-pill" type="button" data-cat="GIS, Remote Sensing &amp; UHI">GIS, Remote Sensing &amp; UHI <span class="cnt"></span></button>
-          <button class="cat-pill" type="button" data-cat="Environmental Policy &amp; Fellowships">Environmental Policy &amp; Fellowships <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Academic, JRF, SRF &amp; PhD Positions">Academic, JRF, SRF &amp; PhD <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Research Associate &amp; Project Staff (Contractual)">Research Associate &amp; Project Staff <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Forestry, Wildlife &amp; Afforestation">Forestry, Wildlife &amp; Afforestation <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="GIS, Remote Sensing &amp; Earth Observation">GIS, Remote Sensing &amp; Earth Observation <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="ESG, Carbon Markets &amp; Corporate Sustainability">ESG, Carbon Markets &amp; Corporate Sustainability <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Climate Policy, Think-Tanks &amp; Fellowships">Climate Policy, Think-Tanks &amp; Fellowships <span class="cnt"></span></button>
         </div>
       </div>
     </div>
@@ -264,6 +287,51 @@
       </div>
     </main>
 
+    <!-- ================= CAREER PATHWAYS: PRE-RENDERED SEO HUB PAGES ================= -->
+    <section class="pathway-band" aria-labelledby="pathway-title">
+      <div class="pathway-inner">
+        <p class="eyebrow">Career Pathways</p>
+        <h2 id="pathway-title">Explore Career Pathways</h2>
+        <p class="pathway-sub">
+          Dedicated hubs for each track of the registry &mdash; research and academic positions,
+          doctoral fellowships, government contractual roles, corporate sustainability and
+          policy think-tanks &mdash; each with every current and recent mandate.
+        </p>
+        <div class="pathway-grid">
+          <a class="pathway-card" href="/jrf-srf-project-associate-jobs.html">
+            <span class="pathway-kicker">Academic &amp; Research</span>
+            <span class="pathway-name">JRF / SRF &amp; Project Associate Jobs</span>
+            <span class="pathway-desc">Junior and senior research fellowships, research and project associates across Indian universities, IITs, IISc and national institutes.</span>
+            <span class="pathway-go">Open hub &rarr;</span>
+          </a>
+          <a class="pathway-card" href="/phd-fellowships-climate-sustainability.html">
+            <span class="pathway-kicker">Doctoral &amp; Postdoc</span>
+            <span class="pathway-name">PhD &amp; Postdoctoral Fellowships</span>
+            <span class="pathway-desc">Doctoral programmes, PhD fellowships and postdoctoral positions in climate, ecology, sustainability and environmental science.</span>
+            <span class="pathway-go">Open hub &rarr;</span>
+          </a>
+          <a class="pathway-card" href="/forestry-wildlife-government-jobs.html">
+            <span class="pathway-kicker">Government &amp; Forestry</span>
+            <span class="pathway-name">Forestry, Wildlife &amp; Government Jobs</span>
+            <span class="pathway-desc">Forest department, wildlife institute, ICFRE and contractual government mandates in forestry, afforestation and conservation.</span>
+            <span class="pathway-go">Open hub &rarr;</span>
+          </a>
+          <a class="pathway-card" href="/gis-remote-sensing-climate-jobs.html">
+            <span class="pathway-kicker">Geospatial</span>
+            <span class="pathway-name">GIS, Remote Sensing &amp; EO Jobs</span>
+            <span class="pathway-desc">Geospatial analyst, remote sensing, earth observation and urban heat-island roles with ISRO, institutes and consultancies.</span>
+            <span class="pathway-go">Open hub &rarr;</span>
+          </a>
+          <a class="pathway-card" href="/esg-carbon-sustainability-jobs.html">
+            <span class="pathway-kicker">Corporate &amp; Carbon</span>
+            <span class="pathway-name">ESG &amp; Carbon Market Jobs</span>
+            <span class="pathway-desc">ESG analyst, sustainability manager, carbon-market and climate-finance mandates across corporate India and NGOs.</span>
+            <span class="pathway-go">Open hub &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= SEO DIRECTORY: STATE & SECTOR LANDING VIEWS ================= -->
     <section class="seo-directory" aria-labelledby="seo-dir-title">
       <div class="seo-dir-inner">
@@ -277,11 +345,12 @@
           <div class="seo-col">
             <h3>By Sector</h3>
             <ul class="seo-links" id="seo-categories">
-              <li><a href="?category=climate-sustainability">Climate &amp; Sustainability</a></li>
-              <li><a href="?category=forestry-afforestation">Forestry &amp; Afforestation</a></li>
-              <li><a href="?category=esg-carbon-markets">ESG &amp; Carbon Markets</a></li>
-              <li><a href="?category=gis-remote-sensing-uhi">GIS, Remote Sensing &amp; UHI</a></li>
-              <li><a href="?category=environmental-policy-fellowships">Environmental Policy &amp; Fellowships</a></li>
+              <li><a href="?category=academic-jrf-srf-phd">Academic, JRF, SRF &amp; PhD Positions</a></li>
+              <li><a href="?category=research-associate-project-staff">Research Associate &amp; Project Staff (Contractual)</a></li>
+              <li><a href="?category=forestry-wildlife-afforestation">Forestry, Wildlife &amp; Afforestation</a></li>
+              <li><a href="?category=gis-remote-sensing-earth-observation">GIS, Remote Sensing &amp; Earth Observation</a></li>
+              <li><a href="?category=esg-carbon-sustainability">ESG, Carbon Markets &amp; Corporate Sustainability</a></li>
+              <li><a href="?category=climate-policy-think-tanks-fellowships">Climate Policy, Think-Tanks &amp; Fellowships</a></li>
             </ul>
           </div>
           <div class="seo-col">
@@ -293,6 +362,169 @@
         </div>
       </div>
     </section>
+
+    <!-- ================= PRE-RENDERED REGISTRY SNAPSHOT (STATIC SEO) ================= -->
+    <!-- SEO_DIRECTORY_START -->
+    <section class="seo-prerendered" aria-labelledby="seo-pr-title">
+      <div class="seo-pr-inner">
+        <p class="eyebrow">Pre-Rendered Registry Snapshot</p>
+        <h2 id="seo-pr-title">Complete List of Active Environmental &amp; Academic Mandates in India</h2>
+        <p class="seo-pr-intro">The complete static index of active environmental, forestry, geospatial and academic research mandates tracked by Urban Forest Park — climate, forestry, wildlife, ESG, carbon market, GIS, remote sensing, earth observation, JRF, SRF, PhD, postdoctoral, project associate, young professional and faculty vacancies across Indian states and cities. Every entry links to the live position dossier with the official application portal. Snapshot updated 18 October 2026 (IST) — 75 active and 6 recently archived mandates.</p>
+        <div class="seo-pr-grid">
+          <div class="seo-pr-col">
+            <h3>Active Opportunities (75)</h3>
+            <ul class="seo-pr-list">
+            <li><a href="/?job=team-member-green-steel-jsw-steel-chennai">Team Member - Green Steel — JSW Steel (Tamil Nadu | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=senior-sector-expert-building-energy-efficiency-asci">Senior Sector Expert – Building Energy Efficiency — ASCI (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=senior-regulatory-specialist-toxicology-ecolab-pune">Senior Regulatory Specialist - Toxicology — Ecolab (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=senior-leadership-energy-transition-new-delhi">Senior Leadership Role – Energy Transition &amp; Industry Transformation — Confidential (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=senior-consultant-ccass-ey-chennai">Senior Consultant - Climate Change &amp; Sustainability Services (CCaSS) — EY (Tamil Nadu | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=senior-associate-pwc-india">Senior Associate - Climate &amp; Sustainability — PwC India (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=scientist-innovation-systems-icrisat">Scientist - Innovation Systems — International Crops Research Institute for the Semi-Arid Tropics (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=sales-manager-sustainability-intertek-india">Sales Manager - Sustainability — Intertek India (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=sales-consultant-quantum-sustainability-consulting">Sales Consultant — Quantum Sustainability Consulting Pvt. Ltd. (Tamil Nadu | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=sales-analyst-nextpower">Sales Analyst — Nextpower (Telangana | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=renewable-energy-program-manager-pwc-patna">Renewable Energy Program Manager — PwC India (Bihar | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=quality-assurance-manager-naandi-water">Quality Assurance Manager — Naandi Water (Telangana | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=project-lead-access-development-services">Project Lead — ACCESS Development Services (Odisha | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=project-coordinator-yclc-bindi-international">Project Coordinator – Young Climate Leadership Curriculum — Bindi International Association (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=project-associate-assistant-wii">Project Associate and Project Assistant — Wildlife Institute of India (Uttarakhand | Project Associate / Research Associate)</a></li>
+            <li><a href="/?job=programme-associate-industrial-heat-decarbonisation-iforest">Programme Associate - Industrial Heat Decarbonisation — International Forum for Environment, Sustainability &amp; Technology (iFOREST) (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=programme-associate-industrial-decarbonisation-iforest">Programme Associate - Industrial Decarbonisation — International Forum for Environment, Sustainability &amp; Technology (iFOREST) (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=program-manager-sustainability-fleet-electrification-amazon">Program Manager, Sustainability and Fleet Electrification — Amazon (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=program-manager-disaster-climate-resilience-selco">Program Manager – Disaster &amp; Climate Resilience — SELCO Foundation (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=program-coordinator-climate-health-path-mumbai">Program Coordinator - Climate Health — PATH (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=program-partnership-manager-equilibrium">Program &amp; Partnership Manager — Equilibrium (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=process-engineer-electrification-quest-global">Process Engineer - Electrification, Energy Efficiency &amp; GHG Emissions — Quest Global (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=partnerships-outreach-manager-liter-of-light-mumbai">Partnerships &amp; Outreach Manager — Liter of Light India (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=mechanical-design-engineer-saltech-design-labs">Mechanical Design Engineer — Saltech Design Labs (Gujarat | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=manager-program-development-geapp-india">Manager, Program Development — The Global Energy Alliance for People and Planet (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=manager-sustainability-aditya-birla-fashion-and-retail">Manager Sustainability (Disclosure) — Aditya Birla Fashion and Retail Limited (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=asst-manager-manager-operations-tuv-sud-gurugram-2">Manager - Environmental, Social &amp; Sustainability Services — TÜV SÜD (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=manager-esg-sustainability-scimplify-bengaluru">Manager - ESG &amp; Sustainability — Scimplify (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=management-trainee-climate-smart-agriculture-cosmosgreen">Management Trainee – Climate Smart Agriculture — CosmosGreen (Telangana | Fellowship / Internship)</a></li>
+            <li><a href="/?job=lead-infrastructure-and-climate-iihs">Lead – Infrastructure and Climate — Indian Institute for Human Settlements (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=head-projects-operations-suninfra-energies">Head – Projects &amp; Operations (Renewable Energy) — SunInfra Energies Ltd (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=head-esg-yulu">Head ESG — Yulu (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=global-logistics-sustainability-sme-castrol">Global Logistics Sustainability SME — Castrol (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=environmental-analyst-olive-recruitment-kochi">Environmental Analyst — Olive Recruitment (Kerala | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=building-automation-engineer-cundall-chennai">Engineer/Senior Engineer - Building Automation, ELV/ICT — Cundall (Tamil Nadu | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=emissions-executive-accelleron">Emissions Executive — Accelleron (Punjab | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=esg-manager-redington-limited">ESG Manager — Redington Limited (Tamil Nadu | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=esg-data-evidence-architect-ntt-data">ESG Data and Evidence Architect — NTT DATA (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=esg-analyst-metro-global-solution-center">ESG Analyst — METRO Global Solution Center (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=doctoral-student-iit-guwahati">Doctoral Student (Energy and Sustainability) — Indian Institute of Technology, Guwahati (Assam | PhD / Doctoral Fellowship)</a></li>
+            <li><a href="/?job=deputy-vice-president-energy-environment-sambodhi">Deputy Vice President - Energy, Environment and Climate Change — Sambodhi Research and Communications Pvt. Ltd. (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=dean-anant-school-for-climate-action-ahmedabad">Dean, Anant School for Climate Action — Anant National University (Gujarat | Faculty / Academic)</a></li>
+            <li><a href="/?job=coordinator-tea-wwf-india">Coordinator - Tea — WWF-India (Assam | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=consultant-ccass-ey-chennai">Consultant - Climate Change and Sustainability Services (CCaSS) — EY (Tamil Nadu | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=consultant-ccass-ey-mumbai">Consultant - Climate Change and Sustainability Services — EY (Maharashtra | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=compliance-executive-peregreen-enviro">Compliance Executive (Environmental Engineer) — Peregreen Enviro India Pvt. Ltd. (Gujarat | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=co-founder-dhartiamrit-ecoservices">Co-founder with Investment — DhartiAmrit Ecoservices (Rajasthan | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=climate-nature-social-risk-analyst-jpmorganchase">Climate, Nature &amp; Social Risk Integration Analyst — JPMorganChase (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=business-head-textile-circularity-hospitality-2">Business Head - Textile Circularity — Confidential (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=business-head-textile-circularity-hospitality">Business Head - Textile Circularity — Undisclosed (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=business-development-manager-renewable-energy-deif">Business Development Manager – Renewable Energy &amp; BESS — DEIF (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=business-development-marketing-associate-flora-carbon-ai">Business Development &amp; Marketing Associate — Flora Carbon AI (West Bengal | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=auditor-sustainability-services-cotecna">Auditor – Sustainability Services — Cotecna (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=associate-power-utility-transformation-pwc-india">Associate, Power Utility Transformation Advisory — PwC India (West Bengal | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=associate-team-lead-supplier-compliance-colgate-palmolive">Associate Team Lead, Supplier Compliance — Colgate-Palmolive (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=associate-analyst-supplier-compliance-colgate-palmolive">Associate Analyst, Supplier Compliance — Colgate-Palmolive (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=assistant-associate-esg-lic-housing-finance">Assistant/Associate - ESG — LIC Housing Finance Limited (Maharashtra | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=asst-manager-manager-operations-tuv-sud-gurugram">Assistant Manager / Manager – Operations (Environment, Social &amp; Sustainability Services) — TÜV SÜD (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=assistant-manager-csr-social-innovation">Assistant Manager - Social Innovation &amp; Transformation — Confidential (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=area-sales-manager-loom-solar">Area Sales Manager — Loom Solar Pvt. Ltd. (Chhattisgarh | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=analyst-civil-design-desri-hyderabad">Analyst/Senior Analyst - Civil Design Engineering — DESRI (Telangana | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=analyst-sustainable-sourcing-avantor-2">Analyst - Sustainable Sourcing — Avantor (Multiple States / Remote | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=analyst-sustainable-sourcing-avantor">Analyst - Sustainable Sourcing — Avantor (Tamil Nadu | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=jrf-tiger-ecology-landscape-connectivity-wii-dehradun">Junior Research Fellow (JRF) - Tiger Ecology &amp; Landscape Connectivity — Wildlife Institute of India (WII) (Uttarakhand | JRF / SRF)</a></li>
+            <li><a href="/?job=jrf-air-quality-atmospheric-chemistry-iit-delhi">Junior Research Fellow (JRF) - Air Quality &amp; Atmospheric Chemistry — Indian Institute of Technology Delhi (IIT Delhi) (Delhi NCR | JRF / SRF)</a></li>
+            <li><a href="/?job=jrf-avian-ecology-habitat-assessment-sacon-coimbatore">Junior Research Fellow (JRF) - Avian Ecology &amp; Habitat Assessment — Salim Ali Centre for Ornithology and Natural History (SACON) (Tamil Nadu | JRF / SRF)</a></li>
+            <li><a href="/?job=postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp">Postdoctoral Fellow - Environmental Sustainability &amp; Climate Risk — Indian Institute of Technology Kharagpur (IIT Kharagpur) (West Bengal | PhD / Doctoral Fellowship)</a></li>
+            <li><a href="/?job=research-associate-biodiversity-ecological-genomics-ncbs">Research Associate - Biodiversity &amp; Ecological Genomics — National Centre for Biological Sciences (NCBS) (Karnataka | Project Associate / Research Associate)</a></li>
+            <li><a href="/?job=phd-climate-dynamics-earth-system-modelling-iisc-bengaluru">PhD Position - Climate Dynamics &amp; Earth System Modelling — Indian Institute of Science (IISc) (Karnataka | PhD / Doctoral Fellowship)</a></li>
+            <li><a href="/?job=doctoral-fellowship-climate-policy-sustainable-development-teri">Doctoral Fellowship - Climate Policy &amp; Sustainable Development — The Energy and Resources Institute (TERI) (Delhi NCR | PhD / Doctoral Fellowship)</a></li>
+            <li><a href="/?job=young-professional-forest-policy-climate-finance-iifm-bhopal">Young Professional - Forest Policy &amp; Climate Finance — Indian Institute of Forest Management (IIFM) (Madhya Pradesh | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=young-professional-climate-change-campa-moefcc">Young Professional (Climate Change) - CAMPA &amp; Climate Finance — Ministry of Environment, Forest and Climate Change (MoEFCC) (Delhi NCR | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=project-associate-geospatial-modelling-urban-heat-island-nrsc">Project Associate - Geospatial Modelling &amp; Urban Heat Island Studies — National Remote Sensing Centre (NRSC), ISRO (Telangana | Project Associate / Research Associate)</a></li>
+            <li><a href="/?job=project-associate-himalayan-ecology-climate-adaptation-gbpnihe">Project Associate - Himalayan Ecology &amp; Climate Change Adaptation — G.B. Pant National Institute of Himalayan Environment (GBPNIHE) (Uttarakhand | Project Associate / Research Associate)</a></li>
+            <li><a href="/?job=project-associate-geospatial-urban-green-infrastructure-atree">Project Associate - Geospatial Analysis for Urban Green Infrastructure — ATREE (Karnataka | Project Associate / Research Associate)</a></li>
+            </ul>
+          </div>
+          <div class="seo-pr-col">
+            <h3>Recently Archived Mandates (6)</h3>
+            <ul class="seo-pr-list">
+            <li><a href="/?job=geospatial-analyst-forest-land-use-mapping-atree-bengaluru">Geospatial Analyst – Forest &amp; Land-Use Mapping — ATREE (Karnataka | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=research-associate-climate-policy-governance-wri-india-bengaluru">Research Associate – Climate Policy &amp; Governance — WRI India (Karnataka | Project Associate / Research Associate)</a></li>
+            <li><a href="/?job=programme-officer-urban-forestry-green-cover-wwf-india-new-delhi">Programme Officer – Urban Forestry &amp; Green Cover — WWF-India (Delhi NCR | Full-Time Corporate / NGO)</a></li>
+            <li><a href="/?job=consultant-esg-disclosures-brsr-reporting-ceew-new-delhi">Consultant – ESG Disclosures &amp; BRSR Reporting — CEEW (Delhi NCR | Young Professional / Consultant (Contractual))</a></li>
+            <li><a href="/?job=research-fellowship-environmental-policy-teri-new-delhi">Research Fellowship – Environmental Policy &amp; Climate Governance — TERI (Delhi NCR | Fellowship / Internship)</a></li>
+            <li><a href="/?job=manager-carbon-credit-origination-eki-energy-services-indore">Manager – Carbon Credit Origination — EKI Energy Services (Madhya Pradesh | Full-Time Corporate / NGO)</a></li>
+            </ul>
+            <h3 style="margin-top:22px;">Career Pathway Hubs</h3>
+            <ul class="seo-pr-list">
+            <li><a href="/jrf-srf-project-associate-jobs.html">JRF / SRF &amp; Project Associate Jobs in India</a></li>
+            <li><a href="/phd-fellowships-climate-sustainability.html">PhD &amp; Postdoctoral Fellowships — Climate, Sustainability &amp; Environment</a></li>
+            <li><a href="/forestry-wildlife-government-jobs.html">Forestry, Wildlife &amp; Government Jobs in India</a></li>
+            <li><a href="/gis-remote-sensing-climate-jobs.html">GIS, Remote Sensing &amp; Earth Observation Jobs in India</a></li>
+            <li><a href="/esg-carbon-sustainability-jobs.html">ESG, Carbon Markets &amp; Corporate Sustainability Jobs</a></li>
+            </ul>
+          </div>
+        </div>
+        <h3 class="seo-pr-faq-title">Frequently Asked Questions</h3>
+        <dl class="seo-pr-faq">
+          <dt>What is the Urban Forest Park Career Registry?</dt>
+          <dd>It is India&#x27;s national registry of active climate, forestry, environment, ESG, carbon-market, geospatial and academic research mandates. The registry tracks Junior Research Fellow (JRF), Senior Research Fellow (SRF), PhD, postdoctoral, project associate, young professional, faculty and corporate sustainability openings — publishing every listing with a direct link to the official application portal, with no fees and no intermediaries.</dd>
+          <dt>Which job categories and position types does the registry cover?</dt>
+          <dd>Six sectors — Academic / JRF / SRF / PhD positions, research associate and project staff (contractual), forestry, wildlife and afforestation, GIS, remote sensing and earth observation, ESG, carbon markets and corporate sustainability, and climate policy, think-tanks and fellowships — across seven position types at universities, IITs, IISc, government institutes, NGOs and companies.</dd>
+          <dt>How often are the job listings updated?</dt>
+          <dd>The registry refreshes every day at 7 AM IST. Automated collectors scan official portals, verified job feeds and news alerts; each mandate is normalised, de-duplicated and published, and expired mandates move to the Historical Archive.</dd>
+          <dt>How do I apply for a position listed here?</dt>
+          <dd>Open the position dossier and follow the ‘Apply on official portal’ link — every listing links straight to the employer&#x27;s application page or advertisement. The registry never charges fees; always verify eligibility details in the official notification before applying.</dd>
+        </dl>
+      </div>
+    </section>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Urban Forest Park Career Registry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is India's national registry of active climate, forestry, environment, ESG, carbon-market, geospatial and academic research mandates. The registry tracks Junior Research Fellow (JRF), Senior Research Fellow (SRF), PhD, postdoctoral, project associate, young professional, faculty and corporate sustainability openings — publishing every listing with a direct link to the official application portal, with no fees and no intermediaries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which job categories and position types does the registry cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Six sectors — Academic / JRF / SRF / PhD positions, research associate and project staff (contractual), forestry, wildlife and afforestation, GIS, remote sensing and earth observation, ESG, carbon markets and corporate sustainability, and climate policy, think-tanks and fellowships — across seven position types at universities, IITs, IISc, government institutes, NGOs and companies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often are the job listings updated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The registry refreshes every day at 7 AM IST. Automated collectors scan official portals, verified job feeds and news alerts; each mandate is normalised, de-duplicated and published, and expired mandates move to the Historical Archive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I apply for a position listed here?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open the position dossier and follow the ‘Apply on official portal’ link — every listing links straight to the employer's application page or advertisement. The registry never charges fees; always verify eligibility details in the official notification before applying."
+      }
+    }
+  ]
+}
+</script>
+    <!-- SEO_DIRECTORY_END -->
 
   </div><!-- /feed-home -->
 
@@ -308,7 +540,7 @@
         <h3>Urban Forest Park</h3>
         <p>
           National Climate, Forestry, ESG &amp; Geospatial Career Registry (India). We monitor
-          official portals, research institutions, consultancies and development organisations —
+          official portals, universities, research institutions, consultancies and development organisations —
           and publish verified mandates that link straight to the source.
         </p>
         <p style="margin-top:10px;">
@@ -324,6 +556,17 @@
           <li><a href="#filter-bar">Browse by State</a></li>
           <li><a href="#seo-dir-title">Browse by Sector</a></li>
           <li><a href="#" data-open-modal>Publish a Vacancy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Career Pathways</h3>
+        <ul>
+          <li><a href="/jrf-srf-project-associate-jobs.html">JRF / SRF &amp; Project Associate Jobs</a></li>
+          <li><a href="/phd-fellowships-climate-sustainability.html">PhD &amp; Postdoctoral Fellowships</a></li>
+          <li><a href="/forestry-wildlife-government-jobs.html">Forestry, Wildlife &amp; Government Jobs</a></li>
+          <li><a href="/gis-remote-sensing-climate-jobs.html">GIS &amp; Remote Sensing Jobs</a></li>
+          <li><a href="/esg-carbon-sustainability-jobs.html">ESG &amp; Carbon Market Jobs</a></li>
         </ul>
       </div>
 
@@ -365,7 +608,7 @@
       <p class="eyebrow">Institutional Partnership Desk</p>
       <h2 id="post-job-title">Publish a Vacancy / Institutional Partnership</h2>
       <p class="modal-sub">
-        Reach India&rsquo;s climate, forestry, ESG and geospatial professionals. Submit the mandate
+        Reach India&rsquo;s climate, forestry, ESG, geospatial and academic research professionals. Submit the mandate
         details below and our editorial desk will respond with publication and verification
         requirements.
       </p>

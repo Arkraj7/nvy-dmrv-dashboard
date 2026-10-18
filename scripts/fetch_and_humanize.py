@@ -21,17 +21,23 @@ forestry, ESG and geospatial job board). It:
      pending"), and on any failure the pipeline falls back to ReliefWeb's
      public India jobs RSS feed, which needs no key or approval. Both routes
      feed the same Gemini humanizer as every other source.
-  4. HUMANIZES every candidate with a Gemini Flash model (newest working
+  4. HARVESTS Indian academic, JRF/SRF, PhD and contractual institute
+     vacancies through public Google News RSS searches (WII, ICFRE, IIFM,
+     IIRS, NRSC, ATREE, CEEW, TERI, GBPNIHE, ICAR, MoEFCC and similar
+     bodies advertise contractual roles outside the big job boards). Every
+     headline is screened for job-ad phrasing before humanizing, and the
+     links route through Google News to the underlying announcement.
+  5. HUMANIZES every candidate with a Gemini Flash model (newest working
      version, with automatic fallback if one is retired). The model also runs
      a strict India + green-relevance check first: off-topic software/IT jobs
      that leaked through keyword search are marked is_relevant_green_job
      = false and never written to jobs.json.
-  5. MERGES accepted listings into public/jobs.json (the file the job board
+  6. MERGES accepted listings into public/jobs.json (the file the job board
      reads at runtime; see js/jobs.js), stamps every listing with its
      lifecycle fields (status + valid_through) and MOVES listings whose
      30-day window has passed into public/archive.json - past mandates are
      preserved for institutional reference and never deleted.
-  6. REGENERATES public/sitemap.xml (homepage, dashboard, archive view,
+  7. REGENERATES public/sitemap.xml (homepage, dashboard, archive view,
      category/state landing views, active and archived job URLs) and
      public/stats.json (weekly hiring telemetry: active / opened / passed
      counts plus per-category and per-state breakdowns).
@@ -54,6 +60,13 @@ Typical usage
 
     # 7-day backfill sweep (bash; PowerShell: $env:LOOKBACK_HOURS="168")
     LOOKBACK_HOURS=168 python scripts/fetch_and_humanize.py
+
+    # Pre-render the static SEO directory inside index.html plus the five
+    # career-pathway hub pages (run after the pipeline; no API key needed)
+    python scripts/build_seo_pages.py
+
+    # One-time bootstrap of Indian academic / JRF / PhD seed listings
+    python scripts/seed_academic_jobs.py
 
 Environment
 -----------
@@ -90,7 +103,7 @@ import time
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
-from urllib.parse import quote, urlparse
+from urllib.parse import quote, urlencode, urlparse
 from xml.etree import ElementTree as ET
 
 # ---------------------------------------------------------------------------
@@ -183,7 +196,9 @@ GEMINI_RATE_LIMIT_ABORT_AFTER = 3  # consecutive rate-limited candidates -> stop
 PRIMARY_SITES = ["linkedin", "indeed", "naukri"]
 FALLBACK_SITES = ["linkedin", "indeed"]
 
-# India-specific high-intent search queries.
+# India-specific high-intent search queries. The second block extends the
+# rotation to academic, JRF/SRF, PhD and contractual institute roles so the
+# board covers the research workforce alongside corporate mandates.
 SEARCH_QUERIES = [
     "Climate Change Sustainability India",
     "ESG BRSR Carbon Credits Sustainability",
@@ -191,26 +206,68 @@ SEARCH_QUERIES = [
     "GIS Remote Sensing Earth Engine Environment",
     "Urban Heat Island Urban Planner Sustainability",
     "CSR Environment Sustainability Manager",
+    "JRF SRF Project Associate Environment Forestry Climate India",
+    "Research Associate Young Professional Environment Agriculture Forestry",
+    "PhD Postdoctoral Fellowship Climate Sustainability Ecology India",
+    "Walk in Interview Project Associate GIS Remote Sensing Forestry",
+    "Faculty Assistant Professor Environmental Science Sustainability India",
 ]
 
-# Front-end vocabulary (must match index.html filters and jobs.json values).
+# Front-end vocabulary (must match index.html filters, js/jobs.js and the
+# values inside jobs.json / archive.json).
 CATEGORIES = [
-    "Climate & Sustainability",
-    "Environmental Policy & Fellowships",
-    "ESG & Carbon Markets",
-    "Forestry & Afforestation",
-    "GIS, Remote Sensing & UHI",
+    "Academic, JRF, SRF & PhD Positions",
+    "Research Associate & Project Staff (Contractual)",
+    "Forestry, Wildlife & Afforestation",
+    "GIS, Remote Sensing & Earth Observation",
+    "ESG, Carbon Markets & Corporate Sustainability",
+    "Climate Policy, Think-Tanks & Fellowships",
 ]
+
+# Pre-upgrade category names still present in published data (jobs.json /
+# archive.json written before this schema expansion). normalize_job_fields()
+# maps them onto the list above so historical records stay filterable.
+LEGACY_CATEGORY_MAP = {
+    "Climate & Sustainability": "ESG, Carbon Markets & Corporate Sustainability",
+    "ESG & Carbon Markets": "ESG, Carbon Markets & Corporate Sustainability",
+    "Forestry & Afforestation": "Forestry, Wildlife & Afforestation",
+    "GIS, Remote Sensing & UHI": "GIS, Remote Sensing & Earth Observation",
+    "Environmental Policy & Fellowships": "Climate Policy, Think-Tanks & Fellowships",
+}
 
 # URL slugs for the crawlable category landing views (?category=<slug>).
-# js/jobs.js maps the same slugs back to the display names above.
+# js/jobs.js maps the same slugs back to the display names above and keeps
+# accepting the pre-upgrade slugs as aliases.
 CATEGORY_SLUGS = {
-    "Climate & Sustainability": "climate-sustainability",
-    "Environmental Policy & Fellowships": "environmental-policy-fellowships",
-    "ESG & Carbon Markets": "esg-carbon-markets",
-    "Forestry & Afforestation": "forestry-afforestation",
-    "GIS, Remote Sensing & UHI": "gis-remote-sensing-uhi",
+    "Academic, JRF, SRF & PhD Positions": "academic-jrf-srf-phd",
+    "Research Associate & Project Staff (Contractual)": "research-associate-project-staff",
+    "Forestry, Wildlife & Afforestation": "forestry-wildlife-afforestation",
+    "GIS, Remote Sensing & Earth Observation": "gis-remote-sensing-earth-observation",
+    "ESG, Carbon Markets & Corporate Sustainability": "esg-carbon-sustainability",
+    "Climate Policy, Think-Tanks & Fellowships": "climate-policy-think-tanks-fellowships",
 }
+
+# Position types carried by every record (badges on cards + dossiers, the
+# career-track quick filters, and the JobPosting JSON-LD employmentType).
+POSITION_TYPES = [
+    "JRF / SRF",
+    "PhD / Doctoral Fellowship",
+    "Project Associate / Research Associate",
+    "Young Professional / Consultant (Contractual)",
+    "Faculty / Academic",
+    "Full-Time Corporate / NGO",
+    "Fellowship / Internship",
+]
+
+# Static career-pathway hub pages (regenerated by scripts/build_seo_pages.py
+# after every pipeline run and listed in the sitemap at priority 0.9).
+SEO_HUB_PAGES = [
+    "/jrf-srf-project-associate-jobs.html",
+    "/phd-fellowships-climate-sustainability.html",
+    "/forestry-wildlife-government-jobs.html",
+    "/gis-remote-sensing-climate-jobs.html",
+    "/esg-carbon-sustainability-jobs.html",
+]
 
 # How many state landing views the sitemap lists (busiest states first).
 SITEMAP_TOP_STATES = 25
@@ -294,6 +351,9 @@ if BaseModel is not None:
         city: str = ""
         category: str = ""
         experience_level: str = ""
+        position_type: str = ""
+        qualification_summary: str = ""
+        compensation_or_fellowship: str = ""
         role_summary: str = ""
         key_responsibilities: List[str] = Field(default_factory=list)
         must_have_skills: List[str] = Field(default_factory=list)
@@ -318,7 +378,9 @@ A posting is acceptable ONLY when BOTH are true:
 afforestation, wildlife/ecology, sustainability, ESG, CSR, carbon markets, \
 clean/renewable energy, water, agriculture (sustainability angle), urban \
 planning/green infrastructure, or geospatial / remote-sensing / GIS \
-analysis of natural or built environments.
+analysis of natural or built environments. Academic, JRF/SRF, doctoral, \
+postdoctoral, faculty and project-staff positions in these fields are fully \
+in scope.
   (b) The role is located in India, or explicitly open to India-based or \
 remote-India candidates.
 If EITHER fails - for example a generic software, IT support, sales, \
@@ -340,6 +402,23 @@ city names glued on, company name repeats).
 - city: city name, or a short descriptor such as "Remote (India)".
 - category: EXACTLY ONE of: {categories}
 - experience_level: EXACTLY ONE of: {experience}
+- position_type: EXACTLY ONE of: {position_types}. Use "JRF / SRF" and \
+"Project Associate / Research Associate" for funded research-project posts, \
+"Young Professional / Consultant (Contractual)" for scheme-based government \
+contract roles, "PhD / Doctoral Fellowship" for doctoral and postdoctoral \
+positions, "Faculty / Academic" for teaching posts, "Fellowship / Internship" \
+for entry fellowships and internships, and "Full-Time Corporate / NGO" for \
+permanent staff roles.
+- qualification_summary: one short line with the degree / exam requirements \
+(e.g. "M.Sc. Environmental Science / Forestry / Geoinformatics (NET/GATE \
+preferred or exempted)", "Master's in Sustainability / Management", "PhD in \
+Ecology / Atmospheric Science"). When the source does not state them, write \
+the standard requirement for that position_type.
+- compensation_or_fellowship: the stipend or salary ONLY when the source \
+states one (e.g. "₹37,000 - ₹42,000/month + HRA (DST/CSIR norms)"). \
+Otherwise write "As per institute norms" for academic / contractual roles, or \
+"Not disclosed - see official portal" for corporate roles. Never invent \
+figures.
 - role_summary: exactly 3 sentences, 45-70 words, concrete and specific \
 to THIS role (team, mandate, location, impact). No generic filler.
 - key_responsibilities: 4-5 short bullets, each a plain sentence fragment \
@@ -370,6 +449,7 @@ def build_system_prompt(today: str) -> str:
         .replace("{states}", ", ".join(INDIAN_STATES))
         .replace("{categories}", " | ".join(CATEGORIES))
         .replace("{experience}", " | ".join(EXPERIENCE_LEVELS))
+        .replace("{position_types}", " | ".join(POSITION_TYPES))
     )
 
 
@@ -466,6 +546,129 @@ def match_enum(value: str, allowed: List[str], aliases: Optional[Dict[str, str]]
     if aliases and text in aliases:
         return aliases[text]
     return None
+
+
+# Ordered title patterns -> position_type, most specific first.
+POSITION_TYPE_PATTERNS = (
+    (
+        re.compile(r"\b(jrf|junior research fellow|srf|senior research fellow)\b", re.I),
+        "JRF / SRF",
+    ),
+    (
+        re.compile(r"\b(ph\.?\s?d|doctoral|doctorate|post-?doctoral|postdoc)\b", re.I),
+        "PhD / Doctoral Fellowship",
+    ),
+    (
+        re.compile(
+            r"\b(project associate|research associate|project assistant|"
+            r"research assistant|project scientist|research scientist)\b",
+            re.I,
+        ),
+        "Project Associate / Research Associate",
+    ),
+    (
+        re.compile(r"\b(young professional|consultant|advisor|adviser)\b", re.I),
+        "Young Professional / Consultant (Contractual)",
+    ),
+    (
+        re.compile(r"\b(professor|faculty|lecturer|dean)\b", re.I),
+        "Faculty / Academic",
+    ),
+    (
+        re.compile(r"\b(fellow|fellowship|intern|internship|trainee)\b", re.I),
+        "Fellowship / Internship",
+    ),
+)
+
+# Fallback position_type per category when the title carries no signal.
+POSITION_TYPE_BY_CATEGORY = {
+    "Academic, JRF, SRF & PhD Positions": "JRF / SRF",
+    "Research Associate & Project Staff (Contractual)": "Project Associate / Research Associate",
+}
+
+DEFAULT_POSITION_TYPE = "Full-Time Corporate / NGO"
+
+ACADEMIC_POSITION_TYPES = (
+    "JRF / SRF",
+    "PhD / Doctoral Fellowship",
+    "Project Associate / Research Associate",
+    "Young Professional / Consultant (Contractual)",
+    "Faculty / Academic",
+    "Fellowship / Internship",
+)
+
+
+def infer_position_type(title: str, category: str = "") -> str:
+    """Guess a position_type from the title first, then the category."""
+    text = squash(title)
+    for pattern, position_type in POSITION_TYPE_PATTERNS:
+        if pattern.search(text):
+            return position_type
+    return POSITION_TYPE_BY_CATEGORY.get(squash(category), DEFAULT_POSITION_TYPE)
+
+
+def default_qualification_summary(position_type: str) -> str:
+    """Standard Indian eligibility line used when a source omits requirements."""
+    return {
+        "JRF / SRF": (
+            "M.Sc. / M.Tech. in the relevant discipline "
+            "(UGC-NET / GATE preferred, as per funding-agency norms)"
+        ),
+        "PhD / Doctoral Fellowship": (
+            "Master's degree in the relevant discipline; doctoral registration "
+            "as per institute / fellowship norms (UGC-NET / GATE preferred)"
+        ),
+        "Project Associate / Research Associate": (
+            "M.Sc. / M.Tech. / B.Tech. in the relevant discipline, "
+            "as per the project advertisement"
+        ),
+        "Young Professional / Consultant (Contractual)": (
+            "Master's degree in the relevant discipline with 0-3 years of "
+            "experience, as per the scheme norms"
+        ),
+        "Faculty / Academic": (
+            "Ph.D. in the relevant discipline with teaching / research "
+            "experience, as per UGC norms"
+        ),
+        "Fellowship / Internship": (
+            "Recent graduate / postgraduate in the relevant discipline, "
+            "as per the fellowship norms"
+        ),
+    }.get(
+        position_type,
+        "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
+    )
+
+
+def default_compensation(position_type: str) -> str:
+    """Standard compensation note used when a source omits the figure."""
+    if position_type in ACADEMIC_POSITION_TYPES:
+        return "As per institute norms"
+    return "Not disclosed - see official portal"
+
+
+def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
+    """Upgrade a stored record to the current schema, in place.
+
+    Maps pre-upgrade category names onto the current six-category list and
+    backfills position_type / qualification_summary / compensation_or_fellowship
+    so that every record - including historical archive entries - carries the
+    fields the front-end filters, badges and JSON-LD builders expect.
+    """
+    category = squash(job.get("category"))
+    if category in LEGACY_CATEGORY_MAP:
+        job["category"] = LEGACY_CATEGORY_MAP[category]
+    position_type = squash(job.get("position_type"))
+    if position_type not in POSITION_TYPES:
+        position_type = infer_position_type(
+            squash(job.get("clean_title")), str(job.get("category") or "")
+        )
+    job["position_type"] = position_type
+    if not squash(job.get("qualification_summary")):
+        job["qualification_summary"] = default_qualification_summary(position_type)
+    if not squash(job.get("compensation_or_fellowship")):
+        job["compensation_or_fellowship"] = default_compensation(position_type)
+    return job
 
 
 # ---------------------------------------------------------------------------
@@ -604,6 +807,30 @@ def format_source_counts(site_counts: Dict[str, int]) -> str:
     )
 
 
+def interleave_candidates(
+    groups: List[List[Dict[str, Any]]],
+) -> List[Dict[str, Any]]:
+    """Round-robin merge several candidate lists, preserving group order.
+
+    The run cap (--max-new) limits how many candidates reach the Gemini
+    humanizer each day. Plain concatenation lets a single noisy source fill
+    the entire budget; interleaving guarantees every source - job boards,
+    targeted sweeps, ReliefWeb and the institute news harvest - contributes
+    to each run.
+    """
+    merged: List[Dict[str, Any]] = []
+    index = 0
+    remaining = True
+    while remaining:
+        remaining = False
+        for group in groups:
+            if index < len(group):
+                merged.append(group[index])
+                remaining = True
+        index += 1
+    return merged
+
+
 def scrape_board_candidates() -> List[Dict[str, Any]]:
     """Primary sweep across the six broad India green searches."""
     candidates, site_counts = scrape_jobspy_queries(SEARCH_QUERIES)
@@ -651,7 +878,198 @@ def fetch_targeted_green_jobs() -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Source 3: ReliefWeb India (v2 API first, public RSS feed as fallback)
+# Source 3: Indian academic & institute recruitment (Google News RSS, zero key)
+# ---------------------------------------------------------------------------
+GOOGLE_NEWS_RSS_SEARCH = "https://news.google.com/rss/search"
+GOOGLE_NEWS_RESULTS_PER_QUERY = 25
+# Google News happily resurfaces years-old announcements; anything older than
+# this window is almost certainly an expired advertisement and is dropped at
+# harvest time so only genuinely current vacancies reach the humanizer.
+GOOGLE_NEWS_MAX_AGE_DAYS = 21
+
+# High-intent Indian recruitment queries for institutes that advertise
+# JRF / SRF / project-staff / PhD / contractual roles outside the big boards.
+INDIAN_ACADEMIC_NEWS_QUERIES = [
+    '("Junior Research Fellow" OR "JRF" OR "Project Associate" OR "Research Associate")'
+    ' AND ("Environmental" OR "Forestry" OR "Climate" OR "Remote Sensing" OR "GIS"'
+    ' OR "Ecology") India',
+    '("WII Dehradun" OR "ICFRE" OR "IIFM Bhopal" OR "IIRS" OR "NRSC" OR "ATREE"'
+    ' OR "CEEW" OR "TERI" OR "GBPNIHE" OR "ICAR") AND ("Recruitment" OR "Vacancy"'
+    ' OR "Position" OR "Fellow" OR "Associate")',
+    '("Young Professional" OR "Contractual" OR "Consultant") AND ("MoEFCC" OR "Forest"'
+    ' OR "Climate Change" OR "Sustainability" OR "CAMPA" OR "Pollution Control") India',
+    '("PhD Position" OR "PhD Fellowship" OR "Junior Research Fellowship")'
+    ' AND ("Climate" OR "Sustainability" OR "Forestry" OR "Earth Sciences"'
+    ' OR "Atmospheric") India',
+]
+
+# Optional extra academic-job RSS feeds (labelled). Best-effort: unreachable
+# feeds are logged and skipped, and an empty list simply means Google News
+# is the only institute-news source (IndiaBioscience currently serves no
+# public RSS, and its job pages block automated reads).
+EXTRA_ACADEMIC_JOB_FEEDS: List[Tuple[str, str]] = []
+
+# A harvested headline only counts as a vacancy announcement when it reads
+# like a recruitment ad rather than a news story.
+JOB_AD_TITLE_RE = re.compile(
+    r"(jrf|srf|junior research fellow|senior research fellow|research fellow|"
+    r"project associate|research associate|project assistant|research assistant|"
+    r"young professional|consultant|fellow|fellowship|phd|doctoral|postdoc|"
+    r"post-?doctoral|recruit|vacanc|walk-?in|opening|hiring|"
+    r"assistant professor|faculty|(?:research|project|principal|chief)\s+scientist)",
+    re.I,
+)
+
+# News headlines that merely mention fellowships/scientists (recipient lists,
+# launches, explainers) are not vacancies and are dropped at harvest time.
+NEWS_NOISE_TITLE_RE = re.compile(
+    r"(recipients?|winners?|awardees?|felicitat|set out|observes|launches|"
+    r"to prepare for)",
+    re.I,
+)
+
+
+def _google_news_query_url(query: str) -> str:
+    # The when:30d operator makes Google News sort by recency, which is what a
+    # daily pipeline needs (the default relevance order resurfaces old ads).
+    return GOOGLE_NEWS_RSS_SEARCH + "?" + urlencode(
+        {"q": query + " when:30d", "hl": "en-IN", "gl": "IN", "ceid": "IN:en"}
+    )
+
+
+def _news_entry_to_candidate(entry: Dict[str, Any], query: str) -> Optional[Dict[str, Any]]:
+    """Convert one feed entry into a candidate, or None when it is not an ad."""
+    title = squash(strip_html(entry.get("title") or ""))
+    link = str(entry.get("link") or "").strip()
+    if not title or not link.lower().startswith("http"):
+        return None
+    publisher = ""
+    source = entry.get("source")
+    if isinstance(source, dict):
+        publisher = squash(source.get("title") or "")
+    # Google News headlines end with " - Publisher"; drop the suffix when the
+    # feed exposes the publisher name separately.
+    if publisher and title.endswith(" - " + publisher):
+        title = title[: -(len(publisher) + 3)].strip()
+    if not JOB_AD_TITLE_RE.search(title):
+        return None
+    if NEWS_NOISE_TITLE_RE.search(title):
+        return None
+    summary = strip_html(entry.get("summary") or entry.get("description") or "")[:4000]
+    date_posted = ""
+    published = entry.get("published_parsed") or entry.get("updated_parsed")
+    if published is not None:
+        try:
+            date_posted = date(published[0], published[1], published[2]).isoformat()
+        except (TypeError, ValueError, IndexError, AttributeError):
+            date_posted = ""
+    if date_posted:
+        age_cutoff = (date.today() - timedelta(days=GOOGLE_NEWS_MAX_AGE_DAYS)).isoformat()
+        if date_posted < age_cutoff:
+            return None
+    return {
+        "source": "google-news",
+        "title": title,
+        "organization": publisher or "Institute / Recruiter (see announcement)",
+        "location_raw": "India",
+        "description": summary,
+        "apply_url": link,
+        "date_posted": date_posted,
+        "matched_query": query,
+    }
+
+
+def fetch_indian_academic_and_institute_jobs() -> List[Dict[str, Any]]:
+    """Zero-key harvest of Indian institute JRF / PhD / contractual ads.
+
+    Indian research institutes (WII, ICFRE, IIFM, IIRS, NRSC, ICAR, IITs,
+    IISc, MoEFCC, GBPNIHE, ATREE, TERI and others) frequently post JRF, PhD
+    and contractual advertisements outside the major job boards. Public
+    Google News RSS searches surface those announcements; each headline is
+    screened for job-ad phrasing, then flows through the same Gemini
+    humanizer and strict India + green relevance filter as every other
+    source. Feed entries link through Google News to the announcement page.
+    """
+    if feedparser is None:
+        log.warning(
+            "feedparser is not installed - skipping the institute news harvest "
+            "(pip install -r scripts/requirements.txt)"
+        )
+        return []
+
+    candidates: List[Dict[str, Any]] = []
+    seen_links: Set[str] = set()
+
+    def harvest(feed_url: str, label: str, query: str) -> None:
+        parsed = None
+        if requests is not None:
+            try:
+                # Keep requests' default library user-agent; Google News RSS
+                # is a public feed and does not need browser spoofing.
+                response = requests.get(
+                    feed_url,
+                    headers={"Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8"},
+                    timeout=REQUEST_TIMEOUT,
+                )
+                if response.status_code != 200:
+                    log.warning(
+                        "%s feed returned HTTP %s for %r - skipping",
+                        label, response.status_code, query[:60],
+                    )
+                    return
+                parsed = feedparser.parse(response.content)
+            except Exception as exc:
+                log.warning(
+                    "%s feed request failed for %r: %s",
+                    label, query[:60], str(exc)[:140],
+                )
+                return
+        else:
+            try:
+                parsed = feedparser.parse(feed_url)
+            except Exception as exc:
+                log.warning(
+                    "%s feed fetch via feedparser failed for %r: %s",
+                    label, query[:60], str(exc)[:140],
+                )
+                return
+
+        entries = list(getattr(parsed, "entries", []) or [])[:GOOGLE_NEWS_RESULTS_PER_QUERY]
+        if not entries:
+            if getattr(parsed, "bozo", False):
+                log.warning(
+                    "%s feed could not be parsed (%s) - skipping",
+                    label, str(parsed.get("bozo_exception"))[:140],
+                )
+            return
+        kept = 0
+        for entry in entries:
+            candidate = _news_entry_to_candidate(entry, query)
+            if candidate is None:
+                continue
+            link_key = normalize_key(candidate["apply_url"])
+            if link_key in seen_links:
+                continue
+            seen_links.add(link_key)
+            candidates.append(candidate)
+            kept += 1
+        log.info(
+            "%s: %d recruitment headline(s) kept from %d feed entr(y/ies) for %r",
+            label, kept, len(entries), query[:70],
+        )
+
+    for query in INDIAN_ACADEMIC_NEWS_QUERIES:
+        harvest(_google_news_query_url(query), "Google News (India)", query)
+
+    for feed_label, feed_url in EXTRA_ACADEMIC_JOB_FEEDS:
+        harvest(feed_url, feed_label, feed_label)
+
+    log.info("Institute news harvest produced %d candidate(s)", len(candidates))
+    return candidates
+
+
+# ---------------------------------------------------------------------------
+# Source 4: ReliefWeb India (v2 API first, public RSS feed as fallback)
 # ---------------------------------------------------------------------------
 RELIEFWEB_V2_JOBS_API = "https://api.reliefweb.int/v2/jobs"
 RELIEFWEB_INDIA_RSS = "https://reliefweb.int/jobs/rss.xml?advanced-search=%28C119%29"
@@ -1082,6 +1500,16 @@ def coerce_to_job_record(
     if experience is None:
         return None, "unmapped experience level: " + squash(job.experience_level)
 
+    position_type = match_enum(job.position_type, POSITION_TYPES) or infer_position_type(
+        squash(job.clean_title), category
+    )
+    qualification_summary = squash(
+        job.qualification_summary
+    ) or default_qualification_summary(position_type)
+    compensation_or_fellowship = squash(
+        job.compensation_or_fellowship
+    ) or default_compensation(position_type)
+
     responsibilities = [
         re.sub(r"^[\-\u2022\*\s]+", "", squash(item))
         for item in (job.key_responsibilities or [])
@@ -1119,6 +1547,9 @@ def coerce_to_job_record(
         "city": squash(job.city),
         "category": category,
         "experience_level": experience,
+        "position_type": position_type,
+        "qualification_summary": qualification_summary,
+        "compensation_or_fellowship": compensation_or_fellowship,
         "role_summary": role_summary,
         "key_responsibilities": responsibilities,
         "must_have_skills": skills,
@@ -1173,7 +1604,7 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
 
 
 def write_jobs(jobs: List[Dict[str, Any]], path: Path) -> None:
-    jobs = filter_valid_jobs(jobs)
+    jobs = filter_valid_jobs([normalize_job_fields(job) for job in jobs])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(jobs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -1301,7 +1732,7 @@ def compute_stats(
 
 
 def write_archive(jobs: List[Dict[str, Any]], path: Path) -> None:
-    jobs = filter_valid_jobs(jobs)
+    jobs = filter_valid_jobs([normalize_job_fields(job) for job in jobs])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(jobs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -1413,6 +1844,15 @@ def write_sitemap(
             "lastmod": today,
             "changefreq": "weekly",
             "priority": "0.7",
+        }
+
+    # Career-pathway hub pages (pre-rendered by scripts/build_seo_pages.py
+    # on every pipeline run, so they always exist when this runs).
+    for page_path in SEO_HUB_PAGES:
+        entries[SITE_BASE_URL + page_path] = {
+            "lastmod": today,
+            "changefreq": "weekly",
+            "priority": "0.9",
         }
 
     # Busiest state landing views (?state=<State>), in rank order.
@@ -1594,8 +2034,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         Path(args.sitemap) if args.sitemap else resolve_default(DEFAULT_SITEMAP_PATH)
     )
 
-    existing = load_jobs(jobs_path)
-    archive = load_jobs(archive_path)
+    existing = [normalize_job_fields(job) for job in load_jobs(jobs_path)]
+    archive = [normalize_job_fields(job) for job in load_jobs(archive_path)]
     log.info(
         "Loaded %d active listing(s) from %s and %d archived listing(s) from %s",
         len(existing), jobs_path, len(archive), archive_path,
@@ -1634,13 +2074,26 @@ def main(argv: Optional[List[str]] = None) -> int:
         log.error("pydantic is not installed. Run: pip install -r scripts/requirements.txt")
         return 1
 
-    # 1. Gather raw candidates from all sources.
+    # 1. Gather raw candidates from all sources. The per-source groups are
+    # round-robin interleaved so a single noisy source cannot consume the
+    # whole humanization budget (--max-new) on its own.
     log.info("Lookback window for this run: %d hour(s)", resolve_lookback_hours())
-    candidates: List[Dict[str, Any]] = []
-    candidates.extend(scrape_board_candidates())
-    candidates.extend(fetch_targeted_green_jobs())
-    candidates.extend(fetch_reliefweb_jobs())
-    log.info("Collected %d raw candidate(s) from all sources", len(candidates))
+    board_candidates = scrape_board_candidates()
+    targeted_candidates = fetch_targeted_green_jobs()
+    reliefweb_candidates = fetch_reliefweb_jobs()
+    academic_candidates = fetch_indian_academic_and_institute_jobs()
+    candidates = interleave_candidates(
+        [academic_candidates, reliefweb_candidates, targeted_candidates, board_candidates]
+    )
+    log.info(
+        "Collected %d raw candidate(s) from all sources "
+        "(institute-news=%d, reliefweb=%d, targeted=%d, boards=%d)",
+        len(candidates),
+        len(academic_candidates),
+        len(reliefweb_candidates),
+        len(targeted_candidates),
+        len(board_candidates),
+    )
 
     # 2. De-duplicate against the live feed and within this run.
     seen = existing_keys(existing)
@@ -1686,6 +2139,19 @@ def main(argv: Optional[List[str]] = None) -> int:
             rate_limit_streak = 0
             if record is not None and not is_valid_apply_url(record.get("apply_url")):
                 record, reason = None, "apply URL failed validation"
+            if record is not None:
+                # The humanizer may resolve two different source links to the
+                # same vacancy (e.g. a job board and a news announcement);
+                # collapse those onto one registry record.
+                record_key = (
+                    normalize_key(record.get("clean_title") or "")
+                    + "@"
+                    + normalize_key(record.get("organization") or "")
+                )
+                if record_key in seen:
+                    record, reason = None, "duplicate of a listing already in the registry"
+                else:
+                    seen.add(record_key)
             if record is None:
                 log.info("[%d/%d] skipped %r - %s", index, len(fresh), label, reason)
             else:

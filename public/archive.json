@@ -9,7 +9,7 @@
     "organization": "ATREE",
     "state": "Karnataka",
     "city": "Bengaluru",
-    "category": "GIS, Remote Sensing & UHI",
+    "category": "GIS, Remote Sensing & Earth Observation",
     "experience_level": "1-3 Years",
     "role_summary": "This position supported ATREE's geospatial lab on applied research covering forest cover change, land-use transitions, and urban green infrastructure across Karnataka and the Western Ghats. The analyst processed satellite imagery and drone datasets, maintained spatial databases, and prepared cartographic outputs for peer-reviewed publications and state-level advisory reports.",
     "key_responsibilities": [
@@ -28,7 +28,10 @@
       "Spatial data management"
     ],
     "application_tip": "Portfolios carry the most weight for this role. Link a GitHub page or PDF portfolio demonstrating classification workflows, accuracy assessments, and cartographic design quality rather than listing software alone.",
-    "apply_url": "https://www.atree.org/careers"
+    "apply_url": "https://www.atree.org/careers",
+    "position_type": "Full-Time Corporate / NGO",
+    "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
+    "compensation_or_fellowship": "Not disclosed - see official portal"
   },
   {
     "id": "research-associate-climate-policy-governance-wri-india-bengaluru",
@@ -40,7 +43,7 @@
     "organization": "WRI India",
     "state": "Karnataka",
     "city": "Bengaluru",
-    "category": "Climate & Sustainability",
+    "category": "ESG, Carbon Markets & Corporate Sustainability",
     "experience_level": "1-3 Years",
     "role_summary": "This role supported WRI India's climate program on state-level climate action planning and governance research. The associate conducted policy analysis, synthesised evidence from state action plans and national missions, and contributed to stakeholder consultations with state governments and research partners across southern India.",
     "key_responsibilities": [
@@ -59,7 +62,10 @@
       "Project coordination"
     ],
     "application_tip": "Tailor your writing sample to climate governance in an Indian federal context. Reviewers look for crisp policy writing and evidence of quantitative rigor; attach one analytical piece you authored end-to-end.",
-    "apply_url": "https://www.wri.org/careers"
+    "apply_url": "https://www.wri.org/careers",
+    "position_type": "Project Associate / Research Associate",
+    "qualification_summary": "M.Sc. / M.Tech. / B.Tech. in the relevant discipline, as per the project advertisement",
+    "compensation_or_fellowship": "As per institute norms"
   },
   {
     "id": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
@@ -71,7 +77,7 @@
     "organization": "WWF-India",
     "state": "Delhi NCR",
     "city": "New Delhi",
-    "category": "Forestry & Afforestation",
+    "category": "Forestry, Wildlife & Afforestation",
     "experience_level": "Mid-Senior (3-6 Years)",
     "role_summary": "The Programme Officer coordinated urban forestry and green cover initiatives linked to national urban greening missions. Responsibilities spanned species planning, plantation monitoring, nursery partnerships, and community engagement with municipal bodies and resident welfare associations in the National Capital Region.",
     "key_responsibilities": [
@@ -90,7 +96,10 @@
       "Partnership coordination"
     ],
     "application_tip": "Quantify your field experience: hectares planted, survival percentages, or number of communities coordinated. Familiarity with CAMPA or municipal green budgets is a strong differentiator for this portfolio.",
-    "apply_url": "https://www.wwfindia.org/about_wwf/careers/"
+    "apply_url": "https://www.wwfindia.org/about_wwf/careers/",
+    "position_type": "Full-Time Corporate / NGO",
+    "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
+    "compensation_or_fellowship": "Not disclosed - see official portal"
   },
   {
     "id": "consultant-esg-disclosures-brsr-reporting-ceew-new-delhi",
@@ -102,7 +111,7 @@
     "organization": "CEEW",
     "state": "Delhi NCR",
     "city": "New Delhi",
-    "category": "ESG & Carbon Markets",
+    "category": "ESG, Carbon Markets & Corporate Sustainability",
     "experience_level": "Mid-Senior (3-6 Years)",
     "role_summary": "This consulting assignment supported CEEW's sustainable finance workstream on corporate ESG disclosure practice in India, including BRSR adoption and assurance readiness. The consultant analysed disclosure quality across listed companies and prepared guidance material for industry and regulator-facing audiences.",
     "key_responsibilities": [
@@ -121,7 +130,10 @@
       "Stakeholder consultation"
     ],
     "application_tip": "Go beyond naming frameworks: cite specific BRSR principle-wise disclosures you have prepared or reviewed, and any exposure to assurance processes under ISAE 3000 or equivalent standards.",
-    "apply_url": "https://www.ceew.in/careers"
+    "apply_url": "https://www.ceew.in/careers",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
+    "compensation_or_fellowship": "As per institute norms"
   },
   {
     "id": "research-fellowship-environmental-policy-teri-new-delhi",
@@ -133,7 +145,7 @@
     "organization": "TERI",
     "state": "Delhi NCR",
     "city": "New Delhi",
-    "category": "Environmental Policy & Fellowships",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
     "experience_level": "Entry Level / Fellowship",
     "role_summary": "This fellowship placed early-career researchers within TERI's policy research vertical, working on environmental governance, climate negotiations support, and sustainable development analyses. Fellows contributed to research reports, policy briefs, and multi-institution research projects under senior mentorship.",
     "key_responsibilities": [
@@ -152,7 +164,10 @@
       "MS Office and reference management"
     ],
     "application_tip": "Fellowship selection favours a focused research statement over an exhaustive CV. State one environmental governance question you want to pursue and how your academic background prepares you to investigate it.",
-    "apply_url": "https://www.teriin.org/careers"
+    "apply_url": "https://www.teriin.org/careers",
+    "position_type": "Fellowship / Internship",
+    "qualification_summary": "Recent graduate / postgraduate in the relevant discipline, as per the fellowship norms",
+    "compensation_or_fellowship": "As per institute norms"
   },
   {
     "id": "manager-carbon-credit-origination-eki-energy-services-indore",
@@ -164,7 +179,7 @@
     "organization": "EKI Energy Services",
     "state": "Madhya Pradesh",
     "city": "Indore",
-    "category": "ESG & Carbon Markets",
+    "category": "ESG, Carbon Markets & Corporate Sustainability",
     "experience_level": "Mid-Senior (3-6 Years)",
     "role_summary": "This position led carbon credit origination across community and industrial projects in central India, spanning feasibility assessment, baseline studies, and registry documentation. The manager coordinated validation and verification processes and engaged project partners on benefit-sharing structures for voluntary and compliance market programs.",
     "key_responsibilities": [
@@ -183,6 +198,9 @@
       "Carbon markets knowledge"
     ],
     "application_tip": "Show a full lifecycle you have personally owned: which methodology, which registry, and your role through validation. Specificity about project types (cookstoves, agroforestry, waste-to-energy) beats general carbon market familiarity.",
-    "apply_url": "https://enkingint.org/careers"
+    "apply_url": "https://enkingint.org/careers",
+    "position_type": "Full-Time Corporate / NGO",
+    "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
+    "compensation_or_fellowship": "Not disclosed - see official portal"
   }
 ]

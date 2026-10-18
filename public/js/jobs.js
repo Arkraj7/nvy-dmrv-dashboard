@@ -26,12 +26,42 @@
   };
 
   var CATEGORY_SLUGS = {
-    'Climate & Sustainability': 'climate-sustainability',
-    'Forestry & Afforestation': 'forestry-afforestation',
-    'ESG & Carbon Markets': 'esg-carbon-markets',
-    'GIS, Remote Sensing & UHI': 'gis-remote-sensing-uhi',
-    'Environmental Policy & Fellowships': 'environmental-policy-fellowships'
+    'Academic, JRF, SRF & PhD Positions': 'academic-jrf-srf-phd',
+    'Research Associate & Project Staff (Contractual)': 'research-associate-project-staff',
+    'Forestry, Wildlife & Afforestation': 'forestry-wildlife-afforestation',
+    'GIS, Remote Sensing & Earth Observation': 'gis-remote-sensing-earth-observation',
+    'ESG, Carbon Markets & Corporate Sustainability': 'esg-carbon-sustainability',
+    'Climate Policy, Think-Tanks & Fellowships': 'climate-policy-think-tanks-fellowships'
   };
+
+  /* Pre-upgrade category slugs and display names keep resolving as aliases so
+     old bookmarks, sitemap-era links and search-engine results never dead-end. */
+  var LEGACY_CATEGORY_SLUGS = {
+    'climate-sustainability': 'ESG, Carbon Markets & Corporate Sustainability',
+    'esg-carbon-markets': 'ESG, Carbon Markets & Corporate Sustainability',
+    'forestry-afforestation': 'Forestry, Wildlife & Afforestation',
+    'gis-remote-sensing-uhi': 'GIS, Remote Sensing & Earth Observation',
+    'environmental-policy-fellowships': 'Climate Policy, Think-Tanks & Fellowships'
+  };
+
+  var CATEGORY_LEGACY_NAMES = {
+    'Climate & Sustainability': 'ESG, Carbon Markets & Corporate Sustainability',
+    'ESG & Carbon Markets': 'ESG, Carbon Markets & Corporate Sustainability',
+    'Forestry & Afforestation': 'Forestry, Wildlife & Afforestation',
+    'GIS, Remote Sensing & UHI': 'GIS, Remote Sensing & Earth Observation',
+    'Environmental Policy & Fellowships': 'Climate Policy, Think-Tanks & Fellowships'
+  };
+
+  /* Career tracks: the quick-filter strip over position_type + category.
+     Order matters - trackOf() returns exactly one track per record. */
+  var TRACK_META = [
+    { id: 'all', label: 'All Mandates' },
+    { id: 'research', label: 'JRF / SRF & Project Associates' },
+    { id: 'phd', label: 'PhD & Postdoctoral Fellowships' },
+    { id: 'contractual', label: 'Young Professional & Govt Contractual' },
+    { id: 'corporate', label: 'Corporate ESG & Sustainability' },
+    { id: 'thinktank', label: 'Think-Tanks, NGOs & Policy' }
+  ];
 
   var DEFAULT_TITLE = document.title;
   var DEFAULT_DESC = (document.querySelector('meta[name="description"]') || {}).content || '';
@@ -47,6 +77,7 @@
     query: '',
     state: 'all',
     category: 'all',
+    track: 'all',
     experience: 'all',
     detailId: null,
     loaded: false
@@ -84,20 +115,77 @@
       linkedin: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
       copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg>',
       bulb: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-4 10.5c.7.7 1 1.6 1 2.5h6c0-.9.3-1.8 1-2.5A6 6 0 0012 3z"/></svg>',
-      archive: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 001 1h12a1 1 0 001-1V8"/><path d="M10 12h4"/></svg>'
+      archive: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 001 1h12a1 1 0 001-1V8"/><path d="M10 12h4"/></svg>',
+      cap: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9.5L12 5 2 9.5l10 4.5 10-4.5z"/><path d="M6 11.6V16c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.4"/><path d="M22 9.5v4.6"/></svg>',
+      rupee: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 8h12"/><path d="M6 13h4a5 5 0 000-10H6"/><path d="M6 13l8.5 8"/></svg>'
     };
     return icons[name] || '';
   }
 
   var CATEGORY_CLASS = {
-    'Climate & Sustainability': 'cat-climate',
-    'Forestry & Afforestation': 'cat-forestry',
-    'ESG & Carbon Markets': 'cat-esg',
-    'GIS, Remote Sensing & UHI': 'cat-gis',
-    'Environmental Policy & Fellowships': 'cat-policy'
+    'Academic, JRF, SRF & PhD Positions': 'cat-academic',
+    'Research Associate & Project Staff (Contractual)': 'cat-research',
+    'Forestry, Wildlife & Afforestation': 'cat-forestry',
+    'GIS, Remote Sensing & Earth Observation': 'cat-gis',
+    'ESG, Carbon Markets & Corporate Sustainability': 'cat-esg',
+    'Climate Policy, Think-Tanks & Fellowships': 'cat-policy'
   };
 
   function catClass(category) { return CATEGORY_CLASS[category] || 'cat-policy'; }
+
+  /* Position-type inference mirrors scripts/fetch_and_humanize.py so even a
+     pre-migration record still lands in an accurate career track. */
+  var POSITION_TYPE_PATTERNS = [
+    [/\b(jrf|junior research fellow|srf|senior research fellow)\b/i, 'JRF / SRF'],
+    [/\b(ph\.?\s?d|doctoral|doctorate|post-?doctoral|postdoc)\b/i, 'PhD / Doctoral Fellowship'],
+    [/\b(project associate|research associate|project assistant|research assistant|project scientist|research scientist)\b/i, 'Project Associate / Research Associate'],
+    [/\b(young professional|consultant|advisor|adviser)\b/i, 'Young Professional / Consultant (Contractual)'],
+    [/\b(professor|faculty|lecturer|dean)\b/i, 'Faculty / Academic'],
+    [/\b(fellow|fellowship|intern|internship|trainee)\b/i, 'Fellowship / Internship']
+  ];
+
+  var POSITION_TYPE_BY_CATEGORY = {
+    'Academic, JRF, SRF & PhD Positions': 'JRF / SRF',
+    'Research Associate & Project Staff (Contractual)': 'Project Associate / Research Associate'
+  };
+
+  var ACADEMIC_POSITION_TYPES = [
+    'JRF / SRF',
+    'PhD / Doctoral Fellowship',
+    'Project Associate / Research Associate',
+    'Young Professional / Consultant (Contractual)',
+    'Faculty / Academic',
+    'Fellowship / Internship'
+  ];
+
+  function positionTypeOf(job) {
+    if (job.position_type) return job.position_type;
+    var text = String(job.clean_title || '') + ' ' + String(job.category || '');
+    var i;
+    for (i = 0; i < POSITION_TYPE_PATTERNS.length; i += 1) {
+      if (POSITION_TYPE_PATTERNS[i][0].test(text)) return POSITION_TYPE_PATTERNS[i][1];
+    }
+    return POSITION_TYPE_BY_CATEGORY[job.category] || 'Full-Time Corporate / NGO';
+  }
+
+  /* Exactly one career track per record (drives the quick-filter strip). */
+  function trackOf(job) {
+    var pt = positionTypeOf(job);
+    if (pt === 'JRF / SRF' || pt === 'Project Associate / Research Associate' || pt === 'Faculty / Academic') return 'research';
+    if (pt === 'PhD / Doctoral Fellowship') return 'phd';
+    if (pt === 'Young Professional / Consultant (Contractual)') return 'contractual';
+    if (job.category === 'Climate Policy, Think-Tanks & Fellowships' || pt === 'Fellowship / Internship') return 'thinktank';
+    return 'corporate';
+  }
+
+  /* schema.org employmentType derived from the position type. */
+  function employmentTypeFor(job) {
+    var pt = positionTypeOf(job);
+    if (pt === 'JRF / SRF' || pt === 'Project Associate / Research Associate' ||
+        pt === 'Young Professional / Consultant (Contractual)') return 'CONTRACTOR';
+    if (pt === 'Fellowship / Internship') return 'INTERN';
+    return 'FULL_TIME';
+  }
 
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
   function localIso(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
@@ -203,6 +291,7 @@
       syncViewChrome();
       populateStateSelect();
       refreshCategoryPills();
+      refreshTrackButtons();
       injectFeedJsonLd(state.jobs);
       renderSeoDirectory();
       applyFilters();
@@ -224,8 +313,12 @@
     for (key in CATEGORY_SLUGS) {
       if (CATEGORY_SLUGS[key] === raw) return key;
     }
+    if (LEGACY_CATEGORY_SLUGS[raw]) return LEGACY_CATEGORY_SLUGS[raw];
     for (key in CATEGORY_CLASS) {
       if (key.toLowerCase() === raw.toLowerCase()) return key;
+    }
+    for (key in CATEGORY_LEGACY_NAMES) {
+      if (key.toLowerCase() === raw.toLowerCase()) return CATEGORY_LEGACY_NAMES[key];
     }
     return null;
   }
@@ -241,6 +334,23 @@
     if (stateParam && stateParam !== 'all') state.state = stateParam;
     var cat = resolveCategoryParam(params.get('category'));
     if (cat) state.category = cat;
+
+    /* Career-track deep links (used by the pathway hub pages). */
+    var track = params.get('track');
+    if (track) {
+      var known = false;
+      TRACK_META.forEach(function (t) { if (t.id === track) known = true; });
+      if (known) state.track = track;
+    }
+
+    /* ?q= entry point for the WebSite SearchAction sitelinks searchbox. */
+    var q = params.get('q');
+    if (q) {
+      state.query = q;
+      var searchInput = document.getElementById('jobs-search');
+      if (searchInput) searchInput.value = q;
+    }
+
     state.detailId = null;
   }
 
@@ -252,6 +362,7 @@
     if (state.category !== 'all') {
       parts.push('category=' + encodeURIComponent(CATEGORY_SLUGS[state.category] || state.category));
     }
+    if (state.track !== 'all') parts.push('track=' + encodeURIComponent(state.track));
     return parts.length ? '?' + parts.join('&') : '';
   }
 
@@ -296,6 +407,7 @@
     updateTabCounts();
     populateStateSelect();
     refreshCategoryPills();
+    refreshTrackButtons();
     if (changed || opts.force) applyFilters();
     if (!opts.keepUrl) syncUrl(opts.push !== false);
   }
@@ -391,6 +503,22 @@
     });
   }
 
+  function refreshTrackButtons() {
+    var source = getViewData();
+    var counts = { all: source.length, research: 0, phd: 0, contractual: 0, corporate: 0, thinktank: 0 };
+    source.forEach(function (j) { counts[trackOf(j)] += 1; });
+    var row = document.getElementById('career-tracks');
+    if (!row) return;
+    Array.prototype.forEach.call(row.querySelectorAll('.track-btn'), function (btn) {
+      var track = btn.getAttribute('data-track') || 'all';
+      var cnt = btn.querySelector('.cnt');
+      if (cnt) cnt.textContent = counts[track] != null ? counts[track] : 0;
+      var active = track === state.track;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
   function archiveCutoff() {
     return isoDaysAgo(CONFIG.ARCHIVE_RECENT_DAYS);
   }
@@ -404,12 +532,15 @@
     state.filtered = source.filter(function (job) {
       if (state.state !== 'all' && job.state !== state.state) return false;
       if (state.category !== 'all' && job.category !== state.category) return false;
+      if (state.track !== 'all' && trackOf(job) !== state.track) return false;
       if (!isArchive && state.experience !== 'all' && job.experience_level !== state.experience) return false;
       if (isArchive && state.archiveRecent && String(job.date_archived || '') < cutoff) return false;
       if (q) {
         var haystack = [
           job.clean_title, job.organization, job.city, job.state,
-          job.category, job.experience_level, (job.must_have_skills || []).join(' ')
+          job.category, job.experience_level, job.position_type,
+          job.qualification_summary, job.compensation_or_fellowship,
+          (job.must_have_skills || []).join(' ')
         ].join(' ').toLowerCase();
         if (haystack.indexOf(q) === -1) return false;
       }
@@ -483,6 +614,19 @@
     return html;
   }
 
+  /* Qualification + compensation strip shown under a card's meta row. */
+  function jcEligibilityHtml(job) {
+    var items = [];
+    if (job.qualification_summary) {
+      items.push('<span class="jc-elig-item">' + iconSvg('cap') + escapeHtml(job.qualification_summary) + '</span>');
+    }
+    if (job.compensation_or_fellowship) {
+      items.push('<span class="jc-elig-item">' + iconSvg('rupee') + escapeHtml(job.compensation_or_fellowship) + '</span>');
+    }
+    if (!items.length) return '';
+    return '<div class="jc-eligibility">' + items.join('') + '</div>';
+  }
+
   function jobCardHtml(job, isArchived) {
     var skills = job.must_have_skills || [];
     var shown = skills.slice(0, 3);
@@ -512,6 +656,7 @@
         escapeHtml(job.clean_title) + ' at ' + escapeHtml(job.organization) + '">' +
         '<div class="jc-top">' +
           '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
+          '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
           '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
           statusBadge +
         '</div>' +
@@ -521,6 +666,7 @@
           '<span>' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
           '<span>' + dateMeta + '</span>' +
         '</div>' +
+        jcEligibilityHtml(job) +
         '<div class="jc-skills">' + chips + '</div>' +
         '<div class="jc-foot">' +
           '<span class="jc-date">' + footDate + '</span>' +
@@ -638,6 +784,7 @@
           updateTabCounts();
           populateStateSelect();
           refreshCategoryPills();
+          refreshTrackButtons();
         }
         renderDetail(found.job, found.archived);
         document.body.classList.add('view-detail');
@@ -672,6 +819,31 @@
   /* ------------------------------------------------------------------ */
   /* Position dossier (detail view)                                      */
   /* ------------------------------------------------------------------ */
+  /* Position-type / qualification / compensation block for a dossier. */
+  function eligibilitySectionHtml(job) {
+    var rows = '' +
+      '<div><dt>Position Type</dt><dd>' + escapeHtml(positionTypeOf(job)) + '</dd></div>' +
+      '<div><dt>Engagement</dt><dd>' + escapeHtml(employmentTypeLabel(job)) + '</dd></div>';
+    if (job.qualification_summary) {
+      rows += '<div><dt>Qualification</dt><dd>' + escapeHtml(job.qualification_summary) + '</dd></div>';
+    }
+    if (job.compensation_or_fellowship) {
+      rows += '<div><dt>Compensation / Fellowship</dt><dd>' + escapeHtml(job.compensation_or_fellowship) + '</dd></div>';
+    }
+    return '' +
+      '<div class="detail-section">' +
+        '<h2>Position &amp; Eligibility</h2>' +
+        '<dl class="elig-grid">' + rows + '</dl>' +
+      '</div>';
+  }
+
+  function employmentTypeLabel(job) {
+    var type = employmentTypeFor(job);
+    if (type === 'CONTRACTOR') return 'Contractual / Project Engagement';
+    if (type === 'INTERN') return 'Fellowship / Internship';
+    return 'Full-Time';
+  }
+
   function renderDetail(job, isArchived) {
     var skills = (job.must_have_skills || []).map(function (s) {
       return '<span class="skill-chip">' + escapeHtml(s) + '</span>';
@@ -742,6 +914,7 @@
       '<div class="detail-card">' +
         '<div class="detail-kicker">' +
           '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
+          '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
           '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
           '<span class="badge badge-state">' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
           archiveBadge +
@@ -759,6 +932,8 @@
           '<h2>Mandate Summary</h2>' +
           '<p>' + escapeHtml(job.role_summary) + '</p>' +
         '</div>' +
+
+        eligibilitySectionHtml(job) +
 
         '<div class="detail-section">' +
           '<h2>Core Responsibilities</h2>' +
@@ -887,6 +1062,12 @@
     var hasCat = state.category !== 'all';
     var isArchive = state.view === 'archive';
 
+    var hasTrack = state.track !== 'all';
+    var trackLabel = '';
+    if (hasTrack) {
+      TRACK_META.forEach(function (t) { if (t.id === state.track) trackLabel = t.label; });
+    }
+
     var title = DEFAULT_TITLE;
     var desc = DEFAULT_DESC;
     var url = CONFIG.SITE_URL;
@@ -908,6 +1089,12 @@
         heroText = 'Historical Mandate Archive \u2014 ' + (hasCat ? state.category : '') +
           (hasCat && hasState ? ' \u00b7 ' : '') + (hasState ? state.state : '');
       }
+      url = CONFIG.SITE_URL + queryForState();
+    } else if (hasTrack && !hasCat && !hasState) {
+      title = trackLabel + ' Jobs in India | Urban Forest Park';
+      desc = 'Current ' + trackLabel.toLowerCase() + ' opportunities across India \u2014 verified listings with direct links to official application portals, maintained by the Urban Forest Park registry.';
+      heroText = trackLabel + ' \u2014 India';
+      feedTitle = trackLabel;
       url = CONFIG.SITE_URL + queryForState();
     } else if (hasCat || hasState) {
       var scope = hasState ? state.state : 'India';
@@ -985,7 +1172,7 @@
       },
       datePosted: job.date_added,
       validThrough: validThrough,
-      employmentType: 'FULL_TIME',
+      employmentType: employmentTypeFor(job),
       hiringOrganization: {
         '@type': 'Organization',
         name: job.organization,
@@ -1001,6 +1188,11 @@
         }
       },
       directApply: false,
+      qualifications: job.qualification_summary || undefined,
+      educationRequirements: job.qualification_summary ? {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: job.qualification_summary
+      } : undefined,
       url: shareableUrl(job.id)
     };
 
@@ -1163,7 +1355,7 @@
   /* Event wiring                                                        */
   /* ------------------------------------------------------------------ */
   function resetFilters() {
-    state.query = ''; state.state = 'all'; state.category = 'all'; state.experience = 'all';
+    state.query = ''; state.state = 'all'; state.category = 'all'; state.track = 'all'; state.experience = 'all';
     state.archiveRecent = false;
     var searchInput = document.getElementById('jobs-search');
     var expSelect = document.getElementById('experience-filter');
@@ -1179,6 +1371,7 @@
     syncRangeButtons();
     populateStateSelect();
     refreshCategoryPills();
+    refreshTrackButtons();
     applyFilters();
     syncUrl(false);
   }
@@ -1225,6 +1418,18 @@
         if (!pill) return;
         state.category = pill.getAttribute('data-cat') || 'all';
         refreshCategoryPills();
+        applyFilters();
+        syncUrl(false);
+      });
+    }
+
+    var trackRow = document.getElementById('career-tracks');
+    if (trackRow) {
+      trackRow.addEventListener('click', function (e) {
+        var btn = e.target.closest('.track-btn');
+        if (!btn) return;
+        state.track = btn.getAttribute('data-track') || 'all';
+        refreshTrackButtons();
         applyFilters();
         syncUrl(false);
       });
