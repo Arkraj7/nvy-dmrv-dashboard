@@ -16,14 +16,19 @@ forestry, ESG and geospatial job board). It:
      environment & forest bodies, remote-sensing / GIS forestry, ESG / CSR
      management, carbon and net-zero roles) so the whole climate and
      conservation economy is covered without extra API credentials.
-  3. HUMANIZES every candidate with a Gemini Flash model (newest working
+  3. FETCHES ReliefWeb India vacancies: the v2 API is attempted first (it
+     needs an appname approved by ReliefWeb; a 401/403 simply means "still
+     pending"), and on any failure the pipeline falls back to ReliefWeb's
+     public India jobs RSS feed, which needs no key or approval. Both routes
+     feed the same Gemini humanizer as every other source.
+  4. HUMANIZES every candidate with a Gemini Flash model (newest working
      version, with automatic fallback if one is retired). The model also runs
      a strict India + green-relevance check first: off-topic software/IT jobs
      that leaked through keyword search are marked is_relevant_green_job
      = false and never written to jobs.json.
-  4. MERGES accepted listings into public/jobs.json (the file the job board
+  5. MERGES accepted listings into public/jobs.json (the file the job board
      reads at runtime; see js/jobs.js).
-  5. REGENERATES public/sitemap.xml, listing the homepage, dashboard.html
+  6. REGENERATES public/sitemap.xml, listing the homepage, dashboard.html
      and every active job as https://www.urbanforestpark.com/?job=<id>
      with <lastmod> set to the job's date_added (plus any pre-existing
      non-job URLs are preserved).
@@ -52,6 +57,11 @@ Environment
     LOOKBACK_HOURS    Optional posting-age window in hours (default 24 for
                       daily runs; set 168 to cover a full week). Applies to
                       both the broad and targeted jobspy sweeps.
+    RELIEFWEB_APPNAME Optional ReliefWeb API appname (default
+                      "urbanforestpark-jobboard-7x9k"). ReliefWeb must
+                      approve the appname before the v2 jobs API answers;
+                      until then the public India jobs RSS feed is used
+                      instead, so no action is required.
     A local .env file (git-ignored) is loaded automatically when present,
     so you can keep GEMINI_API_KEY=... next to your other dev secrets
     without exporting it in every terminal.
@@ -92,6 +102,16 @@ if scrape_jobs is not None:
         _JOBSPY_PARAMS = set(inspect.signature(scrape_jobs).parameters)
     except (TypeError, ValueError):  # pragma: no cover
         _JOBSPY_PARAMS = set()
+
+try:
+    import requests
+except Exception:  # pragma: no cover
+    requests = None
+
+try:
+    import feedparser
+except Exception:  # pragma: no cover
+    feedparser = None
 
 try:
     from pydantic import BaseModel, Field
@@ -135,6 +155,7 @@ DEFAULT_JOBS_PATH = Path("public/jobs.json")
 DEFAULT_SITEMAP_PATH = Path("public/sitemap.xml")
 
 RESULTS_PER_QUERY = 25          # jobspy results wanted per search query
+REQUEST_TIMEOUT = 30            # seconds; HTTP timeout for ReliefWeb calls
 DEFAULT_LOOKBACK_HOURS = 24     # posting-age window; LOOKBACK_HOURS env overrides
 DEFAULT_MAX_NEW_PER_RUN = 12    # cap on Gemini calls per run (cost control)
 GEMINI_SLEEP_SECONDS = 4.0      # gentle rate limit between model calls
@@ -599,6 +620,273 @@ def fetch_targeted_green_jobs() -> List[Dict[str, Any]]:
     else:
         log.info("Targeted sweep produced 0 raw candidate(s)")
     return candidates
+
+
+# ---------------------------------------------------------------------------
+# Source 3: ReliefWeb India (v2 API first, public RSS feed as fallback)
+# ---------------------------------------------------------------------------
+RELIEFWEB_V2_JOBS_API = "https://api.reliefweb.int/v2/jobs"
+RELIEFWEB_INDIA_RSS = "https://reliefweb.int/jobs/rss.xml?advanced-search=%28C119%29"
+DEFAULT_RELIEFWEB_APPNAME = "urbanforestpark-jobboard-7x9k"
+
+# Keyword scope for the API attempt (plain-text OR query).
+RELIEFWEB_KEYWORDS = (
+    "climate OR environment OR forestry OR wildlife OR conservation OR "
+    "sustainability OR ESG OR carbon OR water OR agriculture OR disaster OR "
+    "GIS OR geospatial OR \"remote sensing\""
+)
+
+# ReliefWeb's curated themes that overlap this board's categories; the API
+# call first tries country+theme and then drops to country-only for safety.
+RELIEFWEB_THEMES = (
+    "climate change and environment",
+    "disaster management",
+    "agriculture",
+    "water sanitation hygiene",
+)
+
+
+def fetch_reliefweb_v2_jobs(appname: str) -> Optional[List[Dict[str, Any]]]:
+    """Try the ReliefWeb v2 jobs API for India vacancies.
+
+    Returns the candidate list on success, or None whenever the API is not
+    usable this run (401/403 while the appname is still pending approval,
+    network trouble, or an unexpected payload) so the caller can fall back
+    to the public RSS feed.
+    """
+    if requests is None:
+        log.warning("`requests` is not installed - skipping the ReliefWeb v2 API")
+        return None
+
+    base_payload: Dict[str, Any] = {
+        "limit": 60,
+        "profile": "full",
+        "query": {"value": RELIEFWEB_KEYWORDS, "fields": ["title", "body"]},
+        "sort": ["date.created:desc"],
+    }
+    country_condition = {"field": "country", "value": "india"}
+    theme_condition = {
+        "operator": "OR",
+        "conditions": [{"field": "theme", "value": theme} for theme in RELIEFWEB_THEMES],
+    }
+    filter_attempts = (
+        {"operator": "AND", "conditions": [country_condition, theme_condition]},
+        {"operator": "AND", "conditions": [country_condition]},
+    )
+
+    items: Optional[List[Dict[str, Any]]] = None
+    for attempt, filter_obj in enumerate(filter_attempts, start=1):
+        try:
+            response = requests.post(
+                RELIEFWEB_V2_JOBS_API,
+                params={"appname": appname},
+                json=dict(base_payload, filter=filter_obj),
+                timeout=REQUEST_TIMEOUT,
+            )
+            response.raise_for_status()
+            data = response.json().get("data")
+        except Exception as exc:
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            if status in (401, 403):
+                log.warning(
+                    "ReliefWeb v2 rejected appname %r (HTTP %s; it may still be "
+                    "pending approval) - falling back to the public RSS feed",
+                    appname,
+                    status,
+                )
+                return None
+            log.warning(
+                "ReliefWeb v2 query attempt %d failed (%s)",
+                attempt,
+                str(exc)[:160].replace("\n", " "),
+            )
+            continue
+        if data is None:
+            log.warning("ReliefWeb v2 returned an unexpected payload")
+            return None
+        items = data
+        if items:
+            break
+
+    if items is None:
+        log.warning(
+            "ReliefWeb v2 was not usable this run - falling back to the public RSS feed"
+        )
+        return None
+
+    candidates: List[Dict[str, Any]] = []
+    for item in items:
+        fields = item.get("fields") or {}
+        title = _clean_cell(fields.get("title"))
+        apply_url = _clean_cell(fields.get("url"))
+        if not (title and apply_url):
+            continue
+        sources = fields.get("source") or []
+        organization = (
+            _clean_cell(sources[0].get("name"))
+            if sources
+            else "ReliefWeb partner organisation"
+        )
+        cities = fields.get("city") or []
+        city = _clean_cell(cities[0].get("name")) if cities else ""
+        created = _clean_cell((fields.get("date") or {}).get("created"))[:10]
+        candidates.append(
+            {
+                "source": "reliefweb",
+                "title": title,
+                "organization": organization,
+                "location_raw": city or "India",
+                "description": strip_html(fields.get("body") or "")[:4000],
+                "apply_url": apply_url,
+                "date_posted": created,
+                "matched_query": "reliefweb-v2-india",
+            }
+        )
+    log.info("ReliefWeb v2 API produced %d India candidate(s)", len(candidates))
+    return candidates
+
+
+def _reliefweb_org_from_entry(entry: Dict[str, Any]) -> str:
+    """Best-effort organization extraction from a ReliefWeb RSS entry."""
+    raw = str(entry.get("summary") or entry.get("description") or "")
+    match = re.search(
+        r'class="tag source">\s*Organization:\s*(.*?)\s*</div>', raw, re.S | re.I
+    )
+    if match:
+        return _clean_cell(html.unescape(match.group(1)))
+    match = re.search(
+        r"Organization:\s*(.+?)(?:\s+Closing date:|\s+Employment Type:|$)",
+        strip_html(raw),
+        re.I,
+    )
+    if match:
+        return _clean_cell(match.group(1))
+    return ""
+
+
+def fetch_reliefweb_rss_jobs() -> List[Dict[str, Any]]:
+    """Parse ReliefWeb's public India jobs RSS feed (no appname needed).
+
+    The feed is fetched with `requests` keeping its default library
+    user-agent, then parsed with feedparser. Every failure mode (WAF
+    challenge page, HTTP error, missing dependency) is logged and skipped
+    so the rest of the pipeline keeps running.
+    """
+    if requests is None and feedparser is None:
+        log.warning(
+            "Neither `requests` nor `feedparser` is installed - skipping the "
+            "ReliefWeb RSS fallback (pip install -r scripts/requirements.txt)"
+        )
+        return []
+
+    parsed = None
+    if requests is not None:
+        try:
+            # IMPORTANT: keep requests' default library user-agent. The
+            # reliefweb.int edge (AWS WAF) challenges browser-like and known
+            # scraper user-agents (202 + challenge.js) but lets plain library
+            # clients read the public feed.
+            response = requests.get(
+                RELIEFWEB_INDIA_RSS,
+                headers={
+                    "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8"
+                },
+                timeout=REQUEST_TIMEOUT,
+            )
+        except Exception as exc:
+            log.warning("ReliefWeb RSS request failed: %s", str(exc)[:160])
+            return []
+        waf_action = (response.headers.get("x-amzn-waf-action") or "").lower()
+        if waf_action == "challenge" or response.status_code == 202:
+            log.warning(
+                "ReliefWeb RSS is behind an AWS WAF browser challenge (HTTP %s) - "
+                "skipping this source this run",
+                response.status_code,
+            )
+            return []
+        if response.status_code != 200:
+            log.warning(
+                "ReliefWeb RSS returned HTTP %s - skipping", response.status_code
+            )
+            return []
+        if feedparser is None:
+            log.warning(
+                "feedparser is not installed - cannot parse the ReliefWeb RSS "
+                "feed (pip install -r scripts/requirements.txt)"
+            )
+            return []
+        parsed = feedparser.parse(response.content)
+    else:
+        # No `requests` available: last-ditch direct fetch via feedparser.
+        try:
+            parsed = feedparser.parse(RELIEFWEB_INDIA_RSS)
+        except Exception as exc:
+            log.warning("ReliefWeb RSS fetch via feedparser failed: %s", str(exc)[:160])
+            return []
+
+    status = getattr(parsed, "status", None)
+    entries = list(getattr(parsed, "entries", []) or [])
+    if status not in (None, 200) and not entries:
+        log.warning("ReliefWeb RSS feed returned HTTP %s - skipping", status)
+        return []
+    if not entries:
+        if getattr(parsed, "bozo", False):
+            log.warning(
+                "ReliefWeb RSS could not be parsed (%s) - skipping",
+                str(parsed.get("bozo_exception"))[:160],
+            )
+        else:
+            log.info("ReliefWeb RSS returned no entries this run")
+        return []
+
+    candidates: List[Dict[str, Any]] = []
+    for entry in entries:
+        title = _clean_cell(entry.get("title"))
+        apply_url = _clean_cell(entry.get("link"))
+        if not (title and apply_url):
+            continue
+        organization = _clean_cell(entry.get("author")) or _reliefweb_org_from_entry(entry)
+        date_posted = ""
+        published = entry.get("published_parsed") or entry.get("updated_parsed")
+        if published is not None:
+            try:
+                date_posted = date(published[0], published[1], published[2]).isoformat()
+            except (TypeError, ValueError, IndexError, AttributeError):
+                date_posted = ""
+        candidates.append(
+            {
+                "source": "reliefweb-rss",
+                "title": title,
+                "organization": organization or "ReliefWeb partner organisation",
+                "location_raw": "India",
+                "description": strip_html(
+                    entry.get("summary") or entry.get("description") or ""
+                )[:4000],
+                "apply_url": apply_url,
+                "date_posted": date_posted,
+                "matched_query": "reliefweb-india-rss",
+            }
+        )
+    log.info("ReliefWeb RSS produced %d India candidate(s)", len(candidates))
+    return candidates
+
+
+def fetch_reliefweb_jobs() -> List[Dict[str, Any]]:
+    """ReliefWeb India source: v2 API first, public RSS feed as the fallback.
+
+    RELIEFWEB_APPNAME (env or .env, default DEFAULT_RELIEFWEB_APPNAME) names
+    this client to the API. Until ReliefWeb approves that appname every v2
+    call returns 403 and the pipeline automatically continues with the
+    public RSS feed, which needs no key or approval.
+    """
+    appname = (
+        os.environ.get("RELIEFWEB_APPNAME") or DEFAULT_RELIEFWEB_APPNAME
+    ).strip()
+    log.info("ReliefWeb source: trying the v2 API first (appname=%r)", appname)
+    jobs = fetch_reliefweb_v2_jobs(appname)
+    if jobs is not None:
+        return jobs
+    return fetch_reliefweb_rss_jobs()
 
 
 # ---------------------------------------------------------------------------
@@ -1086,6 +1374,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     candidates: List[Dict[str, Any]] = []
     candidates.extend(scrape_board_candidates())
     candidates.extend(fetch_targeted_green_jobs())
+    candidates.extend(fetch_reliefweb_jobs())
     log.info("Collected %d raw candidate(s) from all sources", len(candidates))
 
     # 2. De-duplicate against the live feed and within this run.
