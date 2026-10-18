@@ -187,7 +187,7 @@ DEFAULT_WHATSAPP_DIGEST_PATH = Path("public/whatsapp_digest.txt")
 
 # Community channels printed inside every digest (override via env or .env).
 WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw"
-TELEGRAM_CHANNEL_URL = "https://t.me/urbanforestpark_jobs"
+TELEGRAM_CHANNEL_URL = "https://t.me/urbanforestpark"
 
 # Job lifecycle: a listing stays "active" in jobs.json for VALID_DAYS after
 # its date_added; once valid_through has passed it moves into archive.json

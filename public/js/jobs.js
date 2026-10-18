@@ -36,7 +36,7 @@
     }
     return {
       whatsapp_group_url: metaValue('ufp-whatsapp-group', 'https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw'),
-      telegram_channel_url: metaValue('ufp-telegram-channel', 'https://t.me/urbanforestpark_jobs')
+      telegram_channel_url: metaValue('ufp-telegram-channel', 'https://t.me/urbanforestpark')
     };
   })();
 
