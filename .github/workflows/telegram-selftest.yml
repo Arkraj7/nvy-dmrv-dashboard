@@ -1,0 +1,65 @@
+name: Telegram Broadcast Self-Test
+
+# Manual-only health check (Actions tab -> "Run workflow").
+# Proves that the TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID repository secrets
+# can actually deliver a message to the configured channel - run it whenever
+# the bot or the channel changes. It never runs on a schedule.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  send-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Send a test message via the Telegram Bot API
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          token = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip()
+          chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
+          if not token or not chat_id:
+              print("FAIL: TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID secret is missing")
+              sys.exit(1)
+
+          with urllib.request.urlopen(
+              f"https://api.telegram.org/bot{token}/getMe", timeout=30
+          ) as response:
+              me = json.load(response)
+          print("getMe ok:", me.get("ok"), "| bot:", (me.get("result") or {}).get("username"))
+
+          text = (
+              "✅ Broadcast connected — Urban Forest Park job alerts will post "
+              "here every morning at 7:00 AM IST.\n"
+              "(setup self-test from GitHub Actions; the owner can delete this message)"
+          )
+          data = urllib.parse.urlencode(
+              {"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
+          ).encode()
+          try:
+              with urllib.request.urlopen(
+                  f"https://api.telegram.org/bot{token}/sendMessage",
+                  data=data,
+                  timeout=30,
+              ) as response:
+                  result = json.load(response)
+          except urllib.error.HTTPError as exc:
+              print("sendMessage FAILED HTTP", exc.code, exc.read().decode()[:300])
+              sys.exit(1)
+
+          print("send ok:", result.get("ok"), "| message_id:", (result.get("result") or {}).get("message_id"))
+          print("delivered to chat:", json.dumps((result.get("result") or {}).get("chat", {}))[:220])
+          PY
