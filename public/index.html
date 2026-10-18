@@ -51,6 +51,11 @@
     <meta name="ufp-whatsapp-group" content="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw">
     <meta name="ufp-telegram-channel" content="https://t.me/urbanforestpark">
 
+    <!-- Mandate Dispatch subscription endpoint (js/jobs.js reads this; the
+         Cloudflare Pages Function at /api/subscribe is deployed with the
+         site. Point this at a custom webhook/API if one is preferred). -->
+    <meta name="ufp-newsletter-endpoint" content="/api/subscribe">
+
     <!-- Favicons (same set as the rest of the site) -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -96,6 +101,63 @@
         },
         "query-input": "required name=search_term_string"
       }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "India's environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed institutional notices — recruitment PDFs and advertisements issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities, alongside opportunities published separately by development think-tanks such as CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this information asymmetry by aggregating, verifying and structuring these mandates into a single searchable national registry, with every entry linked to its official application source."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every listing passes through an automated verification pipeline before publication. Candidates are surfaced from official portals, verified feeds and institutional notices; each record then undergoes domain verification, redirect unwrapping (so links resolve to the publisher rather than a news wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier presents both the direct application portal link and the verified official website of the parent organisation, so applicants can confirm every detail at its authoritative source."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to expired or closed job mandates, and why is a historical archive maintained?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Active mandates remain in the registry for a 30-day lifecycle; when an application window closes, the record transitions automatically into the Historical Mandate Archive (archive.json). The archive is maintained as a public research asset: students, researchers and policy analysts can benchmark historical fellowship stipends, recurring technical requirements (GIS, Google Earth Engine, BRSR reporting, carbon markets) and seasonal hiring velocity across Indian states and union territories."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How frequently is the registry updated, and how do the automated Email, WhatsApp, and Telegram dispatches work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The registry is harvested by an automated pipeline every day at 07:00 AM IST. Verified mandates are published to the registry immediately and broadcast through instant Telegram and WhatsApp alert channels; a curated email briefing — the Mandate Dispatch — is issued every 72 hours, summarising each period's new verified positions, registry telemetry and geographical coverage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the relationship between the Career Registry and the Nagar Van Yojana dMRV Dashboard & Green Calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Urban Forest Park originated as a digital Monitoring, Reporting and Verification (dMRV) and Urban Heat Island (UHI) analytics initiative for urban forestry in India. Alongside the national career registry, the platform continues to operate and maintain its open-access public research utilities — the Nagar Van dMRV Dashboard and the Green Calculator — freely available to institutions, researchers and citizens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there any fee for candidates or institutions to access listings or subscribe to dispatches?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "None. The registry and every dispatch channel — the website, the 72-hour email dispatch, the Telegram channel and the WhatsApp group — are 100% open-access for candidates, researchers, academic scholars and institutional partners. Urban Forest Park does not charge candidates any fee at any stage and does not act as a recruitment intermediary; all applications are submitted directly to the employer's official portal."
+          }
+        }
+      ]
     }
     </script>
 
@@ -284,6 +346,20 @@
           <button class="cat-pill" type="button" data-cat="GIS, Remote Sensing &amp; Earth Observation">GIS, Remote Sensing &amp; Earth Observation <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="ESG, Carbon Markets &amp; Corporate Sustainability">ESG, Carbon Markets &amp; Corporate Sustainability <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="Climate Policy, Think-Tanks &amp; Fellowships">Climate Policy, Think-Tanks &amp; Fellowships <span class="cnt"></span></button>
+        </div>
+
+        <!-- Compact dispatch widget: 72-hour email briefing (see #dispatch) -->
+        <div class="dispatch-mini" aria-label="Subscribe to the 72-hour mandate dispatch">
+          <div class="dm-copy">
+            <strong>72-Hour Mandate Dispatch</strong>
+            <span>Email briefing of new verified mandates &mdash; issued every 72 hours.</span>
+          </div>
+          <form class="dm-form" data-newsletter-form="mini" novalidate>
+            <label class="visually-hidden" for="dispatch-mini-email">Email address</label>
+            <input id="dispatch-mini-email" name="email" type="email" required autocomplete="email" placeholder="you@organisation.in">
+            <button class="btn btn-outline dm-btn" type="submit">Join</button>
+          </form>
+          <p class="dispatch-status dm-status" role="status" aria-live="polite"></p>
         </div>
       </div>
     </div>
@@ -501,62 +577,203 @@
             </ul>
           </div>
         </div>
-        <h3 class="seo-pr-faq-title">Frequently Asked Questions</h3>
-        <dl class="seo-pr-faq">
-          <dt>What is the Urban Forest Park Career Registry?</dt>
-          <dd>It is India&#x27;s national registry of active climate, forestry, environment, ESG, carbon-market, geospatial and academic research mandates. The registry tracks Junior Research Fellow (JRF), Senior Research Fellow (SRF), PhD, postdoctoral, project associate, young professional, faculty and corporate sustainability openings — publishing every listing with a direct link to the official application portal, with no fees and no intermediaries.</dd>
-          <dt>Which job categories and position types does the registry cover?</dt>
-          <dd>Six sectors — Academic / JRF / SRF / PhD positions, research associate and project staff (contractual), forestry, wildlife and afforestation, GIS, remote sensing and earth observation, ESG, carbon markets and corporate sustainability, and climate policy, think-tanks and fellowships — across seven position types at universities, IITs, IISc, government institutes, NGOs and companies.</dd>
-          <dt>How often are the job listings updated?</dt>
-          <dd>The registry refreshes every day at 7 AM IST. Automated collectors scan official portals, verified job feeds and news alerts; each mandate is normalised, de-duplicated and published, and expired mandates move to the Historical Archive.</dd>
-          <dt>How do I apply for a position listed here?</dt>
-          <dd>Open the position dossier and follow the ‘Apply on official portal’ link — every listing links straight to the employer&#x27;s application page or advertisement. The registry never charges fees; always verify eligibility details in the official notification before applying.</dd>
-        </dl>
       </div>
     </section>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the Urban Forest Park Career Registry?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It is India's national registry of active climate, forestry, environment, ESG, carbon-market, geospatial and academic research mandates. The registry tracks Junior Research Fellow (JRF), Senior Research Fellow (SRF), PhD, postdoctoral, project associate, young professional, faculty and corporate sustainability openings — publishing every listing with a direct link to the official application portal, with no fees and no intermediaries."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which job categories and position types does the registry cover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Six sectors — Academic / JRF / SRF / PhD positions, research associate and project staff (contractual), forestry, wildlife and afforestation, GIS, remote sensing and earth observation, ESG, carbon markets and corporate sustainability, and climate policy, think-tanks and fellowships — across seven position types at universities, IITs, IISc, government institutes, NGOs and companies."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How often are the job listings updated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The registry refreshes every day at 7 AM IST. Automated collectors scan official portals, verified job feeds and news alerts; each mandate is normalised, de-duplicated and published, and expired mandates move to the Historical Archive."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I apply for a position listed here?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Open the position dossier and follow the ‘Apply on official portal’ link — every listing links straight to the employer's application page or advertisement. The registry never charges fees; always verify eligibility details in the official notification before applying."
-      }
-    }
-  ]
-}
-</script>
     <!-- SEO_DIRECTORY_END -->
 
   </div><!-- /feed-home -->
+
+  <!-- ================= MANDATE DISPATCH: 72-HOUR EMAIL BRIEFING ================= -->
+  <section class="dispatch-band" id="dispatch" aria-labelledby="dispatch-title">
+    <div class="dispatch-inner">
+      <div class="dispatch-copy">
+        <p class="eyebrow">Dispatch Service</p>
+        <h2 id="dispatch-title">Climate, Forestry, JRF &amp; ESG Mandate Dispatch</h2>
+        <p class="dispatch-sub">
+          A formal bi-weekly email briefing &mdash; issued every 72 hours &mdash; carrying the period&rsquo;s
+          verified mandates: JRF / SRF and doctoral fellowships, forestry, wildlife and GIS positions, and
+          corporate ESG mandates across India.
+        </p>
+        <ul class="dispatch-points">
+          <li>Drawn exclusively from the same verified registry published on this page.</li>
+          <li>Direct application links and official institution sources &mdash; no intermediaries.</li>
+          <li>One-click opt-out; unsubscribe requests honoured within 7 working days.</li>
+        </ul>
+        <p class="dispatch-ledger">
+          Also available: the instant <a href="https://t.me/urbanforestpark" target="_blank" rel="noopener">Telegram channel</a>
+          and the <a href="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw" target="_blank" rel="noopener">WhatsApp job group</a>.
+        </p>
+      </div>
+
+      <form class="dispatch-form" data-newsletter-form="main" novalidate aria-labelledby="dispatch-form-title">
+        <p class="df-title" id="dispatch-form-title">Subscribe to Official Dispatch</p>
+
+        <div class="form-field">
+          <label for="dispatch-email">Official Email Address</label>
+          <input id="dispatch-email" name="email" type="email" required autocomplete="email" placeholder="you@organisation.in">
+        </div>
+
+        <fieldset class="df-fieldset">
+          <legend>Frequency</legend>
+          <div class="df-pills" role="radiogroup" aria-label="Dispatch frequency">
+            <label class="df-pill">
+              <input type="radio" name="frequency" value="3-day" checked>
+              <span>Every 3 Days (Recommended)</span>
+            </label>
+            <label class="df-pill">
+              <input type="radio" name="frequency" value="weekly">
+              <span>Weekly Digest</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-field">
+          <label for="dispatch-sector">Sector Preference</label>
+          <select id="dispatch-sector" name="sector">
+            <option value="all" selected>All Mandates</option>
+            <option value="academic">JRF / PhD / Academic</option>
+            <option value="forestry-gis">Forestry &amp; GIS</option>
+            <option value="corporate-esg">Corporate ESG</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary dispatch-submit" type="submit">Subscribe to Official Dispatch</button>
+        <p class="dispatch-micro">
+          Issued every 72 hours. Zero spam. Governed by our
+          <a href="/privacy.html">institutional Privacy Policy</a> and our
+          <a href="/terms.html">Terms of Use</a>.
+        </p>
+        <p class="dispatch-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= EXECUTIVE FAQ: PLATFORM GOVERNANCE & METHODOLOGY ================= -->
+  <section class="exec-faq" id="executive-faq" aria-labelledby="exec-faq-title">
+    <div class="exec-faq-inner">
+      <p class="eyebrow">Platform Governance &amp; Methodology</p>
+      <h2 id="exec-faq-title">Frequently Asked Questions</h2>
+      <p class="exec-faq-sub">
+        A formal reference for candidates, institutions, researchers and partners on how this registry is
+        governed, verified and maintained. Corresponding structured data is published as FAQPage schema in
+        this page&rsquo;s metadata.
+      </p>
+
+      <div class="exec-faq-list">
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">01</span>
+            <span class="faq-q">What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              India&rsquo;s environmental, forestry, geospatial and academic recruitment landscape is fragmented
+              across hundreds of unindexed institutional notices &mdash; recruitment PDFs and advertisements
+              issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian
+              universities, alongside opportunities published separately by development think-tanks such as
+              CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this
+              information asymmetry by aggregating, verifying and structuring these mandates into a single
+              searchable national registry, with every entry linked to its official application source.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">02</span>
+            <span class="faq-q">How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Every listing passes through an automated verification pipeline before publication. Candidates are
+              surfaced from official portals, verified feeds and institutional notices; each record then undergoes
+              domain verification, redirect unwrapping (so links resolve to the publisher rather than a news
+              wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier
+              presents both the direct application portal link and the verified official website of the parent
+              organisation, so applicants can confirm every detail at its authoritative source.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">03</span>
+            <span class="faq-q">What happens to expired or closed job mandates, and why is a historical archive maintained?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Active mandates remain in the registry for a 30-day lifecycle; when an application window closes,
+              the record transitions automatically into the Historical Mandate Archive (archive.json). The
+              archive is maintained as a public research asset: students, researchers and policy analysts can
+              benchmark historical fellowship stipends, recurring technical requirements (GIS, Google Earth
+              Engine, BRSR reporting, carbon markets) and seasonal hiring velocity across Indian states and
+              union territories.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">04</span>
+            <span class="faq-q">How frequently is the registry updated, and how do the automated Email, WhatsApp, and Telegram dispatches work?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              The registry is harvested by an automated pipeline every day at 07:00 AM IST. Verified mandates are
+              published to the registry immediately and broadcast through instant Telegram and WhatsApp alert
+              channels; a curated email briefing &mdash; the Mandate Dispatch &mdash; is issued every 72 hours,
+              summarising each period&rsquo;s new verified positions, registry telemetry and geographical coverage.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">05</span>
+            <span class="faq-q">What is the relationship between the Career Registry and the Nagar Van Yojana dMRV Dashboard &amp; Green Calculator?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              Urban Forest Park originated as a digital Monitoring, Reporting and Verification (dMRV) and Urban
+              Heat Island (UHI) analytics initiative for urban forestry in India. Alongside the national career
+              registry, the platform continues to operate and maintain its open-access public research utilities
+              &mdash; the <a href="/dashboard.html">Nagar Van dMRV Dashboard</a> and the
+              <a href="/green-calculator.html">Green Calculator</a> &mdash; freely available to institutions,
+              researchers and citizens.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="faq-num">06</span>
+            <span class="faq-q">Is there any fee for candidates or institutions to access listings or subscribe to dispatches?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq-body">
+            <p>
+              None. The registry and every dispatch channel &mdash; the website, the 72-hour email dispatch, the
+              Telegram channel and the WhatsApp group &mdash; are 100% open-access for candidates, researchers,
+              academic scholars and institutional partners. Urban Forest Park does not charge candidates any fee
+              at any stage and does not act as a recruitment intermediary; all applications are submitted directly
+              to the employer&rsquo;s official portal.
+            </p>
+          </div>
+        </details>
+      </div>
+
+      <p class="exec-faq-note">
+        Further statutory detail is published in the <a href="/privacy.html">Privacy Policy</a>,
+        <a href="/terms.html">Terms of Use</a> and <a href="/cookies.html">Cookie Policy</a>. Institutional
+        enquiries: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>.
+      </p>
+    </div>
+  </section>
 
   <!-- ================= POSITION DOSSIER (rendered via ?job=<id>) ================= -->
   <section id="job-detail" class="detail-wrap" aria-live="polite" aria-label="Position dossier">
@@ -619,6 +836,8 @@
           <li><a href="/terms.html">Terms of Use</a></li>
           <li><a href="/cookies.html">Cookie Policy</a></li>
           <li><a href="/accessibility.html">Accessibility</a></li>
+          <li><a href="/unsubscribe.html">Dispatch Preferences</a></li>
+          <li><button type="button" class="footer-link-btn" data-ufp-cookie-settings>Cookie Preferences</button></li>
           <li><a href="/report.html">Report an Issue</a></li>
           <li><a href="mailto:arkraj.biswas6@gmail.com">Contact the Registry</a></li>
         </ul>
@@ -681,5 +900,7 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script defer src="js/consent.js"></script>
 </body>
 </html>

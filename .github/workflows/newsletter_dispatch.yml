@@ -1,0 +1,85 @@
+name: Mandate Dispatch — 3-Day Email Newsletter
+
+# Issues the subscriber email briefing (the "Mandate Dispatch") every third
+# day at 08:00 AM IST (02:30 UTC). The mailer reads public/jobs.json, writes
+# the web edition to public/newsletter_latest.html, delivers one personalised
+# copy per subscriber through the first configured channel
+# (RESEND_API_KEY -> BREVO_API_KEY -> SMTP_*), then commits the web edition
+# and redeploys the site. With no email credentials configured it still
+# regenerates the web edition and exits 0 — CI never fails for silence.
+#
+# Subscriber sources (see scripts/send_newsletter.py header):
+#   NEWSLETTER_SUBSCRIBERS      JSON list secret, or
+#   NEWSLETTER_SUBSCRIBERS_CSV  published-CSV URL secret (Google Sheet), or
+#   data/subscribers.json       repository file.
+
+on:
+  schedule:
+    # 08:00 AM IST == 02:30 UTC, every third day
+    - cron: "30 2 */3 * *"
+  workflow_dispatch: {}   # allows a manual 1-click test from the Actions tab
+
+permissions:
+  contents: write         # the bot commits the dispatch web edition
+
+concurrency:
+  group: newsletter-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate & deliver the Mandate Dispatch
+        env:
+          # Delivery channels — set whichever you use in repository secrets.
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          NEWSLETTER_FROM_EMAIL: ${{ secrets.NEWSLETTER_FROM_EMAIL }}
+          NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME }}
+          # Subscriber sources (optional):
+          NEWSLETTER_SUBSCRIBERS: ${{ secrets.NEWSLETTER_SUBSCRIBERS }}
+          NEWSLETTER_SUBSCRIBERS_CSV: ${{ secrets.NEWSLETTER_SUBSCRIBERS_CSV }}
+        run: python scripts/send_newsletter.py
+
+      - name: Commit the dispatch web edition
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          git add public/newsletter_latest.html
+          if git diff --cached --quiet; then
+            echo "No dispatch changes to commit."
+          else
+            git commit -m "chore(newsletter): refresh Mandate Dispatch web edition ($(date -u +'%Y-%m-%d'))"
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install site dependencies
+        run: npm ci
+
+      - name: Build & deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run deploy

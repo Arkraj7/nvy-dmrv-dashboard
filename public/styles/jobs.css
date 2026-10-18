@@ -1799,3 +1799,294 @@ body.view-detail .telemetry-band { display: none; }
   .cs-actions { width: 100%; }
   .footer-broadcast { flex-direction: column; align-items: flex-start; }
 }
+
+/* ================= 16. MANDATE DISPATCH (72-HOUR EMAIL BRIEFING) ================= */
+
+/* ---------- 16a. Homepage dispatch band ---------- */
+[hidden] { display: none !important; }
+
+.dispatch-band { padding: 34px 24px 10px; }
+.dispatch-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 30px;
+  align-items: start;
+  padding: 30px 30px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: linear-gradient(140deg, var(--accent-soft) 0%, var(--card) 55%, var(--bg-2) 100%);
+  box-shadow: var(--shadow-card);
+}
+.dispatch-copy h2 {
+  margin: 6px 0 10px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.dispatch-sub {
+  margin: 0 0 14px;
+  max-width: 58ch;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.dispatch-points { margin: 0 0 14px; padding-left: 18px; display: grid; gap: 7px; }
+.dispatch-points li { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+.dispatch-ledger { margin: 0; font-size: 12.5px; color: var(--ink-3); }
+.dispatch-ledger a { color: var(--accent); font-weight: 600; }
+
+.dispatch-form {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.dispatch-form .df-title {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dispatch-form .form-field { margin-bottom: 0; }
+.dispatch-form .form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.dispatch-form .form-field input,
+.dispatch-form .form-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13.5px;
+}
+.dispatch-form .form-field input:focus-visible,
+.dispatch-form .form-field select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.df-fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.df-fieldset legend {
+  padding: 0 0 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.df-pills { display: grid; gap: 8px; }
+.df-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  font-size: 12.8px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+.df-pill:hover { border-color: var(--accent); }
+.df-pill input { margin: 0; accent-color: var(--accent); flex: none; }
+.df-pill:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.dispatch-submit { width: 100%; justify-content: center; }
+.dispatch-micro { margin: 0; font-size: 11.8px; line-height: 1.6; color: var(--ink-3); }
+.dispatch-micro a { color: var(--accent); font-weight: 600; }
+.dispatch-status { margin: 0; font-size: 12.6px; line-height: 1.55; color: var(--ink-3); }
+.dispatch-status:empty { display: none; }
+.dispatch-status.is-ok { color: var(--emerald); font-weight: 600; }
+.dispatch-status.is-error { color: #DC2626; font-weight: 600; }
+[data-theme="dark"] .dispatch-status.is-error { color: #F87171; }
+
+/* Confirmation state (after successful submit or on return visits) */
+.dispatch-done {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--emerald);
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.dd-title { margin: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
+.dd-meta { margin: 0; display: grid; gap: 8px; }
+.dd-meta > div { display: flex; gap: 10px; align-items: baseline; }
+.dd-meta dt {
+  min-width: 84px;
+  font-size: 10.6px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.dd-meta dd { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); overflow-wrap: anywhere; }
+.dd-note { margin: 0; font-size: 12.4px; line-height: 1.6; color: var(--ink-3); }
+.dd-actions { margin: 0; font-size: 12.6px; color: var(--ink-3); }
+.dd-actions a { color: var(--accent); font-weight: 600; }
+.dd-sep { color: var(--ink-4); margin: 0 2px; }
+.dd-update {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 12.6px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- 16b. Compact dispatch widget (filter area) ---------- */
+.dispatch-mini {
+  margin-top: 14px;
+  padding: 13px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px dashed var(--border-2);
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+}
+.dm-copy { display: grid; gap: 2px; min-width: 0; }
+.dm-copy strong { font-size: 12.8px; font-weight: 800; color: var(--ink); }
+.dm-copy span { font-size: 11.6px; color: var(--ink-3); }
+.dm-form { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dm-form input {
+  min-width: 210px;
+  padding: 8px 11px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12.6px;
+}
+.dm-form input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dm-btn { padding: 8px 16px; font-size: 12.4px; }
+.dm-status { flex-basis: 100%; }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 980px) {
+  .dispatch-inner { grid-template-columns: 1fr; padding: 22px; }
+}
+@media (max-width: 720px) {
+  .dispatch-band { padding: 24px 14px 6px; }
+  .dm-form { width: 100%; }
+  .dm-form input { flex: 1 1 100%; min-width: 0; }
+}
+
+/* ================= 17. EXECUTIVE FAQ (PLATFORM GOVERNANCE) ================= */
+.exec-faq { padding: 42px 24px 8px; }
+.exec-faq-inner { max-width: var(--maxw-narrow); margin: 0 auto; }
+.exec-faq-inner h2 {
+  margin: 8px 0;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.exec-faq-sub {
+  margin: 0 0 22px;
+  max-width: 74ch;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.exec-faq-list { display: grid; gap: 10px; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 18px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 14.6px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.45;
+  color: var(--ink);
+  transition: background 0.12s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { background: var(--bg-2); }
+.faq-item summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.faq-num {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.faq-q { flex: 1 1 auto; min-width: 0; }
+.faq-chevron { flex: none; color: var(--ink-3); transition: transform 0.18s ease; }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+.faq-item[open] summary { border-bottom: 1px solid var(--border); background: var(--bg-2); }
+.faq-body { padding: 15px 18px 17px 52px; }
+.faq-body p { margin: 0; font-size: 13.6px; line-height: 1.72; color: var(--ink-2); }
+.faq-body a { color: var(--accent); font-weight: 600; }
+.exec-faq-note { margin: 18px 0 0; font-size: 12.4px; line-height: 1.65; color: var(--ink-3); }
+.exec-faq-note a { color: var(--accent); font-weight: 600; }
+@media (max-width: 720px) {
+  .exec-faq { padding: 30px 14px 6px; }
+  .faq-body { padding-left: 18px; }
+}
+
+/* ================= 18. FOOTER COOKIE-PREFERENCES CONTROL ================= */
+.footer-col .footer-link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--footer-ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 400;
+  text-align: left;
+  text-decoration: none;
+  opacity: 0.92;
+  cursor: pointer;
+  transition: color 0.12s ease, opacity 0.12s ease;
+}
+.footer-col .footer-link-btn:hover {
+  color: var(--emerald);
+  opacity: 1;
+  text-decoration: underline;
+}
+.footer-col .footer-link-btn:focus-visible { outline: 2px solid var(--emerald); outline-offset: 2px; }

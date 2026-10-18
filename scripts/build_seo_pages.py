@@ -7,8 +7,10 @@ Actions workflow and scripts/fetch_and_humanize.py):
 
 1. A pre-rendered registry snapshot injected into ``public/index.html``
    between the ``<!-- SEO_DIRECTORY_START -->`` / ``<!-- SEO_DIRECTORY_END -->``
-   markers: crawlable links to every active and recently archived mandate,
-   keyword-dense copy and an FAQ block with FAQPage JSON-LD.
+   markers: crawlable links to every active and recently archived mandate
+   and keyword-dense structured copy. The homepage's executive FAQ block and
+   its FAQPage JSON-LD are maintained by hand in index.html, outside the
+   markers, so this script never rewrites or duplicates them.
 
 2. Five career-pathway hub pages (listed in ``SEO_HUB_PAGES`` inside
    ``fetch_and_humanize.py`` and emitted into the sitemap at priority 0.9),
@@ -636,6 +638,8 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/terms.html">Terms of Use</a></li>
           <li><a href="/cookies.html">Cookie Policy</a></li>
           <li><a href="/accessibility.html">Accessibility</a></li>
+          <li><a href="/unsubscribe.html">Dispatch Preferences</a></li>
+          <li><a href="/cookies.html" data-ufp-cookie-settings>Cookie Preferences</a></li>
           <li><a href="/report.html">Report an Issue</a></li>
           <li><a href="mailto:arkraj.biswas6@gmail.com">Contact the Registry</a></li>
         </ul>
@@ -652,38 +656,12 @@ def footer_html(current_hub: Optional[str] = None) -> str:
 # --------------------------------------------------------------------------
 # Index snapshot
 # --------------------------------------------------------------------------
-INDEX_FAQS: List[Tuple[str, str]] = [
-    (
-        "What is the Urban Forest Park Career Registry?",
-        "It is India's national registry of active climate, forestry, environment, ESG, "
-        "carbon-market, geospatial and academic research mandates. The registry tracks Junior "
-        "Research Fellow (JRF), Senior Research Fellow (SRF), PhD, postdoctoral, project "
-        "associate, young professional, faculty and corporate sustainability openings \u2014 "
-        "publishing every listing with a direct link to the official application portal, with "
-        "no fees and no intermediaries.",
-    ),
-    (
-        "Which job categories and position types does the registry cover?",
-        "Six sectors \u2014 Academic / JRF / SRF / PhD positions, research associate and project "
-        "staff (contractual), forestry, wildlife and afforestation, GIS, remote sensing and "
-        "earth observation, ESG, carbon markets and corporate sustainability, and climate "
-        "policy, think-tanks and fellowships \u2014 across seven position types at universities, "
-        "IITs, IISc, government institutes, NGOs and companies.",
-    ),
-    (
-        "How often are the job listings updated?",
-        "The registry refreshes every day at 7 AM IST. Automated collectors scan official "
-        "portals, verified job feeds and news alerts; each mandate is normalised, de-duplicated "
-        "and published, and expired mandates move to the Historical Archive.",
-    ),
-    (
-        "How do I apply for a position listed here?",
-        "Open the position dossier and follow the \u2018Apply on official portal\u2019 link "
-        "\u2014 every listing links straight to the employer's application page or "
-        "advertisement. The registry never charges fees; always verify eligibility details in "
-        "the official notification before applying.",
-    ),
-]
+# NOTE: The homepage FAQ block (executive accordion + FAQPage JSON-LD) is
+# maintained by hand in public/index.html, outside the snapshot markers.
+# Historically this script injected a second, generated FAQ block here; it
+# was retired so the page carries exactly one FAQPage entity, synchronised
+# with the visible accordion content.
+
 
 
 def snapshot_link(job: Dict[str, Any]) -> str:
@@ -710,10 +688,6 @@ def build_index_block(
         f'            <li><a href="/{h["file"]}">{esc(h["h1"])}</a></li>' for h in HUBS
     )
 
-    faq_items = "\n".join(
-        f"          <dt>{esc(q)}</dt>\n          <dd>{esc(a)}</dd>" for q, a in INDEX_FAQS
-    )
-
     intro = (
         f"The complete static index of active environmental, forestry, geospatial and academic "
         f"research mandates tracked by Urban Forest Park \u2014 climate, forestry, wildlife, ESG, "
@@ -722,21 +696,6 @@ def build_index_block(
         f"cities. Every entry links to the live position dossier with the official application "
         f"portal. Snapshot updated {long_date(today)} (IST) \u2014 {len(active_sorted)} active "
         f"and {len(archived_sorted)} recently archived mandates."
-    )
-
-    faq_jsonld = jsonld_script(
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": q,
-                    "acceptedAnswer": {"@type": "Answer", "text": a},
-                }
-                for q, a in INDEX_FAQS
-            ],
-        }
     )
 
     block = f"""{SNAPSHOT_START}
@@ -763,13 +722,8 @@ def build_index_block(
             </ul>
           </div>
         </div>
-        <h3 class="seo-pr-faq-title">Frequently Asked Questions</h3>
-        <dl class="seo-pr-faq">
-{faq_items}
-        </dl>
       </div>
     </section>
-    {faq_jsonld}
     {SNAPSHOT_END}"""
     return block
 
@@ -1057,6 +1011,8 @@ def build_hub_page(
   </main>
 
 {footer_html(hub['file'])}
+
+  <script defer src="/js/consent.js"></script>
 </body>
 </html>
 """

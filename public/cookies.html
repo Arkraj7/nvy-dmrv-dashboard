@@ -1,190 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E7BLPFWP7"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme bootstrap: applied before stylesheets to prevent flicker. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4E7BLPFWP7');
+      (function () {
+        try {
+          var t = localStorage.getItem('ufp_theme');
+          if (t !== 'dark' && t !== 'light') {
+            t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* default rendering: light */ }
+      })();
     </script>
-    <meta name="description" content="Cookie Policy for Nagar Van DMRV Dashboard. Learn about how we use cookies and similar tracking technologies on our urban forest monitoring platform.">
+
+    <title>Cookie Policy — Urban Forest Park Career Registry</title>
+    <meta name="description" content="Statutory Cookie Policy of the Urban Forest Park Career Registry. Full specification of strictly necessary storage, analytical telemetry (Google Analytics) and advertising cookies (Google AdSense), with preference controls.">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.urbanforestpark.com/cookies.html">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Cookie Policy — Nagar Van DMRV Dashboard">
-    <meta property="og:description" content="Cookie Policy for Nagar Van DMRV Dashboard. Learn about our use of cookies and tracking technologies.">
+    <meta property="og:site_name" content="Urban Forest Park — India Career Registry">
+    <meta property="og:title" content="Cookie Policy — Urban Forest Park Career Registry">
+    <meta property="og:description" content="Full specification of storage keys and cookies used on urbanforestpark.com, with preference controls.">
     <meta property="og:url" content="https://www.urbanforestpark.com/cookies.html">
     <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
-    <meta property="og:site_name" content="Nagar Van DMRV Dashboard">
-    <meta property="og:locale" content="en_IN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cookie Policy — Nagar Van DMRV Dashboard">
-    <meta name="twitter:description" content="Cookie Policy for the Nagar Van DMRV Dashboard.">
-    <meta name="twitter:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cookie Policy — Urban Forest Park Career Registry">
+    <meta name="twitter:description" content="Full specification of storage keys and cookies used on urbanforestpark.com.">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="UrbanPark" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+    <!-- Institutional legal stylesheet -->
+    <link rel="stylesheet" href="/styles/legal.css">
+
+    <!-- Structured data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Cookie Policy — Nagar Van DMRV Dashboard",
-      "description": "Cookie policy for the urban forest monitoring platform",
+      "name": "Cookie Policy — Urban Forest Park Career Registry",
+      "description": "Statutory Cookie Policy specifying strictly necessary storage, analytical and advertising cookies used on urbanforestpark.com.",
       "url": "https://www.urbanforestpark.com/cookies.html",
+      "inLanguage": "en-IN",
       "isPartOf": {
         "@type": "WebSite",
-        "name": "Nagar Van DMRV Dashboard",
+        "name": "Urban Forest Park — National Climate, Forestry, ESG & Geospatial Career Registry (India)",
         "url": "https://www.urbanforestpark.com/"
       }
     }
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Policy - Nagar Van DMRV</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/night-mode.css">
-    <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
-        .icon-sm { width: 16px; height: 16px; }
-        .icon-lg { width: 28px; height: 28px; }
-        .icon-white { color: #fff; }
-        .icon-green { color: #6ee7b7; }
-        .icon-blue { color: #7dd3fc; }
-        .icon-amber { color: #fde68a; }
-        .icon-purple { color: #c4b5fd; }
-        .icon-teal { color: #5eead4; }
-        .icon-peach { color: #fed7aa; }
-        .icon-sky { color: #7dd3fc; }
-        .icon-dark { color: #374151; }
-        .icon-red { color: #ef4444; }
-    </style>
 </head>
-<body class="bg-[#f4f7f6] min-h-screen">
+<body>
+  <a class="skip-link" href="#legal-doc">Skip to document</a>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
-  <symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
-  <symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
-  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
-  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
-  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
-  <symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
-  <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
-  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
-  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
-  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="M22 15l-5-5-7 7"/><path d="M16 13l-3 3"/></symbol>
-  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
-  <symbol id="icon-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9h-9V3z"/><path d="M12 12l-4-4"/></symbol>
-  <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12c1.5 0 2.5-.5 3-1"/><path d="M3 12h16c1.5 0 2.5.5 3 1"/><path d="M5 18h10c1.5 0 2.5-.5 3-1"/></symbol>
-  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 8 5 12 5 16a7 7 0 0014 0c0-4-4-8-7-14z"/></symbol>
-  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 00-4 0v10.8"/><path d="M8 16a4 4 0 108 0 4 4 0 00-8 0z"/></symbol>
-  <symbol id="icon-seedling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-4 0-6 2-6 5"/><path d="M12 8c4 0 6 2 6 5"/><path d="M8 3c4 0 6 1.5 6 5"/><path d="M16 3c-4 0-6 1.5-6 5"/></symbol>
-  <symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
-  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 00-9-9H5a3 3 0 00-3 3v6a3 3 0 003 3h2v4l4-4h4a9 9 0 006-3z"/></symbol>
-  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
-  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
-  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
-  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
-  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .5-5.5 5 1.5 7L12 17l-6 4 1.5-7L2 9l7-.5L12 2z"/></symbol>
-  <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a3 3 0 013-3h4l3 3h7a3 3 0 013 3v9a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"/></symbol>
-  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
-  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7a2 2 0 00-2-2h-3l-2-3H9L7 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7z"/><circle cx="12" cy="13" r="4"/></symbol>
-  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 114 4L7 20l-4 1 1-4L17 3z"/></symbol>
-  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></symbol>
-  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
-  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
-  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
-  <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
-  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
-  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
-  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
-  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h0"/></symbol>
-  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
-  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
-  <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
-  <symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
-  <symbol id="icon-eco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c5-5 8-11 8-18"/><path d="M17 7c-2 2-4 3-8 4"/><path d="M12 12c2-2 4-3 5-7"/></symbol>
-  <symbol id="icon-clean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l15-15"/><path d="M13 3l8 8"/><path d="M4 20l3-3"/></symbol>
-  <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
-</svg>
+  <!-- ================= INSTITUTIONAL TOP BAR ================= -->
+  <header class="legal-topbar">
+    <div class="legal-topbar-inner">
+      <a class="legal-wordmark" href="/">
+        <span class="lw-name">URBAN FOREST PARK</span>
+        <span class="lw-sub">National Career Registry &amp; dMRV Tools &middot; India</span>
+      </a>
+      <nav class="legal-nav" aria-label="Site navigation">
+        <a href="/">Job Registry</a>
+        <a href="/dashboard.html">dMRV Dashboard</a>
+        <a href="/green-calculator.html">Green Calculator</a>
+        <a href="/about.html">About</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">Night Mode</button>
+    </div>
+  </header>
 
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] text-white py-8">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <a href="javascript:history.back()" class="inline-flex items-center gap-2 text-white hover:text-emerald-200">
-                    <svg class="icon icon-green"><use href="#icon-arrow-left"/></svg> Back to Dashboard
-                </a>
-                <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
-                  <div class="theme-toggle__container">
-                    <div class="theme-toggle__clouds"></div>
-                    <div class="theme-toggle__stars">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 88.5976 25.602 87.9802 26.0053C87.3716 26.3995 86.8864 26.9312 86.5248 27.5913C86.172 28.2513 85.9956 28.9572 85.9956 29.7273C85.9956 28.563 85.6075 27.5546 84.8313 26.7112C84.0551 25.8587 83.1114 25.4095 81 25.3545ZM104 22.3545C105.111 22.2995 106.055 21.8503 106.831 21.0069C107.607 20.1635 107.996 19.1642 107.996 18C107.996 19.1642 108.384 20.1635 109.16 21.0069C109.936 21.8503 110.88 22.2903 112 22.3545C111.268 22.3911 110.598 22.602 109.98 23.0053C109.372 23.3995 108.886 23.9312 108.525 24.5913C108.172 25.2513 107.996 25.9572 107.996 26.7273C107.996 25.563 107.607 24.5546 106.831 23.7112C106.055 22.8587 105.111 22.4095 104 22.3545ZM123.168 9.00688C122.392 9.85027 121.448 10.2995 120.337 10.3545C121.448 10.4095 122.392 10.8587 123.168 11.7112C123.944 12.5546 124.332 13.563 124.332 14.7273C124.332 13.9572 124.509 13.2513 124.861 12.5913C125.223 11.9312 125.708 11.3995 126.317 11.0053C126.934 10.602 127.605 10.3911 128.337 10.3545C127.217 10.2903 126.273 9.85027 125.497 9.00688C124.721 8.16348 124.332 7.16425 124.332 6C124.332 7.16425 123.944 8.16348 123.168 9.00688Z" fill="currentColor"/></svg>
-                    </div>
-                    <div class="theme-toggle__sun">
-                      <div class="theme-toggle__moon-mask">
-                        <div class="theme-toggle__crater"></div>
-                        <div class="theme-toggle__crater"></div>
-                        <div class="theme-toggle__crater"></div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-            </div>
-            <h1 class="text-3xl font-bold flex items-center gap-2"><svg class="icon icon-amber"><use href="#icon-info"/></svg>Cookie Policy</h1>
-            <p class="text-emerald-100 mt-2">Nagar Van Digital Monitoring, Reporting & Verification</p>
+  <!-- ================= DOCUMENT ================= -->
+  <main class="legal-shell">
+    <aside class="legal-aside">
+      <nav class="legal-toc" aria-label="Document navigation">
+        <p class="toc-title">Document Navigation</p>
+        <ol>
+          <li><a href="#s1">Scope &amp; Consent Model</a></li>
+          <li><a href="#s2">Cookie &amp; Storage Specification</a></li>
+          <li><a href="#preferences">Managing Your Preferences</a></li>
+          <li><a href="#s4">Policy Updates &amp; Contact</a></li>
+        </ol>
+      </nav>
+
+      <div class="legal-meta">
+        <p class="meta-title">Document Metadata</p>
+        <dl>
+          <div><dt>Document</dt><dd>Cookie Policy</dd></div>
+          <div><dt>Effective Date</dt><dd>19 October 2026</dd></div>
+          <div><dt>Last Revised</dt><dd>19 October 2026</dd></div>
+          <div><dt>Jurisdiction</dt><dd>Republic of India</dd></div>
+          <div><dt>Compliance Framework</dt><dd>IT Act, 2000 &amp; DPDP Act, 2023</dd></div>
+          <div><dt>Advertising Partner</dt><dd>Google AdSense (Google LLC)</dd></div>
+          <div><dt>Grievance Officer</dt><dd><a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </aside>
+
+    <article class="legal-doc" id="legal-doc">
+      <p class="doc-eyebrow">Legal &amp; Compliance &middot; Statutory Document</p>
+      <h1>Cookie Policy</h1>
+      <hr class="doc-rule">
+      <p class="doc-lede">
+        This Cookie Policy specifies every cookie and local-storage key deployed on
+        <strong>urbanforestpark.com</strong> and its subpages, the categories to which each belongs,
+        the provider responsible, and the controls available to users. It supplements, and should be
+        read together with, the <a href="/privacy.html">Privacy Policy</a> and the
+        <a href="/terms.html">Terms of Use</a>.
+      </p>
+
+      <!-- SECTION 1 -->
+      <section class="doc-section" id="s1">
+        <h2><span class="sec-num">Section 1.0</span> Scope &amp; Consent Model</h2>
+        <p>
+          1.1 This Policy applies to all storage mechanisms — HTTP cookies, and client-side
+          localStorage / sessionStorage — deployed by the Platform on any page of
+          urbanforestpark.com, whether set directly by the Platform or by third-party services
+          engaged by it.
+        </p>
+        <p>
+          1.2 The Platform operates a three-tier consent model, presented to every first-time
+          visitor through the <strong>Institutional Cookie &amp; Telemetry Notice</strong> displayed
+          at the foot of the viewport:
+        </p>
+        <ul>
+          <li><strong>Strictly necessary storage</strong> — required for the interface to function
+          (theme preference, consent record, dispatch preferences). These are deployed without
+          consent as they involve no tracking, in keeping with conventional interpretations of the
+          DPDP Act and the IT Act, 2000.</li>
+          <li><strong>Analytical &amp; performance telemetry</strong> — Google Analytics cookies,
+          deployed to measure aggregate traffic. Activated on <em>Accept All Cookies</em>.</li>
+          <li><strong>Advertising &amp; monetisation cookies</strong> — Google AdSense identifiers,
+          deployed to serve relevant, non-intrusive advertisements. Activated on
+          <em>Accept All Cookies</em>.</li>
+        </ul>
+        <p>
+          1.3 The consent record is stored locally under
+          <span class="cookie-key">ufp_cookie_consent</span>, with the corresponding decision
+          timestamp under <span class="cookie-key">ufp_cookie_consent_ts</span>. Use of the
+          <em>Essential Only</em> control records a preference restricting non-essential storage
+          wherever technically implemented.
+        </p>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="doc-section" id="s2">
+        <h2><span class="sec-num">Section 2.0</span> Cookie &amp; Storage Specification</h2>
+        <p>
+          2.1 The following table constitutes the complete specification of storage mechanisms in
+          use on this domain as of the Last Revised date. Storage keys are set in
+          localStorage unless identified as a cookie.
+        </p>
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <caption>Table 1 — Storage &amp; Cookie Specification</caption>
+            <thead>
+              <tr>
+                <th>Storage key / cookie</th>
+                <th>Category</th>
+                <th>Provider</th>
+                <th>Purpose</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="cookie-key">ufp_theme</span></td>
+                <td><strong>Strictly Necessary</strong> (localStorage)</td>
+                <td>urbanforestpark.com</td>
+                <td>Persists the user's Light / Night interface preference so pages render without flicker.</td>
+                <td>Persistent — until cleared by the user.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">ufp_cookie_consent</span> · <span class="cookie-key">ufp_cookie_consent_ts</span></td>
+                <td><strong>Strictly Necessary</strong> (localStorage)</td>
+                <td>urbanforestpark.com</td>
+                <td>Records the cookie-consent decision and its timestamp, and powers the "Cookie Preferences" re-consent control in the global footer.</td>
+                <td>Persistent — until cleared or revised by the user.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">ufp_newsletter</span></td>
+                <td><strong>Strictly Necessary / Functional</strong> (localStorage)</td>
+                <td>urbanforestpark.com</td>
+                <td>Records the dispatch-subscription preferences entered in the subscription form (email, frequency, sector, timestamp) on the user's own device.</td>
+                <td>Persistent — until cleared by the user.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">_ga</span> · <span class="cookie-key">_ga_&lt;container-id&gt;</span></td>
+                <td><strong>Analytical &amp; Performance Telemetry</strong></td>
+                <td>Google LLC (Google Analytics)</td>
+                <td>Distinguishes users pseudonymously for aggregate traffic measurement and registry usability analysis.</td>
+                <td>Up to 24 months.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">_gid</span></td>
+                <td><strong>Analytical &amp; Performance Telemetry</strong></td>
+                <td>Google LLC (Google Analytics)</td>
+                <td>Distinguishes short-lived sessions for aggregate reporting.</td>
+                <td>24 hours.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">__gads</span> · <span class="cookie-key">__gpi</span></td>
+                <td><strong>Advertising &amp; Monetisation</strong></td>
+                <td>Google LLC (Google AdSense)</td>
+                <td>Frequency capping, aggregated advertising reporting and fraud prevention for advertisements served on this domain.</td>
+                <td>Up to 13 months.</td>
+              </tr>
+              <tr>
+                <td><span class="cookie-key">IDE</span></td>
+                <td><strong>Advertising &amp; Monetisation</strong></td>
+                <td>Google LLC (DoubleClick / AdSense)</td>
+                <td>Serves and measures advertisements, including re-targeting controls, on this and other domains participating in Google's advertising network.</td>
+                <td>Up to 24 months.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </header>
+        <p>
+          2.2 Google's processing of advertising and analytics data is governed by its own policies,
+          including the information published at
+          <a href="https://policies.google.com/technologies/ads" rel="noopener" target="_blank">https://policies.google.com/technologies/ads</a>
+          and <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">https://policies.google.com/technologies/partner-sites</a>.
+          Users may opt out of personalised advertising at
+          <a href="https://adssettings.google.com" rel="noopener" target="_blank">adssettings.google.com</a>.
+        </p>
+        <p>
+          2.3 This specification is reviewed whenever new storage mechanisms are introduced. Where
+          a new non-essential category is added, the consent banner is updated before deployment of
+          the corresponding mechanism.
+        </p>
+      </section>
 
-    <!-- Content -->
-    <main class="max-w-4xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-            <p class="text-lg text-gray-600 mb-8">Last updated: October 2026</p>
+      <!-- SECTION 3 -->
+      <section class="doc-section" id="preferences">
+        <h2><span class="sec-num">Section 3.0</span> Managing Your Preferences</h2>
+        <p>
+          3.1 Preferences may be set or revised at any time through the following controls:
+        </p>
+        <ul>
+          <li><strong>On-site consent banner</strong> — on request, the Institutional Cookie &amp;
+          Telemetry Notice reopens via the <em>Cookie Preferences</em> control in the global footer
+          present on every page. Selecting <em>Accept All Cookies</em> enables analytical and
+          advertising storage; <em>Essential Only</em> restricts storage to strictly necessary
+          keys.</li>
+          <li><strong>Google Ads Settings</strong> — independent opt-out from personalised
+          advertising at <a href="https://adssettings.google.com" rel="noopener" target="_blank">adssettings.google.com</a>.</li>
+          <li><strong>Industry portals</strong> — <a href="https://www.aboutads.info/choices/" rel="noopener" target="_blank">www.aboutads.info</a> and
+          <a href="https://www.youronlinechoices.com" rel="noopener" target="_blank">www.youronlinechoices.com</a>
+          maintain network-wide preference registries.</li>
+          <li><strong>Browser settings</strong> — all modern browsers permit blocking, restricting or
+          clearing cookies and site data. Blocking strictly necessary storage may degrade interface
+          preferences but does not prevent access to registry content.</li>
+        </ul>
+        <p class="doc-note">
+          <strong>Quick action:</strong> use the <button type="button" class="lf-btn" style="padding:0;border:0;background:none;color:var(--accent);font:inherit;font-weight:700;cursor:pointer;text-decoration:underline;" data-ufp-cookie-settings>Cookie Preferences</button>
+          control to reopen the consent notice on this page and revise your current choice.
+        </p>
+        <p>
+          3.2 Withdrawal of consent does not affect the lawfulness of storage undertaken prior to
+          withdrawal. Records of the decision are retained as evidence of compliance.
+        </p>
+      </section>
 
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-search"/></svg>1. What Are Cookies?</h2>
-            <p class="text-gray-700 mb-6">Cookies and local storage are small data files stored on your browser that help websites function efficiently and remember user preferences.</p>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-green"><use href="#icon-edit"/></svg>2. How We Use Them</h2>
-            <p class="text-gray-700 mb-4">The Nagar Van DMRV Dashboard uses strictly necessary local storage to enhance your user experience. For example:</p>
-
-            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-6 mb-6">
-                <h3 class="font-semibold text-[#1b3a2d] mb-2">Session Management</h3>
-                <p class="text-gray-700">We use local session storage to remember if you have already seen and closed the "Acknowledgment & Data Disclaimer" popup, ensuring you are not repeatedly interrupted during a single browsing session.</p>
+      <!-- SECTION 4 -->
+      <section class="doc-section" id="s4">
+        <h2><span class="sec-num">Section 4.0</span> Policy Updates &amp; Contact</h2>
+        <p>
+          4.1 This Policy may be revised to reflect changes in applicable law, the storage
+          mechanisms in use, or the Platform's operations. Material revisions will be reflected in
+          the "Last Revised" date within the Document Metadata box at the head of this page.
+        </p>
+        <p>
+          4.2 Questions, objections or grievances relating to cookies and tracking may be addressed
+          to the Grievance &amp; Data Protection Officer identified in the
+          <a href="/privacy.html#s6">Privacy Policy, Section 6.0</a>.
+        </p>
+        <div class="contact-block">
+          <dl>
+            <div>
+              <dt>Grievance &amp; Data Protection Officer</dt>
+              <dd>Office of the Publisher — Urban Forest Park</dd>
             </div>
-
-            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-6 mb-6">
-                <h3 class="font-semibold text-[#1b3a2d] mb-2">Offline Functionality</h3>
-                <p class="text-gray-700">We utilize service workers and caching to allow the dashboard and forms to load efficiently, even in areas with poor internet connectivity (like inside dense urban forests).</p>
+            <div>
+              <dt>Electronic Mail</dt>
+              <dd><a href="mailto:arkraj.biswas6@gmail.com?subject=Cookie%20Policy%20Enquiry%20%E2%80%94%20urbanforestpark.com">arkraj.biswas6@gmail.com</a></dd>
             </div>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-purple"><use href="#icon-shield"/></svg>3. Advertising &amp; Analytics</h2>
-            <p class="text-gray-700 mb-4">Parts of this website (including the UrbanForestPark jobs board) are supported by advertising. Google AdSense and its partners may place and read cookies on your browser, or use web beacons, to serve ads based on your prior visits to this or other websites. Analytics cookies (Google Analytics) help us understand aggregate, anonymised usage of the site.</p>
-            <p class="text-gray-700">You can opt out of personalised advertising at any time via <a class="text-[#1b3a2d] hover:underline font-semibold" href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a class="text-[#1b3a2d] hover:underline font-semibold" href="https://www.aboutads.info" target="_blank" rel="noopener">www.aboutads.info</a>. Opting out does not remove ads; it makes them less relevant. The dashboard storage and service-worker caches described above are never shared with advertisers.</p>
+          </dl>
         </div>
-    </main>
+      </section>
+    </article>
+  </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
-        <div class="max-w-4xl mx-auto px-4 text-center text-sm text-gray-600">
-            <p>&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
-            <p class="mt-3">Career Registry:
-              <a href="/" class="text-[#1b3a2d] hover:underline">Career Registry (All Jobs)</a> &middot;
-              <a href="/jrf-srf-project-associate-jobs.html" class="text-[#1b3a2d] hover:underline">JRF / SRF &amp; Project Associate Jobs</a> &middot;
-              <a href="/phd-fellowships-climate-sustainability.html" class="text-[#1b3a2d] hover:underline">PhD &amp; Postdoctoral Fellowships</a> &middot;
-              <a href="/forestry-wildlife-government-jobs.html" class="text-[#1b3a2d] hover:underline">Forestry &amp; Wildlife Jobs</a> &middot;
-              <a href="/gis-remote-sensing-climate-jobs.html" class="text-[#1b3a2d] hover:underline">GIS &amp; Remote Sensing Jobs</a> &middot;
-              <a href="/esg-carbon-sustainability-jobs.html" class="text-[#1b3a2d] hover:underline">ESG &amp; Carbon Market Jobs</a>
-            </p>
-            <div class="flex justify-center gap-4 mt-4">
-                <a href="/privacy.html" class="text-[#1b3a2d] hover:underline">Privacy Policy</a>
-                <a href="/terms.html" class="text-[#1b3a2d] hover:underline">Terms of Use</a>
-                <a href="/accessibility.html" class="text-[#1b3a2d] hover:underline">Accessibility</a>
-                <a href="/dashboard.html" class="text-[#1b3a2d] hover:underline">Dashboard</a>
-            </div>
-        </div>
-    </footer>
-<script src="assets/js/night-mode.js"></script>
+  <!-- ================= INSTITUTIONAL FOOTER ================= -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <div class="lf-brand">
+        <span class="lf-name">URBAN FOREST PARK</span>
+        <p>
+          National Climate, Forestry, ESG &amp; Geospatial Career Registry (India) — home of the
+          Nagar Van dMRV Dashboard &amp; Green Calculator.
+        </p>
+      </div>
+      <nav class="lf-links" aria-label="Legal documents and site links">
+        <a href="/">Job Registry</a>
+        <a href="/dashboard.html">dMRV Dashboard</a>
+        <a href="/green-calculator.html">Green Calculator</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/cookies.html">Cookie Policy</a>
+        <a href="/accessibility.html">Accessibility</a>
+        <a href="/unsubscribe.html">Dispatch Preferences</a>
+        <button type="button" class="lf-btn" data-ufp-cookie-settings>Cookie Preferences</button>
+      </nav>
+      <p class="lf-note">
+        &copy; 2026 Urban Forest Park &middot; Governed by the laws of the Republic of India &middot;
+        Compliance framework: IT Act, 2000 &amp; DPDP Act, 2023 &middot;
+        Grievance Officer: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="/js/consent.js"></script>
+  <script>
+    /* Light / Night mode toggle (shared institutional behaviour). */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      function render() {
+        var dark = root.getAttribute('data-theme') === 'dark';
+        btn.textContent = dark ? 'Light Mode' : 'Night Mode';
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        var meta = document.getElementById('meta-theme-color');
+        if (meta) meta.setAttribute('content', dark ? '#0B0F17' : '#F8FAFC');
+      }
+      btn.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('ufp_theme', next); } catch (e) { /* private mode */ }
+        render();
+      });
+      render();
+    })();
+  </script>
 </body>
 </html>

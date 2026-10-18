@@ -1,0 +1,574 @@
+/* ==========================================================================
+   Urban Forest Park — Institutional Legal Document Stylesheet
+   --------------------------------------------------------------------------
+   Shared by: privacy.html · cookies.html · terms.html · accessibility.html ·
+              unsubscribe.html
+   Design language: formal statutory typography, two-column document layout
+   (240px sticky clause navigation + 780px reading column), 1px hairlines,
+   light / night mode via [data-theme="dark"] on <html>.
+   Variable names mirror styles/jobs.css so shared components (consent bar)
+   inherit the correct palette on every page.
+   ========================================================================== */
+
+/* ------------------------------------------------ 1. Tokens */
+:root {
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', 'Noto Serif', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --bg: #F8FAFC;
+  --bg-2: #F1F5F9;
+  --card: #FFFFFF;
+  --ink: #0F172A;
+  --ink-2: #334155;
+  --ink-3: #64748B;
+  --ink-4: #94A3B8;
+  --border: #E2E8F0;
+  --border-2: #CBD5E1;
+
+  --accent: #065F46;
+  --accent-2: #044637;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #ECFDF5;
+  --accent-soft-2: #D1FAE5;
+  --emerald: #10B981;
+
+  --footer-bg: #0D1F17;
+  --footer-ink: #E8F0EC;
+  --footer-ink-2: #9FB6AB;
+  --footer-line: rgba(232, 240, 236, 0.14);
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 26px -20px rgba(15, 23, 42, 0.22);
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 14px;
+  --maxw: 1240px;
+  --doc-width: 780px;
+  --aside-width: 240px;
+}
+
+[data-theme="dark"] {
+  --bg: #0B0F17;
+  --bg-2: #0F1522;
+  --card: #111827;
+  --ink: #F1F5F9;
+  --ink-2: #CBD5E1;
+  --ink-3: #94A3B8;
+  --ink-4: #64748B;
+  --border: #1E293B;
+  --border-2: #334155;
+
+  --accent: #34D399;
+  --accent-2: #10B981;
+  --accent-ink: #052E1F;
+  --accent-soft: rgba(16, 185, 129, 0.10);
+  --accent-soft-2: rgba(16, 185, 129, 0.20);
+  --emerald: #34D399;
+
+  --footer-bg: #0B0F17;
+  --footer-ink: #E2E8F0;
+  --footer-ink-2: #7E8CA0;
+  --footer-line: rgba(148, 163, 184, 0.18);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 30px -22px rgba(0, 0, 0, 0.65);
+}
+
+/* ------------------------------------------------ 2. Base */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-2); }
+[data-theme="dark"] a:hover { color: var(--accent); filter: brightness(1.15); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 14px;
+  top: -48px;
+  z-index: 12000;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 12px; color: var(--accent-ink); }
+
+/* ------------------------------------------------ 3. Institutional top bar */
+.legal-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.legal-topbar-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 13px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.legal-wordmark {
+  display: grid;
+  gap: 1px;
+  text-decoration: none;
+  line-height: 1.2;
+}
+.lw-name {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+.lw-sub {
+  font-size: 10.6px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.legal-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.legal-nav a {
+  padding: 8px 11px;
+  border-radius: var(--r-sm);
+  font-size: 12.8px;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.legal-nav a:hover { background: var(--bg-2); color: var(--ink); }
+
+.theme-toggle {
+  padding: 8px 14px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: inherit;
+  font-size: 12.2px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ------------------------------------------------ 4. Two-column shell */
+.legal-shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 46px 24px 72px;
+  display: grid;
+  grid-template-columns: var(--aside-width) minmax(0, var(--doc-width));
+  justify-content: center;
+  gap: 56px;
+  align-items: start;
+}
+
+.legal-aside {
+  position: sticky;
+  top: 84px;
+  display: grid;
+  gap: 18px;
+}
+
+.legal-toc,
+.legal-meta {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  padding: 16px 16px 14px;
+}
+
+.toc-title,
+.meta-title {
+  margin: 0 0 10px;
+  font-size: 10.8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.legal-toc ol {
+  margin: 0;
+  padding: 0 0 0 0;
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  counter-reset: clause;
+}
+.legal-toc li { counter-increment: clause; }
+.legal-toc a {
+  display: block;
+  padding: 6px 8px;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 12.4px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+.legal-toc a::before {
+  content: counter(clause) ".0  ";
+  font-family: var(--font-mono);
+  font-size: 10.6px;
+  color: var(--ink-4);
+}
+.legal-toc a:hover {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.legal-meta dl { margin: 0; display: grid; gap: 9px; }
+.legal-meta dl > div { display: grid; gap: 1px; }
+.legal-meta dt {
+  font-size: 10.4px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.legal-meta dd {
+  margin: 0;
+  font-size: 12.6px;
+  font-weight: 600;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.legal-meta dd a { font-weight: 600; }
+
+/* ------------------------------------------------ 5. Document column */
+.legal-doc {
+  min-width: 0;
+  max-width: var(--doc-width);
+}
+
+.doc-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.legal-doc h1 {
+  margin: 0 0 6px;
+  font-size: 33px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.doc-rule {
+  width: 64px;
+  height: 3px;
+  margin: 14px 0 18px;
+  border: 0;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.doc-lede {
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: var(--ink-2);
+}
+
+.doc-note {
+  margin: 14px 0 0;
+  padding: 12px 15px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  font-size: 12.8px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.doc-note strong { color: var(--ink); }
+
+/* Sections & statutory prose */
+.doc-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 92px;
+}
+
+.doc-section h2 {
+  margin: 0 0 14px;
+  font-size: 19.5px;
+  font-weight: 800;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.sec-num {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.doc-section h3 {
+  margin: 26px 0 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.doc-section p,
+.doc-section li {
+  font-family: var(--font-serif);
+  font-size: 15.5px;
+  line-height: 1.78;
+  color: var(--ink-2);
+}
+.doc-section p { margin: 0 0 14px; }
+.doc-section ul,
+.doc-section ol { margin: 0 0 16px; padding-left: 22px; }
+.doc-section li { margin-bottom: 7px; }
+.doc-section li strong,
+.doc-section p strong { color: var(--ink); font-weight: 700; }
+
+.doc-section code,
+.cookie-key {
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-2);
+  font-family: var(--font-mono);
+  font-size: 12.4px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* Definitions & specification tables */
+.doc-table-wrap { overflow-x: auto; margin: 0 0 18px; border: 1px solid var(--border); border-radius: var(--r); }
+
+table.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  background: var(--card);
+  font-size: 13px;
+}
+table.doc-table caption {
+  caption-side: top;
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  font-family: var(--font-mono);
+  font-size: 10.8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+}
+table.doc-table th {
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: var(--bg-2);
+  font-size: 11.4px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: left;
+  white-space: nowrap;
+}
+table.doc-table td {
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+table.doc-table th:last-child,
+table.doc-table td:last-child { border-right: 0; }
+table.doc-table tr:last-child td { border-bottom: 0; }
+table.doc-table td strong { color: var(--ink); }
+
+/* Callout boxes */
+.callout {
+  margin: 20px 0;
+  padding: 15px 17px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.callout .callout-title {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.callout p {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 13.2px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.callout p + p { margin-top: 8px; }
+
+/* Contact block */
+.contact-block {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.contact-block dl { margin: 0; display: grid; gap: 11px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.contact-block dt {
+  font-size: 10.6px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.contact-block dd { margin: 2px 0 0; font-size: 13.4px; font-weight: 600; color: var(--ink-2); }
+
+/* ------------------------------------------------ 6. Institutional footer */
+.legal-footer {
+  border-top: 1px solid var(--footer-line);
+  background: var(--footer-bg);
+  color: var(--footer-ink);
+}
+.legal-footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 34px 24px 26px;
+  display: grid;
+  gap: 18px;
+}
+.lf-brand { display: grid; gap: 6px; max-width: 720px; }
+.lf-name {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--footer-ink);
+}
+.lf-brand p {
+  margin: 0;
+  font-size: 12.4px;
+  line-height: 1.6;
+  color: var(--footer-ink-2);
+}
+.lf-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--footer-line);
+  border-bottom: 1px solid var(--footer-line);
+}
+.lf-links a,
+.lf-links .lf-btn {
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12.6px;
+  font-weight: 600;
+  color: var(--footer-ink-2);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.lf-links a:hover,
+.lf-links .lf-btn:hover { color: var(--emerald); }
+.lf-note {
+  margin: 0;
+  font-size: 11.8px;
+  line-height: 1.7;
+  color: var(--footer-ink-2);
+}
+.lf-note a { color: var(--footer-ink); }
+
+/* ------------------------------------------------ 7. Responsive */
+@media (max-width: 980px) {
+  .legal-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    padding-top: 30px;
+  }
+  .legal-aside { position: static; }
+  .legal-doc { max-width: none; }
+}
+
+@media (max-width: 720px) {
+  .legal-topbar-inner { padding: 11px 16px; }
+  .legal-shell { padding: 24px 16px 56px; }
+  .legal-doc h1 { font-size: 26px; }
+  .doc-section p, .doc-section li { font-size: 15px; }
+  .legal-nav a { padding: 6px 8px; font-size: 12px; }
+}
+
+/* ------------------------------------------------ 8. Print */
+@media print {
+  .legal-topbar, .legal-aside, .legal-footer, .ufp-cc { display: none !important; }
+  .legal-shell { display: block; padding: 0; }
+  body { background: #FFFFFF; color: #000000; font-size: 12px; }
+  .doc-section p, .doc-section li { color: #1a1a1a; font-size: 11.5px; }
+  .doc-section { break-inside: avoid-page; }
+}

@@ -1871,6 +1871,192 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Mandate Dispatch — 72-hour email briefing subscription              */
+  /* ------------------------------------------------------------------ */
+  var NEWSLETTER_STORE_KEY = 'ufp_newsletter';
+
+  var SECTOR_LABELS = {
+    'all': 'All mandates',
+    'academic': 'JRF / PhD / Academic',
+    'forestry-gis': 'Forestry & GIS',
+    'corporate-esg': 'Corporate ESG'
+  };
+
+  function newsletterEndpoint() {
+    var meta = document.querySelector('meta[name="ufp-newsletter-endpoint"]');
+    var value = meta && meta.content ? meta.content.trim() : '';
+    return value || '/api/subscribe';
+  }
+
+  function newsletterStored() {
+    try {
+      var raw = window.localStorage.getItem(NEWSLETTER_STORE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function newsletterStore(payload) {
+    try {
+      window.localStorage.setItem(NEWSLETTER_STORE_KEY, JSON.stringify(payload));
+    } catch (e) { /* private mode: the confirmation simply will not persist */ }
+  }
+
+  function validEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(value || '').trim());
+  }
+
+  function dispatchStatusEl(form) {
+    var scope = form.closest('.dispatch-mini') || form.parentNode;
+    return scope ? scope.querySelector('.dispatch-status') : null;
+  }
+
+  function dispatchSetStatus(form, message, kind) {
+    var el = dispatchStatusEl(form);
+    if (!el) return;
+    el.textContent = message;
+    el.classList.remove('is-ok', 'is-note', 'is-error');
+    if (kind) el.classList.add(kind);
+  }
+
+  function dispatchPayload(form) {
+    var emailInput = form.querySelector('input[type="email"]');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!validEmail(email)) return null;
+    var frequencyEl = form.querySelector('input[name="frequency"]:checked');
+    var sectorEl = form.querySelector('select[name="sector"]');
+    return {
+      email: email,
+      frequency: frequencyEl ? frequencyEl.value : '3-day',
+      sector: sectorEl ? sectorEl.value : 'all'
+    };
+  }
+
+  /* Swap a submitted form for a formal confirmation state. `note` carries
+     any transparency note (e.g. a local-only save when the dispatch
+     endpoint is not yet reachable). */
+  function dispatchDone(form, record, note) {
+    var isMini = !!form.closest('.dispatch-mini');
+
+    if (isMini) {
+      form.hidden = true;
+      dispatchSetStatus(
+        form,
+        'Subscribed \u2014 next briefing within 72 hours.' + (note ? ' ' + note : ''),
+        'is-ok'
+      );
+      return;
+    }
+
+    dispatchSetStatus(form, '', null);
+    form.hidden = true;
+
+    var done = document.createElement('div');
+    done.className = 'dispatch-done';
+    var html = '<p class="dd-title">Subscription recorded</p>' +
+      '<dl class="dd-meta">' +
+      '<div><dt>Address</dt><dd>' + escapeHtml(record.email) + '</dd></div>' +
+      '<div><dt>Frequency</dt><dd>' + (record.frequency === 'weekly' ? 'Weekly digest' : 'Every 3 days') + '</dd></div>' +
+      '<div><dt>Sector</dt><dd>' + escapeHtml(SECTOR_LABELS[record.sector] || 'All mandates') + '</dd></div>' +
+      '</dl>' +
+      (note ? '<p class="dd-note">' + escapeHtml(note) + '</p>' : '') +
+      '<p class="dd-actions">' +
+      '<a href="/unsubscribe.html?email=' + encodeURIComponent(record.email) + '">Manage or withdraw this subscription</a>' +
+      ' <span class="dd-sep">&middot;</span> ' +
+      '<button type="button" class="dd-update">Update preferences</button>' +
+      '</p>';
+    done.innerHTML = html;
+
+    var updateBtn = done.querySelector('.dd-update');
+    if (updateBtn) {
+      updateBtn.addEventListener('click', function () {
+        done.parentNode.removeChild(done);
+        form.hidden = false;
+        var emailInput = form.querySelector('input[type="email"]');
+        if (emailInput) emailInput.focus();
+      });
+    }
+    form.parentNode.insertBefore(done, form.nextSibling);
+  }
+
+  function submitDispatch(form, event) {
+    event.preventDefault();
+    var payload = dispatchPayload(form);
+    if (!payload) {
+      dispatchSetStatus(form, 'Enter a valid official email address to subscribe.', 'is-error');
+      var badInput = form.querySelector('input[type="email"]');
+      if (badInput) badInput.focus();
+      return;
+    }
+
+    var record = {
+      email: payload.email,
+      frequency: payload.frequency,
+      sector: payload.sector,
+      ts: new Date().toISOString(),
+      status: 'pending'
+    };
+    newsletterStore(record);
+    dispatchSetStatus(form, 'Registering subscription\u2026', 'is-note');
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
+    fetch(newsletterEndpoint(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        return { ok: response.ok && !(data && data.ok === false), persisted: !!(data && data.persisted) };
+      });
+    }).then(function (result) {
+      record.status = result.ok ? 'subscribed' : 'local';
+      record.persisted = result.persisted;
+      newsletterStore(record);
+      if (result.ok) {
+        dispatchDone(form, record, result.persisted ? '' :
+          'Saved on this device. To join the current dispatch list immediately, write to arkraj.biswas6@gmail.com.');
+        toast(result.persisted
+          ? 'Dispatch subscribed \u2014 next briefing within 72 hours.'
+          : 'Dispatch preference saved on this device.');
+      } else {
+        dispatchDone(form, record,
+          'Saved on this device. To join the current dispatch list immediately, write to arkraj.biswas6@gmail.com.');
+        toast('Dispatch preference saved on this device.');
+      }
+    }).catch(function () {
+      record.status = 'local';
+      newsletterStore(record);
+      dispatchDone(form, record,
+        'Saved on this device. To join the current dispatch list immediately, write to arkraj.biswas6@gmail.com.');
+      toast('Dispatch preference saved on this device.');
+    }).then(function () {
+      if (submitBtn) submitBtn.disabled = false;
+    });
+  }
+
+  function initNewsletter() {
+    var forms = document.querySelectorAll('form[data-newsletter-form]');
+    Array.prototype.forEach.call(forms, function (form) {
+      form.addEventListener('submit', function (event) { submitDispatch(form, event); });
+
+      var stored = newsletterStored();
+      var emailInput = form.querySelector('input[type="email"]');
+      if (stored && stored.email && emailInput) emailInput.value = stored.email;
+
+      /* Returning visitor with a recorded preference: show the confirmation
+         state instead of an empty form. */
+      if (stored && stored.email && (stored.status === 'subscribed' || stored.status === 'local')) {
+        var frequencyInput = form.querySelector('input[name="frequency"][value="' + (stored.frequency || '3-day') + '"]');
+        if (frequencyInput) frequencyInput.checked = true;
+        var sectorSelect = form.querySelector('select[name="sector"]');
+        if (sectorSelect && SECTOR_LABELS[stored.sector]) sectorSelect.value = stored.sector;
+        dispatchDone(form, stored, stored.persisted ? '' : '');
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Boot                                                                */
   /* ------------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', function () {
@@ -1894,6 +2080,7 @@
     };
     bindEvents();
     bindCommunityEvents();
+    initNewsletter();
     initTheme();
     loadAll();
   });

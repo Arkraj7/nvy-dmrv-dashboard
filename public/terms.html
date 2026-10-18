@@ -1,187 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E7BLPFWP7"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme bootstrap: applied before stylesheets to prevent flicker. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4E7BLPFWP7');
+      (function () {
+        try {
+          var t = localStorage.getItem('ufp_theme');
+          if (t !== 'dark' && t !== 'light') {
+            t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* default rendering: light */ }
+      })();
     </script>
-    <meta name="description" content="Terms and conditions for using the Nagar Van DMRV Dashboard. Please read these terms carefully before using our urban forest monitoring platform.">
+
+    <title>Terms of Use — Urban Forest Park Career Registry</title>
+    <meta name="description" content="Statutory Terms of Use of the Urban Forest Park Climate, Forestry, ESG &amp; Academic Career Registry (India). Nature of service, accuracy of AI-structured summaries, intellectual property, limitation of liability and governing law.">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.urbanforestpark.com/terms.html">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Terms of Use — Nagar Van DMRV Dashboard">
-    <meta property="og:description" content="Terms and conditions for using the Nagar Van DMRV Dashboard platform.">
+    <meta property="og:site_name" content="Urban Forest Park — India Career Registry">
+    <meta property="og:title" content="Terms of Use — Urban Forest Park Career Registry">
+    <meta property="og:description" content="Statutory Terms of Use governing access to the registry, its dispatches and public research utilities.">
     <meta property="og:url" content="https://www.urbanforestpark.com/terms.html">
     <meta property="og:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
-    <meta property="og:site_name" content="Nagar Van DMRV Dashboard">
-    <meta property="og:locale" content="en_IN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Terms of Use — Nagar Van DMRV Dashboard">
-    <meta name="twitter:description" content="Terms and conditions for using the platform.">
-    <meta name="twitter:image" content="https://www.urbanforestpark.com/assets/images/Nagar_Van_Logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Terms of Use — Urban Forest Park Career Registry">
+    <meta name="twitter:description" content="Statutory Terms of Use governing access to the registry.">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="UrbanPark" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+    <!-- Institutional legal stylesheet -->
+    <link rel="stylesheet" href="/styles/legal.css">
+
+    <!-- Structured data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Terms of Use — Nagar Van DMRV Dashboard",
-      "description": "Terms of use for the urban forest monitoring platform",
+      "name": "Terms of Use — Urban Forest Park Career Registry",
+      "description": "Statutory Terms of Use governing the Urban Forest Park Career Registry, dispatches and public research utilities.",
       "url": "https://www.urbanforestpark.com/terms.html",
+      "inLanguage": "en-IN",
       "isPartOf": {
         "@type": "WebSite",
-        "name": "Nagar Van DMRV Dashboard",
+        "name": "Urban Forest Park — National Climate, Forestry, ESG & Geospatial Career Registry (India)",
         "url": "https://www.urbanforestpark.com/"
       }
     }
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Use - Nagar Van DMRV</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/night-mode.css">
-    <script>try{if(localStorage.getItem('app-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .icon { width: 20px; height: 20px; vertical-align: middle; display: inline-block; flex-shrink: 0; }
-        .icon-sm { width: 16px; height: 16px; }
-        .icon-lg { width: 28px; height: 28px; }
-        .icon-white { color: #fff; }
-        .icon-green { color: #6ee7b7; }
-        .icon-blue { color: #7dd3fc; }
-        .icon-amber { color: #fde68a; }
-        .icon-purple { color: #c4b5fd; }
-        .icon-teal { color: #5eead4; }
-        .icon-peach { color: #fed7aa; }
-        .icon-sky { color: #7dd3fc; }
-        .icon-dark { color: #374151; }
-        .icon-red { color: #ef4444; }
-    </style>
 </head>
-<body class="bg-[#f4f7f6] min-h-screen">
+<body>
+  <a class="skip-link" href="#legal-doc">Skip to document</a>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7"/><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M9 14h6v6H9z"/></symbol>
-  <symbol id="icon-insights" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="13" width="4" height="7" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></symbol>
-  <symbol id="icon-about" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
-  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-2.8 2.7-5 6-5s6 2.2 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c1.5 0 2.8.6 3.8 1.6"/></symbol>
-  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4c2-1 4-1 6 0s4 1 6 0 4-1 6 0v10c-2 1-4 1-6 0s-4-1-6 0-4 1-6 0"/></symbol>
-  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-1-1-9-5.5-9-10a5 5 0 0110-3 5 5 0 019 3c0 4.5-8 9-9 10z"/></symbol>
-  <symbol id="icon-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c5-5 8-11 13-13"/><path d="M14 10c-2 1-5 3-7 7"/><path d="M5 19l2-4"/></symbol>
-  <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 12c0-3 2.7-6 6-6s6 3 6 6"/><path d="M8 16c0-2 1.8-4 4-4s4 2 4 4"/><rect x="11" y="16" width="2" height="5" rx="1"/></symbol>
-  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3"/><path d="M12 2c-4.4 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3.6-8-8-8z"/></symbol>
-  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20"/><path d="M12 2c-2.8 2.5-4.5 6.2-4.5 10s1.7 7.5 4.5 10c2.8-2.5 4.5-6.2 4.5-10S14.8 4.5 12 2z"/></symbol>
-  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="M22 15l-5-5-7 7"/><path d="M16 13l-3 3"/></symbol>
-  <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="14" width="3" height="5" rx="1"/><rect x="13" y="9" width="3" height="10" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></symbol>
-  <symbol id="icon-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 019 9h-9V3z"/><path d="M12 12l-4-4"/></symbol>
-  <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12c1.5 0 2.5-.5 3-1"/><path d="M3 12h16c1.5 0 2.5.5 3 1"/><path d="M5 18h10c1.5 0 2.5-.5 3-1"/></symbol>
-  <symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 8 5 12 5 16a7 7 0 0014 0c0-4-4-8-7-14z"/></symbol>
-  <symbol id="icon-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V4a2 2 0 00-4 0v10.8"/><path d="M8 16a4 4 0 108 0 4 4 0 00-8 0z"/></symbol>
-  <symbol id="icon-seedling" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-4 0-6 2-6 5"/><path d="M12 8c4 0 6 2 6 5"/><path d="M8 3c4 0 6 1.5 6 5"/><path d="M16 3c-4 0-6 1.5-6 5"/></symbol>
-  <symbol id="icon-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/><path d="M12 8v8"/></symbol>
-  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 00-9-9H5a3 3 0 00-3 3v6a3 3 0 003 3h2v4l4-4h4a9 9 0 006-3z"/></symbol>
-  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
-  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 4l10 8 10-8"/></symbol>
-  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 13.5l6 3.5"/><path d="M15 7l-6 3.5"/></symbol>
-  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5-5"/></symbol>
-  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .5-5.5 5 1.5 7L12 17l-6 4 1.5-7L2 9l7-.5L12 2z"/></symbol>
-  <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6a3 3 0 013-3h4l3 3h7a3 3 0 013 3v9a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"/></symbol>
-  <symbol id="icon-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></symbol>
-  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7a2 2 0 00-2-2h-3l-2-3H9L7 5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7z"/><circle cx="12" cy="13" r="4"/></symbol>
-  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 114 4L7 20l-4 1 1-4L17 3z"/></symbol>
-  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></symbol>
-  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
-  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
-  <symbol id="icon-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l5 5v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
-  <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></symbol>
-  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M10 7l-5 5 5 5"/></symbol>
-  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
-  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
-  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h0"/></symbol>
-  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></symbol>
-  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
-  <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z"/><path d="M9 3v15"/><path d="M15 6v15"/></symbol>
-  <symbol id="icon-gps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></symbol>
-  <symbol id="icon-eco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c5-5 8-11 8-18"/><path d="M17 7c-2 2-4 3-8 4"/><path d="M12 12c2-2 4-3 5-7"/></symbol>
-  <symbol id="icon-clean" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l15-15"/><path d="M13 3l8 8"/><path d="M4 20l3-3"/></symbol>
-  <symbol id="icon-safety" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v7c0 4-3 8-7 9-4-1-7-5-7-9V5l7-3z"/></symbol>
-</svg>
+  <!-- ================= INSTITUTIONAL TOP BAR ================= -->
+  <header class="legal-topbar">
+    <div class="legal-topbar-inner">
+      <a class="legal-wordmark" href="/">
+        <span class="lw-name">URBAN FOREST PARK</span>
+        <span class="lw-sub">National Career Registry &amp; dMRV Tools &middot; India</span>
+      </a>
+      <nav class="legal-nav" aria-label="Site navigation">
+        <a href="/">Job Registry</a>
+        <a href="/dashboard.html">dMRV Dashboard</a>
+        <a href="/green-calculator.html">Green Calculator</a>
+        <a href="/about.html">About</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">Night Mode</button>
+    </div>
+  </header>
 
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-[#1b3a2d] to-[#5dc48a] text-white py-8">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <a href="javascript:history.back()" class="inline-flex items-center gap-2 text-white hover:text-emerald-200">
-                    <svg class="icon icon-green"><use href="#icon-arrow-left"/></svg> Back to Dashboard
-                </a>
-                <button class="theme-toggle" id="theme-toggle-btn" role="switch" aria-checked="false" aria-label="Switch to dark mode">
-                  <div class="theme-toggle__container">
-                    <div class="theme-toggle__clouds"></div>
-                    <div class="theme-toggle__stars">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 88.5976 25.602 87.9802 26.0053C87.3716 26.3995 86.8864 26.9312 86.5248 27.5913C86.172 28.2513 85.9956 28.9572 85.9956 29.7273C85.9956 28.563 85.6075 27.5546 84.8313 26.7112C84.0551 25.8587 83.1114 25.4095 81 25.3545ZM104 22.3545C105.111 22.2995 106.055 21.8503 106.831 21.0069C107.607 20.1635 107.996 19.1642 107.996 18C107.996 19.1642 108.384 20.1635 109.16 21.0069C109.936 21.8503 110.88 22.2903 112 22.3545C111.268 22.3911 110.598 22.602 109.98 23.0053C109.372 23.3995 108.886 23.9312 108.525 24.5913C108.172 25.2513 107.996 25.9572 107.996 26.7273C107.996 25.563 107.607 24.5546 106.831 23.7112C106.055 22.8587 105.111 22.4095 104 22.3545ZM123.168 9.00688C122.392 9.85027 121.448 10.2995 120.337 10.3545C121.448 10.4095 122.392 10.8587 123.168 11.7112C123.944 12.5546 124.332 13.563 124.332 14.7273C124.332 13.9572 124.509 13.2513 124.861 12.5913C125.223 11.9312 125.708 11.3995 126.317 11.0053C126.934 10.602 127.605 10.3911 128.337 10.3545C127.217 10.2903 126.273 9.85027 125.497 9.00688C124.721 8.16348 124.332 7.16425 124.332 6C124.332 7.16425 123.944 8.16348 123.168 9.00688Z" fill="currentColor"/></svg>
-                    </div>
-                    <div class="theme-toggle__sun">
-                      <div class="theme-toggle__moon-mask">
-                        <div class="theme-toggle__crater"></div>
-                        <div class="theme-toggle__crater"></div>
-                        <div class="theme-toggle__crater"></div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
+  <!-- ================= DOCUMENT ================= -->
+  <main class="legal-shell">
+    <aside class="legal-aside">
+      <nav class="legal-toc" aria-label="Document navigation">
+        <p class="toc-title">Document Navigation</p>
+        <ol>
+          <li><a href="#s1">Acceptance of Institutional Terms</a></li>
+          <li><a href="#s2">Nature of Service</a></li>
+          <li><a href="#s3">Accuracy of Automated &amp; AI-Structured Summaries</a></li>
+          <li><a href="#s4">Intellectual Property &amp; Open-Access dMRV Tools</a></li>
+          <li><a href="#s5">Limitation of Liability</a></li>
+          <li><a href="#s6">Governing Law &amp; Jurisdiction</a></li>
+        </ol>
+      </nav>
+
+      <div class="legal-meta">
+        <p class="meta-title">Document Metadata</p>
+        <dl>
+          <div><dt>Document</dt><dd>Terms of Use</dd></div>
+          <div><dt>Effective Date</dt><dd>19 October 2026</dd></div>
+          <div><dt>Last Revised</dt><dd>19 October 2026</dd></div>
+          <div><dt>Jurisdiction</dt><dd>Republic of India — Courts at New Delhi</dd></div>
+          <div><dt>Compliance Framework</dt><dd>IT Act, 2000 &amp; DPDP Act, 2023</dd></div>
+          <div><dt>Publisher</dt><dd>Urban Forest Park — <a href="https://www.urbanforestpark.com/">urbanforestpark.com</a></dd></div>
+          <div><dt>Grievance Officer</dt><dd><a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </aside>
+
+    <article class="legal-doc" id="legal-doc">
+      <p class="doc-eyebrow">Legal &amp; Compliance &middot; Statutory Document</p>
+      <h1>Terms of Use</h1>
+      <hr class="doc-rule">
+      <p class="doc-lede">
+        These Terms of Use ("Terms") govern access to and use of the National Climate, Forestry, ESG
+        &amp; Geospatial Career Registry, the Mandate Dispatch, and the public research utilities
+        operated by Urban Forest Park at <strong>www.urbanforestpark.com</strong> (collectively, "the
+        Services"). Read these Terms in conjunction with the
+        <a href="/privacy.html">Privacy Policy</a> and the
+        <a href="/cookies.html">Cookie Policy</a>.
+      </p>
+
+      <!-- SECTION 1 -->
+      <section class="doc-section" id="s1">
+        <h2><span class="sec-num">Section 1.0</span> Acceptance of Institutional Terms</h2>
+        <p>
+          1.1 By accessing, browsing, subscribing to, or otherwise using any of the Services, the
+          user ("you") affirms that you have read, understood and agreed to be bound by these Terms,
+          and that you possess the legal capacity to enter into this agreement under the Indian
+          Contract Act, 1872.
+        </p>
+        <p>
+          1.2 If you do not accept these Terms, in whole or in part, you must refrain from using the
+          Services. Continued use following the publication of any revision constitutes acceptance of
+          the revised Terms.
+        </p>
+        <p>
+          1.3 The Services are operated from the Republic of India and are intended primarily for
+          users situated in India. The Platform makes no representation that the Services are
+          appropriate or available for use in any other jurisdiction.
+        </p>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="doc-section" id="s2">
+        <h2><span class="sec-num">Section 2.0</span> Nature of Service</h2>
+        <p>
+          2.1 <strong>The Services constitute an informational career registry and research
+          aggregator.</strong> The Platform collects, verifies, structures and publishes publicly
+          advertised mandates — including academic fellowships, research positions, government
+          contractual roles and corporate sustainability vacancies — and links each entry to the
+          official application portal of the publishing institution.
+        </p>
+        <p>
+          2.2 <strong>The Platform is not a recruitment agency, employment exchange, placement
+          consultancy or labour intermediary.</strong> Specifically, and without limitation:
+        </p>
+        <ul>
+          <li>The Platform does not act on behalf of any employer, institution or candidate in any
+          recruitment capacity;</li>
+          <li>The Platform does not solicit, receive, process or forward applications, curricula
+          vitae or supporting documents;</li>
+          <li>The Platform does not charge any fee, consideration or commission from candidates,
+          researchers or academic scholars at any stage of use — registration, browsing,
+          subscription to dispatches and access to the archive are 100% free;</li>
+          <li>The Platform extends no guarantee, warranty or assurance of employment, fellowship
+          award, shortlisting, admission or selection of any kind.</li>
+        </ul>
+        <p>
+          2.3 All hiring and selection decisions are made exclusively by the publishing institutions
+          in accordance with their own recruitment rules. Grievances regarding a particular
+          recruitment process must be addressed to the concerned institution, not to the Platform.
+        </p>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section class="doc-section" id="s3">
+        <h2><span class="sec-num">Section 3.0</span> Accuracy of Automated &amp; AI-Structured Job Summaries</h2>
+        <p>
+          3.1 Registry entries are compiled through an automated harvest-and-verification pipeline.
+          Source notices are normalised, de-duplicated and structured — in part with the assistance
+          of machine-based (AI) summarisation — into standardised dossiers covering position title,
+          organisation, location, qualification, compensation or fellowship reference, and the
+          application window.
+        </p>
+        <p>
+          3.2 While the Platform applies domain verification, redirect-unwrapping, duplicate hashing
+          and editorial structuring to every entry, <strong>automated summaries may contain
+          condensation errors, interpolation, or may lag behind subsequent corrigenda issued by the
+          publishing institution.</strong> Stipend figures, eligibility criteria, reservation
+          provisions, deadlines and extensions are frequently revised after first publication.
+        </p>
+        <p>
+          3.3 <strong>Candidates are advised — and it is a condition of use of the registry —
+          to always verify deadlines and official notifications directly at the linked parent
+          institution website before acting.</strong> The authoritative source for every mandate is
+          the official notification or portal of the concerned institution; the registry entry is a
+          discovery aid and not a substitute for it.
+        </p>
+        <div class="callout">
+          <p class="callout-title">Verification Obligation</p>
+          <p>
+            Every dossier provides both the direct application portal link and the verified official
+            website of the parent organisation. Users must treat the official notification as
+            controlling in the event of any discrepancy with the condensed registry summary.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 4 -->
+      <section class="doc-section" id="s4">
+        <h2><span class="sec-num">Section 4.0</span> Intellectual Property &amp; Open-Access dMRV Tools</h2>
+        <p>
+          4.1 The Services — including the registry compilation, editorial structure, snapshots,
+          dispatch texts, source code, design system, and the datasets underlying the Nagar Van
+          dMRV Dashboard and Green Calculator — are the intellectual property of Urban Forest Park
+          and are protected under the Copyright Act, 1957 and applicable international conventions.
+        </p>
+        <p>
+          4.2 The Platform publishes its registry outputs — the mandate listings, digests and
+          archive — for <strong>open access</strong>. You may read, quote, cite and redistribute
+          registry outputs for non-commercial research, journalistic, academic and public-interest
+          purposes, provided that:
+        </p>
+        <ul>
+          <li>attribution is given to "Urban Forest Park — National Career Registry (urbanforestpark.com)";</li>
+          <li>the redistribution is not presented as an official communication of any employer or institution; and</li>
+          <li>automated bulk extraction (scraping) is conducted at a rate that does not impair the
+          availability of the Services for other users.</li>
+        </ul>
+        <p>
+          4.3 The <strong>Nagar Van dMRV Dashboard</strong> and the <strong>Green Calculator</strong>
+          are maintained as open-access public research utilities. Their outputs may be cited in
+          research and policy work with attribution, but the underlying code, visualisations and
+          methodology may not be represented as the work of any other party or offered as a
+          competing commercial product.
+        </p>
+        <p>
+          4.4 Institutional names, logos and trademarks referenced in listings remain the property of
+          their respective owners and are used solely for identification of the publishing
+          institution.
+        </p>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section class="doc-section" id="s5">
+        <h2><span class="sec-num">Section 5.0</span> Limitation of Liability</h2>
+        <p>
+          5.1 The Services are provided on an <strong>"as is" and "as available"</strong> basis,
+          without warranties of any kind, express or implied, including as to merchantability,
+          fitness for a particular purpose, or uninterrupted availability.
+        </p>
+        <p>
+          5.2 To the maximum extent permitted by applicable law, Urban Forest Park, its publisher
+          and its contributors shall not be liable for any direct, indirect, incidental, special,
+          consequential or exemplary loss or damage arising from or in connection with:
+        </p>
+        <ul>
+          <li>reliance upon any registry entry, condensed summary, stipend figure or deadline
+          published on the Platform, where the official notification of the concerned institution
+          differs;</li>
+          <li>the acts, omissions, delays, cancellations or data practices of any third-party
+          institution or portal to which the Services link;</li>
+          <li>any application, examination, interview, recruitment or selection process conducted by
+          a third party;</li>
+          <li>unavailability, interruption or discontinuation of the Services or any part thereof;
+          or</li>
+          <li>unauthorised access to or alteration of transmissions or data, notwithstanding
+          reasonable security practices maintained by the Platform.</li>
+        </ul>
+        <p>
+          5.3 The Platform receives no consideration from candidates and, accordingly, no
+          consideration-based duty of care attaches to registry entries beyond the editorial
+          diligence described in Section 3.0.
+        </p>
+      </section>
+
+      <!-- SECTION 6 -->
+      <section class="doc-section" id="s6">
+        <h2><span class="sec-num">Section 6.0</span> Governing Law &amp; Jurisdiction</h2>
+        <p>
+          6.1 These Terms, and any dispute or claim arising out of or in connection with the
+          Services, shall be governed by and construed in accordance with the laws of the
+          Republic of India.
+        </p>
+        <p>
+          6.2 Subject to any mandatory provisions of applicable law, the courts at
+          <strong>New Delhi, India</strong> shall have exclusive jurisdiction in respect of all
+          matters arising under or in connection with these Terms.
+        </p>
+        <p>
+          6.3 The Platform may seek interim or injunctive relief in any court of competent
+          jurisdiction to protect its intellectual property or the integrity of the Services.
+        </p>
+        <p>
+          6.4 Questions regarding these Terms may be addressed to the Grievance Officer:
+        </p>
+        <div class="contact-block">
+          <dl>
+            <div>
+              <dt>Grievance Officer</dt>
+              <dd>Office of the Publisher — Urban Forest Park</dd>
             </div>
-            <h1 class="text-3xl font-bold flex items-center gap-2"><svg class="icon icon-sky"><use href="#icon-file"/></svg>Terms of Use</h1>
-            <p class="text-emerald-100 mt-2">Nagar Van Digital Monitoring, Reporting & Verification</p>
-        </div>
-    </header>
-
-    <!-- Content -->
-    <main class="max-w-4xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-            <p class="text-lg text-gray-600 mb-8">Last updated: May 2026</p>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-green"><use href="#icon-check"/></svg>1. Acceptance of Terms</h2>
-            <p class="text-gray-700 mb-6">By accessing and using the Nagar Van DMRV Dashboard, you agree to comply with these Terms of Use. This platform is intended for civic engagement, environmental monitoring, and public information.</p>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-amber"><use href="#icon-flag"/></svg>2. Acceptable Use & Civic Reporting</h2>
-            <p class="text-gray-700 mb-4">Users are encouraged to submit accurate, truthful reports regarding park conditions. You agree not to:</p>
-            <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2 ml-4">
-                <li>Submit false, misleading, or malicious data through our public forms.</li>
-                <li>Upload inappropriate, offensive, or non-relevant images to the AI verification system.</li>
-                <li>Attempt to disrupt the backend infrastructure or reverse-engineer the platform.</li>
-            </ul>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-purple"><use href="#icon-lock"/></svg>3. Intellectual Property</h2>
-            <p class="text-gray-700 mb-6">All thematic maps, research methodologies, ecological formulas, and written content presented on this dashboard are the intellectual property of the research team and affiliated institutions (MoEF&CC, CAMPA, GRAAM). You may reference the aggregated data for educational purposes, provided proper citation is given.</p>
-
-            <h2 class="text-xl font-bold text-[#1b3a2d] mb-4 flex items-center gap-2"><svg class="icon icon-red"><use href="#icon-shield"/></svg>4. Disclaimer of Liability</h2>
-            <p class="text-gray-700 mb-6">The environmental metrics (e.g., Carbon Sequestration, PM2.5 tracking) provided on this dashboard are calculated using scientific models and third-party APIs (such as Open-Meteo). While we strive for high accuracy, these figures are estimates for research and policy evaluation and should not be used as the sole basis for critical legal or financial decisions.</p>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
-        <div class="max-w-4xl mx-auto px-4 text-center text-sm text-gray-600">
-            <p>&copy; 2026 Nagar Van DMRV. All rights reserved.</p>
-            <p class="mt-3">Career Registry:
-              <a href="/" class="text-[#1b3a2d] hover:underline">Career Registry (All Jobs)</a> &middot;
-              <a href="/jrf-srf-project-associate-jobs.html" class="text-[#1b3a2d] hover:underline">JRF / SRF &amp; Project Associate Jobs</a> &middot;
-              <a href="/phd-fellowships-climate-sustainability.html" class="text-[#1b3a2d] hover:underline">PhD &amp; Postdoctoral Fellowships</a> &middot;
-              <a href="/forestry-wildlife-government-jobs.html" class="text-[#1b3a2d] hover:underline">Forestry &amp; Wildlife Jobs</a> &middot;
-              <a href="/gis-remote-sensing-climate-jobs.html" class="text-[#1b3a2d] hover:underline">GIS &amp; Remote Sensing Jobs</a> &middot;
-              <a href="/esg-carbon-sustainability-jobs.html" class="text-[#1b3a2d] hover:underline">ESG &amp; Carbon Market Jobs</a>
-            </p>
-            <div class="flex justify-center gap-4 mt-4">
-                <a href="/privacy.html" class="text-[#1b3a2d] hover:underline">Privacy Policy</a>
-                <a href="/cookies.html" class="text-[#1b3a2d] hover:underline">Cookie Policy</a>
-                <a href="/accessibility.html" class="text-[#1b3a2d] hover:underline">Accessibility</a>
-                <a href="/dashboard.html" class="text-[#1b3a2d] hover:underline">Dashboard</a>
+            <div>
+              <dt>Electronic Mail</dt>
+              <dd><a href="mailto:arkraj.biswas6@gmail.com?subject=Terms%20of%20Use%20Enquiry%20%E2%80%94%20urbanforestpark.com">arkraj.biswas6@gmail.com</a></dd>
             </div>
+            <div>
+              <dt>Governing Law</dt>
+              <dd>Laws of the Republic of India</dd>
+            </div>
+            <div>
+              <dt>Exclusive Jurisdiction</dt>
+              <dd>Courts at New Delhi, India</dd>
+            </div>
+          </dl>
         </div>
-    </footer>
-<script src="assets/js/night-mode.js"></script>
+      </section>
+    </article>
+  </main>
+
+  <!-- ================= INSTITUTIONAL FOOTER ================= -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <div class="lf-brand">
+        <span class="lf-name">URBAN FOREST PARK</span>
+        <p>
+          National Climate, Forestry, ESG &amp; Geospatial Career Registry (India) — home of the
+          Nagar Van dMRV Dashboard &amp; Green Calculator.
+        </p>
+      </div>
+      <nav class="lf-links" aria-label="Legal documents and site links">
+        <a href="/">Job Registry</a>
+        <a href="/dashboard.html">dMRV Dashboard</a>
+        <a href="/green-calculator.html">Green Calculator</a>
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+        <a href="/cookies.html">Cookie Policy</a>
+        <a href="/accessibility.html">Accessibility</a>
+        <a href="/unsubscribe.html">Dispatch Preferences</a>
+        <button type="button" class="lf-btn" data-ufp-cookie-settings>Cookie Preferences</button>
+      </nav>
+      <p class="lf-note">
+        &copy; 2026 Urban Forest Park &middot; Governed by the laws of the Republic of India &middot;
+        Compliance framework: IT Act, 2000 &amp; DPDP Act, 2023 &middot;
+        Grievance Officer: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="/js/consent.js"></script>
+  <script>
+    /* Light / Night mode toggle (shared institutional behaviour). */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      function render() {
+        var dark = root.getAttribute('data-theme') === 'dark';
+        btn.textContent = dark ? 'Light Mode' : 'Night Mode';
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        var meta = document.getElementById('meta-theme-color');
+        if (meta) meta.setAttribute('content', dark ? '#0B0F17' : '#F8FAFC');
+      }
+      btn.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('ufp_theme', next); } catch (e) { /* private mode */ }
+        render();
+      });
+      render();
+    })();
+  </script>
 </body>
 </html>
