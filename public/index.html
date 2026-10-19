@@ -403,8 +403,31 @@
 
     <section class="hero">
       <div class="hero-inner">
-        <p class="hero-kicker" id="hero-kicker" data-default-kicker="National Registry of Environmental Mandates — India" data-i18n="hero.kicker">National Registry of Environmental Mandates — India</p>
-        <h1 id="hero-heading" data-i18n-html="hero.title_html">India&rsquo;s Climate, Forestry, ESG, Geospatial &amp; Academic <span class="accent">Career Registry</span></h1>
+        <div class="hero-head-row">
+          <div class="hero-head-copy">
+            <p class="hero-kicker" id="hero-kicker" data-default-kicker="National Registry of Environmental Mandates — India" data-i18n="hero.kicker">National Registry of Environmental Mandates — India</p>
+            <h1 id="hero-heading" data-i18n-html="hero.title_html">India&rsquo;s Climate, Forestry, ESG, Geospatial &amp; Academic <span class="accent">Career Registry</span></h1>
+          </div>
+
+          <!-- ============ INSTANT SEARCH (ACTIVE + ARCHIVED, INDIA + GLOBAL) ============ -->
+          <div class="hero-search" id="hero-search">
+            <form class="hs-form" id="hero-search-form" role="search" aria-label="Instant search across every active and archived mandate">
+              <label class="hs-label" for="hero-search-input">Search all mandates — active &amp; archived</label>
+              <div class="hs-box">
+                <div class="hs-field">
+                  <span class="hs-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+                  <input class="hs-input" id="hero-search-input" type="search" placeholder="Search title, skill, state, organisation&hellip;" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="hero-search-panel" aria-autocomplete="list" aria-label="Search every active and archived mandate; matches and similar positions appear below the field">
+                </div>
+                <button class="hs-btn" id="hero-search-btn" type="submit" aria-label="Search the registry and filter the mandate feed">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                  <span>Search</span>
+                </button>
+              </div>
+            </form>
+            <div class="hs-panel" id="hero-search-panel" role="listbox" aria-label="Search matches and similar positions" hidden></div>
+          </div>
+        </div>
+
         <p class="hero-sub" id="hero-sub" data-i18n-html="hero.sub_html">
           A continuously monitored index of active positions with forest departments, universities
           and research institutions (JRF / SRF / PhD / project staff), sustainability teams and
@@ -566,16 +589,6 @@
           </form>
           <p class="dispatch-status dm-status" role="status" aria-live="polite"></p>
         </div>
-      </div>
-    </div>
-
-    <!-- ================= AD SLOT 1: TOP LEADERBOARD ================= -->
-    <div class="ad-container ad-leaderboard" aria-label="Sponsored placement">
-      <span class="ad-label">Sponsored &middot; Institutional Partner Space</span>
-      <!-- Google AdSense: paste the leaderboard <ins class="adsbygoogle" ...> unit inside .ad-slot below -->
-      <div class="ad-slot">
-        <span>Leaderboard space — place your organisation in front of India&rsquo;s environmental workforce.</span>
-        <a class="ad-cta" href="mailto:urbanforestpark@gmail.com?subject=Advertising%20%2F%20Partnership%20on%20UrbanForestPark%20Jobs%20Board">Sponsor this space &rarr;</a>
       </div>
     </div>
 

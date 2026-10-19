@@ -5,3 +5,4 @@ dist/
 .env
 __pycache__/
 .venv*/
+welcome_email_preview.html

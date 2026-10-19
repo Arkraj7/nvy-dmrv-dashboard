@@ -33,7 +33,6 @@
     GLOBAL_DATA_URL: 'global_jobs.json',
     GLOBAL_ARCHIVE_URL: 'global_archive.json',
     CONTACT_EMAIL: 'urbanforestpark@gmail.com',
-    ADS_EVERY: 5,              // inject an in-feed ad card after every 5th card
     VALID_DAYS: 30,            // fallback jobPosting validThrough = datePosted + N days
     ARCHIVE_RECENT_DAYS: 7,    // "Closed in the last 7 days" archive window
     SITE_URL: 'https://www.urbanforestpark.com/',
@@ -728,6 +727,8 @@
       state.query = q;
       var searchInput = document.getElementById('jobs-search');
       if (searchInput) searchInput.value = q;
+      var heroInput = document.getElementById('hero-search-input');
+      if (heroInput) heroInput.value = q;
     }
 
     state.detailId = null;
@@ -1086,12 +1087,8 @@
     }
 
     var html = '';
-    jobs.forEach(function (job, index) {
+    jobs.forEach(function (job) {
       html += jobCardHtml(job, isArchive);
-      var position = index + 1;
-      if (position % CONFIG.ADS_EVERY === 0 && position < jobs.length) {
-        html += adInFeedHtml();
-      }
     });
     els.grid.innerHTML = html;
     els.grid.setAttribute('aria-busy', 'false');
@@ -1201,18 +1198,6 @@
           '<span class="jc-view">' + ctaLabel + ' ' + iconSvg('arrow') + '</span>' +
         '</div>' +
       '</article>';
-  }
-
-  function adInFeedHtml() {
-    return '' +
-      '<div class="ad-container ad-infeed" aria-label="Sponsored placement">' +
-        '<span class="ad-label">Sponsored &middot; Institutional Partner Space</span>' +
-        '<div class="ad-slot">' +
-          '<span>Place your organisation here &mdash; reach India&rsquo;s environmental workforce.</span>' +
-          '<a class="ad-cta" href="mailto:' + encodeURIComponent(CONFIG.CONTACT_EMAIL) +
-            '?subject=' + encodeURIComponent('Advertising / Partnership on UrbanForestPark Jobs Board') + '">Sponsor this space &rarr;</a>' +
-        '</div>' +
-      '</div>';
   }
 
   /* ------------------------------------------------------------------ */
@@ -1555,14 +1540,10 @@
           '<div class="skills-wrap">' + skills + '</div>' +
         '</div>' +
 
-        adDetailHtml() +
-
         '<div class="tip-callout">' +
           '<span class="tip-title">' + iconSvg('bulb') + ' ' + t('detail.tip', 'Candidate Advisory') + '</span>' +
           '<p>' + formatReadableText(job.application_tip) + '</p>' +
         '</div>' +
-
-        adDetailHtml() +
 
         applyBlock +
 
@@ -1602,18 +1583,6 @@
       '<div class="suggest-block">' +
         '<h3>' + t('detail.suggest.h3', 'Currently Active Positions in This Sector') + '</h3>' +
         '<div class="suggest-grid">' + cards + '</div>' +
-      '</div>';
-  }
-
-  function adDetailHtml() {
-    return '' +
-      '<div class="ad-container" style="margin:24px 0;padding:0;" aria-label="Sponsored placement">' +
-        '<span class="ad-label">Sponsored &middot; Institutional Partner Space</span>' +
-        '<div class="ad-slot">' +
-          '<span>Reach thousands of climate, forestry and ESG professionals every month.</span>' +
-          '<a class="ad-cta" href="mailto:' + encodeURIComponent(CONFIG.CONTACT_EMAIL) +
-            '?subject=' + encodeURIComponent('Advertising / Partnership on UrbanForestPark Jobs Board') + '">Partner with Urban Forest Park &rarr;</a>' +
-        '</div>' +
       '</div>';
   }
 
@@ -2007,6 +1976,459 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Instant hero search & recommendations (active + archived)           */
+  /* ------------------------------------------------------------------ */
+  /* Domain clusters power the "Related & Similar Positions" engine: a
+     record's clusters are derived from its own text (title, category,
+     position type, skills, qualification), and shared-cluster /
+     shared-skill overlap drives the recommendations. */
+  var SEARCH_CLUSTER_DEFS = [
+    {
+      id: 'geospatial',
+      label: 'Geospatial, Remote Sensing & Earth Observation',
+      terms: ['gis', 'remote sensing', 'earth engine', 'gee', 'satellite', 'spatial', 'lst',
+        'urban heat island', 'uhi', 'qgis', 'arcgis', 'drone', 'lidar']
+    },
+    {
+      id: 'forestry',
+      label: 'Forestry, Wildlife & Ecology',
+      terms: ['forestry', 'wildlife', 'afforestation', 'campa', 'biodiversity', 'ecology',
+        'conservation', 'mangrove', 'agroforestry', 'botany', 'zoology', 'wii', 'icfre']
+    },
+    {
+      id: 'academic',
+      label: 'Academic & Research Careers',
+      terms: ['jrf', 'srf', 'project associate', 'research associate', 'phd', 'postdoc',
+        'fellowship', 'net', 'gate', 'stipend', 'young professional', 'faculty']
+    },
+    {
+      id: 'esg',
+      label: 'ESG, Carbon & Corporate Sustainability',
+      terms: ['esg', 'brsr', 'carbon', 'carbon credits', 'dmrv', 'net zero', 'ghg',
+        'sustainability', 'csr', 'ehs', 'climate risk', 'gri']
+    },
+    {
+      id: 'climate',
+      label: 'Climate, Water & Policy',
+      terms: ['climate policy', 'think tank', 'adaptation', 'mitigation', 'water', 'wash',
+        'clean energy', 'renewable', 'solar', 'circular economy', 'agriculture']
+    }
+  ];
+
+  var heroState = { open: false, items: [], activeIndex: -1 };
+
+  function heroRefs() {
+    return {
+      root: document.getElementById('hero-search'),
+      form: document.getElementById('hero-search-form'),
+      input: document.getElementById('hero-search-input'),
+      panel: document.getElementById('hero-search-panel')
+    };
+  }
+
+  function recordKey(rec) {
+    return rec.registry + ':' + (rec.archived ? 'a' : 'l') + ':' + rec.job.id;
+  }
+
+  /* Every loaded registry, tagged with its jurisdiction and status. */
+  function allRecords() {
+    var out = [];
+    state.jobs.forEach(function (job) { out.push({ job: job, archived: false, registry: 'india' }); });
+    state.globalJobs.forEach(function (job) { out.push({ job: job, archived: false, registry: 'global' }); });
+    state.archive.forEach(function (job) { out.push({ job: job, archived: true, registry: 'india' }); });
+    state.globalArchive.forEach(function (job) { out.push({ job: job, archived: true, registry: 'global' }); });
+    return out;
+  }
+
+  /* The searchable surface: exactly the fields the registry promises. */
+  function searchBlobOf(job) {
+    return [
+      job.clean_title, job.title_hi, job.organization, job.state, job.city, job.region,
+      job.country, job.category, job.position_type, job.opportunity_kind,
+      job.qualification_summary, job.experience_level,
+      (job.must_have_skills || []).join(' ')
+    ].join(' ').toLowerCase();
+  }
+
+  function queryTokens(query) {
+    return String(query || '').toLowerCase().split(/[^a-z0-9+#.]+/).filter(function (tok) {
+      return tok.length >= 2;
+    });
+  }
+
+  /* AND-scored direct match: every token must land somewhere, with
+     title/organisation/skill hits outranking taxonomy and prose hits. */
+  function scoreRecord(job, tokens) {
+    var blob = searchBlobOf(job);
+    var title = String(job.clean_title || '').toLowerCase();
+    var org = String(job.organization || '').toLowerCase();
+    var skills = (job.must_have_skills || []).join(' ').toLowerCase();
+    var taxo = [job.category, job.position_type, job.opportunity_kind].join(' ').toLowerCase();
+    var place = [job.state, job.city, job.region, job.country].join(' ').toLowerCase();
+    var qual = String(job.qualification_summary || '').toLowerCase();
+    var score = 0;
+    for (var i = 0; i < tokens.length; i += 1) {
+      var tok = tokens[i];
+      if (blob.indexOf(tok) === -1) return 0;
+      if (title.indexOf(tok) !== -1) score += 6;
+      else if (org.indexOf(tok) !== -1) score += 5;
+      else if (skills.indexOf(tok) !== -1) score += 4;
+      else if (taxo.indexOf(tok) !== -1) score += 3;
+      else if (place.indexOf(tok) !== -1) score += 2;
+      else if (qual.indexOf(tok) !== -1) score += 1;
+      else score += 1;
+    }
+    return score;
+  }
+
+  function recencyOf(rec) {
+    return String(rec.job.date_added || rec.job.date_archived || '');
+  }
+
+  function directMatches(query, limit) {
+    var tokens = queryTokens(query);
+    if (!tokens.length) return [];
+    var scored = [];
+    allRecords().forEach(function (rec) {
+      var score = scoreRecord(rec.job, tokens);
+      if (score > 0) scored.push({ rec: rec, score: score });
+    });
+    if (!scored.length && tokens.length > 1) {
+      /* Graceful partial fallback: rank on the strongest single token. */
+      var single = tokens[0];
+      allRecords().forEach(function (rec) {
+        if (searchBlobOf(rec.job).indexOf(single) !== -1) scored.push({ rec: rec, score: 1 });
+      });
+    }
+    scored.sort(function (a, b) {
+      return b.score - a.score || recencyOf(b.rec).localeCompare(recencyOf(a.rec));
+    });
+    return scored.slice(0, limit || 6).map(function (entry) { return entry.rec; });
+  }
+
+  function clustersOfText(text) {
+    var blob = String(text || '').toLowerCase();
+    var found = [];
+    SEARCH_CLUSTER_DEFS.forEach(function (cluster) {
+      for (var i = 0; i < cluster.terms.length; i += 1) {
+        if (blob.indexOf(cluster.terms[i]) !== -1) { found.push(cluster.id); break; }
+      }
+    });
+    return found;
+  }
+
+  /* 3-5 relatable mandates: shared domain clusters, overlapping skills and
+     the same category/type outrank the rest; active beats archived. */
+  function relatedRecords(seedBlobs, excludeKeys, limit) {
+    var clusterTally = {};
+    var tokenTally = {};
+    seedBlobs.forEach(function (blob) {
+      clustersOfText(blob).forEach(function (id) { clusterTally[id] = (clusterTally[id] || 0) + 1; });
+      String(blob || '').split(/[^a-z0-9+#.]+/).forEach(function (tok) {
+        if (tok.length >= 4) tokenTally[tok] = (tokenTally[tok] || 0) + 1;
+      });
+    });
+    var candidates = [];
+    allRecords().forEach(function (rec) {
+      if (excludeKeys[recordKey(rec)]) return;
+      var blob = searchBlobOf(rec.job);
+      var score = 0;
+      clustersOfText(blob).forEach(function (id) { if (clusterTally[id]) score += 3; });
+      var tokenScore = 0;
+      String(blob || '').split(/[^a-z0-9+#.]+/).forEach(function (tok) {
+        if (tok.length >= 4 && tokenTally[tok]) tokenScore += 2;
+      });
+      score += Math.min(tokenScore, 6);
+      if (score > 0) candidates.push({ rec: rec, score: score });
+    });
+    candidates.sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      var aArchived = a.rec.archived ? 1 : 0;
+      var bArchived = b.rec.archived ? 1 : 0;
+      if (aArchived !== bArchived) return aArchived - bArchived;   /* active first */
+      return recencyOf(b.rec).localeCompare(recencyOf(a.rec));
+    });
+    return candidates.slice(0, limit || 5).map(function (entry) { return entry.rec; });
+  }
+
+  function latestRecords(limit) {
+    var out = [];
+    state.jobs.forEach(function (job) { out.push({ job: job, archived: false, registry: 'india' }); });
+    state.globalJobs.forEach(function (job) { out.push({ job: job, archived: false, registry: 'global' }); });
+    out.sort(function (a, b) { return recencyOf(b).localeCompare(recencyOf(a)); });
+    return out.slice(0, limit || 6);
+  }
+
+  function heroRowHtml(rec, index) {
+    var job = rec.job;
+    var badge = rec.archived
+      ? '<span class="hs-badge is-archived">' + t('hero.search.archived', 'ARCHIVED') + '</span>'
+      : '<span class="hs-badge is-active">' + t('hero.search.active', 'ACTIVE') + '</span>';
+    var region = rec.registry === 'global'
+      ? '<span class="hs-region">\uD83C\uDF0D GLOBAL</span>'
+      : '<span class="hs-region">\uD83C\uDDEE\uD83C\uDDF3 INDIA</span>';
+    var taxonomy = String(job.category || '');
+    if (job.position_type) taxonomy += ' \u00b7 ' + job.position_type;
+    return '' +
+      '<div class="hs-row" role="option" id="hs-opt-' + index + '" data-idx="' + index + '" ' +
+        'data-job-id="' + escapeHtml(job.id) + '" aria-label="' + escapeHtml(displayTitle(job) + ' at ' + (job.organization || '')) + '">' +
+        '<div class="hs-row-top">' +
+          '<span class="hs-title">' + escapeHtml(displayTitle(job)) + '</span>' +
+          badge +
+        '</div>' +
+        '<div class="hs-row-meta">' +
+          '<span>' + escapeHtml(job.organization || '') + '</span>' +
+          '<span>' + iconSvg('pin') + ' ' + escapeHtml(stateLabel(job)) + '</span>' +
+          '<span>' + escapeHtml(taxonomy) + '</span>' +
+          region +
+        '</div>' +
+      '</div>';
+  }
+
+  function registryMatchCounts(query) {
+    var matches = directMatches(query, 400);
+    var counts = { activeCurrent: 0, archivedCurrent: 0, activeOther: 0, archivedOther: 0 };
+    matches.forEach(function (rec) {
+      var sameRegistry = rec.registry === state.registry;
+      if (sameRegistry && !rec.archived) counts.activeCurrent += 1;
+      else if (sameRegistry && rec.archived) counts.archivedCurrent += 1;
+      else if (!rec.archived) counts.activeOther += 1;
+      else counts.archivedOther += 1;
+    });
+    return counts;
+  }
+
+  function renderHeroPanel() {
+    var refs = heroRefs();
+    if (!refs.panel || !refs.input) return;
+    if (!state.loaded) {
+      refs.panel.innerHTML = '<p class="hs-empty">' + t('hero.search.loading', 'Loading the registry\u2026') + '</p>';
+      openHeroPanel();
+      return;
+    }
+
+    var query = String(refs.input.value || '').trim();
+    var isQuery = query.length >= 2;
+    var matches = isQuery ? directMatches(query, 6) : latestRecords(6);
+    var excluded = {};
+    matches.forEach(function (rec) { excluded[recordKey(rec)] = true; });
+
+    var seedBlobs = matches.map(function (rec) { return searchBlobOf(rec.job); });
+    if (isQuery) seedBlobs.push(query.toLowerCase());
+    var related = relatedRecords(seedBlobs, excluded, 5);
+
+    var items = [];
+    var html = '';
+
+    html += '<p class="hs-group">' + (isQuery
+      ? t('hero.search.direct', 'Direct Matches') + ' \u2014 ' + t('hero.search.directNote', 'Active &amp; Archived')
+      : t('hero.search.latest', 'Latest Verified Mandates')) + '</p>';
+
+    if (matches.length) {
+      matches.forEach(function (rec) {
+        html += heroRowHtml(rec, items.length);
+        items.push(rec);
+      });
+    } else {
+      html += '<p class="hs-empty">' + t('hero.search.none', 'No mandate matches that phrase. Try a skill, institution, state or category \u2014 related positions are listed below.') + '</p>';
+    }
+
+    if ((isQuery || related.length) && related.length) {
+      html += '<p class="hs-group">' + t('hero.search.related', 'Related &amp; Similar Positions in This Field') + '</p>';
+      related.forEach(function (rec) {
+        html += heroRowHtml(rec, items.length);
+        items.push(rec);
+      });
+    }
+
+    if (isQuery) {
+      var counts = registryMatchCounts(query);
+      if (counts.activeCurrent === 0 && counts.archivedCurrent > 0) {
+        html += '<div class="hs-foot">' +
+          '<span>' + counts.archivedCurrent + ' archived reference record' + (counts.archivedCurrent === 1 ? '' : 's') + ' match in this registry.</span>' +
+          '<button type="button" class="hs-foot-btn" data-hs-show-archive="1">' +
+            t('hero.search.showArchive', 'Show archived matches') + ' \u2192</button>' +
+        '</div>';
+      } else if (counts.activeCurrent === 0 && counts.activeOther > 0) {
+        html += '<div class="hs-foot">' +
+          '<span>' + counts.activeOther + ' active match' + (counts.activeOther === 1 ? '' : 'es') + ' sit in the other jurisdiction.</span>' +
+          '<button type="button" class="hs-foot-btn" data-hs-switch-registry="1">' +
+            (state.registry === 'global' ? t('hero.search.switchIndia', 'Open the India registry') : t('hero.search.switchGlobal', 'Open the Global registry')) +
+          ' \u2192</button>' +
+        '</div>';
+      }
+    }
+
+    refs.panel.innerHTML = html;
+    heroState.items = items;
+    heroState.activeIndex = -1;
+    openHeroPanel();
+  }
+
+  function openHeroPanel() {
+    var refs = heroRefs();
+    if (!refs.panel || !refs.root) return;
+    refs.panel.hidden = false;
+    refs.root.classList.add('hs-open');
+    if (refs.input) refs.input.setAttribute('aria-expanded', 'true');
+    heroState.open = true;
+  }
+
+  function closeHeroPanel() {
+    var refs = heroRefs();
+    if (!refs.panel || !refs.root) return;
+    refs.panel.hidden = true;
+    refs.root.classList.remove('hs-open');
+    if (refs.input) {
+      refs.input.setAttribute('aria-expanded', 'false');
+      refs.input.removeAttribute('aria-activedescendant');
+    }
+    heroState.open = false;
+    heroState.activeIndex = -1;
+  }
+
+  function setHeroActiveIndex(index) {
+    var refs = heroRefs();
+    var rows = refs.panel ? refs.panel.querySelectorAll('.hs-row') : [];
+    heroState.activeIndex = index;
+    Array.prototype.forEach.call(rows, function (row, i) {
+      row.classList.toggle('hs-active', i === index);
+    });
+    if (refs.input) {
+      if (index >= 0 && rows[index]) {
+        refs.input.setAttribute('aria-activedescendant', rows[index].id);
+        if (rows[index].scrollIntoView) rows[index].scrollIntoView({ block: 'nearest' });
+      } else {
+        refs.input.removeAttribute('aria-activedescendant');
+      }
+    }
+  }
+
+  /* Pressing Enter (or the Search button) mirrors the query into the main
+     feed filter. Archived-only matches switch the feed to the archive view;
+     matches that only exist in the other jurisdiction switch registries. */
+  function submitHeroSearch() {
+    var refs = heroRefs();
+    if (!refs.input || !state.loaded) return;
+    var query = String(refs.input.value || '').trim();
+    closeHeroPanel();
+
+    state.query = query;
+    var mainSearch = document.getElementById('jobs-search');
+    if (mainSearch) mainSearch.value = query;
+
+    if (query.length >= 2) {
+      var counts = registryMatchCounts(query);
+      if (counts.activeCurrent === 0 && counts.archivedCurrent > 0) {
+        setView('archive', { keepUrl: true, force: true });
+        toast(t('hero.search.toastArchive', 'No active matches \u2014 showing ') + counts.archivedCurrent +
+          t('hero.search.toastArchive2', ' archived reference record(s) for \u201C') + query + '\u201D.');
+      } else if (counts.activeCurrent === 0 && counts.activeOther > 0) {
+        var target = state.registry === 'global' ? 'india' : 'global';
+        setRegistry(target, { keepUrl: true, silent: true });
+        setView('active', { keepUrl: true, force: true });
+        toast(target === 'global'
+          ? t('hero.search.toastGlobal', 'Showing matching Global Opportunities.')
+          : t('hero.search.toastIndia', 'Showing matching India mandates.'));
+      }
+    }
+
+    applyFilters();
+    syncUrl(true);
+    var feed = document.getElementById('filter-bar') || document.getElementById('jobs-feed');
+    if (feed && feed.scrollIntoView) {
+      feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function openHeroResult(index) {
+    var rec = heroState.items[index];
+    if (!rec) return;
+    closeHeroPanel();
+    openJob(rec.job.id);
+  }
+
+  function bindHeroSearch() {
+    var refs = heroRefs();
+    if (!refs.form || !refs.input || !refs.panel) return;
+
+    refs.form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitHeroSearch();
+    });
+
+    refs.input.addEventListener('input', debounce(function () {
+      renderHeroPanel();
+    }, 120));
+
+    refs.input.addEventListener('focus', function () {
+      renderHeroPanel();
+    });
+
+    refs.input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        if (!heroState.open) { renderHeroPanel(); return; }
+        e.preventDefault();
+        var count = heroState.items.length;
+        if (!count) return;
+        var next = heroState.activeIndex + (e.key === 'ArrowDown' ? 1 : -1);
+        if (next < 0) next = count - 1;
+        if (next >= count) next = 0;
+        setHeroActiveIndex(next);
+        return;
+      }
+      if (e.key === 'Enter') {
+        if (heroState.activeIndex >= 0) {
+          e.preventDefault();
+          openHeroResult(heroState.activeIndex);
+        }
+        return;   /* otherwise the form submit handler takes over */
+      }
+      if (e.key === 'Escape') {
+        closeHeroPanel();
+      }
+    });
+
+    refs.panel.addEventListener('mousedown', function (e) {
+      var archiveBtn = e.target.closest ? e.target.closest('[data-hs-show-archive]') : null;
+      if (archiveBtn) {
+        e.preventDefault();
+        var query = String(refs.input.value || '').trim();
+        state.query = query;
+        var mainSearch = document.getElementById('jobs-search');
+        if (mainSearch) mainSearch.value = query;
+        setView('archive', { keepUrl: true, force: true });
+        applyFilters();
+        syncUrl(true);
+        closeHeroPanel();
+        return;
+      }
+      var switchBtn = e.target.closest ? e.target.closest('[data-hs-switch-registry]') : null;
+      if (switchBtn) {
+        e.preventDefault();
+        var q = String(refs.input.value || '').trim();
+        state.query = q;
+        setRegistry(state.registry === 'global' ? 'india' : 'global', { keepUrl: true, silent: true });
+        setView('active', { keepUrl: true, force: true });
+        applyFilters();
+        syncUrl(true);
+        closeHeroPanel();
+        return;
+      }
+      var row = e.target.closest ? e.target.closest('.hs-row') : null;
+      if (!row) return;
+      e.preventDefault();
+      openHeroResult(parseInt(row.getAttribute('data-idx'), 10));
+    });
+
+    document.addEventListener('mousedown', function (e) {
+      if (!heroState.open) return;
+      if (refs.root && refs.root.contains(e.target)) return;
+      closeHeroPanel();
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Event wiring                                                        */
   /* ------------------------------------------------------------------ */
   function resetFilters() {
@@ -2014,8 +2436,10 @@
     state.kind = 'all';
     state.archiveRecent = false;
     var searchInput = document.getElementById('jobs-search');
+    var heroInput = document.getElementById('hero-search-input');
     var expSelect = document.getElementById('experience-filter');
     if (searchInput) searchInput.value = '';
+    if (heroInput) heroInput.value = '';
     if (expSelect) expSelect.value = 'all';
     syncKindSelect();
     if (els.stateSelect) els.stateSelect.value = 'all';
@@ -2044,10 +2468,14 @@
   }
 
   function bindEvents() {
+    bindHeroSearch();
+
     var searchInput = document.getElementById('jobs-search');
     if (searchInput) {
       searchInput.addEventListener('input', debounce(function (e) {
         state.query = e.target.value || '';
+        var heroInput = document.getElementById('hero-search-input');
+        if (heroInput) heroInput.value = state.query;
         applyFilters();
       }, 160));
     }

@@ -453,6 +453,232 @@ textarea, .share-btn, .btn {
   margin-top: 24px;
 }
 
+/* ---------- 6b. Hero instant search (right side of the masthead row) ----------
+   Neumorphic soft-surface search adapted for the institutional palette:
+   gradient frame, recessed field, emerald action button. Searches the whole
+   registry live (active + archived, India + Global) and opens the
+   recommendations dropdown anchored under the bar. */
+.hero-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hero-head-copy { flex: 1 1 auto; min-width: 0; }
+.hero-search {
+  position: relative;
+  flex: 0 0 372px;
+  width: 372px;
+  margin-top: 6px;
+}
+.hs-form { margin: 0; }
+.hs-label {
+  display: block;
+  margin: 0 0 8px 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, var(--accent), var(--ink-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+}
+.hs-box {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  padding: 4px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(-67deg, rgba(6, 95, 70, 0.18), rgba(16, 185, 129, 0.10) 46%, rgba(148, 163, 184, 0.26));
+  box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.7), 2px 2px 12px rgba(148, 163, 184, 0.35);
+  transition: box-shadow 0.24s ease;
+}
+.hero-search.hs-open .hs-box,
+.hs-box:focus-within {
+  box-shadow:
+    -2px -2px 6px rgba(255, 255, 255, 0.7),
+    2px 2px 12px rgba(16, 185, 129, 0.4),
+    0 0 0 3px rgba(16, 185, 129, 0.16);
+}
+.hs-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 12px;
+  border-radius: var(--r);
+  background: var(--card);
+  box-shadow: inset 1px 1px 3px rgba(100, 116, 139, 0.28), inset -2px -2px 4px rgba(255, 255, 255, 0.85);
+}
+.hs-icon { display: inline-flex; flex: 0 0 auto; color: var(--accent); }
+.hs-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.hs-input::placeholder { color: var(--ink-4); font-weight: 500; }
+.hs-input:focus { outline: none; }
+.hs-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.hs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 0 15px;
+  border: 0;
+  border-radius: var(--r);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 6px 16px -10px rgba(6, 95, 70, 0.7);
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+.hs-btn:hover { background: var(--accent-2); }
+.hs-btn:active { transform: translateY(1px); }
+.hs-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-height: 420px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-pop);
+  scrollbar-width: thin;
+}
+.hs-panel[hidden] { display: none; }
+.hs-group {
+  margin: 8px 6px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.hs-group:first-child { margin-top: 4px; }
+.hs-group-note {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-4);
+}
+.hs-row {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.hs-row:hover,
+.hs-row.hs-active { border-color: var(--border); background: var(--bg-2); }
+.hs-row-top { display: flex; align-items: center; gap: 8px; }
+.hs-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.hs-badge {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.hs-badge.is-active { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent); }
+.hs-badge.is-archived { background: var(--amber-bg); border-color: rgba(245, 158, 11, 0.35); color: var(--amber-ink); }
+.hs-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.hs-region { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--ink-4); }
+.hs-empty { padding: 14px 12px; font-size: 12.5px; color: var(--ink-3); }
+.hs-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 9px 6px 3px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.hs-foot-btn {
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.hs-foot-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+[data-theme="dark"] .hs-box {
+  background: linear-gradient(-67deg, rgba(16, 185, 129, 0.30), rgba(52, 211, 153, 0.12) 46%, rgba(30, 41, 59, 0.9));
+  box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.45), 2px 2px 12px rgba(0, 0, 0, 0.5);
+}
+[data-theme="dark"] .hero-search.hs-open .hs-box,
+[data-theme="dark"] .hs-box:focus-within {
+  box-shadow:
+    -2px -2px 6px rgba(0, 0, 0, 0.45),
+    2px 2px 12px rgba(16, 185, 129, 0.35),
+    0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+[data-theme="dark"] .hs-field {
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.55), inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+}
+@media (max-width: 980px) {
+  .hero-head-row { flex-direction: column; align-items: stretch; gap: 18px; }
+  .hero-search { flex: 1 1 auto; width: 100%; margin-top: 2px; }
+  .hs-panel { max-height: 380px; }
+}
+@media (max-width: 640px) {
+  .hs-btn span { display: none; }
+  .hs-btn { padding: 0 12px; }
+}
+
 /* ---------- 7. Active / Archived switcher ---------- */
 .tabs-wrap {
   max-width: var(--maxw);
@@ -650,44 +876,12 @@ textarea, .share-btn, .btn {
 .track-btn.active { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .track-btn.active .cnt { color: var(--bg); opacity: 0.75; }
 
-/* ---------- 9. Ad slots ---------- */
-.ad-container {
-  max-width: var(--maxw);
-  margin: 26px auto 0;
-  padding: 0 20px;
-}
-.ad-leaderboard { margin-top: 22px; }
-.ad-label {
-  display: block;
-  margin-bottom: 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-4);
-}
-.ad-slot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding: 15px 17px;
-  border: 1px dashed var(--border-2);
-  border-radius: var(--r);
-  background: var(--bg-2);
-}
-.ad-slot span { font-size: 13px; color: var(--ink-3); }
-.ad-cta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  white-space: nowrap;
-}
-.ad-cta:hover { text-decoration: underline; }
-.ad-infeed { grid-column: 1 / -1; margin: 0; max-width: none; padding: 0; }
+/* ---------- 9. Reserved ad slots (no placeholder ever renders) ----------
+   The registry shows visitors zero invented sponsorship copy or dashed
+   placeholder boxes. If a real AdSense <ins> unit is ever approved, paste
+   it inside an .ad-slot container — the wrapper stays collapsed and empty
+   by default, and no other styling here paints anything on screen. */
+.ad-slot { display: none; }
 
 /* ---------- 10. Feed ---------- */
 .feed-wrap {

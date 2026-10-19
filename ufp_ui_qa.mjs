@@ -763,6 +763,253 @@ check('legal pages carry no legacy personal email', !(await page.locator('body')
 check('legal footer carries the discreet Syndication Desk control', await page.locator('.legal-footer [data-syndication-open]').count() >= 1);
 
 /* ======================================================================
+   J. Phase upgrades: right-side hero instant search (active + archived),
+      sponsor-placeholder purge, newsletter welcome flow
+   ====================================================================== */
+await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+await page.waitForSelector('.job-card', { timeout: 20000 });
+
+/* --- J1. Hero search mounts on the right of the masthead row --- */
+const heroSearchLayout = await page.evaluate(() => {
+  const row = document.querySelector('.hero-head-row');
+  const heading = document.getElementById('hero-heading');
+  const search = document.getElementById('hero-search');
+  const input = document.getElementById('hero-search-input');
+  const btn = document.getElementById('hero-search-btn');
+  if (!row || !heading || !search || !input || !btn) return null;
+  const rr = row.getBoundingClientRect();
+  const hr = heading.getBoundingClientRect();
+  const sr = search.getBoundingClientRect();
+  const br = btn.getBoundingClientRect();
+  return {
+    rowDisplay: getComputedStyle(row).display,
+    sameRow: sr.left >= hr.right - 2 && Math.abs(sr.top - hr.top) < 140,
+    rightAligned: sr.right <= rr.right + 1,
+    btnVisible: br.width >= 40 && br.height >= 32,
+    placeholder: input.getAttribute('placeholder') || ''
+  };
+});
+check('J: hero head row places the instant search to the right of the H1',
+  !!heroSearchLayout && heroSearchLayout.rowDisplay === 'flex' && heroSearchLayout.sameRow && heroSearchLayout.rightAligned,
+  JSON.stringify(heroSearchLayout || {}).slice(0, 220));
+check('J: hero search button renders at interactive size', !!heroSearchLayout && heroSearchLayout.btnVisible);
+check('J: hero search input advertises title / skill / organisation search',
+  !!heroSearchLayout && /title/i.test(heroSearchLayout.placeholder) && /skill/i.test(heroSearchLayout.placeholder) && /organisation/i.test(heroSearchLayout.placeholder),
+  heroSearchLayout ? heroSearchLayout.placeholder : '');
+
+/* --- J2. Typing pops the dropdown with Direct + Related groups --- */
+await page.fill('#hero-search-input', 'gis');
+await page.waitForTimeout(320);
+const heroPanel = await page.evaluate(() => {
+  const panel = document.getElementById('hero-search-panel');
+  const root = document.getElementById('hero-search');
+  const rows = panel ? [...panel.querySelectorAll('.hs-row')] : [];
+  return {
+    hidden: panel ? panel.hidden : true,
+    rootOpen: !!root && root.classList.contains('hs-open'),
+    ariaExpanded: (document.getElementById('hero-search-input') || {}).getAttribute
+      ? document.getElementById('hero-search-input').getAttribute('aria-expanded') : null,
+    rows: rows.length,
+    text: panel ? panel.innerText : '',
+    activeBadges: rows.filter(r => r.querySelector('.hs-badge.is-active')).length,
+    archivedBadges: rows.filter(r => r.querySelector('.hs-badge.is-archived')).length
+  };
+});
+check('J: typing 2+ characters opens the anchored dropdown panel',
+  !heroPanel.hidden && heroPanel.rootOpen && heroPanel.rows >= 1, JSON.stringify({ hidden: heroPanel.hidden, rows: heroPanel.rows }));
+check('J: dropdown announces the expanded combobox state', heroPanel.ariaExpanded === 'true');
+check('J: dropdown renders the Direct Matches group', /direct matches/i.test(heroPanel.text));
+check('J: dropdown renders the Related & Similar Positions group', /related & similar positions in this field/i.test(heroPanel.text));
+check('J: every dropdown row carries an ACTIVE or ARCHIVED status badge',
+  heroPanel.activeBadges + heroPanel.archivedBadges >= heroPanel.rows && heroPanel.rows >= 1,
+  `active=${heroPanel.activeBadges} archived=${heroPanel.archivedBadges} rows=${heroPanel.rows}`);
+
+/* --- J3. Live sweep: archive.json + jobs.json + global_jobs.json --- */
+const blobOf = j => [j.clean_title, j.title_hi, j.organization, j.state, j.city, j.region, j.country,
+  j.category, j.position_type, j.opportunity_kind, j.qualification_summary, j.experience_level,
+  (j.must_have_skills || []).join(' ')].join(' ').toLowerCase();
+const allTagged = [
+  ...india.map(j => ({ j, archived: false })),
+  ...globalJobs.map(j => ({ j, archived: false })),
+  ...indiaArchive.map(j => ({ j, archived: true })),
+  ...globalArchive.map(j => ({ j, archived: true }))
+];
+function tokenPlan(records) {
+  for (let minHits = 1; minHits <= 3; minHits += 1) {
+    for (const rec of records) {
+      const words = String(rec.j.clean_title || '').toLowerCase().split(/[^a-z0-9+#.]+/).filter(w => w.length >= 6);
+      for (const w of words) {
+        const hits = allTagged.filter(r => blobOf(r.j).includes(w));
+        if (hits.length === minHits && hits.some(h => h.j.id === rec.j.id)) {
+          return { token: w, exact: hits.length === 1, ids: hits.map(h => h.j.id) };
+        }
+      }
+    }
+  }
+  return null;
+}
+async function heroRowsFor(token) {
+  await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('.job-card', { timeout: 20000 });
+  await page.fill('#hero-search-input', token);
+  await page.waitForTimeout(350);
+  return page.evaluate(() => {
+    const panel = document.getElementById('hero-search-panel');
+    const rows = panel ? [...panel.querySelectorAll('.hs-row')] : [];
+    return {
+      open: !!panel && !panel.hidden,
+      rows: rows.map(r => ({
+        id: r.getAttribute('data-job-id'),
+        active: !!r.querySelector('.hs-badge.is-active'),
+        archived: !!r.querySelector('.hs-badge.is-archived')
+      }))
+    };
+  });
+}
+const archivePlan = tokenPlan(indiaArchive.map(j => ({ j, archived: true })));
+const activePlan = tokenPlan(india.map(j => ({ j, archived: false })));
+const globalPlan = tokenPlan(globalJobs.map(j => ({ j, archived: false })));
+check('J: a unique archived title token exists for the live search sweep', !!archivePlan, archivePlan ? archivePlan.token : 'none');
+check('J: a unique active title token exists for the live search sweep', !!activePlan, activePlan ? activePlan.token : 'none');
+check('J: a unique global title token exists for the live search sweep', !!globalPlan, globalPlan ? globalPlan.token : 'none');
+if (archivePlan) {
+  const stateA = await heroRowsFor(archivePlan.token);
+  const hitA = stateA.rows.filter(r => r.id && archivePlan.ids.includes(r.id));
+  check('J: hero search reaches archive.json ("' + archivePlan.token + '")', stateA.open && hitA.length >= 1, JSON.stringify(stateA).slice(0, 200));
+  check('J: archived search hit is badged ARCHIVED', hitA.some(r => r.archived), JSON.stringify(hitA).slice(0, 160));
+}
+if (activePlan) {
+  const stateB = await heroRowsFor(activePlan.token);
+  const hitB = stateB.rows.filter(r => r.id && activePlan.ids.includes(r.id));
+  check('J: hero search reaches jobs.json ("' + activePlan.token + '")', stateB.open && hitB.length >= 1, JSON.stringify(stateB).slice(0, 200));
+  check('J: active search hit is badged ACTIVE', hitB.some(r => r.active), JSON.stringify(hitB).slice(0, 160));
+}
+if (globalPlan) {
+  const stateC = await heroRowsFor(globalPlan.token);
+  const hitC = stateC.rows.filter(r => r.id && globalPlan.ids.includes(r.id));
+  check('J: hero search reaches global_jobs.json ("' + globalPlan.token + '")', stateC.open && hitC.length >= 1, JSON.stringify(stateC).slice(0, 200));
+}
+
+/* --- J4. Enter mirrors the query into the main feed filter --- */
+if (activePlan) {
+  await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('.job-card', { timeout: 20000 });
+  await page.fill('#hero-search-input', activePlan.token);
+  await page.waitForTimeout(280);
+  await page.press('#hero-search-input', 'Enter');
+  await page.waitForTimeout(700);
+  const feedState = await page.evaluate(() => ({
+    mainSearch: document.getElementById('jobs-search').value,
+    cards: [...document.querySelectorAll('.job-card')].map(c => c.getAttribute('data-id')),
+    panelHidden: document.getElementById('hero-search-panel').hidden
+  }));
+  check('J: Enter mirrors the query into the main search box',
+    feedState.mainSearch === activePlan.token, 'main=' + feedState.mainSearch);
+  check('J: Enter filters the feed down to the matching mandate',
+    feedState.cards.length >= 1 && feedState.cards.includes(activePlan.ids[0]),
+    'cards=' + feedState.cards.slice(0, 4).join(','));
+  check('J: dropdown collapses after submitting', feedState.panelHidden);
+}
+
+/* --- J5. Clicking an archived recommendation opens its dossier --- */
+if (archivePlan) {
+  await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('.job-card', { timeout: 20000 });
+  await page.fill('#hero-search-input', archivePlan.token);
+  await page.waitForTimeout(320);
+  await page.click('#hero-search-panel .hs-row[data-job-id="' + archivePlan.ids[0] + '"]');
+  await page.waitForTimeout(600);
+  const dossierState = await page.evaluate(() => ({
+    jobParam: new URLSearchParams(window.location.search).get('job'),
+    detailCard: !!document.querySelector('#job-detail .detail-card'),
+    canonical: (document.querySelector('link[rel="canonical"]') || {}).href || ''
+  }));
+  check('J: clicking an archived dropdown row opens its ?job= dossier',
+    dossierState.detailCard && dossierState.jobParam === archivePlan.ids[0],
+    JSON.stringify({ job: dossierState.jobParam, expected: archivePlan.ids[0], detail: dossierState.detailCard }));
+  check('J: archived dossier keeps the self-referencing canonical',
+    dossierState.canonical === 'https://www.urbanforestpark.com/?job=' + archivePlan.ids[0],
+    dossierState.canonical);
+}
+
+/* --- J6. Zero sponsor / leaderboard placeholders anywhere --- */
+await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+await page.waitForSelector('.job-card', { timeout: 20000 });
+const placeholderRe = /sponsor this space|leaderboard space|institutional partner space|in-feed partner slot/i;
+const feedPlaceholders = await page.evaluate(() => ({
+  text: document.body.innerText,
+  containers: document.querySelectorAll('.ad-container, .ad-label, .ad-cta').length
+}));
+check('J: feed carries no sponsor/leaderboard placeholder copy', !placeholderRe.test(feedPlaceholders.text),
+  (feedPlaceholders.text.match(placeholderRe) || [''])[0]);
+check('J: feed carries zero ad placeholder containers', feedPlaceholders.containers === 0, 'n=' + feedPlaceholders.containers);
+await page.evaluate(() => { document.querySelector('.job-card').click(); });
+await page.waitForTimeout(500);
+const detailPlaceholders = await page.evaluate(() => ({
+  text: /sponsor this space|leaderboard space|institutional partner space|in-feed partner slot/i.test(document.body.innerText),
+  containers: document.querySelectorAll('.ad-container, .ad-label, .ad-cta').length
+}));
+check('J: dossier view carries zero sponsor placeholders', !detailPlaceholders.text && detailPlaceholders.containers === 0, JSON.stringify(detailPlaceholders));
+const repoRoot = 'C:/Users/arkra/NVY DMRV/nvy-dmrv-dashboard';
+const htmlFiles = fs.readdirSync(REPO).filter(f => f.endsWith('.html'));
+const htmlOffenders = htmlFiles.filter(f => /sponsor this space|leaderboard space|institutional partner space|in-feed partner slot/i.test(fs.readFileSync(REPO + '/' + f, 'utf-8')));
+check('J: no placeholder ad copy in any of the ' + htmlFiles.length + ' published HTML pages', htmlOffenders.length === 0, htmlOffenders.join(','));
+const jobsSource = fs.readFileSync(REPO + '/js/jobs.js', 'utf-8');
+check('J: jobs.js renders no ad placeholders (no adInFeed/adDetail builders)',
+  !/adInFeedHtml|adDetailHtml|ad-container|Sponsor this space|Leaderboard space/i.test(jobsSource));
+
+/* --- J7. Newsletter submit triggers the welcome flow --- */
+const mailerSource = fs.readFileSync(repoRoot + '/scripts/send_newsletter.py', 'utf-8');
+check('J: mailer defines the welcome template builder (subscriber, frequency, sector)',
+  /def build_welcome_email_html\(/.test(mailerSource) && /subscriber_email/.test(mailerSource));
+check('J: mailer exposes --welcome and --test-welcome modes',
+  mailerSource.includes('"--welcome"') && mailerSource.includes('"--test-welcome"'));
+check('J: mailer auto-welcomes pending subscribers on every run',
+  /def process_welcome_backlog\(/.test(mailerSource) && /process_welcome_backlog\(channel, config, jobs/.test(mailerSource));
+check('J: welcome subject line matches the institutional template',
+  mailerSource.includes('Welcome to Urban Forest Park \\u2014 India & Global Climate, Forestry,'));
+check('J: welcome email carries the top-3 featured active opportunities',
+  /def featured_jobs\(/.test(mailerSource) && /TOP 3 FEATURED ACTIVE OPPORTUNITIES/.test(mailerSource));
+check('J: welcome email links the app install with the source campaign tag',
+  mailerSource.includes('?source=welcome_email'));
+const subscribeSource = fs.readFileSync(repoRoot + '/functions/api/subscribe.js', 'utf-8');
+check('J: /api/subscribe triggers the instant welcome email',
+  subscribeSource.includes('welcome_email') && subscribeSource.includes('GITHUB_PAT') && subscribeSource.includes('waitUntil'));
+check('J: /api/subscribe records welcome_sent:false for new subscribers',
+  /welcome_sent: false/.test(subscribeSource));
+const workflowSource = fs.readFileSync(repoRoot + '/.github/workflows/newsletter_dispatch.yml', 'utf-8');
+check('J: dispatch workflow listens for the welcome_email repository event',
+  /repository_dispatch/.test(workflowSource) && /types: \[welcome_email\]/.test(workflowSource.split('\n').join('\n')));
+check('J: dispatch workflow supports on-demand welcome + test inputs',
+  /subscriber_email/.test(workflowSource) && /test_welcome/.test(workflowSource) && /--welcome/.test(workflowSource) && /--test-welcome/.test(workflowSource));
+
+let dispatchPayload = null;
+await page.route('**/api/subscribe', async (route) => {
+  try { dispatchPayload = route.request().postData(); } catch (e) { /* ignore */ }
+  await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, persisted: true, storage: 'kv' }) });
+});
+await page.fill('#dispatch-email', 'qa-subscriber@example.com');
+await page.selectOption('#dispatch-sector', 'academic');
+await page.check('input[name="frequency"][value="weekly"]');
+await page.click('.dispatch-form button[type="submit"]');
+await page.waitForTimeout(1000);
+const dispatchState = await page.evaluate(() => {
+  const done = document.querySelector('.dispatch-done');
+  return {
+    doneTitle: done ? done.innerText.replace(/\s+/g, ' ').slice(0, 120) : '',
+    hasForm: !!document.querySelector('.dispatch-form')
+  };
+});
+let payloadParsed = null;
+try { payloadParsed = dispatchPayload ? JSON.parse(dispatchPayload) : null; } catch (e) { payloadParsed = null; }
+check('J: newsletter form POSTs the exact subscription payload',
+  !!payloadParsed && payloadParsed.email === 'qa-subscriber@example.com' && payloadParsed.frequency === 'weekly' && payloadParsed.sector === 'academic',
+  String(dispatchPayload).slice(0, 160));
+check('J: newsletter form confirms the subscription cleanly (welcome flow acknowledged)',
+  /Subscription recorded/.test(dispatchState.doneTitle), dispatchState.doneTitle);
+await page.unroute('**/api/subscribe');
+
+/* ======================================================================
    I. LAYOUT / NAVIGATION / MOBILE REGRESSION SUITE
    ====================================================================== */
 

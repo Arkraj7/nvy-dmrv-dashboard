@@ -30,6 +30,23 @@
  *      preference on the subscriber's device, showing the contact-mailbox
  *      route so no request is ever lost or errors out.
  *
+ * Instant welcome email (optional, first configured channel wins):
+ *
+ *   1. `GITHUB_PAT` + `GITHUB_REPO` (e.g. "owner/urbanforestpark")
+ *      Fires a repository_dispatch event `welcome_email` whose payload is
+ *      consumed by .github/workflows/newsletter_dispatch.yml, which runs
+ *      `scripts/send_newsletter.py --welcome <email>` — so the new
+ *      subscriber receives the formal onboarding email within minutes.
+ *      The PAT needs `contents: write` (fine-grained, this repository only).
+ *
+ *   2. `WELCOME_WEBHOOK_URL`
+ *      Any HTTPS endpoint that accepts a JSON POST with the full subscriber
+ *      record plus `{"event": "welcome_email"}`.
+ *
+ * The trigger is fire-and-forget (`context.waitUntil`) and never blocks or
+ * breaks the subscription response. Re-submissions of an address that was
+ * already queued/welcomed are skipped, so no duplicate welcomes are sent.
+ *
  * The main-site copy of the subscriber list used by the 3-day mailer
  * (scripts/send_newsletter.py) can come from repository data
  * (data/subscribers.json), a 📄 published Google Sheet CSV
@@ -49,6 +66,47 @@ function json(body, status) {
       "Cache-Control": "no-store",
     },
   });
+}
+
+/* Fire the instant-welcome trigger. Fire-and-forget: never throws. */
+async function triggerWelcomeEmail(env, record) {
+  try {
+    if (env && env.GITHUB_PAT && env.GITHUB_REPO) {
+      const response = await fetch(
+        "https://api.github.com/repos/" + env.GITHUB_REPO + "/dispatches",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + env.GITHUB_PAT,
+            Accept: "application/vnd.github+json",
+            "Content-Type": "application/json",
+            "User-Agent": "urbanforestpark-subscribe",
+          },
+          body: JSON.stringify({
+            event_type: "welcome_email",
+            client_payload: {
+              email: record.email,
+              frequency: record.frequency,
+              sector: record.sector,
+              source: record.source,
+            },
+          }),
+        }
+      );
+      return response.ok ? "github" : "github_failed";
+    }
+    if (env && env.WELCOME_WEBHOOK_URL) {
+      const response = await fetch(env.WELCOME_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ event: "welcome_email", ...record }),
+      });
+      return response.ok ? "webhook" : "webhook_failed";
+    }
+  } catch (err) {
+    return "failed";
+  }
+  return "not_configured";
 }
 
 export async function onRequestPost(context) {
@@ -72,6 +130,22 @@ export async function onRequestPost(context) {
     return json({ ok: false, error: "invalid_email" }, 422);
   }
 
+  /* Skip the welcome trigger for an address already queued/welcomed. */
+  let alreadyKnown = false;
+  if (env && env.NEWSLETTER_KV && typeof env.NEWSLETTER_KV.get === "function") {
+    try {
+      const existing = await env.NEWSLETTER_KV.get("sub:" + email);
+      alreadyKnown = !!(
+        existing && /"welcome_sent"\s*:\s*true|"welcome_queued"\s*:\s*true/.test(existing)
+      );
+    } catch (err) {
+      /* A KV read failure must never block the subscription. */
+    }
+  }
+
+  const canTrigger = !alreadyKnown &&
+    !!((env && env.GITHUB_PAT && env.GITHUB_REPO) || (env && env.WELCOME_WEBHOOK_URL));
+
   const record = {
     email,
     frequency,
@@ -79,20 +153,25 @@ export async function onRequestPost(context) {
     source: "urbanforestpark.com",
     subscribed_at: new Date().toISOString(),
     user_agent: request.headers.get("User-Agent") || "",
+    welcome_sent: false,
+    welcome_queued: alreadyKnown || canTrigger,
   };
 
-  // 1. KV binding ---------------------------------------------------------
+  /* 1. KV binding --------------------------------------------------------- */
+  let storage = "client";
+  let persisted = false;
   if (env && env.NEWSLETTER_KV && typeof env.NEWSLETTER_KV.put === "function") {
     try {
       await env.NEWSLETTER_KV.put("sub:" + email, JSON.stringify(record));
-      return json({ ok: true, persisted: true, storage: "kv" });
+      storage = "kv";
+      persisted = true;
     } catch (err) {
       // Fall through to the webhook / acknowledgement paths below.
     }
   }
 
-  // 2. Webhook forwarding -------------------------------------------------
-  if (env && env.NEWSLETTER_WEBHOOK_URL) {
+  /* 2. Webhook forwarding ------------------------------------------------- */
+  if (!persisted && env && env.NEWSLETTER_WEBHOOK_URL) {
     try {
       const headers = { "Content-Type": "application/json" };
       if (env.NEWSLETTER_WEBHOOK_TOKEN) {
@@ -104,17 +183,26 @@ export async function onRequestPost(context) {
         body: JSON.stringify(record),
       });
       if (upstream.ok) {
-        return json({ ok: true, persisted: true, storage: "webhook" });
+        storage = "webhook";
+        persisted = true;
       }
     } catch (err) {
       // Fall through to the acknowledgement path below.
     }
   }
 
-  // 3. Acknowledgement without server-side persistence --------------------
+  /* 3. Instant welcome email (fire-and-forget) ----------------------------- */
+  if (canTrigger) {
+    const trigger = triggerWelcomeEmail(env, record);
+    if (typeof context.waitUntil === "function") {
+      context.waitUntil(trigger);
+    }
+  }
+
+  /* 4. Acknowledgement without server-side persistence --------------------- */
   // The frontend records the preference on the subscriber's device and
   // surfaces the contact route; this must never surface as a hard error.
-  return json({ ok: true, persisted: false, storage: "client" });
+  return json({ ok: true, persisted, storage });
 }
 
 export async function onRequestGet() {

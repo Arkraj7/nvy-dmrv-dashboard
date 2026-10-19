@@ -106,6 +106,32 @@ BORDER = "#E2E8F0"
 BG = "#F8FAFC"
 CARD = "#FFFFFF"
 
+# ---------------------------------------------------------------------------
+# Welcome email (sent once per new subscriber, on every cadence)
+# ---------------------------------------------------------------------------
+WELCOME_SUBJECT = (
+    "Welcome to Urban Forest Park \u2014 India & Global Climate, Forestry, "
+    "ESG & Research Career Dispatch"
+)
+WELCOME_PREVIEW = REPO_ROOT / "welcome_email_preview.html"
+APP_INSTALL_URL = SITE + "/?source=welcome_email"
+WELCOME_WHATSAPP_COLOR = "#128C7E"
+WELCOME_TELEGRAM_COLOR = "#229ED9"
+
+FREQUENCY_LABELS = {
+    "3-day": "Every 3 Days",
+    "3days": "Every 3 Days",
+    "3_days": "Every 3 Days",
+    "weekly": "Weekly Digest",
+}
+
+SECTOR_LABELS = {
+    "all": "All mandates \u2014 academic, forestry, GIS, ESG, climate policy & water",
+    "academic": "JRF / PhD / Academic and research mandates",
+    "forestry-gis": "Forestry, Wildlife, GIS & Remote Sensing mandates",
+    "corporate-esg": "Corporate ESG, carbon markets & sustainability mandates",
+}
+
 
 # --------------------------------------------------------------------------
 # Small helpers
@@ -572,6 +598,393 @@ def render_email(
 
 
 # --------------------------------------------------------------------------
+# Welcome email - one formal onboarding message per new subscriber
+# --------------------------------------------------------------------------
+def frequency_label(frequency: Any) -> str:
+    return FREQUENCY_LABELS.get(squash(frequency).lower(), "Every 3 Days")
+
+
+def sector_label(sector: Any) -> str:
+    return SECTOR_LABELS.get(squash(sector).lower(), SECTOR_LABELS["all"])
+
+
+def featured_jobs(jobs: List[Dict[str, Any]], limit: int = 3) -> List[Dict[str, Any]]:
+    """The three most recently verified active mandates, newest first."""
+    ranked = sorted(
+        jobs,
+        key=lambda job: (parse_iso_date(job.get("date_added")) or date.min, squash(job.get("clean_title"))),
+        reverse=True,
+    )
+    return ranked[:limit]
+
+
+def _email_button(url: str, label: str, color: str, outline: bool = False) -> str:
+    if outline:
+        style = (
+            f"display:inline-block;margin:0 8px 8px 0;padding:10px 16px;background:{CARD};"
+            f"color:{BRAND_ACCENT};border:1px solid {BRAND_ACCENT};border-radius:8px;"
+            "font-size:12.5px;font-weight:700;text-decoration:none;"
+        )
+    else:
+        style = (
+            f"display:inline-block;margin:0 8px 8px 0;padding:10px 16px;background:{color};"
+            "color:#FFFFFF;border-radius:8px;font-size:12.5px;font-weight:700;text-decoration:none;"
+        )
+    return f'<a href="{esc(url)}" style="{style}">{esc(label)}</a>'
+
+
+def _welcome_section(title: str, rows_html: str) -> str:
+    return (
+        f'<tr><td style="padding:18px 0 0 0;">'
+        f'<div style="font-size:14px;font-weight:800;letter-spacing:.01em;color:{INK};'
+        f'padding-bottom:10px;border-bottom:1px solid {BORDER};">{esc(title)}</div>'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">'
+        f"{rows_html}</table></td></tr>"
+    )
+
+
+def _welcome_li(title: str, body: str) -> str:
+    return (
+        f'<tr><td style="padding:0 0 10px 0;font-size:13px;line-height:1.65;color:{INK_2};">'
+        f'<strong style="color:{INK};">{esc(title)}</strong> \u2014 {body}</td></tr>'
+    )
+
+
+def build_welcome_email_html(
+    subscriber_email: str,
+    frequency: Any = "3-day",
+    sector: Any = "all",
+    jobs: Optional[List[Dict[str, Any]]] = None,
+) -> Tuple[str, str]:
+    """Formal welcome email for a new subscriber. Returns (html, plain_text)."""
+    cadence = frequency_label(frequency)
+    sector_text = sector_label(sector)
+    address = squash(subscriber_email)
+    if jobs is None:
+        try:
+            jobs = load_jobs(DEFAULT_JOBS) if DEFAULT_JOBS.exists() else []
+        except (OSError, json.JSONDecodeError):
+            jobs = []
+
+    picks = featured_jobs(jobs, 3)
+    cards_html = "\n".join(_job_card(job) for job in picks) if picks else (
+        f'<tr><td style="padding:16px 18px;border:1px solid {BORDER};border-radius:10px;'
+        f'background:{CARD};font-size:13px;color:{INK_3};">The live registry is between harvest '
+        f'cycles \u2014 open <a href="{esc(SITE)}" style="color:{BRAND_ACCENT};font-weight:700;'
+        'text-decoration:none;">urbanforestpark.com</a> for the current verified mandates.</td></tr>'
+    )
+
+    tracked = (
+        _welcome_li(
+            "Academic & research mandates",
+            "JRF, SRF, Project Associate I/II, Research Associate, PhD fellowships and Young "
+            "Professional roles published by WII, ICFRE, IIFM, IIRS, ICAR, IITs and IISc.",
+        )
+        + _welcome_li(
+            "Corporate ESG, carbon & sustainability roles",
+            "ESG analysts, BRSR reporting, carbon market and dMRV specialists, and CSR managers "
+            "at India's leading corporates and consultancies.",
+        )
+        + _welcome_li(
+            "Forestry, GIS & climate policy",
+            "Think-tank positions (CEEW, WRI India, TERI, ATREE, UNDP), GIS / remote sensing "
+            "roles, plus fellowships, grants, scholarships, internships and competitions.",
+        )
+        + _welcome_li(
+            "Separate India & Global portals",
+            "Every dossier carries the official application link. Use the "
+            "<strong>\U0001F1EE\U0001F1F3 India Registry</strong> and "
+            "<strong>\U0001F30D Global Opportunities</strong> switcher on the homepage to change "
+            "jurisdiction in one click.",
+        )
+    )
+
+    guide = (
+        _welcome_li(
+            "Right-side instant search",
+            "Search every active mandate and past archived position \u2014 archived records are "
+            "ideal for benchmarking stipends, required skills and eligibility.",
+        )
+        + _welcome_li(
+            "One-click filters",
+            "Narrow by Indian state, global region, career track, opportunity type or experience "
+            "tier to reach an exact shortlist instantly.",
+        )
+        + _welcome_li(
+            "Nagar Van dMRV Dashboard & Green Calculator",
+            "Run urban-forestry and heat-island impact analysis, and estimate carbon and "
+            "plantation benefits for your own project.",
+        )
+    )
+
+    html_doc = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Urban Forest Park</title>
+</head>
+<body style="margin:0;padding:0;background:{BG};">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Welcome aboard - your {esc(cadence)} dispatch of verified India &amp; Global climate, forestry, ESG and research mandates starts now.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{BG};">
+<tr><td align="center" style="padding:26px 12px;">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="width:640px;max-width:100%;">
+
+  <!-- Masthead -->
+  <tr><td style="padding:24px 26px;background:{BRAND_DARK};border-radius:12px 12px 0 0;">
+    <div style="font-size:16px;font-weight:800;letter-spacing:.16em;color:#FFFFFF;">URBAN FOREST PARK</div>
+    <div style="margin-top:6px;font-size:12.5px;line-height:1.5;color:#9FB6AB;">India Climate, Forestry, Academic &amp; ESG Career Registry</div>
+    <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#10B981;">Welcome aboard &middot; {esc(cadence)}</div>
+  </td></tr>
+
+  <!-- Greeting -->
+  <tr><td style="padding:22px 26px 8px 26px;background:{BG};border:1px solid {BORDER};border-top:0;">
+    <p style="margin:0 0 12px 0;font-size:15px;line-height:1.65;color:{INK};"><strong>Welcome to Urban Forest Park \u2014 <a href="{esc(SITE)}" style="color:{BRAND_ACCENT};font-weight:700;text-decoration:none;">urbanforestpark.com</a></strong></p>
+    <p style="margin:0 0 12px 0;font-size:13.5px;line-height:1.7;color:{INK_2};">
+      This mailbox{(' (' + esc(address) + ')') if address else ''} is now registered on the official
+      registry dispatch. Your confirmed preference: <strong>{esc(cadence)}</strong> &middot;
+      <strong>{esc(sector_text)}</strong>. Every briefing is compiled from official institutional
+      notifications and application portals \u2014 verified before it is sent, with direct links to
+      the authoritative source.
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 2px 0;">
+      <tr>
+        <td width="50%" style="padding:0 6px 0 0;">
+          <div style="padding:12px 14px;border:1px solid {BORDER};border-radius:10px;background:{CARD};">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{INK_3};">Dispatch cadence</div>
+            <div style="margin-top:4px;font-size:15px;font-weight:800;color:{INK};">{esc(cadence)}</div>
+          </div>
+        </td>
+        <td width="50%" style="padding:0 0 0 6px;">
+          <div style="padding:12px 14px;border:1px solid {BORDER};border-radius:10px;background:{CARD};">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{INK_3};">Sector preference</div>
+            <div style="margin-top:4px;font-size:13.5px;font-weight:700;line-height:1.4;color:{INK};">{esc(sector_text)}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- What we track & verify -->
+  <tr><td style="padding:0 26px;background:{BG};border-left:1px solid {BORDER};border-right:1px solid {BORDER};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      {_welcome_section('What We Track & Verify for You', tracked)}
+    </table>
+  </td></tr>
+
+  <!-- Quick guide -->
+  <tr><td style="padding:0 26px 14px 26px;background:{BG};border-left:1px solid {BORDER};border-right:1px solid {BORDER};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      {_welcome_section('How to Use Urban Forest Park Effectively', guide)}
+    </table>
+  </td></tr>
+
+  <!-- Featured opportunities -->
+  <tr><td style="padding:0 26px 8px 26px;background:{BG};border-left:1px solid {BORDER};border-right:1px solid {BORDER};">
+    <div style="font-size:14px;font-weight:800;color:{INK};padding-bottom:10px;border-bottom:1px solid {BORDER};">Top 3 Featured Active Opportunities Right Now</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:12px;">
+{cards_html}
+    </table>
+  </td></tr>
+
+  <!-- Channels -->
+  <tr><td style="padding:0 26px 22px 26px;background:{BG};border-left:1px solid {BORDER};border-right:1px solid {BORDER};">
+    <div style="padding:16px 18px;border:1px solid {BORDER};border-radius:10px;background:{CARD};">
+      <div style="font-size:13.5px;font-weight:800;color:{INK};">Instant alerts &amp; the Urban Forest Park web app</div>
+      <p style="margin:8px 0 12px 0;font-size:12.5px;line-height:1.65;color:{INK_2};">
+        Job alerts are broadcast every morning at 7 AM IST across the community network. Join the
+        channels below, or install the official web app for one-tap access and offline dossiers.
+      </p>
+      <div>
+        {_email_button(WHATSAPP_URL, 'Join the WhatsApp Job Group', WELCOME_WHATSAPP_COLOR)}
+        {_email_button(TELEGRAM_URL, 'Join the Telegram Channel', WELCOME_TELEGRAM_COLOR)}
+        {_email_button(APP_INSTALL_URL, 'Install the Urban Forest Park Web App', BRAND_ACCENT)}
+      </div>
+    </div>
+    <p style="margin:14px 0 0 0;font-size:12px;line-height:1.65;color:{INK_3};">
+      Urban Forest Park is an informational registry \u2014 it charges no fees, processes no
+      applications, and every dossier links straight to the official application portal.
+    </p>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="padding:20px 26px;background:{BRAND_DARK};border-radius:0 0 12px 12px;">
+    <div style="font-size:12px;line-height:1.7;color:#9FB6AB;">
+      <a href="{esc(SITE)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">Career Registry</a>
+      &nbsp;&middot;&nbsp;
+      <a href="{esc(DASHBOARD_URL)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">Nagar Van dMRV Dashboard</a>
+      &nbsp;&middot;&nbsp;
+      <a href="{esc(CALCULATOR_URL)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">Green Calculator</a>
+      &nbsp;&middot;&nbsp;
+      <a href="{esc(TELEGRAM_URL)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">Telegram</a>
+      &nbsp;&middot;&nbsp;
+      <a href="{esc(WHATSAPP_URL)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">WhatsApp</a>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(232,240,236,.14);font-size:11px;line-height:1.7;color:#7E9A8C;">
+      You are receiving this welcome message because this mailbox subscribed at urbanforestpark.com.
+      <a href="{esc(unsubscribe_url_for(address))}" style="color:#10B981;font-weight:700;text-decoration:none;">Unsubscribe</a> or manage your
+      <a href="{esc(UNSUBSCRIBE_PAGE)}" style="color:#10B981;text-decoration:none;">dispatch preferences</a>.
+      Opt-out requests are honoured within 7 working days.
+    </div>
+    <div style="margin-top:12px;font-size:11px;line-height:1.7;color:#5F7A6C;">
+      Urban Forest Park &middot; National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)
+      &middot; Grievance Officer: {esc(CONTACT_EMAIL)}
+    </div>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+"""
+
+    text_lines = [
+        "URBAN FOREST PARK",
+        "Welcome - India & Global Climate, Forestry, ESG & Research Career Dispatch",
+        "",
+        f"Hello{(' (' + address + ')') if address else ''},",
+        "",
+        f"Your confirmed dispatch preference: {cadence} | {sector_text}.",
+        "Every briefing is compiled from official institutional notifications and application portals.",
+        "",
+        "WHAT WE TRACK & VERIFY FOR YOU",
+        "- Academic & research mandates: JRF, SRF, Project Associate I/II, Research Associate, PhD fellowships and Young Professional roles (WII, ICFRE, IIFM, IIRS, ICAR, IITs, IISc).",
+        "- Corporate ESG, carbon & sustainability roles: ESG analysts, BRSR reporting, carbon market / dMRV specialists, CSR managers.",
+        "- Forestry, GIS & climate policy: think-tank positions (CEEW, WRI India, TERI, ATREE, UNDP), GIS / remote sensing roles, fellowships, grants, scholarships, internships and competitions.",
+        "- Separate India & Global portals: switch between the India Registry and Global Opportunities on the homepage.",
+        "",
+        "HOW TO USE URBAN FOREST PARK EFFECTIVELY",
+        "- Right-side instant search: query every active mandate and past archived position (ideal for benchmarking stipends and skills).",
+        "- One-click filters: Indian state, global region, career track, opportunity type, experience tier.",
+        "- Nagar Van dMRV Dashboard & Green Calculator: urban forestry and heat-island impact analysis.",
+        "",
+        "TOP 3 FEATURED ACTIVE OPPORTUNITIES RIGHT NOW",
+    ]
+    for job in picks:
+        text_lines.extend(
+            [
+                f"- {squash(job.get('clean_title'))} | {squash(job.get('organization'))} | {squash(job.get('state'))}",
+                f"  {squash(job.get('position_type'))} | {squash(job.get('compensation_or_fellowship'))}",
+                f"  View Position Dossier: {job_dossier_url(squash(job.get('id')))}",
+                "",
+            ]
+        )
+    text_lines.extend(
+        [
+            "INSTANT ALERTS & WEB APP",
+            "WhatsApp Job Group: " + WHATSAPP_URL,
+            "Telegram Channel: " + TELEGRAM_URL,
+            "Install the Urban Forest Park web app: " + APP_INSTALL_URL,
+            "",
+            "Urban Forest Park is an informational registry - no fees, no application processing.",
+            "Unsubscribe: " + unsubscribe_url_for(address),
+            "Urban Forest Park - Grievance Officer: " + CONTACT_EMAIL,
+        ]
+    )
+    return html_doc, "\n".join(text_lines)
+
+
+def deliver_welcome(
+    channel: str,
+    config: Dict[str, str],
+    recipient: str,
+    frequency: Any,
+    sector: Any,
+    jobs: Optional[List[Dict[str, Any]]] = None,
+) -> None:
+    html_body, text_body = build_welcome_email_html(recipient, frequency, sector, jobs)
+    list_unsub = f"<mailto:{CONTACT_EMAIL}?subject=unsubscribe>, <{unsubscribe_url_for(recipient)}>"
+    DELIVERERS[channel](config, recipient, WELCOME_SUBJECT, html_body, text_body, list_unsub)
+
+
+def _raw_subscriber_records(raw: Any) -> List[Dict[str, Any]]:
+    """Normalise the subscribers file (list | wrapper | bare addresses)."""
+    if isinstance(raw, dict):
+        raw = raw.get("subscribers", [])
+    if not isinstance(raw, list):
+        return []
+    records: List[Dict[str, Any]] = []
+    for item in raw:
+        if isinstance(item, dict):
+            records.append(dict(item))
+        elif isinstance(item, str) and item.strip():
+            records.append({"email": item.strip()})
+    return records
+
+
+def load_subscriber_records() -> List[Dict[str, Any]]:
+    if not SUBSCRIBERS_FILE.exists():
+        return []
+    try:
+        raw = json.loads(SUBSCRIBERS_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        logging.warning("Could not read %s (%s)", SUBSCRIBERS_FILE, exc)
+        return []
+    return _raw_subscriber_records(raw)
+
+
+def save_subscriber_records(records: List[Dict[str, Any]]) -> None:
+    SUBSCRIBERS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = SUBSCRIBERS_FILE.with_suffix(".json.tmp")
+    tmp_path.write_text(json.dumps(records, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    tmp_path.replace(SUBSCRIBERS_FILE)
+
+
+def process_welcome_backlog(
+    channel: str,
+    config: Dict[str, str],
+    jobs: Optional[List[Dict[str, Any]]] = None,
+    pace: float = 0.4,
+) -> int:
+    """Send the welcome email to every recorded subscriber that lacks one.
+
+    This is the safety net behind the instant `/api/subscribe` trigger: any
+    subscriber saved without ``welcome_sent: true`` receives the onboarding
+    email on the next dispatch run, and the marker is written back so each
+    address is welcomed exactly once. Never raises: the dispatch run must
+    stay green even if a single welcome delivery fails.
+    """
+    records = load_subscriber_records()
+    pending = [
+        record for record in records
+        if EMAIL_RE.match(squash(record.get("email")))
+        and record.get("welcome_sent") is not True
+        and not _looks_like_test_email(squash(record.get("email")))
+    ]
+    if not records:
+        logging.info("Welcome backlog: no subscribers recorded yet - nothing to send.")
+        return 0
+    if not pending:
+        logging.info("Welcome backlog: all %d recorded subscriber(s) already welcomed.", len(records))
+        return 0
+
+    logging.info("Welcome backlog: %d subscriber(s) pending a welcome email.", len(pending))
+    sent = 0
+    for record in pending:
+        address = squash(record.get("email")).lower()
+        try:
+            deliver_welcome(channel, config, address, record.get("frequency"), record.get("sector"), jobs)
+            record["email"] = address
+            record["welcome_sent"] = True
+            record["welcome_sent_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            sent += 1
+            logging.info("Welcome email delivered -> %s", address)
+        except Exception as exc:  # noqa: BLE001 - continue the batch
+            logging.warning("Welcome email FAILED -> %s (%s)", address, clip(exc, 160))
+        if pace > 0:
+            time.sleep(pace)
+
+    if sent:
+        try:
+            save_subscriber_records(records)
+            logging.info("Welcome backlog: %d welcome email(s) sent; subscriber file updated.", sent)
+        except OSError as exc:
+            logging.warning("Welcome backlog: could not update %s (%s)", SUBSCRIBERS_FILE, clip(exc, 160))
+    return sent
+
+
+# --------------------------------------------------------------------------
 # Delivery
 # --------------------------------------------------------------------------
 def http_json(url: str, payload: Dict[str, Any], headers: Dict[str, str], timeout: int = 45) -> Tuple[int, str]:
@@ -695,11 +1108,91 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-cards", type=int, default=10, help="Maximum job cards in the dispatch")
     parser.add_argument("--date", default="", help="Override 'today' (YYYY-MM-DD) - for testing")
     parser.add_argument("--to", default="", help="Send only to these address(es), comma separated - test mode")
+    parser.add_argument(
+        "--welcome",
+        default="",
+        metavar="EMAIL",
+        help="Send the one-time Welcome email to this address now, then exit",
+    )
+    parser.add_argument(
+        "--test-welcome",
+        action="store_true",
+        help="Send a test Welcome email to SMTP_USER / NEWSLETTER_OWNER_EMAIL and always write welcome_email_preview.html",
+    )
+    parser.add_argument(
+        "--frequency",
+        default="3-day",
+        choices=["3-day", "weekly"],
+        help="Dispatch cadence stamped into the Welcome email (default 3-day)",
+    )
+    parser.add_argument(
+        "--sector",
+        default="all",
+        choices=["all", "academic", "forestry-gis", "corporate-esg"],
+        help="Sector preference stamped into the Welcome email (default all)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Generate the HTML edition only; do not send")
     parser.add_argument("--strict", action="store_true", help="Exit non-zero when delivery was attempted and nothing was delivered")
     parser.add_argument("--pace", type=float, default=0.4, help="Seconds to pause between deliveries (default 0.4)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose (debug) logging")
     return parser
+
+
+def run_welcome_command(args: argparse.Namespace) -> int:
+    """--welcome / --test-welcome: build and deliver the onboarding email."""
+    jobs: Optional[List[Dict[str, Any]]] = None
+    if args.jobs.exists():
+        jobs = load_jobs(args.jobs)
+
+    if args.test_welcome:
+        recipient = (
+            (args.to or "").split(",")[0].strip()
+            or os.environ.get("NEWSLETTER_OWNER_EMAIL", "").strip()
+            or os.environ.get("SMTP_USER", "").strip()
+            or os.environ.get("NEWSLETTER_FROM_EMAIL", "").strip()
+        )
+        if not recipient or not EMAIL_RE.match(recipient):
+            recipient = CONTACT_EMAIL
+            logging.info(
+                "No SMTP_USER / NEWSLETTER_OWNER_EMAIL configured - using %s for the preview.",
+                CONTACT_EMAIL,
+            )
+        mode = "test"
+    else:
+        recipient = args.welcome.strip()
+        mode = "single"
+
+    if not recipient or not EMAIL_RE.match(recipient):
+        logging.error(
+            "No valid recipient for the welcome email (pass --welcome <email>, --to, or set SMTP_USER)."
+        )
+        return 1
+
+    html_body, _text_body = build_welcome_email_html(recipient, args.frequency, args.sector, jobs)
+    try:
+        WELCOME_PREVIEW.write_text(html_body, encoding="utf-8")
+        logging.info(
+            "Welcome email preview written to %s (%d bytes).",
+            WELCOME_PREVIEW, len(html_body.encode("utf-8")),
+        )
+    except OSError as exc:
+        logging.warning("Could not write the welcome preview (%s).", clip(exc, 160))
+
+    channel, config = detect_channel()
+    if channel is None:
+        logging.info(
+            "No email credentials configured (RESEND_API_KEY / BREVO_API_KEY / SMTP_*) - "
+            "preview saved only; nothing was sent."
+        )
+        return 0
+
+    try:
+        deliver_welcome(channel, config, recipient, args.frequency, args.sector, jobs)
+    except Exception as exc:  # noqa: BLE001 - surface the failure for this explicit request
+        logging.error("Welcome email delivery failed via %s: %s", channel.upper(), clip(exc, 240))
+        return 1
+    logging.info("Welcome email (%s mode) delivered via %s -> %s", mode, channel.upper(), recipient)
+    return 0
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -709,6 +1202,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         format="%(asctime)s [%(levelname)s] %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+
+    if args.welcome or args.test_welcome:
+        return run_welcome_command(args)
 
     today = parse_iso_date(args.date) or datetime.now(IST).date()
 
@@ -742,6 +1238,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         logging.info("--dry-run requested: skipping delivery.")
         return 0
 
+    channel, config = detect_channel()
+
+    # Welcome-email safety net: any subscriber recorded without a welcome
+    # email yet receives the onboarding message on this run (exactly once).
+    if channel is not None and not args.to:
+        try:
+            process_welcome_backlog(channel, config, jobs, pace=args.pace)
+        except Exception as exc:  # noqa: BLE001 - never fail the dispatch run
+            logging.warning("Welcome backlog pass skipped: %s", clip(exc, 160))
+
     recipients, source = load_recipients(args.to or None)
     logging.info("Subscriber source: %s (%d valid unique recipient(s)).", source, len(recipients))
     if not recipients:
@@ -751,7 +1257,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         )
         return 0
 
-    channel, config = detect_channel()
     if channel is None:
         logging.info(
             "No email credentials configured (RESEND_API_KEY / BREVO_API_KEY / SMTP_*) - "
