@@ -2542,3 +2542,248 @@ main h1, main h2 { font-weight: 600; }
 }
 .skill-chip.more::before { background: var(--ink-4); }
 /* end ufp-institutional-refinement */
+
+/* ==========================================================================
+   24. MOBILE PHONE OPTIMISATION (360px - 430px)
+   --------------------------------------------------------------------------
+   A compact, native-feeling phone layout: two-row header, 2x2 telemetry,
+   swipeable filter strips, tighter cards and dossier, and room for the
+   floating app / cookie / back-to-top controls.
+   ========================================================================== */
+
+/* Zero horizontal overflow. `clip` keeps position: sticky working, while
+   older engines fall back to hidden. */
+html, body { overflow-x: hidden; }
+@supports (overflow-x: clip) {
+  html, body { overflow-x: clip; }
+}
+
+@media (max-width: 768px) {
+  /* ---------- 24a. Compact two-row header ---------- */
+  .header-inner {
+    position: relative;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 6px;
+    row-gap: 6px;
+  }
+  .brand { flex: 1 1 100%; padding-right: 46px; }
+  .ufp-header-logo {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    margin-right: 8px;
+    border-width: 1px;
+  }
+  .brand-word { font-size: 15px; letter-spacing: 0.12em; line-height: 1.2; }
+  .brand-sub { display: none; }
+  .header-actions {
+    flex: 1 1 100%;
+    margin-left: 0;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  .lang-btn { padding: 5px 9px; font-size: 11.5px; }
+  .theme-toggle { padding: 6px 10px; font-size: 11px; gap: 5px; }
+  .nav-cta { display: none; }
+  .nav-toggle { position: absolute; top: 8px; right: 12px; padding: 7px; }
+
+  /* ---------- 24b. 2x2 telemetry ribbon ---------- */
+  .telemetry-inner { padding: 10px 12px 12px; }
+  .telemetry-head { margin-bottom: 8px; gap: 6px; }
+  .telemetry-head .eyebrow,
+  .telemetry-head .mono-note { font-size: 10px; }
+  .telemetry-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .tel-card { padding: 6px 9px; gap: 0; border-radius: 10px; }
+  .tel-label { font-size: 11px; line-height: 1.1; letter-spacing: 0.02em; gap: 4px; }
+  .tel-icon,
+  .tel-card .pulse { display: none; }
+  .tel-value { font-size: 18px; line-height: 1.05; }
+  .tel-note { display: none; }
+
+  /* ---------- 24c. Single-row swipeable filter strips ---------- */
+  .filter-wrap { margin-top: 12px; }
+  .filter-card { padding: 12px; border-radius: 12px; }
+  .filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .filter-row .field-search,
+  .filter-row .field-wide,
+  #archive-range-field { grid-column: 1 / -1; }
+  .filter-row .field label { margin-bottom: 4px; font-size: 9.5px; letter-spacing: 0.06em; }
+  .filter-row .field input[type="search"] { padding: 9px 10px 9px 36px; font-size: 13px; }
+  .filter-row .field select { padding: 9px 10px; font-size: 13px; }
+  #clear-filters { width: 100%; }
+
+  /* ---------- 24c-2. Compact hero, jurisdiction cards & community strip ---------- */
+  .hero { padding: 22px 0 18px; }
+  .hero-inner { padding: 0 12px; }
+  .hero-kicker { margin-bottom: 8px; font-size: 10px; letter-spacing: 0.1em; }
+  .hero h1 { font-size: 26px; line-height: 1.16; }
+  .hero-sub { margin-top: 12px; font-size: 13.5px; line-height: 1.55; }
+  .hero-actions {
+    margin-top: 14px;
+    padding-bottom: 2px;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .hero-actions::-webkit-scrollbar { display: none; }
+  .hero-actions .btn { flex-shrink: 0; padding: 9px 12px; font-size: 12.5px; }
+  .jurisdiction-switch.hero-js {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin: 14px 0 4px;
+  }
+  .jurisdiction-switch.hero-js .js-pill {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    gap: 6px;
+  }
+  .jurisdiction-switch.hero-js .js-text strong { font-size: 12px; }
+  .jurisdiction-switch.hero-js .js-text .js-sub { display: none; }
+  .jurisdiction-switch.hero-js .js-flag { font-size: 14px; }
+
+  .community-strip { padding: 8px 12px 0; }
+  .cs-inner { padding: 10px 12px; gap: 8px; }
+  .cs-copy { gap: 1px; }
+  .cs-copy strong { font-size: 13.5px; }
+  .cs-copy span { font-size: 11.5px; line-height: 1.4; }
+  .cs-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+  .cs-btn { justify-content: center; padding: 7px 10px; font-size: 11.5px; }
+
+  .pill-row,
+  .track-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+  .pill-row::-webkit-scrollbar,
+  .track-row::-webkit-scrollbar { display: none; }
+  .pill-row { margin-top: 12px; padding-top: 12px; }
+  .track-row { margin-top: 10px; padding-top: 10px; }
+  .cat-pill { flex-shrink: 0; padding: 6px 11px 6px 10px; font-size: 12px; }
+  .cat-pill::before { width: 5px; height: 5px; margin-right: 6px; }
+  .cat-pill .cnt { margin-left: 5px; font-size: 10px; }
+  .track-btn { flex-shrink: 0; padding: 6px 11px; font-size: 12px; }
+  .track-label { flex-shrink: 0; }
+
+  /* ---------- 24d. Compact feed cards ---------- */
+  .feed-wrap { margin-top: 20px; padding: 0 12px; }
+  .feed-head { margin-bottom: 12px; padding-bottom: 10px; }
+  .feed-head h2 { font-size: 19px; }
+  .feed-note { font-size: 10px; }
+  #jobs-grid { gap: 10px; }
+  .job-card { padding: 12px 14px 10px; gap: 7px; border-radius: 12px; }
+  .jc-main { gap: 9px; }
+  .jc-title { font-size: 15px; line-height: 1.32; }
+  .jc-org { font-size: 12.5px; }
+  .jc-top { gap: 4px; }
+  .badge { padding: 3px 6px; font-size: 10px; gap: 4px; }
+  .badge-state { font-size: 10.5px; }
+  .job-card .badge-exp { display: none; }
+  .jc-meta { font-size: 11px; gap: 4px 10px; }
+  .jc-meta svg { width: 12px; height: 12px; }
+  /* The posted date is repeated in the card footer; keeping it in the meta
+     row forces a second line on narrow phones. */
+  .jc-meta > span:nth-child(2) { display: none; }
+  .jc-eligibility { display: none; }
+  .jc-skills { max-height: 25px; overflow: hidden; gap: 5px; }
+  .skill-chip { padding: 3px 7px; font-size: 10.5px; }
+  .jc-foot { padding-top: 8px; }
+  .jc-date { font-size: 10px; }
+  .jc-view { font-size: 11.5px; }
+  .job-figure--card { width: 46px; height: 46px; border-radius: 9px; }
+  .job-figure--card .fig-emblem svg { width: 16px; height: 16px; }
+  .job-figure--card .fig-monogram { font-size: 5.8px; }
+  .job-figure--card .fig-strip { display: none; }
+
+  /* ---------- 24e. Compact dossier ---------- */
+  .detail-wrap { padding: 14px 12px 40px; }
+  .detail-card { padding: 14px; border-radius: 12px; }
+  .detail-topbar { gap: 8px; margin-bottom: 12px; }
+  .back-link { font-size: 12.5px; }
+  .share-btn { padding: 6px 9px; font-size: 11px; }
+  .detail-head { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; }
+  .detail-card h1 { font-size: 20px; line-height: 1.24; }
+  .detail-org { margin-bottom: 10px; font-size: 13.5px; }
+  .detail-meta { padding-bottom: 14px; font-size: 10.5px; gap: 6px 12px; }
+  .detail-head-main,
+  .detail-kicker { min-width: 0; }
+  .detail-kicker { margin-bottom: 10px; gap: 5px; }
+  .detail-kicker .badge { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  .detail-section { margin-top: 20px; }
+  .detail-section p { font-size: 14px; line-height: 1.65; }
+  .job-figure--detail { width: 64px; height: 64px; border-radius: 10px; }
+  .job-figure--detail .fig-emblem svg { width: 24px; height: 24px; }
+  .job-figure--detail .fig-monogram { margin-top: 2px; font-size: 8px; }
+  .job-figure--detail .fig-strip { display: none; }
+  .elig-grid > div { padding: 8px 10px; }
+  .elig-grid dt { font-size: 10px; }
+  .elig-grid dd { font-size: 12.5px; overflow-wrap: anywhere; }
+  .verify-card { margin-top: 20px; padding: 12px; }
+  .verify-actions { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .verify-btn {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    justify-content: center;
+  }
+  .verify-btn .vb-label { font-size: 13.5px; }
+  .btn-apply { min-height: 42px; padding: 11px 14px; font-size: 13.5px; }
+  .community-callout { padding: 12px; }
+  .cc-btn { flex: 1 1 auto; justify-content: center; }
+
+  /* ---------- 24f. PWA widget: mini-pill docks at bottom-right ---------- */
+  .ufp-app-widget {
+    right: 12px;
+    left: auto;
+    bottom: 14px;
+    width: 300px;
+    max-width: calc(100vw - 24px);
+    padding: 12px 14px 11px;
+    border-radius: 14px;
+  }
+  .ufp-app-pill {
+    right: 12px;
+    bottom: 14px;
+    height: 34px;
+    padding: 6px 12px;
+    gap: 6px;
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  .uaw-close { top: 6px; right: 6px; width: 30px; height: 30px; font-size: 18px; }
+  .uaw-head { gap: 8px; padding-right: 26px; }
+  .uaw-logo { width: 28px; height: 28px; }
+  .uaw-copy { gap: 2px; }
+  .uaw-copy strong { font-size: 13px; line-height: 1.25; }
+  .uaw-copy span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
+  .uaw-actions { gap: 7px; margin-top: 10px; }
+  .uaw-btn { min-height: 34px; padding: 5px 10px; border-radius: 9px; font-size: 12px; }
+  .uaw-note { margin-top: 6px; max-height: 2.7em; overflow: auto; font-size: 10.5px; line-height: 1.35; }
+
+  html.ufp-consent-open .ufp-app-widget,
+  html.ufp-consent-open .ufp-app-pill { bottom: 126px; }
+}
+/* end ufp-mobile-optimisation */

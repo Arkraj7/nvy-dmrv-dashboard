@@ -10,6 +10,17 @@
 (function () {
   'use strict';
 
+  /* The registry restores the feed's scroll offset itself, so the browser's
+     automatic restoration must not compete with the dossier navigation. */
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+
+  /* Session keys for exact feed-position memory (Phase 2). */
+  var SCROLL_KEY = 'ufp_saved_scroll_y';
+  var SCROLL_JOB_KEY = 'ufp_last_clicked_job_id';
+  var RETURN_FLAG = 'ufp_returning_from_job';
+
   /* ------------------------------------------------------------------ */
   /* Config & state                                                      */
   /* ------------------------------------------------------------------ */
@@ -641,6 +652,7 @@
       renderSeoDirectory();
       applyFilters();
       route(true);
+      restoreFeedScrollOnLoad();
     }).catch(function (err) {
       els.grid.innerHTML = '<div class="empty-state"><h3>Could not load registry data</h3>' +
         '<p>Please refresh the page. If this persists, check that <code>jobs.json</code> is being served on this domain.</p></div>';
@@ -1274,6 +1286,59 @@
     }
   }
 
+  /* -------------------------- Feed scroll memory -------------------------- */
+  function sessionGet(key) {
+    try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
+  }
+  function sessionSet(key, value) {
+    try { window.sessionStorage.setItem(key, String(value)); } catch (e) { /* private mode */ }
+  }
+  function sessionRemove(key) {
+    try { window.sessionStorage.removeItem(key); } catch (e) { /* ignore */ }
+  }
+
+  function scrollToTopInstant() {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } catch (e) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function saveFeedScroll(jobId) {
+    var y = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+    sessionSet(SCROLL_KEY, Math.max(0, Math.round(y)));
+    sessionSet(SCROLL_JOB_KEY, jobId);
+    sessionSet(RETURN_FLAG, '1');
+  }
+
+  /* Restore only after the feed has been re-rendered and laid out. The
+     double requestAnimationFrame is deliberate: the first frame lets the
+     feed become visible, the second measures the final document height. */
+  function restoreFeedScroll() {
+    var saved = sessionGet(SCROLL_KEY);
+    var y = parseInt(saved, 10);
+    sessionRemove(RETURN_FLAG);
+    if (isNaN(y) || y <= 0) return;
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        try {
+          window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+        } catch (e) {
+          window.scrollTo(0, y);
+        }
+      });
+    });
+  }
+
+  /* A full page load back to "/" (for example the header logo) should also
+     return the reader to the feed position they left. */
+  function restoreFeedScrollOnLoad() {
+    if (getJobIdFromUrl()) return;
+    if (sessionGet(RETURN_FLAG) !== '1') return;
+    restoreFeedScroll();
+  }
+
   function goHome() {
     var path = window.location.pathname + queryForState();
     if (window.history && window.history.pushState) {
@@ -1287,6 +1352,7 @@
   }
 
   function route(initial) {
+    var wasDetail = !!state.detailId;
     var id = getJobIdFromUrl();
     if (id) {
       var found = findJob(id);
@@ -1308,7 +1374,9 @@
         }
         renderDetail(found.job, found.archived);
         document.body.classList.add('view-detail');
-        if (!initial) window.scrollTo({ top: 0, behavior: 'smooth' });
+        /* The dossier always opens at its own beginning, never at the
+           feed offset the reader came from. */
+        scrollToTopInstant();
         updateSeoForJob(found.job, found.archived);
         return;
       }
@@ -1321,10 +1389,15 @@
     state.detailId = null;
     document.body.classList.remove('view-detail');
     updateViewSeo();
+    if (wasDetail) restoreFeedScroll();
   }
 
   function openJob(id) {
     if (state.detailId === id) return;
+    /* Capture the feed offset before the DOM switches to dossier mode.
+       Opening a related role from inside a dossier must not overwrite the
+       position the reader originally came from. */
+    if (!state.detailId) saveFeedScroll(id);
     var url = '?job=' + encodeURIComponent(id);
     if (window.history && window.history.pushState) {
       try {
@@ -2045,18 +2118,22 @@
       els.navRegistry.addEventListener('click', function (e) {
         if (state.view === 'active' && !state.detailId) return;
         e.preventDefault();
+        var wasDetail = !!state.detailId;
         state.detailId = null;
         document.body.classList.remove('view-detail');
         setView('active');
+        if (wasDetail) restoreFeedScroll();
       });
     }
     if (els.navArchive) {
       els.navArchive.addEventListener('click', function (e) {
         if (state.view === 'archive' && !state.detailId) return;
         e.preventDefault();
+        var wasDetail = !!state.detailId;
         state.detailId = null;
         document.body.classList.remove('view-detail');
         setView('archive');
+        if (wasDetail) restoreFeedScroll();
       });
     }
 

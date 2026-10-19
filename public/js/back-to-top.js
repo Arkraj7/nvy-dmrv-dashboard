@@ -21,8 +21,10 @@
   window.__ufpBackToTop = true;
 
   var SHOW_AFTER = 440;   /* px of scroll before the control appears     */
-  var SIZE = 46;          /* button diameter (also referenced by layout) */
-  var GAP = 22;           /* resting distance from the viewport corner   */
+  var SIZE = 46;          /* desktop button diameter                     */
+  var GAP = 22;           /* desktop resting distance from the corner    */
+  var MOBILE_MAX = 768;   /* phone breakpoint                            */
+  var MOBILE_SIZE = 36;   /* phone button diameter                       */
 
   var STYLE_ID = 'ufp-btt-styles';
   var btn = null;
@@ -45,7 +47,8 @@
     'border-color:rgba(255,255,255,.18);box-shadow:0 18px 36px -18px rgba(0,0,0,.78);}',
     'html[data-theme="dark"] .ufp-btt:hover,html[data-theme="dark"] .ufp-btt:focus,',
     'html.dark .ufp-btt:hover,html.dark .ufp-btt:focus{border-color:#34d399;color:#34d399;}',
-    '@media (max-width:640px){.ufp-btt{width:43px;height:43px;right:16px;}}',
+    '@media (max-width:768px){.ufp-btt{width:36px;height:36px;left:12px;right:auto;bottom:14px;}',
+    '.ufp-btt svg{width:16px;height:16px;}}',
     '@media print{.ufp-btt{display:none !important;}}',
     '@media (prefers-reduced-motion:reduce){.ufp-btt{transition:none;}}'
   ].join('');
@@ -84,7 +87,9 @@
   /* Keep the control clear of the cookie notice and the app/alerts widget. */
   function layout() {
     if (!btn) { return; }
-    var bottom = GAP;
+    var mobile = window.innerWidth <= MOBILE_MAX;
+    var size = mobile ? MOBILE_SIZE : SIZE;
+    var bottom = mobile ? 14 : GAP;
     var right = GAP;
 
     var bar = visibleRect(document.getElementById('ufp-cookie-consent'));
@@ -92,23 +97,33 @@
       bottom = Math.max(bottom, window.innerHeight - bar.top + 10);
     }
 
-    var app = visibleRect(document.getElementById('ufp-app-widget')) ||
-              visibleRect(document.getElementById('ufp-app-pill'));
-    if (app) {
-      var appBottom = window.innerHeight - app.bottom;      /* px above the viewport base */
-      var appFromRight = window.innerWidth - app.left;      /* horizontal footprint       */
-      if (bottom + SIZE + 8 > appBottom) {
-        var leftRoom = app.left - SIZE - 14;
-        if (leftRoom >= 12) {
-          right = appFromRight + 14;                        /* tuck beside the widget column */
-        } else {
-          bottom = appBottom + app.height + 12;             /* stack above it (narrow screens) */
+    /* On phones the control docks bottom-left, opposite the app mini-pill, so
+       the two can never stack on top of each other. */
+    if (!mobile) {
+      var app = visibleRect(document.getElementById('ufp-app-widget')) ||
+                visibleRect(document.getElementById('ufp-app-pill'));
+      if (app) {
+        var appBottom = window.innerHeight - app.bottom;    /* px above the viewport base */
+        var appFromRight = window.innerWidth - app.left;    /* horizontal footprint       */
+        if (bottom + size + 8 > appBottom) {
+          var leftRoom = app.left - size - 14;
+          if (leftRoom >= 12) {
+            right = appFromRight + 14;                      /* tuck beside the widget column */
+          } else {
+            bottom = appBottom + app.height + 12;           /* stack above it (narrow screens) */
+          }
         }
       }
     }
 
     btn.style.bottom = Math.round(bottom) + 'px';
-    btn.style.right = Math.round(right) + 'px';
+    if (mobile) {
+      btn.style.left = '12px';
+      btn.style.right = 'auto';
+    } else {
+      btn.style.left = 'auto';
+      btn.style.right = Math.round(right) + 'px';
+    }
   }
 
   function onScroll() {

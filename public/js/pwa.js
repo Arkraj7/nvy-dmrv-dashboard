@@ -219,7 +219,10 @@
     var pill = $('ufp-app-pill');
     if (!widget || !pill) return;
 
-    showWidget(read(LS_COLLAPSED) !== '1');
+    /* On phones the panel must never cover the feed on arrival: start in the
+       compact mini-pill state and let the reader opt into the full card. */
+    var mobileViewport = !!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+    showWidget(!mobileViewport && read(LS_COLLAPSED) !== '1');
 
     var closeBtn = $('ufp-app-close');
     if (closeBtn) {
