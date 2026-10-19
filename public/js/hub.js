@@ -11,7 +11,7 @@
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     var meta = document.getElementById('meta-theme-color');
-    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0D131A' : '#F3F7F4');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0B0F17' : '#F8FAFC');
     var label = document.getElementById('theme-label');
     if (label) label.textContent = theme === 'dark' ? 'Light' : 'Night';
     var btn = document.getElementById('theme-toggle');

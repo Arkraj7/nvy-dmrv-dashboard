@@ -949,7 +949,7 @@ def build_hub_page(
     <meta name="twitter:title" content="{esc(hub['title'])}">
     <meta name="twitter:description" content="{esc(hub['desc'])}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
 {FAVICONS}

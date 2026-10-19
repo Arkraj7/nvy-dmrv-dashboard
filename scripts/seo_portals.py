@@ -381,7 +381,7 @@ def build_hindi_hub_page(
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
@@ -621,7 +621,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
@@ -916,7 +916,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
