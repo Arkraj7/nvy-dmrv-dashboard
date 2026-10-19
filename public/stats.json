@@ -1,17 +1,17 @@
 {
-  "last_updated": "2026-10-19T03:47:42",
-  "active_open_jobs": 82,
-  "opened_this_week": 76,
+  "last_updated": "2026-10-19T06:40:55",
+  "active_open_jobs": 84,
+  "opened_this_week": 78,
   "passed_this_week": 6,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 88,
+  "total_historical_indexed": 90,
   "by_category": {
     "Forestry, Wildlife & Afforestation": {
       "active": 6,
       "archived": 1
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 5,
+      "active": 7,
       "archived": 1
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
@@ -36,8 +36,8 @@
     "Maharashtra": 13,
     "Karnataka": 11,
     "Tamil Nadu": 8,
+    "Gujarat": 5,
     "Telangana": 5,
-    "Gujarat": 4,
     "Uttarakhand": 3,
     "West Bengal": 3,
     "Assam": 2,

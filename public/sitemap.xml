@@ -247,13 +247,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.urbanforestpark.com/?state=Telangana</loc>
+    <loc>https://www.urbanforestpark.com/?state=Gujarat</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.urbanforestpark.com/?state=Gujarat</loc>
+    <loc>https://www.urbanforestpark.com/?state=Telangana</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -325,6 +325,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.urbanforestpark.com/?job=research-intern-technology-futures-ceew</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.urbanforestpark.com/?job=programme-associate-energy-transitions-ceew</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>daily</changefreq>
@@ -332,6 +338,12 @@
   </url>
   <url>
     <loc>https://www.urbanforestpark.com/?job=mittal-family-climate-fellowship-program</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.urbanforestpark.com/?job=chief-of-partnerships-unaccc-vadodara</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
