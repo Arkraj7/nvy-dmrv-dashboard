@@ -132,6 +132,45 @@
     }
   }
 
+  /* The cookie notice and the app/alerts widget can open or close long after
+     the last scroll (the notice slides in ~350ms after load; the widget pops
+     in later still). Sample the geometry again once each transition has had
+     time to settle so the control never ends up underneath either overlay. */
+  function scheduleRelayout() {
+    [0, 140, 400].forEach(function (delay) {
+      window.setTimeout(function () {
+        if (btn && btn.classList.contains('is-visible')) { layout(); }
+      }, delay);
+    });
+  }
+
+  function watchOverlays() {
+    document.addEventListener('ufp:consent-change', scheduleRelayout);
+
+    if (!window.MutationObserver || !document.body) { return; }
+    var WATCHED_IDS = { 'ufp-cookie-consent': 1, 'ufp-app-widget': 1, 'ufp-app-pill': 1 };
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var target = mutations[i].target;
+        if (!target) { continue; }
+        if (target === document.documentElement || WATCHED_IDS[target.id]) {
+          scheduleRelayout();
+          return;
+        }
+      }
+    });
+    try {
+      /* Consent open/close state lives on <html>; the overlays toggle
+         hidden/class/is-open on themselves. */
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['hidden', 'class', 'style'],
+        subtree: true
+      });
+    } catch (err) { /* no observer support: scroll/resize still re-measures */ }
+  }
+
   function build() {
     if (btn || !document.body) { return; }
 
@@ -160,6 +199,7 @@
     window.addEventListener('orientationchange', function () {
       if (btn.classList.contains('is-visible')) { layout(); }
     });
+    watchOverlays();
     onScroll();
   }
 
