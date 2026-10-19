@@ -39,26 +39,10 @@ jobs:
           python -c "import lxml; print('lxml:', lxml.__version__)"
 
       - name: Test basic connectivity
-        run: |
-          python3 -c "
-import requests
-import certifi
-try:
-    r = requests.get('https://example.com', timeout=10, verify=certifi.where())
-    print('example.com:', r.status_code)
-except Exception as e:
-    print('ERROR:', type(e).__name__, str(e))
-
-try:
-    r = requests.get('https://www.ceew.in/careers', timeout=15, verify=certifi.where(), headers={'User-Agent': 'UrbanForestPark-Verifier/1.0'})
-    print('ceew.in/careers:', r.status_code)
-except Exception as e:
-    print('ceew.in ERROR:', type(e).__name__, str(e))
-"
+        run: python scripts/test_connect.py
 
       - name: Run link audit
-        run: |
-          python scripts/audit_links.py 2>&1
+        run: python scripts/audit_links.py 2>&1
         shell: bash
         continue-on-error: true
 
@@ -72,24 +56,5 @@ except Exception as e:
 
       - name: Print summary
         if: always()
-        run: |
-          echo "=== AUDIT SUMMARY ==="
-          python3 -c "
-import csv, os
-from collections import Counter
-if os.path.exists('audit_report.csv'):
-    rows = list(csv.DictReader(open('audit_report.csv')))
-    print('Total:', len(rows))
-    print('PASS:', sum(1 for r in rows if r['verdict'] == 'PASS'))
-    print('FAIL:', sum(1 for r in rows if r['verdict'] == 'FAIL'))
-    print('HTTP 200:', sum(1 for r in rows if r['http_status'] == '200'))
-    rc = Counter(r['reason_code'] for r in rows)
-    print('Reason codes:', dict(rc.most_common()))
-    et = Counter(r['entry_type'] for r in rows)
-    print('Entry types:', dict(et.most_common()))
-    hc = Counter(r['final_host'] for r in rows if r['final_host'])
-    print('Top hosts:', dict(hc.most_common(10)))
-else:
-    print('audit_report.csv not found')
-"
+        run: python scripts/print_summary.py
         shell: bash
