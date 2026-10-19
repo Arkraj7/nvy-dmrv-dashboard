@@ -194,12 +194,40 @@ class LinkVerifier:
         return urlunparse(parsed._replace(query=new_query))
     
     def _is_private_ip(self, host: str) -> bool:
-        """Check if host resolves to private/loopback/link-local IP (SSRF protection)."""
+        """Check if host resolves to private/loopback/link-local IP (SSRF protection).
+        
+        Checks ALL A/AAAA records. Returns True only if ALL resolved IPs are private.
+        Public CDN addresses (Cloudflare, AWS, etc.) are allowed.
+        """
         try:
             import socket
-            ip = socket.gethostbyname(host)
-            ip_obj = ipaddress.ip_address(ip)
-            return ip_obj.is_private or ip_obj.is_loopback or ip_obj.is_link_local
+            # Get all A records
+            ips = set()
+            try:
+                for res in socket.getaddrinfo(host, None, socket.AF_INET):
+                    ips.add(res[4][0])
+            except Exception:
+                pass
+            # Get all AAAA records
+            try:
+                for res in socket.getaddrinfo(host, None, socket.AF_INET6):
+                    ips.add(res[4][0])
+            except Exception:
+                pass
+            
+            if not ips:
+                return False  # No IPs resolved - allow (will fail later anyway)
+            
+            # Check if ALL resolved IPs are private/loopback/link-local
+            for ip_str in ips:
+                try:
+                    ip_obj = ipaddress.ip_address(ip_str)
+                    if not (ip_obj.is_private or ip_obj.is_loopback or ip_obj.is_link_local):
+                        return False  # At least one public IP - allow
+                except Exception:
+                    continue
+            # All resolved IPs are private/loopback/link-local
+            return True
         except Exception:
             return False
     
@@ -440,12 +468,24 @@ class LinkVerifier:
         return hashlib.sha256(content).hexdigest()[:32]
     
     def _detect_entry_type(self, text: str, final_url: str, final_host: str) -> str:
-        """Detect if page is a job-specific posting or generic careers portal."""
+        """Detect if page is a job-specific posting, generic careers portal, or award portal."""
         if not text:
             return 'unknown'
         
         text_lower = text.lower()
         url_lower = final_url.lower()
+        
+        # Award portal indicators (scholarships, prizes, awards)
+        award_url_patterns = [
+            '/award', '/prize', '/scholarship', '/fellowship', '/grant',
+            '/competition', '/challenge', '/call-for'
+        ]
+        
+        award_content_phrases = [
+            'scholarship', 'fellowship', 'prize', 'award', 'grant',
+            'application deadline', 'eligibility criteria', 'selection criteria',
+            'application form', 'submit your application'
+        ]
         
         # Generic portal indicators in URL
         generic_url_patterns = [
@@ -471,6 +511,7 @@ class LinkVerifier:
         
         generic_score = 0
         specific_score = 0
+        award_score = 0
         
         # URL check
         for pattern in generic_url_patterns:
@@ -481,16 +522,27 @@ class LinkVerifier:
                 else:
                     generic_score += 1
         
+        for pattern in award_url_patterns:
+            if pattern in url_lower:
+                award_score += 2
+        
         # Content check
         for phrase in generic_content_phrases:
             if phrase in text_lower:
                 generic_score += 1
         
+        for phrase in award_content_phrases:
+            if phrase in text_lower:
+                award_score += 1
+        
         for phrase in job_specific_phrases:
             if phrase in text_lower:
                 specific_score += 2
         
-        if generic_score > specific_score and generic_score > 0:
+        # Priority: award > posting > careers_portal
+        if award_score > max(generic_score, specific_score):
+            return 'award_portal'
+        elif generic_score > specific_score and generic_score > 0:
             return 'careers_portal'
         elif specific_score > 0:
             return 'posting'
@@ -500,11 +552,18 @@ class LinkVerifier:
     
     def _is_generic_landing_page(self, text: str, final_url: str, final_host: str, 
                                   matched: bool, overlap: float) -> bool:
-        """Check if page is a generic careers/recruitment landing page."""
+        """Check if page is a generic careers/recruitment landing page.
+        
+        Award portals (scholarships, prizes) are legitimate even without job title match.
+        """
         if not text:
             return True
         
         entry_type = self._detect_entry_type(text, final_url, final_host)
+        
+        # Award portals are legitimate even without job title match
+        if entry_type == 'award_portal':
+            return False
         
         # If content match failed AND it's a generic portal, it's a generic landing page
         if not matched and entry_type == 'careers_portal':
@@ -689,6 +748,25 @@ class LinkVerifier:
                 warnings=[f'HTTP {status}']
             )
         
+        if status == 403:
+            # 403 Forbidden - could be bot protection, geographic restriction, etc.
+            return VerificationResult(
+                ok=False,
+                final_url=final_url,
+                final_host=final_host,
+                http_status=status,
+                redirect_chain=redirect_chain,
+                verification_level='unverified',
+                host_class=host_class,
+                reason_code='NEEDS_MANUAL_CHECK',
+                evidence_snippet='',
+                content_hash=content_hash,
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail=f'status|HTTP403|Forbidden - may need manual verification',
+                warnings=['HTTP 403 Forbidden - may require manual verification']
+            )
+        
         if status >= 400:
             return VerificationResult(
                 ok=False,
@@ -790,15 +868,27 @@ class LinkVerifier:
                 warnings=['Generic careers/recruitment landing page']
             )
         
+        # Tightened OK: require BOTH org name AND job title on page
+        # (title_overlap >= 0.6 already checked in _content_match)
         if matched:
             verification_level = 'page_verified'
             reason_code = 'OK'
             ok = True
+            warnings = []
         else:
-            # Domain verified only - host is allowed but content couldn't be matched
-            verification_level = 'domain_verified'
-            reason_code = 'CONTENT_MISMATCH' if text else 'EMPTY_RESPONSE'
-            ok = True
+            # Check if content check could run
+            if not text or len(text.strip()) < 100:
+                # Content check couldn't run - empty/thin body, likely JS-rendered
+                verification_level = 'domain_verified'
+                reason_code = 'CONTENT_CHECK_SKIPPED'
+                ok = True  # domain_verified is still OK per policy
+                warnings = ['Content check skipped: empty/thin body (likely JS-rendered)']
+            else:
+                # Page loaded but job title not found - CONTENT_MISMATCH = FAIL
+                verification_level = 'unverified'
+                reason_code = 'CONTENT_MISMATCH'
+                ok = False  # FAIL - quarantined
+                warnings = ['Job title not found on page - content mismatch']
         
         return VerificationResult(
             ok=ok,
@@ -814,7 +904,7 @@ class LinkVerifier:
             verified_at=datetime.now(timezone.utc).isoformat(),
             entry_type=entry_type,
             error_detail='',
-            warnings=[]
+            warnings=warnings
         )
 
 
