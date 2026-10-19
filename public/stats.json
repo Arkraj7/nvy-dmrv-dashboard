@@ -1,21 +1,21 @@
 {
-  "last_updated": "2026-10-18T20:06:30",
-  "active_open_jobs": 79,
-  "opened_this_week": 74,
+  "last_updated": "2026-10-19T03:47:42",
+  "active_open_jobs": 82,
+  "opened_this_week": 76,
   "passed_this_week": 6,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 85,
+  "total_historical_indexed": 88,
   "by_category": {
     "Forestry, Wildlife & Afforestation": {
-      "active": 5,
+      "active": 6,
       "archived": 1
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 4,
+      "active": 5,
       "archived": 1
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 58,
+      "active": 59,
       "archived": 3
     },
     "Academic, JRF, SRF & PhD Positions": {
@@ -32,12 +32,12 @@
     }
   },
   "by_state": {
-    "Delhi NCR": 15,
+    "Delhi NCR": 16,
     "Maharashtra": 13,
     "Karnataka": 11,
     "Tamil Nadu": 8,
     "Telangana": 5,
-    "Gujarat": 3,
+    "Gujarat": 4,
     "Uttarakhand": 3,
     "West Bengal": 3,
     "Assam": 2,
