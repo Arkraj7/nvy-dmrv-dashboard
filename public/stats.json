@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-10-19T13:14:11",
-  "active_open_jobs": 84,
-  "opened_this_week": 78,
+  "last_updated": "2026-10-19T19:44:20",
+  "active_open_jobs": 80,
+  "opened_this_week": 74,
   "passed_this_week": 6,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 90,
+  "total_historical_indexed": 86,
   "by_category": {
     "Forestry, Wildlife & Afforestation": {
       "active": 6,
@@ -15,7 +15,7 @@
       "archived": 1
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 59,
+      "active": 55,
       "archived": 3
     },
     "Academic, JRF, SRF & PhD Positions": {
@@ -32,7 +32,7 @@
     }
   },
   "by_state": {
-    "Delhi NCR": 16,
+    "Delhi NCR": 15,
     "Maharashtra": 13,
     "Karnataka": 11,
     "Tamil Nadu": 8,

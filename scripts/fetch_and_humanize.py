@@ -1501,6 +1501,20 @@ BAD_ORG_MARKERS = (
     "not disclosed", "undisclosed", "employer", "various",
 )
 
+# Anonymous-employer labels that are never publishable, even if a job board
+# supplies a working apply link. Kept separate from the broader markers above
+# so the final write gate can enforce this class unconditionally.
+BLOCKED_ORG_TERMS = (
+    "confidential", "undisclosed", "unknown",
+    "leading client", "not disclosed",
+)
+
+
+def has_blocked_organization(job: Dict[str, Any]) -> bool:
+    """True when the employer name is an anonymous placeholder."""
+    org = squash(job.get("organization")).casefold()
+    return any(term in org for term in BLOCKED_ORG_TERMS)
+
 
 def is_verifiable_job(job: Dict[str, Any]) -> Tuple[bool, str]:
     """Strict publish gate: real apply link, real employer, official website."""
@@ -1512,6 +1526,8 @@ def is_verifiable_job(job: Dict[str, Any]) -> Tuple[bool, str]:
     org = squash(job.get("organization")).lower().strip(" .,-")
     if len(org) < 3 or re.fullmatch(r"[^a-z0-9]+", org):
         return False, "organization is not a named entity"
+    if has_blocked_organization(job):
+        return False, "organization is an anonymous placeholder"
     if any(marker in org for marker in BAD_ORG_MARKERS):
         return False, "organization is not a named entity"
     if not is_valid_apply_url(squash(job.get("org_website"))):
@@ -3688,10 +3704,14 @@ def load_jobs(path: Path) -> List[Dict[str, Any]]:
 
 
 def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Final gate: legacy/imported listings with invalid URLs never persist."""
+    """Final gate: invalid URLs and anonymous employers never persist."""
     valid: List[Dict[str, Any]] = []
     dropped = 0
+    blocked = 0
     for job in jobs:
+        if has_blocked_organization(job):
+            blocked += 1
+            continue
         if is_valid_apply_url(job.get("apply_url")):
             valid.append(job)
         else:
@@ -3699,6 +3719,10 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     if dropped:
         log.warning(
             "Dropped %d listing(s) with empty/placeholder apply URLs", dropped
+        )
+    if blocked:
+        log.warning(
+            "Dropped %d listing(s) with anonymous employer names", blocked
         )
     return valid
 
