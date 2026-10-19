@@ -46,7 +46,7 @@ REGIONAL_HUB_URL = SITE + "/" + REGIONAL_HUB_FILE
 # Devanagari + all major Indic scripts used by the regional portal.
 FONTS_HI = """    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&display=swap">"""
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&display=swap">"""
 
 PATHWAY_LABELS_HI: Dict[str, str] = {
     "jrf-srf-project-associate-jobs.html": "JRF / SRF एवं प्रोजेक्ट एसोसिएट भर्तियाँ",
@@ -270,7 +270,8 @@ def footer_html_hi() -> str:
           <li><a href="/privacy.html">गोपनीयता नीति</a></li>
           <li><a href="/terms.html">उपयोग की शर्तें</a></li>
           <li><a href="/unsubscribe.html">डिस्पैच प्राथमिकताएँ</a></li>
-          <li><a href="mailto:arkraj.biswas6@gmail.com">संपर्क करें</a></li>
+          <li><a href="mailto:urbanforestpark@gmail.com">संपर्क करें</a></li>
+          <li><button type="button" class="footer-link-btn" data-syndication-open>Syndication Desk</button></li>
         </ul>
       </div>
     </div>
@@ -380,7 +381,7 @@ def build_hindi_hub_page(
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
@@ -470,6 +471,7 @@ def build_hindi_hub_page(
 
   <script defer src="/js/consent.js"></script>
 <script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/syndication-drawer.js"></script>
 </body>
 </html>
 """
@@ -619,7 +621,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
@@ -697,6 +699,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
 
   <script defer src="/js/consent.js"></script>
 <script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/syndication-drawer.js"></script>
 </body>
 </html>
 """
@@ -757,8 +760,8 @@ GLOBAL_FAQS: List[Tuple[str, str]] = [
         "How do I receive new global opportunities as soon as they are published?",
         "Install the UrbanForestPark app from the registry page and enable instant job "
         "notifications \u2014 new verified listings reach your device automatically. You can also "
-        "copy the weekly LinkedIn Top-10 roundup from the registry footer, or follow the daily "
-        "broadcast on Telegram (@urbanforestpark).",
+        "follow the daily broadcast on Telegram (@urbanforestpark) and the weekly roundup on "
+        "the Urban Forest Park LinkedIn page.",
     ),
 ]
 
@@ -913,7 +916,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
 
     <!-- Favicons -->
 {bsp.FAVICONS}
@@ -1007,6 +1010,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
 
   <script defer src="/js/consent.js"></script>
 <script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/syndication-drawer.js"></script>
 </body>
 </html>
 """

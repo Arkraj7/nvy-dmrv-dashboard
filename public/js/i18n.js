@@ -85,7 +85,6 @@
       'community.sub': 'Daily JRF, forestry, GIS, ESG and climate mandates — verified and broadcast every morning at 7 AM IST.',
       'community.wa': 'Join WhatsApp Job Group',
       'community.tg': 'Join Telegram Channel',
-      'community.copy': 'Copy Today\u2019s Broadcast',
 
       'tabs.aria': 'Registry view',
       'tabs.active': 'Active Opportunities',
@@ -285,7 +284,7 @@
       'dd.freq.3day': 'Every 3 days',
       'dd.manage': 'Manage or withdraw this subscription',
       'dd.update': 'Update preferences',
-      'dd.note.local': 'Saved on this device. To join the current dispatch list immediately, write to arkraj.biswas6@gmail.com.',
+      'dd.note.local': 'Saved on this device. To join the current dispatch list immediately, write to urbanforestpark@gmail.com.',
       'sector.all': 'All mandates',
       'sector.academic': 'JRF / PhD / Academic',
       'sector.forestry-gis': 'Forestry & GIS',
@@ -310,7 +309,7 @@
       'faq.a5_html': 'Urban Forest Park originated as a digital Monitoring, Reporting and Verification (dMRV) and Urban Heat Island (UHI) analytics initiative for urban forestry in India. Alongside the national career registry, the platform continues to operate and maintain its open-access public research utilities — the <a href="/dashboard.html">Nagar Van dMRV Dashboard</a> and the <a href="/green-calculator.html">Green Calculator</a> — freely available to institutions, researchers and citizens.',
       'faq.q6': 'Is there any fee for candidates or institutions to access listings or subscribe to dispatches?',
       'faq.a6': 'None. The registry and every dispatch channel — the website, the 72-hour email dispatch, the Telegram channel and the WhatsApp group — are 100% open-access for candidates, researchers, academic scholars and institutional partners. Urban Forest Park does not charge candidates any fee at any stage and does not act as a recruitment intermediary; all applications are submitted directly to the employer\u2019s official portal.',
-      'faq.note_html': 'Further statutory detail is published in the <a href="/privacy.html">Privacy Policy</a>, <a href="/terms.html">Terms of Use</a> and <a href="/cookies.html">Cookie Policy</a>. Institutional enquiries: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>.'
+      'faq.note_html': 'Further statutory detail is published in the <a href="/privacy.html">Privacy Policy</a>, <a href="/terms.html">Terms of Use</a> and <a href="/cookies.html">Cookie Policy</a>. Institutional enquiries: <a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a>.'
     },
 
     hi: {
@@ -355,7 +354,6 @@
       'community.sub': 'प्रतिदिन JRF, वानिकी, GIS, ESG एवं जलवायु अधिदेश — प्रत्येक सुबह 7 बजे IST पर सत्यापित एवं प्रसारित।',
       'community.wa': 'WhatsApp जॉब ग्रुप जॉइन करें',
       'community.tg': 'Telegram चैनल जॉइन करें',
-      'community.copy': 'आज का ब्रॉडकास्ट कॉपी करें',
 
       'tabs.aria': 'रजिस्ट्री दृश्य',
       'tabs.active': 'सक्रिय अवसर',
@@ -555,7 +553,7 @@
       'dd.freq.3day': 'प्रत्येक 3 दिन',
       'dd.manage': 'सदस्यता प्रबंधित या वापस लें',
       'dd.update': 'प्राथमिकताएँ बदलें',
-      'dd.note.local': 'इस डिवाइस पर सहेजा गया। वर्तमान डिस्पैच सूची में तत्काल जुड़ने हेतु arkraj.biswas6@gmail.com पर लिखें।',
+      'dd.note.local': 'इस डिवाइस पर सहेजा गया। वर्तमान डिस्पैच सूची में तत्काल जुड़ने हेतु urbanforestpark@gmail.com पर लिखें।',
       'sector.all': 'सभी अधिदेश',
       'sector.academic': 'JRF / PhD / शैक्षणिक',
       'sector.forestry-gis': 'वानिकी एवं GIS',
@@ -580,7 +578,7 @@
       'faq.a5_html': 'अर्बन फॉरेस्ट पार्क की शुरुआत भारत में शहरी वानिकी हेतु डिजिटल मॉनिटरिंग, रिपोर्टिंग एवं वेरिफिकेशन (dMRV) तथा अर्बन हीट आइलैंड (UHI) विश्लेषण पहल के रूप में हुई थी। राष्ट्रीय करियर रजिस्ट्री के साथ-साथ यह प्लेटफ़ॉर्म अपनी खुली-पहुँच सार्वजनिक शोध उपयोगिताएँ — <a href="/dashboard.html">नगर वन dMRV डैशबोर्ड</a> एवं <a href="/green-calculator.html">ग्रीन कैलकुलेटर</a> — संस्थानों, शोधकर्ताओं एवं नागरिकों के लिए निःशुल्क संचालित एवं अनुरक्षित रखता है।',
       'faq.q6': 'उम्मीदवारों या संस्थानों के लिए सूचियाँ देखने अथवा डिस्पैच की सदस्यता में कोई शुल्क है?',
       'faq.a6': 'नहीं। रजिस्ट्री एवं प्रत्येक डिस्पैच माध्यम — वेबसाइट, 72-घंटे ईमेल डिस्पैच, Telegram चैनल एवं WhatsApp ग्रुप — उम्मीदवारों, शोधकर्ताओं, शैक्षणिक विद्वानों एवं संस्थागत भागीदारों हेतु 100% खुली-पहुँच है। अर्बन फॉरेस्ट पार्क किसी भी चरण पर उम्मीदवारों से कोई शुल्क नहीं लेता और भर्ती मध्यस्थ के रूप में कार्य नहीं करता; सभी आवेदन सीधे नियोक्ता के आधिकारिक पोर्टल पर जमा होते हैं।',
-      'faq.note_html': 'विस्तृत सांविधिक जानकारी <a href="/privacy.html">गोपनीयता नीति</a>, <a href="/terms.html">उपयोग की शर्तें</a> तथा <a href="/cookies.html">कुकी नीति</a> में प्रकाशित है। संस्थागत पूछताछ: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>।'
+      'faq.note_html': 'विस्तृत सांविधिक जानकारी <a href="/privacy.html">गोपनीयता नीति</a>, <a href="/terms.html">उपयोग की शर्तें</a> तथा <a href="/cookies.html">कुकी नीति</a> में प्रकाशित है। संस्थागत पूछताछ: <a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a>।'
     }
   };
 

@@ -21,7 +21,7 @@
     <meta name="description" content="Manage your subscription to the Urban Forest Park Mandate Dispatch — unsubscribe or update your email briefing preferences for the India climate, forestry, ESG and academic career registry.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://www.urbanforestpark.com/unsubscribe.html">
-    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -34,7 +34,7 @@
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&display=swap">
 
     <!-- Institutional legal stylesheet -->
     <link rel="stylesheet" href="/styles/legal.css">
@@ -80,7 +80,7 @@
           <div><dt>Service</dt><dd>Mandate Dispatch (72-hour email briefing)</dd></div>
           <div><dt>Last Revised</dt><dd>19 October 2026</dd></div>
           <div><dt>Related Policy</dt><dd><a href="/privacy.html">Privacy Policy, Section 5.0</a></dd></div>
-          <div><dt>Grievance Officer</dt><dd><a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a></dd></div>
+          <div><dt>Grievance Officer</dt><dd><a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a></dd></div>
         </dl>
       </div>
     </aside>
@@ -119,7 +119,7 @@
               <dt>Action</dt>
               <dd>
                 <a id="unsub-action" class="theme-toggle" style="display:inline-block;text-decoration:none;"
-                   href="mailto:arkraj.biswas6@gmail.com?subject=Unsubscribe%20%E2%80%94%20Mandate%20Dispatch">
+                   href="mailto:urbanforestpark@gmail.com?subject=Unsubscribe%20%E2%80%94%20Mandate%20Dispatch">
                    Compose Unsubscribe Request
                 </a>
               </dd>
@@ -129,7 +129,7 @@
         <p class="doc-note">
           <strong>Alternatively:</strong> use the unsubscribe link appended to the footer of every
           dispatch email, or write directly to
-          <a href="mailto:arkraj.biswas6@gmail.com?subject=Unsubscribe%20%E2%80%94%20Mandate%20Dispatch">arkraj.biswas6@gmail.com</a>
+          <a href="mailto:urbanforestpark@gmail.com?subject=Unsubscribe%20%E2%80%94%20Mandate%20Dispatch">urbanforestpark@gmail.com</a>
           with the subject "Unsubscribe — Mandate Dispatch".
         </p>
       </section>
@@ -165,7 +165,7 @@
         <p>
           3.2 Questions about this page, or difficulties completing an opt-out, may be addressed to
           the Grievance &amp; Data Protection Officer at
-          <a href="mailto:arkraj.biswas6@gmail.com?subject=Dispatch%20Preferences%20%E2%80%94%20urbanforestpark.com">arkraj.biswas6@gmail.com</a>.
+          <a href="mailto:urbanforestpark@gmail.com?subject=Dispatch%20Preferences%20%E2%80%94%20urbanforestpark.com">urbanforestpark@gmail.com</a>.
         </p>
       </section>
     </article>
@@ -192,11 +192,12 @@
         <a href="/accessibility.html">Accessibility</a>
         <a href="/unsubscribe.html">Dispatch Preferences</a>
         <button type="button" class="lf-btn" data-ufp-cookie-settings>Cookie Preferences</button>
+        <button type="button" class="lf-btn" data-syndication-open>Syndication Desk</button>
       </nav>
       <p class="lf-note">
         &copy; 2026 Urban Forest Park &middot; Governed by the laws of the Republic of India &middot;
         Compliance framework: IT Act, 2000 &amp; DPDP Act, 2023 &middot;
-        Grievance Officer: <a href="mailto:arkraj.biswas6@gmail.com">arkraj.biswas6@gmail.com</a>
+        Grievance Officer: <a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a>
       </p>
     </div>
   </footer>
@@ -213,7 +214,7 @@
         btn.textContent = dark ? 'Light Mode' : 'Night Mode';
         btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         var meta = document.getElementById('meta-theme-color');
-        if (meta) meta.setAttribute('content', dark ? '#0B0F17' : '#F8FAFC');
+        if (meta) meta.setAttribute('content', dark ? '#0D131A' : '#F3F7F4');
       }
       btn.addEventListener('click', function () {
         var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -239,12 +240,13 @@
           'Please remove the following address from the Mandate Dispatch mailing list:\n\n' +
           value + '\n\nRequested via urbanforestpark.com/unsubscribe.html'
         );
-        action.setAttribute('href', 'mailto:arkraj.biswas6@gmail.com?subject=' + subject + '&body=' + body);
+        action.setAttribute('href', 'mailto:urbanforestpark@gmail.com?subject=' + subject + '&body=' + body);
       }
       input.addEventListener('input', sync);
       sync();
     })();
   </script>
   <script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/syndication-drawer.js"></script>
 </body>
 </html>

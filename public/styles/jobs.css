@@ -3,10 +3,10 @@
    Career Registry (India)
    styles/jobs.css — institutional design system for index.html
 
-   Light  : alabaster canvas (#F8FAFC), white cards, slate ink,
+   Light  : soft sage-cream canvas (#F3F7F4), white cards, slate ink,
             deep forest accents (#065F46), 1px structural borders.
-   Night  : obsidian-slate canvas (#0B0F17), elevated slate cards (#111827),
-            off-white ink, muted steel borders (#1E293B),
+   Night  : matte charcoal-obsidian canvas (#0D131A), elevated slate cards
+            (#141E28), off-white ink, muted steel borders (#202C38),
             luminous emerald accents (#34D399).
    ========================================================================== */
 
@@ -17,8 +17,8 @@
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --bg: #F8FAFC;
-  --bg-2: #F1F5F9;
+  --bg: #F3F7F4;
+  --bg-2: #EAF1EC;
   --card: #FFFFFF;
 
   --ink: #0F172A;
@@ -26,8 +26,8 @@
   --ink-3: #64748B;
   --ink-4: #94A3B8;
 
-  --border: #E2E8F0;
-  --border-2: #CBD5E1;
+  --border: #DEE8E1;
+  --border-2: #C9D6CD;
 
   --accent: #065F46;
   --accent-2: #044637;
@@ -38,7 +38,7 @@
   --emerald: #10B981;
   --emerald-soft: #D1FAE5;
 
-  --header-bg: rgba(248, 250, 252, 0.88);
+  --header-bg: rgba(243, 247, 244, 0.88);
 
   --amber-bg: #FFFBEB;
   --amber-border: #F59E0B;
@@ -72,17 +72,17 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #0B0F17;
-  --bg-2: #0F1522;
-  --card: #111827;
+  --bg: #0D131A;
+  --bg-2: #111A24;
+  --card: #141E28;
 
   --ink: #F1F5F9;
   --ink-2: #CBD5E1;
   --ink-3: #94A3B8;
   --ink-4: #64748B;
 
-  --border: #1E293B;
-  --border-2: #334155;
+  --border: #202C38;
+  --border-2: #33424F;
 
   --accent: #34D399;
   --accent-2: #10B981;
@@ -93,7 +93,7 @@
   --emerald: #34D399;
   --emerald-soft: rgba(16, 185, 129, 0.16);
 
-  --header-bg: rgba(11, 15, 23, 0.88);
+  --header-bg: rgba(13, 19, 26, 0.88);
 
   --amber-bg: rgba(245, 158, 11, 0.10);
   --amber-border: #B45309;
@@ -102,7 +102,7 @@
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 30px -22px rgba(0, 0, 0, 0.65);
   --shadow-pop: 0 22px 54px -20px rgba(0, 0, 0, 0.7);
 
-  --footer-bg: #0B0F17;
+  --footer-bg: #0B1117;
   --footer-ink: #E2E8F0;
   --footer-ink-2: #7E8CA0;
   --footer-line: rgba(148, 163, 184, 0.18);
@@ -1753,51 +1753,13 @@ body.view-detail .telemetry-band { display: none; }
 .cs-wa:hover { background: #1FC65C; color: #073B1E; }
 .cs-tg { background: #229ED9; color: #FFFFFF; }
 .cs-tg:hover { background: #1E92C9; color: #FFFFFF; }
-.cs-digest {
-  background: transparent;
-  border: 1px dashed var(--border-2);
-  color: var(--ink-3);
-  cursor: pointer;
-  font-family: inherit;
-}
-.cs-digest:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ---------- 15h. Footer broadcast copy row ---------- */
-.footer-broadcast {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 16px 24px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-top: 1px solid var(--footer-line);
-}
-.footer-broadcast .fb-copy { display: grid; gap: 2px; }
-.footer-broadcast .fb-title { font-size: 13.5px; font-weight: 700; color: var(--footer-ink); }
-.footer-broadcast .fb-sub { font-size: 12px; color: var(--footer-ink-2); }
-.digest-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border: 1px solid var(--footer-line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--footer-ink);
-  font-family: inherit;
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
-}
-.digest-copy-btn:hover { border-color: var(--emerald); color: var(--emerald); background: rgba(16, 185, 129, 0.08); }
+/* ---------- 15h. (footer broadcast copy row removed — moved to the
+   discreet internal Syndication Desk drawer, js/syndication-drawer.js) ---------- */
 
 @media (max-width: 720px) {
   .cs-inner { flex-direction: column; align-items: flex-start; }
   .cs-actions { width: 100%; }
-  .footer-broadcast { flex-direction: column; align-items: flex-start; }
 }
 
 /* ================= 16. MANDATE DISPATCH (72-HOUR EMAIL BRIEFING) ================= */
@@ -2291,10 +2253,8 @@ html[data-theme="dark"] .detail-section-hi {
 [data-theme="dark"] .cat-internship  { color: #7DD3FC; background: rgba(3, 105, 161, 0.18); }
 [data-theme="dark"] .cat-competition { color: #A5B4FC; background: rgba(67, 56, 202, 0.18); }
 
-/* ---------- Footer: LinkedIn weekly roundup button ---------- */
-.footer-broadcast { flex-wrap: wrap; }
-.digest-copy-li { background: #0A66C2; border-color: #0A66C2; color: #FFFFFF; }
-.digest-copy-li:hover { background: #004182; border-color: #004182; color: #FFFFFF; }
+/* ---------- (LinkedIn weekly roundup button moved to the internal
+   Syndication Desk drawer — see js/syndication-drawer.js) ---------- */
 
 /* ---------- PWA app & instant-alert widget (above the cookie bar) ---------- */
 .ufp-app-widget {
@@ -2400,3 +2360,208 @@ html.ufp-consent-open .ufp-app-pill { bottom: 112px; }
   html.ufp-consent-open .ufp-app-pill { bottom: 244px; }
 }
 /* end ufp-upgrade-block */
+
+/* ==========================================================================
+   23. INSTITUTIONAL REFINEMENT — executive polish layer
+   --------------------------------------------------------------------------
+   Appended last on purpose so it layers over the component rules above:
+   23a. editorial serif titles + tabular numeric readouts
+   23b. refined tabs / pills / buttons (inset light, hover lift)
+   23c. arrow micro-interactions on portal, state and footer links
+   23d. SVG micro-badges on kind / experience / skill chips
+   ========================================================================== */
+
+/* ---------- 23a. Editorial serif titles & numeric readouts ---------- */
+:root {
+  --font-serif: 'Spectral', 'Iowan Old Style', 'Palatino Linotype', Georgia,
+                'Times New Roman', 'Noto Sans Devanagari', serif;
+}
+
+.hero h1,
+main h1,
+main h2 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+.hero h1 { font-weight: 700; }
+main h1, main h2 { font-weight: 600; }
+
+/* Tabular figures for counts, dates and stipend readouts. */
+.tel-value,
+.tel-note,
+.mono-note,
+.jc-date,
+.jc-deadline,
+.seg-cnt,
+.cat-pill .cnt,
+.hub-stats dd,
+.hub-stats dt,
+.hub-other-cnt,
+.region-cnt,
+.region-total,
+.jc-meta {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.tel-value { letter-spacing: -0.025em; }
+
+/* Micro SVG icon beside telemetry labels (markup in index.html). */
+.tel-icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+/* ---------- 23b. Refined tabs, pills and buttons ---------- */
+.btn {
+  transition: transform 0.16s ease, box-shadow 0.16s ease,
+              background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 4px 14px -9px rgba(6, 95, 70, 0.65);
+}
+.btn-primary:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 9px 22px -11px rgba(6, 95, 70, 0.75);
+}
+.btn-outline { background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); }
+[data-theme="dark"] .btn { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .btn-primary {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 16px -10px rgba(16, 185, 129, 0.7);
+}
+[data-theme="dark"] .btn-outline {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+}
+
+/* Segmented tabs — inset light + soft inner shadow on the active side. */
+.seg-tabs { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), var(--shadow-card); }
+.seg-tab { transition: color 0.16s ease, background-color 0.2s ease; }
+.seg-tab.active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16); }
+[data-theme="dark"] .seg-tabs { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), var(--shadow-card); }
+
+/* Sector pills — inset light, diamond micro-dot, refined hover. */
+.cat-pill {
+  padding: 7px 14px 7px 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.cat-pill::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 1.5px;
+  background: currentColor;
+  opacity: 0.38;
+  transform: rotate(45deg);
+}
+.cat-pill:hover::before { opacity: 0.75; }
+.cat-pill.active {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 6px 16px -10px rgba(6, 95, 70, 0.55);
+}
+.cat-pill.active::before { opacity: 1; }
+[data-theme="dark"] .cat-pill { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+[data-theme="dark"] .cat-pill.active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+
+/* Jurisdiction pills — hover lift + a floating arrow that slides in. */
+.js-pill { transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.15s; }
+.js-pill:hover { transform: translateY(-1px); }
+.js-pill.active:hover { transform: none; }
+.jurisdiction-switch .js-pill::after {
+  content: '\2192';
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateX(-3px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.jurisdiction-switch .js-pill:hover::after { opacity: 0.8; transform: translateX(0); }
+.jurisdiction-switch .js-pill.active::after { content: none; }
+
+/* Language and theme toggles — subtle inset light. */
+.lang-btn { transition: color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease; }
+.lang-btn.active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); }
+.theme-toggle { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+[data-theme="dark"] .theme-toggle { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+
+/* ---------- 23c. Arrow micro-interactions ---------- */
+/* Registry card CTA: the arrow slides right on card hover / focus. */
+.jc-view { transition: color 0.15s ease; }
+.jc-view svg { transition: transform 0.18s ease; }
+.job-card:hover .jc-view svg,
+.job-card:focus-visible .jc-view svg { transform: translateX(4px); }
+
+/* Footer + state + pathway links: a clean arrow etches in on hover. */
+.footer-col a,
+.region-states a,
+.hub-card-foot a {
+  display: inline-block;
+  transition: transform 0.16s ease, color 0.16s ease;
+}
+.footer-col a::after,
+.region-states a::after {
+  content: '\2192';
+  display: inline-block;
+  margin-left: 6px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.footer-col a:hover::after,
+.region-states a:hover::after { opacity: 0.85; transform: translateX(0); }
+.hub-card-foot a:hover { transform: translateX(2px); }
+
+/* ---------- 23d. SVG micro-badges ---------- */
+/* Opportunity-kind badge: institutional medal micro-icon. */
+.badge-kind::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  opacity: 0.8;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='5.6'/%3E%3Cpath d='M8.7 13.8 7.2 21.5l4.8-2.8 4.8 2.8-1.5-7.7'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9' r='5.6'/%3E%3Cpath d='M8.7 13.8 7.2 21.5l4.8-2.8 4.8 2.8-1.5-7.7'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* Experience / qualification badge: verified-shield micro-icon. */
+.badge-exp::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  opacity: 0.7;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.5 20 6v5.2c0 4.9-3.4 8.7-8 10.3-4.6-1.6-8-5.4-8-10.3V6z'/%3E%3Cpath d='m8.6 11.6 2.3 2.3 4.5-4.6'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.5 20 6v5.2c0 4.9-3.4 8.7-8 10.3-4.6-1.6-8-5.4-8-10.3V6z'/%3E%3Cpath d='m8.6 11.6 2.3 2.3 4.5-4.6'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* Skill / qualification chips: a small institutional dot marker. */
+.skill-chip::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.45;
+  vertical-align: 1px;
+}
+.skill-chip.more::before { background: var(--ink-4); }
+/* end ufp-institutional-refinement */

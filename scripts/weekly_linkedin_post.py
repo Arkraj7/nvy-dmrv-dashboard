@@ -11,8 +11,8 @@ Builds a paste-ready LinkedIn post every Monday at 09:00 IST (cron
     and then most-recent when the window is quiet),
   * adds the top 2-3 Global highlights, each labelled ``[INDIA]`` or
     ``[GLOBAL]`` so the two strictly separated registries stay distinct,
-  * writes ``public/linkedin_weekly_post.txt`` (copied verbatim by the
-    registry footer's "Copy Weekly LinkedIn Roundup (Top 10)" button) and
+  * writes ``public/linkedin_weekly_post.txt`` (copied verbatim from the
+    internal Syndication Desk drawer - /admin-syndication) and
     ``public/linkedin_weekly.json`` (hook, items, metadata),
   * emails the post to SMTP_USER with the exact subject
     ``Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup``,

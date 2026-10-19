@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Syndication Desk — Internal | Urban Forest Park</title>
+  <meta name="description" content="Internal syndication and backlink workspace. Not part of the public registry.">
+
+  <!-- Theme bootstrap: applied before stylesheets to prevent flicker. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ufp_theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* default rendering: light */ }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="/styles/jobs.css">
+
+  <style>
+    .synd-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: var(--bg); }
+    .synd-page-card { max-width: 560px; width: 100%; padding: 34px 30px; border: 1px solid var(--border); border-top: 2px solid var(--accent); border-radius: var(--r-lg); background: var(--card); box-shadow: var(--shadow-card); text-align: left; }
+    .synd-page-kicker { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 12px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+    .synd-page-card h1 { margin: 0 0 10px; font-family: var(--font-serif); font-size: 27px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+    .synd-page-card p { margin: 0 0 14px; font-size: 13.5px; line-height: 1.7; color: var(--ink-2); }
+    .synd-page-card p:last-of-type { margin-bottom: 20px; }
+    .synd-page-meta { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--border-2); font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); }
+  </style>
+</head>
+
+<body class="synd-page" data-syndication-open="1">
+  <main class="synd-page-card">
+    <p class="synd-page-kicker">Internal &middot; Not indexed</p>
+    <h1>Syndication Desk</h1>
+    <p>The passphrase-gated drawer should open automatically over this page. It carries the daily WhatsApp / Telegram broadcast, the Weekly LinkedIn Roundup (Top 10) and the canonical backlink kit.</p>
+    <p>If the drawer did not open, press <strong>Ctrl + Shift + U</strong> (Cmd + Shift + U on macOS) or use the button below.</p>
+    <button type="button" class="btn btn-primary" data-syndication-open>Open the Syndication Desk</button>
+    <p class="synd-page-meta">urbanforestpark.com &middot; /admin-syndication &middot; excluded from search engines, sitemap and public navigation.</p>
+  </main>
+
+  <script defer src="/js/syndication-drawer.js"></script>
+</body>
+</html>

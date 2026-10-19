@@ -74,7 +74,7 @@ CALCULATOR_URL = SITE + "/green-calculator.html"
 TELEGRAM_URL = "https://t.me/urbanforestpark"
 WHATSAPP_URL = "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw"
 UNSUBSCRIBE_PAGE = SITE + "/unsubscribe.html"
-CONTACT_EMAIL = "arkraj.biswas6@gmail.com"
+CONTACT_EMAIL = "urbanforestpark@gmail.com"
 
 # The audience is India-based and the workflow runs at 08:00 IST — dispatch
 # dates are therefore computed in IST, not UTC.

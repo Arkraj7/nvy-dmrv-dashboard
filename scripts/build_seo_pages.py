@@ -89,7 +89,7 @@ FAVICONS = """    <link rel="icon" type="image/png" href="/favicon-96x96.png" si
 
 FONTS = """    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">"""
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&display=swap">"""
 
 PIN_SVG = ('<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -648,7 +648,8 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/unsubscribe.html">Dispatch Preferences</a></li>
           <li><a href="/cookies.html" data-ufp-cookie-settings>Cookie Preferences</a></li>
           <li><a href="/report.html">Report an Issue</a></li>
-          <li><a href="mailto:arkraj.biswas6@gmail.com">Contact the Registry</a></li>
+          <li><a href="mailto:urbanforestpark@gmail.com">Contact the Registry</a></li>
+          <li><button type="button" class="footer-link-btn" data-syndication-open title="Internal broadcast &amp; backlink workspace (Ctrl+Shift+U)">Syndication Desk</button></li>
         </ul>
       </div>
     </div>
@@ -948,7 +949,7 @@ def build_hub_page(
     <meta name="twitter:title" content="{esc(hub['title'])}">
     <meta name="twitter:description" content="{esc(hub['desc'])}">
     <meta name="twitter:image" content="{LOGO_URL}">
-    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+    <meta name="theme-color" id="meta-theme-color" content="#F3F7F4">
 
     <!-- Favicons -->
 {FAVICONS}
@@ -1028,6 +1029,7 @@ def build_hub_page(
 
   <script defer src="/js/consent.js"></script>
 <script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/syndication-drawer.js"></script>
 </body>
 </html>
 """

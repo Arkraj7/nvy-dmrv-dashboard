@@ -17,7 +17,7 @@ const NagarVanChat = (function () {
     let useCloudAi = true;
 
     const DEFAULT_REPLY =
-        'Thank you for your question! I can help with Nagar Van, DMRV, CAMPA, afforestation, reporting issues, and the public survey. Try a quick question above, or email <b>arkraj.biswas6@gmail.com</b> for specific queries.';
+        'Thank you for your question! I can help with Nagar Van, DMRV, CAMPA, afforestation, reporting issues, and the public survey. Try a quick question above, or email <b>urbanforestpark@gmail.com</b> for specific queries.';
 
     function normalize(text) {
         return (text || '')

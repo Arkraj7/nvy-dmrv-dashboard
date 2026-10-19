@@ -293,3 +293,54 @@ html[data-theme="dark"] .region-cnt {
   opacity: 0.7;
 }
 /* end ufp-multilingual-portals */
+
+/* ==========================================================================
+   Institutional refinement — hub layer
+   Editorial serif headings, tabular stats, arrow micro-interactions and
+   card hover refinement for the pathway hubs and regional portals.
+   ========================================================================== */
+.hub-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.hub-main-head h2,
+.hub-archive h2,
+.hub-others h2,
+.hub-cta h2,
+.region-card h2,
+.hub-faq h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+}
+
+.hub-stats dd, .hub-stats dt, .region-cnt, .hub-other-cnt, .region-total {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Cards lift gently on hover. */
+.hub-card { transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; }
+.hub-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+
+/* "View dossier & application link ->" slides toward the reader on hover. */
+.hub-card-foot a { display: inline-block; transition: transform 0.16s ease, color 0.16s ease; }
+.hub-card-foot a:hover { transform: translateX(2px); }
+
+/* Region state lists — a floating arrow etches in on hover. */
+.region-states a { display: inline-block; transition: color 0.16s ease; }
+.region-states a::after {
+  content: '\2192';
+  display: inline-block;
+  margin-left: 5px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.region-states a:hover::after { opacity: 0.8; transform: translateX(0); }
+
+/* Other-pathway grid tiles — lift + border accent. */
+.hub-other-grid a { transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease; }
+.hub-other-grid a:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+/* end ufp-hub-refinement */
