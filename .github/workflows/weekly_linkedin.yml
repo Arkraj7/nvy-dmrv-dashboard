@@ -1,0 +1,93 @@
+name: Weekly LinkedIn Roundup - Top 10 Opportunities
+
+# Builds the "Top 10 Opportunities" LinkedIn roundup every Monday at
+# 09:00 AM IST (03:30 UTC):
+#
+#   1. scripts/weekly_linkedin_post.py selects 8-10 highest-impact
+#      opportunities from the past 7 days - balancing the India registry
+#      across jobs / JRF / fellowships / scholarships / grants /
+#      internships - and adds the top 2-3 Global highlights labelled
+#      [INDIA] vs [GLOBAL] (the two registries are never mixed).
+#   2. It rewrites public/linkedin_weekly_post.txt (the paste-ready post,
+#      also copied verbatim by the registry footer's "Copy Weekly LinkedIn
+#      Roundup (Top 10)" button) and public/linkedin_weekly.json.
+#   3. It emails the post to SMTP_USER with the exact subject
+#      "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup".
+#   4. When LINKEDIN_ACCESS_TOKEN + LINKEDIN_AUTHOR_URN are configured it
+#      also publishes directly via POST https://api.linkedin.com/rest/posts
+#      (LinkedIn-Version: 202601, X-Restli-Protocol-Version: 2.0.0).
+#      Without those secrets the direct publish is skipped - the workflow
+#      NEVER fails because of missing LinkedIn or SMTP credentials.
+#
+# The bot then commits the roundup files and redeploys the site.
+
+on:
+  schedule:
+    # 09:00 AM IST == 03:30 UTC, every Monday
+    - cron: "30 3 * * 1"
+  workflow_dispatch: {}   # allows a manual 1-click run from the Actions tab
+
+permissions:
+  contents: write         # the bot commits the roundup files
+
+concurrency:
+  group: weekly-linkedin
+  cancel-in-progress: false
+
+jobs:
+  roundup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build + dispatch the weekly LinkedIn Top-10 roundup
+        env:
+          # Email dispatch (skipped when unset - CI never fails for silence).
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          NEWSLETTER_FROM_EMAIL: ${{ secrets.NEWSLETTER_FROM_EMAIL }}
+          NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME }}
+          # Optional: override the recipient (defaults to SMTP_USER).
+          WEEKLY_ROUNDUP_TO: ${{ secrets.WEEKLY_ROUNDUP_TO }}
+          # Optional direct LinkedIn publishing (skipped when unset).
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+        run: python scripts/weekly_linkedin_post.py
+
+      - name: Commit the weekly roundup
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          git add public/linkedin_weekly_post.txt public/linkedin_weekly.json
+          if git diff --cached --quiet; then
+            echo "No roundup changes to commit."
+          else
+            git commit -m "chore(linkedin): weekly Top-10 opportunities roundup ($(date -u +'%Y-%m-%d'))"
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install site dependencies
+        run: npm ci
+
+      - name: Build & deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run deploy

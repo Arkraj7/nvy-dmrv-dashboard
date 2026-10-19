@@ -36,7 +36,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.atree.org",
     "org_domain": "atree.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "research-associate-climate-policy-governance-wri-india-bengaluru",
@@ -75,7 +77,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://wri-india.org",
     "org_domain": "wri-india.org",
-    "source_portal": "Official Organisation Website"
+    "source_portal": "Official Organisation Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
@@ -114,7 +118,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.wwfindia.org",
     "org_domain": "wwfindia.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "consultant-esg-disclosures-brsr-reporting-ceew-new-delhi",
@@ -153,7 +159,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.ceew.in",
     "org_domain": "ceew.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "research-fellowship-environmental-policy-teri-new-delhi",
@@ -192,7 +200,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.teriin.org",
     "org_domain": "teriin.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "manager-carbon-credit-origination-eki-energy-services-indore",
@@ -231,6 +241,8 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://enkingint.org",
     "org_domain": "enkingint.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   }
 ]

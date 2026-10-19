@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-10-19T13:03:55+05:30",
+  "week_of": "2026-10-19",
+  "window_days": 7,
+  "india_window": "last 7 day(s)",
+  "global_window": "last 7 day(s)",
+  "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct official application links:",
+  "cta": "Apply directly through the official portals — every listing links straight to the source (no fees, no intermediaries).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
+  "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
+  "counts": {
+    "total": 10,
+    "india": 7,
+    "global": 3
+  },
+  "items": [
+    {
+      "position": 1,
+      "registry": "global",
+      "id": "chevening-scholarships-masters",
+      "title": "Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks)",
+      "organization": "Chevening Scholarships - UK Government (FCDO)",
+      "location": "UK Universities",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Scholarship",
+      "score": 50.0,
+      "url": "https://www.urbanforestpark.com/?job=chevening-scholarships-masters"
+    },
+    {
+      "position": 2,
+      "registry": "india",
+      "id": "doctoral-student-iit-guwahati",
+      "title": "Doctoral Student (Energy and Sustainability)",
+      "organization": "Indian Institute of Technology, Guwahati",
+      "location": "Guwahati, Assam",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Fellowship",
+      "score": 49.0,
+      "url": "https://www.urbanforestpark.com/?job=doctoral-student-iit-guwahati"
+    },
+    {
+      "position": 3,
+      "registry": "india",
+      "id": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
+      "title": "Junior Research Fellow (JRF) - Tiger Ecology & Landscape Connectivity",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "JRF / SRF",
+      "opportunity_kind": "Fellowship",
+      "score": 49.0,
+      "url": "https://www.urbanforestpark.com/?job=jrf-tiger-ecology-landscape-connectivity-wii-dehradun"
+    },
+    {
+      "position": 4,
+      "registry": "india",
+      "id": "project-associate-assistant-wii",
+      "title": "Project Associate and Project Assistant",
+      "organization": "Wildlife Institute of India",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/?job=project-associate-assistant-wii"
+    },
+    {
+      "position": 5,
+      "registry": "global",
+      "id": "future-earth-global-opportunities",
+      "title": "Global Sustainability Opportunities - Future Earth Network",
+      "organization": "Future Earth",
+      "location": "Remote (Global) / Stockholm Secretariat",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/?job=future-earth-global-opportunities"
+    },
+    {
+      "position": 6,
+      "registry": "india",
+      "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
+      "title": "Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry",
+      "organization": "Indian Institute of Technology Delhi (IIT Delhi)",
+      "location": "New Delhi, Delhi NCR",
+      "position_type": "JRF / SRF",
+      "opportunity_kind": "Fellowship",
+      "score": 45.0,
+      "url": "https://www.urbanforestpark.com/?job=jrf-air-quality-atmospheric-chemistry-iit-delhi"
+    },
+    {
+      "position": 7,
+      "registry": "india",
+      "id": "programme-associate-energy-transitions-ceew",
+      "title": "Programme Associate – Energy Transitions",
+      "organization": "Council on Energy, Environment and Water (CEEW)",
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/?job=programme-associate-energy-transitions-ceew"
+    },
+    {
+      "position": 8,
+      "registry": "india",
+      "id": "research-analyst-technology-futures-ceew",
+      "title": "Research Analyst / Programme Associate - Technology Futures",
+      "organization": "Council on Energy, Environment and Water (CEEW)",
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/?job=research-analyst-technology-futures-ceew"
+    },
+    {
+      "position": 9,
+      "registry": "global",
+      "id": "unu-ias-postdoctoral-fellowships",
+      "title": "Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability)",
+      "organization": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
+      "location": "Tokyo, Japan",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Fellowship",
+      "score": 43.0,
+      "url": "https://www.urbanforestpark.com/?job=unu-ias-postdoctoral-fellowships"
+    },
+    {
+      "position": 10,
+      "registry": "india",
+      "id": "management-trainee-climate-smart-agriculture-cosmosgreen",
+      "title": "Management Trainee – Climate Smart Agriculture",
+      "organization": "CosmosGreen",
+      "location": "Hyderabad, Telangana",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 39.0,
+      "url": "https://www.urbanforestpark.com/?job=management-trainee-climate-smart-agriculture-cosmosgreen"
+    }
+  ],
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct official application links:\n🇮🇳 India Mandates · 🌍 Global Opportunities\n\n1. [GLOBAL] Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks) — Chevening Scholarships - UK Government (FCDO) (UK Universities | Fellowship / Internship)\nhttps://www.urbanforestpark.com/?job=chevening-scholarships-masters\n\n2. [INDIA] Doctoral Student (Energy and Sustainability) — Indian Institute of Technology, Guwahati (Guwahati, Assam | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/?job=doctoral-student-iit-guwahati\n\n3. [INDIA] Junior Research Fellow (JRF) - Tiger Ecology & Landscape Connectivity — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | JRF / SRF)\nhttps://www.urbanforestpark.com/?job=jrf-tiger-ecology-landscape-connectivity-wii-dehradun\n\n4. [INDIA] Project Associate and Project Assistant — Wildlife Institute of India (Dehradun, Uttarakhand | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/?job=project-associate-assistant-wii\n\n5. [GLOBAL] Global Sustainability Opportunities - Future Earth Network — Future Earth (Remote (Global) / Stockholm Secretariat | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=future-earth-global-opportunities\n\n6. [INDIA] Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry — Indian Institute of Technology Delhi (IIT Delhi) (New Delhi, Delhi NCR | JRF / SRF)\nhttps://www.urbanforestpark.com/?job=jrf-air-quality-atmospheric-chemistry-iit-delhi\n\n7. [INDIA] Programme Associate – Energy Transitions — Council on Energy, Environment and Water (CEEW) (Remote (India), Multiple States / Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=programme-associate-energy-transitions-ceew\n\n8. [INDIA] Research Analyst / Programme Associate - Technology Futures — Council on Energy, Environment and Water (CEEW) (Remote (India), Multiple States / Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=research-analyst-technology-futures-ceew\n\n9. [GLOBAL] Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability) — United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS) (Tokyo, Japan | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/?job=unu-ias-postdoctoral-fellowships\n\n10. [INDIA] Management Trainee – Climate Smart Agriculture — CosmosGreen (Hyderabad, Telangana | Fellowship / Internship)\nhttps://www.urbanforestpark.com/?job=management-trainee-climate-smart-agriculture-cosmosgreen\n\nApply directly through the official portals — every listing links straight to the source (no fees, no intermediaries).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+}

@@ -1,7 +1,24 @@
 {
-  "name": "urbanforestpark",
-  "short_name": "Park",
+  "name": "Urban Forest Park — Green Jobs, Grants & Fellowships",
+  "short_name": "UFP Jobs",
+  "description": "India + Global climate, forestry, ESG, geospatial and academic opportunities — jobs, grants, scholarships, fellowships, internships and competitions, verified daily with direct links to the official portal.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#C9544D",
+  "background_color": "#0B0F17",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["business", "education", "productivity"],
   "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -12,10 +29,27 @@
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "shortcuts": [
+    {
+      "name": "India Mandates",
+      "short_name": "India",
+      "description": "India jobs, JRF, fellowships, scholarships & grants",
+      "url": "/?source=pwa"
+    },
+    {
+      "name": "Global Opportunities",
+      "short_name": "Global",
+      "description": "International jobs, grants & scholarships",
+      "url": "/?region=global&source=pwa"
+    }
+  ]
 }

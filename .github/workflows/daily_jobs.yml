@@ -5,10 +5,15 @@ name: Daily India Green Jobs Update
 # public/jobs.json, expires closed mandates into public/archive.json,
 # refreshes public/stats.json (weekly hiring telemetry), regenerates
 # public/sitemap.xml, backfills bilingual (Hindi) metadata for new mandates,
+# refreshes the strictly separated global registry
+# (public/global_jobs.json + public/global_archive.json),
+# regenerates the weekly LinkedIn roundup files
+# (public/linkedin_weekly_post.txt + public/linkedin_weekly.json - build
+# only; the Monday email/publish lives in weekly_linkedin.yml),
 # rebuilds the static SEO surface (the pre-rendered snapshot inside
-# public/index.html, the five career-pathway hub pages and the two
-# multilingual/regional portals), commits them, and then builds + deploys
-# the live site to Cloudflare Pages.
+# public/index.html, the five career-pathway hub pages, the two
+# multilingual/regional portals and the Global opportunities hub),
+# commits them, and then builds + deploys the live site to Cloudflare Pages.
 
 on:
   schedule:
@@ -62,21 +67,33 @@ jobs:
         # otherwise. Never fails the run.
         run: python scripts/backfill_hindi.py
 
-      - name: Rebuild static SEO pages (snapshot + hubs + multilingual portals)
+      - name: Refresh the weekly LinkedIn roundup files (build only)
+        # Rebuilds public/linkedin_weekly_post.txt + .json so the registry
+        # footer's "Copy Weekly LinkedIn Roundup (Top 10)" button always has
+        # fresh content. --dry-run guarantees no email/publish happens here;
+        # the Monday 09:00 IST dispatch runs in weekly_linkedin.yml.
+        run: python scripts/weekly_linkedin_post.py --dry-run
+
+      - name: Rebuild static SEO pages (snapshot + hubs + multilingual portals + global hub)
         run: python scripts/build_seo_pages.py
 
-      - name: Commit updated registry data (jobs, archive, stats, sitemap, SEO pages)
+      - name: Commit updated registry data (jobs, archive, stats, global, sitemap, SEO pages)
         run: |
           git config user.name "urbanforestpark-bot"
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
           # The deployed site root is public/, so the pipeline writes to
           # public/jobs.json, public/archive.json, public/stats.json,
-          # public/sitemap.xml, public/daily_digest.json and
-          # public/whatsapp_digest.txt; build_seo_pages.py rewrites
-          # public/index.html, the five career-pathway hub pages and the two
-          # multilingual/regional portals (Hindi hub + Bharat regional hub).
+          # public/sitemap.xml, public/daily_digest.json,
+          # public/whatsapp_digest.txt, the strictly separated global
+          # registry (public/global_jobs.json, public/global_archive.json)
+          # and the weekly LinkedIn roundup files;
+          # build_seo_pages.py rewrites public/index.html, the five
+          # career-pathway hub pages, the two multilingual/regional portals
+          # (Hindi hub + Bharat regional hub) and the Global hub page.
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
                   public/daily_digest.json public/whatsapp_digest.txt \
+                  public/global_jobs.json public/global_archive.json \
+                  public/linkedin_weekly_post.txt public/linkedin_weekly.json \
                   public/index.html \
                   public/jrf-srf-project-associate-jobs.html \
                   public/phd-fellowships-climate-sustainability.html \
@@ -84,7 +101,8 @@ jobs:
                   public/gis-remote-sensing-climate-jobs.html \
                   public/esg-carbon-sustainability-jobs.html \
                   public/hindi-environment-forestry-jobs.html \
-                  public/bharat-regional-green-jobs.html
+                  public/bharat-regional-green-jobs.html \
+                  public/global-climate-sustainability-opportunities.html
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else

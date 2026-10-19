@@ -1255,6 +1255,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center flex-wrap">
                 <div class="flex items-center gap-3">
+                    <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park emblem" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" style="width:38px;height:38px;min-width:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(16,185,129,0.35);background:#FFFDF9;margin-right:10px;" />
                     <div class="w-14 h-14 flex items-center justify-center" role="img" aria-label="Nagar Van logo">
                         <img src="assets/images/Nagar_Van_Logo.png" alt="Nagar Van Logo" class="w-full h-full object-contain">
                     </div>
@@ -3438,7 +3439,7 @@
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
+                navigator.serviceWorker.register('/sw.js', { scope: '/' })
                     .then(registration => {
                         swRegistration = registration;
                         console.log('SW registered:', registration);

@@ -35,7 +35,9 @@
     "org_domain": "nature.org",
     "source_portal": "Official Organisation Website",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "research-intern-technology-futures-ceew",
@@ -73,7 +75,9 @@
     "org_domain": "ceew.in",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Internship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "programme-associate-energy-transitions-ceew",
@@ -111,7 +115,9 @@
     "org_domain": "ceew.in",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "mittal-family-climate-fellowship-program",
@@ -148,7 +154,9 @@
     "org_domain": "www2.fundsforngos.org",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "chief-of-partnerships-unaccc-vadodara",
@@ -186,7 +194,9 @@
     "org_domain": "unaccc.org",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "assistant-manager-horticulture-adani-natural-resources",
@@ -224,7 +234,9 @@
     "org_domain": "adani.com",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "assistant-director-programs-m3m-foundation",
@@ -262,7 +274,9 @@
     "org_domain": "m3mfoundation.org",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "team-member-green-steel-jsw-steel-chennai",
@@ -301,7 +315,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.jsw.in",
     "org_domain": "jsw.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "simons-postdoctoral-fellowships-plant-biology",
@@ -339,7 +355,9 @@
     "org_domain": "simonsfoundation.org",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-17",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "senior-sector-expert-building-energy-efficiency-asci",
@@ -376,7 +394,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.asci.org.in",
     "org_domain": "asci.org.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "senior-regulatory-specialist-toxicology-ecolab-pune",
@@ -414,7 +434,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.ecolab.com",
     "org_domain": "ecolab.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "senior-leadership-energy-transition-new-delhi",
@@ -452,7 +474,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "",
     "org_domain": "",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "senior-consultant-ccass-ey-chennai",
@@ -490,7 +514,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.ey.com/en_in",
     "org_domain": "ey.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "senior-associate-pwc-india",
@@ -528,7 +554,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.pwc.in",
     "org_domain": "pwc.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "scientist-innovation-systems-icrisat",
@@ -567,7 +595,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.icrisat.org",
     "org_domain": "icrisat.org",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "sales-manager-sustainability-intertek-india",
@@ -605,7 +635,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.intertek.com",
     "org_domain": "intertek.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "sales-consultant-quantum-sustainability-consulting",
@@ -643,7 +675,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.sustainablebuildingfrontiers.com",
     "org_domain": "sustainablebuildingfrontiers.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "sales-analyst-nextpower",
@@ -681,7 +715,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://nextpower.in",
     "org_domain": "nextpower.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "research-analyst-technology-futures-ceew",
@@ -719,7 +755,9 @@
     "org_domain": "ceew.in",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-17",
-    "status": "active"
+    "status": "active",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "renewable-energy-program-manager-pwc-patna",
@@ -757,7 +795,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.pwc.in",
     "org_domain": "pwc.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "quality-assurance-manager-naandi-water",
@@ -796,7 +836,9 @@
     "status": "active",
     "org_website": "https://www.naandi.org",
     "org_domain": "naandi.org",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-lead-access-development-services",
@@ -835,7 +877,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.accessdev.org",
     "org_domain": "accessdev.org",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-coordinator-yclc-bindi-international",
@@ -873,7 +917,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.bindi-international.org",
     "org_domain": "bindi-international.org",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-associate-assistant-wii",
@@ -911,7 +957,9 @@
     "status": "active",
     "org_website": "https://wii.gov.in",
     "org_domain": "wii.gov.in",
-    "source_portal": "freejobalert.com"
+    "source_portal": "freejobalert.com",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "programme-associate-industrial-heat-decarbonisation-iforest",
@@ -949,7 +997,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://iforest.in",
     "org_domain": "iforest.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "programme-associate-industrial-decarbonisation-iforest",
@@ -987,7 +1037,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://iforest.in",
     "org_domain": "iforest.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "program-partnership-manager-equilibrium",
@@ -1025,7 +1077,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.equilibriumclimate.com",
     "org_domain": "equilibriumclimate.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "program-manager-sustainability-fleet-electrification-amazon",
@@ -1063,7 +1117,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.amazon.in",
     "org_domain": "amazon.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "program-manager-disaster-climate-resilience-selco",
@@ -1102,7 +1158,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://selcofoundation.org",
     "org_domain": "selcofoundation.org",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "program-coordinator-climate-health-path-mumbai",
@@ -1140,7 +1198,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.path.org",
     "org_domain": "path.org",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "process-engineer-electrification-quest-global",
@@ -1179,7 +1239,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.quest-global.com",
     "org_domain": "quest-global.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "partnerships-outreach-manager-liter-of-light-mumbai",
@@ -1217,7 +1279,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://literoflight.org",
     "org_domain": "literoflight.org",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "mechanical-design-engineer-saltech-design-labs",
@@ -1255,7 +1319,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://saltechlabs.com",
     "org_domain": "saltechlabs.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "manager-sustainability-aditya-birla-fashion-and-retail",
@@ -1293,7 +1359,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.abfrl.com",
     "org_domain": "abfrl.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "manager-program-development-geapp-india",
@@ -1331,7 +1399,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://energyalliance.org",
     "org_domain": "energyalliance.org",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "manager-esg-sustainability-scimplify-bengaluru",
@@ -1369,7 +1439,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.scimplify.com",
     "org_domain": "scimplify.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "management-trainee-climate-smart-agriculture-cosmosgreen",
@@ -1407,7 +1479,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.cosmosgreenenergy.com",
     "org_domain": "cosmosgreenenergy.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Internship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "lead-infrastructure-and-climate-iihs",
@@ -1445,7 +1519,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://iihs.co.in",
     "org_domain": "iihs.co.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "head-projects-operations-suninfra-energies",
@@ -1484,7 +1560,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://suninfra.co.in",
     "org_domain": "suninfra.co.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "head-esg-yulu",
@@ -1522,7 +1600,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.yulu.bike",
     "org_domain": "yulu.bike",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "global-logistics-sustainability-sme-castrol",
@@ -1560,7 +1640,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.castrol.com",
     "org_domain": "castrol.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "esg-manager-redington-limited",
@@ -1598,7 +1680,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.redingtongroup.com",
     "org_domain": "redingtongroup.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "esg-data-evidence-architect-ntt-data",
@@ -1636,7 +1720,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.nttdata.com",
     "org_domain": "nttdata.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "esg-analyst-metro-global-solution-center",
@@ -1674,7 +1760,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.metro.co.in",
     "org_domain": "metro.co.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "environmental-analyst-olive-recruitment-kochi",
@@ -1711,7 +1799,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.oliverecruitment.com",
     "org_domain": "oliverecruitment.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "emissions-executive-accelleron",
@@ -1749,7 +1839,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.accelleron.com",
     "org_domain": "accelleron.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "doctoral-student-iit-guwahati",
@@ -1787,7 +1879,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.iitg.ac.in",
     "org_domain": "iitg.ac.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "deputy-vice-president-energy-environment-sambodhi",
@@ -1826,7 +1920,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://sambodhi.co.in",
     "org_domain": "sambodhi.co.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "dean-anant-school-for-climate-action-ahmedabad",
@@ -1864,7 +1960,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://anu.edu.in",
     "org_domain": "anu.edu.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "coordinator-tea-wwf-india",
@@ -1902,7 +2000,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.wwfindia.org",
     "org_domain": "wwfindia.org",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "consultant-ccass-ey-mumbai",
@@ -1940,7 +2040,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.ey.com/en_in",
     "org_domain": "ey.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "consultant-ccass-ey-chennai",
@@ -1978,7 +2080,9 @@
     "compensation_or_fellowship": "As per institute norms",
     "org_website": "https://www.ey.com/en_in",
     "org_domain": "ey.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "compliance-executive-peregreen-enviro",
@@ -2016,7 +2120,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://peregreen.in",
     "org_domain": "peregreen.in",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "co-founder-dhartiamrit-ecoservices",
@@ -2054,7 +2160,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://dhartiamrit.com",
     "org_domain": "dhartiamrit.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "climate-nature-social-risk-analyst-jpmorganchase",
@@ -2092,7 +2200,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.jpmorganchase.com",
     "org_domain": "jpmorganchase.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "business-head-textile-circularity-hospitality-2",
@@ -2130,7 +2240,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://tinyurl.com",
     "org_domain": "tinyurl.com",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "business-head-textile-circularity-hospitality",
@@ -2169,7 +2281,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://tinyurl.com",
     "org_domain": "tinyurl.com",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "business-development-marketing-associate-flora-carbon-ai",
@@ -2207,7 +2321,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://floracarbon.ai",
     "org_domain": "floracarbon.ai",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "business-development-manager-renewable-energy-deif",
@@ -2245,7 +2361,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.deif.com",
     "org_domain": "deif.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "building-automation-engineer-cundall-chennai",
@@ -2283,7 +2401,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.cundall.com",
     "org_domain": "cundall.com",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "auditor-sustainability-services-cotecna",
@@ -2321,7 +2441,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.cotecna.com",
     "org_domain": "cotecna.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram-2",
@@ -2360,7 +2482,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.tuvsud.com",
     "org_domain": "tuvsud.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram",
@@ -2399,7 +2523,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.tuvsud.com",
     "org_domain": "tuvsud.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "associate-team-lead-supplier-compliance-colgate-palmolive",
@@ -2437,7 +2563,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.colgatepalmolive.com",
     "org_domain": "colgatepalmolive.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "associate-power-utility-transformation-pwc-india",
@@ -2474,7 +2602,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.pwc.in",
     "org_domain": "pwc.in",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "associate-analyst-supplier-compliance-colgate-palmolive",
@@ -2512,7 +2642,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.colgatepalmolive.com",
     "org_domain": "colgatepalmolive.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "assistant-manager-csr-social-innovation",
@@ -2550,7 +2682,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "",
     "org_domain": "",
-    "source_portal": "Indeed"
+    "source_portal": "Indeed",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "assistant-associate-esg-lic-housing-finance",
@@ -2588,7 +2722,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.lichousing.com",
     "org_domain": "lichousing.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "area-sales-manager-loom-solar",
@@ -2626,7 +2762,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.loomsolar.com",
     "org_domain": "loomsolar.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor-2",
@@ -2664,7 +2802,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.avantorsciences.com",
     "org_domain": "avantorsciences.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor",
@@ -2702,7 +2842,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.avantorsciences.com",
     "org_domain": "avantorsciences.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "analyst-civil-design-desri-hyderabad",
@@ -2740,7 +2882,9 @@
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "org_website": "https://www.desri.com",
     "org_domain": "desri.com",
-    "source_portal": "LinkedIn"
+    "source_portal": "LinkedIn",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
@@ -2778,7 +2922,9 @@
     "status": "active",
     "org_website": "https://wii.gov.in",
     "org_domain": "wii.gov.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
@@ -2815,7 +2961,9 @@
     "status": "active",
     "org_website": "https://home.iitd.ac.in",
     "org_domain": "iitd.ac.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "jrf-avian-ecology-habitat-assessment-sacon-coimbatore",
@@ -2852,7 +3000,9 @@
     "status": "active",
     "org_website": "https://sacon.in",
     "org_domain": "sacon.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp",
@@ -2889,7 +3039,9 @@
     "status": "active",
     "org_website": "https://www.iitkgp.ac.in",
     "org_domain": "iitkgp.ac.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "research-associate-biodiversity-ecological-genomics-ncbs",
@@ -2926,7 +3078,9 @@
     "status": "active",
     "org_website": "https://www.ncbs.res.in",
     "org_domain": "ncbs.res.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "phd-climate-dynamics-earth-system-modelling-iisc-bengaluru",
@@ -2963,7 +3117,9 @@
     "status": "active",
     "org_website": "https://iisc.ac.in",
     "org_domain": "iisc.ac.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "doctoral-fellowship-climate-policy-sustainable-development-teri",
@@ -3000,7 +3156,9 @@
     "status": "active",
     "org_website": "https://www.teriin.org",
     "org_domain": "teriin.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "young-professional-forest-policy-climate-finance-iifm-bhopal",
@@ -3037,7 +3195,9 @@
     "status": "active",
     "org_website": "https://www.iifm.ac.in",
     "org_domain": "iifm.ac.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "young-professional-climate-change-campa-moefcc",
@@ -3074,7 +3234,9 @@
     "status": "active",
     "org_website": "https://moef.gov.in",
     "org_domain": "moef.gov.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-associate-geospatial-modelling-urban-heat-island-nrsc",
@@ -3111,7 +3273,9 @@
     "status": "active",
     "org_website": "https://www.nrsc.gov.in",
     "org_domain": "nrsc.gov.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-associate-himalayan-ecology-climate-adaptation-gbpnihe",
@@ -3148,7 +3312,9 @@
     "status": "active",
     "org_website": "https://gbpihed.gov.in",
     "org_domain": "gbpihed.gov.in",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   },
   {
     "id": "project-associate-geospatial-urban-green-infrastructure-atree",
@@ -3185,6 +3351,8 @@
     "status": "active",
     "org_website": "https://www.atree.org",
     "org_domain": "atree.org",
-    "source_portal": "Official Organization Website"
+    "source_portal": "Official Organization Website",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open"
   }
 ]

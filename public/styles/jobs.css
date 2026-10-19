@@ -2156,3 +2156,247 @@ html[data-theme="dark"] .detail-section-hi {
   .lang-btn { padding: 7px 9px; font-size: 12px; }
 }
 /* end ufp-i18n-bilingual */
+
+/* ==========================================================================
+   Urban Forest Park upgrade block
+   : red emblem logo, jurisdiction switcher, opportunity-kind badges &
+   deadlines, PWA app/alert widget, LinkedIn roundup button.
+   ========================================================================== */
+
+/* ---------- Circular brand emblem (soothing red, cream tree) ---------- */
+.ufp-header-logo {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(16, 185, 129, 0.35);
+  background: #FFFDF9;
+}
+@media (max-width: 640px) {
+  .ufp-header-logo { width: 32px; height: 32px; min-width: 32px; min-height: 32px; margin-right: 8px; }
+}
+
+/* ---------- Jurisdiction switcher (header + hero) ---------- */
+.jurisdiction-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+.js-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-2);
+  font-family: var(--font);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.js-pill:hover { border-color: var(--accent); color: var(--ink); }
+.js-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 22px -12px rgba(6, 95, 70, 0.6);
+}
+.js-pill .js-flag { font-size: 15px; line-height: 1; }
+
+.jurisdiction-switch.hero-js { margin: 20px 0 6px; }
+.jurisdiction-switch.hero-js .js-pill {
+  padding: 11px 18px;
+  border-radius: 14px;
+  text-align: left;
+}
+.js-text { display: grid; gap: 1px; text-align: left; }
+.js-text strong { font-size: 13.5px; font-weight: 800; letter-spacing: 0.01em; }
+.js-text .js-sub { font-size: 11px; font-weight: 600; opacity: 0.74; }
+.js-pill.active .js-text .js-sub { opacity: 0.92; }
+
+.jurisdiction-switch.header-js {
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-2);
+}
+.jurisdiction-switch.header-js .js-pill {
+  border: 0;
+  background: transparent;
+  padding: 5px 11px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  box-shadow: none;
+}
+.jurisdiction-switch.header-js .js-pill.active { background: var(--accent); color: var(--accent-ink); }
+.jurisdiction-switch.header-js .js-flag { font-size: 13px; }
+@media (max-width: 640px) {
+  .jurisdiction-switch.header-js .js-label { display: none; }
+  .jurisdiction-switch.header-js .js-pill { padding: 5px 9px; }
+}
+
+/* ---------- Opportunity-kind & global region badges ---------- */
+.badge-kind {
+  color: #9A3412;
+  background: #FFF7ED;
+  border-color: #FDBA74;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+[data-theme="dark"] .badge-kind {
+  color: #FDBA74;
+  background: rgba(251, 146, 60, 0.12);
+  border-color: rgba(251, 146, 60, 0.38);
+}
+.badge-region {
+  color: #0E7490;
+  background: #ECFEFF;
+  border-color: #A5F3FC;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+[data-theme="dark"] .badge-region {
+  color: #67E8F9;
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.34);
+}
+
+/* ---------- Deadline / application window chip on cards ---------- */
+.jc-meta .jc-deadline { color: #B45309; font-weight: 700; }
+.jc-meta .jc-deadline svg { color: currentColor; }
+[data-theme="dark"] .jc-meta .jc-deadline { color: #FBBF24; }
+
+/* ---------- New sector identity colours (grants / scholarships / ...) ---------- */
+.cat-grants      { color: #B45309; background: #FFF7ED; }
+.cat-scholarship { color: #7C3AED; background: #F5F3FF; }
+.cat-fellowship  { color: #BE185D; background: #FDF2F8; }
+.cat-internship  { color: #0369A1; background: #F0F9FF; }
+.cat-competition { color: #4338CA; background: #EEF2FF; }
+[data-theme="dark"] .cat-grants      { color: #FDBA74; background: rgba(251, 146, 60, 0.14); }
+[data-theme="dark"] .cat-scholarship { color: #C4B5FD; background: rgba(124, 58, 237, 0.16); }
+[data-theme="dark"] .cat-fellowship  { color: #F9A8D4; background: rgba(219, 39, 119, 0.14); }
+[data-theme="dark"] .cat-internship  { color: #7DD3FC; background: rgba(3, 105, 161, 0.18); }
+[data-theme="dark"] .cat-competition { color: #A5B4FC; background: rgba(67, 56, 202, 0.18); }
+
+/* ---------- Footer: LinkedIn weekly roundup button ---------- */
+.footer-broadcast { flex-wrap: wrap; }
+.digest-copy-li { background: #0A66C2; border-color: #0A66C2; color: #FFFFFF; }
+.digest-copy-li:hover { background: #004182; border-color: #004182; color: #FFFFFF; }
+
+/* ---------- PWA app & instant-alert widget (above the cookie bar) ---------- */
+.ufp-app-widget {
+  position: fixed;
+  right: 18px;
+  bottom: 96px;
+  z-index: 640;
+  width: 334px;
+  max-width: calc(100vw - 32px);
+  padding: 16px 16px 13px;
+  border: 1px solid var(--border-2);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 0 26px 64px -20px rgba(2, 6, 23, 0.5);
+  animation: ufpWidgetIn 0.35s ease both;
+}
+.ufp-app-widget[hidden] { display: none; }
+@keyframes ufpWidgetIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.uaw-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--ink-3);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.uaw-close:hover { background: var(--border); color: var(--ink); }
+.uaw-head { display: flex; gap: 10px; align-items: flex-start; padding-right: 22px; }
+.uaw-logo {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(16, 185, 129, 0.35);
+  background: #FFFDF9;
+}
+.uaw-copy { display: grid; gap: 4px; }
+.uaw-copy strong { font-size: 13.5px; line-height: 1.3; color: var(--ink); }
+.uaw-copy span { font-size: 11.5px; line-height: 1.45; color: var(--ink-3); }
+.uaw-actions { display: grid; gap: 8px; margin-top: 12px; }
+.uaw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, background 0.15s, color 0.15s, border-color 0.15s;
+}
+.uaw-btn:active { transform: translateY(1px); }
+.uaw-install { background: var(--accent); color: var(--accent-ink); }
+.uaw-install:hover { box-shadow: 0 12px 28px -14px rgba(6, 95, 70, 0.65); }
+.uaw-notify { background: var(--card); border-color: var(--border-2); color: var(--ink-2); }
+.uaw-notify:hover { border-color: var(--accent); color: var(--accent); }
+.uaw-notify.is-on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.uaw-note { margin: 9px 2px 0; font-size: 11px; line-height: 1.45; color: var(--ink-3); }
+.uaw-note:empty { display: none; }
+
+.ufp-app-pill {
+  position: fixed;
+  right: 18px;
+  bottom: 96px;
+  z-index: 640;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 15px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-2);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 14px 34px -16px rgba(2, 6, 23, 0.45);
+  cursor: pointer;
+}
+.ufp-app-pill[hidden] { display: none; }
+.ufp-app-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+html.ufp-consent-open .ufp-app-widget,
+html.ufp-consent-open .ufp-app-pill { bottom: 112px; }
+
+@media (max-width: 720px) {
+  .ufp-app-widget { right: 12px; left: 12px; width: auto; max-width: none; }
+  .ufp-app-pill { right: 12px; }
+  html.ufp-consent-open .ufp-app-widget,
+  html.ufp-consent-open .ufp-app-pill { bottom: 244px; }
+}
+/* end ufp-upgrade-block */

@@ -557,12 +557,14 @@ def header_html(active: Optional[str] = None) -> str:
     return f"""  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Urban Forest Park - National Career Registry, India">
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park logo" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
         <a class="{cls('registry')}" href="/">Career Registry</a>
         <a class="{cls('archive')}" href="/?view=archive">Historical Archive</a>
+        <a class="{cls('global')}" href="/global-climate-sustainability-opportunities.html">Global Opportunities</a>
         <a class="{cls('dashboard')}" href="/dashboard.html">dMRV Dashboard <span class="live-tool-badge">Live Tool</span></a>
       </nav>
       <div class="header-actions">
@@ -620,6 +622,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
         <ul>
           <li><a href="/">Active Opportunities</a></li>
           <li><a href="/?view=archive">Historical Mandate Archive</a></li>
+          <li><a href="/global-climate-sustainability-opportunities.html">&#127757; Global Opportunities (International)</a></li>
           <li><a href="/#filter-bar">Browse by State</a></li>
           <li><a href="/#seo-dir-title">Browse by Sector</a></li>
         </ul>
@@ -691,6 +694,10 @@ def build_index_block(
 
     hub_links = "\n".join(
         f'            <li><a href="/{h["file"]}">{esc(h["h1"])}</a></li>' for h in HUBS
+    )
+    hub_links += (
+        '\n            <li><a href="/global-climate-sustainability-opportunities.html">'
+        '&#127757; Global Opportunities (International Jobs, Grants &amp; Scholarships)</a></li>'
     )
 
     intro = (
@@ -1087,8 +1094,20 @@ def main(argv: Optional[List[str]] = None) -> int:
     (public / seo_portals.REGIONAL_HUB_FILE).write_text(regional_page, encoding="utf-8")
     log.info("Wrote %s", seo_portals.REGIONAL_HUB_FILE)
 
+    # ---- global opportunities hub (strictly separate registry) -----------
+    global_active = load_records(public, "global_jobs.json")
+    if not global_active:
+        log.warning("global_jobs.json missing or empty - global hub built with placeholder content")
+    global_page = seo_portals.build_global_hub_page(global_active, today)
+    (public / seo_portals.GLOBAL_HUB_FILE).write_text(global_page, encoding="utf-8")
     log.info(
-        "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s)",
+        "Wrote %s (%d global listing(s))",
+        seo_portals.GLOBAL_HUB_FILE,
+        len(global_active),
+    )
+
+    log.info(
+        "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s) + 1 global hub",
         len(HUBS),
     )
     return 0

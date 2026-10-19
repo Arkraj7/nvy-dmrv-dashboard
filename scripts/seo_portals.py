@@ -204,12 +204,14 @@ def header_html_hi() -> str:
     return """  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/?lang=hi" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park लोगो" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="मुख्य नेविगेशन">
         <a class="nav-link" href="/?lang=hi">करियर रजिस्ट्री (हिंदी)</a>
         <a class="nav-link" href="/?view=archive&amp;lang=hi">संग्रहित भर्तियाँ</a>
+        <a class="nav-link" href="/global-climate-sustainability-opportunities.html">वैश्विक अवसर</a>
         <a class="nav-link" href="/dashboard.html">dMRV डैशबोर्ड <span class="live-tool-badge">Live Tool</span></a>
         <a class="nav-link" href="/">EN Registry</a>
       </nav>
@@ -687,6 +689,315 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
             <li><a href="/esg-carbon-sustainability-jobs.html"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">Corporate</span></a></li>
           </ul>
         </section>
+      </div>
+    </section>
+  </main>
+
+{footer_html(None)}
+
+  <script defer src="/js/consent.js"></script>
+</body>
+</html>
+"""
+
+
+# --------------------------------------------------------------------------
+# Global hub (strictly separate from the India registry)
+# --------------------------------------------------------------------------
+GLOBAL_HUB_FILE = "global-climate-sustainability-opportunities.html"
+GLOBAL_HUB_URL = SITE + "/" + GLOBAL_HUB_FILE
+
+GLOBAL_REGION_ORDER: List[str] = [
+    "Global / Remote",
+    "Europe",
+    "North America",
+    "Asia-Pacific",
+    "Africa & Middle East",
+    "Latin America",
+    "UN / Multilateral",
+]
+
+GLOBAL_KIND_ORDER: List[str] = [
+    "Job / Career",
+    "Fellowship",
+    "Scholarship",
+    "Grant / Funding",
+    "Internship",
+    "Competition / Award",
+]
+
+GLOBAL_FAQS: List[Tuple[str, str]] = [
+    (
+        "What are the Global Opportunities on Urban Forest Park?",
+        "A curated international registry of climate, sustainability, forestry, energy, water, "
+        "biodiversity and ESG opportunities published directly by official organisations \u2014 "
+        "the UNFCCC, Green Climate Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth, "
+        "universities and major foundations. It covers jobs, fellowships, scholarships, grants, "
+        "internships and competitions, and every entry links straight to the official application "
+        "portal \u2014 no intermediaries, no fees.",
+    ),
+    (
+        "How are India mandates and Global opportunities kept apart?",
+        "The two registries are strictly separated and never mixed. The jurisdiction switcher "
+        "(India Mandates / Global Opportunities) swaps the whole dataset: India mandates are "
+        "state-filtered and include JRF, SRF, PhD and government vacancies, while Global "
+        "opportunities replace the state dropdown with a region filter (Global / Remote, Europe, "
+        "North America, Asia-Pacific, Africa & Middle East, Latin America, UN / Multilateral). "
+        "The global hub is backed by global_jobs.json, a file that never contains India records.",
+    ),
+    (
+        "Which regions do the global opportunities cover?",
+        "Global / Remote, Europe, North America, Asia-Pacific, Africa & Middle East, Latin "
+        "America and UN / Multilateral organisations. Remote and worldwide roles are grouped "
+        "under Global / Remote, and UN bodies such as the UNFCCC, UNDP and Green Climate Fund are "
+        "grouped under UN / Multilateral.",
+    ),
+    (
+        "How do I receive new global opportunities as soon as they are published?",
+        "Install the UrbanForestPark app from the registry page and enable instant job "
+        "notifications \u2014 new verified listings reach your device automatically. You can also "
+        "copy the weekly LinkedIn Top-10 roundup from the registry footer, or follow the daily "
+        "broadcast on Telegram (@urbanforestpark).",
+    ),
+]
+
+
+def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> str:
+    """Static hub for the strictly separated Global opportunities registry."""
+    region_counts: Dict[str, int] = {}
+    kind_counts: Dict[str, int] = {}
+    for job in global_active:
+        region = plain(job.get("region")) or "Global / Remote"
+        region_counts[region] = region_counts.get(region, 0) + 1
+        kind = plain(job.get("opportunity_kind")) or "Job / Career"
+        kind_counts[kind] = kind_counts.get(kind, 0) + 1
+
+    item_entries: List[Dict[str, Any]] = []
+    region_sections: List[str] = []
+    ordered_regions = [r for r in GLOBAL_REGION_ORDER if region_counts.get(r)]
+    for region in sorted(region_counts):
+        if region not in ordered_regions:
+            ordered_regions.append(region)
+
+    for region in ordered_regions:
+        matched = [j for j in global_active if (plain(j.get("region")) or "Global / Remote") == region]
+        matched.sort(key=lambda j: str(j.get("date_added") or ""), reverse=True)
+        links = []
+        for job in matched[:14]:
+            job_id = plain(job.get("id"))
+            title = plain(job.get("clean_title")) or "Untitled opportunity"
+            org = plain(job.get("organization"))
+            kind = plain(job.get("opportunity_kind")) or "Job / Career"
+            deadline = plain(job.get("deadline_or_window"))
+            suffix = f" \u00b7 {esc(kind)}" if kind != "Job / Career" else ""
+            if deadline and deadline.lower() != "rolling / open":
+                suffix += f" \u00b7 {esc(deadline)}"
+            links.append(
+                f'            <li><a href="/?job={quote(job_id)}">{esc(title)} &mdash; {esc(org)}'
+                f'{suffix}</a></li>'
+            )
+        if not links:
+            links.append('            <li class="region-empty">Listings coming soon.</li>')
+        view_all = (
+            f'        <p class="region-hub"><a href="/?region=global&amp;gregion={quote(region)}">'
+            f'Open the live registry filtered to {esc(region)} &rarr;</a></p>'
+        )
+        region_sections.append(
+            f"""      <article class="region-card" id="gregion-{quote(region)}">
+        <h2>{esc(region)} <span class="region-cnt">{region_counts[region]}</span></h2>
+        <p class="region-total"><strong>{region_counts[region]}</strong> verified global opportunity(ies) in this region</p>
+        <ul class="region-states">
+{chr(10).join(links)}
+        </ul>
+{view_all}
+      </article>"""
+        )
+        for job in matched[:6]:
+            item_entries.append(
+                {
+                    "@type": "ListItem",
+                    "position": len(item_entries) + 1,
+                    "url": SITE + "/?job=" + quote(plain(job.get("id"))),
+                    "name": plain(job.get("clean_title")),
+                }
+            )
+
+    regions_html = "\n\n".join(region_sections) or (
+        '      <article class="region-card"><h2>Global / Remote</h2>'
+        '<p class="region-total">Listings are being verified \u2014 check back shortly.</p></article>'
+    )
+
+    kind_links = "\n".join(
+        f'            <li><a href="/?region=global&amp;kind={quote(kind)}">'
+        f'{esc(kind)} <span class="region-cnt">{kind_counts.get(kind, 0)}</span></a></li>'
+        for kind in GLOBAL_KIND_ORDER
+    )
+
+    total_jobs = len(global_active)
+    title = (
+        "Global Climate & Sustainability Opportunities \u2014 International Jobs, Grants, "
+        "Scholarships & Fellowships | Urban Forest Park"
+    )
+    desc = (
+        "Verified global climate and sustainability opportunities: international jobs, grants, "
+        "scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate "
+        "Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth and other official "
+        "organisations \u2014 each listing links straight to the official portal."
+    )
+
+    collection = jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": title,
+            "description": desc,
+            "url": GLOBAL_HUB_URL,
+            "inLanguage": "en",
+            "dateModified": today.isoformat(),
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "Urban Forest Park \u2014 Green Jobs, Grants & Fellowships",
+                "url": SITE + "/",
+            },
+            "about": {"@type": "Thing", "name": "Global climate and sustainability opportunities"},
+        }
+    )
+    item_list = jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Global climate and sustainability opportunities",
+            "numberOfItems": len(item_entries),
+            "itemListElement": item_entries,
+        }
+    )
+    breadcrumb = jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Career Registry", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Global Opportunities", "item": GLOBAL_HUB_URL},
+            ],
+        }
+    )
+    faq_ld = faq_jsonld(GLOBAL_FAQS)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    {bsp.GA_SCRIPT}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{bsp.THEME_BOOTSTRAP}
+
+    <title>{esc(title)}</title>
+    <meta name="description" content="{esc(desc)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{GLOBAL_HUB_URL}">
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Urban Forest Park \u2014 Green Jobs, Grants &amp; Fellowships">
+    <meta property="og:title" content="{esc(title)}">
+    <meta property="og:description" content="{esc(desc)}">
+    <meta property="og:url" content="{GLOBAL_HUB_URL}">
+    <meta property="og:image" content="{LOGO_URL}">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{esc(title)}">
+    <meta name="twitter:description" content="{esc(desc)}">
+    <meta name="twitter:image" content="{LOGO_URL}">
+    <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
+
+    <!-- Favicons -->
+{bsp.FAVICONS}
+
+    {FONTS_HI}
+
+    <!-- Registry styles (shared design system) + hub styles -->
+    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/hub.css">
+
+    <!-- Structured data -->
+{collection}
+{item_list}
+{breadcrumb}
+{faq_ld}
+
+    <script defer src="/js/hub.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#global-grid">Skip to global listings</a>
+
+{header_html('global')}
+
+  <main>
+    <section class="hub-hero">
+      <div class="hub-hero-inner">
+        <nav class="hub-crumbs" aria-label="Breadcrumb">
+          <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>Global Opportunities</span>
+        </nav>
+        <p class="eyebrow">\U0001F30D Global Opportunities Registry \u2014 International</p>
+        <h1>Global Climate &amp; Sustainability Opportunities \u2014 International Jobs, Grants, Scholarships &amp; Fellowships</h1>
+        <p class="hub-hero-sub">
+          A strictly separate registry of verified international opportunities \u2014 jobs, grants,
+          scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate
+          Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth and other official
+          organisations. Every listing links straight to the official application portal.
+        </p>
+        <div class="hub-hero-actions">
+          <a class="btn btn-primary" href="/?region=global">Open the Global registry &rarr;</a>
+          <a class="btn btn-outline" href="/">India Mandates</a>
+        </div>
+        <dl class="hub-stats">
+          <div><dt>Global listings</dt><dd>{total_jobs}</dd></div>
+          <div><dt>Regions</dt><dd>{len(ordered_regions)}</dd></div>
+          <div><dt>Opportunity kinds</dt><dd>{len([k for k in GLOBAL_KIND_ORDER if kind_counts.get(k)])}</dd></div>
+          <div><dt>Updated</dt><dd>{esc(long_date(today))}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="hub-main" id="global-grid">
+      <div class="hub-main-inner">
+        <div class="hub-main-head">
+          <h2>Browse global opportunities by region</h2>
+          <p>Counts refresh with every pipeline run; each region link opens the live registry
+          pre-filtered to that region. India mandates remain in their own registry \u2014 the two
+          datasets are never mixed.</p>
+        </div>
+        <div class="region-grid">
+{regions_html}
+        </div>
+
+        <section class="hub-others" aria-labelledby="global-kinds-title">
+          <h2 id="global-kinds-title">Browse by opportunity kind</h2>
+          <ul class="region-states region-states-wide">
+{kind_links}
+          </ul>
+        </section>
+
+        <section class="hub-others" aria-labelledby="global-others-title">
+          <h2 id="global-others-title">Explore career pathways</h2>
+          <ul class="hub-other-grid">
+            <li><a href="/?region=global"><span class="hub-other-name">Global Opportunities</span><span class="hub-other-cnt">International</span></a></li>
+            <li><a href="/jrf-srf-project-associate-jobs.html"><span class="hub-other-name">JRF / SRF &amp; Project Associate Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/phd-fellowships-climate-sustainability.html"><span class="hub-other-name">PhD &amp; Postdoctoral Fellowships</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/forestry-wildlife-government-jobs.html"><span class="hub-other-name">Forestry, Wildlife &amp; Government Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/gis-remote-sensing-climate-jobs.html"><span class="hub-other-name">GIS &amp; Remote Sensing Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/esg-carbon-sustainability-jobs.html"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/hindi-environment-forestry-jobs.html"><span class="hub-other-name">हिंदी करियर पोर्टल</span><span class="hub-other-cnt">Hindi</span></a></li>
+            <li><a href="/bharat-regional-green-jobs.html"><span class="hub-other-name">Bharat Regional Portal</span><span class="hub-other-cnt">India</span></a></li>
+          </ul>
+        </section>
+
+{faq_section_html(GLOBAL_FAQS, "Global Opportunities \u2014 Frequently Asked Questions")}
       </div>
     </section>
   </main>

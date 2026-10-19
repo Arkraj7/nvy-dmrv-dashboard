@@ -17,6 +17,10 @@
     DATA_URL: 'jobs.json',
     ARCHIVE_URL: 'archive.json',
     STATS_URL: 'stats.json',
+    /* Strictly separated Global opportunities registry: these two files
+       never contain India records and are never mixed into jobs.json. */
+    GLOBAL_DATA_URL: 'global_jobs.json',
+    GLOBAL_ARCHIVE_URL: 'global_archive.json',
     CONTACT_EMAIL: 'arkraj.biswas6@gmail.com',
     ADS_EVERY: 5,              // inject an in-feed ad card after every 5th card
     VALID_DAYS: 30,            // fallback jobPosting validThrough = datePosted + N days
@@ -96,6 +100,7 @@
   var DEFAULT_TITLE = document.title;
   var DEFAULT_DESC = (document.querySelector('meta[name="description"]') || {}).content || '';
   var DEFAULT_HERO_HTML = '';
+  var DEFAULT_HERO_SUB_HTML = '';
 
   /* ------------------------------------------------------------------ */
   /* Bilingual interface helpers (js/i18n.js is loaded before this file) */
@@ -125,16 +130,21 @@
   }
 
   var state = {
-    jobs: [],                 // active listings (jobs.json)
-    archive: [],              // past listings (archive.json)
+    jobs: [],                 // active listings (jobs.json, India)
+    archive: [],              // past listings (archive.json, India)
+    globalJobs: [],           // active global opportunities (global_jobs.json)
+    globalArchive: [],        // archived global opportunities (global_archive.json)
     stats: null,              // weekly telemetry (stats.json)
     view: 'active',           // 'active' | 'archive'
+    registry: 'india',        // 'india' | 'global' (never mixed)
+    region: 'all',            // global-region filter (global registry only)
     archiveRecent: false,     // archive: only records closed in the last 7 days
     filtered: [],
     query: '',
     state: 'all',
     category: 'all',
     track: 'all',
+    kind: 'all',              // opportunity kind filter (jobs + grants + ...)
     experience: 'all',
     detailId: null,
     loaded: false
@@ -187,8 +197,35 @@
     'Forestry, Wildlife & Afforestation': 'cat-forestry',
     'GIS, Remote Sensing & Earth Observation': 'cat-gis',
     'ESG, Carbon Markets & Corporate Sustainability': 'cat-esg',
-    'Climate Policy, Think-Tanks & Fellowships': 'cat-policy'
+    'Climate Policy, Think-Tanks & Fellowships': 'cat-policy',
+    'Grants & Research Funding': 'cat-grants',
+    'Scholarships & Doctoral Support': 'cat-scholarship',
+    'Fellowships & Leadership Programs': 'cat-fellowship',
+    'Internships & Student Traineeships': 'cat-internship',
+    'Competitions, Hackathons & Awards': 'cat-competition'
   };
+
+  /* Opportunity kinds (badges + the Opportunity Type filter). */
+  var OPPORTUNITY_KINDS = [
+    'Job / Career',
+    'Fellowship',
+    'Scholarship',
+    'Grant / Funding',
+    'Internship',
+    'Competition / Award'
+  ];
+
+  /* Region vocabulary of the Global registry (replaces the India state
+     filter when the jurisdiction switcher is on "Global"). */
+  var GLOBAL_REGIONS = [
+    'Global / Remote',
+    'Europe',
+    'North America',
+    'Asia-Pacific',
+    'Africa & Middle East',
+    'Latin America',
+    'UN / Multilateral'
+  ];
 
   function catClass(category) { return CATEGORY_CLASS[category] || 'cat-policy'; }
 
@@ -201,7 +238,12 @@
     'Forestry, Wildlife & Afforestation': { key: 'forestry', label: 'FORESTRY', emblem: 'canopy' },
     'GIS, Remote Sensing & Earth Observation': { key: 'gis', label: 'GIS & EO', emblem: 'satellite' },
     'ESG, Carbon Markets & Corporate Sustainability': { key: 'esg', label: 'ESG & CARBON', emblem: 'leaf' },
-    'Climate Policy, Think-Tanks & Fellowships': { key: 'policy', label: 'CLIMATE', emblem: 'globe' }
+    'Climate Policy, Think-Tanks & Fellowships': { key: 'policy', label: 'CLIMATE', emblem: 'globe' },
+    'Grants & Research Funding': { key: 'grants', label: 'GRANTS', emblem: 'beaker' },
+    'Scholarships & Doctoral Support': { key: 'scholarship', label: 'SCHOLARSHIP', emblem: 'cap' },
+    'Fellowships & Leadership Programs': { key: 'fellowship', label: 'FELLOWSHIP', emblem: 'globe' },
+    'Internships & Student Traineeships': { key: 'internship', label: 'INTERNSHIP', emblem: 'sprout' },
+    'Competitions, Hackathons & Awards': { key: 'competition', label: 'AWARDS', emblem: 'trophy' }
   };
 
   function topicMetaFor(job) {
@@ -223,6 +265,8 @@
     canopy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 6.8 10h10.4L12 3z"/><path d="M12 8 4.8 16h14.4L12 8z"/><path d="M12 16v5"/></svg>',
     satellite: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="6.4"/><path d="M5.6 13h12.8"/><path d="M12 6.6c-2.1 2.3-3.1 4.4-3.1 6.4s1 4.1 3.1 6.4c2.1-2.3 3.1-4.4 3.1-6.4s-1-4.1-3.1-6.4z"/><ellipse cx="12" cy="11.4" rx="10.3" ry="4.6" transform="rotate(-18 12 11.4)"/><circle cx="21.5" cy="5.4" r="1.3" fill="currentColor" stroke="none"/></svg>',
     leaf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 19.2C4.8 10 10.8 4.8 20 4.8c0 9.2-5.2 15.2-14.4 15.2z"/><path d="M4.8 19.2c2-2.6 4.9-4.8 8.7-6.4"/></svg>',
+    sprout: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4.2 3.2-7.4 8.4-7.4 0 5.2-3.2 7.4-8.4 7.4z"/><path d="M12 13.5c0-3.1-2.5-5.9-6.8-5.9 0 3.9 2.5 5.9 6.8 5.9z"/></svg>',
+    trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3.6h8v3.1a4 4 0 11-8 0V3.6z"/><path d="M8 5.2H5.4a2.6 2.6 0 002.8 3.6"/><path d="M16 5.2h2.6a2.6 2.6 0 01-2.8 3.6"/><path d="M12 10.7v4.2"/><path d="M9.6 20.4h4.8l-.5-5.5h-3.8l-.5 5.5z"/></svg>',
     globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2"/><path d="M12 3.4c-2.7 2.5-3.9 5.4-3.9 8.6s1.2 6.1 3.9 8.6c2.7-2.5 3.9-5.4 3.9-8.6s-1.2-6.1-3.9-8.6z"/></svg>'
   };
 
@@ -417,7 +461,12 @@
 
   var POSITION_TYPE_BY_CATEGORY = {
     'Academic, JRF, SRF & PhD Positions': 'JRF / SRF',
-    'Research Associate & Project Staff (Contractual)': 'Project Associate / Research Associate'
+    'Research Associate & Project Staff (Contractual)': 'Project Associate / Research Associate',
+    'Grants & Research Funding': 'Young Professional / Consultant (Contractual)',
+    'Scholarships & Doctoral Support': 'PhD / Doctoral Fellowship',
+    'Fellowships & Leadership Programs': 'Fellowship / Internship',
+    'Internships & Student Traineeships': 'Fellowship / Internship',
+    'Competitions, Hackathons & Awards': 'Fellowship / Internship'
   };
 
   var ACADEMIC_POSITION_TYPES = [
@@ -445,6 +494,9 @@
     if (pt === 'JRF / SRF' || pt === 'Project Associate / Research Associate' || pt === 'Faculty / Academic') return 'research';
     if (pt === 'PhD / Doctoral Fellowship') return 'phd';
     if (pt === 'Young Professional / Consultant (Contractual)') return 'contractual';
+    if (job.category === 'Grants & Research Funding' || job.category === 'Fellowships & Leadership Programs') return 'thinktank';
+    if (job.category === 'Scholarships & Doctoral Support') return 'phd';
+    if (job.category === 'Internships & Student Traineeships') return 'contractual';
     if (job.category === 'Climate Policy, Think-Tanks & Fellowships' || pt === 'Fellowship / Internship') return 'thinktank';
     return 'corporate';
   }
@@ -500,8 +552,23 @@
   }
 
   function stateLabel(job) {
+    if (job.region) {
+      var base = job.city || job.country || job.region;
+      return (job.region && base !== job.region) ? base + ' \u00b7 ' + job.region : base;
+    }
     if (job.state === 'Multiple States / Remote') return 'Multiple States / Remote';
     return job.city ? job.city + ', ' + job.state : (job.state || 'India');
+  }
+
+  /* Opportunity-kind helpers (badges + filter). */
+  function opportunityKindOf(job) {
+    var kind = String(job.opportunity_kind || '').trim();
+    if (kind && OPPORTUNITY_KINDS.indexOf(kind) !== -1) return kind;
+    return 'Job / Career';
+  }
+
+  function deadlineOf(job) {
+    return String(job.deadline_or_window || '').trim();
   }
 
   function toast(message) {
@@ -547,19 +614,26 @@
     Promise.all([
       fetchJson(CONFIG.DATA_URL, true),
       fetchJson(CONFIG.ARCHIVE_URL, false),
-      fetchJson(CONFIG.STATS_URL, false)
+      fetchJson(CONFIG.STATS_URL, false),
+      fetchJson(CONFIG.GLOBAL_DATA_URL, false),
+      fetchJson(CONFIG.GLOBAL_ARCHIVE_URL, false)
     ]).then(function (results) {
       state.jobs = sortByDateDesc(Array.isArray(results[0]) ? results[0] : [], 'date_added');
       state.archive = sortByDateDesc(Array.isArray(results[1]) ? results[1] : [], 'date_archived');
       state.stats = (results[2] && typeof results[2] === 'object') ? results[2] : null;
+      state.globalJobs = sortByDateDesc(Array.isArray(results[3]) ? results[3] : [], 'date_added');
+      state.globalArchive = sortByDateDesc(Array.isArray(results[4]) ? results[4] : [], 'date_archived');
       state.loaded = true;
 
       DEFAULT_HERO_HTML = els.heroHeading ? els.heroHeading.innerHTML : '';
+      DEFAULT_HERO_SUB_HTML = els.heroSub ? els.heroSub.innerHTML : '';
 
       initFromUrl();
+      syncRegistryChrome();
       renderTelemetry();
       updateTabCounts();
       syncViewChrome();
+      syncKindSelect();
       populateStateSelect();
       refreshCategoryPills();
       refreshTrackButtons();
@@ -608,9 +682,25 @@
 
     if ((params.get('view') || '') === 'archive') state.view = 'archive';
     var stateParam = params.get('state');
-    if (stateParam && stateParam !== 'all') state.state = stateParam;
+    if (stateParam && stateParam !== 'all') {
+      state.state = stateParam;
+      state.registry = 'india';
+    }
     var cat = resolveCategoryParam(params.get('category'));
     if (cat) state.category = cat;
+
+    /* Jurisdiction routing: ?region=global switches to the strictly
+       separated Global registry; ?gregion=<Europe|...> pre-selects a
+       global region and implies the global registry. */
+    var regionParam = (params.get('region') || '').toLowerCase();
+    if (regionParam === 'global') state.registry = 'global';
+    var globalRegionParam = params.get('gregion');
+    if (globalRegionParam) {
+      state.region = globalRegionParam;
+      state.registry = 'global';
+    }
+    var kindParam = params.get('kind');
+    if (kindParam) state.kind = kindParam;
 
     /* Career-track deep links (used by the pathway hub pages). */
     var track = params.get('track');
@@ -635,11 +725,17 @@
   function queryForState() {
     var parts = [];
     if (state.view === 'archive') parts.push('view=archive');
-    if (state.state !== 'all') parts.push('state=' + encodeURIComponent(state.state));
+    if (state.registry === 'global') {
+      parts.push('region=global');
+      if (state.region !== 'all') parts.push('gregion=' + encodeURIComponent(state.region));
+    } else if (state.state !== 'all') {
+      parts.push('state=' + encodeURIComponent(state.state));
+    }
     if (state.category !== 'all') {
       parts.push('category=' + encodeURIComponent(CATEGORY_SLUGS[state.category] || state.category));
     }
     if (state.track !== 'all') parts.push('track=' + encodeURIComponent(state.track));
+    if (state.kind !== 'all') parts.push('kind=' + encodeURIComponent(state.kind));
     return parts.length ? '?' + parts.join('&') : '';
   }
 
@@ -655,7 +751,60 @@
   }
 
   function getViewData() {
-    return state.view === 'archive' ? state.archive : state.jobs;
+    var isGlobal = state.registry === 'global';
+    if (state.view === 'archive') return isGlobal ? state.globalArchive : state.archive;
+    return isGlobal ? state.globalJobs : state.jobs;
+  }
+
+  /* Jurisdiction switcher: 'india' | 'global'. The two registries are
+     strictly separated; switching never mixes their records. */
+  function setRegistry(registry, opts) {
+    opts = opts || {};
+    registry = registry === 'global' ? 'global' : 'india';
+    var changed = state.registry !== registry;
+    state.registry = registry;
+    syncRegistryChrome();
+    updateTabCounts();
+    renderTelemetry();
+    populateStateSelect();
+    refreshCategoryPills();
+    refreshTrackButtons();
+    if (changed || opts.force) applyFilters();
+    if (!opts.keepUrl) syncUrl(opts.push !== false);
+    if (changed && !opts.silent) {
+      toast(registry === 'global'
+        ? t('registry.switch.global', 'Showing Global Opportunities (international jobs, grants & scholarships)')
+        : t('registry.switch.india', 'Showing India Mandates (jobs, JRF, fellowships & grants)'));
+    }
+  }
+
+  function syncRegistryChrome() {
+    var isGlobal = state.registry === 'global';
+    document.body.classList.toggle('registry-global', isGlobal);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-jurisdiction]'),
+      function (btn) {
+        var active = (btn.getAttribute('data-jurisdiction') === 'global') === isGlobal;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+    );
+    /* Hero copy follows the jurisdiction (India registry vs Global hub). */
+    if (els.heroHeading && DEFAULT_HERO_HTML) {
+      els.heroHeading.innerHTML = isGlobal
+        ? t('hero.global.title_html', 'Worldwide <span class="accent">Climate &amp; Sustainability</span> Opportunities')
+        : DEFAULT_HERO_HTML;
+    }
+    if (els.heroSub && DEFAULT_HERO_SUB_HTML) {
+      els.heroSub.innerHTML = isGlobal
+        ? t('hero.global.sub', 'International jobs, grants, scholarships, fellowships, internships and competitions across climate, forestry, energy, water, biodiversity and ESG — verified, with direct links to the official portal.')
+        : DEFAULT_HERO_SUB_HTML;
+    }
+    if (els.heroKicker) {
+      els.heroKicker.textContent = isGlobal
+        ? t('hero.global.kicker', 'Global Opportunities Registry (International)')
+        : t('hero.kicker', els.heroKicker.getAttribute('data-default-kicker') || '');
+    }
   }
 
   function syncViewChrome() {
@@ -690,17 +839,24 @@
   }
 
   function updateTabCounts() {
-    setText('tab-active-count', String(state.jobs.length));
-    setText('tab-archive-count', String(state.archive.length));
+    var isGlobal = state.registry === 'global';
+    setText('tab-active-count', String(isGlobal ? state.globalJobs.length : state.jobs.length));
+    setText('tab-archive-count', String(isGlobal ? state.globalArchive.length : state.archive.length));
   }
 
   function findJob(id) {
-    var i;
+    var i, isGlobal;
     for (i = 0; i < state.jobs.length; i += 1) {
-      if (state.jobs[i].id === id) return { job: state.jobs[i], archived: false };
+      if (state.jobs[i].id === id) return { job: state.jobs[i], archived: false, registry: 'india' };
     }
     for (i = 0; i < state.archive.length; i += 1) {
-      if (state.archive[i].id === id) return { job: state.archive[i], archived: true };
+      if (state.archive[i].id === id) return { job: state.archive[i], archived: true, registry: 'india' };
+    }
+    for (i = 0; i < state.globalJobs.length; i += 1) {
+      if (state.globalJobs[i].id === id) return { job: state.globalJobs[i], archived: false, registry: 'global' };
+    }
+    for (i = 0; i < state.globalArchive.length; i += 1) {
+      if (state.globalArchive[i].id === id) return { job: state.globalArchive[i], archived: true, registry: 'global' };
     }
     return null;
   }
@@ -710,6 +866,20 @@
   /* ------------------------------------------------------------------ */
   function statsWindow() {
     var weekAgo = isoDaysAgo(CONFIG.ARCHIVE_RECENT_DAYS);
+    if (state.registry === 'global') {
+      return {
+        active_open_jobs: state.globalJobs.length,
+        opened_this_week: state.globalJobs.filter(function (j) {
+          return String(j.date_added || '') >= weekAgo;
+        }).length,
+        passed_this_week: state.globalArchive.filter(function (j) {
+          return String(j.date_archived || '') >= weekAgo;
+        }).length,
+        total_archived_jobs: state.globalArchive.length,
+        total_historical_indexed: state.globalJobs.length + state.globalArchive.length,
+        last_updated: null
+      };
+    }
     var computed = {
       active_open_jobs: state.jobs.length,
       opened_this_week: state.jobs.filter(function (j) {
@@ -748,6 +918,33 @@
   /* ------------------------------------------------------------------ */
   function populateStateSelect() {
     if (!els.stateSelect) return;
+    var labelEl = document.getElementById('state-filter-label');
+
+    /* Global registry: the state dropdown becomes a Global Region filter. */
+    if (state.registry === 'global') {
+      if (labelEl) labelEl.textContent = t('filters.gregion.label', 'Global Region');
+      var gsource = getViewData();
+      var gcounts = {};
+      gsource.forEach(function (j) {
+        var region = j.region || 'Global / Remote';
+        gcounts[region] = (gcounts[region] || 0) + 1;
+      });
+      var regions = GLOBAL_REGIONS.filter(function (r) { return gcounts[r]; });
+      Object.keys(gcounts).forEach(function (r) {
+        if (regions.indexOf(r) === -1) regions.push(r);
+      });
+      var ghtml = '<option value="all">' + t('filters.gregion.all', 'All Global ({n})', { n: gsource.length }) + '</option>';
+      regions.forEach(function (r) {
+        ghtml += '<option value="' + escapeHtml(r) + '">' + escapeHtml(r) + ' (' + gcounts[r] + ')</option>';
+      });
+      els.stateSelect.innerHTML = ghtml;
+      els.stateSelect.value = gcounts[state.region] ? state.region : 'all';
+      if (els.stateSelect.value === 'all') state.region = 'all';
+      return;
+    }
+
+    if (labelEl) labelEl.textContent = t('filters.state.label', 'State / Region');
+
     var source = getViewData();
     var counts = {};
     source.forEach(function (j) {
@@ -762,6 +959,14 @@
     els.stateSelect.innerHTML = html;
     els.stateSelect.value = counts[state.state] ? state.state : 'all';
     if (els.stateSelect.value === 'all') state.state = 'all';
+  }
+
+  /* Opportunity-type dropdown (jobs + grants + scholarships + ...). */
+  function syncKindSelect() {
+    if (!els.kindSelect) return;
+    var value = OPPORTUNITY_KINDS.indexOf(state.kind) !== -1 ? state.kind : 'all';
+    els.kindSelect.value = value;
+    if (value === 'all') state.kind = 'all';
   }
 
   function refreshCategoryPills() {
@@ -807,14 +1012,20 @@
     var cutoff = archiveCutoff();
 
     state.filtered = source.filter(function (job) {
-      if (state.state !== 'all' && job.state !== state.state) return false;
+      if (state.registry === 'global') {
+        if (state.region !== 'all' && (job.region || 'Global / Remote') !== state.region) return false;
+      } else if (state.state !== 'all' && job.state !== state.state) {
+        return false;
+      }
       if (state.category !== 'all' && job.category !== state.category) return false;
       if (state.track !== 'all' && trackOf(job) !== state.track) return false;
+      if (state.kind !== 'all' && opportunityKindOf(job) !== state.kind) return false;
       if (!isArchive && state.experience !== 'all' && job.experience_level !== state.experience) return false;
       if (isArchive && state.archiveRecent && String(job.date_archived || '') < cutoff) return false;
       if (q) {
         var haystack = [
           job.clean_title, job.organization, job.city, job.state,
+          job.region, job.country, job.opportunity_kind, job.deadline_or_window,
           job.category, job.experience_level, job.position_type,
           job.qualification_summary, job.compensation_or_fellowship,
           (job.must_have_skills || []).join(' ')
@@ -922,9 +1133,21 @@
       ? '<span class="badge badge-archived">' + iconSvg('archive') + t('card.archived', 'Archived') + '</span>'
       : '';
 
+    var kind = opportunityKindOf(job);
+    var kindBadge = (kind !== 'Job / Career')
+      ? '<span class="badge badge-kind">' + escapeHtml(kind) + '</span>'
+      : '';
+    var regionBadge = job.region
+      ? '<span class="badge badge-region">' + iconSvg('pin') + escapeHtml(job.region) + '</span>'
+      : '';
+
     var dateMeta = isArchived
       ? iconSvg('clock') + escapeHtml(formatClosed(job.date_archived))
       : iconSvg('calendar') + escapeHtml(formatPosted(job.date_added));
+
+    var deadlineMeta = (!isArchived && deadlineOf(job))
+      ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(t('card.deadline', 'Apply: {d}', { d: deadlineOf(job) })) + '</span>'
+      : '';
 
     var footDate = isArchived
       ? t('card.closed', 'Closed ') + escapeHtml(job.date_archived || '')
@@ -941,6 +1164,8 @@
         '<div class="jc-top">' +
           '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
           '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
+          kindBadge +
+          regionBadge +
           '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
           statusBadge +
         '</div>' +
@@ -952,6 +1177,7 @@
             '<div class="jc-meta">' +
               '<span>' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
               '<span>' + dateMeta + '</span>' +
+              deadlineMeta +
             '</div>' +
             jcEligibilityHtml(job) +
             '<div class="jc-skills">' + chips + '</div>' +
@@ -1066,12 +1292,16 @@
       var found = findJob(id);
       if (found) {
         state.detailId = id;
-        /* Keep the active/archived switcher aligned with the record type. */
+        /* Keep the jurisdiction + view switchers aligned with the record. */
         var wantedView = found.archived ? 'archive' : 'active';
-        if (state.view !== wantedView) {
+        var wantedRegistry = found.registry || 'india';
+        if (state.view !== wantedView || state.registry !== wantedRegistry) {
           state.view = wantedView;
+          state.registry = wantedRegistry;
+          syncRegistryChrome();
           syncViewChrome();
           updateTabCounts();
+          renderTelemetry();
           populateStateSelect();
           refreshCategoryPills();
           refreshTrackButtons();
@@ -1113,7 +1343,14 @@
   function eligibilitySectionHtml(job) {
     var rows = '' +
       '<div><dt>' + t('detail.pt', 'Position Type') + '</dt><dd>' + escapeHtml(positionTypeOf(job)) + '</dd></div>' +
+      '<div><dt>' + t('detail.kind', 'Opportunity Type') + '</dt><dd>' + escapeHtml(opportunityKindOf(job)) + '</dd></div>' +
       '<div><dt>' + t('detail.engagement', 'Engagement') + '</dt><dd>' + escapeHtml(employmentTypeLabel(job)) + '</dd></div>';
+    if (deadlineOf(job)) {
+      rows += '<div><dt>' + t('detail.deadline', 'Deadline / Window') + '</dt><dd>' + escapeHtml(deadlineOf(job)) + '</dd></div>';
+    }
+    if (job.region && (job.country || job.city)) {
+      rows += '<div><dt>' + t('detail.region', 'Region') + '</dt><dd>' + escapeHtml((job.country ? job.country + ' \u00b7 ' : '') + job.region) + '</dd></div>';
+    }
     if (job.qualification_summary) {
       rows += '<div><dt>' + t('detail.qualification', 'Qualification') + '</dt><dd>' + escapeHtml(job.qualification_summary) + '</dd></div>';
     }
@@ -1189,6 +1426,7 @@
             '<div class="detail-kicker">' +
               '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
               '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
+              (opportunityKindOf(job) !== 'Job / Career' ? '<span class="badge badge-kind">' + escapeHtml(opportunityKindOf(job)) + '</span>' : '') +
               '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
               '<span class="badge badge-state">' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
               archiveBadge +
@@ -1348,6 +1586,23 @@
       })
       .catch(function () {
         toast('The daily broadcast is generated by the 7 AM IST pipeline run \u2014 please try again later.');
+      });
+  }
+
+  /* Footer button: copies the weekly LinkedIn Top-10 roundup generated by
+     scripts/weekly_linkedin_post.py (public/linkedin_weekly_post.txt). */
+  function copyLinkedinRoundup() {
+    fetch('linkedin_weekly_post.txt', { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      })
+      .then(function (text) {
+        if (!text || !text.trim()) throw new Error('roundup empty');
+        copyTextToClipboard(text.trim(), 'Weekly LinkedIn roundup (Top 10) copied \u2014 paste it into your LinkedIn post');
+      })
+      .catch(function () {
+        toast('The weekly LinkedIn roundup is generated every Monday by the 09:00 IST pipeline \u2014 please try again later.');
       });
   }
 
@@ -1671,11 +1926,13 @@
   /* ------------------------------------------------------------------ */
   function resetFilters() {
     state.query = ''; state.state = 'all'; state.category = 'all'; state.track = 'all'; state.experience = 'all';
+    state.kind = 'all';
     state.archiveRecent = false;
     var searchInput = document.getElementById('jobs-search');
     var expSelect = document.getElementById('experience-filter');
     if (searchInput) searchInput.value = '';
     if (expSelect) expSelect.value = 'all';
+    syncKindSelect();
     if (els.stateSelect) els.stateSelect.value = 'all';
     var pillRow = document.getElementById('category-pills');
     if (pillRow) {
@@ -1712,11 +1969,34 @@
 
     if (els.stateSelect) {
       els.stateSelect.addEventListener('change', function (e) {
-        state.state = e.target.value;
+        if (state.registry === 'global') {
+          state.region = e.target.value || 'all';
+        } else {
+          state.state = e.target.value;
+        }
         applyFilters();
         syncUrl(false);
       });
     }
+
+    /* Opportunity-type dropdown (jobs + grants + scholarships + ...). */
+    if (els.kindSelect) {
+      els.kindSelect.addEventListener('change', function (e) {
+        state.kind = e.target.value || 'all';
+        applyFilters();
+        syncUrl(false);
+      });
+    }
+
+    /* Jurisdiction switcher (header + hero pills). */
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-jurisdiction]'),
+      function (btn) {
+        btn.addEventListener('click', function () {
+          setRegistry(btn.getAttribute('data-jurisdiction'));
+        });
+      }
+    );
 
     var expSelect = document.getElementById('experience-filter');
     if (expSelect) {
@@ -1898,6 +2178,9 @@
 
     var stripDigestBtn = document.getElementById('copy-daily-digest-strip');
     if (stripDigestBtn) stripDigestBtn.addEventListener('click', copyDailyDigest);
+
+    var linkedinBtn = document.getElementById('copy-linkedin-roundup');
+    if (linkedinBtn) linkedinBtn.addEventListener('click', copyLinkedinRoundup);
 
     /* Institution logo failed to load -> swap to the topic emblem. */
     document.addEventListener('error', function (event) {
@@ -2121,6 +2404,9 @@
       tabActive: document.getElementById('tab-active'),
       tabArchive: document.getElementById('tab-archive'),
       heroHeading: document.getElementById('hero-heading'),
+      heroSub: document.getElementById('hero-sub'),
+      heroKicker: document.getElementById('hero-kicker'),
+      kindSelect: document.getElementById('kind-filter'),
       seoStates: document.getElementById('seo-states'),
       seoCategories: document.getElementById('seo-categories'),
       themeToggle: document.getElementById('theme-toggle'),
@@ -2133,11 +2419,15 @@
     bindCommunityEvents();
     initNewsletter();
     initTheme();
+    if (window.UFPAppWidget && typeof window.UFPAppWidget.init === 'function') {
+      window.UFPAppWidget.init();
+    }
 
     /* Language switch: re-render everything that jobs.js owns dynamically.
        (Static markup is re-translated by js/i18n.js via data-i18n.) */
     document.addEventListener('ufp:langchange', function () {
       renderTelemetry();
+      syncRegistryChrome();
       populateStateSelect();
       refreshCategoryPills();
       refreshTrackButtons();

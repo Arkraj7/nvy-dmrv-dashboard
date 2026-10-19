@@ -67,7 +67,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="UrbanPark" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Typography: Inter (UI) + IBM Plex Mono (registry metrics) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -177,6 +177,8 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Urban Forest Park — National Climate, Forestry, ESG and Geospatial Career Registry, India">
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park emblem" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />
+
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub" data-i18n="brand.sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
       </a>
@@ -189,6 +191,11 @@
       </nav>
 
       <div class="header-actions">
+        <div class="jurisdiction-switch header-js" role="group" aria-label="Jurisdiction switcher" data-i18n-aria="js.aria">
+          <button class="js-pill active" type="button" data-jurisdiction="india" aria-pressed="true" title="India Mandates — Jobs, JRF, Fellowships &amp; Grants"><span class="js-flag" aria-hidden="true">🇮🇳</span> <span class="js-label" data-i18n="js.india.short">India</span></button>
+          <button class="js-pill" type="button" data-jurisdiction="global" aria-pressed="false" title="Global Opportunities — International Jobs, Grants &amp; Scholarships"><span class="js-flag" aria-hidden="true">🌍</span> <span class="js-label" data-i18n="js.global.short">Global</span></button>
+        </div>
+
         <button class="btn btn-outline nav-cta" type="button" data-open-modal data-i18n="nav.publish">Publish a Vacancy</button>
 
         <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Interface language">
@@ -247,9 +254,9 @@
 
     <section class="hero">
       <div class="hero-inner">
-        <p class="hero-kicker" data-i18n="hero.kicker">National Registry of Environmental Mandates — India</p>
+        <p class="hero-kicker" id="hero-kicker" data-default-kicker="National Registry of Environmental Mandates — India" data-i18n="hero.kicker">National Registry of Environmental Mandates — India</p>
         <h1 id="hero-heading" data-i18n-html="hero.title_html">India&rsquo;s Climate, Forestry, ESG, Geospatial &amp; Academic <span class="accent">Career Registry</span></h1>
-        <p class="hero-sub" data-i18n-html="hero.sub_html">
+        <p class="hero-sub" id="hero-sub" data-i18n-html="hero.sub_html">
           A continuously monitored index of active positions with forest departments, universities
           and research institutions (JRF / SRF / PhD / project staff), sustainability teams and
           climate organisations across the country.
@@ -257,9 +264,29 @@
           intermediaries, no fees. Closed mandates are preserved in the Historical Archive for
           compensation, skills and institutional reference.
         </p>
+
+        <!-- ============ JURISDICTION SWITCHER (INDIA | GLOBAL) ============ -->
+        <div class="jurisdiction-switch hero-js" role="group" aria-label="Jurisdiction switcher — India mandates or Global opportunities" data-i18n-aria="js.aria">
+          <button class="js-pill active" type="button" data-jurisdiction="india" aria-pressed="true">
+            <span class="js-flag" aria-hidden="true">🇮🇳</span>
+            <span class="js-text">
+              <strong data-i18n="js.india.title">India Mandates</strong>
+              <span class="js-sub" data-i18n="js.india.sub">Jobs, JRF, Fellowships &amp; Grants</span>
+            </span>
+          </button>
+          <button class="js-pill" type="button" data-jurisdiction="global" aria-pressed="false">
+            <span class="js-flag" aria-hidden="true">🌍</span>
+            <span class="js-text">
+              <strong data-i18n="js.global.title">Global Opportunities</strong>
+              <span class="js-sub" data-i18n="js.global.sub">International Jobs, Grants &amp; Scholarships</span>
+            </span>
+          </button>
+        </div>
+
         <div class="hero-actions">
           <a class="btn btn-primary" href="#filter-bar" data-i18n="hero.cta.browse">Browse Active Mandates</a>
           <a class="btn btn-outline" href="/?view=archive" data-i18n="hero.cta.archive">Historical Mandate Archive</a>
+          <a class="btn btn-outline" href="/global-climate-sustainability-opportunities.html" data-i18n="hero.cta.globals">🌍 Global Opportunities Hub</a>
         </div>
       </div>
     </section>
@@ -310,9 +337,22 @@
           </div>
 
           <div class="field">
-            <label for="state-filter" data-i18n="filters.state.label">State / Region</label>
+            <label for="state-filter" id="state-filter-label" data-i18n="filters.state.label">State / Region</label>
             <select id="state-filter" aria-label="Filter mandates by Indian state or region" data-i18n-aria="filters.state.aria">
               <option value="all" data-i18n="filters.state.all">All India</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="kind-filter" data-i18n="filters.kind.label">Opportunity Type</label>
+            <select id="kind-filter" aria-label="Filter by opportunity type — job, fellowship, scholarship, grant, internship or competition" data-i18n-aria="filters.kind.aria">
+              <option value="all" data-i18n="filters.kind.all">All Types (Jobs, Grants, Fellowships…)</option>
+              <option value="Job / Career" data-i18n="filters.kind.job">Job / Career</option>
+              <option value="Fellowship" data-i18n="filters.kind.fellowship">Fellowship</option>
+              <option value="Scholarship" data-i18n="filters.kind.scholarship">Scholarship</option>
+              <option value="Grant / Funding" data-i18n="filters.kind.grant">Grant / Funding</option>
+              <option value="Internship" data-i18n="filters.kind.internship">Internship</option>
+              <option value="Competition / Award" data-i18n="filters.kind.competition">Competition / Award</option>
             </select>
           </div>
 
@@ -358,6 +398,11 @@
           <button class="cat-pill" type="button" data-cat="GIS, Remote Sensing &amp; Earth Observation"><span data-i18n="pills.gis">GIS, Remote Sensing &amp; Earth Observation</span> <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="ESG, Carbon Markets &amp; Corporate Sustainability"><span data-i18n="pills.esg">ESG, Carbon Markets &amp; Corporate Sustainability</span> <span class="cnt"></span></button>
           <button class="cat-pill" type="button" data-cat="Climate Policy, Think-Tanks &amp; Fellowships"><span data-i18n="pills.policy">Climate Policy, Think-Tanks &amp; Fellowships</span> <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Grants &amp; Research Funding"><span data-i18n="pills.grants">Grants &amp; Research Funding</span> <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Scholarships &amp; Doctoral Support"><span data-i18n="pills.scholarships">Scholarships &amp; Doctoral Support</span> <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Fellowships &amp; Leadership Programs"><span data-i18n="pills.fellowships">Fellowships &amp; Leadership Programs</span> <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Internships &amp; Student Traineeships"><span data-i18n="pills.internships">Internships &amp; Student Traineeships</span> <span class="cnt"></span></button>
+          <button class="cat-pill" type="button" data-cat="Competitions, Hackathons &amp; Awards"><span data-i18n="pills.competitions">Competitions, Hackathons &amp; Awards</span> <span class="cnt"></span></button>
         </div>
 
         <!-- Compact dispatch widget: 72-hour email briefing (see #dispatch) -->
@@ -591,6 +636,7 @@
             <li><a href="/forestry-wildlife-government-jobs.html">Forestry, Wildlife &amp; Government Jobs in India</a></li>
             <li><a href="/gis-remote-sensing-climate-jobs.html">GIS, Remote Sensing &amp; Earth Observation Jobs in India</a></li>
             <li><a href="/esg-carbon-sustainability-jobs.html">ESG, Carbon Markets &amp; Corporate Sustainability Jobs</a></li>
+            <li><a href="/global-climate-sustainability-opportunities.html">&#127757; Global Opportunities (International Jobs, Grants &amp; Scholarships)</a></li>
             </ul>
           </div>
         </div>
@@ -817,6 +863,7 @@
         <ul>
           <li><a href="/">Active Opportunities</a></li>
           <li><a href="/?view=archive">Historical Mandate Archive</a></li>
+          <li><a href="/global-climate-sustainability-opportunities.html">🌍 Global Opportunities (International)</a></li>
           <li><a href="#filter-bar">Browse by State</a></li>
           <li><a href="#seo-dir-title">Browse by Sector</a></li>
           <li><a href="#" data-open-modal>Publish a Vacancy</a></li>
@@ -831,6 +878,11 @@
           <li><a href="/forestry-wildlife-government-jobs.html">Forestry, Wildlife &amp; Government Jobs</a></li>
           <li><a href="/gis-remote-sensing-climate-jobs.html">GIS &amp; Remote Sensing Jobs</a></li>
           <li><a href="/esg-carbon-sustainability-jobs.html">ESG &amp; Carbon Market Jobs</a></li>
+          <li><a href="/?category=grants-research-funding">Grants &amp; Research Funding Calls</a></li>
+          <li><a href="/?category=scholarships-doctoral-support">Scholarships &amp; Doctoral Support</a></li>
+          <li><a href="/?category=fellowships-leadership-programs">Fellowships &amp; Leadership Programs</a></li>
+          <li><a href="/?category=internships-student-traineeships">Internships &amp; Student Traineeships</a></li>
+          <li><a href="/?category=competitions-hackathons-awards">Competitions, Hackathons &amp; Awards</a></li>
         </ul>
         <h3 style="margin-top:18px;">Regional &amp; Multilingual Portals (भारत / हिंदी)</h3>
         <ul>
@@ -868,12 +920,16 @@
 
     <div class="footer-broadcast">
       <div class="fb-copy">
-        <span class="fb-title">Daily WhatsApp / Telegram Broadcast</span>
-        <span class="fb-sub">Copy the ready-to-forward digest of today&rsquo;s verified mandates and post it to any WhatsApp group or Telegram channel.</span>
+        <span class="fb-title">Daily WhatsApp / Telegram Broadcast &amp; Weekly LinkedIn Roundup</span>
+        <span class="fb-sub">Copy the ready-to-forward digest of today&rsquo;s verified mandates, or the Top 10 weekly roundup curated for LinkedIn.</span>
       </div>
       <button class="digest-copy-btn" id="copy-daily-digest" type="button">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg>
         Copy Today&rsquo;s WhatsApp / Telegram Broadcast
+      </button>
+      <button class="digest-copy-btn digest-copy-li" id="copy-linkedin-roundup" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>
+        Copy Weekly LinkedIn Roundup (Top 10)
       </button>
     </div>
 
@@ -923,6 +979,25 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- ================= PWA APP & INSTANT ALERT WIDGET ================= -->
+  <div class="ufp-app-widget" id="ufp-app-widget" role="complementary" aria-label="Install the UrbanForestPark app and enable instant job alerts" hidden>
+    <button class="uaw-close" id="ufp-app-close" type="button" aria-label="Collapse the app and alerts panel">&times;</button>
+    <div class="uaw-head">
+      <img src="/assets/images/Logo_UFF.png" alt="" width="34" height="34" class="uaw-logo" loading="lazy" decoding="async" />
+      <div class="uaw-copy">
+        <strong data-i18n="widget.title">Get the UrbanForestPark App &amp; Instant Job Alerts</strong>
+        <span data-i18n="widget.sub">JRF, Forestry, ESG and Grant alerts — straight to your phone the moment they are verified.</span>
+      </div>
+    </div>
+    <div class="uaw-actions">
+      <button class="uaw-btn uaw-install" id="ufp-install-btn" type="button" data-i18n="widget.install">📲 Download / Install App</button>
+      <button class="uaw-btn uaw-notify" id="ufp-notify-btn" type="button" data-i18n="widget.notify">🔔 Enable Instant Job Notifications</button>
+    </div>
+    <p class="uaw-note" id="ufp-app-note" role="status" aria-live="polite"></p>
+  </div>
+  <button class="ufp-app-pill" id="ufp-app-pill" type="button" hidden aria-label="Open the app and instant alerts panel"><span aria-hidden="true">📲</span> <span data-i18n="widget.pill">App &amp; Alerts</span></button>
+
+  <script defer src="js/pwa.js"></script>
   <script defer src="js/consent.js"></script>
 </body>
 </html>

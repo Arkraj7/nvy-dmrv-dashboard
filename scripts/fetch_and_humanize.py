@@ -225,6 +225,34 @@ SEARCH_QUERIES = [
     "Urban Planner Green Building Urban Heat Island Sustainability",
     "Walk in Interview Project Associate GIS Remote Sensing Forestry",
     "Faculty Assistant Professor Environmental Science Sustainability India",
+    # Grants, funding calls & research fellowships (India + open-to-India).
+    "Research Grant Funding Call Proposal Climate Environment India",
+    "DST SERB ANRF Project Grant Call Environment Climate",
+    "Conservation Seed Grant Innovation Funding India Biodiversity",
+    # Scholarships & doctoral support.
+    "Scholarship PhD Fellowship Climate Environment Sustainability India",
+    "International Scholarship Master Climate Sustainability India eligible",
+    "Travel Grant Conference Scholarship Environment Research India",
+    # Fellowships & leadership programmes.
+    "Climate Fellowship Leadership Programme India",
+    "Policy Fellowship Environment Think Tank India",
+    "Postdoctoral Fellowship Climate Sustainability India",
+    # Internships & student traineeships.
+    "Internship Environment Climate Sustainability Student India",
+    "Summer Internship Forestry Ecology Research India",
+    "ESG Sustainability Internship Corporate India",
+    # Competitions, hackathons & awards.
+    "Sustainability Challenge Climate Hackathon Competition India",
+    "Youth Innovation Prize Environment Climate India",
+    "Green Tech Competition Award Students India",
+    # Adjacent sustainability domains (water, energy, agriculture, waste...).
+    "Water Resources WASH Climate India Jobs",
+    "Sustainable Agriculture Agroforestry Remote Sensing India",
+    "Renewable Energy Solar Wind Green Hydrogen Jobs India",
+    "Biodiversity Marine Conservation Ecology Jobs India",
+    "Circular Economy Waste Management Sustainability India",
+    "Rural Livelihoods Natural Resource Management India",
+    "Disaster Resilience Climate Adaptation Jobs India",
 ]
 
 # Front-end vocabulary (must match index.html filters, js/jobs.js and the
@@ -236,6 +264,11 @@ CATEGORIES = [
     "GIS, Remote Sensing & Earth Observation",
     "ESG, Carbon Markets & Corporate Sustainability",
     "Climate Policy, Think-Tanks & Fellowships",
+    "Grants & Research Funding",
+    "Scholarships & Doctoral Support",
+    "Fellowships & Leadership Programs",
+    "Internships & Student Traineeships",
+    "Competitions, Hackathons & Awards",
 ]
 
 # Pre-upgrade category names still present in published data (jobs.json /
@@ -259,7 +292,38 @@ CATEGORY_SLUGS = {
     "GIS, Remote Sensing & Earth Observation": "gis-remote-sensing-earth-observation",
     "ESG, Carbon Markets & Corporate Sustainability": "esg-carbon-sustainability",
     "Climate Policy, Think-Tanks & Fellowships": "climate-policy-think-tanks-fellowships",
+    "Grants & Research Funding": "grants-research-funding",
+    "Scholarships & Doctoral Support": "scholarships-doctoral-support",
+    "Fellowships & Leadership Programs": "fellowships-leadership-programs",
+    "Internships & Student Traineeships": "internships-student-traineeships",
+    "Competitions, Hackathons & Awards": "competitions-hackathons-awards",
 }
+
+# Opportunity kinds carried by every record (badges + the Opportunity Type
+# filter). "Job / Career" is the default for employment records; the other
+# values cover grants, scholarships, fellowships, internships and
+# competitions & awards.
+OPPORTUNITY_KINDS = [
+    "Job / Career",
+    "Fellowship",
+    "Scholarship",
+    "Grant / Funding",
+    "Internship",
+    "Competition / Award",
+]
+
+# Region vocabulary for the strictly separated Global opportunities registry
+# (global_jobs.json / global_archive.json). India records never carry these
+# values; global records always carry exactly one.
+GLOBAL_REGIONS = [
+    "Global / Remote",
+    "Europe",
+    "North America",
+    "Asia-Pacific",
+    "Africa & Middle East",
+    "Latin America",
+    "UN / Multilateral",
+]
 
 # Position types carried by every record (badges on cards + dossiers, the
 # career-track quick filters, and the JobPosting JSON-LD employmentType).
@@ -288,6 +352,12 @@ SEO_HUB_PAGES = [
 MULTILINGUAL_PORTAL_PAGES = [
     "/hindi-environment-forestry-jobs.html",
     "/bharat-regional-green-jobs.html",
+]
+
+# Global opportunities portal (strictly separated from the India registry),
+# pre-rendered by scripts/build_seo_pages.py from global_jobs.json.
+GLOBAL_PORTAL_PAGES = [
+    "/global-climate-sustainability-opportunities.html",
 ]
 
 # How many state landing views the sitemap lists (busiest states first).
@@ -340,6 +410,7 @@ STATIC_SITEMAP_PAGES = [
     ("/green-calculator-report.html", "monthly", "0.7"),
     ("/green-calculator-app.html", "monthly", "0.6"),
     ("/nagar-van-finder.html", "weekly", "0.8"),
+    ("/global-climate-sustainability-opportunities.html", "weekly", "0.9"),
     ("/public-survey.html", "monthly", "0.6"),
     ("/report.html", "monthly", "0.7"),
     ("/privacy.html", "yearly", "0.3"),
@@ -611,6 +682,14 @@ if BaseModel is not None:
         category: str = ""
         experience_level: str = ""
         position_type: str = ""
+        # Opportunity kind spans jobs, fellowships, scholarships, grants,
+        # internships and competitions; deadline_or_window carries the
+        # application window when the source states one.
+        opportunity_kind: str = ""
+        deadline_or_window: str = ""
+        # Global-registry fields (empty for India records).
+        region: str = ""
+        country: str = ""
         qualification_summary: str = ""
         compensation_or_fellowship: str = ""
         role_summary: str = ""
@@ -641,13 +720,24 @@ job board (JSON). You return ONE JSON object.
 
 STEP 1 - STRICT INDIA + GREEN RELEVANCE CHECK (always do this first):
 A posting is acceptable ONLY when BOTH are true:
-  (a) The role is genuinely about the environment, climate change, forestry, \
-afforestation, wildlife/ecology, sustainability, ESG, CSR, carbon markets, \
-clean/renewable energy, water, agriculture (sustainability angle), urban \
-planning/green infrastructure, or geospatial / remote-sensing / GIS \
-analysis of natural or built environments. Academic, JRF/SRF, doctoral, \
+  (a) The opportunity is genuinely about the environment, climate change, \
+forestry, afforestation, wildlife/ecology, sustainability, ESG, CSR, carbon \
+markets, clean/renewable energy, water, agriculture (sustainability angle), \
+urban planning/green infrastructure, or geospatial / remote-sensing / GIS \
+analysis of natural or built environments. All CORE domains are in scope, and \
+these closely connected ADJACENT domains are equally in scope: water resources \
+& WASH, sustainable agriculture & agroforestry, clean/renewable energy \
+(solar, wind, green hydrogen, energy transition), biodiversity & marine \
+conservation, circular economy & waste management, rural livelihoods & \
+natural-resource management, disaster resilience & climate adaptation, and \
+green urban planning & sustainable mobility. Every opportunity KIND is in \
+scope: jobs, grants & research funding calls, scholarships & doctoral \
+support, fellowships & leadership programmes, internships & traineeships, \
+and competitions / hackathons / awards. Academic, JRF/SRF, doctoral, \
 postdoctoral, faculty and project-staff positions in these fields are fully \
-in scope.
+in scope. Generic software, IT support, sales, marketing, finance or HR \
+postings are out of scope even in green companies, unless the role itself \
+works on the domains above.
   (b) The role is located in India, or explicitly open to India-based or \
 remote-India candidates.
 If EITHER fails - for example a generic software, IT support, sales, \
@@ -668,6 +758,15 @@ city names glued on, company name repeats).
 "Delhi NCR" for Delhi / Noida / Gurugram / Ghaziabad / Faridabad roles.
 - city: city name, or a short descriptor such as "Remote (India)".
 - category: EXACTLY ONE of: {categories}
+- opportunity_kind: EXACTLY ONE of: {kinds}. Use "Job / Career" for \
+employment; "Fellowship" for research/leadership fellowships (JRF, SRF, \
+postdoctoral and similar); "Scholarship" for funded study or doctoral \
+support; "Grant / Funding" for project, seed, innovation or travel funding \
+calls; "Internship" for internships and traineeships; "Competition / Award" \
+for challenges, hackathons, prizes and awards.
+- deadline_or_window: the application deadline or window ONLY when the \
+source states one (e.g. "Apply by 15 Nov 2026" or "Open until filled"); \
+otherwise the exact string "Rolling / Open". Never invent dates.
 - experience_level: EXACTLY ONE of: {experience}
 - position_type: EXACTLY ONE of: {position_types}. Use "JRF / SRF" and \
 "Project Associate / Research Associate" for funded research-project posts, \
@@ -733,6 +832,7 @@ def build_system_prompt(today: str) -> str:
         .replace("{today}", today)
         .replace("{states}", ", ".join(INDIAN_STATES))
         .replace("{categories}", " | ".join(CATEGORIES))
+        .replace("{kinds}", " | ".join(OPPORTUNITY_KINDS))
         .replace("{experience}", " | ".join(EXPERIENCE_LEVELS))
         .replace("{position_types}", " | ".join(POSITION_TYPES))
     )
@@ -869,6 +969,11 @@ POSITION_TYPE_PATTERNS = (
 POSITION_TYPE_BY_CATEGORY = {
     "Academic, JRF, SRF & PhD Positions": "JRF / SRF",
     "Research Associate & Project Staff (Contractual)": "Project Associate / Research Associate",
+    "Grants & Research Funding": "Young Professional / Consultant (Contractual)",
+    "Scholarships & Doctoral Support": "PhD / Doctoral Fellowship",
+    "Fellowships & Leadership Programs": "Fellowship / Internship",
+    "Internships & Student Traineeships": "Fellowship / Internship",
+    "Competitions, Hackathons & Awards": "Fellowship / Internship",
 }
 
 DEFAULT_POSITION_TYPE = "Full-Time Corporate / NGO"
@@ -932,14 +1037,45 @@ def default_compensation(position_type: str) -> str:
     return "Not disclosed - see official portal"
 
 
+def infer_opportunity_kind(job: Dict[str, Any]) -> str:
+    """Derive the opportunity kind for records written before the field existed."""
+    category = squash(job.get("category"))
+    position_type = squash(job.get("position_type"))
+    title = squash(job.get("clean_title") or job.get("title"))
+    if category == "Grants & Research Funding":
+        return "Grant / Funding"
+    if category == "Scholarships & Doctoral Support":
+        return "Scholarship"
+    if category == "Competitions, Hackathons & Awards":
+        return "Competition / Award"
+    if category == "Internships & Student Traineeships":
+        return "Internship"
+    if category == "Fellowships & Leadership Programs":
+        return "Fellowship"
+    if re.search(r"\b(grant|funding call|call for proposals?|seed fund)\b", title, re.I):
+        return "Grant / Funding"
+    if re.search(r"\b(scholarship|studentship)\b", title, re.I):
+        return "Scholarship"
+    if re.search(r"\b(competition|hackathon|challenge|award|prize)\b", title, re.I):
+        return "Competition / Award"
+    if re.search(r"\b(intern|internship|trainee|traineeship)\b", title, re.I):
+        return "Internship"
+    if position_type in ("JRF / SRF", "PhD / Doctoral Fellowship") or re.search(
+        r"\b(fellow|fellowship)\b", title, re.I
+    ):
+        return "Fellowship"
+    return "Job / Career"
+
+
 def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
     """Upgrade a stored record to the current schema, in place.
 
-    Maps pre-upgrade category names onto the current six-category list and
-    backfills position_type / qualification_summary / compensation_or_fellowship
-    / org_website / org_domain / source_portal so that every record - including
-    historical archive entries - carries the fields the front-end filters,
-    badges, readable links, official-logo figures and JSON-LD builders expect.
+    Maps pre-upgrade category names onto the current category list and
+    backfills position_type / opportunity_kind / deadline_or_window /
+    qualification_summary / compensation_or_fellowship / org_website /
+    org_domain / source_portal so that every record - including historical
+    archive entries - carries the fields the front-end filters, badges,
+    readable links, official-logo figures and JSON-LD builders expect.
     """
     category = squash(job.get("category"))
     if category in LEGACY_CATEGORY_MAP:
@@ -950,6 +1086,11 @@ def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
             squash(job.get("clean_title")), str(job.get("category") or "")
         )
     job["position_type"] = position_type
+    kind = squash(job.get("opportunity_kind"))
+    if kind not in OPPORTUNITY_KINDS:
+        job["opportunity_kind"] = infer_opportunity_kind(job)
+    if not squash(job.get("deadline_or_window")):
+        job["deadline_or_window"] = "Rolling / Open"
     if not squash(job.get("qualification_summary")):
         job["qualification_summary"] = default_qualification_summary(position_type)
     if not squash(job.get("compensation_or_fellowship")):
@@ -2301,6 +2442,987 @@ def fetch_reliefweb_jobs() -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
+# Global opportunities registry (global_jobs.json / global_archive.json).
+#
+# STRICTLY SEPARATED from the India registry: nothing in this section ever
+# writes into jobs.json / archive.json, and the India pipeline never writes
+# into the global files. Global records carry region / country instead of
+# Indian state / city values and are flagged with "global": true.
+# ---------------------------------------------------------------------------
+DEFAULT_GLOBAL_JOBS_PATH = Path("public/global_jobs.json")
+DEFAULT_GLOBAL_ARCHIVE_PATH = Path("public/global_archive.json")
+GLOBAL_MAX_NEW_PER_RUN = 4        # cap on Gemini calls per run for the global stage
+GLOBAL_NEWS_MAX_AGE_DAYS = 21     # same freshness discipline as the India stage
+
+GLOBAL_SYSTEM_PROMPT = """You are the editorial engine for UrbanForestPark \
+(https://www.urbanforestpark.com), which maintains a Global Opportunities \
+registry strictly separated from its India registry: international climate, \
+environment, sustainability, conservation, energy-transition and ESG jobs, \
+grants, scholarships, fellowships, internships and competitions that are \
+open to candidates worldwide (including India-based applicants). You receive \
+ONE raw opportunity posting scraped from a board or news feed (JSON). You \
+return ONE JSON object.
+
+STEP 1 - STRICT GLOBAL + GREEN RELEVANCE CHECK (always do this first):
+A posting is acceptable ONLY when BOTH are true:
+  (a) The opportunity is genuinely about the environment, climate change, \
+forestry, conservation, biodiversity, sustainability, ESG, carbon markets, \
+clean/renewable energy, water, sustainable agriculture, circular economy, \
+disaster resilience or geospatial / earth-observation analysis - including \
+adjacent domains such as WASH, agroforestry, marine conservation and green \
+urban planning. Every opportunity kind counts: jobs, grants, scholarships, \
+fellowships, internships and competitions / awards.
+  (b) The opportunity is international: based outside India, remote/global, \
+or hosted by a multilateral body (UN agencies, development banks, IUCN, \
+CGIAR, international NGOs) or a foreign university or government, and open \
+to applicants worldwide or to international applicants, including Indians. \
+Positions restricted to India belong to the separate India registry and are \
+NOT acceptable here.
+If EITHER fails, set "is_relevant_green_job" to false, give one sentence in \
+"rejection_reason", and return empty strings/arrays for all other fields. \
+When in doubt, reject.
+
+STEP 2 - HUMANIZED FIELDS (only for accepted opportunities). Return exactly:
+- id: kebab-case slug (a-z, 0-9, hyphens only, max 60 chars) built from the \
+opportunity title + organisation.
+- date_added: {today} (copy this exact value).
+- clean_title: opportunity title cleaned of noise.
+- organization: the institution's proper name.
+- region: EXACTLY ONE of: {regions}
+- country: the host country of the institution or programme (plain English; \
+use "Global" when the opportunity is worldwide and remote).
+- city: city / location descriptor (e.g. "Bonn, Germany", "Remote (Global)").
+- category: EXACTLY ONE of: {categories}
+- opportunity_kind: EXACTLY ONE of: {kinds}
+- deadline_or_window: the deadline or window ONLY when the source states one \
+(e.g. "Apply by 15 Nov 2026"); otherwise the exact string "Rolling / Open". \
+Never invent dates.
+- experience_level: EXACTLY ONE of: {experience}
+- position_type: EXACTLY ONE of: {position_types}
+- qualification_summary: one short line with the degree / experience \
+requirements; write the standard requirement for that kind when the source \
+omits them.
+- compensation_or_fellowship: stipend / salary / funding amount ONLY when the \
+source states one; otherwise "Not disclosed - see official portal" (or \
+"See official call" for grants). Never invent figures.
+- role_summary: exactly 3 sentences, 45-70 words, concrete and specific to \
+THIS opportunity.
+- title_hi: the opportunity title written in formal Hindi (Devanagari), \
+keeping organisation names in Latin script and keeping acronyms (UNFCCC, \
+IUCN, GIS, ESG, PhD, dMRV ...) in Latin script.
+- summary_hi: exactly 2 formal Hindi sentences summarising the opportunity \
+and its eligibility for Hindi-speaking candidates.
+- key_responsibilities: 4-5 short bullets, each supported by the source.
+- must_have_skills: 5-7 short skill tags (mix technical and domain skills).
+- application_tip: 1-2 sentences of practical, editor-style advice. Never \
+mention that this tip was AI-written.
+- apply_url: copy the source URL EXACTLY as provided.
+- org_website: the institution's official website ONLY when genuinely \
+confident; otherwise an empty string.
+- org_domain: root domain of org_website without "https://" or "www."; empty \
+when org_website is empty.
+- source_portal: where apply_url points ("LinkedIn", "ReliefWeb", "Official \
+Organization Website", or the bare domain when none of those).
+
+STYLE RULES: Write like a thoughtful human editor. Plain, concrete English; \
+vary sentence length. Never use the words "delve", "leverage", "spearhead", \
+"passionate", "vibrant", "landscape" (as metaphor) or "game-changer". Use at \
+most one em dash in the entire output and no exclamation marks. Never invent \
+facts (salaries, dates, requirements, benefits) that the source does not \
+contain - you may only compress, clarify and humanize.
+
+Return ONLY the JSON object - no markdown fences, no commentary."""
+
+
+def build_global_system_prompt(today: str) -> str:
+    """Fill the global prompt's enum placeholders."""
+    return (
+        GLOBAL_SYSTEM_PROMPT
+        .replace("{today}", today)
+        .replace("{regions}", " | ".join(GLOBAL_REGIONS))
+        .replace("{categories}", " | ".join(CATEGORIES))
+        .replace("{kinds}", " | ".join(OPPORTUNITY_KINDS))
+        .replace("{experience}", " | ".join(EXPERIENCE_LEVELS))
+        .replace("{position_types}", " | ".join(POSITION_TYPES))
+    )
+
+
+# ---------------------------------------------------------------------------
+# Verified evergreen global opportunities.
+#
+# These are real, long-standing international portals and programmes run by
+# the institutions themselves - no fabricated vacancies. They guarantee the
+# Global registry is rich and live today; freshly scraped opportunities are
+# merged on top by run_global_stage() and expire through the normal
+# lifecycle, while evergreen records stay active indefinitely.
+# ---------------------------------------------------------------------------
+_GLOBAL_SEED_BASE: Dict[str, Any] = {
+    "state": "",
+    "global": True,
+    "evergreen": True,
+    "status": "active",
+    "source_portal": "Official Organization Website",
+}
+
+GLOBAL_SEED_OPPORTUNITIES: List[Dict[str, Any]] = [
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "unfccc-secretariat-climate-careers",
+        "clean_title": "Climate Change Careers - UNFCCC Secretariat (Professional & Programme Roles)",
+        "organization": "United Nations Framework Convention on Climate Change (UNFCCC)",
+        "region": "UN / Multilateral",
+        "country": "Germany",
+        "city": "Bonn, Germany",
+        "category": "Climate Policy, Think-Tanks & Fellowships",
+        "experience_level": "Mid-Senior (3-6 Years)",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Advanced university degree (Master's or above) in climate, environment, economics, law, engineering or a related field, with professional experience as specified per vacancy.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "The UNFCCC secretariat in Bonn runs the international climate process: COP sessions, the Paris Agreement work programme and the transparency regime. It recruits policy, finance, adaptation, mitigation and data professionals on a rolling basis, and professional posts are open to all nationalities, including Indian candidates. Apply through the official UN careers system.",
+        "title_hi": "जलवायु परिवर्तन भर्तियाँ — UNFCCC सचिवालय (पेशेवर एवं कार्यक्रम पद)",
+        "summary_hi": "जर्मनी के बॉन स्थित UNFCCC सचिवालय अंतर्राष्ट्रीय जलवायु प्रक्रिया का संचालन करता है और जलवायु वित्त, अनुकूलन, नीति एवं पारदर्शिता से जुड़े पदों पर योग्य पेशेवरों की निरंतर भर्ती करता है। भारतीय आवेदक इन पदों के लिए पूर्णतः पात्र हैं; नवीनतम रिक्तियाँ आधिकारिक भर्ती पोर्टल पर देखें।",
+        "key_responsibilities": [
+            "Support intergovernmental climate negotiations and work-programme delivery",
+            "Draft policy, finance or transparency analysis for Parties and the secretariat",
+            "Coordinate with UN agencies, observers and national focal points",
+            "Maintain data, reporting and knowledge products for the climate regime",
+        ],
+        "must_have_skills": [
+            "Climate policy",
+            "International negotiations",
+            "Climate finance",
+            "MRV / transparency",
+            "Data analysis",
+            "Report writing",
+        ],
+        "application_tip": "Create a profile in the UNFCCC e-recruitment system before applying, and tailor each application to the specific vacancy requirements, since posts are competitive and reviewed against exact criteria.",
+        "apply_url": "https://unfccc.int/about-us/vacancies",
+        "org_website": "https://unfccc.int",
+        "org_domain": "unfccc.int",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "green-climate-fund-careers",
+        "clean_title": "Climate Finance Careers - Green Climate Fund (GCF)",
+        "organization": "Green Climate Fund (GCF)",
+        "region": "UN / Multilateral",
+        "country": "Republic of Korea",
+        "city": "Songdo, Incheon, Republic of Korea",
+        "category": "Climate Policy, Think-Tanks & Fellowships",
+        "experience_level": "Mid-Senior (3-6 Years)",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Master's degree in finance, economics, environment, engineering or a related field with relevant multilateral or banking experience as specified per vacancy.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "The Green Climate Fund is the world's largest dedicated climate finance institution, headquartered in Songdo, Republic of Korea. GCF recruits investment, safeguards, adaptation and programming professionals who structure and oversee climate projects in developing countries. Vacancies are open internationally, and Indian professionals are well represented in the Fund's portfolio and partner networks.",
+        "title_hi": "जलवायु वित्त करियर — Green Climate Fund (GCF)",
+        "summary_hi": "GCF विश्व का सबसे बड़ा समर्पित जलवायु वित्त संस्थान है, जिसका मुख्यालय दक्षिण कोरिया के सॉन्गदो में है और जो विकासशील देशों में जलवायु परियोजनाओं का वित्तपोषण करता है। वित्त, परियोजना, सुरक्षा-मानक एवं अनुकूलन से जुड़े पदों हेतु अंतर्राष्ट्रीय आवेदन आमंत्रित रहते हैं, जिनके लिए भारतीय पेशेवर भी पात्र हैं।",
+        "key_responsibilities": [
+            "Appraise and structure climate finance proposals from accredited entities",
+            "Monitor funded projects against results and safeguards frameworks",
+            "Prepare investment, risk and portfolio analysis",
+            "Engage with national designated authorities and delivery partners",
+        ],
+        "must_have_skills": [
+            "Climate finance",
+            "Project appraisal",
+            "Environmental & social safeguards",
+            "Portfolio analysis",
+            "Stakeholder engagement",
+        ],
+        "application_tip": "Study GCF's accreditation and funding frameworks before applying, and highlight any experience with multilateral funds, development banks or climate project pipelines in your application.",
+        "apply_url": "https://www.greenclimate.fund/about/careers",
+        "org_website": "https://www.greenclimate.fund",
+        "org_domain": "greenclimate.fund",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "undp-climate-environment-jobs",
+        "clean_title": "Nature, Climate & Energy Roles - UNDP (Global Recruitment)",
+        "organization": "United Nations Development Programme (UNDP)",
+        "region": "UN / Multilateral",
+        "country": "United States",
+        "city": "New York / Country Offices (Global)",
+        "category": "Climate Policy, Think-Tanks & Fellowships",
+        "experience_level": "Mid-Senior (3-6 Years)",
+        "position_type": "Young Professional / Consultant (Contractual)",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Master's degree in environmental science, climate policy, energy, economics or a related field, with experience matching the specific consultancy, NPSA or staff post advertised.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "UNDP's Nature, Climate and Energy practice supports countries on climate action, biodiversity finance, energy transition and resilience across its global network of country offices. Opportunities span staff positions, National Personnel Service Agreement posts and consultancies in more than 170 countries. Indian applicants can apply to both headquarters roles and the large India country-office portfolio.",
+        "title_hi": "प्रकृति, जलवायु एवं ऊर्जा पद — UNDP (वैश्विक भर्ती)",
+        "summary_hi": "UNDP की प्रकृति, जलवायु एवं ऊर्जा टीम जलवायु कार्रवाई, जैव विविधता वित्त, ऊर्जा संक्रमण एवं अनुकूलन क्षमता पर 170 से अधिक देशों में कार्यरत है। स्टाफ पदों, राष्ट्रीय अनुबंध पदों (NPSA) एवं परामर्शदाता भूमिकाओं हेतु भारतीय पेशेवर सीधे आवेदन कर सकते हैं।",
+        "key_responsibilities": [
+            "Design and backstop national climate, nature and energy programmes",
+            "Prepare project documents, results frameworks and donor reports",
+            "Support climate finance and biodiversity finance initiatives",
+            "Advise country offices on resilience and energy transition policy",
+        ],
+        "must_have_skills": [
+            "Climate policy",
+            "Project management",
+            "Climate / biodiversity finance",
+            "Monitoring & evaluation",
+            "English report writing",
+        ],
+        "application_tip": "UNDP advertises on its own careers portal; register once and enable job alerts, since many consultancies stay open for only one to two weeks.",
+        "apply_url": "https://jobs.undp.org/cj_view_jobs.cfm",
+        "org_website": "https://www.undp.org",
+        "org_domain": "undp.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "world-bank-group-climate-careers",
+        "clean_title": "Climate & Environment Careers - World Bank Group (Washington DC & Global)",
+        "organization": "World Bank Group",
+        "region": "UN / Multilateral",
+        "country": "United States",
+        "city": "Washington DC / Country Offices (Global)",
+        "category": "ESG, Carbon Markets & Corporate Sustainability",
+        "experience_level": "Senior",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Advanced degree in economics, environmental science, engineering, finance or a related field with significant relevant experience; the Young Professionals Program has its own annual criteria.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "The World Bank Group is one of the largest financiers of climate and environment operations in developing countries, covering adaptation, carbon markets, blue economy and environmental safeguards. It recruits economists, engineers and environmental specialists across Washington DC and country offices. Indian nationals work across the institution, and the annual Young Professionals Program is open to candidates worldwide.",
+        "title_hi": "जलवायु एवं पर्यावरण करियर — World Bank Group (वॉशिंगटन DC एवं वैश्विक)",
+        "summary_hi": "World Bank Group विकासशील देशों में जलवायु एवं पर्यावरण परियोजनाओं का विश्व का सबसे बड़ा वित्तपोषक संस्थान है, जो अनुकूलन, कार्बन बाज़ार एवं पर्यावरणीय सुरक्षा पर कार्य करता है। अर्थशास्त्रियों, इंजीनियरों एवं पर्यावरण विशेषज्ञों के लिए नियुक्तियाँ निरंतर होती हैं और युवा पेशेवर कार्यक्रम (YPP) हेतु भारतीय आवेदक पात्र हैं।",
+        "key_responsibilities": [
+            "Prepare climate and environment investment operations",
+            "Run analytical work on adaptation, carbon markets and safeguards",
+            "Supervise project implementation with client governments",
+            "Contribute to country climate diagnostics and lending strategy",
+        ],
+        "must_have_skills": [
+            "Development finance",
+            "Climate economics",
+            "Carbon markets",
+            "Environmental safeguards",
+            "Client engagement",
+        ],
+        "application_tip": "Watch the annual Young Professionals Program window (typically mid-year) and prepare a strong statement of interest early, since the process is highly competitive.",
+        "apply_url": "https://www.worldbank.org/en/about/careers",
+        "org_website": "https://www.worldbank.org",
+        "org_domain": "worldbank.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "iucn-south-america-conservation-careers",
+        "clean_title": "Conservation & Biodiversity Careers - IUCN South America Regional Office (Quito / Brasilia)",
+        "organization": "International Union for Conservation of Nature (IUCN) - South America",
+        "region": "Latin America",
+        "country": "Ecuador",
+        "city": "Quito, Ecuador / Brasilia, Brazil",
+        "category": "Forestry, Wildlife & Afforestation",
+        "experience_level": "Mid-Senior (3-6 Years)",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Degree in conservation biology, environmental science, natural-resource management or a related field, with experience as specified per regional vacancy.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "IUCN's Regional Office for South America has been based in Quito, Ecuador since 1991, supported by an office in Brasilia, Brazil, and leads conservation work across the Amazon, the Andes and the páramos - species and ecosystem conservation, protected-area management, landscape restoration, ecosystem-based adaptation to climate change and bioeconomy. It recruits conservation, restoration and programme professionals on a rolling basis, and international candidates, including Indians, apply directly through the official IUCN portal.",
+        "title_hi": "संरक्षण एवं जैव विविधता करियर — IUCN दक्षिण अमेरिका क्षेत्रीय कार्यालय (क्विटो / ब्रासीलिया)",
+        "summary_hi": "IUCN का दक्षिण अमेरिका क्षेत्रीय कार्यालय 1991 से क्विटो (इक्वाडोर) में स्थित है और ब्रासीलिया (ब्राज़ील) कार्यालय के साथ अमेज़न, एंडीज़ एवं पैरामो क्षेत्रों में प्रजाति संरक्षण, संरक्षित क्षेत्र प्रबंधन, परिदृश्य पुनर्स्थापन एवं जलवायु अनुकूलन परियोजनाओं का संचालन करता है। संरक्षण एवं पुनर्स्थापन पेशेवरों की निरंतर भर्ती होती है, जिसके लिए भारतीय आवेदक भी पात्र हैं।",
+        "key_responsibilities": [
+            "Run species, forest or marine conservation programmes",
+            "Prepare Red List assessments and biodiversity guidance",
+            "Work with members, commissions and partner governments",
+            "Support ecosystem-based adaptation planning across the region",
+        ],
+        "must_have_skills": [
+            "Biodiversity conservation",
+            "Red List / IUCN standards",
+            "Protected area management",
+            "Project coordination",
+            "Scientific writing",
+        ],
+        "application_tip": "Register in IUCN's careers portal and consider joining an IUCN commission (for example the Species Survival or Ecosystem Management Commission) to build visibility before applying for staff roles at the regional offices.",
+        "apply_url": "https://www.iucn.org/regions/south-america",
+        "org_website": "https://www.iucn.org/regions/south-america",
+        "org_domain": "iucn.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "wri-global-climate-research-jobs",
+        "clean_title": "Climate Research & ESG Careers - World Resources Institute (WRI)",
+        "organization": "World Resources Institute (WRI)",
+        "region": "North America",
+        "country": "United States",
+        "city": "Washington DC / Global Offices",
+        "category": "Climate Policy, Think-Tanks & Fellowships",
+        "experience_level": "Mid-Senior (3-6 Years)",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Master's degree in environmental policy, economics, urban planning, geography or a related field, with research or programme experience matching the advertised role.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "WRI is a global research organisation working on climate, cities, energy, food, forests and water, with offices in Washington DC, India, Africa, Latin America and beyond. Its research analyst, programme and communications roles shape climate policy in dozens of countries. WRI India operates one of the network's largest programmes, and staff frequently move between global and India teams.",
+        "title_hi": "जलवायु अनुसंधान एवं ESG करियर — World Resources Institute (WRI)",
+        "summary_hi": "WRI एक वैश्विक अनुसंधान संस्था है जो जलवायु, शहर, ऊर्जा, खाद्य, वन एवं जल क्षेत्रों पर कार्य करती है तथा वॉशिंगटन DC, भारत, अफ्रीका एवं लैटिन अमेरिका में कार्यालयों से संचालित होती है। शोध विश्लेषक एवं कार्यक्रम पदों हेतु अंतर्राष्ट्रीय आवेदन आमंत्रित रहते हैं और WRI India के माध्यम से भारतीय पेशेवर वैश्विक टीमों से जुड़ते हैं।",
+        "key_responsibilities": [
+            "Produce policy-relevant climate, energy or urban research",
+            "Translate research into actionable recommendations for governments",
+            "Support country programmes with data and toolkits",
+            "Communicate findings through reports and briefs",
+        ],
+        "must_have_skills": [
+            "Climate policy research",
+            "Quantitative analysis",
+            "Data visualisation",
+            "Policy writing",
+            "Stakeholder workshops",
+        ],
+        "application_tip": "WRI values demonstrable analytical writing; attach or reference published reports and data work in your application materials.",
+        "apply_url": "https://www.wri.org/careers",
+        "org_website": "https://www.wri.org",
+        "org_domain": "wri.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "esa-climate-change-initiative-opportunities",
+        "clean_title": "Earth Observation & Climate Data - ESA Climate Change Initiative",
+        "organization": "European Space Agency (ESA) Climate Office",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "city": "Harwell, United Kingdom / European Research Partners",
+        "category": "GIS, Remote Sensing & Earth Observation",
+        "experience_level": "1-3 Years",
+        "position_type": "Project Associate / Research Associate",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Degree in remote sensing, geoinformatics, atmospheric or climate science, or a related field, with EO data-processing skills as specified per research call or vacancy.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "The ESA Climate Change Initiative generates Essential Climate Variables from European and international satellite missions, supported by a network of research teams across Europe. Opportunities include research fellowships, living-planet and CCI project positions for remote-sensing and climate-data specialists. These roles suit Indian geospatial scientists seeking international EO experience; individual project pages list their own openings and calls.",
+        "title_hi": "पृथ्वी अवलोकन एवं जलवायु डेटा — ESA Climate Change Initiative",
+        "summary_hi": "ESA की Climate Change Initiative यूरोपीय एवं अंतर्राष्ट्रीय उपग्रह मिशनों से आवश्यक जलवायु चर (ECV) तैयार करती है और यूरोप भर के शोध समूहों के साथ रिमोट सेंसिंग विशेषज्ञों की नियुक्ति करती है। भारतीय भू-स्थानिक वैज्ञानिक इन परियोजनाओं एवं शोध अवसरों हेतु आवेदन कर सकते हैं; प्रत्येक परियोजना पृष्ठ पर नवीनतम अवसर सूचीबद्ध होते हैं।",
+        "key_responsibilities": [
+            "Process satellite data into Essential Climate Variables",
+            "Validate EO products against in-situ reference data",
+            "Develop and document reproducible processing chains",
+            "Coordinate with international CCI project teams",
+        ],
+        "must_have_skills": [
+            "Remote sensing",
+            "Python / ESA toolboxes",
+            "Climate data formats (NetCDF)",
+            "Earth observation validation",
+            "Scientific documentation",
+        ],
+        "application_tip": "Build a portfolio of reproducible EO analysis (Sentinel or MODIS based) with public code, since CCI teams value verifiable processing experience over credentials alone.",
+        "apply_url": "https://climate.esa.int/en/",
+        "org_website": "https://www.esa.int",
+        "org_domain": "esa.int",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "future-earth-global-opportunities",
+        "clean_title": "Global Sustainability Opportunities - Future Earth Network",
+        "organization": "Future Earth",
+        "region": "Global / Remote",
+        "country": "Global",
+        "city": "Remote (Global) / Stockholm Secretariat",
+        "category": "Climate Policy, Think-Tanks & Fellowships",
+        "experience_level": "1-3 Years",
+        "position_type": "Full-Time Corporate / NGO",
+        "opportunity_kind": "Job / Career",
+        "deadline_or_window": "Rolling / Open",
+        "qualification_summary": "Varies by listing: research, programme and communications roles in sustainability science typically require a relevant master's degree or equivalent experience.",
+        "compensation_or_fellowship": "Not disclosed - see official portal",
+        "role_summary": "Future Earth is a global research network advancing sustainability science, linking thousands of researchers through programmes such as the Global Land Programme and Sustainability Transitions. Its opportunities desk circulates jobs, fellowships and calls from network members and partner institutions worldwide. India has one of the network's largest research communities, so many listed roles are open to Indian applicants or offer remote participation.",
+        "title_hi": "वैश्विक सतत विकास अवसर — Future Earth नेटवर्क",
+        "summary_hi": "Future Earth एक वैश्विक शोध नेटवर्क है जो सतत विकास विज्ञान को आगे बढ़ाता है और अपने सदस्यों तथा साझेदार संस्थानों की नौकरियों, फेलोशिप एवं कॉल को प्रकाशित करता है। इसके अवसर पृष्ठ पर भारतीय शोधकर्ताओं हेतु उपयुक्त दूरस्थ एवं अंतर्राष्ट्रीय भूमिकाएँ नियमित रूप से सूचीबद्ध होती हैं।",
+        "key_responsibilities": [
+            "Track global sustainability-science opportunities and calls",
+            "Support network research programmes and working groups",
+            "Assist with events, synthesis products and communications",
+            "Connect regional communities with global initiatives",
+        ],
+        "must_have_skills": [
+            "Sustainability science",
+            "Research programme support",
+            "Science communication",
+            "International collaboration",
+            "English writing",
+        ],
+        "application_tip": "Follow Future Earth's opportunities desk and subscribe to its newsletters, since listings from member institutes often appear there before they circulate on job boards.",
+        "apply_url": "https://futureearth.org/opportunities/",
+        "org_website": "https://futureearth.org",
+        "org_domain": "futureearth.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "undp-gef-small-grants-programme",
+        "clean_title": "GEF Small Grants Programme - Community Climate & Biodiversity Grants (UNDP)",
+        "organization": "Global Environment Facility Small Grants Programme (SGP), implemented by UNDP",
+        "region": "Global / Remote",
+        "country": "Global",
+        "city": "Country Programmes in 125+ Countries",
+        "category": "Grants & Research Funding",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Young Professional / Consultant (Contractual)",
+        "opportunity_kind": "Grant / Funding",
+        "deadline_or_window": "Annual national calls - check the country page",
+        "qualification_summary": "Open to civil-society organisations, community groups and indigenous organisations; grants up to USD 50,000 for community-led projects in biodiversity, climate change mitigation/adaptation, land degradation and chemicals management.",
+        "compensation_or_fellowship": "Grants up to USD 50,000 - see official call",
+        "role_summary": "The GEF Small Grants Programme, implemented by UNDP, provides financial and technical support to community organisations for climate, biodiversity and land projects in more than 125 countries, including a large India portfolio. National coordination teams issue annual calls for proposals that fund grassroots conservation, renewable energy and adaptation work. It is one of the most accessible international funding routes for Indian community organisations and field researchers.",
+        "title_hi": "GEF Small Grants Programme — सामुदायिक जलवायु एवं जैव विविधता अनुदान (UNDP)",
+        "summary_hi": "UNDP द्वारा संचालित Global Environment Facility Small Grants Programme 125 से अधिक देशों में सामुदायिक संगठनों को जलवायु, जैव विविधता एवं भूमि क्षरण से जुड़े परियोजनाओं हेतु USD 50,000 तक अनुदान देता है। भारत में राष्ट्रीय समन्वय टीम वार्षिक प्रस्ताव आह्वान जारी करती है, जिसके लिए स्थानीय संगठन सीधे आवेदन कर सकते हैं।",
+        "key_responsibilities": [
+            "Apply through the national SGP call for proposals",
+            "Deliver community-led biodiversity or climate projects",
+            "Maintain grant reporting and documentation standards",
+            "Engage local stakeholders and co-financing partners",
+        ],
+        "must_have_skills": [
+            "Community mobilisation",
+            "Project proposal writing",
+            "Grant management",
+            "Biodiversity / climate field work",
+            "Reporting",
+        ],
+        "application_tip": "Contact your national SGP office before drafting, since each country page lists its current call window, thematic priorities and required templates.",
+        "apply_url": "https://sgp.undp.org/",
+        "org_website": "https://sgp.undp.org",
+        "org_domain": "sgp.undp.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "chevening-scholarships-masters",
+        "clean_title": "Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks)",
+        "organization": "Chevening Scholarships - UK Government (FCDO)",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "city": "UK Universities",
+        "category": "Scholarships & Doctoral Support",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Fellowship / Internship",
+        "opportunity_kind": "Scholarship",
+        "deadline_or_window": "Annual cycle - applications typically open August to October",
+        "qualification_summary": "Bachelor's degree (for master's entry), at least two years of work or leadership experience, and an unconditional offer from a UK course by the reference deadline; open to Indian citizens.",
+        "compensation_or_fellowship": "Tuition fully funded + monthly living stipend + travel - see official portal",
+        "role_summary": "Chevening is the UK government's fully funded international scholarship, covering tuition, living costs and travel for one-year master's degrees at UK universities. Indian applicants regularly win places in climate policy, environment, sustainability and energy programmes. The scholarship selects on leadership, networking and career-plan potential rather than academic scores alone.",
+        "title_hi": "Chevening छात्रवृत्ति — ब्रिटेन में पूर्णतः वित्तपोषित मास्टर्स (जलवायु एवं सतत विकास)",
+        "summary_hi": "Chevening ब्रिटेन सरकार की पूर्णतः वित्तपोषित अंतर्राष्ट्रीय छात्रवृत्ति है जो जलवायु नीति, पर्यावरण एवं सतत विकास जैसे विषयों में एक वर्षीय मास्टर्स हेतु ट्यूशन, रहने का खर्च एवं यात्रा प्रदान करती है। भारतीय नागरिक प्रत्येक वर्ष आवेदन कर सकते हैं; चयन नेतृत्व क्षमता एवं करियर योजना पर आधारित होता है।",
+        "key_responsibilities": [
+            "Secure admission to an eligible UK master's programme",
+            "Submit the online Chevening application within the annual window",
+            "Demonstrate leadership and career plan in interviews",
+            "Complete the degree and join the global Chevening network",
+        ],
+        "must_have_skills": [
+            "Leadership",
+            "Climate / sustainability subject knowledge",
+            "Academic writing",
+            "Networking",
+            "English proficiency (IELTS as required by the course)",
+        ],
+        "application_tip": "Draft your essays around concrete leadership stories and a clear return-home plan, and apply to UK courses in parallel so you can meet the offer deadline.",
+        "apply_url": "https://www.chevening.org/scholarships/",
+        "org_website": "https://www.chevening.org",
+        "org_domain": "chevening.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "erasmus-mundus-joint-masters",
+        "clean_title": "Erasmus Mundus Joint Masters - Climate, Environment & Sustainability Programmes (EU)",
+        "organization": "European Commission - Erasmus+ (EACEA)",
+        "region": "Europe",
+        "country": "European Union",
+        "city": "Multiple European Universities",
+        "category": "Scholarships & Doctoral Support",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Fellowship / Internship",
+        "opportunity_kind": "Scholarship",
+        "deadline_or_window": "Annual cycle - most consortia close December to January",
+        "qualification_summary": "Bachelor's degree for master's entry; each consortium sets its own discipline requirements. Scholarship applications are open to candidates worldwide, including India.",
+        "compensation_or_fellowship": "Scholarships cover tuition, travel and living costs - see official catalogue",
+        "role_summary": "Erasmus Mundus Joint Masters are prestigious two-year degrees delivered by consortia of European universities, with fully funded scholarships for excellent candidates worldwide. Catalogue entries include climate change, environmental sciences, sustainability, forestry and geospatial specialisations. Indian graduates receive a large share of these scholarships each year, and the catalogue lists every programme with its own application portal.",
+        "title_hi": "Erasmus Mundus संयुक्त मास्टर्स — जलवायु, पर्यावरण एवं सतत विकास कार्यक्रम (यूरोपीय संघ)",
+        "summary_hi": "Erasmus Mundus संयुक्त मास्टर्स यूरोपीय विश्वविद्यालयों के समूहों द्वारा संचालित दो-वर्षीय प्रतिष्ठित डिग्री कार्यक्रम हैं, जिनमें जलवायु, पर्यावरण विज्ञान, वानिकी एवं भू-स्थानिक विशेषज्ञता शामिल है। विश्व भर के उत्कृष्ट अभ्यर्थियों हेतु छात्रवृत्तियाँ उपलब्ध हैं और भारतीय स्नातक प्रत्येक वर्ष बड़ी संख्या में चयनित होते हैं।",
+        "key_responsibilities": [
+            "Choose consortia matching your climate / environment goals",
+            "Apply directly through each programme's portal",
+            "Prepare motivation letters and references early",
+            "Plan mobility between the consortium universities",
+        ],
+        "must_have_skills": [
+            "Subject expertise (environment / climate)",
+            "English or consortium language proficiency",
+            "Motivation letter writing",
+            "Academic references",
+            "Intercultural adaptability",
+        ],
+        "application_tip": "Filter the official catalogue by climate and environment fields, and shortlist three to four programmes: applications are free and deadlines cluster around January.",
+        "apply_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+        "org_website": "https://www.eacea.ec.europa.eu",
+        "org_domain": "eacea.ec.europa.eu",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "unu-ias-postdoctoral-fellowships",
+        "clean_title": "Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability)",
+        "organization": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
+        "region": "Asia-Pacific",
+        "country": "Japan",
+        "city": "Tokyo, Japan",
+        "category": "Fellowships & Leadership Programs",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "PhD / Doctoral Fellowship",
+        "opportunity_kind": "Fellowship",
+        "deadline_or_window": "Annual calls - check the opportunities page",
+        "qualification_summary": "PhD completed (or near completion) in sustainability-related fields for postdoctoral fellows; specific JSPS and project fellowships list their own eligibility.",
+        "compensation_or_fellowship": "Monthly fellowship stipend + research allowance - see official call",
+        "role_summary": "UNU-IAS in Tokyo advances sustainability research and education, hosting postdoctoral fellows, JSPS research fellows and visiting scholars working on biodiversity, climate, water and governance themes. Fellowships run for defined terms with stipends and research support in Japan. Calls are open internationally, and Indian researchers have strong representation in UNU-IAS programmes.",
+        "title_hi": "पोस्टडॉक्टोरल एवं शोध फेलोशिप — UNU-IAS, टोक्यो (सतत विकास)",
+        "summary_hi": "UNU-IAS टोक्यो में सतत विकास पर केंद्रित शोध एवं शिक्षण संचालित होता है, जहाँ पोस्टडॉक्टोरल, JSPS एवं परियोजना फेलोशिप हेतु प्रतिवर्ष आवेदन आमंत्रित किए जाते हैं। जैव विविधता, जलवायु, जल एवं शासन विषयों पर कार्यरत भारतीय शोधकर्ता इन अंतर्राष्ट्रीय फेलोशिप हेतु पात्र हैं।",
+        "key_responsibilities": [
+            "Conduct independent sustainability research with UNU-IAS faculty",
+            "Publish peer-reviewed and policy outputs",
+            "Participate in capacity-development programmes",
+            "Contribute to international research networks",
+        ],
+        "must_have_skills": [
+            "Research methods",
+            "Peer-reviewed publishing",
+            "Sustainability / climate expertise",
+            "Interdisciplinary collaboration",
+            "English academic writing",
+        ],
+        "application_tip": "Frame your research proposal around UNU-IAS thematic priorities and contact potential supervisors before the call closes; reference lists are competitive.",
+        "apply_url": "https://ias.unu.edu/en/opportunities",
+        "org_website": "https://ias.unu.edu",
+        "org_domain": "ias.unu.edu",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "unfccc-internship-programme",
+        "clean_title": "Internship Programme - UNFCCC Secretariat (Climate Policy, Bonn)",
+        "organization": "United Nations Framework Convention on Climate Change (UNFCCC)",
+        "region": "UN / Multilateral",
+        "country": "Germany",
+        "city": "Bonn, Germany (some teams support remote interns)",
+        "category": "Internships & Student Traineeships",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Fellowship / Internship",
+        "opportunity_kind": "Internship",
+        "deadline_or_window": "Rolling / Open - internship calls posted continuously",
+        "qualification_summary": "Enrolled in or recently completed a bachelor's / master's degree in climate, environment, economics, law, communications or a related field; strong English writing skills.",
+        "compensation_or_fellowship": "Monthly internship stipend (varies) - see official portal",
+        "role_summary": "The UNFCCC internship programme places students and recent graduates in the secretariat's divisions in Bonn, working alongside negotiators, analysts and communications teams on the international climate process. Internships run for up to six months and are open to applicants of all nationalities. It is a recognised entry route into multilateral climate work for young Indian graduates.",
+        "title_hi": "इंटर्नशिप कार्यक्रम — UNFCCC सचिवालय (जलवायु नीति, बॉन)",
+        "summary_hi": "UNFCCC इंटर्नशिप कार्यक्रम विद्यार्थियों एवं नए स्नातकों को बॉन स्थित सचिवालय के विभागों में वार्ताकारों एवं विश्लेषकों के साथ कार्य करने का अवसर देता है। यह अंतर्राष्ट्रीय जलवायु क्षेत्र में प्रवेश का मान्य मार्ग है, जिसके लिए सभी राष्ट्रीयताओं के आवेदक, जिनमें भारतीय स्नातक भी शामिल हैं, पात्र हैं।",
+        "key_responsibilities": [
+            "Support negotiation sessions and inter-sessional work",
+            "Draft briefings, summaries and communication products",
+            "Maintain databases and knowledge platforms",
+            "Assist project teams across secretariat divisions",
+        ],
+        "must_have_skills": [
+            "Climate policy literacy",
+            "Research and drafting",
+            "English writing",
+            "MS Office / data tools",
+            "Teamwork in multicultural settings",
+        ],
+        "application_tip": "Internship calls appear and close within weeks; set up alerts on the UNFCCC vacancies page and prepare a precise cover letter mapped to the division you target.",
+        "apply_url": "https://unfccc.int/about-us/internships",
+        "org_website": "https://unfccc.int",
+        "org_domain": "unfccc.int",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "zayed-sustainability-prize",
+        "clean_title": "Zayed Sustainability Prize - Global Awards for Climate, Energy, Water & Food Innovators",
+        "organization": "Zayed Sustainability Prize (UAE)",
+        "region": "Africa & Middle East",
+        "country": "United Arab Emirates",
+        "city": "Abu Dhabi, UAE",
+        "category": "Competitions, Hackathons & Awards",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Fellowship / Internship",
+        "opportunity_kind": "Competition / Award",
+        "deadline_or_window": "Annual cycle - submissions typically close in spring",
+        "qualification_summary": "Open to small and medium enterprises, non-profit organisations and high schools worldwide with sustainability solutions in health, food, energy, water or climate action categories.",
+        "compensation_or_fellowship": "Prize funds per category - see official portal",
+        "role_summary": "The Zayed Sustainability Prize honours organisations and schools delivering impactful, innovative and inspiring sustainability solutions across energy, water, food, health and climate action. Winners share a multi-million-dollar prize fund awarded at the UAE Sustainability Week in Abu Dhabi. Indian social enterprises and schools have been among the winners in past cycles.",
+        "title_hi": "Zayed Sustainability Prize — जलवायु, ऊर्जा, जल एवं खाद्य नवाचार हेतु वैश्विक पुरस्कार",
+        "summary_hi": "Zayed Sustainability Prize ऊर्जा, जल, खाद्य, स्वास्थ्य एवं जलवायु कार्रवाई के क्षेत्र में प्रभावी एवं नवाचारी समाधान प्रस्तुत करने वाले संगठनों तथा विद्यालयों को सम्मानित करता है। भारतीय सामाजिक उद्यम एवं विद्यालय भी प्रत्येक वर्ष इस वैश्विक पुरस्कार हेतु आवेदन कर सकते हैं, जिसका वितरण अबू धाबी में होता है।",
+        "key_responsibilities": [
+            "Submit an impact-driven entry in the relevant category",
+            "Document measurable sustainability outcomes",
+            "Provide references and verification evidence",
+            "Engage with the global winners network",
+        ],
+        "must_have_skills": [
+            "Impact measurement",
+            "Sustainability innovation",
+            "Project documentation",
+            "Pitching",
+            "Partnership building",
+        ],
+        "application_tip": "Quantify your impact with verifiable numbers in the entry form, since the jury scores measurable outcomes above narrative.",
+        "apply_url": "https://zayedsustainabilityprize.org/",
+        "org_website": "https://zayedsustainabilityprize.org",
+        "org_domain": "zayedsustainabilityprize.org",
+    },
+    {
+        **_GLOBAL_SEED_BASE,
+        "id": "earthshot-prize",
+        "clean_title": "The Earthshot Prize - GBP 1 Million Awards for Environmental Solutions",
+        "organization": "The Earthshot Prize (Royal Foundation)",
+        "region": "Global / Remote",
+        "country": "United Kingdom",
+        "city": "London, United Kingdom / Global",
+        "category": "Competitions, Hackathons & Awards",
+        "experience_level": "Entry Level / Fellowship",
+        "position_type": "Fellowship / Internship",
+        "opportunity_kind": "Competition / Award",
+        "deadline_or_window": "Annual cycle - nominations open each year",
+        "qualification_summary": "Open to innovators, communities, businesses and organisations worldwide with solutions across the five Earthshots: climate, biodiversity, nature protection, air and ocean.",
+        "compensation_or_fellowship": "GBP 1 million per winner - see official portal",
+        "role_summary": "The Earthshot Prize awards five one-million-pound prizes each year to the most inspiring and impactful environmental solutions, spanning climate, nature, oceans, air and waste. Finalists and winners receive global visibility and a fellowship of support, and entries from South Asia have featured strongly. Indian innovators working on clean air, restoration or circular economy solutions can be nominated or apply through the open process.",
+        "title_hi": "The Earthshot Prize — पर्यावरणीय समाधानों हेतु 1 मिलियन पाउंड के वैश्विक पुरस्कार",
+        "summary_hi": "Earthshot Prize प्रत्येक वर्ष जलवायु, प्रकृति, महासागर, वायु एवं अपशिष्ट क्षेत्रों के पाँच सर्वाधिक प्रभावी पर्यावरणीय समाधानों को 1 मिलियन पाउंड का पुरस्कार एवं वैश्विक पहचान प्रदान करता है। दक्षिण एशियाई परियोजनाएँ पहले भी फाइनलिस्ट रही हैं, और भारतीय नवप्रवर्तक खुले नामांकन माध्यम से आवेदन कर सकते हैं।",
+        "key_responsibilities": [
+            "Submit a scalable environmental solution to the annual cycle",
+            "Evidence community and ecological impact",
+            "Prepare for the global awards process",
+            "Scale with fellowship support if shortlisted",
+        ],
+        "must_have_skills": [
+            "Environmental innovation",
+            "Scalable business model",
+            "Impact evidence",
+            "Storytelling",
+            "International partnerships",
+        ],
+        "application_tip": "Nominations can be routed through official nominators; large organisations and past finalists publish the path, so contact a nominator early if you cannot apply directly.",
+        "apply_url": "https://earthshotprize.org/",
+        "org_website": "https://earthshotprize.org",
+        "org_domain": "earthshotprize.org",
+    },
+]
+
+_GLOBAL_NEWS_QUERIES = [
+    '("Climate" OR "Environment" OR "Sustainability") ("vacancy" OR "careers" OR "jobs") '
+    '("UN" OR "UNFCCC" OR "UNDP" OR "UNEP" OR "World Bank" OR "IUCN" OR "WRI" OR "CGIAR")',
+    '("PhD" OR "postdoctoral" OR "fellowship") ("climate" OR "ecology" OR "conservation") '
+    '("fully funded" OR "scholarship" OR "apply")',
+    '("climate" OR "conservation" OR "biodiversity") ("grant" OR "call for proposals" OR "funding") '
+    '("apply by" OR "deadline" OR "open call")',
+    '("climate" OR "sustainability") ("internship" OR "traineeship") '
+    '("United Nations" OR "UNEP" OR "UNDP" OR "World Bank" OR "IUCN")',
+    '("climate" OR "sustainability") ("competition" OR "hackathon" OR "prize" OR "award") '
+    '("youth" OR "students" OR "innovators")',
+]
+
+# A global headline must resolve to an institutional / academic / organisation
+# domain before it can become a global candidate.
+GLOBAL_VERIFIABLE_HOST_RE = re.compile(
+    r"\.(int|org|edu|gov|eu|un\.org|ac\.[a-z]{2,3}|edu\.[a-z]{2,3}|org\.[a-z]{2,3})$",
+    re.I,
+)
+GLOBAL_VERIFIABLE_DOMAINS = (
+    "linkedin.com",
+    "reliefweb.int",
+    "un.org",
+    "undp.org",
+    "iucn.org",
+    "wri.org",
+    "worldbank.org",
+    "greenclimate.fund",
+    "unfccc.int",
+    "cgiar.org",
+    "cifor-icraf.org",
+    "futureearth.org",
+)
+
+
+def _is_global_verifiable_host(url: str) -> bool:
+    host = host_of(url)
+    if not host:
+        return False
+    if any(host == d or host.endswith("." + d) for d in GLOBAL_VERIFIABLE_DOMAINS):
+        return True
+    return bool(GLOBAL_VERIFIABLE_HOST_RE.search(host))
+
+
+def _google_news_query_url_global(query: str) -> str:
+    return GOOGLE_NEWS_RSS_SEARCH + "?" + urlencode(
+        {"q": query + " when:14d", "hl": "en", "gl": "US", "ceid": "US:en"}
+    )
+
+
+def _global_news_entry_to_candidate(
+    entry: Dict[str, Any], query: str
+) -> Optional[Dict[str, Any]]:
+    """Convert one global news entry into a candidate, or None when unusable."""
+    title = squash(strip_html(entry.get("title") or ""))
+    link = str(entry.get("link") or "").strip()
+    if not title or not link.lower().startswith("http"):
+        return None
+    publisher = ""
+    source = entry.get("source")
+    if isinstance(source, dict):
+        publisher = squash(source.get("title") or "")
+    if publisher and title.endswith(" - " + publisher):
+        title = title[: -(len(publisher) + 3)].strip()
+    if not JOB_AD_TITLE_RE.search(title):
+        return None
+    if NEWS_NOISE_TITLE_RE.search(title):
+        return None
+    summary = strip_html(entry.get("summary") or entry.get("description") or "")[:4000]
+    date_posted = ""
+    published = entry.get("published_parsed") or entry.get("updated_parsed")
+    if published is not None:
+        try:
+            date_posted = date(published[0], published[1], published[2]).isoformat()
+        except (TypeError, ValueError, IndexError, AttributeError):
+            date_posted = ""
+    if date_posted:
+        age_cutoff = (date.today() - timedelta(days=GLOBAL_NEWS_MAX_AGE_DAYS)).isoformat()
+        if date_posted < age_cutoff:
+            return None
+    if is_google_news_url(link):
+        resolved = resolve_google_news_link(link)
+        if not resolved:
+            return None
+        link = resolved
+    if not _is_global_verifiable_host(link):
+        return None
+    return {
+        "source": "google-news-global",
+        "title": title,
+        "organization": publisher or "International organisation (see announcement)",
+        "location_raw": "International",
+        "description": summary,
+        "apply_url": link,
+        "date_posted": date_posted,
+        "matched_query": query,
+        "global": True,
+    }
+
+
+def fetch_global_opportunities() -> List[Dict[str, Any]]:
+    """Zero-key harvest of global climate / sustainability opportunities.
+
+    Public Google News RSS searches surface international vacancies, grants,
+    scholarships, fellowships, internships and competitions; each headline is
+    screened for opportunity phrasing and must resolve to an institutional
+    domain. Every candidate then passes the same Gemini humanizer (global
+    prompt) and verifiability gate as the India pipeline, but is written
+    ONLY to the global registry files.
+    """
+    if feedparser is None or requests is None:
+        log.warning("feedparser/requests unavailable - skipping global harvest")
+        return []
+
+    candidates: List[Dict[str, Any]] = []
+    seen_links: Set[str] = set()
+    for query in _GLOBAL_NEWS_QUERIES:
+        url = _google_news_query_url_global(query)
+        try:
+            response = requests.get(
+                url, headers=HTTP_SIMPLE_HEADERS, timeout=REQUEST_TIMEOUT
+            )
+            response.raise_for_status()
+            feed = feedparser.parse(response.content)
+        except Exception as exc:
+            log.warning("Global Google News query failed (%s): %s", query[:60], exc)
+            continue
+        added = 0
+        for entry in (feed.entries or [])[:GOOGLE_NEWS_RESULTS_PER_QUERY]:
+            candidate = _global_news_entry_to_candidate(entry, query)
+            if candidate is None:
+                continue
+            key = normalize_key(candidate.get("apply_url") or "")
+            if key in seen_links:
+                continue
+            seen_links.add(key)
+            candidates.append(candidate)
+            added += 1
+        log.info("Global news query returned %d usable candidate(s): %s", added, query[:60])
+    return candidates
+
+
+def normalize_global_record(job: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize a stored global record: base schema + region discipline."""
+    job = normalize_job_fields(job)
+    job["global"] = True
+    region = squash(job.get("region"))
+    job["region"] = region if region in GLOBAL_REGIONS else "Global / Remote"
+    if job.get("state") and job.get("state") not in ("", "Multiple States / Remote"):
+        # Global records never masquerade as Indian states.
+        job["state"] = ""
+    return job
+
+
+def ensure_global_seed(jobs: List[Dict[str, Any]], today: str) -> int:
+    """Merge the verified evergreen global seed into the active list.
+
+    Idempotent: seed ids already present (active or archived) are left
+    untouched, so manual edits and archive history are never overwritten.
+    """
+    taken_ids = {str(job.get("id") or "") for job in jobs}
+    added = 0
+    for seed in GLOBAL_SEED_OPPORTUNITIES:
+        seed_id = str(seed.get("id") or "")
+        if not seed_id or seed_id in taken_ids:
+            continue
+        record = dict(seed)
+        record.setdefault("date_added", today)
+        record.setdefault("deadline_or_window", "Rolling / Open")
+        record.setdefault("status", "active")
+        jobs.append(record)
+        taken_ids.add(seed_id)
+        added += 1
+    if added:
+        log.info("Seeded %d evergreen global opportunit(ies)", added)
+    return added
+
+
+def apply_global_lifecycle(
+    jobs: List[Dict[str, Any]],
+    archive: List[Dict[str, Any]],
+    today: str,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], int]:
+    """Global lifecycle: normal expiry rules, evergreen records never expire."""
+    evergreen = [job for job in jobs if job.get("evergreen")]
+    decayable = [job for job in jobs if not job.get("evergreen")]
+    active, archive_out, newly_archived = apply_job_lifecycle(decayable, archive, today)
+
+    today_value = parse_iso_date(today) or date.today()
+    for job in evergreen:
+        job["status"] = "active"
+        added = parse_iso_date(job.get("date_added")) or today_value
+        job["date_added"] = added.isoformat()
+        if not job.get("valid_through"):
+            job["valid_through"] = (added + timedelta(days=3650)).isoformat()
+        active.append(job)
+
+    active_ids = {str(job.get("id") or "") for job in active}
+    archive_out = [
+        record for record in archive_out if str(record.get("id") or "") not in active_ids
+    ]
+    active.sort(
+        key=lambda job: (str(job.get("date_added") or ""), str(job.get("id") or "")),
+        reverse=True,
+    )
+    return active, archive_out, newly_archived
+
+
+def run_global_stage(
+    jobs_path: Path,
+    archive_path: Path,
+    today: str,
+    api_key: Optional[str] = None,
+    max_new: int = GLOBAL_MAX_NEW_PER_RUN,
+) -> Tuple[int, int]:
+    """Refresh the strictly separated global registry.
+
+    Always: load + normalize both global files, merge the evergreen seed and
+    apply the global lifecycle. When a Gemini key is available: additionally
+    harvest a handful of fresh international opportunities and humanize them
+    through the dedicated global prompt. Returns (active_count, new_count).
+    """
+    existing = [normalize_global_record(job) for job in load_jobs(jobs_path)]
+    archive = [normalize_global_record(job) for job in load_jobs(archive_path)]
+    log.info(
+        "Global registry: %d active, %d archived before this run",
+        len(existing), len(archive),
+    )
+    ensure_global_seed(existing, today)
+
+    accepted: List[Dict[str, Any]] = []
+    if api_key and GreenJob is not None:
+        candidates = fetch_global_opportunities()
+        seen = existing_keys(existing + archive)
+        fresh: List[Dict[str, Any]] = []
+        for candidate in candidates:
+            if not (candidate.get("title") and candidate.get("apply_url")):
+                continue
+            if not is_valid_apply_url(candidate.get("apply_url")):
+                continue
+            key = dedupe_key(candidate)
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            fresh.append(candidate)
+        fresh = fresh[: max(0, max_new)]
+        log.info(
+            "Global registry: %d new candidate(s) to humanize (cap=%d)",
+            len(fresh), max_new,
+        )
+
+        if fresh:
+            humanizer = GeminiHumanizer(api_key, today, mode="global")
+            taken_ids = {
+                str(job.get("id") or "")
+                for job in existing + archive
+                if job.get("id")
+            }
+            rate_limited = False
+            for index, candidate in enumerate(fresh, start=1):
+                label = squash(candidate.get("title"))[:70]
+                try:
+                    reply = humanizer.complete(build_user_prompt(candidate, today))
+                    data = parse_model_json(reply)
+                    record, reason = coerce_to_job_record(data, candidate, today)
+                    if record is not None and not is_valid_apply_url(record.get("apply_url")):
+                        record, reason = None, "apply URL failed validation"
+                    if record is not None:
+                        record = normalize_global_record(record)
+                        record["global"] = True
+                        record["evergreen"] = False
+                        record, reason = resolve_and_verify_record(record)
+                        if record is not None:
+                            record = normalize_global_record(record)
+                    if record is None:
+                        log.info(
+                            "[global %d/%d] skipped %r - %s",
+                            index, len(fresh), label, reason,
+                        )
+                    else:
+                        record["id"] = unique_id(record["id"], taken_ids)
+                        accepted.append(record)
+                        log.info(
+                            "[global %d/%d] accepted %s", index, len(fresh), record["id"]
+                        )
+                except GeminiRateLimited as exc:
+                    rate_limited = True
+                    log.warning(
+                        "[global %d/%d] Gemini rate-limited for %r | %s",
+                        index, len(fresh), label, str(exc)[:160],
+                    )
+                    break
+                except Exception as exc:
+                    log.warning(
+                        "[global %d/%d] humanizer failed for %r: %s | %s",
+                        index, len(fresh), label, type(exc).__name__, str(exc)[:160],
+                    )
+                time.sleep(GEMINI_SLEEP_SECONDS)
+
+    merged = accepted + existing
+    merged.sort(
+        key=lambda job: (str(job.get("date_added") or ""), str(job.get("id") or "")),
+        reverse=True,
+    )
+    active, archive_out, newly_archived = apply_global_lifecycle(merged, archive, today)
+    write_jobs(active, jobs_path)
+    write_archive(archive_out, archive_path)
+    log.info(
+        "Global registry done: %d active (%d new this run), %d archived (%d newly archived).",
+        len(active), len(accepted), len(archive_out), newly_archived,
+    )
+    return len(active), len(accepted)
+
+
+# ---------------------------------------------------------------------------
 # Gemini humanizer
 # ---------------------------------------------------------------------------
 RETIRED_MARKERS = ("404", "not_found", "no longer available")
@@ -2333,13 +3455,17 @@ class GeminiHumanizer:
     survives both model deprecations and quota hiccups without edits.
     """
 
-    def __init__(self, api_key: str, today: str) -> None:
+    def __init__(self, api_key: str, today: str, mode: str = "india") -> None:
         if _GENAI_MODE is None:
             raise RuntimeError(
                 "No Gemini SDK found. Install with: pip install google-genai"
             )
         self.mode = _GENAI_MODE
-        self.system_instruction = build_system_prompt(today)
+        self.system_instruction = (
+            build_global_system_prompt(today)
+            if mode == "global"
+            else build_system_prompt(today)
+        )
         override = (os.environ.get("GEMINI_MODEL") or "").strip()
         ordered = ([override] if override else []) + list(MODEL_CANDIDATES)
         seen: Set[str] = set()
@@ -2503,6 +3629,8 @@ def coerce_to_job_record(
         return None, "no usable apply URL"
 
     state = squash(job.state) or "Multiple States / Remote"
+    opportunity_kind = match_enum(job.opportunity_kind, OPPORTUNITY_KINDS) or ""
+    deadline_or_window = squash(job.deadline_or_window) or "Rolling / Open"
     record = {
         "id": squash(job.id),
         "date_added": today,
@@ -2513,6 +3641,10 @@ def coerce_to_job_record(
         "category": category,
         "experience_level": experience,
         "position_type": position_type,
+        "opportunity_kind": opportunity_kind,
+        "deadline_or_window": deadline_or_window,
+        "region": squash(job.region),
+        "country": squash(job.country),
         "qualification_summary": qualification_summary,
         "compensation_or_fellowship": compensation_or_fellowship,
         "role_summary": role_summary,
@@ -3114,6 +4246,14 @@ def write_sitemap(
             "priority": "0.9",
         }
 
+    # Global opportunities portal (strictly separated registry).
+    for page_path in GLOBAL_PORTAL_PAGES:
+        entries[SITE_BASE_URL + page_path] = {
+            "lastmod": today,
+            "changefreq": "weekly",
+            "priority": "0.9",
+        }
+
     # Busiest state landing views (?state=<State>), in rank order.
     state_counts: Dict[str, int] = {}
     for job in jobs:
@@ -3248,6 +4388,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="Path to whatsapp_digest.txt (default: public/whatsapp_digest.txt)",
     )
     parser.add_argument(
+        "--global-jobs",
+        help="Path to global_jobs.json (default: public/global_jobs.json)",
+    )
+    parser.add_argument(
+        "--global-archive",
+        help="Path to global_archive.json (default: public/global_archive.json)",
+    )
+    parser.add_argument(
         "--max-new",
         type=int,
         default=DEFAULT_MAX_NEW_PER_RUN,
@@ -3306,6 +4454,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     whatsapp_digest_path = (
         Path(args.digest_txt) if args.digest_txt else resolve_default(DEFAULT_WHATSAPP_DIGEST_PATH)
     )
+    global_jobs_path = (
+        Path(args.global_jobs) if args.global_jobs else resolve_default(DEFAULT_GLOBAL_JOBS_PATH)
+    )
+    global_archive_path = (
+        Path(args.global_archive)
+        if args.global_archive
+        else resolve_default(DEFAULT_GLOBAL_ARCHIVE_PATH)
+    )
 
     existing = [normalize_job_fields(job) for job in load_jobs(jobs_path)]
     archive = [normalize_job_fields(job) for job in load_jobs(archive_path)]
@@ -3331,6 +4487,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         write_stats(stats, stats_path)
         write_sitemap(active, archive, sitemap_path)
         write_digests(active, [], today, digest_json_path, whatsapp_digest_path)
+        # The strictly separated global registry is maintained in the same
+        # run (seeds + lifecycle only; no scraping and no API key needed).
+        run_global_stage(global_jobs_path, global_archive_path, today, api_key=None)
         log.info(
             "Sync complete: %d active, %d archived (%d newly archived this run).",
             len(active), len(archive), newly_archived,
@@ -3486,6 +4645,10 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # 5. Regenerate the sitemap for Google Jobs indexing.
     write_sitemap(active, archive, sitemap_path)
+
+    # 5b. Global opportunities registry - strictly separate files
+    #     (global_jobs.json / global_archive.json), seed + fresh harvest.
+    run_global_stage(global_jobs_path, global_archive_path, today, api_key=api_key)
 
     # 6. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
     #    TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (or a WhatsApp webhook) are set.
