@@ -42,6 +42,8 @@ HINDI_HUB_FILE = "hindi-environment-forestry-jobs.html"
 REGIONAL_HUB_FILE = "bharat-regional-green-jobs.html"
 HINDI_HUB_URL = SITE + "/" + HINDI_HUB_FILE
 REGIONAL_HUB_URL = SITE + "/" + REGIONAL_HUB_FILE
+HINDI_META = bsp.page_meta(HINDI_HUB_FILE)
+REGIONAL_META = bsp.page_meta(REGIONAL_HUB_FILE)
 
 # Devanagari + all major Indic scripts used by the regional portal.
 FONTS_HI = """    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -204,7 +206,7 @@ def header_html_hi() -> str:
     return """  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/?lang=hi" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
-        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park लोगो" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" />
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park — India Climate, Forestry, ESG &amp; Research Jobs Registry Logo" title="Urban Forest Park Official Emblem" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)</span>
       </a>
@@ -320,15 +322,9 @@ def build_hindi_hub_page(
         for h in bsp.HUBS
     )
 
-    title = (
-        "पर्यावरण एवं वानिकी भर्तियाँ 2026 — JRF, ESG, GIS, PhD एवं जलवायु करियर "
-        "| Urban Forest Park"
-    )
-    desc = (
-        "भारत में पर्यावरण, वानिकी, वन्यजीव, जलवायु परिवर्तन, ESG, कार्बन बाज़ार एवं भू-स्थानिक (GIS) क्षेत्र की "
-        "सत्यापित भर्तियाँ — JRF / SRF, PhD एवं पोस्टडॉक्टोरल फेलोशिप, रिसर्च एवं प्रोजेक्ट पद तथा कॉर्पोरेट "
-        "सस्टेनेबिलिटी भूमिकाएँ। प्रत्येक सूची सीधे आधिकारिक आवेदन पोर्टल से जुड़ती है।"
-    )
+    h1 = bsp.plain(HINDI_META['h1'])
+    title = bsp.plain(HINDI_META['title'])
+    desc = bsp.plain(HINDI_META['description'])
 
     collection = jsonld_script(
         {
@@ -349,6 +345,10 @@ def build_hindi_hub_page(
     )
     faqs = faq_jsonld(HINDI_FAQS)
     faq_block = faq_section_html(HINDI_FAQS, heading="अक्सर पूछे जाने वाले प्रश्न")
+    item_list = bsp.item_list_jsonld({"h1": h1}, jobs)
+    organization = bsp.organization_jsonld()
+    website = bsp.website_jsonld()
+    breadcrumb = bsp.breadcrumb_jsonld(h1, HINDI_HUB_URL)
 
     return f"""<!DOCTYPE html>
 <html lang="hi-IN">
@@ -366,6 +366,7 @@ def build_hindi_hub_page(
     <link rel="canonical" href="{HINDI_HUB_URL}">
     <link rel="alternate" hreflang="en-IN" href="{SITE}/">
     <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities.html">
     <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
@@ -394,7 +395,11 @@ def build_hindi_hub_page(
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
+{organization}
+{website}
 {collection}
+{item_list}
+{breadcrumb}
 {faqs}
 
     <script defer src="/js/hub.js"></script>
@@ -412,7 +417,7 @@ def build_hindi_hub_page(
           <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>हिंदी करियर पोर्टल</span>
         </nav>
         <p class="eyebrow">हिंदी ग्रीन करियर पोर्टल</p>
-        <h1>भारत में पर्यावरण एवं वानिकी भर्तियाँ — JRF, ESG, GIS एवं जलवायु करियर</h1>
+        <h1>{esc(h1)}</h1>
         <p class="hub-hero-sub">
           वन विभागों, विश्वविद्यालयों एवं शोध संस्थानों (JRF / SRF / PhD / प्रोजेक्ट स्टाफ), सस्टेनेबिलिटी टीमों
           तथा जलवायु संगठनों की सक्रिय भर्तियों का निरंतर निगरानी किया जाने वाला सूचकांक।
@@ -467,6 +472,8 @@ def build_hindi_hub_page(
     </section>
   </main>
 
+{bsp.site_matrix_html('/' + HINDI_HUB_FILE)}
+
 {footer_html_hi()}
 
   <script defer src="/js/consent.js"></script>
@@ -480,6 +487,29 @@ def build_hindi_hub_page(
 # --------------------------------------------------------------------------
 # Regional hub
 # --------------------------------------------------------------------------
+REGIONAL_FAQS: List[Tuple[str, str]] = [
+    (
+        "How are state-wise green jobs grouped on this portal?",
+        "The regional portal groups active mandates into language and cultural regions used by India's "
+        "environmental employers: the Hindi belt, Marathi-speaking Maharashtra, Tamil Nadu, Telugu states, "
+        "Karnataka, West Bengal and Gujarat. Each state link opens the live registry pre-filtered to that "
+        "state, with the same verified records and official application links as the main registry.",
+    ),
+    (
+        "Do regional links open the live registry or a separate database?",
+        "They open the single national registry with a state filter applied. The regional portal is a "
+        "crawlable entry point, not a duplicate dataset, so deadlines, eligibility and application links "
+        "always match the active registry.",
+    ),
+    (
+        "Are the regional listings bilingual?",
+        "Every verified mandate carries an English title and summary, and the main registry includes an "
+        "EN | हिंदी switch. The Hindi portal and this regional portal provide additional language-native "
+        "entry points for candidates who prefer to browse in Hindi or another Indian language.",
+    ),
+]
+
+
 def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> str:
     counts: Dict[str, int] = {}
     for job in active_jobs:
@@ -553,15 +583,9 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     cards_html = "\n\n".join(cards) + "\n\n" + others_card
 
     total_jobs = len(active_jobs)
-    title = (
-        "Bharat Regional & State-Wise Green Jobs — भारत क्षेत्रीय पर्यावरण एवं वानिकी भर्तियाँ "
-        "| Urban Forest Park"
-    )
-    desc = (
-        "State-wise green job portal for India — environment, forestry, wildlife, climate, ESG and "
-        "geospatial vacancies across the Hindi, Marathi, Tamil, Telugu, Kannada, Bengali and Gujarati "
-        "regions. हर राज्य की सत्यापित भर्तियाँ — सीधे आधिकारिक आवेदन पोर्टल से जुड़ी।"
-    )
+    h1 = bsp.plain(REGIONAL_META['h1'])
+    title = bsp.plain(REGIONAL_META['title'])
+    desc = bsp.plain(REGIONAL_META['description'])
 
     collection = jsonld_script(
         {
@@ -589,6 +613,11 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
             "itemListElement": item_entries,
         }
     )
+    organization = bsp.organization_jsonld()
+    website = bsp.website_jsonld()
+    breadcrumb = bsp.breadcrumb_jsonld(h1, REGIONAL_HUB_URL)
+    faqs = faq_jsonld(REGIONAL_FAQS)
+    faq_block = faq_section_html(REGIONAL_FAQS, heading="Bharat Regional Portal — Frequently Asked Questions")
 
     return f"""<!DOCTYPE html>
 <html lang="en-IN">
@@ -604,9 +633,10 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{REGIONAL_HUB_URL}">
-    <link rel="alternate" hreflang="en-IN" href="{REGIONAL_HUB_URL}">
+    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
     <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
-    <link rel="alternate" hreflang="x-default" href="{REGIONAL_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities.html">
+    <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
@@ -634,8 +664,12 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
+{organization}
+{website}
 {collection}
 {item_list}
+{breadcrumb}
+{faqs}
 
     <script defer src="/js/hub.js"></script>
 </head>
@@ -652,7 +686,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
           <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>Bharat Regional Portal</span>
         </nav>
         <p class="eyebrow">Bharat Regional &amp; Multilingual Portal</p>
-        <h1>Bharat Regional &amp; State-Wise Green Jobs — भारत क्षेत्रीय हरित भर्तियाँ</h1>
+        <h1>{esc(h1)}</h1>
         <p class="hub-hero-sub">
           State-wise environment, forestry, wildlife, climate, ESG and geospatial mandates —
           हिंदी, मराठी, தமிழ், తెలుగు, ಕನ್ನಡ, বাংলা एवं ગુજરાતી क्षेत्रों हेतु क्षेत्रीय प्रवेश द्वार।
@@ -680,6 +714,8 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
 {cards_html}
         </div>
 
+{faq_block}
+
         <section class="hub-others" aria-labelledby="hub-others-title">
           <h2 id="hub-others-title">Explore career pathways</h2>
           <ul class="hub-other-grid">
@@ -694,6 +730,8 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
       </div>
     </section>
   </main>
+
+{bsp.site_matrix_html('/' + REGIONAL_HUB_FILE)}
 
 {footer_html(None)}
 
@@ -710,6 +748,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
 # --------------------------------------------------------------------------
 GLOBAL_HUB_FILE = "global-climate-sustainability-opportunities.html"
 GLOBAL_HUB_URL = SITE + "/" + GLOBAL_HUB_FILE
+GLOBAL_META = bsp.page_meta(GLOBAL_HUB_FILE)
 
 GLOBAL_REGION_ORDER: List[str] = [
     "Global / Remote",
@@ -838,16 +877,9 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     )
 
     total_jobs = len(global_active)
-    title = (
-        "Global Climate & Sustainability Opportunities \u2014 International Jobs, Grants, "
-        "Scholarships & Fellowships | Urban Forest Park"
-    )
-    desc = (
-        "Verified global climate and sustainability opportunities: international jobs, grants, "
-        "scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate "
-        "Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth and other official "
-        "organisations \u2014 each listing links straight to the official portal."
-    )
+    h1 = bsp.plain(GLOBAL_META['h1'])
+    title = bsp.plain(GLOBAL_META['title'])
+    desc = bsp.plain(GLOBAL_META['description'])
 
     collection = jsonld_script(
         {
@@ -886,6 +918,8 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         }
     )
     faq_ld = faq_jsonld(GLOBAL_FAQS)
+    organization = bsp.organization_jsonld()
+    website = bsp.website_jsonld()
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -901,8 +935,10 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
+    <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
     <link rel="alternate" hreflang="en" href="{GLOBAL_HUB_URL}">
-    <link rel="alternate" hreflang="x-default" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
@@ -928,6 +964,8 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
+{organization}
+{website}
 {collection}
 {item_list}
 {breadcrumb}
@@ -948,7 +986,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
           <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>Global Opportunities</span>
         </nav>
         <p class="eyebrow">\U0001F30D Global Opportunities Registry \u2014 International</p>
-        <h1>Global Climate &amp; Sustainability Opportunities \u2014 International Jobs, Grants, Scholarships &amp; Fellowships</h1>
+        <h1>{esc(h1)}</h1>
         <p class="hub-hero-sub">
           A strictly separate registry of verified international opportunities \u2014 jobs, grants,
           scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate
@@ -1005,6 +1043,8 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
       </div>
     </section>
   </main>
+
+{bsp.site_matrix_html('/' + GLOBAL_HUB_FILE, include_states=False)}
 
 {footer_html(None)}
 

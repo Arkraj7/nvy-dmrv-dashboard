@@ -1,36 +1,78 @@
+# Cloudflare Pages headers for Urban Forest Park
+# Security headers apply to every response. HTML/JSON use a short cache so
+# the daily registry updates are visible; versioned assets are immutable.
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Cache-Control: public, max-age=0, must-revalidate
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
 
-# Allow indexing of main pages
 /index.html
-/dashboard.html
-/about.html
-/report.html
-/nagar-van-finder.html
-/explore-dashboard.html
-/spatial-data.html
-/public-survey.html
-/privacy.html
-/terms.html
-/cookies.html
-/accessibility.html
-/green-calculator.html
-  X-Robots-Tag: index, follow
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
 
-# Cache static assets
+/jobs.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: "*"
+
+/archive.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: "*"
+
+/global_jobs.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: "*"
+
+/global_archive.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: "*"
+
+/stats.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
+/seo_keyword_map.json
+  Cache-Control: public, max-age=1800, stale-while-revalidate=86400
+
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Job listings: short cache so new roles appear quickly
-/jobs.json
-  Cache-Control: public, max-age=300
-  Access-Control-Allow-Origin: "*"
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+
+/favicon.svg
+  Cache-Control: public, max-age=2592000
+
+/favicon-16x16.png
+  Cache-Control: public, max-age=2592000
+
+/favicon-32x32.png
+  Cache-Control: public, max-age=2592000
+
+/favicon-96x96.png
+  Cache-Control: public, max-age=2592000
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
 
 /manifest.json
-/site.webmanifest
-/favicon*
   Cache-Control: public, max-age=86400
+
+/site.webmanifest
+  Cache-Control: public, max-age=86400
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/404.html
+  X-Robots-Tag: noindex, follow
+
+/500.html
+  X-Robots-Tag: noindex, follow
+
+/unsubscribe.html
+  X-Robots-Tag: noindex, follow
+
+/newsletter_latest.html
+  X-Robots-Tag: noindex, follow

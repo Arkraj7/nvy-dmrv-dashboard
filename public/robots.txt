@@ -2,4 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin-syndication
 Disallow: /admin-syndication/
+Disallow: /admin-syndication.html
+Disallow: /syndication
 Sitemap: https://www.urbanforestpark.com/sitemap.xml

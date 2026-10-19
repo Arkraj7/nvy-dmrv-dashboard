@@ -2787,3 +2787,30 @@ html, body { overflow-x: hidden; }
   html.ufp-consent-open .ufp-app-pill { bottom: 126px; }
 }
 /* end ufp-mobile-optimisation */
+/* Position dossier breadcrumbs (matches hub breadcrumbs) */
+.job-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-3, #64748b);
+}
+.job-crumbs a { color: var(--accent, #065f46); text-decoration: none; }
+.job-crumbs a:hover { text-decoration: underline; }
+.job-crumbs span[aria-current="page"] {
+  color: var(--ink-2, #334155);
+  max-width: 52ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme="dark"] .job-crumbs { color: #94a3b8; }
+html[data-theme="dark"] .job-crumbs a { color: #6ee7b7; }
+html[data-theme="dark"] .job-crumbs span[aria-current="page"] { color: #e2e8f0; }
+@media (max-width: 640px) {
+  .job-crumbs span[aria-current="page"] { max-width: 100%; white-space: normal; }
+}
+/* end ufp-job-crumbs */

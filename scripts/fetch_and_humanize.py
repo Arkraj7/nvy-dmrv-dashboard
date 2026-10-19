@@ -405,6 +405,7 @@ INDIAN_STATES = [
 # otherwise preserved verbatim on every regeneration).
 STATIC_SITEMAP_PAGES = [
     ("/about.html", "monthly", "0.8"),
+    ("/explore-dashboard.html", "monthly", "0.7"),
     ("/spatial-data.html", "weekly", "0.9"),
     ("/green-calculator.html", "monthly", "0.8"),
     ("/green-calculator-report.html", "monthly", "0.7"),
@@ -4230,16 +4231,20 @@ def write_sitemap(
     for loc, meta in preserved.items():
         if "?job=" in loc or "?category=" in loc or "?state=" in loc or "?view=" in loc:
             continue  # regenerated from the data below
+        if "?van=" in loc:
+            continue  # filtered spatial views canonicalise to spatial-data.html
         entries[loc] = {
             "lastmod": meta.get("lastmod") or today,
             "changefreq": meta.get("changefreq") or "monthly",
             "priority": meta.get("priority") or "0.6",
         }
 
-    # Fresh checkout: seed the known static pages.
-    if len(entries) <= 3:
-        for page_path, changefreq, priority in STATIC_SITEMAP_PAGES:
-            entries[SITE_BASE_URL + page_path] = {
+    # Seed known static pages. Existing entries are preserved; newly added
+    # institutional pages are picked up even when a sitemap already exists.
+    for page_path, changefreq, priority in STATIC_SITEMAP_PAGES:
+        loc = SITE_BASE_URL + page_path
+        if loc not in entries:
+            entries[loc] = {
                 "lastmod": today,
                 "changefreq": changefreq,
                 "priority": priority,
@@ -4319,7 +4324,10 @@ def write_sitemap(
     for loc, meta in entries.items():
         url_node = ET.SubElement(root, "{" + SITEMAP_NS + "}url")
         ET.SubElement(url_node, "{" + SITEMAP_NS + "}loc").text = loc
-        ET.SubElement(url_node, "{" + SITEMAP_NS + "}lastmod").text = meta["lastmod"]
+        lastmod = meta["lastmod"]
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", lastmod or ""):
+            lastmod = today
+        ET.SubElement(url_node, "{" + SITEMAP_NS + "}lastmod").text = lastmod
         ET.SubElement(url_node, "{" + SITEMAP_NS + "}changefreq").text = meta["changefreq"]
         ET.SubElement(url_node, "{" + SITEMAP_NS + "}priority").text = meta["priority"]
 

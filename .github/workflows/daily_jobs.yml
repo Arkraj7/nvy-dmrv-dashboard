@@ -13,7 +13,9 @@ name: Daily India Green Jobs Update
 # rebuilds the static SEO surface (the pre-rendered snapshot inside
 # public/index.html, the five career-pathway hub pages, the two
 # multilingual/regional portals and the Global opportunities hub),
-# commits them, and then builds + deploys the live site to Cloudflare Pages.
+# audits that surface for canonical, metadata, schema, crawl-graph and
+# header regressions, commits them, and then builds + deploys the live
+# site to Cloudflare Pages.
 
 on:
   schedule:
@@ -77,6 +79,11 @@ jobs:
       - name: Rebuild static SEO pages (snapshot + hubs + multilingual portals + global hub)
         run: python scripts/build_seo_pages.py
 
+      - name: Audit the SEO surface (canonicals, metadata, schema, crawl graph, headers)
+        # Fails the run before deploy if titles, descriptions, canonicals,
+        # hreflang, JSON-LD, sitemap entries, internal links or headers drift.
+        run: python scripts/seo_checklist_audit.py
+
       - name: Commit updated registry data (jobs, archive, stats, global, sitemap, SEO pages)
         run: |
           git config user.name "urbanforestpark-bot"
@@ -102,7 +109,9 @@ jobs:
                   public/esg-carbon-sustainability-jobs.html \
                   public/hindi-environment-forestry-jobs.html \
                   public/bharat-regional-green-jobs.html \
-                  public/global-climate-sustainability-opportunities.html
+                  public/global-climate-sustainability-opportunities.html \
+                  public/about.html public/404.html public/500.html \
+                  public/seo_keyword_map.json
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else

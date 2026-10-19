@@ -48,8 +48,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PUBLIC = REPO_ROOT / "public"
 
 SITE = "https://www.urbanforestpark.com"
-LOGO_URL = SITE + "/assets/images/Nagar_Van_Logo.png"
+LOGO_URL = SITE + "/assets/images/Logo_UFF.png"
+LOGO_PATH = "assets/images/Logo_UFF.png"
+BRAND_ALT = "Urban Forest Park — India Climate, Forestry, ESG & Research Jobs Registry Logo"
+BRAND_ALT_HTML = html.escape(BRAND_ALT, quote=True)
+BRAND_TITLE = "Urban Forest Park Official Emblem"
 IST = timezone(timedelta(hours=5, minutes=30))
+
+KEYWORD_MAP_PATH = REPO_ROOT / "scripts" / "seo_keyword_map.json"
+PUBLIC_KEYWORD_MAP = DEFAULT_PUBLIC / "seo_keyword_map.json"
 
 SNAPSHOT_START = "<!-- SEO_DIRECTORY_START -->"
 SNAPSHOT_END = "<!-- SEO_DIRECTORY_END -->"
@@ -80,12 +87,14 @@ THEME_BOOTSTRAP = """    <!-- Theme bootstrap: applied before stylesheets to pre
       })();
     </script>"""
 
-FAVICONS = """    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+FAVICONS = """    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="UrbanPark" />
-    <link rel="manifest" href="/site.webmanifest" />"""
+    <link rel="manifest" href="/manifest.json" />"""
 
 FONTS = """    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +124,62 @@ def trim(value: Any, limit: int) -> str:
     if " " in cut:
         cut = cut[: cut.rfind(" ")]
     return cut.rstrip(" ,;:") + "\u2026"
+
+
+def load_keyword_map(path: Path = KEYWORD_MAP_PATH) -> Dict[str, Dict[str, Any]]:
+    """Load the single source of truth for page titles, descriptions and H1s."""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        raise SystemExit(f"ERROR: could not read keyword map {path}: {exc}") from exc
+    pages = payload.get("pages") if isinstance(payload, dict) else payload
+    if not isinstance(pages, list):
+        raise SystemExit(f"ERROR: {path} must contain a 'pages' array")
+    result: Dict[str, Dict[str, Any]] = {}
+    for entry in pages:
+        if not isinstance(entry, dict):
+            continue
+        file_name = str(entry.get("file") or "").strip()
+        if not file_name:
+            raise SystemExit(f"ERROR: keyword-map entry without a file name in {path}")
+        result[file_name] = entry
+    if not result:
+        raise SystemExit(f"ERROR: keyword map {path} is empty")
+    return result
+
+
+def validate_keyword_map(pages: Dict[str, Dict[str, Any]]) -> None:
+    titles: Dict[str, str] = {}
+    descriptions: Dict[str, str] = {}
+    primaries: Dict[str, str] = {}
+    for file_name, entry in pages.items():
+        title = plain(entry.get("title"))
+        desc = plain(entry.get("description"))
+        primary = plain(entry.get("primary_keyword"))
+        if not (55 <= len(title) <= 60):
+            raise SystemExit(f"ERROR: {file_name} title is {len(title)} chars (expected 55-60)")
+        if not (155 <= len(desc) <= 160):
+            raise SystemExit(f"ERROR: {file_name} description is {len(desc)} chars (expected 155-160)")
+        if title in titles:
+            raise SystemExit(f"ERROR: duplicate title for {file_name} and {titles[title]}")
+        if desc in descriptions:
+            raise SystemExit(f"ERROR: duplicate description for {file_name} and {descriptions[desc]}")
+        if primary in primaries:
+            raise SystemExit(f"ERROR: duplicate primary keyword for {file_name} and {primaries[primary]}")
+        titles[title] = file_name
+        descriptions[desc] = file_name
+        primaries[primary] = file_name
+
+
+KEYWORD_MAP: Dict[str, Dict[str, Any]] = load_keyword_map()
+validate_keyword_map(KEYWORD_MAP)
+
+
+def page_meta(file_name: str) -> Dict[str, Any]:
+    try:
+        return KEYWORD_MAP[file_name]
+    except KeyError as exc:
+        raise SystemExit(f"ERROR: missing keyword-map entry for {file_name}") from exc
 
 
 def ist_today() -> date:
@@ -177,6 +242,187 @@ def searchable_text(job: Dict[str, Any]) -> str:
 def jsonld_script(payload: Any) -> str:
     body = json.dumps(payload, ensure_ascii=False, indent=2).replace("</", "<\\/")
     return '<script type="application/ld+json">\n' + body + "\n</script>"
+
+
+def organization_jsonld() -> str:
+    """Institutional publisher identity, reused by every indexable surface."""
+    return jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": SITE + "/#organization",
+            "name": "Urban Forest Park",
+            "url": SITE + "/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": LOGO_URL,
+                "width": 512,
+                "height": 512,
+            },
+            "email": "urbanforestpark@gmail.com",
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "contactType": "editorial support",
+                    "email": "urbanforestpark@gmail.com",
+                    "availableLanguage": ["en", "hi"],
+                    "areaServed": "IN",
+                }
+            ],
+            "description": (
+                "National Climate, Forestry, ESG and Geospatial Career Registry (India), "
+                "and home of the Nagar Van dMRV Dashboard and Green Calculator."
+            ),
+            "areaServed": ["IN", "Global"],
+            "sameAs": [
+                "https://t.me/urbanforestpark",
+                "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw",
+            ],
+        }
+    )
+
+
+def website_jsonld() -> str:
+    return jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": SITE + "/#website",
+            "name": "Urban Forest Park — National Climate, Forestry, ESG & Geospatial Career Registry (India)",
+            "url": SITE + "/",
+            "inLanguage": "en-IN",
+            "publisher": {"@id": SITE + "/#organization"},
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": SITE + "/?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+            },
+        }
+    )
+
+
+def breadcrumb_jsonld(name: str, url: str) -> str:
+    return jsonld_script(
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Career Registry", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": name, "item": url},
+            ],
+        }
+    )
+
+
+SITE_MATRIX_LINKS: List[Tuple[str, str]] = [
+    ("India Climate, Forestry, ESG & Academic Job Registry", "/"),
+    ("Global Climate Jobs, Grants & Fellowships", "/global-climate-sustainability-opportunities.html"),
+    ("JRF, SRF & Project Associate Environmental Science Jobs", "/jrf-srf-project-associate-jobs.html"),
+    ("PhD Fellowships & Postdoctoral Positions in Climate", "/phd-fellowships-climate-sustainability.html"),
+    ("Forestry, Wildlife, ICFRE, WII & MoEFCC Jobs", "/forestry-wildlife-government-jobs.html"),
+    ("GIS, Remote Sensing & Earth Observation Jobs", "/gis-remote-sensing-climate-jobs.html"),
+    ("ESG, BRSR, Carbon Credits & Sustainability Jobs", "/esg-carbon-sustainability-jobs.html"),
+    ("Hindi Environment, Forestry & Climate Jobs Portal", "/hindi-environment-forestry-jobs.html"),
+    ("State-Wise Environmental & Research Jobs in India", "/bharat-regional-green-jobs.html"),
+    ("Nagar Van Yojana dMRV Dashboard & Green Calculator", "/dashboard.html"),
+    ("Live Nagar Van dMRV Site Insights Dashboard", "/explore-dashboard.html"),
+    ("Urban Forest Green Calculator", "/green-calculator.html"),
+    ("Green Calculator Web App", "/green-calculator-app.html"),
+    ("Green Calculator Environmental Impact Report", "/green-calculator-report.html"),
+    ("Find Nagar Van Sites Near You", "/nagar-van-finder.html"),
+    ("Nagar Van Spatial Data Explorer", "/spatial-data.html"),
+    ("Nagar Van Public Survey", "/public-survey.html"),
+    ("About Urban Forest Park & Editorial Governance", "/about.html"),
+    ("Privacy Policy", "/privacy.html"),
+    ("Terms of Use", "/terms.html"),
+    ("Cookie Policy", "/cookies.html"),
+    ("Accessibility Statement", "/accessibility.html"),
+    ("Mandate Dispatch Archive", "/newsletter_latest.html"),
+    ("Dispatch Subscription Preferences", "/unsubscribe.html"),
+    ("Report an Issue", "/report.html"),
+]
+
+# Contextual state gateways keep every major state within two clicks of the
+# homepage and give crawlers a path to the live ?state= filtered views.
+TOP_STATE_LINKS: List[Tuple[str, str]] = [
+    ("Uttar Pradesh", "/?state=Uttar%20Pradesh"),
+    ("Maharashtra", "/?state=Maharashtra"),
+    ("Delhi NCR", "/?state=Delhi%20NCR"),
+    ("Karnataka", "/?state=Karnataka"),
+    ("Tamil Nadu", "/?state=Tamil%20Nadu"),
+    ("Madhya Pradesh", "/?state=Madhya%20Pradesh"),
+    ("Rajasthan", "/?state=Rajasthan"),
+    ("Gujarat", "/?state=Gujarat"),
+    ("Telangana", "/?state=Telangana"),
+    ("Uttarakhand", "/?state=Uttarakhand"),
+    ("West Bengal", "/?state=West%20Bengal"),
+    ("Bihar", "/?state=Bihar"),
+    ("Kerala", "/?state=Kerala"),
+    ("Punjab", "/?state=Punjab"),
+    ("Odisha", "/?state=Odisha"),
+    ("Assam", "/?state=Assam"),
+]
+
+
+def site_matrix_html(current_path: str = "", include_states: bool = True) -> str:
+    """The unified crawlable hub matrix used by the homepage and every hub."""
+    items = []
+    for label, href in SITE_MATRIX_LINKS:
+        if href == current_path:
+            items.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
+        else:
+            items.append(f'<li><a href="{href}">{esc(label)}</a></li>')
+    state_items = "".join(
+        f'<li><a href="{href}">{esc(label)} state jobs</a></li>' for label, href in TOP_STATE_LINKS
+    )
+    state_block = ""
+    if include_states:
+        state_block = f"""      <p class="site-matrix-sub" style="margin:18px 0 6px;font-weight:700;">Browse live state gateways</p>
+      <ul class="site-matrix-list">
+        {state_items}
+      </ul>"""
+    return f"""  <section class="site-matrix" aria-labelledby="site-matrix-title">
+    <div class="site-matrix-inner">
+      <p class="eyebrow">National &amp; Global Career Pathways</p>
+      <h2 id="site-matrix-title">National &amp; Global Career Pathways &amp; Research Hubs</h2>
+      <p class="site-matrix-sub">Every career pathway, language portal, institutional research tool, governance page and statutory policy in one crawlable directory.</p>
+      <ul class="site-matrix-list">
+        {''.join(items)}
+      </ul>
+{state_block}
+    </div>
+  </section>"""
+
+
+def compact_site_matrix_html(current_path: str = "") -> str:
+    """Footer-level fallback for legacy static pages outside the hub generator."""
+    items = []
+    for label, href in SITE_MATRIX_LINKS:
+        if href == current_path:
+            items.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
+        else:
+            items.append(f'<li><a href="{href}">{esc(label)}</a></li>')
+    state_items = "".join(
+        f'<li><a href="{href}">{esc(label)} state jobs</a></li>' for label, href in TOP_STATE_LINKS
+    )
+    return f"""<nav class="ufp-site-matrix" aria-labelledby="ufp-site-matrix-title" style="max-width:1240px;margin:0 auto;padding:22px 18px 28px;font-family:Inter,system-ui,sans-serif;color:#334155;border-top:1px solid #E2E8F0;background:#F8FAFC;">
+  <h2 id="ufp-site-matrix-title" style="font-size:15px;margin:0 0 10px;color:#0F172A;">National &amp; Global Career Pathways &amp; Research Hubs</h2>
+  <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 20px;list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.55;">
+    {''.join(items)}
+  </ul>
+  <p style="font-size:13px;font-weight:700;margin:16px 0 6px;">Browse live state gateways</p>
+  <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 20px;list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.55;">
+    {state_items}
+  </ul>
+  <p style="font-size:12px;line-height:1.6;margin:16px 0 0;color:#475569;">Cite this registry:
+    <a href="/about.html#cite">citation &amp; embed widget</a> &middot;
+    <a href="https://t.me/urbanforestpark" rel="noopener">Telegram</a> &middot;
+    <a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a>
+  </p>
+</nav>"""
 
 
 FAQS_PAGE_RE = re.compile(r"\n{3,}")
@@ -505,7 +751,12 @@ HUBS: List[Dict[str, Any]] = [
 ]
 
 for _hub in HUBS:
+    _meta = page_meta(_hub["file"])
+    _hub["title"] = plain(_meta["title"])
+    _hub["desc"] = plain(_meta["description"])
+    _hub["h1"] = plain(_meta["h1"])
     _hub["canonical"] = SITE + "/" + _hub["file"]
+    _hub["primary_keyword"] = plain(_meta["primary_keyword"])
 
 
 # --------------------------------------------------------------------------
@@ -557,7 +808,7 @@ def header_html(active: Optional[str] = None) -> str:
     return f"""  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Urban Forest Park - National Career Registry, India">
-        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park logo" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" />
+        <img src="/assets/images/Logo_UFF.png" alt="{BRAND_ALT_HTML}" title="{BRAND_TITLE}" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
       </a>
@@ -649,6 +900,8 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/cookies.html" data-ufp-cookie-settings>Cookie Preferences</a></li>
           <li><a href="/report.html">Report an Issue</a></li>
           <li><a href="mailto:urbanforestpark@gmail.com">Contact the Registry</a></li>
+          <li><a href="https://t.me/urbanforestpark" target="_blank" rel="noopener">Telegram Channel</a></li>
+          <li><a href="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw" target="_blank" rel="noopener">WhatsApp Job Group</a></li>
           <li><button type="button" class="footer-link-btn" data-syndication-open title="Internal broadcast &amp; backlink workspace (Ctrl+Shift+U)">Syndication Desk</button></li>
         </ul>
       </div>
@@ -657,6 +910,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
     <div class="footer-bottom">
       &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)
       <span class="dot">&bull;</span>All listings link to official application portals &mdash; please verify details before applying.
+      <span class="dot">&bull;</span><a href="/about.html#cite">Cite this registry &amp; embed a link</a>
     </div>
   </footer>"""
 
@@ -821,11 +1075,8 @@ def collection_jsonld(hub: Dict[str, Any], today: date) -> str:
             "url": hub["canonical"],
             "inLanguage": "en-IN",
             "dateModified": today.isoformat(),
-            "isPartOf": {
-                "@type": "WebSite",
-                "name": "Urban Forest Park \u2014 National Climate, Forestry, ESG & Geospatial Career Registry (India)",
-                "url": SITE + "/",
-            },
+            "isPartOf": {"@id": SITE + "/#website"},
+            "publisher": {"@id": SITE + "/#organization"},
             "about": {"@type": "Thing", "name": hub["h1"]},
         }
     )
@@ -914,14 +1165,17 @@ def build_hub_page(
 
     jsonld_blocks = "\n".join(
         [
+            organization_jsonld(),
+            website_jsonld(),
             collection_jsonld(hub, today),
             item_list_jsonld(hub, matched_active),
+            breadcrumb_jsonld(hub["h1"], hub["canonical"]),
             faq_jsonld(hub["faqs"]),
         ]
     )
 
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
     {GA_SCRIPT}
 
@@ -936,6 +1190,7 @@ def build_hub_page(
     <link rel="canonical" href="{hub['canonical']}">
     <link rel="alternate" hreflang="en-IN" href="{hub['canonical']}">
     <link rel="alternate" hreflang="hi-IN" href="https://www.urbanforestpark.com/hindi-environment-forestry-jobs.html">
+    <link rel="alternate" hreflang="en" href="https://www.urbanforestpark.com/global-climate-sustainability-opportunities.html">
     <link rel="alternate" hreflang="x-default" href="{hub['canonical']}">
 
     <!-- Open Graph / social -->
@@ -1025,6 +1280,8 @@ def build_hub_page(
     </section>
   </main>
 
+{site_matrix_html('/' + hub['file'])}
+
 {footer_html(hub['file'])}
 
   <script defer src="/js/consent.js"></script>
@@ -1108,8 +1365,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         len(global_active),
     )
 
+    # ---- institutional pages + keyword-map metadata -----------------------
+    import seo_static_pages  # lazy import: reuses this module's helpers
+
+    seo_static_pages.write_keyword_map(public)
+    seo_static_pages.write_institutional_pages(public, today)
+    seo_static_pages.normalise_static_pages(public)
+    log.info("Wrote institutional pages and normalised static SEO metadata")
+
     log.info(
-        "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s) + 1 global hub",
+        "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s) + 1 global hub + 3 institutional pages",
         len(HUBS),
     )
     return 0

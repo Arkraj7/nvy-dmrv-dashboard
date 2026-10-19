@@ -344,3 +344,143 @@ html[data-theme="dark"] .region-cnt {
 .hub-other-grid a { transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease; }
 .hub-other-grid a:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
 /* end ufp-hub-refinement */
+
+/* ==========================================================================
+   SEO site matrix, About / governance and institutional error pages
+   ========================================================================== */
+.site-matrix {
+  border-top: 1px solid var(--border, #e2e8f0);
+  background: var(--bg-2, #f1f5f9);
+}
+.site-matrix-inner {
+  max-width: var(--maxw, 1240px);
+  margin: 0 auto;
+  padding: 42px 22px 46px;
+}
+.site-matrix h2 {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.2;
+  margin: 4px 0 8px;
+}
+.site-matrix-sub {
+  max-width: 760px;
+  margin: 0 0 20px;
+  color: var(--ink-2, #334155);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.site-matrix-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 7px 24px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.site-matrix-list a,
+.site-matrix-list span {
+  color: var(--ink-2, #334155);
+  text-decoration: none;
+}
+.site-matrix-list a:hover { color: var(--accent, #065f46); text-decoration: underline; }
+.site-matrix-list span { color: var(--ink-3, #64748b); font-weight: 600; }
+html[data-theme="dark"] .site-matrix { background: #0b1120; }
+html[data-theme="dark"] .site-matrix-sub,
+html[data-theme="dark"] .site-matrix-list a,
+html[data-theme="dark"] .site-matrix-list span { color: #cbd5e1; }
+
+.about-main .hub-main-inner { max-width: 980px; }
+.about-copy h2 {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(22px, 2.8vw, 28px);
+  line-height: 1.25;
+  margin: 38px 0 10px;
+}
+.about-copy h2:first-child { margin-top: 0; }
+.about-copy h3 {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 20px 0 6px;
+}
+.about-copy p,
+.about-copy li { color: var(--ink-2, #334155); font-size: 14.5px; line-height: 1.72; }
+.about-copy a { color: var(--accent, #065f46); }
+.about-steps { margin: 12px 0 0; padding-left: 20px; }
+.about-steps li { margin-bottom: 16px; }
+.about-steps h3 { margin-top: 0; }
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+.about-card {
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 16px 17px;
+  background: var(--card, #fff);
+}
+.about-card h3 { margin-top: 0; font-size: 15px; }
+.about-card p { margin: 0; font-size: 13.5px; line-height: 1.65; }
+.about-person {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin: 18px 0 8px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--card, #fff);
+}
+.about-person img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  aspect-ratio: 586 / 626;
+  object-fit: cover;
+}
+.about-role { font-weight: 600; color: var(--ink, #0f172a) !important; }
+.about-links { padding-left: 20px; }
+.about-links li { margin-bottom: 7px; }
+.about-meta a { color: inherit; text-decoration: underline; }
+.citation-box {
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px 0;
+  background: var(--bg-2, #f1f5f9);
+}
+.citation-label { margin: 0 0 6px; font-size: 12px !important; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.citation-box pre,
+.citation-embed pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono, monospace);
+  font-size: 12.5px;
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+.citation-embed { margin: 8px 0 0; }
+.citation-embed summary { cursor: pointer; font-weight: 600; color: var(--accent, #065f46); }
+.citation-embed pre { margin-top: 8px; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 10px; background: var(--bg-2, #f1f5f9); }
+.error-main { padding-top: 0; }
+.error-hero { min-height: 340px; }
+.error-hero .hub-hero-inner { padding-bottom: 26px; }
+html[data-theme="dark"] .about-person,
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .citation-box,
+html[data-theme="dark"] .citation-embed pre { background: #111827; border-color: #1f2937; }
+html[data-theme="dark"] .about-copy p,
+html[data-theme="dark"] .about-copy li,
+html[data-theme="dark"] .about-copy a { color: #cbd5e1; }
+@media (max-width: 720px) {
+  .about-person { grid-template-columns: 1fr; }
+  .about-person img { max-width: 220px; }
+  .site-matrix-inner { padding: 30px 16px 34px; }
+}
+/* end ufp-seo-institutional */

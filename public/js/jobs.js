@@ -1444,6 +1444,18 @@
     return 'Full-Time';
   }
 
+  function detailBreadcrumbHtml(job, isArchived) {
+    var categorySlug = CATEGORY_SLUGS[job.category] || job.category;
+    var middle = isArchived
+      ? '<a href="' + CONFIG.SITE_URL + '?view=archive">' + t('detail.crumb.archive', 'Historical Archive') + '</a>'
+      : '<a href="' + CONFIG.SITE_URL + '?category=' + encodeURIComponent(categorySlug) + '">' + escapeHtml(job.category) + '</a>';
+    return '<nav class="job-crumbs" aria-label="Breadcrumb">' +
+      '<a href="' + CONFIG.SITE_URL + '">' + t('detail.crumb.home', 'Career Registry') + '</a>' +
+      '<span aria-hidden="true">/</span>' + middle +
+      '<span aria-hidden="true">/</span><span aria-current="page">' + escapeHtml(displayTitle(job)) + '</span>' +
+    '</nav>';
+  }
+
   function renderDetail(job, isArchived) {
     var skills = (job.must_have_skills || []).map(function (s) {
       return '<span class="skill-chip">' + escapeHtml(s) + '</span>';
@@ -1482,6 +1494,7 @@
     var suggestions = isArchived ? suggestionsHtml(job) : '';
 
     els.detail.innerHTML = '' +
+      detailBreadcrumbHtml(job, isArchived) +
       '<div class="detail-topbar">' +
         '<a class="back-link" href="#" data-action="back">' + iconSvg('back') + ' ' + backLabel + '</a>' +
         '<div class="share-row">' +
@@ -1762,14 +1775,13 @@
     if (isArchived) {
       title = 'Archived: ' + job.clean_title + ' \u2014 ' + job.organization + ' | Urban Forest Park Archive';
       injectJsonLd(webPageSchema(job), 'job-webpage-jsonld');
-      injectJsonLd(breadcrumbSchema(job), 'job-breadcrumb-jsonld');
       removeJsonLd('job-posting-jsonld');
     } else {
       title = job.clean_title + ' \u2014 ' + job.organization + ' | Urban Forest Park Registry';
       injectJsonLd(jobPostingSchema(job), 'job-posting-jsonld');
       removeJsonLd('job-webpage-jsonld');
-      removeJsonLd('job-breadcrumb-jsonld');
     }
+    injectJsonLd(breadcrumbSchema(job, isArchived), 'job-breadcrumb-jsonld');
 
     applyMetaBlock(title, desc, url);
     setText('feed-eyebrow', isArchived ? 'Historical Mandate Archive' : 'Active Sector Mandates');
@@ -1809,15 +1821,21 @@
       hiringOrganization: {
         '@type': 'Organization',
         name: job.organization,
-        sameAs: CONFIG.SITE_URL
+        sameAs: (function () {
+          var orgUrl = job.org_website || job.apply_url || '';
+          if (orgUrl && !/^https?:/i.test(orgUrl)) orgUrl = 'https://' + orgUrl;
+          return orgUrl || undefined;
+        })()
       },
+      industry: job.category || 'Environmental Services',
+      occupationalCategory: job.category || undefined,
       jobLocation: {
         '@type': 'Place',
         address: {
           '@type': 'PostalAddress',
           addressLocality: job.city || '',
           addressRegion: job.state || '',
-          addressCountry: 'IN'
+          addressCountry: job.country || 'IN'
         }
       },
       directApply: false,
@@ -1855,14 +1873,18 @@
     };
   }
 
-  function breadcrumbSchema(job) {
+  function breadcrumbSchema(job, isArchived) {
+    var categorySlug = CATEGORY_SLUGS[job.category] || job.category;
+    var middle = isArchived
+      ? { name: 'Historical Archive', item: CONFIG.SITE_URL + '?view=archive' }
+      : { name: job.category, item: CONFIG.SITE_URL + '?category=' + encodeURIComponent(categorySlug) };
     return {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Career Registry', item: CONFIG.SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Historical Archive', item: CONFIG.SITE_URL + '?view=archive' },
-        { '@type': 'ListItem', position: 3, name: job.clean_title }
+        { '@type': 'ListItem', position: 2, name: middle.name, item: middle.item },
+        { '@type': 'ListItem', position: 3, name: job.clean_title, item: shareableUrl(job.id) }
       ]
     };
   }

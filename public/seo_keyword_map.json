@@ -1,0 +1,464 @@
+{
+  "site": "https://www.urbanforestpark.com",
+  "pages": [
+    {
+      "path": "/",
+      "file": "index.html",
+      "canonical": "https://www.urbanforestpark.com/",
+      "title": "Climate, Forestry, ESG Jobs in India | Urban Forest Park",
+      "description": "Verified climate, forestry, ESG, carbon-market, geospatial and academic jobs across India, each linked to the official application portal and refreshed daily.",
+      "primary_keyword": "Climate, Forestry, ESG",
+      "secondary_keywords": [
+        "climate jobs India",
+        "forestry jobs India",
+        "ESG jobs India",
+        "environmental research jobs"
+      ],
+      "search_intent": "transactional",
+      "h1": "India’s Climate, Forestry, ESG, Geospatial & Academic Career Registry",
+      "indexable": true
+    },
+    {
+      "path": "/jrf-srf-project-associate-jobs.html",
+      "file": "jrf-srf-project-associate-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/jrf-srf-project-associate-jobs.html",
+      "title": "JRF / SRF & Project Associate Jobs India | Urban Forest Park",
+      "description": "Verified JRF, SRF, research associate and project associate vacancies at universities, IITs, IISc, CSIR and government research institutes, refreshed daily.",
+      "primary_keyword": "JRF / SRF & Project Associate Jobs",
+      "secondary_keywords": [
+        "JRF jobs India",
+        "SRF vacancies",
+        "project associate environment",
+        "research fellow India"
+      ],
+      "search_intent": "transactional",
+      "h1": "JRF / SRF & Project Associate Jobs in India",
+      "indexable": true
+    },
+    {
+      "path": "/phd-fellowships-climate-sustainability.html",
+      "file": "phd-fellowships-climate-sustainability.html",
+      "canonical": "https://www.urbanforestpark.com/phd-fellowships-climate-sustainability.html",
+      "title": "PhD Climate & Ecology Fellowships India | Urban Forest Park",
+      "description": "PhD and postdoctoral fellowships in climate, ecology, sustainability and environmental science at Indian universities and research institutes. Updated daily.",
+      "primary_keyword": "PhD Climate & Ecology Fellowships",
+      "secondary_keywords": [
+        "PhD climate India",
+        "postdoctoral fellowship India",
+        "ecology PhD funding",
+        "sustainability scholarships"
+      ],
+      "search_intent": "informational",
+      "h1": "PhD Climate & Ecology Fellowships — Postdoctoral & Sustainability",
+      "indexable": true
+    },
+    {
+      "path": "/forestry-wildlife-government-jobs.html",
+      "file": "forestry-wildlife-government-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/forestry-wildlife-government-jobs.html",
+      "title": "Forestry, Wildlife & Government Jobs | Urban Forest Park",
+      "description": "Forest department, ICFRE, WII, MoEFCC and wildlife vacancies across India, with research, young-professional and contractual roles linked to official portals.",
+      "primary_keyword": "Forestry, Wildlife & Government Jobs",
+      "secondary_keywords": [
+        "forest department jobs",
+        "wildlife jobs India",
+        "ICFRE recruitment",
+        "MoEFCC vacancies"
+      ],
+      "search_intent": "transactional",
+      "h1": "Forestry, Wildlife & Government Jobs in India",
+      "indexable": true
+    },
+    {
+      "path": "/gis-remote-sensing-climate-jobs.html",
+      "file": "gis-remote-sensing-climate-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/gis-remote-sensing-climate-jobs.html",
+      "title": "GIS, Remote Sensing & Earth Observation Jobs India 2026",
+      "description": "GIS, remote sensing and earth observation jobs across ISRO centres, environmental institutes, urban bodies and geospatial consultancies in India, updated daily.",
+      "primary_keyword": "GIS, Remote Sensing & Earth Observation Jobs",
+      "secondary_keywords": [
+        "GIS analyst jobs India",
+        "remote sensing careers",
+        "earth observation jobs",
+        "geospatial vacancies"
+      ],
+      "search_intent": "transactional",
+      "h1": "GIS, Remote Sensing & Earth Observation Jobs in India",
+      "indexable": true
+    },
+    {
+      "path": "/esg-carbon-sustainability-jobs.html",
+      "file": "esg-carbon-sustainability-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/esg-carbon-sustainability-jobs.html",
+      "title": "ESG, Carbon Markets & Sustainability Jobs in India | UFP",
+      "description": "ESG, BRSR, carbon market, climate finance and corporate sustainability jobs across Indian companies, consultancies, rating agencies and NGOs, updated daily.",
+      "primary_keyword": "ESG, Carbon Markets",
+      "secondary_keywords": [
+        "ESG jobs India",
+        "BRSR reporting jobs",
+        "carbon market careers",
+        "climate finance jobs"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG, Carbon Markets & Corporate Sustainability Jobs",
+      "indexable": true
+    },
+    {
+      "path": "/global-climate-sustainability-opportunities.html",
+      "file": "global-climate-sustainability-opportunities.html",
+      "canonical": "https://www.urbanforestpark.com/global-climate-sustainability-opportunities.html",
+      "title": "Global Climate & Sustainability Opportunities | UFP India",
+      "description": "International climate jobs, grants, scholarships, fellowships and internships from UN agencies, funds, universities and global foundations, with official links.",
+      "primary_keyword": "Global Climate & Sustainability",
+      "secondary_keywords": [
+        "UN climate jobs",
+        "international sustainability fellowships",
+        "climate grants",
+        "global environmental careers"
+      ],
+      "search_intent": "transactional",
+      "h1": "Global Climate & Sustainability Opportunities — International Jobs, Grants, Scholarships & Fellowships",
+      "indexable": true
+    },
+    {
+      "path": "/hindi-environment-forestry-jobs.html",
+      "file": "hindi-environment-forestry-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/hindi-environment-forestry-jobs.html",
+      "title": "पर्यावरण एवं वानिकी भर्तियाँ भारत 2026 | Urban Forest Park",
+      "description": "भारत में पर्यावरण, वानिकी, JRF, ESG, GIS और जलवायु परिवर्तन की सत्यापित नौकरियाँ, आधिकारिक आवेदन पोर्टल के लिंक के साथ। प्रतिदिन नई भर्तियाँ, सभी श्रेणियों में।",
+      "primary_keyword": "पर्यावरण एवं वानिकी भर्तियाँ",
+      "secondary_keywords": [
+        "हिंदी में नौकरी",
+        "पर्यावरण नौकरी",
+        "वानिकी भर्ती",
+        "JRF भारत"
+      ],
+      "search_intent": "transactional",
+      "h1": "भारत में पर्यावरण एवं वानिकी भर्तियाँ — JRF, ESG, GIS एवं जलवायु करियर",
+      "indexable": true
+    },
+    {
+      "path": "/bharat-regional-green-jobs.html",
+      "file": "bharat-regional-green-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/bharat-regional-green-jobs.html",
+      "title": "State-Wise Green Jobs in India 2026 | Urban Forest Park",
+      "description": "State-wise environmental, forestry, wildlife, climate and ESG jobs across India's Hindi, Marathi, Tamil, Telugu, Kannada, Bengali and Gujarati regions. Daily.",
+      "primary_keyword": "State-Wise Green Jobs",
+      "secondary_keywords": [
+        "state green jobs",
+        "regional environmental jobs",
+        "forestry jobs by state",
+        "India green careers"
+      ],
+      "search_intent": "transactional",
+      "h1": "Bharat Regional & State-Wise Green Jobs — भारत क्षेत्रीय हरित भर्तियाँ",
+      "indexable": true
+    },
+    {
+      "path": "/dashboard.html",
+      "file": "dashboard.html",
+      "canonical": "https://www.urbanforestpark.com/dashboard.html",
+      "title": "Nagar Van dMRV Dashboard & Green Calculator | UFP India",
+      "description": "Explore the Nagar Van Yojana dMRV dashboard and Green Calculator for urban forest carbon, biodiversity, cooling, air quality and ecosystem-benefit metrics.",
+      "primary_keyword": "dMRV Dashboard",
+      "secondary_keywords": [
+        "Nagar Van dashboard",
+        "urban forest dMRV",
+        "green calculator India",
+        "urban heat island metrics"
+      ],
+      "search_intent": "informational",
+      "h1": "Advanced dMRV Dashboard for Nagar Van & Urban Forests",
+      "indexable": true
+    },
+    {
+      "path": "/about.html",
+      "file": "about.html",
+      "canonical": "https://www.urbanforestpark.com/about.html",
+      "title": "Institutional Governance & Editorial Verification | UFP",
+      "description": "Learn how Urban Forest Park verifies climate, forestry, ESG and academic vacancies, maintains editorial standards and governs its public career registry here.",
+      "primary_keyword": "Institutional Governance & Editorial Verification",
+      "secondary_keywords": [
+        "about Urban Forest Park",
+        "editorial standards",
+        "research verification",
+        "career registry governance"
+      ],
+      "search_intent": "informational",
+      "h1": "About Urban Forest Park — Institutional Governance & Editorial Verification",
+      "indexable": true
+    },
+    {
+      "path": "/accessibility.html",
+      "file": "accessibility.html",
+      "canonical": "https://www.urbanforestpark.com/accessibility.html",
+      "title": "Accessibility Statement | Urban Forest Park Career Registry",
+      "description": "Urban Forest Park accessibility statement covering keyboard navigation, screen-reader support, contrast, reduced motion, known limits and our feedback process.",
+      "primary_keyword": "Accessibility Statement",
+      "secondary_keywords": [
+        "web accessibility",
+        "keyboard navigation",
+        "screen reader support",
+        "accessibility feedback"
+      ],
+      "search_intent": "informational",
+      "h1": "Accessibility Statement",
+      "indexable": true
+    },
+    {
+      "path": "/cookies.html",
+      "file": "cookies.html",
+      "canonical": "https://www.urbanforestpark.com/cookies.html",
+      "title": "Cookie Policy | Official Urban Forest Park Career Registry",
+      "description": "Official cookie policy for the Urban Forest Park registry, explaining essential storage, analytics, advertising choices, consent controls and privacy rights.",
+      "primary_keyword": "Cookie Policy",
+      "secondary_keywords": [
+        "cookie consent",
+        "analytics cookies",
+        "advertising cookies",
+        "privacy choices"
+      ],
+      "search_intent": "informational",
+      "h1": "Cookie Policy",
+      "indexable": true
+    },
+    {
+      "path": "/privacy.html",
+      "file": "privacy.html",
+      "canonical": "https://www.urbanforestpark.com/privacy.html",
+      "title": "Privacy Policy | Official Urban Forest Park Career Registry",
+      "description": "Official privacy policy for the Urban Forest Park career registry, covering data collection, DPDP Act rights, retention, security, sharing and contact details.",
+      "primary_keyword": "Privacy Policy",
+      "secondary_keywords": [
+        "DPDP Act rights",
+        "data protection",
+        "personal data",
+        "privacy contact"
+      ],
+      "search_intent": "informational",
+      "h1": "Privacy Policy",
+      "indexable": true
+    },
+    {
+      "path": "/terms.html",
+      "file": "terms.html",
+      "canonical": "https://www.urbanforestpark.com/terms.html",
+      "title": "Terms of Use | Official Urban Forest Park Career Registry",
+      "description": "Official terms of use for the Urban Forest Park career registry, covering service scope, listing accuracy, intellectual property, liability and user duties.",
+      "primary_keyword": "Terms of Use",
+      "secondary_keywords": [
+        "registry terms",
+        "listing accuracy",
+        "intellectual property",
+        "liability"
+      ],
+      "search_intent": "informational",
+      "h1": "Terms of Use",
+      "indexable": true
+    },
+    {
+      "path": "/unsubscribe.html",
+      "file": "unsubscribe.html",
+      "canonical": "https://www.urbanforestpark.com/unsubscribe.html",
+      "title": "Dispatch Subscription Preferences | Urban Forest Park India",
+      "description": "Manage your Urban Forest Park Mandate Dispatch subscription, update email preferences or unsubscribe from the weekly climate, forestry and ESG jobs briefing.",
+      "primary_keyword": "Dispatch Subscription Preferences",
+      "secondary_keywords": [
+        "unsubscribe",
+        "email preferences",
+        "newsletter management",
+        "dispatch subscription"
+      ],
+      "search_intent": "navigational",
+      "h1": "Dispatch Subscription Preferences",
+      "indexable": false
+    },
+    {
+      "path": "/404.html",
+      "file": "404.html",
+      "canonical": "https://www.urbanforestpark.com/404.html",
+      "title": "Page Not Found | Official Urban Forest Park Career Registry",
+      "description": "The requested page could not be found. Return to the India job registry, global opportunities or the SEO career hubs to continue exploring verified roles now.",
+      "primary_keyword": "Page Not Found",
+      "secondary_keywords": [
+        "404 error",
+        "career registry home",
+        "job hubs",
+        "site recovery"
+      ],
+      "search_intent": "navigational",
+      "h1": "Page Not Found — Return to the Registry",
+      "indexable": false
+    },
+    {
+      "path": "/500.html",
+      "file": "500.html",
+      "canonical": "https://www.urbanforestpark.com/500.html",
+      "title": "Server Error | Official Urban Forest Park Career Registry",
+      "description": "A server error prevented this page from loading. Return to the Urban Forest Park registry or contact our editorial team for assistance. Please try again soon.",
+      "primary_keyword": "Server Error",
+      "secondary_keywords": [
+        "500 error",
+        "site recovery",
+        "contact support",
+        "registry home"
+      ],
+      "search_intent": "navigational",
+      "h1": "Server Error — The Registry Is Temporarily Unavailable",
+      "indexable": false
+    },
+    {
+      "path": "/explore-dashboard.html",
+      "file": "explore-dashboard.html",
+      "canonical": "https://www.urbanforestpark.com/explore-dashboard.html",
+      "title": "Live dMRV Dashboard | Nagar Van Site Insights India 2026",
+      "description": "Explore Nagar Van dMRV insights, ecological metrics, thematic maps, weather data and regional urban forest profiles across India in one dashboard every day.",
+      "primary_keyword": "Live dMRV Dashboard",
+      "secondary_keywords": [
+        "live dMRV dashboard",
+        "Nagar Van maps",
+        "urban forest metrics",
+        "India ecological insights"
+      ],
+      "search_intent": "informational",
+      "h1": "Live dMRV Dashboard",
+      "indexable": true
+    },
+    {
+      "path": "/green-calculator-app.html",
+      "file": "green-calculator-app.html",
+      "canonical": "https://www.urbanforestpark.com/green-calculator-app.html",
+      "title": "Green Calculator Tool 2026 | Urban Forest Park dMRV India",
+      "description": "Use the Urban Forest Park Green Calculator to estimate carbon sequestration, biodiversity, cooling, air quality and ecosystem benefits for a site in seconds.",
+      "primary_keyword": "Green Calculator Tool",
+      "secondary_keywords": [
+        "green calculator",
+        "urban forest carbon tool",
+        "biodiversity calculator",
+        "ecosystem benefits"
+      ],
+      "search_intent": "transactional",
+      "h1": "Green Calculator Tool",
+      "indexable": true
+    },
+    {
+      "path": "/green-calculator-report.html",
+      "file": "green-calculator-report.html",
+      "canonical": "https://www.urbanforestpark.com/green-calculator-report.html",
+      "title": "Green Calculator Environmental Impact Report 2026 | UFP",
+      "description": "View your Green Calculator impact report with carbon sequestration, biodiversity, cooling, air quality, stormwater and carbon-credit results for your site.",
+      "primary_keyword": "Green Calculator Environmental Impact Report",
+      "secondary_keywords": [
+        "impact report",
+        "carbon sequestration report",
+        "biodiversity score",
+        "urban forest assessment"
+      ],
+      "search_intent": "informational",
+      "h1": "Green Calculator Environmental Impact Report",
+      "indexable": true
+    },
+    {
+      "path": "/green-calculator.html",
+      "file": "green-calculator.html",
+      "canonical": "https://www.urbanforestpark.com/green-calculator.html",
+      "title": "Urban Forest Green Calculator Tool | Nagar Van dMRV India",
+      "description": "Calculate urban forest impact with the Nagar Van Green Calculator: carbon sequestration, biodiversity, cooling, air quality and stormwater benefits instantly.",
+      "primary_keyword": "Urban Forest Green Calculator Tool",
+      "secondary_keywords": [
+        "green calculator India",
+        "carbon calculator",
+        "urban forest benefits",
+        "Nagar Van tool"
+      ],
+      "search_intent": "transactional",
+      "h1": "Urban Forest Green Calculator Tool",
+      "indexable": true
+    },
+    {
+      "path": "/nagar-van-finder.html",
+      "file": "nagar-van-finder.html",
+      "canonical": "https://www.urbanforestpark.com/nagar-van-finder.html",
+      "title": "Nagar Van Finder | Find Urban Forest Sites Near You India",
+      "description": "Find Nagar Van urban forest sites near you and explore parks across Madhya Pradesh, Andhra Pradesh, Gujarat, Jharkhand and other Indian states today. Apply now.",
+      "primary_keyword": "Nagar Van Finder",
+      "secondary_keywords": [
+        "Nagar Van finder",
+        "urban forest near me",
+        "Nagar Van parks",
+        "India green spaces"
+      ],
+      "search_intent": "transactional",
+      "h1": "Nagar Van Finder",
+      "indexable": true
+    },
+    {
+      "path": "/newsletter_latest.html",
+      "file": "newsletter_latest.html",
+      "canonical": "https://www.urbanforestpark.com/newsletter_latest.html",
+      "title": "Mandate Dispatch Archive | Urban Forest Park Weekly India",
+      "description": "Read the latest Urban Forest Park Mandate Dispatch with verified climate, forestry, ESG, geospatial and academic job highlights from across India every week.",
+      "primary_keyword": "Mandate Dispatch",
+      "secondary_keywords": [
+        "weekly job dispatch",
+        "climate jobs email",
+        "forestry jobs newsletter",
+        "ESG jobs digest"
+      ],
+      "search_intent": "informational",
+      "h1": "Urban Forest Park Mandate Dispatch — 19 October 2026",
+      "indexable": false
+    },
+    {
+      "path": "/public-survey.html",
+      "file": "public-survey.html",
+      "canonical": "https://www.urbanforestpark.com/public-survey.html",
+      "title": "Nagar Van Public Survey & Feedback 2026 | Urban Forest Park",
+      "description": "Share feedback on Nagar Van urban forests through the Urban Forest Park public survey and help improve India's green-space planning and community outcomes.",
+      "primary_keyword": "Nagar Van Public Survey",
+      "secondary_keywords": [
+        "public feedback",
+        "urban forest survey",
+        "Nagar Van participation",
+        "community outcomes"
+      ],
+      "search_intent": "transactional",
+      "h1": "Nagar Van Public Survey",
+      "indexable": true
+    },
+    {
+      "path": "/report.html",
+      "file": "report.html",
+      "canonical": "https://www.urbanforestpark.com/report.html",
+      "title": "Grievance Report | Urban Forest Park Issue Tracker India",
+      "description": "Report a listing issue, accessibility problem, data correction or site error to the Urban Forest Park editorial and support team for a prompt review. Thank you.",
+      "primary_keyword": "Grievance Report",
+      "secondary_keywords": [
+        "report a problem",
+        "data correction",
+        "accessibility feedback",
+        "listing issue"
+      ],
+      "search_intent": "transactional",
+      "h1": "Live Issue Tracker & Grievance Report",
+      "indexable": true
+    },
+    {
+      "path": "/spatial-data.html",
+      "file": "spatial-data.html",
+      "canonical": "https://www.urbanforestpark.com/spatial-data.html",
+      "title": "Environmental Impact Dashboard | Nagar Van Spatial Data",
+      "description": "Explore environmental impact profiles for 30 featured Nagar Van sites across India, covering climate, ecology, air quality, biodiversity and cooling benefits.",
+      "primary_keyword": "Environmental Impact Dashboard",
+      "secondary_keywords": [
+        "Nagar Van data",
+        "environmental profiles",
+        "spatial dashboard",
+        "India urban forests"
+      ],
+      "search_intent": "informational",
+      "h1": "30 Selected Nagar Vans Environmental Impact Dashboard",
+      "indexable": true
+    }
+  ]
+}
