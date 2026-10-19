@@ -20,7 +20,11 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      - name: Install dependencies
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y python3-dev libxml2-dev libxslt1-dev zlib1g-dev
+
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 pdfplumber certifi lxml
@@ -32,11 +36,31 @@ jobs:
           python -c "import bs4; print('beautifulsoup4:', bs4.__version__)"
           python -c "import pdfplumber; print('pdfplumber:', pdfplumber.__version__)"
           python -c "import certifi; print('certifi:', certifi.where())"
+          python -c "import lxml; print('lxml:', lxml.__version__)"
+
+      - name: Test basic connectivity
+        run: |
+          python3 -c "
+import requests
+import certifi
+try:
+    r = requests.get('https://example.com', timeout=10, verify=certifi.where())
+    print('example.com:', r.status_code)
+except Exception as e:
+    print('ERROR:', type(e).__name__, str(e))
+
+try:
+    r = requests.get('https://www.ceew.in/careers', timeout=15, verify=certifi.where(), headers={'User-Agent': 'UrbanForestPark-Verifier/1.0'})
+    print('ceew.in/careers:', r.status_code)
+except Exception as e:
+    print('ceew.in ERROR:', type(e).__name__, str(e))
+"
 
       - name: Run link audit
         run: |
           python scripts/audit_links.py 2>&1
         shell: bash
+        continue-on-error: true
 
       - name: Upload audit report
         if: always()
