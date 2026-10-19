@@ -20,7 +20,7 @@ var CACHE_NAME = 'ufp-shell-v2';
 var DATA_FILES = ['/jobs.json', '/global_jobs.json', '/archive.json', '/global_archive.json', '/stats.json', '/daily_digest.json'];
 var PRECACHE = [
   '/',
-  '/index.html',
+  '/',
   '/manifest.json',
   '/styles/jobs.css',
   '/js/i18n.js',
@@ -105,7 +105,7 @@ self.addEventListener('fetch', function (event) {
         return response;
       }).catch(function () {
         return caches.match(request).then(function (cached) {
-          return cached || caches.match('/index.html') || caches.match('/');
+          return cached || caches.match('/') || caches.match('/');
         });
       })
     );

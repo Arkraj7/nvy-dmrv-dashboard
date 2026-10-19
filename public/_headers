@@ -68,11 +68,23 @@
 /404.html
   X-Robots-Tag: noindex, follow
 
+/404
+  X-Robots-Tag: noindex, follow
+
 /500.html
+  X-Robots-Tag: noindex, follow
+
+/500
   X-Robots-Tag: noindex, follow
 
 /unsubscribe.html
   X-Robots-Tag: noindex, follow
 
+/unsubscribe
+  X-Robots-Tag: noindex, follow
+
 /newsletter_latest.html
+  X-Robots-Tag: noindex, follow
+
+/newsletter_latest
   X-Robots-Tag: noindex, follow

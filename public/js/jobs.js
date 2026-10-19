@@ -2374,7 +2374,7 @@
       '</dl>' +
       (note ? '<p class="dd-note">' + escapeHtml(note) + '</p>' : '') +
       '<p class="dd-actions">' +
-      '<a href="/unsubscribe.html?email=' + encodeURIComponent(record.email) + '">' + t('dd.manage', 'Manage or withdraw this subscription') + '</a>' +
+      '<a href="/unsubscribe?email=' + encodeURIComponent(record.email) + '">' + t('dd.manage', 'Manage or withdraw this subscription') + '</a>' +
       ' <span class="dd-sep">&middot;</span> ' +
       '<button type="button" class="dd-update">' + t('dd.update', 'Update preferences') + '</button>' +
       '</p>';

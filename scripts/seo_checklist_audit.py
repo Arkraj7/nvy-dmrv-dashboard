@@ -170,7 +170,11 @@ def html_pages() -> List[Path]:
 
 
 def local_target(href: str, base: Path) -> Optional[Path]:
-    """Map a site-relative href to a file on disk, or None when external."""
+    """Map a site-relative href to a file on disk, or None when external.
+
+    Extensionless URLs are resolved to the ``.html`` file the host serves for
+    them, mirroring Cloudflare Pages' pretty-URL handling.
+    """
     if not href:
         return None
     href = unescape(href).strip()
@@ -190,7 +194,12 @@ def local_target(href: str, base: Path) -> Optional[Path]:
     path = path or "/"
     if path.endswith("/"):
         path += "index.html"
-    return PUBLIC / path.lstrip("/")
+    target = PUBLIC / path.lstrip("/")
+    if not target.exists() and not Path(path).suffix:
+        pretty = PUBLIC / (path.lstrip("/") + ".html")
+        if pretty.exists():
+            return pretty
+    return target
 
 
 def load_json(path: Path) -> Optional[object]:
@@ -219,13 +228,14 @@ def group_1(pages: Dict[str, str], kmap: Dict[str, dict]) -> None:
         canonical = meta_content(text, prop="og:url")
         link_canon = link_hrefs(text, "canonical")
         expected = kmap[name]["canonical"] if name in kmap else None
-
         if not link_canon:
             error(1, f"{name}: missing <link rel=\"canonical\">")
         elif len(link_canon) != 1:
             error(1, f"{name}: expected exactly one canonical, found {len(link_canon)}")
         elif link_canon[0] != expected:
             error(1, f"{name}: canonical {link_canon[0]!r} != keyword map {expected!r}")
+        elif link_canon[0].endswith(".html"):
+            error(1, f"{name}: canonical uses the redirecting .html form")
 
         if canonical and canonical != expected:
             error(1, f"{name}: og:url {canonical!r} != keyword map {expected!r}")
@@ -376,7 +386,13 @@ def group_3() -> None:
     for loc in locs:
         path = urlparse(loc).path
         rel = path.lstrip("/") or "index.html"
+        if rel.endswith("/"):
+            rel += "index.html"
         target = PUBLIC / rel
+        if not target.exists() and "." not in path.rsplit("/", 1)[-1]:
+            pretty = PUBLIC / (rel + ".html")
+            if pretty.exists():
+                target, rel = pretty, rel + ".html"
         if not target.exists():
             error(3, f"sitemap.xml: {loc} has no file on disk")
             continue
@@ -390,16 +406,18 @@ def group_3() -> None:
             # expected to canonicalise to the clean page they resolve to.
             if canon and canon[0] != loc and canon[0] != loc.split("?", 1)[0]:
                 error(3, f"sitemap.xml: {rel} canonical {canon[0]!r} != sitemap {loc!r}")
+            if loc.endswith(".html"):
+                error(3, f"sitemap.xml: redirecting .html URL listed: {loc}")
 
     for name in NOINDEX_FILES:
         rel = SITE + "/" + name
         if rel in locs:
             error(3, f"sitemap.xml: noindex page {name} is listed")
 
-    if f"{SITE}/explore-dashboard.html" not in locs:
-        error(3, "sitemap.xml: explore-dashboard.html is missing")
-    if f"{SITE}/nagar-van-finder.html" not in locs:
-        error(3, "sitemap.xml: nagar-van-finder.html is missing")
+    if f"{SITE}/explore-dashboard" not in locs:
+        error(3, "sitemap.xml: explore-dashboard is missing")
+    if f"{SITE}/nagar-van-finder" not in locs:
+        error(3, "sitemap.xml: nagar-van-finder is missing")
 
 
 # --------------------------------------------------------------------------
@@ -494,8 +512,8 @@ def group_5(pages: Dict[str, str]) -> None:
     """Every language page must publish the same reciprocal hreflang cluster."""
     canonical_cluster = {
         "en-IN": SITE + "/",
-        "hi-IN": SITE + "/hindi-environment-forestry-jobs.html",
-        "en": SITE + "/global-climate-sustainability-opportunities.html",
+        "hi-IN": SITE + "/hindi-environment-forestry-jobs",
+        "en": SITE + "/global-climate-sustainability-opportunities",
         "x-default": SITE + "/",
     }
     doc_lang = {
@@ -533,10 +551,16 @@ def group_5(pages: Dict[str, str]) -> None:
 
 def group_6(pages: Dict[str, str], kmap: Dict[str, dict]) -> None:
     broken: List[str] = []
+    html_links: List[str] = []
     graph: Dict[str, Set[str]] = {name: set() for name in pages}
 
     for name, text in pages.items():
         for href in re.findall(r"\bhref=[\"']([^\"']+)[\"']", text):
+            raw = unescape(href)
+            parsed = urlparse(raw)
+            internal = parsed.netloc in ("", HOST, "urbanforestpark.com")
+            if internal and parsed.path.endswith(".html") and not parsed.path.endswith("/index.html"):
+                html_links.append(f"{name} -> {raw}")
             target = local_target(href, PUBLIC)
             if target is None:
                 continue
@@ -560,6 +584,14 @@ def group_6(pages: Dict[str, str], kmap: Dict[str, dict]) -> None:
 
     for item in sorted(set(broken)):
         error(6, f"broken internal reference: {item}")
+
+    html_links = sorted(set(html_links))
+    if html_links:
+        sample = "; ".join(html_links[:5])
+        error(
+            6,
+            f"{len(html_links)} internal link(s) use the redirecting .html form: {sample}",
+        )
 
     indexable = {n for n, m in kmap.items() if m.get("indexable")}
     depth = {name: 0 for name in graph if name == "index.html"}

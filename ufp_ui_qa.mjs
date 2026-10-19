@@ -127,7 +127,7 @@ await context.addInitScript(() => {
 const consoleErrors = [];
 const sameOriginHttpErrors = [];
 function attach(page, tag) {
-  page.on('pageerror', err => consoleErrors.push(tag + ' pageerror: ' + err.message));
+  page.on('pageerror', err => consoleErrors.push(tag + ' pageerror: ' + err.message + ' :: ' + String(err.stack).slice(0, 600)));
   page.on('response', response => {
     if (response.status() >= 400 && response.url().startsWith(BASE)) {
       sameOriginHttpErrors.push(response.status() + ' ' + response.url());
@@ -530,7 +530,7 @@ for (const path of logoPages) {
 await page.goto(BASE + '/global-climate-sustainability-opportunities.html', { waitUntil: 'networkidle' });
 const hubTitle = await page.title();
 check('global hub title targets global queries', /Global Climate & Sustainability Opportunities/.test(hubTitle), hubTitle.slice(0, 90));
-check('global hub canonical exact', (await page.getAttribute('link[rel="canonical"]', 'href')) === 'https://www.urbanforestpark.com/global-climate-sustainability-opportunities.html');
+check('global hub canonical exact', (await page.getAttribute('link[rel="canonical"]', 'href')) === 'https://www.urbanforestpark.com/global-climate-sustainability-opportunities');
 const hubRegionCards = await page.locator('.region-card').count();
 check('global hub groups by region', hubRegionCards >= 6, 'cards=' + hubRegionCards);
 check('global hub shows 15 seeded listings', (await page.locator('.region-states li a[href*="?job="]').count()) >= 12, 'n=' + await page.locator('.region-states li a[href*="?job="]').count());
@@ -544,12 +544,12 @@ check('global hub has no India registry ids in its links', await page.evaluate((
   const hrefs = [...document.querySelectorAll('a[href*="?job="]')].map(a => a.getAttribute('href'));
   return hrefs.every(h => !/wii-dehradun|iit-|iisc|jrf-tiger/.test(h));
 }));
-check('global hub lists India pathways separately', (await page.locator('a[href="/jrf-srf-project-associate-jobs.html"]').count()) >= 1);
+check('global hub lists India pathways separately', (await page.locator('a[href="/jrf-srf-project-associate-jobs"]').count()) >= 1);
 
 /* hub pages carry the global nav link */
 for (const path of ['/jrf-srf-project-associate-jobs.html', '/hindi-environment-forestry-jobs.html']) {
   await page.goto(BASE + path, { waitUntil: 'domcontentloaded' });
-  check('hub links to the Global hub ' + path, (await page.locator('a[href="/global-climate-sustainability-opportunities.html"]').count()) >= 1);
+  check('hub links to the Global hub ' + path, (await page.locator('a[href="/global-climate-sustainability-opportunities"]').count()) >= 1);
 }
 
 /* Legal pages: English-only + emoji ban intact */

@@ -53,6 +53,68 @@ LOGO_PATH = "assets/images/Logo_UFF.png"
 BRAND_ALT = "Urban Forest Park — India Climate, Forestry, ESG & Research Jobs Registry Logo"
 BRAND_ALT_HTML = html.escape(BRAND_ALT, quote=True)
 BRAND_TITLE = "Urban Forest Park Official Emblem"
+
+# Bump when an immutable /assets image changes so existing edge and browser
+# caches fetch the new bytes (the URL is the cache key).
+ASSET_VERSION = "20261019"
+
+
+def pretty_url(url: str) -> str:
+    """Return the URL form Cloudflare Pages serves with HTTP 200.
+
+    The host normalises ``/about.html`` to ``/about`` with a 308, so every
+    canonical, sitemap entry and internal link must use the pretty form to
+    keep the crawl path redirect-free.
+    """
+    if not url:
+        return url
+    if url.startswith(("mailto:", "tel:", "javascript:", "data:", "#", "//")):
+        return url
+
+    prefix = ""
+    rest = url
+    if url.startswith(SITE + "/"):
+        prefix, rest = SITE, url[len(SITE):]
+    elif url.startswith("/"):
+        prefix, rest = "", url
+    else:
+        # Relative page links such as "explore-dashboard.html#map-section".
+        if ".html" not in url.split("#", 1)[0].split("?", 1)[0]:
+            return url
+        rest = "/" + url
+
+    path, has_fragment, fragment = rest.partition("#")
+    page, has_query, query = path.partition("?")
+    if not page.endswith(".html"):
+        return url
+    page = "/" if page == "/index.html" else page[:-5]
+    rebuilt = prefix + page
+    if has_query:
+        rebuilt += "?" + query
+    if has_fragment:
+        rebuilt += "#" + fragment
+    return rebuilt
+
+
+_ATTR_URL_RE = re.compile(
+    r"(\b(?:href|content|item|url)=)(?:\"([^\"]+)\"|'([^']+)')", re.I
+)
+_JSON_URL_RE = re.compile(r'("(?:url|item|@id|image)"\s*:\s*")([^"]+)(")', re.I)
+
+
+def prettify_internal_urls(text: str) -> str:
+    """Rewrite same-site .html URLs to their extensionless canonical form."""
+
+    def attr_repl(match: re.Match[str]) -> str:
+        quote = '"' if match.group(2) is not None else "'"
+        value = match.group(2) if match.group(2) is not None else match.group(3)
+        return f"{match.group(1)}{quote}{pretty_url(value)}{quote}"
+
+    def json_repl(match: re.Match[str]) -> str:
+        return match.group(1) + pretty_url(match.group(2)) + match.group(3)
+
+    text = _ATTR_URL_RE.sub(attr_repl, text)
+    return _JSON_URL_RE.sub(json_repl, text)
 IST = timezone(timedelta(hours=5, minutes=30))
 
 KEYWORD_MAP_PATH = REPO_ROOT / "scripts" / "seo_keyword_map.json"
@@ -1372,6 +1434,36 @@ def main(argv: Optional[List[str]] = None) -> int:
     seo_static_pages.write_institutional_pages(public, today)
     seo_static_pages.normalise_static_pages(public)
     log.info("Wrote institutional pages and normalised static SEO metadata")
+
+    # ---- pretty-URL normalisation ----------------------------------------
+    # Cloudflare Pages serves /about and 308s /about.html. Everything the
+    # crawler sees must use the 200 form: internal links, canonical/OG tags,
+    # JSON-LD URLs and the sitemap.
+    rewritten = 0
+    for path in sorted(public.glob("*.html")):
+        text = path.read_text(encoding="utf-8")
+        updated = prettify_internal_urls(text)
+        updated = re.sub(
+            r"(/assets/images/Logo_UFF\.png)(?!\?)",
+            r"\1?v=" + ASSET_VERSION,
+            updated,
+        )
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+            rewritten += 1
+    log.info("Normalised internal URLs on %d page(s)", rewritten)
+
+    sitemap_path = public / "sitemap.xml"
+    if sitemap_path.exists():
+        sitemap = sitemap_path.read_text(encoding="utf-8")
+        updated = re.sub(
+            r"<loc>([^<]+)</loc>",
+            lambda m: "<loc>" + pretty_url(m.group(1)) + "</loc>",
+            sitemap,
+        )
+        if updated != sitemap:
+            sitemap_path.write_text(updated, encoding="utf-8")
+            log.info("Normalised sitemap locations to extensionless canonicals")
 
     log.info(
         "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s) + 1 global hub + 3 institutional pages",

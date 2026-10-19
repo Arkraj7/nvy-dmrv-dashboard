@@ -4165,6 +4165,30 @@ def broadcast_new_jobs(
 # ---------------------------------------------------------------------------
 # sitemap.xml generation
 # ---------------------------------------------------------------------------
+def pretty_loc(url: str) -> str:
+    """Extensionless form Cloudflare Pages serves with HTTP 200.
+
+    ``/about.html`` redirects (308) to ``/about``, so sitemap entries must use
+    the pretty path to stay canonical, indexable and redirect-free.
+    """
+    if not url.startswith(SITE_BASE_URL):
+        return url
+    path, sep, tail = url[len(SITE_BASE_URL):].partition("?")
+    frag = ""
+    if "#" in tail:
+        tail, _, frag = tail.partition("#")
+    if path == "/index.html":
+        path = "/"
+    elif path.endswith(".html"):
+        path = path[:-5]
+    rebuilt = SITE_BASE_URL + path
+    if sep:
+        rebuilt += "?" + tail
+    if frag:
+        rebuilt += "#" + frag
+    return rebuilt
+
+
 def write_sitemap(
     active_jobs: List[Dict[str, Any]],
     archive_jobs: List[Dict[str, Any]],
@@ -4172,12 +4196,12 @@ def write_sitemap(
 ) -> None:
     """Regenerate sitemap.xml for the registry.
 
-    Includes the homepage, dashboard.html, the archive view
-    (/?view=archive), the category landing views (/?category=<slug>), the
-    busiest state landing views (/?state=<State>), every active listing
-    (/?job=<id>, priority 0.8, lastmod = date_added) and every archived
-    listing (priority 0.5, lastmod = date_archived). Any other pre-existing
-    URLs (e.g. spatial-data.html?van=...) are preserved untouched.
+    Includes the homepage, /dashboard, the archive view (/?view=archive), the
+    category landing views (/?category=<slug>), the busiest state landing views
+    (/?state=<State>), every active listing (/?job=<id>, priority 0.8,
+    lastmod = date_added) and every archived listing (priority 0.5,
+    lastmod = date_archived). All page URLs are emitted in the extensionless
+    form the host serves with HTTP 200.
     """
     jobs = filter_valid_jobs(active_jobs)
     archive = filter_valid_jobs(archive_jobs)
@@ -4192,7 +4216,7 @@ def write_sitemap(
                 loc = (node.findtext("{" + SITEMAP_NS + "}loc") or node.findtext("loc") or "").strip()
                 if not loc:
                     continue
-                preserved[loc] = {
+                preserved[pretty_loc(loc)] = {
                     "lastmod": (node.findtext("{" + SITEMAP_NS + "}lastmod") or node.findtext("lastmod") or "").strip(),
                     "changefreq": (node.findtext("{" + SITEMAP_NS + "}changefreq") or node.findtext("changefreq") or "").strip(),
                     "priority": (node.findtext("{" + SITEMAP_NS + "}priority") or node.findtext("priority") or "").strip(),
@@ -4203,7 +4227,7 @@ def write_sitemap(
     entries: Dict[str, Dict[str, str]] = {}
 
     home_url = SITE_BASE_URL + "/"
-    dash_url = SITE_BASE_URL + "/dashboard.html"
+    dash_url = SITE_BASE_URL + "/dashboard"
     archive_url = SITE_BASE_URL + "/?view=archive"
     home_prev = preserved.pop(home_url, {})
     dash_prev = preserved.pop(dash_url, {})
@@ -4242,7 +4266,7 @@ def write_sitemap(
     # Seed known static pages. Existing entries are preserved; newly added
     # institutional pages are picked up even when a sitemap already exists.
     for page_path, changefreq, priority in STATIC_SITEMAP_PAGES:
-        loc = SITE_BASE_URL + page_path
+        loc = pretty_loc(SITE_BASE_URL + page_path)
         if loc not in entries:
             entries[loc] = {
                 "lastmod": today,
@@ -4261,7 +4285,7 @@ def write_sitemap(
     # Career-pathway hub pages (pre-rendered by scripts/build_seo_pages.py
     # on every pipeline run, so they always exist when this runs).
     for page_path in SEO_HUB_PAGES:
-        entries[SITE_BASE_URL + page_path] = {
+        entries[pretty_loc(SITE_BASE_URL + page_path)] = {
             "lastmod": today,
             "changefreq": "weekly",
             "priority": "0.9",
@@ -4269,7 +4293,7 @@ def write_sitemap(
 
     # Multilingual & regional portals (Hindi hub + state-wise regional hub).
     for page_path in MULTILINGUAL_PORTAL_PAGES:
-        entries[SITE_BASE_URL + page_path] = {
+        entries[pretty_loc(SITE_BASE_URL + page_path)] = {
             "lastmod": today,
             "changefreq": "weekly",
             "priority": "0.9",
@@ -4277,7 +4301,7 @@ def write_sitemap(
 
     # Global opportunities portal (strictly separated registry).
     for page_path in GLOBAL_PORTAL_PAGES:
-        entries[SITE_BASE_URL + page_path] = {
+        entries[pretty_loc(SITE_BASE_URL + page_path)] = {
             "lastmod": today,
             "changefreq": "weekly",
             "priority": "0.9",
@@ -4323,7 +4347,7 @@ def write_sitemap(
     root = ET.Element("{" + SITEMAP_NS + "}urlset")
     for loc, meta in entries.items():
         url_node = ET.SubElement(root, "{" + SITEMAP_NS + "}url")
-        ET.SubElement(url_node, "{" + SITEMAP_NS + "}loc").text = loc
+        ET.SubElement(url_node, "{" + SITEMAP_NS + "}loc").text = pretty_loc(loc)
         lastmod = meta["lastmod"]
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", lastmod or ""):
             lastmod = today
