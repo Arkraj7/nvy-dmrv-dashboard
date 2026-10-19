@@ -38,20 +38,4 @@ jobs:
       - name: Print summary
         run: |
           echo "=== AUDIT SUMMARY ==="
-          python3 -c "
-import csv
-with open('audit_report.csv') as f:
-    reader = csv.DictReader(f)
-    rows = list(reader)
-print(f'Total: {len(rows)}')
-print(f'PASS: {sum(1 for r in rows if r[\"verdict\"] == \"PASS\")}')
-print(f'FAIL: {sum(1 for r in rows if r[\"verdict\"] == \"FAIL\")}')
-print(f'HTTP 200: {sum(1 for r in rows if r[\"http_status\"] == \"200\")}')
-from collections import Counter
-rc = Counter(r['reason_code'] for r in rows)
-print('Reason codes:', dict(rc.most_common()))
-et = Counter(r['entry_type'] for r in rows)
-print('Entry types:', dict(et.most_common()))
-hc = Counter(r['final_host'] for r in rows if r['final_host'])
-print('Top hosts:', dict(hc.most_common(10)))
-"
+          python3 -c "import csv; from collections import Counter; rows = list(csv.DictReader(open('audit_report.csv'))); print('Total:', len(rows)); print('PASS:', sum(1 for r in rows if r['verdict'] == 'PASS')); print('FAIL:', sum(1 for r in rows if r['verdict'] == 'FAIL')); print('HTTP 200:', sum(1 for r in rows if r['http_status'] == '200')); rc = Counter(r['reason_code'] for r in rows); print('Reason codes:', dict(rc.most_common())); et = Counter(r['entry_type'] for r in rows); print('Entry types:', dict(et.most_common())); hc = Counter(r['final_host'] for r in rows if r['final_host']); print('Top hosts:', dict(hc.most_common(10)))"
