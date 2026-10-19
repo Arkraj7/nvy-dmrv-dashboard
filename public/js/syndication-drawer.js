@@ -140,7 +140,7 @@
   function buildStyles() {
     if (document.getElementById('ufp-synd-styles')) return;
     var css = '' +
-      '.synd-root{position:fixed;inset:0;z-index:950;display:none;}' +
+      '.synd-root{position:fixed;inset:0;z-index:10050;display:none;}' +
       '.synd-root.is-open{display:block;}' +
       '.synd-backdrop{position:absolute;inset:0;background:rgba(11,17,23,.5);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);animation:synd-fade .2s ease;}' +
       '.synd-panel{position:absolute;top:0;right:0;height:100%;width:min(440px,96vw);display:flex;flex-direction:column;' +
