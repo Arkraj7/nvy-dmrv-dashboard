@@ -1628,8 +1628,11 @@
   /* Registry feed / filtered landing view SEO. */
   function updateViewSeo() {
     if (state.detailId) return;
+    var isGlobal = state.registry === 'global';
     var hasState = state.state !== 'all';
     var hasCat = state.category !== 'all';
+    var hasRegion = isGlobal && state.region !== 'all';
+    var hasKind = state.kind !== 'all';
     var isArchive = state.view === 'archive';
 
     var hasTrack = state.track !== 'all';
@@ -1641,12 +1644,31 @@
     var title = DEFAULT_TITLE;
     var desc = DEFAULT_DESC;
     var url = CONFIG.SITE_URL;
-    var heroHtml = heroDefaultHtml();
+    /* The hero heading is jurisdiction-aware: the Global registry keeps its
+       own title, so late SEO passes never overwrite it with the India hero. */
+    var heroHtml = isGlobal
+      ? t('hero.global.title_html', 'Worldwide <span class="accent">Climate &amp; Sustainability</span> Opportunities')
+      : heroDefaultHtml();
     var heroText = null;
     var feedEyebrow = t('feed.eyebrow', 'Active Sector Mandates');
     var feedTitle = t('feed.title', 'Active Opportunities');
 
-    if (isArchive) {
+    if (isGlobal) {
+      feedEyebrow = t('feed.eyebrow.global', 'Global Opportunities Registry');
+      feedTitle = t('feed.title.global', 'International Opportunities');
+      title = 'Global Climate & Sustainability Opportunities \u2014 International Jobs, Grants & Scholarships | Urban Forest Park';
+      desc = 'Verified international climate, forestry, ESG, conservation and development opportunities from UN bodies, multilateral funds and global institutions \u2014 each with a direct link to the official application portal.';
+      url = CONFIG.SITE_URL + queryForState();
+      if (hasRegion || hasKind) {
+        var globalScope = hasKind ? state.kind : 'Global Opportunities';
+        heroText = globalScope + ' \u2014 ' + (hasRegion ? state.region : 'Worldwide');
+        title = globalScope + (hasRegion ? ' in ' + state.region : ' Worldwide') + ' | Urban Forest Park';
+        desc = 'Live ' + globalScope.toLowerCase() + ' opportunities' +
+          (hasRegion ? ' across ' + state.region : ' worldwide') +
+          ' \u2014 verified international listings with direct links to the official application portals.';
+      }
+      if (hasKind) feedTitle = state.kind;
+    } else if (isArchive) {
       feedEyebrow = t('feed.eyebrow.archive', 'Historical Mandate Archive');
       feedTitle = t('feed.title.archive', 'Archived / Past Positions');
       title = 'Historical Mandate Archive \u2014 Past Climate, Forestry, ESG & GIS Positions | Urban Forest Park';
