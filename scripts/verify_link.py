@@ -167,8 +167,6 @@ class LinkVerifier:
         self.employers = employers_registry
         self.use_playwright = use_playwright
         self._session = self._create_session()
-        self._playwright = None
-        self._browser = None
     
     def _create_session(self) -> requests.Session:
         """Create a requests session with retries and polite headers."""
@@ -280,17 +278,21 @@ class LinkVerifier:
         return 'unregistered'
     
     def _fetch_with_redirects(self, url: str) -> tuple:
-        """Fetch URL following redirects, return (response, redirect_chain)."""
+        """Fetch URL following redirects, return (response, redirect_chain, error_detail).
+        
+        error_detail is empty on success, or contains 'stage|exception_class|message' on failure.
+        Stages: dns | ssrf_guard | connect | tls | read | status | redirect
+        """
         redirect_chain = [url]
         current_url = url
         
         for hop in range(MAX_REDIRECTS):
             try:
-                # Check for private IP (SSRF)
+                # Check for private IP (SSRF) - before DNS/connect
                 parsed = urlparse(current_url)
                 if self._is_private_ip(parsed.hostname or ''):
                     logger.warning(f"SSRF blocked: {current_url} resolves to private IP")
-                    return None, redirect_chain
+                    return None, redirect_chain, 'ssrf_guard|PrivateIPError|Blocked private IP'
                 
                 # Stream to control size
                 resp = self._session.get(
@@ -309,7 +311,7 @@ class LinkVerifier:
                 if content_length and int(content_length) > max_size:
                     logger.warning(f"Content too large: {content_length} > {max_size}")
                     resp.close()
-                    return resp, redirect_chain
+                    return resp, redirect_chain, ''
                 
                 # Read limited content
                 content = b''
@@ -328,24 +330,27 @@ class LinkVerifier:
                         current_url = location
                         continue
                 
-                return resp, redirect_chain
+                return resp, redirect_chain, ''
                 
             except requests.exceptions.SSLError as e:
-                logger.warning(f"SSL error for {current_url}: {e}")
-                return None, redirect_chain
+                return None, redirect_chain, f'tls|SSLError|{e}'
+            except requests.exceptions.ConnectTimeout as e:
+                return None, redirect_chain, f'connect|ConnectTimeout|{e}'
+            except requests.exceptions.ReadTimeout as e:
+                return None, redirect_chain, f'read|ReadTimeout|{e}'
             except requests.exceptions.Timeout as e:
-                logger.warning(f"Timeout for {current_url}: {e}")
-                return None, redirect_chain
+                return None, redirect_chain, f'timeout|Timeout|{e}'
             except requests.exceptions.ConnectionError as e:
-                logger.warning(f"Connection error for {current_url}: {e}")
-                return None, redirect_chain
+                return None, redirect_chain, f'connect|ConnectionError|{e}'
+            except requests.exceptions.TooManyRedirects as e:
+                return None, redirect_chain, f'redirect|TooManyRedirects|{e}'
+            except requests.exceptions.RequestException as e:
+                return None, redirect_chain, f'request|{type(e).__name__}|{e}'
             except Exception as e:
-                logger.warning(f"Error fetching {current_url}: {e}")
-                return None, redirect_chain
+                return None, redirect_chain, f'unknown|{type(e).__name__}|{e}'
         
         # Too many redirects
-        logger.warning(f"Redirect loop detected for {url}")
-        return None, redirect_chain
+        return None, redirect_chain, 'redirect|RedirectLoop|Max redirects exceeded'
     
     def _extract_text_content(self, response, content_type: str) -> str:
         """Extract text content from response for content matching."""
@@ -485,9 +490,6 @@ class LinkVerifier:
             if phrase in text_lower:
                 specific_score += 2
         
-        # Title token overlap check (if we have title words)
-        # This will be done in _content_match
-        
         if generic_score > specific_score and generic_score > 0:
             return 'careers_portal'
         elif specific_score > 0:
@@ -520,6 +522,8 @@ class LinkVerifier:
         Main verification entry point.
         
         Returns VerificationResult with all policy checks.
+        Order of checks: P3 blocklist -> registry/host class -> fetch -> 
+        landing-page check -> content match. Reason code = first check that failed.
         """
         now = datetime.now(timezone.utc).isoformat()
         clean_url = self._strip_tracking_params(apply_url)
@@ -551,53 +555,55 @@ class LinkVerifier:
                 warnings=[f'Employer {employer_id} not found in registry']
             )
         
-        # Fetch with redirects
-        try:
-            response, redirect_chain = self._fetch_with_redirects(clean_url)
-        except Exception as e:
-            error_detail = f'{type(e).__name__}: {e}'
-            final_url = clean_url
-            final_host = urlparse(clean_url).hostname or ''
+        # P3 BLOCKLIST CHECK - BEFORE ANY NETWORK CALL
+        parsed_url = urlparse(clean_url)
+        apply_host = parsed_url.hostname or ''
+        if self._is_blocklisted(apply_host):
             return VerificationResult(
                 ok=False,
-                final_url=final_url,
-                final_host=final_host,
+                final_url=clean_url,
+                final_host=apply_host,
                 http_status=0,
                 redirect_chain=[clean_url],
                 verification_level='unverified',
-                host_class=self._determine_host_class(final_host, employer),
-                reason_code='VERIFICATION_ERROR',
+                host_class='blocklisted',
+                reason_code='BLOCKED_HOST',
+                evidence_snippet='',
+                content_hash='',
+                verified_at=now,
+                entry_type='unknown',  # never fetched
+                error_detail='blocklist|BlocklistedHost|Host in blocklist',
+                warnings=[f'Blocklisted host: {apply_host}']
+            )
+        
+        # Determine host class from employer registry
+        host_class = self._determine_host_class(apply_host, employer)
+        if host_class == 'unregistered':
+            return VerificationResult(
+                ok=False,
+                final_url=clean_url,
+                final_host=apply_host,
+                http_status=0,
+                redirect_chain=[clean_url],
+                verification_level='unverified',
+                host_class='unregistered',
+                reason_code='HOST_NOT_IN_REGISTRY',
                 evidence_snippet='',
                 content_hash='',
                 verified_at=now,
                 entry_type='unknown',
-                error_detail=error_detail,
-                warnings=[f'Fetch exception: {error_detail}']
+                error_detail='registry|HostNotInRegistry|Host not in employer registry',
+                warnings=[f'Host {apply_host} not in employer registry']
             )
         
+        # Now fetch with redirects
+        response, redirect_chain, fetch_error = self._fetch_with_redirects(clean_url)
         final_url = redirect_chain[-1] if redirect_chain else clean_url
         final_host = urlparse(final_url).hostname or ''
         
-        if not response:
-            # Check if it's a known gov/academic host that blocks foreign IPs
-            if self._is_gov_academic(final_host):
-                return VerificationResult(
-                    ok=False,
-                    final_url=final_url,
-                    final_host=final_host,
-                    http_status=0,
-                    redirect_chain=redirect_chain,
-                    verification_level='unverified',
-                    host_class='government_notice',
-                    reason_code='UNREACHABLE_FROM_RUNNER',
-                    evidence_snippet='',
-                    content_hash='',
-                    verified_at=now,
-                    entry_type='unknown',
-                    error_detail='Connection timeout/blocked from foreign IP',
-                    warnings=[f'Government/academic host {final_host} unreachable from GitHub runner (foreign IP)']
-                )
-            error_detail = 'No response received (timeout/connection error)'
+        # Update host_class based on final host (in case of redirect)
+        host_class = self._determine_host_class(final_host, employer)
+        if host_class == 'blocklisted':
             return VerificationResult(
                 ok=False,
                 final_url=final_url,
@@ -605,21 +611,64 @@ class LinkVerifier:
                 http_status=0,
                 redirect_chain=redirect_chain,
                 verification_level='unverified',
-                host_class=self._determine_host_class(final_host, employer),
-                reason_code='TIMEOUT' if 'timeout' in str(redirect_chain).lower() else 'CONNECTION_ERROR',
+                host_class='blocklisted',
+                reason_code='BLOCKED_HOST',
                 evidence_snippet='',
                 content_hash='',
-                verified_at=now,
+                verified_at=datetime.now(timezone.utc).isoformat(),
                 entry_type='unknown',
-                error_detail=error_detail,
-                warnings=['Failed to fetch URL']
+                error_detail='blocklist|BlocklistedHost|Redirect to blocklisted host',
+                warnings=[f'Redirect to blocklisted host: {final_host}']
+            )
+        if host_class == 'unregistered':
+            return VerificationResult(
+                ok=False,
+                final_url=final_url,
+                final_host=final_host,
+                http_status=0,
+                redirect_chain=redirect_chain,
+                verification_level='unverified',
+                host_class='unregistered',
+                reason_code='HOST_NOT_IN_REGISTRY',
+                evidence_snippet='',
+                content_hash='',
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type='unknown',
+                error_detail='registry|HostNotInRegistry|Redirect to unregistered host',
+                warnings=[f'Redirect to unregistered host: {final_host}']
             )
         
+        if fetch_error:
+            # Parse fetch_error to get stage
+            stage = fetch_error.split('|')[0] if '|' in fetch_error else 'unknown'
+            reason = fetch_error.split('|')[1] if '|' in fetch_error else 'FETCH_ERROR'
+            entry_type = 'unknown'
+            return VerificationResult(
+                ok=False,
+                final_url=final_url,
+                final_host=final_host,
+                http_status=0,
+                redirect_chain=redirect_chain,
+                verification_level='unverified',
+                host_class=host_class,
+                reason_code=reason,
+                evidence_snippet='',
+                content_hash='',
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail=fetch_error,
+                warnings=[f'Fetch failed at {stage}: {fetch_error}']
+            )
+        
+        # Success - got response
         status = response.status_code
         content_type = response.headers.get('Content-Type', '')
         content = getattr(response, '_content_for_analysis', b'')
         text = self._extract_text_content(response, content_type)
         content_hash = self._compute_hash(content) if content else ''
+        
+        # Determine entry_type from content
+        entry_type = self._detect_entry_type(text, final_url, final_host)
         
         # Check HTTP status
         if status in (404, 410):
@@ -630,13 +679,13 @@ class LinkVerifier:
                 http_status=status,
                 redirect_chain=redirect_chain,
                 verification_level='unverified',
-                host_class=self._determine_host_class(final_host, employer),
+                host_class=host_class,
                 reason_code='HTTP_404',
                 evidence_snippet='',
                 content_hash=content_hash,
-                verified_at=now,
-                entry_type='unknown',
-                error_detail='',
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail=f'status|HTTP{status}|Not found',
                 warnings=[f'HTTP {status}']
             )
         
@@ -648,13 +697,13 @@ class LinkVerifier:
                 http_status=status,
                 redirect_chain=redirect_chain,
                 verification_level='unverified',
-                host_class=self._determine_host_class(final_host, employer),
+                host_class=host_class,
                 reason_code=f'HTTP_{status}',
                 evidence_snippet='',
                 content_hash=content_hash,
-                verified_at=now,
-                entry_type='unknown',
-                error_detail=f'HTTP {status}',
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail=f'status|HTTP{status}|Server error',
                 warnings=[f'HTTP {status}']
             )
         
@@ -667,20 +716,18 @@ class LinkVerifier:
                 http_status=status,
                 redirect_chain=redirect_chain,
                 verification_level='unverified',
-                host_class=self._determine_host_class(final_host, employer),
+                host_class=host_class,
                 reason_code='SOFT_404',
                 evidence_snippet=text[:200],
                 content_hash=content_hash,
-                verified_at=now,
-                entry_type=self._detect_entry_type(text, final_url, final_host),
-                error_detail='',
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail='content|Soft404|Page indicates position closed',
                 warnings=['Soft 404 detected']
             )
         
-        # Determine host class
+        # Re-check host class on final URL (in case of redirect)
         host_class = self._determine_host_class(final_host, employer)
-        
-        # Blocklist check
         if host_class == 'blocklisted':
             return VerificationResult(
                 ok=False,
@@ -693,13 +740,12 @@ class LinkVerifier:
                 reason_code='BLOCKED_HOST',
                 evidence_snippet='',
                 content_hash=content_hash,
-                verified_at=now,
-                entry_type=self._detect_entry_type(text, final_url, final_host),
-                error_detail='',
-                warnings=[f'Final host {final_host} is blocklisted']
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail='blocklist|BlocklistedHost|Redirect to blocklisted host',
+                warnings=[f'Redirect to blocklisted host: {final_host}']
             )
         
-        # Host not in registry
         if host_class == 'unregistered':
             return VerificationResult(
                 ok=False,
@@ -712,17 +758,16 @@ class LinkVerifier:
                 reason_code='HOST_NOT_IN_REGISTRY',
                 evidence_snippet='',
                 content_hash=content_hash,
-                verified_at=now,
-                entry_type=self._detect_entry_type(text, final_url, final_host),
-                error_detail='',
-                warnings=[f'Final host {final_host} not in employer registry']
+                verified_at=datetime.now(timezone.utc).isoformat(),
+                entry_type=entry_type,
+                error_detail='registry|HostNotInRegistry|Redirect to unregistered host',
+                warnings=[f'Redirect to unregistered host: {final_host}']
             )
         
         # Content match check (for page_verified)
         org_name = employer.get('name', '')
         job_title_clean = job_title or org_name
         matched, overlap, evidence = self._content_match(text, org_name, job_title_clean)
-        entry_type = self._detect_entry_type(text, final_url, final_host)
         
         # Check for generic landing page
         is_generic = self._is_generic_landing_page(text, final_url, final_host, matched, overlap)
@@ -739,10 +784,10 @@ class LinkVerifier:
                 reason_code='GENERIC_LANDING_PAGE',
                 evidence_snippet=text[:200] if text else '',
                 content_hash=content_hash,
-                verified_at=now,
+                verified_at=datetime.now(timezone.utc).isoformat(),
                 entry_type='careers_portal',
-                error_detail='',
-                warnings=['Generic careers/recruitment landing page - not job-specific']
+                error_detail='content|GenericLandingPage|Generic careers/recruitment page',
+                warnings=['Generic careers/recruitment landing page']
             )
         
         if matched:
@@ -753,7 +798,7 @@ class LinkVerifier:
             # Domain verified only - host is allowed but content couldn't be matched
             verification_level = 'domain_verified'
             reason_code = 'CONTENT_MISMATCH' if text else 'EMPTY_RESPONSE'
-            ok = True  # Still OK for domain_verified per policy
+            ok = True
         
         return VerificationResult(
             ok=ok,
@@ -766,9 +811,9 @@ class LinkVerifier:
             reason_code=reason_code,
             evidence_snippet=evidence[:200] if evidence else '',
             content_hash=content_hash,
-            verified_at=now,
+            verified_at=datetime.now(timezone.utc).isoformat(),
             entry_type=entry_type,
-            error_detail=error_detail,
+            error_detail='',
             warnings=[]
         )
 
