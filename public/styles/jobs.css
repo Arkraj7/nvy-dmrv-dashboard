@@ -2168,10 +2168,10 @@ html[data-theme="dark"] .detail-section-hi {
   display: inline-block;
   vertical-align: middle;
   float: left;
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
@@ -2179,7 +2179,7 @@ html[data-theme="dark"] .detail-section-hi {
   background: #FFFDF9;
 }
 @media (max-width: 640px) {
-  .ufp-header-logo { width: 32px; height: 32px; min-width: 32px; min-height: 32px; margin-right: 8px; }
+  .ufp-header-logo { width: 40px; height: 40px; min-width: 40px; min-height: 40px; margin-right: 10px; }
 }
 
 /* ---------- Jurisdiction switcher (header + hero) ---------- */

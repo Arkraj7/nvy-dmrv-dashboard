@@ -557,7 +557,7 @@ def header_html(active: Optional[str] = None) -> str:
     return f"""  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="Urban Forest Park - National Career Registry, India">
-        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park logo" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park logo" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
       </a>
@@ -565,7 +565,6 @@ def header_html(active: Optional[str] = None) -> str:
         <a class="{cls('registry')}" href="/">Career Registry</a>
         <a class="{cls('archive')}" href="/?view=archive">Historical Archive</a>
         <a class="{cls('global')}" href="/global-climate-sustainability-opportunities.html">Global Opportunities</a>
-        <a class="{cls('dashboard')}" href="/dashboard.html">dMRV Dashboard <span class="live-tool-badge">Live Tool</span></a>
       </nav>
       <div class="header-actions">
         <a class="btn btn-outline nav-cta" href="/#filter-bar">Browse Registry</a>
@@ -1028,6 +1027,7 @@ def build_hub_page(
 {footer_html(hub['file'])}
 
   <script defer src="/js/consent.js"></script>
+<script defer src="/js/back-to-top.js"></script>
 </body>
 </html>
 """

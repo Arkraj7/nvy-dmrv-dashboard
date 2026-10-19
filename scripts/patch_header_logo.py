@@ -31,12 +31,12 @@ PUBLIC = REPO_ROOT / "public"
 
 IMG = (
     '<img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park emblem" '
-    'class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />'
+    'class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" />'
 )
 IMG_DASHBOARD = (
     '<img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park emblem" '
-    'class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" '
-    'style="width:38px;height:38px;min-width:38px;border-radius:50%;object-fit:cover;'
+    'class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" '
+    'style="width:48px;height:48px;min-width:48px;border-radius:50%;object-fit:cover;'
     'border:1.5px solid rgba(16,185,129,0.35);background:#FFFDF9;margin-right:10px;" />'
 )
 

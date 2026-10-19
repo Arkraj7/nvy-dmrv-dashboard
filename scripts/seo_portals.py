@@ -204,7 +204,7 @@ def header_html_hi() -> str:
     return """  <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/?lang=hi" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
-        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park लोगो" class="ufp-header-logo" width="38" height="38" loading="eager" decoding="async" />
+        <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park लोगो" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)</span>
       </a>
@@ -212,7 +212,6 @@ def header_html_hi() -> str:
         <a class="nav-link" href="/?lang=hi">करियर रजिस्ट्री (हिंदी)</a>
         <a class="nav-link" href="/?view=archive&amp;lang=hi">संग्रहित भर्तियाँ</a>
         <a class="nav-link" href="/global-climate-sustainability-opportunities.html">वैश्विक अवसर</a>
-        <a class="nav-link" href="/dashboard.html">dMRV डैशबोर्ड <span class="live-tool-badge">Live Tool</span></a>
         <a class="nav-link" href="/">EN Registry</a>
       </nav>
       <div class="header-actions">
@@ -470,6 +469,7 @@ def build_hindi_hub_page(
 {footer_html_hi()}
 
   <script defer src="/js/consent.js"></script>
+<script defer src="/js/back-to-top.js"></script>
 </body>
 </html>
 """
@@ -696,6 +696,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
 {footer_html(None)}
 
   <script defer src="/js/consent.js"></script>
+<script defer src="/js/back-to-top.js"></script>
 </body>
 </html>
 """
@@ -1005,6 +1006,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
 {footer_html(None)}
 
   <script defer src="/js/consent.js"></script>
+<script defer src="/js/back-to-top.js"></script>
 </body>
 </html>
 """
