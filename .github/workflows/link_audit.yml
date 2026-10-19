@@ -9,7 +9,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -23,12 +23,23 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 pdfplumber certifi
+          pip install requests beautifulsoup4 pdfplumber certifi lxml
+
+      - name: Debug Python environment
+        run: |
+          python -c "import sys; print(sys.version)"
+          python -c "import requests; print('requests:', requests.__version__)"
+          python -c "import bs4; print('beautifulsoup4:', bs4.__version__)"
+          python -c "import pdfplumber; print('pdfplumber:', pdfplumber.__version__)"
+          python -c "import certifi; print('certifi:', certifi.where())"
 
       - name: Run link audit
-        run: python scripts/audit_links.py
+        run: |
+          python scripts/audit_links.py 2>&1
+        shell: bash
 
       - name: Upload audit report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: audit-report
@@ -36,6 +47,25 @@ jobs:
           retention-days: 30
 
       - name: Print summary
+        if: always()
         run: |
           echo "=== AUDIT SUMMARY ==="
-          python3 -c "import csv; from collections import Counter; rows = list(csv.DictReader(open('audit_report.csv'))); print('Total:', len(rows)); print('PASS:', sum(1 for r in rows if r['verdict'] == 'PASS')); print('FAIL:', sum(1 for r in rows if r['verdict'] == 'FAIL')); print('HTTP 200:', sum(1 for r in rows if r['http_status'] == '200')); rc = Counter(r['reason_code'] for r in rows); print('Reason codes:', dict(rc.most_common())); et = Counter(r['entry_type'] for r in rows); print('Entry types:', dict(et.most_common())); hc = Counter(r['final_host'] for r in rows if r['final_host']); print('Top hosts:', dict(hc.most_common(10)))"
+          python3 -c "
+import csv, os
+from collections import Counter
+if os.path.exists('audit_report.csv'):
+    rows = list(csv.DictReader(open('audit_report.csv')))
+    print('Total:', len(rows))
+    print('PASS:', sum(1 for r in rows if r['verdict'] == 'PASS'))
+    print('FAIL:', sum(1 for r in rows if r['verdict'] == 'FAIL'))
+    print('HTTP 200:', sum(1 for r in rows if r['http_status'] == '200'))
+    rc = Counter(r['reason_code'] for r in rows)
+    print('Reason codes:', dict(rc.most_common()))
+    et = Counter(r['entry_type'] for r in rows)
+    print('Entry types:', dict(et.most_common()))
+    hc = Counter(r['final_host'] for r in rows if r['final_host'])
+    print('Top hosts:', dict(hc.most_common(10)))
+else:
+    print('audit_report.csv not found')
+"
+        shell: bash
