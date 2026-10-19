@@ -1,0 +1,2562 @@
+{
+  "version": 1,
+  "updated": "2026-10-20",
+  "employers": [
+    {
+      "id": "the-nature-conservancy-tnc",
+      "name": "The Nature Conservancy (TNC)",
+      "domains": [
+        "nature.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.nature.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "council-on-energy-environment-and-water-ceew",
+      "name": "Council on Energy, Environment and Water (CEEW)",
+      "domains": [
+        "ceew.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.ceew.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "mittal-family-foundation",
+      "name": "Mittal Family Foundation",
+      "domains": [
+        "mittalfamilyfoundation.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://mittalfamilyfoundation.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "unaccc-unity-of-nations-action-for-climate-change-council",
+      "name": "UNAccc (Unity of Nations Action for Climate Change Council)",
+      "domains": [
+        "unaccc.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.unaccc.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "adani-natural-resources",
+      "name": "Adani Natural Resources",
+      "domains": [
+        "adani.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.adani.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "m3m-foundation",
+      "name": "M3M Foundation",
+      "domains": [
+        "m3mfoundation.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://m3mfoundation.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "jsw-steel",
+      "name": "JSW Steel",
+      "domains": [
+        "jsw.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.jsw.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "simons-foundation",
+      "name": "Simons Foundation",
+      "domains": [
+        "simonsfoundation.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.simonsfoundation.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "asci",
+      "name": "ASCI",
+      "domains": [
+        "asci.org.in"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.asci.org.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "ecolab",
+      "name": "Ecolab",
+      "domains": [
+        "ecolab.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.ecolab.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "ey",
+      "name": "EY",
+      "domains": [
+        "ey.com"
+      ],
+      "ats_hosts": [
+        "careers.ey.com"
+      ],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.ey.com/en_in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "pwc",
+      "name": "PwC India",
+      "domains": [
+        "pwc.in"
+      ],
+      "ats_hosts": [
+        "careers.pwc.in"
+      ],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.pwc.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "international-crops-research-institute-for-the-semiarid-tropics",
+      "name": "International Crops Research Institute for the Semi-Arid Tropics",
+      "domains": [
+        "icrisat.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.icrisat.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "intertek",
+      "name": "Intertek India",
+      "domains": [
+        "intertek.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.intertek.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "quantum-sustainability-consulting-ltd",
+      "name": "Quantum Sustainability Consulting Pvt. Ltd.",
+      "domains": [
+        "sustainablebuildingfrontiers.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.sustainablebuildingfrontiers.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "nextpower",
+      "name": "Nextpower",
+      "domains": [
+        "nextpower.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://nextpower.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "naandi-water",
+      "name": "Naandi Water",
+      "domains": [
+        "naandi.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.naandi.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "access-development-services",
+      "name": "ACCESS Development Services",
+      "domains": [
+        "accessdev.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.accessdev.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "bindi-international-association",
+      "name": "Bindi International Association",
+      "domains": [
+        "bindi-international.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.bindi-international.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "wildlife-institute-of-wii",
+      "name": "Wildlife Institute of India (WII)",
+      "domains": [
+        "wii.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://wii.gov.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "international-forum-for-environment-sustainability-technology-iforest",
+      "name": "International Forum for Environment, Sustainability & Technology (iFOREST)",
+      "domains": [
+        "iforest.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://iforest.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "equilibrium",
+      "name": "Equilibrium",
+      "domains": [
+        "equilibriumclimate.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.equilibriumclimate.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "domains": [
+        "amazon.in"
+      ],
+      "ats_hosts": [
+        "amazon.jobs"
+      ],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.amazon.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "selco-foundation",
+      "name": "SELCO Foundation",
+      "domains": [
+        "selcofoundation.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://selcofoundation.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "path",
+      "name": "PATH",
+      "domains": [
+        "path.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.path.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "quest-global",
+      "name": "Quest Global",
+      "domains": [
+        "quest-global.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.quest-global.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "liter-of-light",
+      "name": "Liter of Light India",
+      "domains": [
+        "literoflight.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://literoflight.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "saltech-design-labs",
+      "name": "Saltech Design Labs",
+      "domains": [
+        "saltechlabs.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://saltechlabs.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "aditya-birla-fashion-and-retail",
+      "name": "Aditya Birla Fashion and Retail Limited",
+      "domains": [
+        "abfrl.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.abfrl.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "the-global-energy-alliance-for-people-and-planet",
+      "name": "The Global Energy Alliance for People and Planet",
+      "domains": [
+        "energyalliance.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://energyalliance.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "scimplify",
+      "name": "Scimplify",
+      "domains": [
+        "scimplify.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.scimplify.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "cosmosgreen",
+      "name": "CosmosGreen",
+      "domains": [
+        "cosmosgreenenergy.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.cosmosgreenenergy.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-for-human-settlements",
+      "name": "Indian Institute for Human Settlements",
+      "domains": [
+        "iihs.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://iihs.co.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "suninfra-energies-ltd",
+      "name": "SunInfra Energies Ltd",
+      "domains": [
+        "suninfra.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://suninfra.co.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "yulu",
+      "name": "Yulu",
+      "domains": [
+        "yulu.bike"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.yulu.bike",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "castrol",
+      "name": "Castrol",
+      "domains": [
+        "castrol.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.castrol.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "redington",
+      "name": "Redington Limited",
+      "domains": [
+        "redingtongroup.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.redingtongroup.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "ntt-data",
+      "name": "NTT DATA",
+      "domains": [
+        "nttdata.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.nttdata.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "metro-global-solution-center",
+      "name": "METRO Global Solution Center",
+      "domains": [
+        "metro.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.metro.co.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "olive-recruitment",
+      "name": "Olive Recruitment",
+      "domains": [
+        "oliverecruitment.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.oliverecruitment.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "accelleron",
+      "name": "Accelleron",
+      "domains": [
+        "accelleron.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.accelleron.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-of-technology-guwahati",
+      "name": "Indian Institute of Technology, Guwahati",
+      "domains": [
+        "iitg.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitg.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitg.ac.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "sambodhi-research-and-communications-ltd",
+      "name": "Sambodhi Research and Communications Pvt. Ltd.",
+      "domains": [
+        "sambodhi.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://sambodhi.co.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "anant-national-university",
+      "name": "Anant National University",
+      "domains": [
+        "anu.edu.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://anu.edu.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "wwfindia",
+      "name": "WWF-India",
+      "domains": [
+        "wwfindia.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.wwfindia.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "peregreen-enviro-ltd",
+      "name": "Peregreen Enviro India Pvt. Ltd.",
+      "domains": [
+        "peregreen.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://peregreen.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "dhartiamrit-ecoservices",
+      "name": "DhartiAmrit Ecoservices",
+      "domains": [
+        "dhartiamrit.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://dhartiamrit.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "jpmorganchase",
+      "name": "JPMorganChase",
+      "domains": [
+        "jpmorganchase.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.jpmorganchase.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "flora-carbon-ai",
+      "name": "Flora Carbon AI",
+      "domains": [
+        "floracarbon.ai"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://floracarbon.ai",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "deif",
+      "name": "DEIF",
+      "domains": [
+        "deif.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.deif.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "cundall",
+      "name": "Cundall",
+      "domains": [
+        "cundall.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.cundall.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "cotecna",
+      "name": "Cotecna",
+      "domains": [
+        "cotecna.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.cotecna.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "tüv-süd",
+      "name": "TÜV SÜD",
+      "domains": [
+        "tuvsud.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.tuvsud.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "colgatepalmolive",
+      "name": "Colgate-Palmolive",
+      "domains": [
+        "colgatepalmolive.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.colgatepalmolive.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "lic-housing-finance",
+      "name": "LIC Housing Finance Limited",
+      "domains": [
+        "lichousing.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.lichousing.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "loom-solar-ltd",
+      "name": "Loom Solar Pvt. Ltd.",
+      "domains": [
+        "loomsolar.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.loomsolar.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "avantor",
+      "name": "Avantor",
+      "domains": [
+        "avantorsciences.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.avantorsciences.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "desri",
+      "name": "DESRI",
+      "domains": [
+        "desri.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.desri.com",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-of-technology-delhi-iit-delhi",
+      "name": "Indian Institute of Technology Delhi (IIT Delhi)",
+      "domains": [
+        "iitd.ac.in"
+      ],
+      "ats_hosts": [
+        "home.iitd.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://home.iitd.ac.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "salim-ali-centre-for-ornithology-and-natural-history-sacon",
+      "name": "Salim Ali Centre for Ornithology and Natural History (SACON)",
+      "domains": [
+        "sacon.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://sacon.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-of-technology-kharagpur-iit-kharagpur",
+      "name": "Indian Institute of Technology Kharagpur (IIT Kharagpur)",
+      "domains": [
+        "iitkgp.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitkgp.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitkgp.ac.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "national-centre-for-biological-sciences-ncbs",
+      "name": "National Centre for Biological Sciences (NCBS)",
+      "domains": [
+        "ncbs.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.ncbs.res.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-of-science-iisc",
+      "name": "Indian Institute of Science (IISc)",
+      "domains": [
+        "iisc.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://iisc.ac.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "the-energy-and-resources-institute-teri",
+      "name": "The Energy and Resources Institute (TERI)",
+      "domains": [
+        "teriin.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.teriin.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-institute-of-forest-management-iifm",
+      "name": "Indian Institute of Forest Management (IIFM)",
+      "domains": [
+        "iifm.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iifm.ac.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "ministry-of-environment-forest-and-climate-change-moefcc",
+      "name": "Ministry of Environment, Forest and Climate Change (MoEFCC)",
+      "domains": [
+        "moef.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://moef.gov.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "national-remote-sensing-centre-nrsc-isro",
+      "name": "National Remote Sensing Centre (NRSC), ISRO",
+      "domains": [
+        "nrsc.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.nrsc.gov.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "gb-pant-national-institute-of-himalayan-environment-gbpnihe",
+      "name": "G.B. Pant National Institute of Himalayan Environment (GBPNIHE)",
+      "domains": [
+        "gbpihed.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://gbpihed.gov.in",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "atree",
+      "name": "ATREE",
+      "domains": [
+        "atree.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.atree.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "world-resources-institute-wri",
+      "name": "World Resources Institute (WRI)",
+      "domains": [
+        "wri-india.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://wri-india.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "eki-energy-services",
+      "name": "EKI Energy Services",
+      "domains": [
+        "enkingint.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://enkingint.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "zayed-sustainability-prize-uae",
+      "name": "Zayed Sustainability Prize (UAE)",
+      "domains": [
+        "zayedsustainabilityprize.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://zayedsustainabilityprize.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "world-bank-group",
+      "name": "World Bank Group",
+      "domains": [
+        "worldbank.org"
+      ],
+      "ats_hosts": [
+        "careers.worldbank.org"
+      ],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://www.worldbank.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
+      "name": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
+      "domains": [
+        "ias.unu.edu"
+      ],
+      "ats_hosts": [],
+      "type": "international_organization",
+      "region": "global",
+      "website": "https://ias.unu.edu",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "united-nations-framework-convention-on-climate-change-unfccc",
+      "name": "United Nations Framework Convention on Climate Change (UNFCCC)",
+      "domains": [
+        "unfccc.int"
+      ],
+      "ats_hosts": [],
+      "type": "international_organization",
+      "region": "global",
+      "website": "https://unfccc.int",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "global-environment-facility-small-grants-programme-sgp-implemented-by-undp",
+      "name": "Global Environment Facility Small Grants Programme (SGP), implemented by UNDP",
+      "domains": [
+        "thegef.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://www.thegef.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "united-nations-development-programme-undp",
+      "name": "United Nations Development Programme (UNDP)",
+      "domains": [
+        "undp.org"
+      ],
+      "ats_hosts": [
+        "jobs.undp.org"
+      ],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://www.undp.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "international-union-for-conservation-of-nature-iucn-south-america",
+      "name": "International Union for Conservation of Nature (IUCN) - South America",
+      "domains": [
+        "iucn.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://www.iucn.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "green-climate-fund-gcf",
+      "name": "Green Climate Fund (GCF)",
+      "domains": [
+        "greenclimate.fund"
+      ],
+      "ats_hosts": [],
+      "type": "international_organization",
+      "region": "global",
+      "website": "https://greenclimate.fund",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "future-earth",
+      "name": "Future Earth",
+      "domains": [
+        "futureearth.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://futureearth.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "european-space-agency-esa-climate-office",
+      "name": "European Space Agency (ESA) Climate Office",
+      "domains": [
+        "esa.int"
+      ],
+      "ats_hosts": [],
+      "type": "international_organization",
+      "region": "global",
+      "website": "https://climate.esa.int",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "european-commission-erasmus-eacea",
+      "name": "European Commission - Erasmus+ (EACEA)",
+      "domains": [
+        "eacea.ec.europa.eu"
+      ],
+      "ats_hosts": [],
+      "type": "international_organization",
+      "region": "global",
+      "website": "https://eacea.ec.europa.eu",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "the-earthshot-prize-royal-foundation",
+      "name": "The Earthshot Prize (Royal Foundation)",
+      "domains": [
+        "earthshotprize.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://earthshotprize.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "chevening-scholarships-uk-government-fcdo",
+      "name": "Chevening Scholarships - UK Government (FCDO)",
+      "domains": [
+        "chevening.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "global",
+      "website": "https://www.chevening.org",
+      "approved": true,
+      "approved_at": "2026-10-20T00:00:00Z",
+      "approved_by": "seed"
+    },
+    {
+      "id": "indian-council-of-forestry-research-and-education",
+      "name": "Indian Council Of Forestry Research And Education",
+      "domains": [
+        "icfre.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://icfre.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-council-of-forestry-research-education",
+      "name": "Indian Council Of Forestry Research & Education",
+      "domains": [
+        "icfre.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://icfre.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "icfre",
+      "name": "Icfre",
+      "domains": [
+        "icfre.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://icfre.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "forest-research-institute",
+      "name": "Forest Research Institute",
+      "domains": [
+        "fridu.edu.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://fridu.edu.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "forest-survey-of-india",
+      "name": "Forest Survey Of India",
+      "domains": [
+        "fsi.nic.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://fsi.nic.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "central-pollution-control-board",
+      "name": "Central Pollution Control Board",
+      "domains": [
+        "cpcb.nic.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://cpcb.nic.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "cpcb",
+      "name": "Cpcb",
+      "domains": [
+        "cpcb.nic.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://cpcb.nic.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "wildlife-trust-of-india",
+      "name": "Wildlife Trust Of India",
+      "domains": [
+        "wti.org.in"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.wti.org.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "wildlife-conservation-society",
+      "name": "Wildlife Conservation Society",
+      "domains": [
+        "wcs.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://india.wcs.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "bombay-natural-history-society",
+      "name": "Bombay Natural History Society",
+      "domains": [
+        "bnhs.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.bnhs.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "bnhs",
+      "name": "Bnhs",
+      "domains": [
+        "bnhs.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.bnhs.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "nature-conservation-foundation",
+      "name": "Nature Conservation Foundation",
+      "domains": [
+        "ncf-india.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.ncf-india.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "foundation-for-ecological-security",
+      "name": "Foundation For Ecological Security",
+      "domains": [
+        "fes.org.in"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://fes.org.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "centre-for-wildlife-studies",
+      "name": "Centre For Wildlife Studies",
+      "domains": [
+        "cwsindia.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://cwsindia.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "centre-for-science-and-environment",
+      "name": "Centre For Science And Environment",
+      "domains": [
+        "cseindia.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.cseindia.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "cse-india",
+      "name": "Cse India",
+      "domains": [
+        "cseindia.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.cseindia.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-remote-sensing",
+      "name": "Indian Institute Of Remote Sensing",
+      "domains": [
+        "iirs.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iirs.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iirs",
+      "name": "Iirs",
+      "domains": [
+        "iirs.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iirs.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-space-research-organisation",
+      "name": "Indian Space Research Organisation",
+      "domains": [
+        "isro.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.isro.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "isro",
+      "name": "Isro",
+      "domains": [
+        "isro.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.isro.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-tropical-meteorology",
+      "name": "Indian Institute Of Tropical Meteorology",
+      "domains": [
+        "tropmet.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.tropmet.res.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "national-institute-of-oceanography",
+      "name": "National Institute Of Oceanography",
+      "domains": [
+        "nio.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.nio.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "wadia-institute",
+      "name": "Wadia Institute",
+      "domains": [
+        "wihg.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.wihg.res.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "birbal-sahni",
+      "name": "Birbal Sahni",
+      "domains": [
+        "bsip.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://bsip.res.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-council-of-agricultural-research",
+      "name": "Indian Council Of Agricultural Research",
+      "domains": [
+        "icar.org.in"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://icar.org.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "icar",
+      "name": "Icar",
+      "domains": [
+        "icar.org.in"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://icar.org.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "council-of-scientific-and-industrial-research",
+      "name": "Council Of Scientific And Industrial Research",
+      "domains": [
+        "csir.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.csir.res.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "csir",
+      "name": "Csir",
+      "domains": [
+        "csir.res.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.csir.res.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "department-of-biotechnology",
+      "name": "Department Of Biotechnology",
+      "domains": [
+        "dbtindia.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://dbtindia.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "department-of-science-and-technology",
+      "name": "Department Of Science And Technology",
+      "domains": [
+        "dst.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://dst.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "niti-aayog",
+      "name": "Niti Aayog",
+      "domains": [
+        "niti.gov.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://niti.gov.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iit-bombay",
+      "name": "Iit Bombay",
+      "domains": [
+        "iitb.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitb.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitb.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iit-madras",
+      "name": "Iit Madras",
+      "domains": [
+        "iitm.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitm.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitm.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iit-roorkee",
+      "name": "Iit Roorkee",
+      "domains": [
+        "iitr.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitr.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitr.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iit-kanpur",
+      "name": "Iit Kanpur",
+      "domains": [
+        "iitk.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitk.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitk.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "banaras-hindu-university",
+      "name": "Banaras Hindu University",
+      "domains": [
+        "bhu.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.bhu.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "bhu",
+      "name": "Bhu",
+      "domains": [
+        "bhu.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.bhu.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "tata-institute-of-social-sciences",
+      "name": "Tata Institute Of Social Sciences",
+      "domains": [
+        "tiss.edu"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.tiss.edu",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "tiss",
+      "name": "Tiss",
+      "domains": [
+        "tiss.edu"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.tiss.edu",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "azim-premji-university",
+      "name": "Azim Premji University",
+      "domains": [
+        "azimpremjiuniversity.edu.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://azimpremjiuniversity.edu.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "azim-premji-foundation",
+      "name": "Azim Premji Foundation",
+      "domains": [
+        "azimpremjifoundation.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://azimpremjifoundation.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "jawaharlal-nehru-university",
+      "name": "Jawaharlal Nehru University",
+      "domains": [
+        "jnu.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.jnu.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "jnu",
+      "name": "Jnu",
+      "domains": [
+        "jnu.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.jnu.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "university-of-delhi",
+      "name": "University Of Delhi",
+      "domains": [
+        "du.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.du.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "delhi-university",
+      "name": "Delhi University",
+      "domains": [
+        "du.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.du.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "jamia-millia-islamia",
+      "name": "Jamia Millia Islamia",
+      "domains": [
+        "jmi.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://jmi.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "aligarh-muslim-university",
+      "name": "Aligarh Muslim University",
+      "domains": [
+        "amu.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.amu.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indira-gandhi-national-open-university",
+      "name": "Indira Gandhi National Open University",
+      "domains": [
+        "ignou.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://ignou.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "ignou",
+      "name": "Ignou",
+      "domains": [
+        "ignou.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://ignou.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "teri-school",
+      "name": "Teri School",
+      "domains": [
+        "terisas.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.terisas.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "terisas",
+      "name": "Terisas",
+      "domains": [
+        "terisas.ac.in"
+      ],
+      "ats_hosts": [],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.terisas.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "cstep",
+      "name": "Cstep",
+      "domains": [
+        "cstep.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://cstep.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "development-alternatives",
+      "name": "Development Alternatives",
+      "domains": [
+        "devalt.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.devalt.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "vasudha-foundation",
+      "name": "Vasudha Foundation",
+      "domains": [
+        "vasudhafoundation.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.vasudhafoundation.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "shakti-sustainable-energy-foundation",
+      "name": "Shakti Sustainable Energy Foundation",
+      "domains": [
+        "shaktifoundation.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://shaktifoundation.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "centre-for-policy-research",
+      "name": "Centre For Policy Research",
+      "domains": [
+        "cprindia.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://cprindia.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "observer-research-foundation",
+      "name": "Observer Research Foundation",
+      "domains": [
+        "orfonline.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.orfonline.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "india-climate-collaborative",
+      "name": "India Climate Collaborative",
+      "domains": [
+        "indiaclimatecollaborative.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://indiaclimatecollaborative.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "nrdc-india",
+      "name": "Nrdc India",
+      "domains": [
+        "nrdc.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.nrdc.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "united-nations-environment-programme",
+      "name": "United Nations Environment Programme",
+      "domains": [
+        "unep.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.unep.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "unep",
+      "name": "Unep",
+      "domains": [
+        "unep.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.unep.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "international-finance-corporation",
+      "name": "International Finance Corporation",
+      "domains": [
+        "ifc.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.ifc.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "asian-development-bank",
+      "name": "Asian Development Bank",
+      "domains": [
+        "adb.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.adb.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "international-water-management-institute",
+      "name": "International Water Management Institute",
+      "domains": [
+        "iwmi.cgiar.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.iwmi.cgiar.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "iwmi",
+      "name": "Iwmi",
+      "domains": [
+        "iwmi.cgiar.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.iwmi.cgiar.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "cgiar",
+      "name": "Cgiar",
+      "domains": [
+        "cgiar.org"
+      ],
+      "ats_hosts": [],
+      "type": "ngo",
+      "region": "india",
+      "website": "https://www.cgiar.org",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "kpmg",
+      "name": "Kpmg",
+      "domains": [
+        "kpmg.com"
+      ],
+      "ats_hosts": [
+        "careers.kpmg.com"
+      ],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://kpmg.com/in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "deloitte",
+      "name": "Deloitte",
+      "domains": [
+        "deloitte.com"
+      ],
+      "ats_hosts": [
+        "careers.deloitte.com"
+      ],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www2.deloitte.com/in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "larsen-toubro",
+      "name": "Larsen & Toubro",
+      "domains": [
+        "larsentoubro.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.larsentoubro.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "larsen-and-toubro",
+      "name": "Larsen And Toubro",
+      "domains": [
+        "larsentoubro.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.larsentoubro.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "lt",
+      "name": "L&T",
+      "domains": [
+        "larsentoubro.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.larsentoubro.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "tata-steel",
+      "name": "Tata Steel",
+      "domains": [
+        "tatasteel.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.tatasteel.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "tata-power",
+      "name": "Tata Power",
+      "domains": [
+        "tatapower.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.tatapower.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "itc-limited",
+      "name": "Itc Limited",
+      "domains": [
+        "itcportal.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.itcportal.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "itc",
+      "name": "Itc",
+      "domains": [
+        "itcportal.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.itcportal.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "godrej",
+      "name": "Godrej",
+      "domains": [
+        "godrej.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.godrej.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "hindustan-unilever",
+      "name": "Hindustan Unilever",
+      "domains": [
+        "hul.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.hul.co.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "schneider-electric",
+      "name": "Schneider Electric",
+      "domains": [
+        "se.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.se.com/in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "siemens",
+      "name": "Siemens",
+      "domains": [
+        "siemens.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.siemens.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "arcadis",
+      "name": "Arcadis",
+      "domains": [
+        "arcadis.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.arcadis.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "arup",
+      "name": "Arup",
+      "domains": [
+        "arup.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.arup.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "ramboll",
+      "name": "Ramboll",
+      "domains": [
+        "ramboll.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.ramboll.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "erm",
+      "name": "Erm",
+      "domains": [
+        "erm.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.erm.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "wsp",
+      "name": "Wsp",
+      "domains": [
+        "wsp.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.wsp.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "ntpc",
+      "name": "Ntpc",
+      "domains": [
+        "ntpc.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.ntpc.co.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "nhpc",
+      "name": "Nhpc",
+      "domains": [
+        "nhpcindia.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.nhpcindia.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "ongc",
+      "name": "Ongc",
+      "domains": [
+        "ongcindia.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://ongcindia.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "gail",
+      "name": "Gail",
+      "domains": [
+        "gailonline.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://gailonline.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-oil",
+      "name": "Indian Oil",
+      "domains": [
+        "iocl.com"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://iocl.com",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "bharat-petroleum",
+      "name": "Bharat Petroleum",
+      "domains": [
+        "bharatpetroleum.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.bharatpetroleum.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "steel-authority-of-india",
+      "name": "Steel Authority Of India",
+      "domains": [
+        "sail.co.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://sail.co.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "power-grid-corporation",
+      "name": "Power Grid Corporation",
+      "domains": [
+        "powergrid.in"
+      ],
+      "ats_hosts": [],
+      "type": "corporate",
+      "region": "india",
+      "website": "https://www.powergrid.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-technology-bombay",
+      "name": "Indian Institute Of Technology Bombay",
+      "domains": [
+        "iitb.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitb.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitb.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-technology-madras",
+      "name": "Indian Institute Of Technology Madras",
+      "domains": [
+        "iitm.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitm.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitm.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-technology-roorkee",
+      "name": "Indian Institute Of Technology Roorkee",
+      "domains": [
+        "iitr.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitr.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitr.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    },
+    {
+      "id": "indian-institute-of-technology-kanpur",
+      "name": "Indian Institute Of Technology Kanpur",
+      "domains": [
+        "iitk.ac.in"
+      ],
+      "ats_hosts": [
+        "www.iitk.ac.in"
+      ],
+      "type": "government_institute",
+      "region": "india",
+      "website": "https://www.iitk.ac.in",
+      "approved": false,
+      "approved_at": null,
+      "approved_by": null
+    }
+  ]
+}
