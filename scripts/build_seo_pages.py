@@ -652,23 +652,25 @@ HUBS: List[Dict[str, Any]] = [
         "file": "forestry-wildlife-government-jobs.html",
         "match": match_forestry,
         "kicker": "Government & Forestry Track",
-        "title": "Forestry & Wildlife Jobs in India \u2014 Government Vacancies | Urban Forest Park",
-        "h1": "Forestry, Wildlife & Government Jobs in India",
+        "title": "Forest Guard, Forester, RFO, ACF & IFS Recruitment in India | Urban Forest Park",
+        "h1": "Government Forest Recruitment in India",
         "desc": (
-            "Forest department, wildlife institute, ICFRE and environment ministry vacancies "
-            "across India \u2014 research positions, young-professional mandates and contractual "
-            "roles with direct application links."
+            "Forest guard, forester, RFO, ACF and IFS recruitment plus forest department, "
+            "wildlife institute, ICFRE and environment ministry vacancies across India \u2014 "
+            "research positions, young-professional mandates and contractual roles with "
+            "direct application links."
         ),
         "hero_sub": (
-            "Forestry, wildlife, conservation and environment-ministry mandates \u2014 research "
-            "and project positions, young professionals and contractual government roles across "
-            "Indian states."
+            "Forest guard, forester, RFO, ACF and IFS recruitment, plus forestry, wildlife, "
+            "conservation and environment-ministry mandates across Indian states. Filter "
+            "state-wise links below for local forest department notices."
         ),
         "list_copy": (
             "Vacancies with state forest departments, the Wildlife Institute of India, ICFRE "
             "institutes, SACON, the environment ministry and conservation organisations \u2014 "
-            "covering forestry, afforestation, wildlife biology, ecology and habitat "
-            "management."
+            "covering forest guard and forester recruitment, RFO / ACF / IFS notifications, "
+            "afforestation, wildlife biology, ecology and habitat management. Use the "
+            "state-wise filter to narrow the registry to your state."
         ),
         "cta_href": "/?category=forestry-wildlife-afforestation",
         "matched_noun": "forestry, wildlife and government",
@@ -722,7 +724,7 @@ HUBS: List[Dict[str, Any]] = [
         "list_copy": (
             "GIS, remote sensing and earth-observation positions spanning geospatial modelling, "
             "satellite data analysis, urban heat-island mapping, land-use change and spatial "
-            "planning \u2014 each with a direct link to the official application portal."
+            "planning \u2014 each with a direct application link."
         ),
         "cta_href": "/?category=gis-remote-sensing-earth-observation",
         "matched_noun": "GIS, remote sensing and geospatial",
@@ -978,7 +980,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
 
     <div class="footer-bottom">
       &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)
-      <span class="dot">&bull;</span>All listings link to official application portals &mdash; please verify details before applying.
+      <span class="dot">&bull;</span>All listings link to direct application pages &mdash; please verify details before applying.
       <span class="dot">&bull;</span><a href="/about.html#cite">Cite this registry &amp; embed a link</a>
     </div>
   </footer>"""
@@ -1028,8 +1030,8 @@ def build_index_block(
         f"research mandates tracked by Urban Forest Park \u2014 climate, forestry, wildlife, ESG, "
         f"carbon market, GIS, remote sensing, earth observation, JRF, SRF, PhD, postdoctoral, "
         f"project associate, young professional and faculty vacancies across Indian states and "
-        f"cities. Every entry links to the live position dossier with the official application "
-        f"portal. Snapshot updated {long_date(today)} (IST) \u2014 {len(active_sorted)} active "
+        f"cities. Every entry links to the live position dossier with a direct application "
+        f"link. Snapshot updated {long_date(today)} (IST) \u2014 {len(active_sorted)} active "
         f"and {len(archived_sorted)} recently archived mandates."
     )
 

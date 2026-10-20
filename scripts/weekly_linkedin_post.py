@@ -67,7 +67,7 @@ HASHTAGS = (
 
 CTA = (
     "Apply directly through the official portals \u2014 every listing links straight to the "
-    "source (no fees, no intermediaries).\n"
+    "source (no fees).\n"
     "Full registry \u00b7 daily alerts \u00b7 Global opportunities hub: " + SITE + "/\n"
     "Telegram: https://t.me/urbanforestpark"
 )
@@ -391,7 +391,7 @@ def build_post_text(rows: List[Dict[str, Any]], today: date) -> str:
         "\U0001F331 Top " + str(len(rows)) + " green opportunities this week \u2014 "
         "climate, forestry, ESG, geospatial & sustainability (" +
         f"{india_count} India" + (f" + {global_count} Global" if global_count else "") +
-        "), verified with direct official application links:\n"
+        "), verified with direct application links:\n"
         "\U0001F1EE\U0001F1F3 India Mandates \u00b7 \U0001F30D Global Opportunities"
     )
 

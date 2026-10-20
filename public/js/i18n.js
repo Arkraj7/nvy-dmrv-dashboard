@@ -77,7 +77,7 @@
 
       'hero.kicker': 'National Registry of Environmental Mandates — India',
       'hero.title_html': 'India\u2019s Climate, Forestry, ESG, Geospatial &amp; Academic <span class="accent">Career Registry</span>',
-      'hero.sub_html': 'A continuously monitored index of active positions with forest departments, universities and research institutions (JRF / SRF / PhD / project staff), sustainability teams and climate organisations across the country. <strong>Every listing links straight to the official application portal</strong> — no intermediaries, no fees. Closed mandates are preserved in the Historical Archive for compensation, skills and institutional reference.',
+      'hero.sub_html': 'A continuously monitored index of active positions with forest departments, universities and research institutions (JRF / SRF / PhD / project staff), sustainability teams and climate organisations across the country. <strong>Every listing links straight to a direct application page</strong> — no fees. Closed mandates are preserved in the Historical Archive for compensation, skills and institutional reference.',
       'hero.cta.browse': 'Browse Active Mandates',
       'hero.cta.archive': 'Historical Mandate Archive',
 
@@ -255,9 +255,9 @@
 
       'dispatch.eyebrow': 'Dispatch Service',
       'dispatch.title': 'Climate, Forestry, JRF & ESG Mandate Dispatch',
-      'dispatch.sub': 'A formal bi-weekly email briefing — issued every 72 hours — carrying the period\u2019s verified mandates: JRF / SRF and doctoral fellowships, forestry, wildlife and GIS positions, and corporate ESG mandates across India.',
+      'dispatch.sub': 'A formal email briefing — issued every 72 hours — carrying the period\u2019s verified mandates: JRF / SRF and doctoral fellowships, forestry, wildlife and GIS positions, and corporate ESG mandates across India.',
       'dispatch.point1': 'Drawn exclusively from the same verified registry published on this page.',
-      'dispatch.point2': 'Direct application links and official institution sources — no intermediaries.',
+      'dispatch.point2': 'Direct application links and free access — no fees at any stage.',
       'dispatch.point3': 'One-click opt-out; unsubscribe requests honoured within 7 working days.',
       'dispatch.ledger_html': 'Also available: the instant <a href="https://t.me/urbanforestpark" target="_blank" rel="noopener">Telegram channel</a> and the <a href="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw" target="_blank" rel="noopener">WhatsApp job group</a>.',
       'dispatch.form.title': 'Subscribe to Official Dispatch',
@@ -300,7 +300,7 @@
       'faq.q1': 'What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?',
       'faq.a1': 'India\u2019s environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed institutional notices — recruitment PDFs and advertisements issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities, alongside opportunities published separately by development think-tanks such as CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this information asymmetry by aggregating, verifying and structuring these mandates into a single searchable national registry, with every entry linked to its official application source.',
       'faq.q2': 'How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?',
-      'faq.a2': 'Every listing passes through an automated verification pipeline before publication. Candidates are surfaced from official portals, verified feeds and institutional notices; each record then undergoes domain verification, redirect unwrapping (so links resolve to the publisher rather than a news wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier presents both the direct application portal link and the verified official website of the parent organisation, so applicants can confirm every detail at its authoritative source.',
+      'faq.a2': 'Every listing passes through an automated verification pipeline before publication. Candidates are surfaced from employer portals, job platforms, verified feeds and institutional notices; each record then undergoes domain verification, redirect unwrapping (so links resolve to the publisher rather than a news wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier presents both a direct application link and the verified website of the parent organisation, so applicants can confirm every detail at its authoritative source.',
       'faq.q3': 'What happens to expired or closed job mandates, and why is a historical archive maintained?',
       'faq.a3': 'Active mandates remain in the registry for a 30-day lifecycle; when an application window closes, the record transitions automatically into the Historical Mandate Archive (archive.json). The archive is maintained as a public research asset: students, researchers and policy analysts can benchmark historical fellowship stipends, recurring technical requirements (GIS, Google Earth Engine, BRSR reporting, carbon markets) and seasonal hiring velocity across Indian states and union territories.',
       'faq.q4': 'How frequently is the registry updated, and how do the automated Email, WhatsApp, and Telegram dispatches work?',

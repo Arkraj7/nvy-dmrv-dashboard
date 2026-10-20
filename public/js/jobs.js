@@ -311,10 +311,37 @@
     if (/linkedin\./.test(host)) return 'LinkedIn';
     if (/indeed\./.test(host)) return 'Indeed';
     if (/naukri\./.test(host)) return 'Naukri';
+    if (/freejobalert\./.test(host)) return 'FreeJobAlert';
+    if (/foundit\./.test(host)) return 'Foundit';
+    if (/shine\./.test(host)) return 'Shine';
+    if (/timesjobs\./.test(host)) return 'TimesJobs';
+    if (/internshala\./.test(host)) return 'Internshala';
+    if (/apna\./.test(host)) return 'Apna';
     if (/news\.google\./.test(host)) return 'News Announcement';
     if (/reliefweb\./.test(host)) return 'ReliefWeb';
-    if (/\.(gov\.in|nic\.in|ac\.in|res\.in|edu\.in)$/.test(host)) return 'Official Institute Portal';
-    return host || 'Official Portal';
+    if (/\.(gov\.in|nic\.in|ac\.in|res\.in|edu\.in)$/.test(host)) return 'Institute Portal';
+    return host || 'Direct source';
+  }
+
+  /* Editable platform list mirrored from public/link_policy.json for labels. */
+  var PLATFORM_HOSTS = [
+    [/linkedin\./, 'LinkedIn'],
+    [/indeed\./, 'Indeed'],
+    [/naukri\./, 'Naukri'],
+    [/freejobalert\./, 'FreeJobAlert'],
+    [/foundit\./, 'Foundit'],
+    [/shine\./, 'Shine'],
+    [/timesjobs\./, 'TimesJobs'],
+    [/internshala\./, 'Internshala'],
+    [/apna\./, 'Apna']
+  ];
+
+  function applyPlatformOf(job) {
+    var host = applyHostOf(job);
+    for (var i = 0; i < PLATFORM_HOSTS.length; i++) {
+      if (PLATFORM_HOSTS[i][0].test(host)) return PLATFORM_HOSTS[i][1];
+    }
+    return '';
   }
 
   /* Square institution-logo / topic-emblem figure used on cards & dossiers.
@@ -354,7 +381,7 @@
       out += escapeHtml(src.slice(last, match.index));
       var host = url.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[\/?#]/)[0];
       out += '<a class="inline-doc-link" href="' + escapeHtml(url) +
-        '" target="_blank" rel="noopener noreferrer nofollow">Official Link (' +
+        '" target="_blank" rel="noopener noreferrer nofollow">Direct link (' +
         escapeHtml(host) + ') \u2197</a>';
       last = match.index + match[0].length;
     }
@@ -417,12 +444,12 @@
       '</div>';
   }
 
-  /* "Official Verification & Application Portal" card: Apply on <portal> +
-     Visit Official Website, always with readable labels. */
+  /* Direct application card: Apply / Apply on <platform> + hostname. */
   function verifyCardHtml(job, isArchived) {
     var portal = sourcePortalOf(job);
     var orgDomain = orgDomainOf(job);
     var applyHost = applyHostOf(job);
+    var platform = applyPlatformOf(job);
     var verifiedDate = verifiedDateOf(job);
 
     if (isArchived) {
@@ -431,10 +458,10 @@
       return '' +
         '<div class="verify-card is-archived">' +
           '<div class="verify-head">' +
-            '<span class="verify-kicker">' + t('verify.kicker', 'Official application record') + '</span>' +
+            '<span class="verify-kicker">' + t('verify.kicker', 'Application record') + '</span>' +
             '<span class="verify-source">' + t('verify.source', 'Source: ') + '<strong>' + escapeHtml(portal) + '</strong></span>' +
           '</div>' +
-          '<p class="apply-note">' + t('verify.note.archive', 'This mandate is archived \u2014 the application window has closed. No outbound application link is shown. The original application host was ') +
+          '<p class="apply-note">' + t('verify.note.archive', 'This listing is archived \u2014 the application window has closed. No outbound application link is shown. The original application host was ') +
             '<strong>' + escapeHtml(applyHost || 'not recorded') + '</strong>.</p>' +
         '</div>';
     }
@@ -443,26 +470,30 @@
     if (job.org_website) {
       secondary = '<a class="verify-btn verify-btn-org" href="' + escapeHtml(job.org_website) +
         '" target="_blank" rel="noopener noreferrer">' +
-        '<span class="vb-label">' + t('verify.website', 'Visit Official Website') + ' ' + iconSvg('external') + '</span>' +
-        '<span class="vb-sub">' + escapeHtml(orgDomain || t('verify.website.sub', 'official portal')) + '</span></a>';
+        '<span class="vb-label">' + t('verify.website', 'Organisation website') + ' ' + iconSvg('external') + '</span>' +
+        '<span class="vb-sub">' + escapeHtml(orgDomain || t('verify.website.sub', 'employer domain')) + '</span></a>';
     }
+
+    var applyLabel = platform
+      ? t('verify.apply.platform', 'Apply on ' + platform)
+      : t('verify.apply', 'Apply');
 
     return '' +
       '<div class="verify-card">' +
         '<div class="verify-head">' +
-          '<span class="verify-kicker">' + t('verify.kicker.active', 'Official Verification &amp; Application Portal') + '</span>' +
+          '<span class="verify-kicker">' + t('verify.kicker.active', 'Direct application link') + '</span>' +
           '<span class="verify-source">' + t('verify.source', 'Source: ') + '<strong>' + escapeHtml(portal) + '</strong></span>' +
         '</div>' +
         '<div class="verify-actions">' +
           '<a class="verify-btn verify-btn-apply" href="' + escapeHtml(job.apply_url) +
             '" target="_blank" rel="noopener noreferrer">' +
-            '<span class="vb-label">' + t('verify.apply.on', 'Apply on official site') + ' ' + iconSvg('external') + '</span>' +
-            '<span class="vb-sub">' + escapeHtml(applyHost || 'official site') + '</span></a>' +
+            '<span class="vb-label">' + escapeHtml(applyLabel) + ' ' + iconSvg('external') + '</span>' +
+            '<span class="vb-sub">' + escapeHtml(applyHost || 'direct link') + '</span></a>' +
           secondary +
         '</div>' +
-        '<p class="verify-trust">' + t('verify.trust', 'Verified at source on') + ' ' +
+        '<p class="verify-trust">' + t('verify.trust', 'Link checked on') + ' ' +
           escapeHtml(verifiedDate) + '</p>' +
-        '<p class="apply-note">' + t('verify.note.active', 'The apply link opens the employer\u2019s own page in a new tab. Always verify eligibility, fellowship norms and deadlines before applying. ') +
+        '<p class="apply-note">' + t('verify.note.active', 'The application link opens in a new tab. Always verify eligibility, fellowship norms and deadlines before applying. ') +
           '<a class="verify-report" href="' + reportBrokenLinkHref(job) + '">' +
           t('verify.report', 'Report a broken link') + '</a></p>' +
       '</div>';
@@ -853,7 +884,7 @@
     }
     if (els.heroSub && DEFAULT_HERO_SUB_HTML) {
       els.heroSub.innerHTML = isGlobal
-        ? t('hero.global.sub', 'International jobs, grants, scholarships, fellowships, internships and competitions across climate, forestry, energy, water, biodiversity and ESG — verified, with direct links to the official portal.')
+        ? t('hero.global.sub', 'International jobs, grants, scholarships, fellowships, internships and competitions across climate, forestry, energy, water, biodiversity and ESG — verified, with direct application links.')
         : DEFAULT_HERO_SUB_HTML;
     }
     if (els.heroKicker) {
@@ -1747,7 +1778,7 @@
       feedEyebrow = t('feed.eyebrow.global', 'Global Opportunities Registry');
       feedTitle = t('feed.title.global', 'International Opportunities');
       title = 'Global Climate & Sustainability Opportunities \u2014 International Jobs, Grants & Scholarships | Urban Forest Park';
-      desc = 'Verified international climate, forestry, ESG, conservation and development opportunities from UN bodies, multilateral funds and global institutions \u2014 each with a direct link to the official application portal.';
+      desc = 'Verified international climate, forestry, ESG, conservation and development opportunities from UN bodies, multilateral funds and global institutions \u2014 each with a direct application link.';
       url = CONFIG.SITE_URL + queryForState();
       if (hasRegion || hasKind) {
         var globalScope = hasKind ? state.kind : 'Global Opportunities';
@@ -1755,7 +1786,7 @@
         title = globalScope + (hasRegion ? ' in ' + state.region : ' Worldwide') + ' | Urban Forest Park';
         desc = 'Live ' + globalScope.toLowerCase() + ' opportunities' +
           (hasRegion ? ' across ' + state.region : ' worldwide') +
-          ' \u2014 verified international listings with direct links to the official application portals.';
+          ' \u2014 verified international listings with direct application links.';
       }
       if (hasKind) feedTitle = state.kind;
     } else if (isArchive) {
@@ -1774,7 +1805,7 @@
       url = CONFIG.SITE_URL + queryForState();
     } else if (hasTrack && !hasCat && !hasState) {
       title = trackLabel + ' Jobs in India | Urban Forest Park';
-      desc = 'Current ' + trackLabel.toLowerCase() + ' opportunities across India \u2014 verified listings with direct links to official application portals, maintained by the Urban Forest Park registry.';
+      desc = 'Current ' + trackLabel.toLowerCase() + ' opportunities across India \u2014 verified listings with direct application links, maintained by the Urban Forest Park registry.';
       heroText = trackLabel + ' \u2014 India';
       feedTitle = trackLabel;
       url = CONFIG.SITE_URL + queryForState();
@@ -1783,7 +1814,7 @@
       title = (hasCat ? state.category : 'Climate, Forestry, ESG & GIS') + ' Jobs in ' + scope + ' | Urban Forest Park';
       desc = 'Active ' + (hasCat ? state.category.toLowerCase() + ' ' : '') + 'positions' +
         (hasState ? ' across ' + state.state : ' across India') +
-        ' \u2014 verified listings with direct links to official application portals, maintained by the Urban Forest Park registry.';
+        ' \u2014 verified listings with direct application links, maintained by the Urban Forest Park registry.';
       heroText = hasCat
         ? state.category + ' Jobs \u2014 ' + (hasState ? state.state : 'All India')
         : 'Climate, Forestry, ESG & Geospatial Jobs \u2014 ' + state.state;

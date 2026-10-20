@@ -574,7 +574,7 @@ def build_about_page(today: date) -> str:
           geospatial analysis and academic research. Urban Forest Park exists to make that
           search transparent. Every active and archived mandate is presented with its
           organisation, state, position type, deadline and a direct link to the official
-          application portal &mdash; no intermediaries, no application fees and no sponsored
+          application page &mdash; no application fees and no sponsored
           ranking.
         </p>
 

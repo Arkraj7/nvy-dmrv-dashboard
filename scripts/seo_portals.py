@@ -690,7 +690,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         <p class="hub-hero-sub">
           State-wise environment, forestry, wildlife, climate, ESG and geospatial mandates —
           हिंदी, मराठी, தமிழ், తెలుగు, ಕನ್ನಡ, বাংলা एवं ગુજરાતી क्षेत्रों हेतु क्षेत्रीय प्रवेश द्वार।
-          Every listing links straight to the official application portal.
+          Every listing links straight to a direct application page.
         </p>
         <div class="hub-hero-actions">
           <a class="btn btn-primary" href="/hindi-environment-forestry-jobs.html">हिंदी पोर्टल खोलें &rarr;</a>
@@ -777,7 +777,7 @@ GLOBAL_FAQS: List[Tuple[str, str]] = [
         "the UNFCCC, Green Climate Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth, "
         "universities and major foundations. It covers jobs, fellowships, scholarships, grants, "
         "internships and competitions, and every entry links straight to the official application "
-        "portal \u2014 no intermediaries, no fees.",
+        "page \u2014 no fees.",
     ),
     (
         "How are India mandates and Global opportunities kept apart?",
@@ -991,7 +991,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
           A strictly separate registry of verified international opportunities \u2014 jobs, grants,
           scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate
           Fund, UNDP, World Bank Group, IUCN, WRI, ESA, Future Earth and other official
-          organisations. Every listing links straight to the official application portal.
+          organisations. Every listing links straight to a direct application page.
         </p>
         <div class="hub-hero-actions">
           <a class="btn btn-primary" href="/?region=global">Open the Global registry &rarr;</a>

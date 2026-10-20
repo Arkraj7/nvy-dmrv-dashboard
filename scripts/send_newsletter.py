@@ -531,7 +531,7 @@ def render_email(
     </table>
 
     <p style="margin:8px 0 18px 0;font-size:12.5px;line-height:1.65;color:{INK_3};">
-      Every dossier links to the official application portal of the publishing institution.
+      Every dossier links by a direct application link from the publishing institution.
       Always verify deadlines, stipends and eligibility in the authoritative notification before applying.
       Urban Forest Park is an informational registry — it charges no fees and does not process applications.
     </p>
@@ -697,7 +697,7 @@ def build_welcome_email_html(
         )
         + _welcome_li(
             "Separate India & Global portals",
-            "Every dossier carries the official application link. Use the "
+            "Every dossier carries a direct application link. Use the "
             "<strong>\U0001F1EE\U0001F1F3 India Registry</strong> and "
             "<strong>\U0001F30D Global Opportunities</strong> switcher on the homepage to change "
             "jurisdiction in one click.",
@@ -808,7 +808,7 @@ def build_welcome_email_html(
     </div>
     <p style="margin:14px 0 0 0;font-size:12px;line-height:1.65;color:{INK_3};">
       Urban Forest Park is an informational registry \u2014 it charges no fees, processes no
-      applications, and every dossier links straight to the official application portal.
+      applications, and every dossier links straight to a direct application page.
     </p>
   </td></tr>
 
