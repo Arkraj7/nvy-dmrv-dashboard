@@ -6,3 +6,6 @@ dist/
 __pycache__/
 .venv*/
 welcome_email_preview.html
+data/pipeline_run*.log
+data/qa_run*.log
+data/candidates_*.json

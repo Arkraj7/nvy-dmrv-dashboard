@@ -116,13 +116,12 @@ def test_verified_record_is_published_with_registry_identity():
     assert "_qualification_is_default" not in record
 
 
-def test_invented_title_is_blanked_not_generated():
+def test_invented_title_is_rejected_not_published_blank():
     record, reason = run_gate(
         make_record(clean_title="Senior Director of Planetary Finance")
     )
-    assert record["status"] == "active"
-    assert record["clean_title"] == ""
-    assert reason == ""
+    assert record is None
+    assert reason == "clean title not found on source page"
 
 
 def test_invented_skill_is_blanked():

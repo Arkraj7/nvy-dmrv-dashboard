@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-10-20T21:56:03",
+  "reason": "hard-negative sales/commercial/support blocklist",
+  "removed": [
+    {
+      "bucket": "active",
+      "id": "sales-manager-sustainability-intertek-india",
+      "title": "Sales Manager - Sustainability",
+      "organization": "Intertek India"
+    },
+    {
+      "bucket": "active",
+      "id": "sales-consultant-quantum-sustainability-consulting",
+      "title": "Sales Consultant",
+      "organization": "Quantum Sustainability Consulting Pvt. Ltd."
+    },
+    {
+      "bucket": "active",
+      "id": "sales-analyst-nextpower",
+      "title": "Sales Analyst",
+      "organization": "Nextpower"
+    },
+    {
+      "bucket": "active",
+      "id": "business-development-marketing-associate-flora-carbon-ai",
+      "title": "Business Development & Marketing Associate",
+      "organization": "Flora Carbon AI"
+    },
+    {
+      "bucket": "active",
+      "id": "area-sales-manager-loom-solar",
+      "title": "Area Sales Manager",
+      "organization": "Loom Solar Pvt. Ltd."
+    }
+  ]
+}

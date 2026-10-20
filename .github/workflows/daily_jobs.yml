@@ -53,6 +53,16 @@ jobs:
       - name: Unit tests (verify_link + ingestion gate)
         run: python -m pytest tests -q
 
+      - name: Verify Telegram bot + channel (preflight)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        # Logs getMe / getChat / HTTP status / destination title. Missing
+        # secrets are a safe no-op; a broken token or chat id fails loudly
+        # before the pipeline runs, so the daily heartbeat never disappears
+        # silently.
+        run: python scripts/verify_telegram.py --allow-missing
+
       - name: Fetch, humanize & publish green jobs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -108,8 +118,10 @@ jobs:
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
                   public/daily_digest.json public/whatsapp_digest.txt \
                   public/global_jobs.json public/global_archive.json \
+                  public/source_report.json data/role_purge_report.json \
                   public/linkedin_weekly_post.txt public/linkedin_weekly.json \
-                  public/index.html \
+                  public/index.html public/feed.xml public/jrf-feed.xml \
+                  public/a9f3c2d7e8b14f60a2c5e9d3b7f14c68.txt \
                   public/jrf-srf-project-associate-jobs.html \
                   public/phd-fellowships-climate-sustainability.html \
                   public/forestry-wildlife-government-jobs.html \
@@ -151,3 +163,9 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx -y wrangler@4.151.1 pages deploy dist --project-name=nvy-dmrv-dashboard --commit-dirty=true
+
+      - name: Submit updated URLs to IndexNow
+        # Post-deploy only: IndexNow verifies the live key file. Best-effort;
+        # a search-engine outage must never roll back a successful deploy.
+        continue-on-error: true
+        run: python scripts/ping_search_engines.py

@@ -105,7 +105,7 @@ from collections import Counter
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
-from urllib.parse import quote, urlencode, urljoin, urlparse
+from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlparse
 from xml.etree import ElementTree as ET
 
 # Official-link gate (Phase 3): every candidate is verified at its source
@@ -300,6 +300,16 @@ CATEGORIES = [
 # Pre-upgrade category names still present in published data (jobs.json /
 # archive.json written before this schema expansion). normalize_job_fields()
 # maps them onto the list above so historical records stay filterable.
+CATEGORY_ALIASES = {
+    "jrf, srf & phd positions": "Academic, JRF, SRF & PhD Positions",
+    "jrf srf and phd positions": "Academic, JRF, SRF & PhD Positions",
+    "jrf / srf": "Academic, JRF, SRF & PhD Positions",
+    "academic / jrf / srf / phd": "Academic, JRF, SRF & PhD Positions",
+    "research associate & project staff": "Research Associate & Project Staff (Contractual)",
+    "research associate and project staff": "Research Associate & Project Staff (Contractual)",
+}
+
+
 LEGACY_CATEGORY_MAP = {
     "Climate & Sustainability": "ESG, Carbon Markets & Corporate Sustainability",
     "ESG & Carbon Markets": "ESG, Carbon Markets & Corporate Sustainability",
@@ -766,7 +776,21 @@ in scope. Generic software, IT support, sales, marketing, finance, HR or QA \
 postings, pure mechanical or civil design roles with no environmental scope, \
 and any listing that asks the candidate to pay a fee, deposit or investment \
 are out of scope even in green companies, unless the role itself works on \
-the domains above.
+the domains above. MANDATORY CORE DOMAIN: the role must itself be Climate \
+Change, Forestry/Wildlife/Ecology, Academic Research (JRF/SRF/Project \
+Associate/Research Associate/PhD/Postdoc), Corporate ESG/Sustainability \
+(BRSR, carbon markets, dMRV, EHS, CSR, net zero), Geospatial (GIS/remote \
+sensing/Earth observation/LiDAR), Sustainable Agriculture/Agroforestry, \
+Water Resources/WASH/Hydrology, or Clean/Renewable Energy. A green employer \
+alone is not enough.
+  HARD EXCLUSIONS (always reject, without exception): Sales Manager, Sales \
+Analyst, Sales Executive/Consultant, Area/Territory/Regional Sales, Business \
+Development (unless the title explicitly says Carbon Credits, ESG Advisory, \
+Solar or Renewable/BESS), Account Executive, Customer Support/Care, \
+Telecaller, BPO, Retail, Store Manager, Cashier, HR Recruiter, Payroll/Tax \
+Consultant, General Accountant, Medical Representative, Insurance, Real \
+Estate, Front Desk, generic Digital Marketing/SEO/Social Media/Content \
+Writing, and generic full-stack/software/IT roles at non-climate employers.
   (b) The role is located in India, or explicitly open to India-based or \
 remote-India candidates.
 If EITHER fails - for example a generic software, IT support, sales, \
@@ -852,6 +876,112 @@ benefits) that the source does not contain - you may only compress, \
 clarify and humanize.
 
 Return ONLY the JSON object - no markdown fences, no commentary."""
+
+# ---------------------------------------------------------------------------
+# Layer A: hard negative title blocklist (pre-Gemini, zero-cost)
+# ---------------------------------------------------------------------------
+# These are generic commercial / retail / support roles that repeatedly leak
+# through broad keyword searches. They are rejected before any model call.
+EXCLUDED_ROLE_PATTERNS = tuple(
+    re.compile(pattern, re.I)
+    for pattern in (
+        r"\bsales\s+(manager|analyst|executive|consultant|officer|head|director)\b",
+        r"\barea\s+sales\b",
+        r"\bterritory\s+sales\b",
+        r"\bregional\s+sales\b",
+        r"\bmedical\s+representative\b",
+        r"\binsurance\b",
+        r"\breal\s+estate\b",
+        r"\bstore\s+manager\b",
+        r"\bcashier\b",
+        r"\btelecaller\b",
+        r"\bcustomer\s+(care|support|service)\b",
+        r"\bbpo\b",
+        r"\bfront\s+desk\b",
+        r"\bpayroll\b",
+        r"\btax\s+consultant\b",
+        r"\bhr\s+recruiter\b",
+        r"\baccountant\b",
+        r"\bdigital\s+marketing\b",
+        r"\bseo\s+(executive|specialist|manager)\b",
+        r"\bsocial\s+media\s+(manager|executive)\b",
+        r"\bcontent\s+writer\b",
+        r"\baccount\s+executive\b",
+    )
+)
+
+# Business-development and software roles are allowed only when the title
+# itself names a core climate / carbon / solar / ESG / geospatial mandate, or
+# the employer is an explicitly climate/GIS/environmental organisation.
+BD_ROLE_RE = re.compile(r"\bbusiness\s+development\b", re.I)
+SOFTWARE_ROLE_RE = re.compile(
+    r"\b(full[\s-]?stack|software|frontend|front[\s-]?end|backend|back[\s-]?end|"
+    r"devops|qa\s+engineer|java|python|react|node)\s+(developer|engineer|architect)\b",
+    re.I,
+)
+CORE_DOMAIN_SIGNAL_RE = re.compile(
+    r"\b(climate|environment(?:al)?|forest(?:ry)?|wildlife|biodiversity|"
+    r"conservation|ecolog(?:y|ical)|carbon|emissions?|ghg|net[ -]zero|"
+    r"renewable|solar|wind|energy transition|esg|brsr|pollution|waste|"
+    r"recycl|water|watershed|groundwater|sanitation|agricultur|agri|soil|"
+    r"land use|geospatial|gis|remote sensing|satellite|urban planning|"
+    r"green building|sustainable development|sustainability|"
+    r"sustainable finance|nature|ecosystem|marine|coastal|mangrove|glacier|"
+    r"hydrolog|meteorolog|air quality|circular economy|"
+    r"adaptation|mitigation|decarboni[sz]\w*)\b",
+    re.I,
+)
+NON_VACANCY_TITLE_RE = re.compile(
+    r"\b(?:job\s+openings?|current\s+vacancies|careers?|research\s+programme|"
+    r"work\s+with\s+us|opportunities)\s*$",
+    re.I,
+)
+
+
+def has_core_domain_signal(*parts: Any) -> bool:
+    """Layer B: require an explicit core/adjacent environmental domain signal."""
+    blob = " ".join(squash(part) for part in parts if part)
+    return bool(CORE_DOMAIN_SIGNAL_RE.search(blob))
+
+
+def is_generic_landing_title(title: str) -> bool:
+    return bool(NON_VACANCY_TITLE_RE.search(squash(title)))
+
+
+BD_ALLOWED_RE = re.compile(
+    r"carbon\s+(credit|market|account|finance)|esg|solar|renewable|bess|"
+    r"clean\s+energy|energy\s+transition|climate|sustainab",
+    re.I,
+)
+CLIMATE_ORG_RE = re.compile(
+    r"climate|forest|wildlife|ecolog|environment|sustainab|carbon|esg|"
+    r"geospatial|remote\s+sensing|earth|conservation|renewable|solar|"
+    r"water|biodiversity|nature",
+    re.I,
+)
+
+
+def is_excluded_role(title: str, organization: str = "", description: str = "") -> bool:
+    """Return True when a title is a generic non-environmental role.
+
+    Deliberately conservative: it blocks the named sales/support/retail
+    families outright, and allows business-development or software titles only
+    when the *title* names a climate/carbon/ESG/solar/geospatial scope or the
+    employer itself is a climate organisation.
+    """
+    title_text = squash(title)
+    combined = " ".join((title_text, squash(organization), squash(description)[:800]))
+    if not title_text:
+        return False
+    if any(pattern.search(title_text) for pattern in EXCLUDED_ROLE_PATTERNS):
+        return True
+    if BD_ROLE_RE.search(title_text) and not BD_ALLOWED_RE.search(title_text):
+        return True
+    if SOFTWARE_ROLE_RE.search(title_text) and not (
+        CLIMATE_ORG_RE.search(title_text) or CLIMATE_ORG_RE.search(organization)
+    ):
+        return True
+    return False
 
 
 def build_system_prompt(today: str) -> str:
@@ -956,6 +1086,32 @@ def dedupe_key(candidate: Dict[str, Any]) -> str:
     )
 
 
+TRACKING_QUERY_PREFIXES = (
+    "utm_", "fbclid", "gclid", "mc_cid", "mc_eid", "igshid", "trk", "trackingid",
+)
+
+
+def apply_url_identity(value: Any) -> str:
+    """Host + path + meaningful query identity for duplicate detection.
+
+    Query strings are retained when they identify a posting (Indeed ``jk``,
+    LinkedIn ``currentJobId``) and dropped only when they are tracking noise.
+    """
+    parsed = urlparse(str(value or "").strip())
+    if not parsed.netloc:
+        return ""
+    query = [
+        (key, item)
+        for key, item in parse_qsl(parsed.query, keep_blank_values=True)
+        if not key.lower().startswith(TRACKING_QUERY_PREFIXES)
+        and key.lower() not in {"ref", "referrer", "source", "campaign"}
+    ]
+    identity = parsed.netloc.lower() + parsed.path.rstrip("/")
+    if query:
+        identity += "?" + urlencode(sorted(query))
+    return identity.lower()
+
+
 def existing_keys(jobs: List[Dict[str, Any]]) -> Set[str]:
     keys: Set[str] = set()
     registry = _employer_registry()
@@ -968,6 +1124,24 @@ def existing_keys(jobs: List[Dict[str, Any]]) -> Set[str]:
             )
         )
     return keys
+
+
+def role_identity(candidate: Dict[str, Any]) -> str:
+    """Title + employer identity, independent of URL and deadline.
+
+    The URL-based dedupe key is intentionally precise, but institute portals
+    publish the same notice at several paths (and job boards add tracking
+    parameters), so a normalised title/employer pair is used as a second
+    guard against duplicate cards.
+    """
+    title = squash(candidate.get("clean_title") or candidate.get("title") or "")
+    organization = squash(
+        candidate.get("organization") or candidate.get("company") or ""
+    )
+    title = re.sub(r"\b(?:19|20)\d{2}\b", " ", title.lower())
+    title = re.sub(r"[^a-z0-9]+", " ", title).strip()
+    organization = re.sub(r"[^a-z0-9]+", " ", organization.lower()).strip()
+    return f"{title}|{organization}" if title and organization else ""
 
 
 def unique_id(base_id: str, taken: Set[str]) -> str:
@@ -1759,6 +1933,68 @@ def interleave_candidates(
     return merged
 
 
+# Academic roles get a guaranteed share of the daily humanization budget so a
+# noisy job-board sweep cannot crowd out JRF/SRF/project-associate mandates.
+ACADEMIC_ROLE_RE = re.compile(
+    r"\b(jrf|junior research fellow|srf|senior research fellow|project associate|"
+    r"research associate|project assistant|research assistant|research fellow|"
+    r"young professional|field assistant|phd|doctoral|postdoc|post-?doctoral|"
+    r"research internship|research intern|project scientist|research scientist)\b",
+    re.I,
+)
+ACADEMIC_BUDGET_SHARE = 0.45
+
+
+def is_academic_candidate(candidate: Dict[str, Any]) -> bool:
+    blob = " ".join(
+        str(candidate.get(key) or "")
+        for key in ("title", "matched_query", "position_type", "description")
+    )
+    if ACADEMIC_ROLE_RE.search(blob):
+        return True
+    return str(candidate.get("source") or "").lower() in {
+        "portal:indiabioscience",
+        "agrijob",
+    }
+
+
+def prioritize_academic_candidates(
+    candidates: List[Dict[str, Any]], limit: int
+) -> List[Dict[str, Any]]:
+    """Reserve ~45% of the run budget for academic/research roles.
+
+    If fewer academic candidates exist, the remaining slots are filled from
+    the full pool without duplication, so a quiet academic day never reduces
+    the total number of published mandates.
+    """
+    limit = max(0, int(limit))
+    if limit == 0:
+        return []
+    academic = [candidate for candidate in candidates if is_academic_candidate(candidate)]
+    non_academic = [candidate for candidate in candidates if not is_academic_candidate(candidate)]
+    academic_target = min(len(academic), max(1, int(round(limit * ACADEMIC_BUDGET_SHARE))))
+    selected = academic[:academic_target]
+    selected_ids = {id(candidate) for candidate in selected}
+    for candidate in non_academic:
+        if len(selected) >= limit:
+            break
+        selected.append(candidate)
+        selected_ids.add(id(candidate))
+    for candidate in academic:
+        if len(selected) >= limit:
+            break
+        if id(candidate) not in selected_ids:
+            selected.append(candidate)
+            selected_ids.add(id(candidate))
+    log.info(
+        "Academic quota: %d of %d slots reserved for research roles (%d academic candidates available)",
+        min(academic_target, len(selected)),
+        len(selected),
+        len(academic),
+    )
+    return selected[:limit]
+
+
 def scrape_board_candidates() -> List[Dict[str, Any]]:
     """Primary sweep across the six broad India green searches."""
     candidates, site_counts = scrape_jobspy_queries(SEARCH_QUERIES)
@@ -1823,13 +2059,36 @@ INDIAN_ACADEMIC_NEWS_QUERIES = [
     ' OR "Ecology") India',
     '(JRF OR "Project Associate" OR "Research Fellow" OR "Field Assistant")'
     ' recruitment when:7d',
-    '("WII Dehradun" OR "ICFRE" OR "IIFM Bhopal" OR "IIRS" OR "NRSC" OR "ATREE"'
-    ' OR "CEEW" OR "TERI" OR "GBPNIHE" OR "ICAR") AND ("Recruitment" OR "Vacancy"'
-    ' OR "Position" OR "Fellow" OR "Associate")',
+    '("Walk-in Interview" OR "Walk In Interview") (JRF OR SRF OR "Project Associate"'
+    ' OR "Research Associate" OR "Young Professional") India when:14d',
+    '("ICFRE" OR "Forest Research Institute" OR "FRI Dehradun" OR "IFGTB" OR "IWST"'
+    ' OR "TFRI" OR "AFRI" OR "RFRI" OR "HFRI" OR "IFB Hyderabad")'
+    ' (Recruitment OR Vacancy OR Fellow OR Associate OR JRF OR SRF) when:30d',
+    '("Wildlife Institute of India" OR "IIFM Bhopal" OR "Forest Survey of India"'
+    ' OR "Botanical Survey of India" OR "Zoological Survey of India" OR "GBPIHED"'
+    ' OR "SACON" OR "NCSCM") (Recruitment OR Vacancy OR Fellow OR Associate) when:30d',
+    '("IIRS" OR "NRSC" OR "Space Applications Centre" OR "IITM Pune" OR "NCPOR"'
+    ' OR "NIOT" OR "INCOIS" OR "MoES") (JRF OR SRF OR "Project Associate"'
+    ' OR "Research Associate" OR Recruitment OR Vacancy) when:30d',
+    '("ICAR" OR "IARI" OR "CAZRI" OR "CRIDA" OR "NBPGR" OR "CSSRI" OR "IIWM"'
+    ' OR "NAARM") (JRF OR SRF OR "Project Associate" OR "Young Professional"'
+    ' OR Recruitment OR Vacancy) when:30d',
+    '("CSIR" OR "NEERI" OR "NIO Goa" OR "NBRI" OR "CIMAP" OR "CSIR-4PI")'
+    ' (JRF OR SRF OR "Project Associate" OR "Research Associate" OR Recruitment) when:30d',
+    '("IIT Delhi" OR "IIT Bombay" OR "IIT Kharagpur" OR "IIT Roorkee" OR "IIT Madras"'
+    ' OR "IIT Guwahati" OR "IIT Kanpur") (JRF OR SRF OR "Research Associate"'
+    ' OR "Project Associate" OR Vacancy) when:30d',
+    '("IISc" OR "IISER" OR "JNU" OR "BHU" OR "TISS" OR "TERI SAS")'
+    ' (JRF OR SRF OR "Research Associate" OR "PhD Fellowship" OR Recruitment) when:30d',
+    '("DST" OR "ANRF" OR "SERB" OR "DBT") ("Project Associate" OR "Research Associate"'
+    ' OR JRF OR SRF OR Fellowship) India when:30d',
     '("Young Professional" OR "Contractual" OR "Consultant") AND ("MoEFCC" OR "Forest"'
     ' OR "Climate Change" OR "Sustainability" OR "CAMPA" OR "Pollution Control") India',
     '("PhD Fellowship" OR "Postdoctoral" OR "PhD Position")'
     ' (Climate OR Forestry OR Environment OR Ecology OR "Earth Sciences") when:7d',
+    '("IndiaBioscience" OR "agrijob" OR "CEEW" OR "WRI India" OR "iFOREST" OR "ATREE"'
+    ' OR "TERI" OR "CSTEP" OR "IIHS" OR "WWF India" OR "WCS India" OR "NCF")'
+    ' (JRF OR SRF OR Fellow OR Associate OR Recruitment OR Vacancy) when:30d',
 ]
 
 # Optional extra academic-job RSS feeds (labelled). Best-effort: unreachable
@@ -2061,6 +2320,66 @@ VERIFIED_PORTAL_PAGES: List[Dict[str, str]] = [
         "organization": "WWF-India",
         "url": "https://www.wwfindia.org/engage_with_us/get_involved/jobs/",
         "slug": "wwf-india",
+    },
+    {
+        "name": "iFOREST",
+        "organization": "International Forum for Environment, Sustainability & Technology (iFOREST)",
+        "url": "https://www.iforest.global/careers/",
+        "slug": "iforest",
+    },
+    {
+        "name": "TERI",
+        "organization": "The Energy and Resources Institute (TERI)",
+        "url": "https://www.teri.res.in/careers",
+        "slug": "teri",
+    },
+    {
+        "name": "CSTEP",
+        "organization": "Center for Study of Science, Technology and Policy (CSTEP)",
+        "url": "https://cstep.in/careers",
+        "slug": "cstep",
+    },
+    {
+        "name": "IIHS",
+        "organization": "Indian Institute for Human Settlements (IIHS)",
+        "url": "https://iihs.co.in/careers/",
+        "slug": "iihs",
+    },
+    {
+        "name": "WCS-India",
+        "organization": "Wildlife Conservation Society (WCS) India",
+        "url": "https://www.wcsindia.org/careers",
+        "slug": "wcs-india",
+    },
+    {
+        "name": "Nature Conservation Foundation",
+        "organization": "Nature Conservation Foundation (NCF)",
+        "url": "https://ncf-india.org/careers",
+        "slug": "ncf",
+    },
+    {
+        "name": "EKI Energy",
+        "organization": "EKI Energy Services",
+        "url": "https://ekinetzero.com/careers/",
+        "slug": "eki-energy",
+    },
+    {
+        "name": "CleanMax",
+        "organization": "CleanMax Solar",
+        "url": "https://cleanmaxsolar.com/careers/",
+        "slug": "cleanmax",
+    },
+    {
+        "name": "IndiaBioscience",
+        "organization": "IndiaBioscience",
+        "url": "https://indiabioscience.org/jobs",
+        "slug": "indiabioscience",
+    },
+    {
+        "name": "AgriJob",
+        "organization": "AgriJob",
+        "url": "https://agrijob.in/",
+        "slug": "agrijob",
     },
 ]
 
@@ -3347,9 +3666,9 @@ def normalize_global_record(job: Dict[str, Any]) -> Dict[str, Any]:
     job["global"] = True
     region = squash(job.get("region"))
     job["region"] = region if region in GLOBAL_REGIONS else "Global / Remote"
-    if job.get("state") and job.get("state") not in ("", "Multiple States / Remote"):
-        # Global records never masquerade as Indian states.
-        job["state"] = ""
+    # Global records are never filtered by an Indian state; keep the field
+    # empty even when a model or seed used the generic "Multiple States" label.
+    job["state"] = ""
     return job
 
 
@@ -3587,7 +3906,10 @@ class GeminiHumanizer:
             else build_system_prompt(today)
         )
         override = (os.environ.get("GEMINI_MODEL") or "").strip()
-        ordered = ([override] if override else []) + list(MODEL_CANDIDATES)
+        # GEMINI_MODEL is a strict pin (useful in CI when a specific quota
+        # bucket is provisioned); without it, fall back through the ordered
+        # candidate list as before.
+        ordered = [override] if override else list(MODEL_CANDIDATES)
         seen: Set[str] = set()
         self.model_candidates = [
             name for name in ordered if name and not (name in seen or seen.add(name))
@@ -3634,9 +3956,14 @@ class GeminiHumanizer:
             order.insert(0, self.active_model)
         last_error: Optional[Exception] = None
         throttle_error: Optional[Exception] = None
+        fast_fail = (os.environ.get("GEMINI_FAST_FAIL") or "").strip().lower() in {
+            "1", "true", "yes"
+        }
+        rate_limit_sleep = float(os.environ.get("GEMINI_RATE_LIMIT_SLEEP", "25"))
+        attempts = (1,) if fast_fail else (1, 2)
         for index, model_name in enumerate(order):
             has_next = index < len(order) - 1
-            for attempt in (1, 2):
+            for attempt in attempts:
                 try:
                     text = self._try_model(model_name, user_prompt)
                     if self.active_model != model_name:
@@ -3661,10 +3988,10 @@ class GeminiHumanizer:
                                 "%s is rate-limited or overloaded (%s); retrying in %.0fs | %s",
                                 model_name,
                                 type(exc).__name__,
-                                GEMINI_RATE_LIMIT_SLEEP,
+                                rate_limit_sleep,
                                 str(exc)[:140].replace("\n", " "),
                             )
-                            time.sleep(GEMINI_RATE_LIMIT_SLEEP)
+                            time.sleep(rate_limit_sleep)
                             continue
                         if has_next:
                             log.warning(
@@ -3703,7 +4030,7 @@ def coerce_to_job_record(
     if not job.is_relevant_green_job:
         return None, squash(job.rejection_reason) or "judged not a relevant Indian green job"
 
-    category = match_enum(job.category, CATEGORIES)
+    category = match_enum(job.category, CATEGORIES, CATEGORY_ALIASES)
     if category is None:
         return None, "unmapped category: " + squash(job.category)
 
@@ -3742,6 +4069,19 @@ def coerce_to_job_record(
     application_tip = squash(job.application_tip)
     if not (clean_title and organization and role_summary and application_tip):
         return None, "missing required text fields"
+    if is_excluded_role(clean_title, organization, role_summary):
+        return None, "hard-negative role blocklist: generic sales/commercial/support title"
+    if is_generic_landing_title(clean_title):
+        return None, "generic careers/landing page, not a specific vacancy"
+    if not has_core_domain_signal(
+        clean_title,
+        role_summary,
+        " ".join(skills),
+        " ".join(responsibilities),
+        candidate.get("title"),
+        candidate.get("description"),
+    ):
+        return None, "no explicit core environmental domain signal (Layer B)"
 
     apply_url = squash(job.apply_url) or squash(candidate.get("apply_url"))
     if not apply_url.lower().startswith("http"):
@@ -3816,6 +4156,7 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     valid: List[Dict[str, Any]] = []
     dropped = 0
     blocked = 0
+    missing_title = 0
     for job in jobs:
         # Quarantined records are the review queue: never deleted, never
         # published. Their apply_url may be temporarily broken; keep them.
@@ -3824,6 +4165,9 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             continue
         if has_blocked_organization(job):
             blocked += 1
+            continue
+        if not squash(job.get("clean_title") or job.get("title")):
+            missing_title += 1
             continue
         if is_valid_apply_url(job.get("apply_url")):
             valid.append(job)
@@ -3836,6 +4180,10 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     if blocked:
         log.warning(
             "Dropped %d listing(s) with anonymous employer names", blocked
+        )
+    if missing_title:
+        log.warning(
+            "Dropped %d listing(s) without a verified title", missing_title
         )
     return valid
 
@@ -3999,6 +4347,7 @@ def compute_stats(
         ),
         "total_archived_jobs": len(archive),
         "total_historical_indexed": len(active) + len(archive),
+        "last_telegram_broadcast_date": None,
         "by_category": by_category,
         "by_state": dict(
             sorted(by_state.items(), key=lambda item: (-item[1], item[0]))
@@ -4016,6 +4365,18 @@ def write_archive(jobs: List[Dict[str, Any]], path: Path) -> None:
 
 
 def write_stats(stats: Dict[str, Any], path: Path) -> None:
+    # Preserve the daily-broadcast marker across telemetry rebuilds. Without
+    # this, a later sync would erase it and the featured heartbeat could be
+    # sent twice on the same day.
+    if path.exists() and not stats.get("last_telegram_broadcast_date"):
+        try:
+            previous = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            previous = {}
+        if isinstance(previous, dict) and previous.get("last_telegram_broadcast_date"):
+            stats["last_telegram_broadcast_date"] = previous[
+                "last_telegram_broadcast_date"
+            ]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -4033,8 +4394,89 @@ def write_stats(stats: Dict[str, Any], path: Path) -> None:
 # Community broadcasting: daily WhatsApp bulletin + Telegram channel post
 # ---------------------------------------------------------------------------
 TELEGRAM_API_URL = "https://api.telegram.org/bot{token}/sendMessage"
+TELEGRAM_GETME_URL = "https://api.telegram.org/bot{token}/getMe"
+TELEGRAM_GETCHAT_URL = "https://api.telegram.org/bot{token}/getChat"
 TELEGRAM_MESSAGE_LIMIT = 3900   # Telegram hard limit is 4096; keep headroom
 DIGEST_MAX_JOBS = 10            # jobs listed per digest / broadcast
+TELEGRAM_HEARTBEAT_JOBS = 5     # featured cards when a day has no brand-new jobs
+
+
+def normalize_telegram_chat_id(raw: str) -> str:
+    """Normalise a public channel handle or numeric chat id.
+
+    ``urbanforestpark_jobs`` -> ``@urbanforestpark_jobs``; already valid
+    ``@handle`` / ``-100...`` values are left untouched. Positive numeric
+    values are left as-is (Telegram user ids), while the sender also builds
+    a ``-100`` group fallback.
+    """
+    value = str(raw or "").strip()
+    if not value:
+        return ""
+    if value.startswith("@") or value.startswith("-100"):
+        return value
+    if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{3,}", value):
+        return "@" + value
+    return value
+
+
+def telegram_chat_candidates(raw: str) -> List[str]:
+    value = normalize_telegram_chat_id(raw)
+    candidates = [value] if value else []
+    if re.fullmatch(r"\d{6,}", value) and not value.startswith("-100"):
+        candidates.append("-100" + value)
+    return candidates
+
+
+def _telegram_plain_text(html_text: str) -> str:
+    text = re.sub(r"<br\s*/?>", "\n", html_text or "", flags=re.I)
+    text = re.sub(r"</p>", "\n", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", "", text)
+    return html.unescape(text).strip()
+
+
+def _telegram_logged_call(url: str, payload: Dict[str, Any], label: str) -> Any:
+    if requests is None:
+        log.warning("requests is not installed - cannot call Telegram %s", label)
+        return None
+    try:
+        response = requests.post(url, json=payload, timeout=REQUEST_TIMEOUT)
+        body: Dict[str, Any] = {}
+        try:
+            body = response.json()
+        except Exception:
+            body = {}
+        if response.status_code == 200 and body.get("ok"):
+            result = body.get("result") or {}
+            log.info(
+                "Telegram %s OK (HTTP 200, message_id=%s)",
+                label,
+                result.get("message_id", "-"),
+            )
+            return result
+        log.warning(
+            "Telegram %s failed (HTTP %s, description=%s)",
+            label,
+            response.status_code,
+            str(body.get("description") or (response.text or ""))[:240],
+        )
+        return {"__status": response.status_code, "__body": body}
+    except Exception as exc:
+        log.warning("Telegram %s exception: %s", label, str(exc)[:200])
+        return None
+
+
+def update_last_telegram_broadcast(stats_path: Path, today: str) -> None:
+    """Persist the once-per-day heartbeat marker without losing telemetry."""
+    try:
+        stats = json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {}
+    except Exception:
+        stats = {}
+    stats["last_telegram_broadcast_date"] = today
+    stats["telegram_last_status"] = "delivered"
+    stats_path.parent.mkdir(parents=True, exist_ok=True)
+    stats_path.write_text(
+        json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
 
 
 def _community_links() -> Tuple[str, str]:
@@ -4239,10 +4681,16 @@ def write_digests(
 
 
 def send_telegram_digest(telegram_html: str) -> bool:
-    """Post the digest to the configured Telegram channel (no-op without env)."""
+    """Post the digest to Telegram with HTML -> plain-text self-healing.
+
+    A 400 response usually means an HTML entity/parse error or an invalid
+    chat id. The sender logs getMe/getChat diagnostics, retries each chunk as
+    plain text without parse_mode, and tries a `-100` group-id fallback for a
+    bare numeric id.
+    """
     token = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip()
-    chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
-    if not token or not chat_id:
+    raw_chat = (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
+    if not token or not raw_chat:
         log.info(
             "Telegram broadcast skipped (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set)"
         )
@@ -4250,31 +4698,66 @@ def send_telegram_digest(telegram_html: str) -> bool:
     if requests is None:
         log.warning("requests is not installed - cannot broadcast to Telegram")
         return False
-    delivered = 0
-    for chunk in _chunk_text(telegram_html, TELEGRAM_MESSAGE_LIMIT):
-        try:
-            response = requests.post(
+
+    me = _telegram_logged_call(
+        TELEGRAM_GETME_URL.format(token=token), {}, "getMe"
+    )
+    if isinstance(me, dict) and me.get("username"):
+        log.info("Telegram bot identity: @%s (id=%s)", me["username"], me.get("id", "-"))
+
+    chats = telegram_chat_candidates(raw_chat)
+    log.info("Telegram chat candidates: %s", ", ".join(chats))
+    for chat_id in chats:
+        chat = _telegram_logged_call(
+            TELEGRAM_GETCHAT_URL.format(token=token),
+            {"chat_id": chat_id},
+            "getChat " + chat_id,
+        )
+        if isinstance(chat, dict) and chat.get("title"):
+            log.info(
+                "Telegram destination: %r (%s)", chat["title"], chat.get("type", "?")
+            )
+        delivered = 0
+        for chunk in _chunk_text(telegram_html, TELEGRAM_MESSAGE_LIMIT):
+            result = _telegram_logged_call(
                 TELEGRAM_API_URL.format(token=token),
-                json={
+                {
                     "chat_id": chat_id,
                     "text": chunk,
                     "parse_mode": "HTML",
                     "disable_web_page_preview": False,
                 },
-                timeout=REQUEST_TIMEOUT,
+                "sendMessage HTML",
             )
-            if response.status_code == 200:
+            if isinstance(result, dict) and result.get("message_id"):
                 delivered += 1
-            else:
+                continue
+            status = (result or {}).get("__status") if isinstance(result, dict) else None
+            if status == 400:
                 log.warning(
-                    "Telegram API returned HTTP %s: %s",
-                    response.status_code, (response.text or "")[:200],
+                    "Telegram HTML parse failed for %s; retrying this chunk as plain text",
+                    chat_id,
                 )
-        except Exception as exc:
-            log.warning("Telegram broadcast failed: %s", str(exc)[:160])
-    if delivered:
-        log.info("Telegram broadcast delivered (%d message chunk(s))", delivered)
-    return delivered > 0
+                result = _telegram_logged_call(
+                    TELEGRAM_API_URL.format(token=token),
+                    {
+                        "chat_id": chat_id,
+                        "text": _telegram_plain_text(chunk),
+                        "disable_web_page_preview": False,
+                    },
+                    "sendMessage plain-text fallback",
+                )
+                if isinstance(result, dict) and result.get("message_id"):
+                    delivered += 1
+        if delivered:
+            log.info(
+                "Telegram broadcast delivered to %s (%d message chunk(s))",
+                chat_id,
+                delivered,
+            )
+            return True
+    log.warning("Telegram broadcast delivered no message chunks")
+    return False
 
 
 def send_whatsapp_webhook(whatsapp_text: str) -> bool:
@@ -4310,8 +4793,14 @@ def broadcast_new_jobs(
     digest_path: Path,
     whatsapp_path: Path,
     send: bool = True,
+    stats_path: Optional[Path] = None,
 ) -> None:
-    """Regenerate the digest files and broadcast new listings when possible."""
+    """Regenerate the digest files and broadcast once per day.
+
+    When a scheduled morning run finds no brand-new listings, it still posts a
+    featured round-up of the top active mandates. ``stats.json`` records
+    ``last_telegram_broadcast_date`` so retries cannot spam the channel.
+    """
     digest = write_digests(active, new_jobs, today, digest_path, whatsapp_path)
     if not send:
         log.info(
@@ -4319,11 +4808,46 @@ def broadcast_new_jobs(
             "(--no-broadcast). Review daily_digest.json + whatsapp_digest.txt."
         )
         return
-    if not new_jobs:
-        log.info("No new listings this run - Telegram/WhatsApp broadcast skipped")
+
+    stats_path = stats_path or (digest_path.parent / "stats.json")
+    try:
+        current_stats = (
+            json.loads(stats_path.read_text(encoding="utf-8"))
+            if stats_path.exists()
+            else {}
+        )
+    except Exception:
+        current_stats = {}
+    if str(current_stats.get("last_telegram_broadcast_date") or "") == today:
+        log.info("Telegram heartbeat already delivered today (%s) - skipping", today)
         return
-    send_telegram_digest(digest["telegram_html"])
-    send_whatsapp_webhook(digest["whatsapp_text"])
+
+    if new_jobs:
+        telegram_html = digest["telegram_html"]
+        whatsapp_text = digest["whatsapp_text"]
+    else:
+        featured = sorted(
+            active,
+            key=lambda job: (
+                str(job.get("date_added") or ""),
+                str(job.get("id") or ""),
+            ),
+            reverse=True,
+        )[:TELEGRAM_HEARTBEAT_JOBS]
+        if not featured:
+            log.warning("Telegram heartbeat skipped: no active mandates to feature")
+            return
+        heading = "📌 Daily Featured Mandates & Closing-Soon JRF/ESG Roundup"
+        telegram_html = build_telegram_digest_html(featured, today, heading)
+        whatsapp_text = build_whatsapp_digest_text(featured, today, heading)
+        log.info(
+            "No new listings today - sending featured heartbeat with %d active mandate(s)",
+            len(featured),
+        )
+
+    if send_telegram_digest(telegram_html):
+        update_last_telegram_broadcast(stats_path, today)
+    send_whatsapp_webhook(whatsapp_text)
 
 
 # ---------------------------------------------------------------------------
@@ -4631,6 +5155,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="Maximum new listings to publish per run (default: %(default)s)",
     )
     parser.add_argument(
+        "--candidates-cache",
+        help=(
+            "Read raw harvested candidates from this JSON cache instead of "
+            "re-scraping; when the file does not exist the run scrapes once "
+            "and writes the cache. Useful for resuming a rate-limited run."
+        ),
+    )
+    parser.add_argument(
         "--sitemap-only",
         action="store_true",
         help="Only regenerate sitemap.xml from the current jobs.json + archive.json (no scraping, no API key needed)",
@@ -4667,6 +5199,107 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     )
     parser.add_argument("--verbose", action="store_true", help="Debug logging")
     return parser.parse_args(argv)
+
+
+def purge_excluded_records(
+    active: List[Dict[str, Any]], archive: List[Dict[str, Any]]
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, str]]]:
+    """Drop hard-negative commercial roles from both registries.
+
+    This is an idempotent data-hygiene pass, not an archive action: the
+    records are removed from the working set so a later keyword run cannot
+    resurrect them. The returned audit rows are logged by the caller.
+    """
+    removed: List[Dict[str, str]] = []
+
+    def keep(job: Dict[str, Any], bucket: str) -> bool:
+        title = squash(job.get("clean_title") or job.get("title"))
+        org = squash(job.get("organization"))
+        summary = squash(job.get("role_summary"))
+        if is_excluded_role(title, org, summary):
+            removed.append(
+                {
+                    "bucket": bucket,
+                    "id": squash(job.get("id")),
+                    "title": title,
+                    "organization": org,
+                }
+            )
+            return False
+        return True
+
+    kept_active = [job for job in active if keep(job, "active")]
+    kept_archive = [job for job in archive if keep(job, "archive")]
+    return kept_active, kept_archive, removed
+
+
+ACADEMIC_STIPEND_RE = re.compile(
+    r"(?:₹|Rs\.?|INR)\s*([0-9][0-9,]{3,7})"
+    r"(?:\s*(?:-|–|to)\s*(?:₹|Rs\.?|INR)?\s*([0-9][0-9,]{3,7}))?"
+    r"[^.\n]{0,40}?(?:per\s+month|/\s*month|p\.?\s*m\.?|monthly|HRA)",
+    re.I,
+)
+
+
+def extract_academic_metadata(candidate: Dict[str, Any]) -> Dict[str, str]:
+    """Extract only facts literally present in the source advert."""
+    text = " ".join(
+        str(candidate.get(key) or "")
+        for key in ("title", "description", "location_raw")
+    )
+    lower = text.lower()
+    stipend = ""
+    match = ACADEMIC_STIPEND_RE.search(text)
+    if match:
+        low = match.group(1).replace(",", "")
+        high = (match.group(2) or "").replace(",", "")
+        stipend = "₹" + match.group(1) + (" – ₹" + match.group(2) if high else "") + " / month"
+    if "net/gate" in lower or ("net" in lower and "gate" in lower):
+        if "exempt" in lower:
+            net_gate = "NET / GATE exempted"
+        elif "preferred" in lower:
+            net_gate = "NET / GATE preferred"
+        else:
+            net_gate = "NET / GATE required"
+    elif "net qualified" in lower or "net-qualified" in lower:
+        net_gate = "NET qualified"
+    else:
+        net_gate = ""
+    if "walk-in" in lower or "walk in interview" in lower:
+        selection = "Walk-in Interview"
+    elif re.search(r"[\w.+-]+@[\w.-]+\.[a-z]{2,}", lower):
+        selection = "Email Application"
+    elif "apply online" in lower:
+        selection = "Online Application"
+    else:
+        selection = ""
+    return {
+        "stipend": stipend,
+        "net_gate": net_gate,
+        "selection_process": selection,
+    }
+
+
+def augment_academic_record(
+    record: Dict[str, Any], candidate: Dict[str, Any]
+) -> None:
+    """Attach verified academic badges/stipend without inventing anything."""
+    if not is_academic_candidate(candidate):
+        return
+    meta = extract_academic_metadata(candidate)
+    if not any(meta.values()):
+        return
+    record["academic_meta"] = {key: value for key, value in meta.items() if value}
+    if meta.get("selection_process"):
+        record["selection_process"] = meta["selection_process"]
+    if meta.get("stipend") and record.get("_compensation_is_default", True):
+        record["compensation_or_fellowship"] = meta["stipend"]
+    if meta.get("net_gate"):
+        qualification = squash(record.get("qualification_summary"))
+        if "net" not in qualification.lower() and "gate" not in qualification.lower():
+            record["qualification_summary"] = (
+                qualification + " · " + meta["net_gate"] if qualification else meta["net_gate"]
+            )
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -4715,6 +5348,29 @@ def main(argv: Optional[List[str]] = None) -> int:
         len(existing), jobs_path, len(archive), archive_path,
     )
 
+    existing, archive, purged_roles = purge_excluded_records(existing, archive)
+    if purged_roles:
+        report_path = jobs_path.parent.parent / "data" / "role_purge_report.json"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            json.dumps(
+                {
+                    "generated_at": datetime.now().isoformat(timespec="seconds"),
+                    "reason": "hard-negative sales/commercial/support blocklist",
+                    "removed": purged_roles,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        log.warning(
+            "Purged %d hard-negative role(s): %s",
+            len(purged_roles),
+            ", ".join(item["id"] for item in purged_roles[:8]),
+        )
+
     today = date.today().isoformat()
 
     if args.sitemap_only:
@@ -4762,65 +5418,125 @@ def main(argv: Optional[List[str]] = None) -> int:
     # round-robin interleaved so a single noisy source cannot consume the
     # whole humanization budget (--max-new) on its own.
     log.info("Lookback window for this run: %d hour(s)", resolve_lookback_hours())
-    board_candidates = scrape_board_candidates()
-    targeted_candidates = fetch_targeted_green_jobs()
-    reliefweb_candidates = fetch_reliefweb_jobs()
-    academic_candidates = fetch_indian_academic_and_institute_jobs()
-    portal_candidates = fetch_verified_indian_portals()
-    freejobalert_candidates = fetch_freejobalert()
-    official_candidates = fetch_official_pages()
-    ats_candidates = fetch_ats_feeds(_employer_registry())
-    candidates = interleave_candidates(
-        [
-            academic_candidates,
-            freejobalert_candidates,
-            official_candidates,
-            ats_candidates,
-            portal_candidates,
-            reliefweb_candidates,
-            targeted_candidates,
-            board_candidates,
-        ]
-    )
-    log.info(
-        "Collected %d raw candidate(s) from all sources "
-        "(institute-news=%d, freejobalert=%d, official=%d, ats=%d, portals=%d, "
-        "reliefweb=%d, targeted=%d, boards=%d)",
-        len(candidates),
-        len(academic_candidates),
-        len(freejobalert_candidates),
-        len(official_candidates),
-        len(ats_candidates),
-        len(portal_candidates),
-        len(reliefweb_candidates),
-        len(targeted_candidates),
-        len(board_candidates),
-    )
+    cache_path = Path(args.candidates_cache) if args.candidates_cache else None
+    if cache_path and cache_path.exists():
+        try:
+            cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            candidates = cached.get("candidates") if isinstance(cached, dict) else cached
+            if not isinstance(candidates, list):
+                raise ValueError("cache must contain a candidate list")
+            log.info(
+                "Loaded %d cached candidate(s) from %s (no re-scraping)",
+                len(candidates), cache_path,
+            )
+        except Exception as exc:
+            log.warning("Candidate cache %s unusable (%s); re-scraping", cache_path, exc)
+            cache_path = None
+    if not cache_path or not cache_path.exists():
+        board_candidates = scrape_board_candidates()
+        targeted_candidates = fetch_targeted_green_jobs()
+        reliefweb_candidates = fetch_reliefweb_jobs()
+        academic_candidates = fetch_indian_academic_and_institute_jobs()
+        portal_candidates = fetch_verified_indian_portals()
+        freejobalert_candidates = fetch_freejobalert()
+        official_candidates = fetch_official_pages()
+        ats_candidates = fetch_ats_feeds(_employer_registry())
+        candidates = interleave_candidates(
+            [
+                academic_candidates,
+                freejobalert_candidates,
+                official_candidates,
+                ats_candidates,
+                portal_candidates,
+                reliefweb_candidates,
+                targeted_candidates,
+                board_candidates,
+            ]
+        )
+        log.info(
+            "Collected %d raw candidate(s) from all sources "
+            "(institute-news=%d, freejobalert=%d, official=%d, ats=%d, portals=%d, "
+            "reliefweb=%d, targeted=%d, boards=%d)",
+            len(candidates),
+            len(academic_candidates),
+            len(freejobalert_candidates),
+            len(official_candidates),
+            len(ats_candidates),
+            len(portal_candidates),
+            len(reliefweb_candidates),
+            len(targeted_candidates),
+            len(board_candidates),
+        )
+        if cache_path:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            cache_path.write_text(
+                json.dumps(
+                    {"generated_at": datetime.now().isoformat(timespec="seconds"),
+                     "candidates": candidates},
+                    ensure_ascii=False,
+                    indent=2,
+                ) + "\n",
+                encoding="utf-8",
+            )
+            log.info("Cached %d raw candidate(s) at %s", len(candidates), cache_path)
 
     # 2. De-duplicate against the live feed and within this run.
     seen = existing_keys(existing)
+    seen_urls = {
+        identity
+        for identity in (apply_url_identity(job.get("apply_url")) for job in existing + archive)
+        if identity
+    }
+    seen_identities = {
+        identity
+        for identity in (role_identity(job) for job in existing + archive)
+        if identity
+    }
     fresh: List[Dict[str, Any]] = []
     invalid_urls = 0
+    blocked_roles = 0
     for candidate in candidates:
         if not (candidate.get("title") and candidate.get("apply_url")):
             continue
+        if is_excluded_role(
+            candidate.get("title") or "",
+            candidate.get("organization") or "",
+            candidate.get("description") or "",
+        ):
+            blocked_roles += 1
+            continue
         if not is_valid_apply_url(candidate.get("apply_url")):
             invalid_urls += 1
+            continue
+        identity = role_identity(candidate)
+        if identity and identity in seen_identities:
+            continue
+        url_identity = apply_url_identity(candidate.get("apply_url"))
+        if url_identity and url_identity in seen_urls:
             continue
         key = dedupe_key(candidate)
         if not key or key in seen:
             continue
         seen.add(key)
+        if identity:
+            seen_identities.add(identity)
+        if url_identity:
+            seen_urls.add(url_identity)
         fresh.append(candidate)
     if invalid_urls:
         log.warning(
             "Skipped %d candidate(s) with empty/placeholder apply URLs", invalid_urls
         )
+    if blocked_roles:
+        log.info(
+            "Layer-A blocklist rejected %d generic sales/commercial/support candidate(s)",
+            blocked_roles,
+        )
     total_fresh = len(fresh)
-    fresh = fresh[: max(0, args.max_new)]
+    fresh = prioritize_academic_candidates(fresh, max(0, args.max_new))
     log.info(
-        "%d candidate(s) are new; humanizing %d (run cap=%d)",
-        total_fresh, len(fresh), args.max_new,
+        "%d candidate(s) are new; humanizing %d (run cap=%d, academic share target=%.0f%%)",
+        total_fresh, len(fresh), args.max_new, ACADEMIC_BUDGET_SHARE * 100,
     )
 
     # 3. Humanize + strict India green filter with Gemini.
@@ -4838,6 +5554,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         for name, count in source_leads.items()
     }
     rate_limit_streak = 0
+    abort_after = int(
+        os.environ.get("GEMINI_RATE_LIMIT_ABORT_AFTER", str(GEMINI_RATE_LIMIT_ABORT_AFTER))
+    )
     for index, candidate in enumerate(fresh, start=1):
         label = squash(candidate.get("title"))[:70]
         try:
@@ -4857,9 +5576,25 @@ def main(argv: Optional[List[str]] = None) -> int:
                     today,
                     resolve_news_url=resolve_google_news_link,
                 )
+            if record is not None:
+                augment_academic_record(record, candidate)
             if record is None:
                 log.info("[%d/%d] skipped %r - %s", index, len(fresh), label, reason)
             else:
+                record_identity = role_identity(record)
+                record_url_identity = apply_url_identity(record.get("apply_url"))
+                if record_url_identity and record_url_identity in seen_urls:
+                    log.info(
+                        "[%d/%d] skipped %r - duplicate apply URL already in the registry",
+                        index, len(fresh), label,
+                    )
+                    continue
+                if record_identity and record_identity in seen_identities:
+                    log.info(
+                        "[%d/%d] skipped %r - duplicate title/employer already in the registry",
+                        index, len(fresh), label,
+                    )
+                    continue
                 record_key = dedupe_key(record)
                 if record_key in seen:
                     log.info(
@@ -4868,6 +5603,10 @@ def main(argv: Optional[List[str]] = None) -> int:
                     )
                     continue
                 seen.add(record_key)
+                if record_identity:
+                    seen_identities.add(record_identity)
+                if record_url_identity:
+                    seen_urls.add(record_url_identity)
                 record["id"] = unique_id(record["id"], taken_ids)
                 source_name = str(candidate.get("source") or "unknown")
                 source_stats.setdefault(
@@ -4892,7 +5631,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                 "[%d/%d] Gemini rate-limited for %r (%d in a row) | %s",
                 index, len(fresh), label, rate_limit_streak, str(exc)[:180],
             )
-            if rate_limit_streak >= GEMINI_RATE_LIMIT_ABORT_AFTER:
+            if rate_limit_streak >= abort_after:
                 log.warning(
                     "Gemini rate limit persists after %d candidates in a row; "
                     "stopping this run early. Unprocessed candidates remain for "
@@ -4970,6 +5709,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         digest_json_path,
         whatsapp_digest_path,
         send=not args.no_broadcast,
+        stats_path=stats_path,
     )
 
     log.info(

@@ -551,6 +551,8 @@ def gate_candidate(
                     record["must_have_skills"] = []
                 else:
                     record[field] = ""
+            if not str(record.get("clean_title") or "").strip():
+                return None, "clean title not found on source page"
 
     # 5. Publish. Identity comes from the registry when matched, never the LLM.
     website, domain = registry_identity(employer) if employer else ("", "")

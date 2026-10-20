@@ -1,0 +1,162 @@
+{
+  "generated_at": "2026-10-21T00:40:00",
+  "source": "post-pipeline2 snapshot (112) vs final registry (97)",
+  "before": 112,
+  "after": 97,
+  "removed_count": 20,
+  "reason_counts": {
+    "duplicate title/employer or apply URL": 11,
+    "generic careers/landing page": 2,
+    "no core environmental domain signal": 4,
+    "empty title after source verification": 3
+  },
+  "removed": [
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "wildlife-trade-forensics-course-wii-2",
+      "title": "Course in Wildlife Trade & Forensics for Revenue Officers",
+      "organization": "Wildlife Institute of India (WII)"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "wildlife-enthusiasts-course-wii-2",
+      "title": "Wildlife Enthusiasts Course",
+      "organization": "Wildlife Institute of India (WII)"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "satluj-river-basin-assessment-consultant-tnc-india",
+      "title": "Consultant / Agency – Satluj River Basin Assessment for Agroforestry and Freshwater Conservation",
+      "organization": "The Nature Conservancy (TNC) India"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "research-intern-technology-futures-ceew-3",
+      "title": "Research Intern - Technology Futures",
+      "organization": "Council on Energy, Environment and Water (CEEW)"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "research-intern-technology-futures-ceew-2",
+      "title": "Research Intern - Technology Futures",
+      "organization": "Council on Energy, Environment and Water (CEEW)"
+    },
+    {
+      "reason": "generic careers/landing page",
+      "id": "research-associate-wri-india",
+      "title": "WRI India Research Programme",
+      "organization": "WRI India"
+    },
+    {
+      "reason": "no core environmental domain signal",
+      "id": "research-associate-icar-nriipm",
+      "title": "Research Associate",
+      "organization": "ICAR-National Research Centre for Integrated Pest Management"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "research-analyst-programme-associate-technology-futures-ceew",
+      "title": "Research Analyst / Programme Associate - Technology Futures",
+      "organization": "Council on Energy, Environment and Water (CEEW)"
+    },
+    {
+      "reason": "no core environmental domain signal",
+      "id": "project-director-preconception-nutrition-nutrition-internati",
+      "title": "Project Director, Preconception Nutrition & Care",
+      "organization": "Nutrition International"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "programme-associate-energy-transitions-ceew-2",
+      "title": "Programme Associate – Energy Transitions",
+      "organization": "Council on Energy, Environment and Water (CEEW)"
+    },
+    {
+      "reason": "no core environmental domain signal",
+      "id": "head-of-advocacy-and-evidencing-helpage-international",
+      "title": "Head of Advocacy and Evidencing",
+      "organization": "HelpAge International"
+    },
+    {
+      "reason": "empty title after source verification",
+      "id": "habitat-ecology-wildlife-institute-of-india",
+      "title": "",
+      "organization": "Wildlife Institute of India (WII)"
+    },
+    {
+      "reason": "generic careers/landing page",
+      "id": "explore-job-openings-wri-india",
+      "title": "Job Openings",
+      "organization": "WRI India"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "consultant-satluj-river-basin-assessment-tnc-2",
+      "title": "Consultant for Comprehensive Assessment of the Satluj River Basin",
+      "organization": "The Nature Conservancy (TNC)"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "consultant-satluj-river-basin-assessment-tnc",
+      "title": "Consultant for Comprehensive Assessment of the Satluj River Basin",
+      "organization": "The Nature Conservancy (TNC)"
+    },
+    {
+      "reason": "empty title after source verification",
+      "id": "consultant-satluj-basin-assessment-tnc",
+      "title": "",
+      "organization": "The Nature Conservancy (TNC)"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "biology-phd-programme-iiser-pune",
+      "title": "PhD Programme in Biology",
+      "organization": "IISER Pune"
+    },
+    {
+      "reason": "empty title after source verification",
+      "id": "animal-ecology-and-conservation-biology-wii",
+      "title": "",
+      "organization": "Wildlife Institute of India (WII)"
+    },
+    {
+      "reason": "no core environmental domain signal",
+      "id": "assistant-director-programs-m3m-foundation",
+      "title": "Assistant Director Programs",
+      "organization": "M3M Foundation"
+    },
+    {
+      "reason": "duplicate title/employer or apply URL",
+      "id": "analyst-sustainable-sourcing-avantor-2",
+      "title": "Analyst - Sustainable Sourcing",
+      "organization": "Avantor"
+    }
+  ],
+  "added_after_snapshot": [
+    {
+      "id": "phd-research-sustainable-rurban-food-systems-atree",
+      "title": "PhD Research on Sustainable Rurban Food Systems",
+      "organization": "ATREE"
+    },
+    {
+      "id": "natural-resource-conservation-scientist-alignerr",
+      "title": "Natural Resource Conservation Scientist (AI Training)",
+      "organization": "Alignerr"
+    },
+    {
+      "id": "editorial-reviewer-plant-animal-science-cactus-communication",
+      "title": "Editorial Reviewer: Plant and Animal Science",
+      "organization": "Cactus Communications"
+    },
+    {
+      "id": "earth-ocean-climate-science-researcher-afterquery",
+      "title": "Earth, Ocean and Climate Science Researcher",
+      "organization": "AfterQuery"
+    },
+    {
+      "id": "climate-data-specialist-alignerr",
+      "title": "Climate Data Specialist (AI Training)",
+      "organization": "Alignerr"
+    }
+  ]
+}

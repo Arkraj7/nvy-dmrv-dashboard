@@ -71,19 +71,67 @@ FREEFOBALERT_QUERIES = [
 ]
 
 OFFICIAL_PAGES: List[Tuple[str, str]] = [
+    # Forestry, ecology and statutory science institutes
     ("Indian Council of Forestry Research and Education (ICFRE)", "https://icfre.gov.in/recruitments"),
+    ("Forest Research Institute (FRI), Dehradun", "https://fri.icfre.gov.in/recruitment"),
+    ("Institute of Forest Genetics and Tree Breeding (IFGTB)", "https://ifgtb.icfre.gov.in/"),
+    ("Institute of Wood Science and Technology (IWST)", "https://iwst.icfre.gov.in/"),
+    ("Tropical Forest Research Institute (TFRI)", "https://tfri.icfre.gov.in/"),
+    ("Arid Forest Research Institute (AFRI)", "https://afri.icfre.gov.in/"),
+    ("Rain Forest Research Institute (RFRI)", "https://rfri.icfre.gov.in/"),
+    ("Himalayan Forest Research Institute (HFRI)", "https://hfri.icfre.gov.in/"),
+    ("Institute of Forest Biodiversity (IFB), Hyderabad", "https://ifb.icfre.gov.in/"),
     ("Forest Survey of India (FSI)", "https://fsi.nic.in/recruitment"),
     ("Wildlife Institute of India (WII)", "https://wii.gov.in/recruitment"),
     ("Indian Institute of Forest Management (IIFM)", "https://iifm.ac.in/careers"),
+    ("Botanical Survey of India (BSI)", "https://bsi.gov.in/"),
+    ("Zoological Survey of India (ZSI)", "https://zsi.gov.in/"),
+    ("GBPIHED / NIHE Almora", "https://gbpihed.gov.in/recruitment"),
+    ("SACON Coimbatore", "https://sacon.in/careers/"),
+    ("National Centre for Sustainable Coastal Management (NCSCM)", "https://www.ncscm.res.in/careers"),
     ("Ministry of Environment, Forest and Climate Change (MoEFCC)", "https://moef.gov.in/recruitment"),
     ("Central Pollution Control Board (CPCB)", "https://cpcb.nic.in/recruitment/"),
+    # Geospatial, earth, atmospheric and marine sciences
+    ("Indian Institute of Remote Sensing (IIRS)", "https://www.iirs.gov.in/recruitment"),
+    ("National Remote Sensing Centre (NRSC)", "https://www.nrsc.gov.in/recruitment"),
+    ("Space Applications Centre (SAC), ISRO", "https://www.sac.gov.in/"),
+    ("Indian Institute of Tropical Meteorology (IITM)", "https://www.tropmet.res.in/careers"),
+    ("National Centre for Polar and Ocean Research (NCPOR)", "https://www.ncpore.res.in/"),
+    ("National Institute of Ocean Technology (NIOT)", "https://www.niot.res.in/careers"),
+    ("Indian National Centre for Ocean Information Services (INCOIS)", "https://incois.gov.in/recruitment"),
+    ("National Institute of Oceanography (NIO)", "https://www.nio.res.in/careers"),
+    # Agricultural and environmental research councils
     ("Indian Council of Agricultural Research (ICAR)", "https://icar.org.in/recruitment"),
+    ("ICAR-IARI New Delhi", "https://iari.res.in/recruitment"),
+    ("ICAR-CAZRI Jodhpur", "https://cazri.res.in/recruitment"),
+    ("ICAR-CRIDA Hyderabad", "https://crida.in/recruitment"),
+    ("ICAR-NBPGR New Delhi", "https://nbpgr.icar.gov.in/"),
+    ("ICAR-CSSRI Karnal", "https://cssri.res.in/"),
+    ("ICAR-IIWM Bhubaneswar", "https://iiwm.res.in/"),
+    ("ICAR-NAARM Hyderabad", "https://naarm.org.in/careers"),
     ("CSIR", "https://www.csir.res.in/careers"),
-    ("IIT Delhi", "https://home.iitd.ac.in/jobs-iitd.php"),
+    ("CSIR-NEERI Nagpur", "https://neeri.res.in/careers"),
+    ("CSIR-NBRI Lucknow", "https://nbri.res.in/recruitment"),
+    ("CSIR-CIMAP Lucknow", "https://cimap.res.in/"),
+    ("CSIR-4PI Bengaluru", "https://4pi.res.in/"),
+    # Premier universities and sponsored research portals
+    ("IIT Delhi", "https://home.iitd.ac.in/jobs.php"),
     ("IIT Bombay", "https://www.iitb.ac.in/en/career"),
     ("IIT Kharagpur", "https://www.iitkgp.ac.in/recruitment"),
-    ("Indian Institute of Science (IISc)", "https://iisc.ac.in/recruitment/"),
-    ("National Institute of Oceanography (NIO)", "https://www.nio.res.in/careers"),
+    ("IIT Roorkee", "https://www.iitr.ac.in/recruitment"),
+    ("IIT Madras", "https://www.iitm.ac.in/careers"),
+    ("IIT Guwahati", "https://www.iitg.ac.in/recruitment"),
+    ("IIT Kanpur", "https://www.iitk.ac.in/dord/recruitment"),
+    ("Indian Institute of Science (IISc)", "https://iisc.ac.in/careers/"),
+    ("IISER Pune", "https://www.iiserpune.ac.in/careers"),
+    ("Jawaharlal Nehru University (JNU)", "https://www.jnu.ac.in/careers"),
+    ("Banaras Hindu University (BHU)", "https://bhu.ac.in/recruitment"),
+    ("Tata Institute of Social Sciences (TISS)", "https://tiss.edu/careers"),
+    ("TERI School of Advanced Studies (TERI SAS)", "https://terisas.ac.in/careers"),
+    ("Department of Science and Technology (DST)", "https://dst.gov.in/careers"),
+    ("Anusandhan National Research Foundation (ANRF)", "https://anrf.gov.in/"),
+    ("Science and Engineering Research Board (SERB)", "https://serb.gov.in/"),
+    ("Department of Biotechnology (DBT)", "https://dbtindia.gov.in/careers"),
 ]
 
 SOURCE_LIMITS = {
@@ -201,18 +249,43 @@ def _extract_official_page(org: str, page_url: str, html: str) -> List[Dict[str,
     return out
 
 
+def _root_url(url: str) -> str:
+    parsed = urlparse(url)
+    if not parsed.scheme or not parsed.netloc:
+        return url
+    return f"{parsed.scheme}://{parsed.netloc}/"
+
+
 def fetch_official_pages() -> List[Dict[str, Any]]:
-    """Harvest specific notice links from official recruitment pages."""
+    """Harvest specific notice links from official recruitment pages.
+
+    Institute sites frequently move their recruitment page without leaving a
+    redirect (a stale /recruitment path returns 404 while the homepage still
+    links the current notice board). A homepage fallback keeps those sources
+    useful instead of silently losing an entire institute.
+    """
     out: List[Dict[str, Any]] = []
     session = _session()
     try:
         for org, url in OFFICIAL_PAGES:
             try:
                 response = session.get(url, timeout=TIMEOUT)
+                page_url = url
+                if response.status_code in (403, 404):
+                    root = _root_url(url)
+                    if root != url:
+                        fallback = session.get(root, timeout=TIMEOUT)
+                        if fallback.status_code == 200:
+                            log.info(
+                                "Official page %s -> HTTP %s; using homepage fallback %s",
+                                url, response.status_code, root,
+                            )
+                            response = fallback
+                            page_url = root
                 if response.status_code != 200:
                     log.info("Official page %s -> HTTP %s", url, response.status_code)
                     continue
-                out.extend(_extract_official_page(org, url, response.text))
+                out.extend(_extract_official_page(org, page_url, response.text))
             except Exception as exc:
                 log.info("Official page %s failed: %s", url, type(exc).__name__)
     finally:
