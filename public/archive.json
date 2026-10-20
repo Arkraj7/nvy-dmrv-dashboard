@@ -4,7 +4,7 @@
     "date_added": "2026-09-10",
     "valid_through": "2026-10-10",
     "date_archived": "2026-10-17",
-    "status": "archived",
+    "status": "quarantined",
     "clean_title": "Geospatial Analyst – Forest & Land-Use Mapping",
     "title_hi": "भू-स्थानिक विश्लेषक – वन & Land-Use मानचित्रण — ATREE",
     "organization": "ATREE",
@@ -38,7 +38,19 @@
     "org_domain": "atree.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "status_before_quarantine": "archived",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://www.atree.org/careers/",
+      "final_host": "www.atree.org",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "id": "research-associate-climate-policy-governance-wri-india-bengaluru",
@@ -79,14 +91,26 @@
     "org_domain": "wri-india.org",
     "source_portal": "Official Organisation Website",
     "opportunity_kind": "Job / Career",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "entry_type": "careers_portal",
+    "employer_id": "world-resources-institute-wri",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://www.wri.org/careers",
+      "final_host": "www.wri.org",
+      "http_status": 200,
+      "content_hash": "60533d54e6156bea2d7c47b08b595852",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "id": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
     "date_added": "2026-09-02",
     "valid_through": "2026-10-02",
     "date_archived": "2026-10-15",
-    "status": "archived",
+    "status": "quarantined",
     "clean_title": "Programme Officer – Urban Forestry & Green Cover",
     "title_hi": "कार्यक्रम अधिकारी – शहरी वानिकी & हरित Cover — WWF-India",
     "organization": "WWF-India",
@@ -120,14 +144,26 @@
     "org_domain": "wwfindia.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "status_before_quarantine": "archived",
+    "quarantine": {
+      "reason_code": "NEEDS_MANUAL_CHECK",
+      "final_url": "https://www.wwfindia.org/about_wwf/careers/",
+      "final_host": "www.wwfindia.org",
+      "http_status": 403,
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "error_detail": "status|HTTP403|Forbidden - may need manual verification",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "id": "consultant-esg-disclosures-brsr-reporting-ceew-new-delhi",
     "date_added": "2026-09-08",
     "valid_through": "2026-10-08",
     "date_archived": "2026-10-14",
-    "status": "archived",
+    "status": "quarantined",
     "clean_title": "Consultant – ESG Disclosures & BRSR Reporting",
     "title_hi": "सलाहकार – ESG Disclosures & BRSR Reporting — CEEW",
     "organization": "CEEW",
@@ -161,14 +197,26 @@
     "org_domain": "ceew.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "status_before_quarantine": "archived",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://www.ceew.in/careers",
+      "final_host": "www.ceew.in",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "id": "research-fellowship-environmental-policy-teri-new-delhi",
     "date_added": "2026-09-12",
     "valid_through": "2026-10-12",
     "date_archived": "2026-10-13",
-    "status": "archived",
+    "status": "quarantined",
     "clean_title": "Research Fellowship – Environmental Policy & Climate Governance",
     "title_hi": "अनुसंधान फेलोशिप – पर्यावरणीय नीति & जलवायु शासन — TERI",
     "organization": "TERI",
@@ -202,14 +250,26 @@
     "org_domain": "teriin.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "status_before_quarantine": "archived",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://www.teriin.org/careers",
+      "final_host": "www.teriin.org",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "id": "manager-carbon-credit-origination-eki-energy-services-indore",
     "date_added": "2026-09-04",
     "valid_through": "2026-10-04",
     "date_archived": "2026-10-12",
-    "status": "archived",
+    "status": "quarantined",
     "clean_title": "Manager – Carbon Credit Origination",
     "title_hi": "प्रबंधक – कार्बन Credit Origination — EKI Energy Services",
     "organization": "EKI Energy Services",
@@ -243,6 +303,18 @@
     "org_domain": "enkingint.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
-    "deadline_or_window": "Rolling / Open"
+    "deadline_or_window": "Rolling / Open",
+    "status_before_quarantine": "archived",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://enkingint.org/careers",
+      "final_host": "enkingint.org",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   }
 ]

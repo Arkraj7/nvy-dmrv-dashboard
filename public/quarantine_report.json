@@ -1,0 +1,1724 @@
+{
+  "generated_at": "2026-10-20T08:26:18Z",
+  "source": "audit_report.csv (11 PASS / 90 FAIL)",
+  "policy": "docs/LINK_POLICY.md",
+  "tag": "pre-gate-2026-10-20",
+  "totals": {
+    "records": 101,
+    "quarantined": 90,
+    "public": 11
+  },
+  "by_reason": {
+    "BLOCKED_HOST": 62,
+    "GENERIC_LANDING_PAGE": 14,
+    "CONTENT_MISMATCH": 5,
+    "NEEDS_MANUAL_CHECK": 3,
+    "HOST_NOT_IN_REGISTRY": 2,
+    "HTTP_404": 2,
+    "SOFT_404": 1,
+    "MissingSchema": 1
+  },
+  "fix_hints": {
+    "HOST_NOT_IN_REGISTRY": "Lead came from an aggregator (indiawaterportal/fundsforngos). Resolve to the employer's own page; never store the aggregator URL.",
+    "BLOCKED_HOST": "Replace with the employer's own posting/careers URL from the registry (job-board links may only be used for discovery).",
+    "GENERIC_LANDING_PAGE": "Replace the portal URL with the specific posting URL (job title must appear on the page).",
+    "CONTENT_MISMATCH": "Replace with the page that carries this exact posting, or add the correct domain/ATS host to the registry.",
+    "SOFT_404": "Page says \"404 / not found\" though HTTP=200 - find the current posting URL.",
+    "NEEDS_MANUAL_CHECK": "Manual review: TLS/403 host. Open in a browser inside India, capture the true posting URL, then re-run verify_link.",
+    "HTTP_404": "Dead link - find the current posting URL or drop the record.",
+    "MissingSchema": "Fetch broke on a relative redirect - retry/replace URL."
+  },
+  "by_employer": [
+    {
+      "employer": "EY",
+      "employer_id": "ey",
+      "count": 3,
+      "reason_codes": {
+        "BLOCKED_HOST": 3
+      },
+      "records": [
+        {
+          "slug": "consultant-ccass-ey-chennai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477790016",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "consultant-ccass-ey-mumbai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4449216914",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "senior-consultant-ccass-ey-chennai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477787211",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "PwC India",
+      "employer_id": "pwc",
+      "count": 3,
+      "reason_codes": {
+        "BLOCKED_HOST": 3
+      },
+      "records": [
+        {
+          "slug": "associate-power-utility-transformation-pwc-india",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4291059973",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "renewable-energy-program-manager-pwc-patna",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478427353",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "senior-associate-pwc-india",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4415883688",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "ATREE",
+      "employer_id": "atree",
+      "count": 2,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 2
+      },
+      "records": [
+        {
+          "slug": "geospatial-analyst-forest-land-use-mapping-atree-bengaluru",
+          "file": "public/archive.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.atree.org",
+          "apply_url": "https://www.atree.org/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-09-10",
+          "manual_seed": false
+        },
+        {
+          "slug": "project-associate-geospatial-urban-green-infrastructure-atree",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.atree.org",
+          "apply_url": "https://www.atree.org/careers/",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-05",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Avantor",
+      "employer_id": "avantor",
+      "count": 2,
+      "reason_codes": {
+        "BLOCKED_HOST": 2
+      },
+      "records": [
+        {
+          "slug": "analyst-sustainable-sourcing-avantor",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480516769",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "analyst-sustainable-sourcing-avantor-2",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480516768",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Colgate-Palmolive",
+      "employer_id": "colgatepalmolive",
+      "count": 2,
+      "reason_codes": {
+        "BLOCKED_HOST": 2
+      },
+      "records": [
+        {
+          "slug": "associate-analyst-supplier-compliance-colgate-palmolive",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4469020152",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "associate-team-lead-supplier-compliance-colgate-palmolive",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4460251490",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "International Forum for Environment, Sustainability & Technology (iFOREST)",
+      "employer_id": "international-forum-for-environment-sustainability-technology-iforest",
+      "count": 2,
+      "reason_codes": {
+        "BLOCKED_HOST": 2
+      },
+      "records": [
+        {
+          "slug": "programme-associate-industrial-decarbonisation-iforest",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479263940",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "programme-associate-industrial-heat-decarbonisation-iforest",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479283171",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "TÜV SÜD",
+      "employer_id": "tüv-süd",
+      "count": 2,
+      "reason_codes": {
+        "BLOCKED_HOST": 2
+      },
+      "records": [
+        {
+          "slug": "asst-manager-manager-operations-tuv-sud-gurugram",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4476461356",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "asst-manager-manager-operations-tuv-sud-gurugram-2",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4476468177",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "United Nations Framework Convention on Climate Change (UNFCCC)",
+      "employer_id": "united-nations-framework-convention-on-climate-change-unfccc",
+      "count": 2,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 2
+      },
+      "records": [
+        {
+          "slug": "unfccc-internship-programme",
+          "file": "public/global_jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "unfccc.int",
+          "apply_url": "https://unfccc.int/about-us/internships",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        },
+        {
+          "slug": "unfccc-secretariat-climate-careers",
+          "file": "public/global_jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "unfccc.int",
+          "apply_url": "https://unfccc.int/about-us/vacancies",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "WWF-India",
+      "employer_id": "wwfindia",
+      "count": 2,
+      "reason_codes": {
+        "BLOCKED_HOST": 1,
+        "NEEDS_MANUAL_CHECK": 1
+      },
+      "records": [
+        {
+          "slug": "coordinator-tea-wwf-india",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480819150",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        },
+        {
+          "slug": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
+          "file": "public/archive.json",
+          "reason_code": "NEEDS_MANUAL_CHECK",
+          "final_host": "www.wwfindia.org",
+          "apply_url": "https://www.wwfindia.org/about_wwf/careers/",
+          "entry_type": "unknown",
+          "date_added": "2026-09-02",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Accelleron",
+      "employer_id": "accelleron",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "emissions-executive-accelleron",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4471426627",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "ACCESS Development Services",
+      "employer_id": "access-development-services",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "project-lead-access-development-services",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=e94794c868c8f5eb",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Adani Natural Resources",
+      "employer_id": "adani-natural-resources",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "assistant-manager-horticulture-adani-natural-resources",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480812620",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Aditya Birla Fashion and Retail Limited",
+      "employer_id": "aditya-birla-fashion-and-retail",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "manager-sustainability-aditya-birla-fashion-and-retail",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477075706",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Amazon",
+      "employer_id": "amazon",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "program-manager-sustainability-fleet-electrification-amazon",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4470473913",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Anant National University",
+      "employer_id": "anant-national-university",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "dean-anant-school-for-climate-action-ahmedabad",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478208572",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "ASCI",
+      "employer_id": "asci",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "senior-sector-expert-building-energy-efficiency-asci",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478230249",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Bindi International Association",
+      "employer_id": "bindi-international-association",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "project-coordinator-yclc-bindi-international",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=e1ff306091b25910",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Castrol",
+      "employer_id": "castrol",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "global-logistics-sustainability-sme-castrol",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479108718",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "CEEW",
+      "employer_id": "council-on-energy-environment-and-water-ceew",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "consultant-esg-disclosures-brsr-reporting-ceew-new-delhi",
+          "file": "public/archive.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.ceew.in",
+          "apply_url": "https://www.ceew.in/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-09-08",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "CosmosGreen",
+      "employer_id": "cosmosgreen",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "management-trainee-climate-smart-agriculture-cosmosgreen",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477277869",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Cotecna",
+      "employer_id": "cotecna",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "auditor-sustainability-services-cotecna",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4476091538",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Cundall",
+      "employer_id": "cundall",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "building-automation-engineer-cundall-chennai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=bcfc0257ecf2d3fc",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "DEIF",
+      "employer_id": "deif",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "business-development-manager-renewable-energy-deif",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4436768027",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "DESRI",
+      "employer_id": "desri",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "analyst-civil-design-desri-hyderabad",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4434358804",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "DhartiAmrit Ecoservices",
+      "employer_id": "dhartiamrit-ecoservices",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "co-founder-dhartiamrit-ecoservices",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477742547",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Ecolab",
+      "employer_id": "ecolab",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "senior-regulatory-specialist-toxicology-ecolab-pune",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4463650250",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "EKI Energy Services",
+      "employer_id": "eki-energy-services",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "manager-carbon-credit-origination-eki-energy-services-indore",
+          "file": "public/archive.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "enkingint.org",
+          "apply_url": "https://enkingint.org/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-09-04",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Equilibrium",
+      "employer_id": "equilibrium",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "program-partnership-manager-equilibrium",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477563878",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "European Commission - Erasmus+ (EACEA)",
+      "employer_id": "european-commission-erasmus-eacea",
+      "count": 1,
+      "reason_codes": {
+        "CONTENT_MISMATCH": 1
+      },
+      "records": [
+        {
+          "slug": "erasmus-mundus-joint-masters",
+          "file": "public/global_jobs.json",
+          "reason_code": "CONTENT_MISMATCH",
+          "final_host": "www.eacea.ec.europa.eu",
+          "apply_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+          "entry_type": "award_portal",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Flora Carbon AI",
+      "employer_id": "flora-carbon-ai",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "business-development-marketing-associate-flora-carbon-ai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477060386",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Future Earth",
+      "employer_id": "future-earth",
+      "count": 1,
+      "reason_codes": {
+        "HTTP_404": 1
+      },
+      "records": [
+        {
+          "slug": "future-earth-global-opportunities",
+          "file": "public/global_jobs.json",
+          "reason_code": "HTTP_404",
+          "final_host": "futureearth.org",
+          "apply_url": "https://futureearth.org/opportunities/",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "G.B. Pant National Institute of Himalayan Environment (GBPNIHE)",
+      "employer_id": "gb-pant-national-institute-of-himalayan-environment-gbpnihe",
+      "count": 1,
+      "reason_codes": {
+        "CONTENT_MISMATCH": 1
+      },
+      "records": [
+        {
+          "slug": "project-associate-himalayan-ecology-climate-adaptation-gbpnihe",
+          "file": "public/jobs.json",
+          "reason_code": "CONTENT_MISMATCH",
+          "final_host": "gbpihed.gov.in",
+          "apply_url": "https://gbpihed.gov.in/vacancy.html",
+          "entry_type": "award_portal",
+          "date_added": "2026-10-06",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute for Human Settlements",
+      "employer_id": "indian-institute-for-human-settlements",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "lead-infrastructure-and-climate-iihs",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4453978704",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute of Forest Management (IIFM)",
+      "employer_id": "indian-institute-of-forest-management-iifm",
+      "count": 1,
+      "reason_codes": {
+        "NEEDS_MANUAL_CHECK": 1
+      },
+      "records": [
+        {
+          "slug": "young-professional-forest-policy-climate-finance-iifm-bhopal",
+          "file": "public/jobs.json",
+          "reason_code": "NEEDS_MANUAL_CHECK",
+          "final_host": "www.iifm.ac.in",
+          "apply_url": "https://www.iifm.ac.in/career",
+          "entry_type": "unknown",
+          "date_added": "2026-10-09",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute of Science (IISc)",
+      "employer_id": "indian-institute-of-science-iisc",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "phd-climate-dynamics-earth-system-modelling-iisc-bengaluru",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.iisc.ac.in",
+          "apply_url": "https://iisc.ac.in/careers/",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-12",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute of Technology Delhi (IIT Delhi)",
+      "employer_id": "indian-institute-of-technology-delhi-iit-delhi",
+      "count": 1,
+      "reason_codes": {
+        "CONTENT_MISMATCH": 1
+      },
+      "records": [
+        {
+          "slug": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
+          "file": "public/jobs.json",
+          "reason_code": "CONTENT_MISMATCH",
+          "final_host": "home.iitd.ac.in",
+          "apply_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
+          "entry_type": "posting",
+          "date_added": "2026-10-16",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute of Technology Kharagpur (IIT Kharagpur)",
+      "employer_id": "indian-institute-of-technology-kharagpur-iit-kharagpur",
+      "count": 1,
+      "reason_codes": {
+        "SOFT_404": 1
+      },
+      "records": [
+        {
+          "slug": "postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp",
+          "file": "public/jobs.json",
+          "reason_code": "SOFT_404",
+          "final_host": "www.iitkgp.ac.in",
+          "apply_url": "https://www.iitkgp.ac.in/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-14",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Indian Institute of Technology, Guwahati",
+      "employer_id": "indian-institute-of-technology-guwahati",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "doctoral-student-iit-guwahati",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478208160",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "International Crops Research Institute for the Semi-Arid Tropics",
+      "employer_id": "international-crops-research-institute-for-the-semiarid-tropics",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "scientist-innovation-systems-icrisat",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=0efcab3d008751a0",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "International Union for Conservation of Nature (IUCN) - South America",
+      "employer_id": "international-union-for-conservation-of-nature-iucn-south-america",
+      "count": 1,
+      "reason_codes": {
+        "MissingSchema": 1
+      },
+      "records": [
+        {
+          "slug": "iucn-south-america-conservation-careers",
+          "file": "public/global_jobs.json",
+          "reason_code": "MissingSchema",
+          "final_host": "iucn.org",
+          "apply_url": "https://www.iucn.org/regions/south-america",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Intertek India",
+      "employer_id": "intertek",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "sales-manager-sustainability-intertek-india",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477062615",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "JPMorganChase",
+      "employer_id": "jpmorganchase",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "climate-nature-social-risk-analyst-jpmorganchase",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4432435954",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "JSW Steel",
+      "employer_id": "jsw-steel",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "team-member-green-steel-jsw-steel-chennai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4468549980",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "LIC Housing Finance Limited",
+      "employer_id": "lic-housing-finance",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "assistant-associate-esg-lic-housing-finance",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479268259",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Liter of Light India",
+      "employer_id": "liter-of-light",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "partnerships-outreach-manager-liter-of-light-mumbai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=a0e7ff5168a92b88",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Loom Solar Pvt. Ltd.",
+      "employer_id": "loom-solar-ltd",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "area-sales-manager-loom-solar",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480875543",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "M3M Foundation",
+      "employer_id": "m3m-foundation",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "assistant-director-programs-m3m-foundation",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479669291",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "METRO Global Solution Center",
+      "employer_id": "metro-global-solution-center",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "esg-analyst-metro-global-solution-center",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4476655607",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Ministry of Environment, Forest and Climate Change (MoEFCC)",
+      "employer_id": "ministry-of-environment-forest-and-climate-change-moefcc",
+      "count": 1,
+      "reason_codes": {
+        "CONTENT_MISMATCH": 1
+      },
+      "records": [
+        {
+          "slug": "young-professional-climate-change-campa-moefcc",
+          "file": "public/jobs.json",
+          "reason_code": "CONTENT_MISMATCH",
+          "final_host": "moef.gov.in",
+          "apply_url": "https://moef.gov.in/vacancy-circulars",
+          "entry_type": "unknown",
+          "date_added": "2026-10-08",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Mittal Family Foundation",
+      "employer_id": "mittal-family-foundation",
+      "count": 1,
+      "reason_codes": {
+        "HOST_NOT_IN_REGISTRY": 1
+      },
+      "records": [
+        {
+          "slug": "mittal-family-climate-fellowship-program",
+          "file": "public/jobs.json",
+          "reason_code": "HOST_NOT_IN_REGISTRY",
+          "final_host": "www2.fundsforngos.org",
+          "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Naandi Water",
+      "employer_id": "naandi-water",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "quality-assurance-manager-naandi-water",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478238129",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "National Centre for Biological Sciences (NCBS)",
+      "employer_id": "national-centre-for-biological-sciences-ncbs",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "research-associate-biodiversity-ecological-genomics-ncbs",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.ncbs.res.in",
+          "apply_url": "https://www.ncbs.res.in/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-13",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "National Remote Sensing Centre (NRSC), ISRO",
+      "employer_id": "national-remote-sensing-centre-nrsc-isro",
+      "count": 1,
+      "reason_codes": {
+        "CONTENT_MISMATCH": 1
+      },
+      "records": [
+        {
+          "slug": "project-associate-geospatial-modelling-urban-heat-island-nrsc",
+          "file": "public/jobs.json",
+          "reason_code": "CONTENT_MISMATCH",
+          "final_host": "www.nrsc.gov.in",
+          "apply_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
+          "entry_type": "unknown",
+          "date_added": "2026-10-07",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Nextpower",
+      "employer_id": "nextpower",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "sales-analyst-nextpower",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4416196729",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "NTT DATA",
+      "employer_id": "ntt-data",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "esg-data-evidence-architect-ntt-data",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478388455",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Olive Recruitment",
+      "employer_id": "olive-recruitment",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "environmental-analyst-olive-recruitment-kochi",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4480914131",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "PATH",
+      "employer_id": "path",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "program-coordinator-climate-health-path-mumbai",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478329847",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Peregreen Enviro India Pvt. Ltd.",
+      "employer_id": "peregreen-enviro-ltd",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "compliance-executive-peregreen-enviro",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "in.indeed.com",
+          "apply_url": "https://in.indeed.com/viewjob?jk=33bee71d3d6b5ca4",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Quantum Sustainability Consulting Pvt. Ltd.",
+      "employer_id": "quantum-sustainability-consulting-ltd",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "sales-consultant-quantum-sustainability-consulting",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477380037",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Quest Global",
+      "employer_id": "quest-global",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "process-engineer-electrification-quest-global",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478887359",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Redington Limited",
+      "employer_id": "redington",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "esg-manager-redington-limited",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479684813",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Salim Ali Centre for Ornithology and Natural History (SACON)",
+      "employer_id": "salim-ali-centre-for-ornithology-and-natural-history-sacon",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "jrf-avian-ecology-habitat-assessment-sacon-coimbatore",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.sacon.in",
+          "apply_url": "https://www.sacon.in/careers/",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-15",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Saltech Design Labs",
+      "employer_id": "saltech-design-labs",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "mechanical-design-engineer-saltech-design-labs",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4465527088",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Sambodhi Research and Communications Pvt. Ltd.",
+      "employer_id": "sambodhi-research-and-communications-ltd",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "deputy-vice-president-energy-environment-sambodhi",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477505089",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Scimplify",
+      "employer_id": "scimplify",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "manager-esg-sustainability-scimplify-bengaluru",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477577315",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "SELCO Foundation",
+      "employer_id": "selco-foundation",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "program-manager-disaster-climate-resilience-selco",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479355847",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "SunInfra Energies Ltd",
+      "employer_id": "suninfra-energies-ltd",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "head-projects-operations-suninfra-energies",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477715492",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "TERI",
+      "employer_id": "the-energy-and-resources-institute-teri",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "research-fellowship-environmental-policy-teri-new-delhi",
+          "file": "public/archive.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.teriin.org",
+          "apply_url": "https://www.teriin.org/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-09-12",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "The Energy and Resources Institute (TERI)",
+      "employer_id": "the-energy-and-resources-institute-teri",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "doctoral-fellowship-climate-policy-sustainable-development-teri",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.teriin.org",
+          "apply_url": "https://www.teriin.org/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-11",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "The Global Energy Alliance for People and Planet",
+      "employer_id": "the-global-energy-alliance-for-people-and-planet",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "manager-program-development-geapp-india",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4477984984",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "The Nature Conservancy (TNC)",
+      "employer_id": "the-nature-conservancy-tnc",
+      "count": 1,
+      "reason_codes": {
+        "HOST_NOT_IN_REGISTRY": 1
+      },
+      "records": [
+        {
+          "slug": "satluj-river-basin-assessment-tnc",
+          "file": "public/jobs.json",
+          "reason_code": "HOST_NOT_IN_REGISTRY",
+          "final_host": "www.indiawaterportal.org",
+          "apply_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "UNAccc (Unity of Nations Action for Climate Change Council)",
+      "employer_id": "unaccc-unity-of-nations-action-for-climate-change-council",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "chief-of-partnerships-unaccc-vadodara",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4478250481",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "United Nations Development Programme (UNDP)",
+      "employer_id": "united-nations-development-programme-undp",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "undp-climate-environment-jobs",
+          "file": "public/global_jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "jobs.undp.org",
+          "apply_url": "https://jobs.undp.org/cj_view_jobs.cfm",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
+      "employer_id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
+      "count": 1,
+      "reason_codes": {
+        "HTTP_404": 1
+      },
+      "records": [
+        {
+          "slug": "unu-ias-postdoctoral-fellowships",
+          "file": "public/global_jobs.json",
+          "reason_code": "HTTP_404",
+          "final_host": "unu.edu",
+          "apply_url": "https://ias.unu.edu/en/opportunities",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Wildlife Institute of India",
+      "employer_id": "wildlife-institute-of-wii",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "project-associate-assistant-wii",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.freejobalert.com",
+          "apply_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": true
+        }
+      ]
+    },
+    {
+      "employer": "Wildlife Institute of India (WII)",
+      "employer_id": "wildlife-institute-of-wii",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
+          "file": "public/jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "wii.gov.in",
+          "apply_url": "https://wii.gov.in/recruitments",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-17",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "World Bank Group",
+      "employer_id": "world-bank-group",
+      "count": 1,
+      "reason_codes": {
+        "GENERIC_LANDING_PAGE": 1
+      },
+      "records": [
+        {
+          "slug": "world-bank-group-climate-careers",
+          "file": "public/global_jobs.json",
+          "reason_code": "GENERIC_LANDING_PAGE",
+          "final_host": "www.worldbank.org",
+          "apply_url": "https://www.worldbank.org/en/about/careers",
+          "entry_type": "careers_portal",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Yulu",
+      "employer_id": "yulu",
+      "count": 1,
+      "reason_codes": {
+        "BLOCKED_HOST": 1
+      },
+      "records": [
+        {
+          "slug": "head-esg-yulu",
+          "file": "public/jobs.json",
+          "reason_code": "BLOCKED_HOST",
+          "final_host": "www.linkedin.com",
+          "apply_url": "https://www.linkedin.com/jobs/view/4479766427",
+          "entry_type": "unknown",
+          "date_added": "2026-10-18",
+          "manual_seed": false
+        }
+      ]
+    },
+    {
+      "employer": "Zayed Sustainability Prize (UAE)",
+      "employer_id": "zayed-sustainability-prize-uae",
+      "count": 1,
+      "reason_codes": {
+        "NEEDS_MANUAL_CHECK": 1
+      },
+      "records": [
+        {
+          "slug": "zayed-sustainability-prize",
+          "file": "public/global_jobs.json",
+          "reason_code": "NEEDS_MANUAL_CHECK",
+          "final_host": "zayedsustainabilityprize.org",
+          "apply_url": "https://zayedsustainabilityprize.org/",
+          "entry_type": "unknown",
+          "date_added": "2026-10-19",
+          "manual_seed": false
+        }
+      ]
+    }
+  ]
+}

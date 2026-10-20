@@ -3,7 +3,7 @@
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "zayed-sustainability-prize",
     "clean_title": "Zayed Sustainability Prize - Global Awards for Climate, Energy, Water & Food Innovators",
@@ -39,7 +39,19 @@
     "org_website": "https://zayedsustainabilityprize.org",
     "org_domain": "zayedsustainabilityprize.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "NEEDS_MANUAL_CHECK",
+      "final_url": "https://zayedsustainabilityprize.org/",
+      "final_host": "zayedsustainabilityprize.org",
+      "http_status": 0,
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "error_detail": "tls|SSLError|HTTPSConnectionPool(host='zayedsustainabilityprize.org', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, '[SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized nam",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
@@ -81,13 +93,25 @@
     "org_website": "https://wri-india.org",
     "org_domain": "wri-india.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "careers_portal",
+    "employer_id": "world-resources-institute-wri",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://www.wri.org/careers",
+      "final_host": "www.wri.org",
+      "http_status": 200,
+      "content_hash": "62c8e702da0a94b7263eacee9a6237d0",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "world-bank-group-climate-careers",
     "clean_title": "Climate & Environment Careers - World Bank Group (Washington DC & Global)",
@@ -123,13 +147,25 @@
     "org_website": "https://www.worldbank.org",
     "org_domain": "worldbank.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://www.worldbank.org/ext/en/careers",
+      "final_host": "www.worldbank.org",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "unu-ias-postdoctoral-fellowships",
     "clean_title": "Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability)",
@@ -165,13 +201,25 @@
     "org_website": "https://ias.unu.edu",
     "org_domain": "ias.unu.edu",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "HTTP_404",
+      "final_url": "https://unu.edu/ias-domain-redirect/en/opportunities",
+      "final_host": "unu.edu",
+      "http_status": 404,
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "error_detail": "status|HTTP404|Not found",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "unfccc-secretariat-climate-careers",
     "clean_title": "Climate Change Careers - UNFCCC Secretariat (Professional & Programme Roles)",
@@ -208,13 +256,25 @@
     "org_website": "https://unfccc.int",
     "org_domain": "unfccc.int",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://unfccc.int/about-us/vacancies",
+      "final_host": "unfccc.int",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "unfccc-internship-programme",
     "clean_title": "Internship Programme - UNFCCC Secretariat (Climate Policy, Bonn)",
@@ -250,7 +310,19 @@
     "org_website": "https://unfccc.int",
     "org_domain": "unfccc.int",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://unfccc.int/about-us/internships",
+      "final_host": "unfccc.int",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
@@ -292,13 +364,25 @@
     "org_website": "https://www.thegef.org",
     "org_domain": "thegef.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "award_portal",
+    "employer_id": "global-environment-facility-small-grants-programme-sgp-implemented-by-undp",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://sgp.undp.org/",
+      "final_host": "sgp.undp.org",
+      "http_status": 200,
+      "content_hash": "803ea9c331df31e54108920ac3475d5d",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "undp-climate-environment-jobs",
     "clean_title": "Nature, Climate & Energy Roles - UNDP (Global Recruitment)",
@@ -334,13 +418,25 @@
     "org_website": "https://www.undp.org",
     "org_domain": "undp.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "GENERIC_LANDING_PAGE",
+      "final_url": "https://jobs.undp.org/cj_view_jobs.cfm",
+      "final_host": "jobs.undp.org",
+      "http_status": 200,
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "iucn-south-america-conservation-careers",
     "clean_title": "Conservation & Biodiversity Careers - IUCN South America Regional Office (Quito / Brasilia)",
@@ -376,7 +472,19 @@
     "org_website": "https://www.iucn.org/regions/south-america",
     "org_domain": "iucn.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "MissingSchema",
+      "final_url": "https://iucn.org/regions/south-america",
+      "final_host": "iucn.org",
+      "http_status": 0,
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "error_detail": "request|MissingSchema|Invalid URL '/our-work/region/south-america': No scheme supplied. Perhaps you meant https:///our-work/region/south-america?",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
@@ -418,13 +526,25 @@
     "org_website": "https://www.greenclimate.fund",
     "org_domain": "greenclimate.fund",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "careers_portal",
+    "employer_id": "green-climate-fund-gcf",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://www.greenclimate.fund/about/careers",
+      "final_host": "www.greenclimate.fund",
+      "http_status": 200,
+      "content_hash": "3fcb104e58de9bfa29d17ee536566043",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "future-earth-global-opportunities",
     "clean_title": "Global Sustainability Opportunities - Future Earth Network",
@@ -460,7 +580,19 @@
     "org_website": "https://futureearth.org",
     "org_domain": "futureearth.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "HTTP_404",
+      "final_url": "https://futureearth.org/opportunities/",
+      "final_host": "futureearth.org",
+      "http_status": 404,
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "error_detail": "status|HTTP404|Not found",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
@@ -502,13 +634,25 @@
     "org_website": "https://www.esa.int",
     "org_domain": "esa.int",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "unknown",
+    "employer_id": "european-space-agency-esa-climate-office",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://climate.esa.int/en/",
+      "final_host": "climate.esa.int",
+      "http_status": 200,
+      "content_hash": "aa669364ad5a3dd20dd1305f715d14cc",
+      "entry_type": "unknown",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "state": "",
     "global": true,
     "evergreen": true,
-    "status": "active",
+    "status": "quarantined",
     "source_portal": "Official Organization Website",
     "id": "erasmus-mundus-joint-masters",
     "clean_title": "Erasmus Mundus Joint Masters - Climate, Environment & Sustainability Programmes (EU)",
@@ -544,7 +688,19 @@
     "org_website": "https://www.eacea.ec.europa.eu",
     "org_domain": "eacea.ec.europa.eu",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "CONTENT_MISMATCH",
+      "final_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+      "final_host": "www.eacea.ec.europa.eu",
+      "http_status": 200,
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "error_detail": "",
+      "verified_at": "2026-10-20T08:26:18Z",
+      "audit": "audit_report.csv"
+    }
   },
   {
     "state": "",
@@ -586,7 +742,19 @@
     "org_website": "https://earthshotprize.org",
     "org_domain": "earthshotprize.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "award_portal",
+    "employer_id": "the-earthshot-prize-royal-foundation",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://earthshotprize.org/",
+      "final_host": "earthshotprize.org",
+      "http_status": 200,
+      "content_hash": "dcb31cb4d09421b793f055fce9539238",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   },
   {
     "state": "",
@@ -628,6 +796,18 @@
     "org_website": "https://www.chevening.org",
     "org_domain": "chevening.org",
     "date_added": "2026-10-19",
-    "valid_through": "2036-10-16"
+    "valid_through": "2036-10-16",
+    "entry_type": "award_portal",
+    "employer_id": "chevening-scholarships-uk-government-fcdo",
+    "verification": {
+      "verified_at": "2026-10-20T00:00:00Z",
+      "final_url": "https://www.chevening.org/scholarships/",
+      "final_host": "www.chevening.org",
+      "http_status": 200,
+      "content_hash": "2e4fcea7caf85fb03a3e7de9fe424e75",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "verifier": "verify_link"
+    }
   }
 ]
