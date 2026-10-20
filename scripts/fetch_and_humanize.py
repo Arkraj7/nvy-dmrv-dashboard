@@ -107,6 +107,18 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from urllib.parse import quote, urlencode, urljoin, urlparse
 from xml.etree import ElementTree as ET
 
+# Official-link gate (Phase 3): every candidate is verified at its source
+# before anything is written. Kept in its own module so pytest exercises the
+# exact code path used by the daily pipeline.
+from ingestion_gate import (
+    deadline_date,
+    dedupe_hash,
+    find_employer,
+    gate_candidate,
+    load_registry,
+    quarantine_record,
+)
+
 # ---------------------------------------------------------------------------
 # Optional third-party dependencies.
 # All imports are guarded so `--help` and `--sitemap-only` keep working in a
@@ -887,21 +899,57 @@ def normalize_key(text: str) -> str:
     return re.sub(r"[^a-z0-9]", "", (text or "").lower())
 
 
+_REGISTRY_CACHE: Optional[Dict[str, Any]] = None
+
+
+def _employer_registry() -> Dict[str, Any]:
+    """Load public/employers.json once per process (source of truth)."""
+    global _REGISTRY_CACHE
+    if _REGISTRY_CACHE is None:
+        try:
+            _REGISTRY_CACHE = load_registry(
+                str(Path(__file__).resolve().parent.parent / "public" / "employers.json")
+            )
+        except Exception as exc:  # pragma: no cover - defensive
+            log.warning("Could not load employer registry: %s", exc)
+            _REGISTRY_CACHE = {"employers": []}
+    return _REGISTRY_CACHE
+
+
+def _employer_id_for(organization: str) -> str:
+    employer = find_employer(organization, _employer_registry())
+    return str(employer.get("id") or "") if employer else ""
+
+
 def dedupe_key(candidate: Dict[str, Any]) -> str:
-    url_key = normalize_key(candidate.get("apply_url") or "")
-    title_key = normalize_key(candidate.get("title") or "")
-    org_key = normalize_key(candidate.get("organization") or "")
-    return url_key or (title_key + "@" + org_key)
+    """employer_id + normalised title + location + deadline (tracking-free)."""
+    organization = (
+        candidate.get("organization")
+        or candidate.get("company")
+        or ""
+    )
+    return dedupe_hash(
+        {
+            "clean_title": candidate.get("title") or candidate.get("clean_title") or "",
+            "organization": organization,
+            "city": candidate.get("city") or candidate.get("location") or "",
+            "state": candidate.get("state") or "",
+            "deadline_or_window": candidate.get("deadline_or_window") or "",
+        },
+        _employer_id_for(str(organization)),
+    )
 
 
 def existing_keys(jobs: List[Dict[str, Any]]) -> Set[str]:
     keys: Set[str] = set()
+    registry = _employer_registry()
     for job in jobs:
-        keys.add(normalize_key(job.get("apply_url") or ""))
+        employer = find_employer(job.get("organization"), registry)
         keys.add(
-            normalize_key(job.get("clean_title") or "")
-            + "@"
-            + normalize_key(job.get("organization") or "")
+            dedupe_hash(
+                job,
+                str(employer.get("id") or "") if employer else "",
+            )
         )
     return keys
 
@@ -1100,14 +1148,18 @@ def normalize_job_fields(job: Dict[str, Any]) -> Dict[str, Any]:
     # Official institution website + readable link identity. Best-effort and
     # non-destructive: verified directory hits always win, existing valid
     # values are preserved, and nothing is ever dropped for missing identity.
-    website, domain = finalize_org_identity(
-        squash(job.get("organization")),
-        squash(job.get("apply_url")),
-        squash(job.get("org_website")),
-        squash(job.get("org_domain")),
-    )
-    job["org_website"] = website
-    job["org_domain"] = domain
+    # Records that passed the Phase 3 gate keep the identity captured from the
+    # verified page + registry; normalization must never overwrite it.
+    if not job.get("verification"):
+        website, domain = finalize_org_identity(
+            squash(job.get("organization")),
+            squash(job.get("apply_url")),
+            squash(job.get("org_website")),
+            squash(job.get("org_domain")),
+        )
+        job["org_website"] = website
+        job["org_domain"] = domain
+    domain = squash(job.get("org_domain"))
     if not squash(job.get("source_portal")):
         job["source_portal"] = infer_source_portal(
             squash(job.get("apply_url")), domain
@@ -3356,6 +3408,7 @@ def run_global_stage(
     ensure_global_seed(existing, today)
 
     accepted: List[Dict[str, Any]] = []
+    quarantined: List[Dict[str, Any]] = []
     if api_key and GreenJob is not None:
         candidates = fetch_global_opportunities()
         seen = existing_keys(existing + archive)
@@ -3396,7 +3449,12 @@ def run_global_stage(
                         record = normalize_global_record(record)
                         record["global"] = True
                         record["evergreen"] = False
-                        record, reason = resolve_and_verify_record(record)
+                        record, reason = gate_candidate(
+                            record,
+                            _employer_registry(),
+                            today,
+                            resolve_news_url=resolve_google_news_link,
+                        )
                         if record is not None:
                             record = normalize_global_record(record)
                     if record is None:
@@ -3406,10 +3464,20 @@ def run_global_stage(
                         )
                     else:
                         record["id"] = unique_id(record["id"], taken_ids)
-                        accepted.append(record)
-                        log.info(
-                            "[global %d/%d] accepted %s", index, len(fresh), record["id"]
-                        )
+                        if record.get("status") == "quarantined":
+                            quarantined.append(record)
+                            log.warning(
+                                "[global %d/%d] quarantined %s - %s",
+                                index, len(fresh), record["id"],
+                                (record.get("quarantine") or {}).get(
+                                    "reason_code", reason
+                                ),
+                            )
+                        else:
+                            accepted.append(record)
+                            log.info(
+                                "[global %d/%d] accepted %s", index, len(fresh), record["id"]
+                            )
                 except GeminiRateLimited as exc:
                     rate_limited = True
                     log.warning(
@@ -3424,7 +3492,7 @@ def run_global_stage(
                     )
                 time.sleep(GEMINI_SLEEP_SECONDS)
 
-    merged = accepted + existing
+    merged = accepted + quarantined + existing
     merged.sort(
         key=lambda job: (str(job.get("date_added") or ""), str(job.get("id") or "")),
         reverse=True,
@@ -3611,12 +3679,11 @@ def coerce_to_job_record(
     position_type = match_enum(job.position_type, POSITION_TYPES) or infer_position_type(
         squash(job.clean_title), category
     )
-    qualification_summary = squash(
-        job.qualification_summary
-    ) or default_qualification_summary(position_type)
-    compensation_or_fellowship = squash(
-        job.compensation_or_fellowship
-    ) or default_compensation(position_type)
+    qualification_source = squash(job.qualification_summary)
+    compensation_source = squash(job.compensation_or_fellowship)
+    deadline_source = squash(job.deadline_or_window)
+    qualification_summary = qualification_source or default_qualification_summary(position_type)
+    compensation_or_fellowship = compensation_source or default_compensation(position_type)
 
     responsibilities = [
         re.sub(r"^[\-\u2022\*\s]+", "", squash(item))
@@ -3647,7 +3714,7 @@ def coerce_to_job_record(
 
     state = squash(job.state) or "Multiple States / Remote"
     opportunity_kind = match_enum(job.opportunity_kind, OPPORTUNITY_KINDS) or ""
-    deadline_or_window = squash(job.deadline_or_window) or "Rolling / Open"
+    deadline_or_window = deadline_source or "Rolling / Open"
     record = {
         "id": squash(job.id),
         "date_added": today,
@@ -3672,6 +3739,11 @@ def coerce_to_job_record(
         "org_website": squash(job.org_website),
         "org_domain": squash(job.org_domain).strip(".").lower(),
         "source_portal": squash(job.source_portal),
+        # Internal gate flags: placeholders are not LLM claims and must not be
+        # demanded on the fetched page. Removed before publication.
+        "_qualification_is_default": not qualification_source,
+        "_compensation_is_default": not compensation_source,
+        "_deadline_is_default": not deadline_source,
     }
     return record, ""
 
@@ -3710,6 +3782,11 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     dropped = 0
     blocked = 0
     for job in jobs:
+        # Quarantined records are the review queue: never deleted, never
+        # published. Their apply_url may be temporarily broken; keep them.
+        if job.get("status") == "quarantined":
+            valid.append(job)
+            continue
         if has_blocked_organization(job):
             blocked += 1
             continue
@@ -3771,8 +3848,11 @@ def apply_job_lifecycle(
         record_id = str(record.get("id") or "").strip()
         if not record_id:
             continue
-        record["status"] = "archived"
-        record.setdefault("date_archived", today)
+        if record.get("status") != "quarantined":
+            record["status"] = "archived"
+            record.setdefault("date_archived", today)
+        else:
+            record.setdefault("status_before_quarantine", "archived")
         added = parse_iso_date(record.get("date_added"))
         if added is not None and not record.get("valid_through"):
             record["valid_through"] = (added + timedelta(days=VALID_DAYS)).isoformat()
@@ -3784,9 +3864,25 @@ def apply_job_lifecycle(
         job_id = str(job.get("id") or "").strip()
         if not job_id:
             continue
+        # Quarantined listings stay in the review queue: hidden from the site,
+        # never aged into the archive and never reactivated automatically.
+        if job.get("status") == "quarantined":
+            job.setdefault("status_before_quarantine", "active")
+            active.append(job)
+            continue
         added = parse_iso_date(job.get("date_added")) or today_value
         job["date_added"] = added.isoformat()
-        valid_through = added + timedelta(days=VALID_DAYS)
+        # Expiry: archive on the stated deadline. With no deadline, cap the
+        # listing at VALID_DAYS and schedule the day-15 re-verification.
+        deadline = deadline_date(job)
+        if deadline is not None:
+            valid_through = deadline
+            job.pop("reverify_after", None)
+        else:
+            valid_through = added + timedelta(days=VALID_DAYS)
+            job["reverify_after"] = (
+                added + timedelta(days=max(1, VALID_DAYS // 2))
+            ).isoformat()
         job["valid_through"] = valid_through.isoformat()
 
         if valid_through < today_value:
@@ -3924,9 +4020,6 @@ def build_whatsapp_job_block(job: Dict[str, Any], index: Optional[int] = None) -
         lines.append(f"🕒 *Apply before:* {valid_through}")
     lines.append("")
     lines.append(f"🔗 *Full Details & Apply:* {share_url}")
-    org_website = squash(job.get("org_website"))
-    if org_website:
-        lines.append(f"🌐 *Official Site:* {org_website}")
     return "\n".join(lines)
 
 
@@ -3970,10 +4063,7 @@ def build_telegram_digest_html(
     ]
     for position, job in enumerate(jobs, start=1):
         share_url = f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}"
-        org_website = squash(job.get("org_website"))
         links = f'<a href="{_html_escape_text(share_url)}">Full details &amp; apply</a>'
-        if org_website:
-            links += f' · <a href="{_html_escape_text(org_website)}">Official website</a>'
         lines += [
             f"<b>{position}. {_html_escape_text(squash(job.get('clean_title')))}</b> — "
             f"{_html_escape_text(squash(job.get('organization')))} "
@@ -4047,9 +4137,8 @@ def write_digests(
                 "qualification_summary": squash(job.get("qualification_summary")),
                 "compensation_or_fellowship": squash(job.get("compensation_or_fellowship")),
                 "valid_through": squash(job.get("valid_through"))[:10],
-                "apply_url": squash(job.get("apply_url")),
-                "org_website": squash(job.get("org_website")),
-                "org_domain": squash(job.get("org_domain")),
+                # Broadcasts and the public digest carry dossier URLs only.
+                # apply_url / org_website / org_domain are never included.
                 "source_portal": squash(job.get("source_portal")),
                 "url": f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}",
             }
@@ -4152,9 +4241,16 @@ def broadcast_new_jobs(
     today: str,
     digest_path: Path,
     whatsapp_path: Path,
+    send: bool = True,
 ) -> None:
     """Regenerate the digest files and broadcast new listings when possible."""
     digest = write_digests(active, new_jobs, today, digest_path, whatsapp_path)
+    if not send:
+        log.info(
+            "Broadcast HELD: digest written, Telegram/WhatsApp not sent "
+            "(--no-broadcast). Review daily_digest.json + whatsapp_digest.txt."
+        )
+        return
     if not new_jobs:
         log.info("No new listings this run - Telegram/WhatsApp broadcast skipped")
         return
@@ -4203,8 +4299,17 @@ def write_sitemap(
     lastmod = date_archived). All page URLs are emitted in the extensionless
     form the host serves with HTTP 200.
     """
-    jobs = filter_valid_jobs(active_jobs)
-    archive = filter_valid_jobs(archive_jobs)
+    jobs = [
+        job
+        for job in filter_valid_jobs(active_jobs)
+        if job.get("status") != "quarantined"
+        and (job.get("entry_type") or "posting") != "unknown"
+    ]
+    archive = [
+        record
+        for record in filter_valid_jobs(archive_jobs)
+        if record.get("status") != "quarantined"
+    ]
     today = date.today().isoformat()
 
     preserved: Dict[str, Dict[str, str]] = {}
@@ -4476,6 +4581,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         action="store_true",
         help="Run the full pipeline but do not write jobs.json, archive.json, stats.json or sitemap.xml",
     )
+    parser.add_argument(
+        "--no-broadcast",
+        action="store_true",
+        help=(
+            "Generate daily_digest.json + whatsapp_digest.txt but do NOT send "
+            "Telegram/WhatsApp messages (hold for review)."
+        ),
+    )
     parser.add_argument("--verbose", action="store_true", help="Debug logging")
     return parser.parse_args(argv)
 
@@ -4626,6 +4739,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         if job.get("id")
     }
     accepted: List[Dict[str, Any]] = []
+    quarantined: List[Dict[str, Any]] = []
     rate_limit_streak = 0
     for index, candidate in enumerate(fresh, start=1):
         label = squash(candidate.get("title"))[:70]
@@ -4637,28 +4751,37 @@ def main(argv: Optional[List[str]] = None) -> int:
             if record is not None and not is_valid_apply_url(record.get("apply_url")):
                 record, reason = None, "apply URL failed validation"
             if record is not None:
-                # Resolve redirects, attach the official institution website
-                # and enforce the strict verifiability gate before publishing.
-                record, reason = resolve_and_verify_record(record)
-            if record is not None:
-                # The humanizer may resolve two different source links to the
-                # same vacancy (e.g. a job board and a news announcement);
-                # collapse those onto one registry record.
-                record_key = (
-                    normalize_key(record.get("clean_title") or "")
-                    + "@"
-                    + normalize_key(record.get("organization") or "")
+                # Phase 3 gate: registry -> verified fetch -> landing page ->
+                # content match -> field-in-source. Fail closed: unverified
+                # candidates are quarantined, never published.
+                record, reason = gate_candidate(
+                    record,
+                    _employer_registry(),
+                    today,
+                    resolve_news_url=resolve_google_news_link,
                 )
-                if record_key in seen:
-                    record, reason = None, "duplicate of a listing already in the registry"
-                else:
-                    seen.add(record_key)
             if record is None:
                 log.info("[%d/%d] skipped %r - %s", index, len(fresh), label, reason)
             else:
+                record_key = dedupe_key(record)
+                if record_key in seen:
+                    log.info(
+                        "[%d/%d] skipped %r - duplicate of a listing already in the registry",
+                        index, len(fresh), label,
+                    )
+                    continue
+                seen.add(record_key)
                 record["id"] = unique_id(record["id"], taken_ids)
-                accepted.append(record)
-                log.info("[%d/%d] accepted %s", index, len(fresh), record["id"])
+                if record.get("status") == "quarantined":
+                    quarantined.append(record)
+                    log.warning(
+                        "[%d/%d] quarantined %s - %s",
+                        index, len(fresh), record["id"],
+                        (record.get("quarantine") or {}).get("reason_code", reason),
+                    )
+                else:
+                    accepted.append(record)
+                    log.info("[%d/%d] accepted %s", index, len(fresh), record["id"])
         except GeminiRateLimited as exc:
             rate_limit_streak += 1
             log.warning(
@@ -4682,7 +4805,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         time.sleep(GEMINI_SLEEP_SECONDS)
 
     # 4. Merge (newest first), apply the lifecycle and persist everything.
-    merged = accepted + existing
+    #    Quarantined records are kept in the data files for review but are
+    #    never published, counted or broadcast.
+    merged = accepted + quarantined + existing
     merged.sort(
         key=lambda job: (str(job.get("date_added") or ""), str(job.get("id") or "")),
         reverse=True,
@@ -4693,7 +4818,18 @@ def main(argv: Optional[List[str]] = None) -> int:
         return 0
 
     active, archive, newly_archived = apply_job_lifecycle(merged, archive, today)
-    stats = compute_stats(active, archive, today)
+    # Telemetry counts only published records: quarantined rows and records
+    # whose entry type is unknown (hidden by placement policy) are excluded.
+    published = [
+        job
+        for job in active
+        if job.get("status") != "quarantined"
+        and (job.get("entry_type") or "posting") != "unknown"
+    ]
+    published_archive = [
+        record for record in archive if record.get("status") != "quarantined"
+    ]
+    stats = compute_stats(published, published_archive, today)
 
     write_jobs(active, jobs_path)
     write_archive(archive, archive_path)
@@ -4708,7 +4844,14 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # 6. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
     #    TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (or a WhatsApp webhook) are set.
-    broadcast_new_jobs(active, accepted, today, digest_json_path, whatsapp_digest_path)
+    broadcast_new_jobs(
+        active,
+        accepted,
+        today,
+        digest_json_path,
+        whatsapp_digest_path,
+        send=not args.no_broadcast,
+    )
 
     log.info(
         "Done: %d active listing(s) (%d new this run), %d archived (%d newly archived).",
