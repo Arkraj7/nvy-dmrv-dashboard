@@ -156,9 +156,184 @@
     track: 'all',
     kind: 'all',              // opportunity kind filter (jobs + grants + ...)
     experience: 'all',
+    quick: 'all',
+    savedOnly: false,
     detailId: null,
     loaded: false
   };
+
+  var SAVED_KEY = 'ufp_saved_jobs';
+  var QUICK_FILTERS = {
+    academic: function (job) {
+      return /(jrf|junior research fellow|srf|senior research fellow|project associate|research associate|project assistant|research fellow|young professional|field assistant|phd|doctoral|postdoc|fellowship)/i
+        .test(jobText(job));
+    },
+    net: function (job) {
+      return /(net\s*\/?\s*gate|net qualified|net exempted|gate qualified|m\.?sc|master of science)/i
+        .test(jobText(job) + ' ' + String((job.academic_meta || {}).net_gate || ''));
+    },
+    govt: function (job) {
+      return /(icfre|wildlife institute|\bwii\b|icar|iit|iisc|iiser|csir|isro|iirs|nrsc|moefcc|forest survey|\bfsi\b|iifm|university|institute|government|govt\.?|autonomous)/i
+        .test(String(job.organization || '') + ' ' + jobText(job));
+    },
+    corporate: function (job) {
+      return /(esg|carbon|sustainability|brsr|dmrv|net zero|climate risk|ehs|csr|clean energy|renewable)/i
+        .test(jobText(job) + ' ' + String(job.category || ''));
+    },
+    gis: function (job) {
+      return /(gis|remote sensing|earth observation|lidar|qgis|arcgis|google earth engine|geospatial|satellite)/i
+        .test(jobText(job) + ' ' + String(job.category || '') + ' ' + (job.must_have_skills || []).join(' '));
+    }
+  };
+
+  function jobText(job) {
+    return [
+      job.clean_title, job.organization, job.position_type, job.category,
+      job.role_summary, job.qualification_summary, job.compensation_or_fellowship
+    ].join(' ');
+  }
+
+  function savedList() {
+    try {
+      var parsed = JSON.parse(window.localStorage.getItem(SAVED_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed.map(String) : [];
+    } catch (e) { return []; }
+  }
+
+  function savedSet() {
+    var set = {};
+    savedList().forEach(function (id) { set[id] = true; });
+    return set;
+  }
+
+  function storeSaved(ids) {
+    try { window.localStorage.setItem(SAVED_KEY, JSON.stringify(ids)); } catch (e) { /* private mode */ }
+    updateSavedUi();
+  }
+
+  function isSaved(id) { return savedSet()[String(id)] === true; }
+
+  function toggleSaved(id) {
+    id = String(id);
+    var ids = savedList();
+    var index = ids.indexOf(id);
+    if (index >= 0) ids.splice(index, 1);
+    else ids.unshift(id);
+    storeSaved(ids);
+    toast(index >= 0 ? 'Removed from saved mandates' : 'Saved — find it under ★ Saved');
+    if (state.savedOnly) applyFilters();
+    return index < 0;
+  }
+
+  function savedJobs() {
+    var map = {};
+    state.jobs.concat(state.globalJobs, state.archive, state.globalArchive).forEach(function (job) {
+      map[String(job.id)] = job;
+    });
+    return savedList().map(function (id) { return map[id]; }).filter(Boolean);
+  }
+
+  function updateSavedUi() {
+    var ids = savedList();
+    var count = ids.length;
+    ['saved-count', 'saved-filter-count'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = String(count);
+    });
+    var btn = document.getElementById('saved-header-btn');
+    if (btn) btn.setAttribute('aria-label', 'Open saved jobs (' + count + ')');
+    var filterBtn = document.getElementById('saved-filter-btn');
+    if (filterBtn) {
+      filterBtn.classList.toggle('active', state.savedOnly);
+      filterBtn.setAttribute('aria-pressed', state.savedOnly ? 'true' : 'false');
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-save-id]'), function (item) {
+      var on = ids.indexOf(String(item.getAttribute('data-save-id'))) >= 0;
+      item.setAttribute('aria-pressed', on ? 'true' : 'false');
+      item.classList.toggle('is-saved', on);
+      var label = item.querySelector('.save-label');
+      if (label) label.textContent = on ? 'Saved' : 'Save';
+    });
+    renderSavedDrawer();
+  }
+
+  function renderSavedDrawer() {
+    var listEl = document.getElementById('saved-drawer-list');
+    if (!listEl) return;
+    var jobs = savedJobs();
+    if (!jobs.length) {
+      listEl.innerHTML = '<p class="saved-empty">No saved mandates yet. Tap <strong>★ Save</strong> on any card to build your shortlist.</p>';
+      return;
+    }
+    listEl.innerHTML = jobs.map(function (job) {
+      return '<div class="saved-item">' +
+        '<button class="saved-item-open" type="button" data-saved-open="' + escapeHtml(job.id) + '">' +
+          '<span class="saved-item-title">' + escapeHtml(displayTitle(job)) + '</span>' +
+          '<span class="saved-item-org">' + escapeHtml(job.organization) + ' · ' + escapeHtml(stateLabel(job)) + '</span>' +
+        '</button>' +
+        '<button class="saved-item-remove" type="button" data-saved-remove="' + escapeHtml(job.id) + '" aria-label="Remove saved mandate">×</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function openSavedDrawer() {
+    var drawer = document.getElementById('saved-drawer');
+    var backdrop = document.getElementById('saved-backdrop');
+    if (!drawer) return;
+    renderSavedDrawer();
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    if (backdrop) { backdrop.hidden = false; backdrop.classList.add('open'); }
+    document.body.classList.add('saved-open');
+    var header = document.getElementById('saved-header-btn');
+    if (header) header.setAttribute('aria-expanded', 'true');
+    var close = drawer.querySelector('.saved-close');
+    if (close) close.focus();
+  }
+
+  function closeSavedDrawer() {
+    var drawer = document.getElementById('saved-drawer');
+    var backdrop = document.getElementById('saved-backdrop');
+    if (!drawer) return;
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (backdrop) { backdrop.classList.remove('open'); backdrop.hidden = true; }
+    document.body.classList.remove('saved-open');
+    var header = document.getElementById('saved-header-btn');
+    if (header) header.setAttribute('aria-expanded', 'false');
+  }
+
+  function shareTextFor(job) {
+    var location = stateLabel(job) || job.city || job.region || 'India';
+    var detail = job.compensation_or_fellowship || job.qualification_summary || 'As per institute norms';
+    return '📌 ' + displayTitle(job) + ' — ' + job.organization + '\n' +
+      '📍 ' + location + '\n' +
+      '🎓 ' + detail + '\n' +
+      '🔗 Apply: ' + shareableUrl(job.id);
+  }
+
+  function findAnyJob(id) {
+    var pools = [state.jobs, state.globalJobs, state.archive, state.globalArchive];
+    for (var i = 0; i < pools.length; i++) {
+      for (var j = 0; j < pools[i].length; j++) {
+        if (String(pools[i][j].id) === String(id)) return pools[i][j];
+      }
+    }
+    return null;
+  }
+
+  function shareJob(id, mode, event) {
+    if (event) event.preventDefault();
+    var job = findAnyJob(id);
+    if (!job) return;
+    var text = shareTextFor(job);
+    if (mode === 'native' && navigator.share) {
+      navigator.share({ title: displayTitle(job) + ' — ' + job.organization, text: text, url: shareableUrl(job.id) })
+        .catch(function () { copyTextToClipboard(text, 'Share card copied'); });
+      return;
+    }
+    copyTextToClipboard(text, '4-line share card copied');
+  }
 
   var els = {};
 
@@ -693,8 +868,20 @@
       encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   }
 
+  function skeletonHtml() {
+    var card = '<div class="job-card skeleton-card" aria-hidden="true">' +
+      '<div class="sk-line sk-badge"></div>' +
+      '<div class="sk-line sk-title"></div>' +
+      '<div class="sk-line sk-sub"></div>' +
+      '<div class="sk-line sk-meta"></div>' +
+      '<div class="sk-line sk-meta short"></div>' +
+      '<div class="sk-line sk-bar"></div>' +
+    '</div>';
+    return '<div class="skeleton-grid" role="status" aria-label="Loading registry mandates">' + card.repeat(6) + '</div>';
+  }
+
   function loadAll() {
-    els.grid.innerHTML = '<div class="loading-state" role="status">' + t('feed.loadingstate', 'Loading registry mandates\u2026') + '</div>';
+    els.grid.innerHTML = skeletonHtml();
     Promise.all([
       fetchJson(CONFIG.DATA_URL, true),
       fetchJson(CONFIG.ARCHIVE_URL, false),
@@ -721,6 +908,8 @@
       populateStateSelect();
       refreshCategoryPills();
       refreshTrackButtons();
+      refreshQuickButtons();
+      updateSavedUi();
       injectFeedJsonLd(state.jobs);
       renderSeoDirectory();
       applyFilters();
@@ -1016,13 +1205,13 @@
         var region = j.region || 'Global / Remote';
         gcounts[region] = (gcounts[region] || 0) + 1;
       });
-      var regions = GLOBAL_REGIONS.filter(function (r) { return gcounts[r]; });
+      var regions = GLOBAL_REGIONS.slice();
       Object.keys(gcounts).forEach(function (r) {
         if (regions.indexOf(r) === -1) regions.push(r);
       });
       var ghtml = '<option value="all">' + t('filters.gregion.all', 'All Global ({n})', { n: gsource.length }) + '</option>';
       regions.forEach(function (r) {
-        ghtml += '<option value="' + escapeHtml(r) + '">' + escapeHtml(r) + ' (' + gcounts[r] + ')</option>';
+        ghtml += '<option value="' + escapeHtml(r) + '">' + escapeHtml(r) + ' (' + (gcounts[r] || 0) + ')</option>';
       });
       els.stateSelect.innerHTML = ghtml;
       els.stateSelect.value = gcounts[state.region] ? state.region : 'all';
@@ -1088,6 +1277,16 @@
     });
   }
 
+  function refreshQuickButtons() {
+    var row = document.getElementById('quick-filters');
+    if (!row) return;
+    Array.prototype.forEach.call(row.querySelectorAll('[data-quick]'), function (btn) {
+      var active = (btn.getAttribute('data-quick') || 'all') === state.quick;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
   function archiveCutoff() {
     return isoDaysAgo(CONFIG.ARCHIVE_RECENT_DAYS);
   }
@@ -1107,6 +1306,8 @@
       }
       if (state.category !== 'all' && job.category !== state.category) return false;
       if (state.track !== 'all' && trackOf(job) !== state.track) return false;
+      if (state.quick !== 'all' && QUICK_FILTERS[state.quick] && !QUICK_FILTERS[state.quick](job)) return false;
+      if (state.savedOnly && savedSet()[String(job.id)] !== true) return false;
       if (state.kind !== 'all' && opportunityKindOf(job) !== state.kind) return false;
       if (!isArchive && state.experience !== 'all' && job.experience_level !== state.experience) return false;
       if (isArchive && state.archiveRecent && String(job.date_archived || '') < cutoff) return false;
@@ -1215,6 +1416,18 @@
   }
 
   /* Qualification + compensation strip shown under a card's meta row. */
+  function academicBadgesHtml(job) {
+    var meta = job.academic_meta || {};
+    var badges = [];
+    if (meta.net_gate) badges.push(meta.net_gate);
+    if (job.selection_process) badges.push(job.selection_process);
+    if (meta.stipend && job.compensation_or_fellowship !== meta.stipend) badges.push(meta.stipend);
+    if (!badges.length) return '';
+    return '<div class="jc-academic-badges">' + badges.map(function (badge) {
+      return '<span class="jc-academic-badge">' + escapeHtml(badge) + '</span>';
+    }).join('') + '</div>';
+  }
+
   function jcEligibilityHtml(job) {
     var items = [];
     if (job.qualification_summary) {
@@ -1223,8 +1436,8 @@
     if (job.compensation_or_fellowship) {
       items.push('<span class="jc-elig-item">' + iconSvg('rupee') + escapeHtml(job.compensation_or_fellowship) + '</span>');
     }
-    if (!items.length) return '';
-    return '<div class="jc-eligibility">' + items.join('') + '</div>';
+    if (!items.length && !academicBadgesHtml(job)) return '';
+    return '<div class="jc-eligibility">' + items.join('') + '</div>' + academicBadgesHtml(job);
   }
 
   function jobCardHtml(job, isArchived) {
@@ -1264,6 +1477,9 @@
       ? t('card.cta.archive', 'Open Archived Record')
       : t('card.cta.active', 'View Position Dossier');
 
+    var saved = isSaved(job.id);
+    var waShareHref = 'https://wa.me/?text=' + encodeURIComponent(shareTextFor(job));
+
     return '' +
       '<article class="job-card' + (isArchived ? ' is-archived' : '') + '" data-id="' + escapeHtml(job.id) + '" tabindex="0" role="link" ' +
         'aria-label="' + (isArchived ? t('card.aria.archive', 'Open archived record: ') : t('card.aria.view', 'View position dossier: ')) +
@@ -1290,6 +1506,13 @@
             '<div class="jc-skills">' + chips + '</div>' +
           '</div>' +
           logoFigureHtml(job, 'card') +
+        '</div>' +
+        '<div class="jc-actions" aria-label="Save or share this mandate">' +
+          '<button class="jc-action jc-save' + (saved ? ' is-saved' : '') + '" type="button" data-save-id="' + escapeHtml(job.id) + '" aria-pressed="' + (saved ? 'true' : 'false') + '">' +
+            '<span aria-hidden="true">★</span> <span class="save-label">' + (saved ? 'Saved' : 'Save') + '</span>' +
+          '</button>' +
+          '<a class="jc-action jc-wa" href="' + waShareHref + '" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">' + iconSvg('whatsapp') + ' WhatsApp</a>' +
+          '<button class="jc-action" type="button" data-share-id="' + escapeHtml(job.id) + '" aria-label="Share this mandate">Share ↗</button>' +
         '</div>' +
         '<div class="jc-foot">' +
           '<span class="jc-date">' + footDate + '</span>' +
@@ -1471,6 +1694,7 @@
     }
     state.detailId = null;
     document.body.classList.remove('view-detail');
+    hideMobileActionBar();
     updateViewSeo();
     if (wasDetail) restoreFeedScroll();
   }
@@ -1512,6 +1736,12 @@
     }
     if (job.compensation_or_fellowship) {
       rows += '<div><dt>' + t('detail.comp', 'Compensation / Fellowship') + '</dt><dd>' + escapeHtml(job.compensation_or_fellowship) + '</dd></div>';
+    }
+    if (job.academic_meta && job.academic_meta.net_gate) {
+      rows += '<div><dt>NET / GATE</dt><dd>' + escapeHtml(job.academic_meta.net_gate) + '</dd></div>';
+    }
+    if (job.selection_process) {
+      rows += '<div><dt>Selection Process</dt><dd>' + escapeHtml(job.selection_process) + '</dd></div>';
     }
     return '' +
       '<div class="detail-section">' +
@@ -1573,6 +1803,7 @@
       : '<span>' + iconSvg('calendar') + escapeHtml(formatPosted(job.date_added)) + '</span>';
 
     var applyBlock = verifyCardHtml(job, isArchived);
+    var saved = isSaved(job.id);
 
     var suggestions = isArchived ? suggestionsHtml(job) : '';
 
@@ -1581,9 +1812,13 @@
       '<div class="detail-topbar">' +
         '<a class="back-link" href="#" data-action="back">' + iconSvg('back') + ' ' + backLabel + '</a>' +
         '<div class="share-row">' +
+          '<button class="share-btn share-save' + (saved ? ' is-saved' : '') + '" type="button" data-action="save" data-save-id="' + escapeHtml(job.id) + '" aria-pressed="' + (saved ? 'true' : 'false') + '">' +
+            '<span aria-hidden="true">★</span> <span class="save-label">' + (saved ? 'Saved' : 'Save') + '</span>' +
+          '</button>' +
           '<a class="share-btn share-whatsapp" href="' + waHref + '" target="_blank" rel="noopener noreferrer">' + iconSvg('whatsapp') + t('detail.share.wa', 'Share on WhatsApp') + '</a>' +
           '<a class="share-btn share-linkedin" href="' + liHref + '" target="_blank" rel="noopener noreferrer">' + iconSvg('linkedin') + t('detail.share.li', 'Share on LinkedIn') + '</a>' +
-          '<button class="share-btn share-copy" type="button" data-action="copy" title="Copies the direct ?job= link for this record">' + iconSvg('copy') + t('detail.share.copy', 'Copy Direct Link') + '</button>' +
+          '<button class="share-btn share-copy" type="button" data-action="share-card" title="Copies a 4-line share card with the direct job link">' + iconSvg('copy') + t('detail.share.card', 'Share ↗') + '</button>' +
+          '<button class="share-btn share-copy" type="button" data-action="copy" title="Copies the direct job link">' + t('detail.share.link', 'Copy Link') + '</button>' +
         '</div>' +
       '</div>' +
 
@@ -1655,6 +1890,39 @@
       '</div>' +
 
       suggestions;
+
+    updateMobileActionBar(job, isArchived);
+  }
+
+  function updateMobileActionBar(job, isArchived) {
+    var bar = document.getElementById('mobile-action-bar');
+    if (!bar) return;
+    bar.hidden = false;
+    var saveBtn = bar.querySelector('[data-action="save-current"]');
+    if (saveBtn) {
+      var on = isSaved(job.id);
+      saveBtn.setAttribute('data-save-id', String(job.id));
+      saveBtn.classList.toggle('is-saved', on);
+      saveBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var label = saveBtn.querySelector('.save-label');
+      if (label) label.textContent = on ? 'Saved' : 'Save';
+    }
+    var apply = bar.querySelector('[data-mobile-apply]');
+    if (apply) {
+      if (!isArchived && job.apply_url) {
+        apply.href = job.apply_url;
+        apply.hidden = false;
+        apply.innerHTML = 'Apply on Portal ' + iconSvg('external');
+      } else {
+        apply.removeAttribute('href');
+        apply.hidden = true;
+      }
+    }
+  }
+
+  function hideMobileActionBar() {
+    var bar = document.getElementById('mobile-action-bar');
+    if (bar) bar.hidden = true;
   }
 
   /* Up to 3 currently active mandates in the same sector or state. */
@@ -2535,6 +2803,8 @@
   function resetFilters() {
     state.query = ''; state.state = 'all'; state.category = 'all'; state.track = 'all'; state.experience = 'all';
     state.kind = 'all';
+    state.quick = 'all';
+    state.savedOnly = false;
     state.archiveRecent = false;
     var searchInput = document.getElementById('jobs-search');
     var heroInput = document.getElementById('hero-search-input');
@@ -2554,6 +2824,8 @@
     populateStateSelect();
     refreshCategoryPills();
     refreshTrackButtons();
+    refreshQuickButtons();
+    updateSavedUi();
     applyFilters();
     syncUrl(false);
   }
@@ -2644,6 +2916,81 @@
       });
     }
 
+    var quickRow = document.getElementById('quick-filters');
+    if (quickRow) {
+      quickRow.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-quick]');
+        if (!btn) return;
+        var value = btn.getAttribute('data-quick') || 'all';
+        state.quick = (state.quick === value) ? 'all' : value;
+        refreshQuickButtons();
+        applyFilters();
+      });
+    }
+
+    var savedHeader = document.getElementById('saved-header-btn');
+    if (savedHeader) savedHeader.addEventListener('click', openSavedDrawer);
+    var savedFilter = document.getElementById('saved-filter-btn');
+    if (savedFilter) {
+      savedFilter.addEventListener('click', function () {
+        state.savedOnly = !state.savedOnly;
+        updateSavedUi();
+        applyFilters();
+        var feed = document.getElementById('jobs-feed');
+        if (feed) feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-saved-filter]'), function (btn) {
+      btn.addEventListener('click', function () {
+        state.savedOnly = true;
+        closeSavedDrawer();
+        updateSavedUi();
+        applyFilters();
+        var feed = document.getElementById('jobs-feed');
+        if (feed) feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    var savedClose = document.getElementById('saved-close');
+    if (savedClose) savedClose.addEventListener('click', closeSavedDrawer);
+    var savedBackdrop = document.getElementById('saved-backdrop');
+    if (savedBackdrop) savedBackdrop.addEventListener('click', closeSavedDrawer);
+    var savedCopy = document.getElementById('saved-copy-all');
+    if (savedCopy) {
+      savedCopy.addEventListener('click', function () {
+        var links = savedJobs().map(function (job) { return shareableUrl(job.id); });
+        if (!links.length) { toast('No saved mandates to copy yet'); return; }
+        copyTextToClipboard(links.join('\n'), links.length + ' saved link(s) copied');
+      });
+    }
+    var savedDrawer = document.getElementById('saved-drawer');
+    if (savedDrawer) {
+      savedDrawer.addEventListener('click', function (e) {
+        var remove = e.target.closest('[data-saved-remove]');
+        if (remove) {
+          toggleSaved(remove.getAttribute('data-saved-remove'));
+          return;
+        }
+        var open = e.target.closest('[data-saved-open]');
+        if (open) {
+          closeSavedDrawer();
+          openJob(open.getAttribute('data-saved-open'));
+        }
+      });
+    }
+    var mobileBar = document.getElementById('mobile-action-bar');
+    if (mobileBar) {
+      mobileBar.addEventListener('click', function (e) {
+        var save = e.target.closest('[data-action="save-current"]');
+        if (save) {
+          e.preventDefault();
+          toggleSaved(save.getAttribute('data-save-id') || state.detailId);
+          return;
+        }
+        var back = e.target.closest('[data-action="back"]');
+        if (back) { e.preventDefault(); goHome(); }
+      });
+    }
+
     var clearBtn = document.getElementById('clear-filters');
     if (clearBtn) clearBtn.addEventListener('click', resetFilters);
 
@@ -2672,6 +3019,7 @@
         var wasDetail = !!state.detailId;
         state.detailId = null;
         document.body.classList.remove('view-detail');
+    hideMobileActionBar();
         setView('active');
         if (wasDetail) restoreFeedScroll();
       });
@@ -2683,6 +3031,7 @@
         var wasDetail = !!state.detailId;
         state.detailId = null;
         document.body.classList.remove('view-detail');
+    hideMobileActionBar();
         setView('archive');
         if (wasDetail) restoreFeedScroll();
       });
@@ -2699,11 +3048,27 @@
           resetFilters();
           return;
         }
+        var saveBtn = e.target.closest('[data-save-id]');
+        if (saveBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleSaved(saveBtn.getAttribute('data-save-id'));
+          return;
+        }
+        var shareBtn = e.target.closest('[data-share-id]');
+        if (shareBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          shareJob(shareBtn.getAttribute('data-share-id'), 'native', e);
+          return;
+        }
+        if (e.target.closest('.jc-actions')) return;
         var card = e.target.closest('.job-card');
         if (card) openJob(card.getAttribute('data-id'));
       });
       els.grid.addEventListener('keydown', function (e) {
         if (e.key !== 'Enter' && e.key !== ' ') return;
+        if (e.target.closest('a, button, [data-save-id], [data-share-id]')) return;
         var card = e.target.closest('.job-card');
         if (card) {
           e.preventDefault();
@@ -2723,6 +3088,12 @@
             goHome();
           } else if (name === 'copy') {
             copyShareLink(e);
+          } else if (name === 'save') {
+            e.preventDefault();
+            toggleSaved(action.getAttribute('data-save-id') || state.detailId);
+          } else if (name === 'share-card') {
+            e.preventDefault();
+            shareJob(state.detailId, 'copy');
           }
           return;
         }
@@ -2783,7 +3154,29 @@
     }
 
     document.addEventListener('keydown', function (e) {
+      var target = e.target || {};
+      var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName || '') || target.isContentEditable;
+      if (e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        var search = document.getElementById('jobs-search');
+        var filter = document.getElementById('filter-bar');
+        if (filter) filter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (search) {
+          search.focus({ preventScroll: true });
+          search.select();
+        }
+        return;
+      }
       if (e.key !== 'Escape') return;
+      var drawer = document.getElementById('saved-drawer');
+      if (drawer && drawer.classList.contains('open')) { closeSavedDrawer(); return; }
+      var nav = document.getElementById('site-nav');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        var toggle = document.getElementById('nav-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        return;
+      }
       if (els.modal && !els.modal.classList.contains('hidden')) { closeModal(); return; }
       if (state.detailId) goHome();
     });
@@ -3040,6 +3433,8 @@
       populateStateSelect();
       refreshCategoryPills();
       refreshTrackButtons();
+      refreshQuickButtons();
+      updateSavedUi();
       applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light', false);
       updateTabCounts();
       if (state.detailId) {

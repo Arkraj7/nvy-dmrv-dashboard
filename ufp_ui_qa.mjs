@@ -48,6 +48,11 @@ function check(label, cond, extra = '') {
 check('global registry has 12+ seeded listings', globalJobs.length >= 12, 'count=' + globalJobs.length);
 check('India registry has active listings', india.length > 0, 'count=' + india.length);
 
+const bannedRole = /(sales manager|sales analyst|area sales|territory sales|sales executive|sales consultant|business development & marketing associate)/i;
+const bannedHits = [...indiaAll, ...globalAll].filter(j => bannedRole.test(String(j.clean_title || '') + ' ' + String(j.title || '')));
+check('ZERO Sales Manager / Sales Analyst / Area Sales roles across both registries',
+  bannedHits.length === 0, bannedHits.map(j => j.id + ':' + j.clean_title).join(' | '));
+
 const anonymousEmployers = [...indiaAll, ...globalAll].filter(j =>
   /confidential|undisclosed|unknown|leading client|not disclosed/i.test(String(j.organization || ''))
 );
@@ -74,7 +79,7 @@ const regionsUsed = new Set(globalJobs.map(j => j.region));
 check('global registry spans 5+ regions', regionsUsed.size >= 5, [...regionsUsed].join(', '));
 const kindsUsed = new Set(globalJobs.map(j => j.opportunity_kind));
 check('global registry spans 4+ opportunity kinds', kindsUsed.size >= 4, [...kindsUsed].join(', '));
-const globalUrlOk = globalJobs.every(j => /^https:\/\/([a-z0-9-]+\.)*(unfccc\.int|greenclimate\.fund|undp\.org|thegef\.org|worldbank\.org|iucn\.org|wri\.org|wri-india\.org|esa\.int|climate\.esa\.int|eacea\.ec\.europa\.eu|erasmus-plus\.ec\.europa\.eu|futureearth\.org|chevening\.org|unu\.edu|zayedsustainabilityprize\.(org|com)|earthshotprize\.org)/.test(j.org_website || ''));
+const globalUrlOk = globalJobs.every(j => /^https:\/\/([a-z0-9-]+\.)*(unfccc\.int|greenclimate\.fund|undp\.org|thegef\.org|worldbank\.org|iucn\.org|wri\.org|wri-india\.org|esa\.int|climate\.esa\.int|eacea\.ec\.europa\.eu|erasmus-plus\.ec\.europa\.eu|futureearth\.org|chevening\.org|unu\.edu|zayedsustainabilityprize\.(org|com)|earthshotprize\.org|simonsfoundation\.org)/.test(j.org_website || ''));
 check('global seed records use official organisation URLs', globalUrlOk, 'bad=' + globalJobs.filter(j => !/^https:\/\//.test(j.org_website || '')).map(j => j.id).join(','));
 
 /* Weekly LinkedIn roundup files */
@@ -127,7 +132,11 @@ await context.addInitScript(() => {
 const consoleErrors = [];
 const sameOriginHttpErrors = [];
 function attach(page, tag) {
-  page.on('pageerror', err => consoleErrors.push(tag + ' pageerror: ' + err.message + ' :: ' + String(err.stack).slice(0, 600)));
+  page.on('pageerror', err => {
+    const stack = String(err.stack || '');
+    if (/googlesyndication|doubleclick|google-analytics/.test(stack)) return;
+    consoleErrors.push(tag + ' pageerror: ' + err.message + ' :: ' + stack.slice(0, 600));
+  });
   page.on('response', response => {
     if (response.status() >= 400 && response.url().startsWith(BASE)) {
       sameOriginHttpErrors.push(response.status() + ' ' + response.url());
@@ -582,17 +591,18 @@ check('header itself carries no NVY/dMRV text', await page.evaluate(() => {
   const header = document.querySelector('.site-header');
   return !!header && !/NVY|dMRV/i.test(header.textContent);
 }));
-check('header action order: language > night mode > publish CTA', await page.evaluate(() => {
+check('header action order: language > night mode > saved > publish CTA', await page.evaluate(() => {
   const actions = document.querySelector('.header-actions');
   if (!actions) return false;
   const order = [...actions.children].map(el => {
     if (el.classList.contains('lang-toggle')) return 'lang';
     if (el.classList.contains('theme-toggle')) return 'theme';
+    if (el.classList.contains('saved-header-btn')) return 'saved';
     if (el.classList.contains('nav-cta')) return 'cta';
     if (el.classList.contains('nav-toggle')) return 'menu';
     return 'other';
   });
-  return JSON.stringify(order) === JSON.stringify(['lang', 'theme', 'cta', 'menu']);
+  return JSON.stringify(order) === JSON.stringify(['lang', 'theme', 'saved', 'cta', 'menu']);
 }));
 
 check('back-to-top control exists on the registry', (await page.locator('.ufp-btt').count()) === 1);
@@ -1144,7 +1154,113 @@ check('C: portal buttons are full-width and 42px+ tall',
   mobileDetail.btnWidths.every(w => Math.abs(w - mobileDetail.actionsWidth) <= 2) &&
   mobileDetail.btnHeights.every(h => h >= 42),
   `w=${mobileDetail.btnWidths.join(',')} h=${mobileDetail.btnHeights.join(',')} actions=${mobileDetail.actionsWidth}`);
+
+check('C: mobile sticky dossier action bar is visible', await mobilePage.locator('#mobile-action-bar').isVisible());
+check('C: mobile action bar has back, save and apply controls',
+  await mobilePage.locator('#mobile-action-bar [data-action="back"]').count() === 1 &&
+  await mobilePage.locator('#mobile-action-bar [data-action="save-current"]').count() === 1 &&
+  await mobilePage.locator('#mobile-action-bar [data-mobile-apply]').count() === 1);
+
+await mobilePage.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+await mobilePage.waitForSelector('.job-card', { timeout: 20000 });
+await mobilePage.waitForTimeout(250);
+check('C: quick-filter strip renders 5 researcher filters + Saved',
+  await mobilePage.locator('#quick-filters [data-quick]').count() === 5 &&
+  await mobilePage.locator('#saved-filter-btn').count() === 1,
+  'n=' + await mobilePage.locator('#quick-filters [data-quick]').count());
+check('C: every job card has save + share + WhatsApp actions',
+  await mobilePage.locator('.job-card [data-save-id]').count() >= 1 &&
+  await mobilePage.locator('.job-card [data-share-id]').count() >= 1 &&
+  await mobilePage.locator('.job-card .jc-wa').count() >= 1);
+check('C: skeleton shimmer markup is replaced after load',
+  await mobilePage.locator('.skeleton-card').count() === 0);
+
+const firstMobileId = await mobilePage.locator('.job-card').first().getAttribute('data-id');
+await mobilePage.locator('.job-card').first().locator('[data-save-id]').click();
+await mobilePage.waitForTimeout(120);
+const savedAfterTap = await mobilePage.evaluate(() => JSON.parse(localStorage.getItem('ufp_saved_jobs') || '[]'));
+check('C: ★ Save persists the job id in ufp_saved_jobs',
+  savedAfterTap.includes(firstMobileId), savedAfterTap.join(','));
+await mobilePage.locator('#saved-header-btn').click();
+await mobilePage.waitForTimeout(180);
+check('C: Saved drawer opens with the shortlisted mandate',
+  await mobilePage.locator('#saved-drawer.open').count() === 1 &&
+  await mobilePage.locator('#saved-drawer [data-saved-open]').count() >= 1);
+await mobilePage.locator('#saved-close').click();
+
+await mobilePage.locator('#quick-filters [data-quick="academic"]').click();
+await mobilePage.waitForTimeout(220);
+const academicOnly = await mobilePage.locator('.job-card').count();
+check('C: JRF/SRF quick filter activates', await mobilePage.locator('#quick-filters [data-quick="academic"]').getAttribute('aria-pressed') === 'true',
+  'cards=' + academicOnly);
+await mobilePage.locator('#quick-filters [data-quick="academic"]').click();
+
+const feedOk = await fetch(BASE + '/feed.xml').then(async r => ({ status: r.status, text: await r.text() }));
+const jrfFeedOk = await fetch(BASE + '/jrf-feed.xml').then(async r => ({ status: r.status, text: await r.text() }));
+check('D: /feed.xml returns HTTP 200 valid RSS', feedOk.status === 200 && /^<\?xml/.test(feedOk.text.trim()) && /<rss[\s>]/.test(feedOk.text) && /<item>/.test(feedOk.text), 'status=' + feedOk.status);
+check('D: /jrf-feed.xml returns HTTP 200 valid RSS', jrfFeedOk.status === 200 && /^<\?xml/.test(jrfFeedOk.text.trim()) && /<rss[\s>]/.test(jrfFeedOk.text) && /<item>/.test(jrfFeedOk.text), 'status=' + jrfFeedOk.status);
+
 await mobileContext.close();
+
+/* Tablet (iPad / Android) */
+const tabletContext = await browser.newContext({ viewport: { width: 820, height: 1180 } });
+const tabletPage = await tabletContext.newPage();
+attach(tabletPage, 'tablet');
+await tabletPage.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+await tabletPage.waitForSelector('.job-card', { timeout: 20000 });
+await tabletPage.waitForTimeout(250);
+const tabletLayout = await tabletPage.evaluate(() => {
+  const card = document.querySelector('.job-card');
+  const quick = document.querySelector('#quick-filters [data-quick]');
+  const grid = document.querySelector('.telemetry-grid');
+  return {
+    docWidth: document.documentElement.scrollWidth,
+    telemetryCols: getComputedStyle(grid).gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+    cardPadding: parseFloat(getComputedStyle(card).paddingTop),
+    quickHeight: quick.getBoundingClientRect().height,
+    headerOverflow: document.querySelector('.header-inner').scrollWidth > document.querySelector('.header-inner').clientWidth + 2,
+    savedVisible: !!document.getElementById('saved-header-btn')
+  };
+});
+check('E: zero horizontal overflow at 820px', tabletLayout.docWidth <= 820, 'doc=' + tabletLayout.docWidth);
+check('E: tablet telemetry is a balanced 2x2 grid', tabletLayout.telemetryCols === 2, 'cols=' + tabletLayout.telemetryCols);
+check('E: tablet cards use 18px padding', Math.abs(tabletLayout.cardPadding - 18) <= 1, 'padding=' + tabletLayout.cardPadding);
+check('E: tablet quick filters meet 44px touch target', tabletLayout.quickHeight >= 44, 'h=' + tabletLayout.quickHeight);
+check('E: tablet header does not wrap/overflow', !tabletLayout.headerOverflow);
+check('E: tablet header exposes the Saved shortlist', tabletLayout.savedVisible);
+await tabletContext.close();
+
+/* Laptop / desktop */
+const laptopContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+const laptopPage = await laptopContext.newPage();
+attach(laptopPage, 'laptop');
+await laptopPage.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
+await laptopPage.waitForSelector('.job-card', { timeout: 20000 });
+await laptopPage.waitForTimeout(250);
+check('F: zero horizontal overflow at 1440px',
+  await laptopPage.evaluate(() => document.documentElement.scrollWidth <= 1440));
+check('F: search input shows the Press / hint',
+  (await laptopPage.locator('.search-kbd').innerText()).toLowerCase().includes('press /'));
+await laptopPage.evaluate(() => document.body.focus());
+await laptopPage.keyboard.press('/');
+await laptopPage.waitForTimeout(120);
+check('F: / keyboard shortcut focuses the registry search',
+  await laptopPage.evaluate(() => document.activeElement && document.activeElement.id === 'jobs-search'));
+check('F: every card exposes Share and Saved actions',
+  await laptopPage.locator('.job-card [data-share-id]').count() >= 1 &&
+  await laptopPage.locator('.job-card [data-save-id]').count() >= 1);
+await laptopPage.evaluate(() => window.scrollTo(0, 520));
+await laptopPage.waitForTimeout(120);
+await laptopPage.evaluate(() => document.querySelector('.job-card').click());
+await laptopPage.waitForTimeout(300);
+check('F: dossier opens with a sticky-free desktop view', await laptopPage.locator('body.view-detail').count() === 1);
+await laptopPage.keyboard.press('Escape');
+await laptopPage.waitForTimeout(450);
+const laptopAfterEscape = await laptopPage.evaluate(() => ({ y: window.scrollY, detail: document.body.classList.contains('view-detail') }));
+check('F: Escape returns to the feed at the saved scroll offset',
+  !laptopAfterEscape.detail && laptopAfterEscape.y >= 300,
+  `y=${Math.round(laptopAfterEscape.y)}`);
+await laptopContext.close();
 
 check('no unexpected console/page errors', consoleErrors.length === 0, consoleErrors.slice(0, 4).join(' || ').slice(0, 240));
 check('zero same-origin HTTP errors across the whole run', sameOriginHttpErrors.length === 0, sameOriginHttpErrors.slice(0, 4).join(' || ').slice(0, 240));
