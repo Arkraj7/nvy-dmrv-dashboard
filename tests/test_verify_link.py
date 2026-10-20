@@ -1,11 +1,17 @@
-"""Unit tests for verify_link policy primitives (offline).
+"""Unit tests for the editable direct-link policy (offline).
 
-Network access is disabled: any test that reaches the fetcher fails loudly.
+Network access is disabled; fetch results are injected.
 """
 from __future__ import annotations
 
 import pytest
 
+from link_policy import (
+    is_generic_url,
+    matches_platform_pattern,
+    platform_for,
+    strip_tracking,
+)
 from verify_link import LinkVerifier, load_employers_registry
 
 REGISTRY = {
@@ -22,75 +28,195 @@ REGISTRY = {
 }
 
 
+class FakeResponse:
+    def __init__(self, status_code=200, text="", content_type="text/html"):
+        self.status_code = status_code
+        self.headers = {"Content-Type": content_type}
+        self._content_for_analysis = text.encode("utf-8")
+
+    def close(self):
+        return None
+
+
 @pytest.fixture()
 def verifier():
     return LinkVerifier(REGISTRY, use_playwright=False)
 
 
-def test_blocklist_is_checked_before_any_network_call(verifier, monkeypatch):
+def no_network(monkeypatch, verifier):
     def boom(*args, **kwargs):
-        raise AssertionError("network must not be touched for blocklisted hosts")
-
+        raise AssertionError("network must not be touched")
     monkeypatch.setattr(verifier, "_fetch_with_redirects", boom)
+
+
+def test_linkedin_direct_is_kept_without_fetch(verifier, monkeypatch):
+    no_network(monkeypatch, verifier)
     result = verifier.verify(
         "https://www.linkedin.com/jobs/view/123456",
         "acme-green-foundation",
-        "Research Associate",
-        "Acme Green Foundation",
     )
-    assert result.ok is False
-    assert result.reason_code == "BLOCKED_HOST"
+    assert result.ok is True
+    assert result.reason_code == "UNKNOWN_KEEP"
+    assert result.entry_type == "posting"
+    assert result.platform == "LinkedIn"
     assert result.http_status == 0
-    assert result.host_class == "blocklisted"
 
 
-def test_unregistered_host_is_rejected_before_fetch(verifier, monkeypatch):
-    def boom(*args, **kwargs):
-        raise AssertionError("network must not be touched")
-
-    monkeypatch.setattr(verifier, "_fetch_with_redirects", boom)
+def test_linkedin_search_is_not_direct(verifier, monkeypatch):
+    no_network(monkeypatch, verifier)
     result = verifier.verify(
-        "https://random-blog.example/careers/job-1",
+        "https://in.linkedin.com/jobs/search?keywords=forestry",
         "acme-green-foundation",
     )
-    assert result.reason_code == "HOST_NOT_IN_REGISTRY"
+    assert result.reason_code == "NOT_DIRECT_LINK"
+    assert result.entry_type == "careers_portal"
+    assert result.ok is True
 
 
-def test_dns_filtered_resolution_needs_manual_check(verifier, monkeypatch):
-    monkeypatch.setattr(
-        verifier, "_is_private_ip", lambda host: "dns_filtered"
-    )
+def test_indeed_direct_url_pattern(verifier, monkeypatch):
+    no_network(monkeypatch, verifier)
     result = verifier.verify(
-        "https://acmegreen.org/careers/research-associate",
+        "https://in.indeed.com/viewjob?jk=abc123&utm_source=alert",
         "acme-green-foundation",
-        "Research Associate",
     )
-    assert result.ok is False
-    assert result.reason_code == "NEEDS_MANUAL_CHECK"
-    assert "dns" in result.error_detail
+    assert result.reason_code == "UNKNOWN_KEEP"
+    assert result.platform == "Indeed"
+    assert "utm_source" not in result.final_url
+    assert "jk=abc123" in result.final_url
 
 
-def test_tls_error_needs_manual_check(verifier, monkeypatch):
+def test_naukri_direct_and_listing(verifier, monkeypatch):
+    no_network(monkeypatch, verifier)
+    direct = verifier.verify(
+        "https://www.naukri.com/job-listings-forest-officer-12345678"
+    )
+    listing = verifier.verify("https://www.naukri.com/forestry-jobs")
+    assert direct.reason_code == "UNKNOWN_KEEP"
+    assert listing.reason_code == "NOT_DIRECT_LINK"
+
+
+def test_home_and_search_pages_are_not_direct(verifier, monkeypatch):
+    no_network(monkeypatch, verifier)
+    for url in (
+        "https://acmegreen.org/",
+        "https://acmegreen.org/careers",
+        "https://acmegreen.org/jobs?q=forestry",
+    ):
+        result = verifier.verify(url, "acme-green-foundation")
+        assert result.reason_code == "NOT_DIRECT_LINK", url
+        assert result.ok is True
+
+
+def test_404_is_dead(verifier, monkeypatch):
     monkeypatch.setattr(verifier, "_is_private_ip", lambda host: False)
     monkeypatch.setattr(
         verifier,
         "_fetch_with_redirects",
-        lambda url: (None, [url], "tls|SSLError|certificate verify failed"),
+        lambda url: (FakeResponse(404), [url], ""),
     )
     result = verifier.verify(
         "https://acmegreen.org/careers/research-associate",
         "acme-green-foundation",
     )
-    assert result.reason_code == "NEEDS_MANUAL_CHECK"
+    assert result.ok is False
+    assert result.reason_code == "DEAD_LINK"
+
+
+def test_closed_text_is_dead(verifier, monkeypatch):
+    monkeypatch.setattr(verifier, "_is_private_ip", lambda host: False)
+    html = (
+        "<html><body><h1>Research Associate</h1>"
+        "<p>Applications are closed.</p></body></html>"
+    )
+    monkeypatch.setattr(
+        verifier,
+        "_fetch_with_redirects",
+        lambda url: (FakeResponse(200, html), [url], ""),
+    )
+    result = verifier.verify(
+        "https://acmegreen.org/careers/research-associate",
+        "acme-green-foundation",
+    )
+    assert result.reason_code == "DEAD_LINK"
+
+
+def test_timeout_and_tls_errors_are_unknown_keep(verifier, monkeypatch):
+    for detail in (
+        "connect|ConnectTimeout|timed out",
+        "tls|SSLError|certificate verify failed",
+        "request|RetryError|too many retries",
+        "ssrf_guard|PrivateIPError|Blocked private IP",
+    ):
+        monkeypatch.setattr(
+            verifier, "_fetch_with_redirects", lambda url, d=detail: (None, [url], d)
+        )
+        result = verifier.verify(
+            "https://acmegreen.org/careers/research-associate",
+            "acme-green-foundation",
+        )
+        assert result.ok is True, detail
+        assert result.reason_code == "UNKNOWN_KEEP", detail
+
+
+def test_200_specific_page_is_ok(verifier, monkeypatch):
+    monkeypatch.setattr(verifier, "_is_private_ip", lambda host: False)
+    html = (
+        "<html><body><h1>Research Associate - Urban Forests</h1>"
+        "<p>Job description. Key responsibilities. Qualifications. Apply now.</p>"
+        "</body></html>"
+    )
+    monkeypatch.setattr(
+        verifier,
+        "_fetch_with_redirects",
+        lambda url: (FakeResponse(200, html), [url], ""),
+    )
+    result = verifier.verify(
+        "https://acmegreen.org/careers/research-associate-urban-forests",
+        "acme-green-foundation",
+    )
+    assert result.ok is True
+    assert result.reason_code == "OK"
+    assert result.entry_type == "posting"
+
+
+def test_unresolved_wrapper_is_dropped(verifier, monkeypatch):
+    monkeypatch.setattr(verifier, "_resolve_destination", lambda url: None)
+    result = verifier.verify("https://news.google.com/articles/abc123")
+    assert result.ok is False
+    assert result.reason_code == "UNRESOLVED_WRAPPER"
 
 
 def test_tracking_parameters_are_stripped(verifier):
     cleaned = verifier._strip_tracking_params(
-        "https://acmegreen.org/jobs/1?utm_source=x&ref=y&job=7"
+        "https://acmegreen.org/jobs/1?utm_source=x&ref=y&job=7&jk=9"
     )
     assert "utm_source" not in cleaned
     assert "ref=y" not in cleaned
-    assert "job=7" in cleaned
+    assert "job=7" in cleaned and "jk=9" in cleaned
+
+
+def test_platform_registry_is_config_driven():
+    policy = {"platforms": [{"name": "Example", "hosts": ["example-jobs.com"]}]}
+    assert platform_for("in.example-jobs.com", policy)["name"] == "Example"
+    assert platform_for("acmegreen.org", policy) is None
+
+
+def test_generic_url_helper():
+    assert is_generic_url("https://acmegreen.org/")
+    assert is_generic_url("https://acmegreen.org/careers/")
+    assert not is_generic_url("https://acmegreen.org/careers/research-associate")
+    assert not is_generic_url("https://acmegreen.org/job/12345")
+
+
+def test_matches_platform_pattern():
+    assert matches_platform_pattern(
+        "https://www.linkedin.com/jobs/view/99",
+        {"direct_patterns": [r"/jobs/view/\d+"]},
+    )
+    assert not matches_platform_pattern(
+        "https://www.linkedin.com/jobs/",
+        {"direct_patterns": [r"/jobs/view/\d+"]},
+    )
 
 
 def test_slug_style_job_url_is_a_posting(verifier):

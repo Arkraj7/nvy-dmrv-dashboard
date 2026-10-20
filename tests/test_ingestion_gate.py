@@ -1,12 +1,10 @@
-"""Unit tests for the Phase 3 ingestion gate.
+"""Unit tests for the direct-link ingestion gate (policy v2).
 
-These tests run fully offline: the verifier and page fetcher are injected.
+Fully offline: the verifier and page fetcher are injected.
 """
 from __future__ import annotations
 
 import copy
-
-import pytest
 
 from ingestion_gate import (
     dedupe_hash,
@@ -59,7 +57,7 @@ def make_record(**overrides):
         "role_summary": "Field research on urban forests.",
         "key_responsibilities": ["Field surveys", "Report writing", "Data analysis"],
         "must_have_skills": ["GIS", "remote sensing", "stakeholder engagement"],
-        "application_tip": "Apply through the official careers page.",
+        "application_tip": "Apply through the direct application link.",
         "apply_url": "https://acmegreen.org/careers/research-associate-urban-forests",
         "org_website": "",
         "org_domain": "",
@@ -118,75 +116,104 @@ def test_verified_record_is_published_with_registry_identity():
     assert "_qualification_is_default" not in record
 
 
-def test_invented_title_is_rejected_as_field_not_in_source():
-    """A title that is not on the fetched page must never be published."""
+def test_invented_title_is_blanked_not_generated():
     record, reason = run_gate(
         make_record(clean_title="Senior Director of Planetary Finance")
     )
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "FIELD_NOT_IN_SOURCE"
-    assert "clean_title" in record["quarantine"]["fields"]
-    assert "title" in reason
+    assert record["status"] == "active"
+    assert record["clean_title"] == ""
+    assert reason == ""
 
 
-def test_invented_skill_is_rejected():
+def test_invented_skill_is_blanked():
     record, reason = run_gate(make_record(must_have_skills=["GIS", "quantum computing"]))
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "FIELD_NOT_IN_SOURCE"
+    assert record["status"] == "active"
+    assert record["must_have_skills"] == []
 
 
 def test_default_placeholders_are_not_required_on_page():
     record, reason = run_gate(
         make_record(
             qualification_summary="Bachelor's / Master's degree in the relevant discipline or equivalent experience",
-            compensation_or_fellowship="Not disclosed - see official portal",
+            compensation_or_fellowship="Not disclosed - see direct application link",
             deadline_or_window="Rolling / Open",
             _qualification_is_default=True,
             _compensation_is_default=True,
             _deadline_is_default=True,
         )
     )
-    assert record["status"] == "active", record.get("quarantine")
+    assert record["status"] == "active", record.get("link_policy")
     assert reason == ""
 
 
-def test_unregistered_employer_is_quarantined():
+def test_unregistered_employer_is_published():
     record, reason = run_gate(make_record(organization="Mystery Employer Ltd"))
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "EMPLOYER_NOT_IN_REGISTRY"
-    assert record["apply_url"]  # data is kept for review
+    assert record["status"] == "active"
+    assert reason == ""
 
 
-def test_blocklisted_job_board_lead_is_dropped_not_stored():
+def test_linkedin_direct_link_is_kept():
     record, reason = run_gate(
-        make_record(apply_url="https://www.linkedin.com/jobs/view/123456")
+        make_record(
+            apply_url="https://www.linkedin.com/jobs/view/123456",
+            organization="Acme Green Foundation",
+        ),
+        result=ok_result(
+            final_url="https://www.linkedin.com/jobs/view/123456",
+            final_host="linkedin.com",
+            http_status=0,
+            verification_level="url_verified",
+            host_class="platform",
+            reason_code="UNKNOWN_KEEP",
+            platform="LinkedIn",
+            direct=True,
+        ),
     )
-    assert record is None
-    assert "aggregator" in reason
+    assert record["status"] == "active"
+    assert record["entry_type"] == "posting"
+    assert record["source_portal"] == "LinkedIn"
+    assert record["apply_url"].startswith("https://www.linkedin.com/jobs/view/")
 
 
-def test_landing_page_failure_is_quarantined():
+def test_generic_landing_page_becomes_a_portal():
     record, reason = run_gate(
-        result=ok_result(ok=False, verification_level="unverified",
-                         reason_code="GENERIC_LANDING_PAGE",
-                         error_detail="landing|GenericLanding|no title match")
+        result=ok_result(
+            http_status=0,
+            verification_level="url_verified",
+            reason_code="NOT_DIRECT_LINK",
+            entry_type="careers_portal",
+            direct=False,
+        )
     )
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "GENERIC_LANDING_PAGE"
+    assert record["status"] == "active"
+    assert record["entry_type"] == "careers_portal"
 
 
-def test_empty_page_text_is_quarantined():
+def test_empty_page_text_is_kept():
     record, reason = run_gate(page_result=page(text="", ok=False))
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "PAGE_TEXT_UNAVAILABLE"
+    assert record["status"] == "active"
 
 
-def test_closed_page_is_quarantined():
+def test_closed_page_is_archived_not_deleted():
     record, reason = run_gate(
         page_result=page(text=PAGE_TEXT + " Applications are closed.")
     )
-    assert record["status"] == "quarantined"
-    assert record["quarantine"]["reason_code"] == "POSITION_CLOSED"
+    assert record["status"] == "archived"
+    assert reason == "DEAD_LINK"
+    assert record["apply_url"]
+
+
+def test_dead_link_is_archived():
+    record, reason = run_gate(
+        result=ok_result(
+            ok=False,
+            http_status=410,
+            verification_level="unverified",
+            reason_code="DEAD_LINK",
+        )
+    )
+    assert record["status"] == "archived"
+    assert reason == "DEAD_LINK"
 
 
 def test_tracking_parameters_are_stripped_from_stored_url():

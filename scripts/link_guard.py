@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""Official-link policy guard.
+"""Direct-link policy guard (policy v2).
 
 Two modes:
 
   python scripts/link_guard.py                 # data guard (pre-build)
   python scripts/link_guard.py --dist dist     # built-site guard (post-build)
 
-Data guard (fails closed):
-  * every active, non-quarantined record has a real apply_url
-  * no blocklisted job board / aggregator / Google News wrapper is stored
-  * the apply host belongs to the record's employer registry entry
-  * the record carries verification metadata (verified_at, entry_type)
+Data guard:
+  * every public record has a real apply_url
+  * no news wrapper or URL shortener is stored
+  * postings point at a specific job page; section roots must be tagged
+    ``careers_portal``
+  * a verification or link_policy block is present
 
 Built-site guard:
   * no quarantined slug appears in any HTML file or sitemap
-  * every outbound link on a built page is limited to
-    {apply_url host, employer homepage, urbanforestpark.com}
-    plus the site's own community/asset infrastructure
+  * no news-wrapper/shortener hrefs are rendered
+  * job links point at dossier URLs
 """
 from __future__ import annotations
 
@@ -27,31 +27,18 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-from verify_link import BLOCKLISTED_HOSTS, load_employers_registry
+from link_policy import (
+    is_generic_url,
+    is_shortener,
+    is_wrapper,
+    matches_platform_pattern,
+    platform_for,
+)
+from verify_link import load_employers_registry
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
 SITE_HOSTS = {"urbanforestpark.com", "www.urbanforestpark.com"}
-
-# Non-job infrastructure the site itself needs (fonts, favicons, community
-# channels, social profiles). These are not application destinations.
-INFRA_HOSTS = {
-    "fonts.googleapis.com",
-    "fonts.gstatic.com",
-    "www.google.com",
-    "google.com",
-    "api.whatsapp.com",
-    "wa.me",
-    "chat.whatsapp.com",
-    "t.me",
-    "telegram.me",
-    "www.linkedin.com",
-    "linkedin.com",
-    "x.com",
-    "twitter.com",
-    "www.instagram.com",
-    "instagram.com",
-}
 
 DATA_FILES = [
     PUBLIC / "jobs.json",
@@ -81,94 +68,41 @@ def host_of(url: str) -> str:
     return (urlparse(str(url or "")).hostname or "").lower()
 
 
-def bare(host: str) -> str:
-    return host[4:] if host.startswith("www.") else host
-
-
-def is_blocklisted(host: str) -> bool:
-    host = (host or "").lower()
-    return host in BLOCKLISTED_HOSTS or bare(host) in BLOCKLISTED_HOSTS
-
-
-def employer_hosts(registry: dict, employer_id: str) -> set[str]:
-    hosts: set[str] = set()
-    for employer in registry.get("employers") or []:
-        if employer.get("id") != employer_id:
-            continue
-        for value in (employer.get("domains") or []) + (employer.get("ats_hosts") or []):
-            value = str(value or "").lower().strip()
-            if value:
-                hosts.add(value)
-        website = host_of(employer.get("website") or "")
-        if website:
-            hosts.add(website)
-    return hosts
-
-
-def host_matches(host: str, allowed: set[str]) -> bool:
-    if not host:
-        return False
-    host = host.lower()
-    if host in allowed or bare(host) in allowed:
-        return True
-    return any(host.endswith("." + entry) or bare(host).endswith("." + entry) for entry in allowed)
+def is_direct(record: dict) -> bool:
+    url = str(record.get("apply_url") or "")
+    host = host_of(url)
+    platform = platform_for(host)
+    if platform:
+        return bool(matches_platform_pattern(url, platform))
+    return not is_generic_url(url)
 
 
 def data_guard() -> list[str]:
     violations: list[str] = []
-    registry = load_employers_registry(str(PUBLIC / "employers.json"))
     for path, record in load_records():
         if record.get("status") == "quarantined":
             continue
         if record.get("status") == "archived":
-            continue  # archived records render no outbound link
+            continue
         rid = record.get("id") or "(no id)"
         apply_url = str(record.get("apply_url") or "")
         if not apply_url.lower().startswith("http"):
             violations.append(f"{path.name}:{rid}: missing apply_url")
             continue
-        host = host_of(apply_url)
-        if is_blocklisted(host):
-            violations.append(f"{path.name}:{rid}: blocklisted host {host}")
-        if host.endswith("news.google.com"):
-            violations.append(f"{path.name}:{rid}: Google News wrapper stored")
-        employer_id = str(record.get("employer_id") or "")
-        if not employer_id:
-            violations.append(f"{path.name}:{rid}: employer_id missing")
-            continue
-        allowed = employer_hosts(registry, employer_id)
-        if not allowed:
-            violations.append(
-                f"{path.name}:{rid}: employer {employer_id} not in registry"
-            )
-        elif not host_matches(host, allowed):
-            violations.append(
-                f"{path.name}:{rid}: apply host {host} outside registry {sorted(allowed)}"
-            )
-        verification = record.get("verification") or {}
-        if not verification.get("verified_at"):
-            violations.append(f"{path.name}:{rid}: missing verification.verified_at")
+        if is_wrapper(apply_url):
+            violations.append(f"{path.name}:{rid}: news wrapper stored")
+        if is_shortener(apply_url):
+            violations.append(f"{path.name}:{rid}: URL shortener stored")
         entry_type = record.get("entry_type")
         if entry_type not in {"posting", "careers_portal", "award_portal", "unknown"}:
             violations.append(f"{path.name}:{rid}: invalid entry_type {entry_type!r}")
+        if entry_type in {"posting", "award_portal"} and not is_direct(record):
+            violations.append(
+                f"{path.name}:{rid}: non-direct URL tagged as {entry_type}"
+            )
+        if not (record.get("verification") or record.get("link_policy")):
+            violations.append(f"{path.name}:{rid}: missing verification/link_policy block")
     return violations
-
-
-def collect_allowed_hosts() -> set[str]:
-    registry = load_employers_registry(str(PUBLIC / "employers.json"))
-    allowed = set(SITE_HOSTS) | INFRA_HOSTS
-    for _path, record in load_records():
-        if record.get("status") == "quarantined" or record.get("status") == "archived":
-            continue
-        host = host_of(record.get("apply_url") or "")
-        if host:
-            allowed.add(host)
-            allowed.add(bare(host))
-        employer_id = str(record.get("employer_id") or "")
-        for entry in employer_hosts(registry, employer_id):
-            allowed.add(entry)
-            allowed.add(bare(entry))
-    return allowed
 
 
 def dist_guard(dist: Path) -> list[str]:
@@ -186,20 +120,15 @@ def dist_guard(dist: Path) -> list[str]:
         for _path, record in load_records()
         if record.get("status") != "quarantined" and record.get("id")
     }
-    allowed_hosts = collect_allowed_hosts()
 
-    html_files = sorted(dist.rglob("*.html"))
-    for path in html_files:
+    for path in sorted(dist.rglob("*.html")):
         text = path.read_text(encoding="utf-8", errors="ignore")
         rel = path.relative_to(dist)
 
-        # Quarantined slugs must not leak into any built page.
         for qid in quarantined_ids:
             if qid and qid in text:
                 violations.append(f"{rel}: quarantined slug present: {qid}")
 
-        # The outbound-link rule applies to job pages (pages that render
-        # listings); institutional/calculator pages have their own assets.
         if "?job=" not in text:
             continue
 
@@ -213,16 +142,11 @@ def dist_guard(dist: Path) -> list[str]:
             host = (parsed.hostname or "").lower()
             if not host:
                 continue
-            if host_matches(host, SITE_HOSTS | INFRA_HOSTS):
-                continue
-            if is_blocklisted(host):
-                violations.append(f"{rel}: blocklisted outbound link {host}")
-                continue
-            if host_matches(host, allowed_hosts):
-                continue
-            violations.append(f"{rel}: outbound link outside policy {host} ({value[:120]})")
+            if is_wrapper(value):
+                violations.append(f"{rel}: news-wrapper outbound link {value[:120]}")
+            elif is_shortener(value):
+                violations.append(f"{rel}: shortener outbound link {value[:120]}")
 
-        # Job links inside the built page must point at dossier URLs.
         for job_id in re.findall(r"\?job=([A-Za-z0-9._-]+)", text):
             if job_id in quarantined_ids:
                 violations.append(f"{rel}: link to quarantined dossier {job_id}")
@@ -242,7 +166,7 @@ def dist_guard(dist: Path) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Official-link policy guard")
+    parser = argparse.ArgumentParser(description="Direct-link policy guard")
     parser.add_argument(
         "--dist",
         help="Built site directory to scan (e.g. dist). Omit for the data guard.",

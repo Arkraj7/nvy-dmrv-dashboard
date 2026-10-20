@@ -1,984 +1,646 @@
 #!/usr/bin/env python3
-"""
-verify_link.py - Official link verification module for Urban Forest Park
+"""Direct-link verification for Urban Forest Park.
 
-This module implements the verification policy (P1-P7):
-- P1: Two destinations only (apply_url + dossier)
-- P2: Allowed hosts per employer registry
-- P3: Blocklist enforcement
-- P4: Verifiable means checked (redirects, content match, evidence)
-- P5: Fail closed (quarantine on failure)
-- P6: Aggregators for discovery only
-- P7: Broadcasts use dossier URLs only
+Policy (v2, 20 Oct 2026) - see ``public/link_policy.json``:
 
-Usage:
-    from verify_link import verify_link, VerificationResult
-    result = verify_link(apply_url, employer_id, employer_registry)
+* any employer domain is allowed;
+* job platforms (LinkedIn, Indeed, Naukri, FreeJobAlert, Foundit, Shine,
+  TimesJobs, Internshala, Apna and configured peers) are allowed when the URL
+  points at one specific job/notice page;
+* home pages, search/listing/category pages and careers roots are NOT_DIRECT
+  and are placed in "Careers portals" instead of individual jobs;
+* news wrappers and shorteners are resolved, or dropped when unresolvable;
+* only dead links (404/410, confirmed soft-404, closed/expired text) are
+  removed. UNKNOWN (bot block, timeout, TLS error) is never treated as dead.
+
+SSRF protections and certificate verification stay enabled. ``verify=False``
+is never used.
 """
-import re
-import json
+from __future__ import annotations
+
 import hashlib
 import ipaddress
+import json
 import logging
-import certifi
+import re
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Any, Set
-from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse
 from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Set
+from urllib.parse import urlparse
+
+import certifi
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Configure logging
+from link_policy import (
+    closed_phrase,
+    host_matches,
+    is_generic_url,
+    is_shortener,
+    is_wrapper,
+    load_policy,
+    matches_platform_pattern,
+    normalize_host,
+    platform_for,
+    platform_label,
+    strip_tracking,
+)
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Constants
 MAX_REDIRECTS = 5
-MAX_HTML_SIZE = 2 * 1024 * 1024      # 2 MB
-MAX_PDF_SIZE = 10 * 1024 * 1024      # 10 MB
+MAX_HTML_SIZE = 2 * 1024 * 1024
+MAX_PDF_SIZE = 10 * 1024 * 1024
 CONNECT_TIMEOUT = 10
 READ_TIMEOUT = 20
 TOTAL_TIMEOUT = 30
-USER_AGENT = 'UrbanForestPark-Verifier/1.0 (+https://www.urbanforestpark.com/contact)'
+USER_AGENT = "UrbanForestPark-Verifier/2.0 (+https://www.urbanforestpark.com/contact)"
 
-# Tracking parameters to strip
-TRACKING_PARAMS = {
-    'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
-    'fbclid', 'gclid', 'ref', 'source', 'utm_id', 'utm_source_platform',
-    'utm_creative_format', 'utm_marketing_tactic', 'msclkid', 'yclid',
-    '_ga', '_gl', 'mc_cid', 'mc_eid', 'utm_reader', 'utm_place'
-}
+# Kept for backwards imports; policy v2 no longer blocks job boards.
+BLOCKLISTED_HOSTS: Set[str] = set()
 
-# Blocklisted hosts (P3) - job boards, aggregators, social, shorteners, file hosts
-BLOCKLISTED_HOSTS: Set[str] = {
-    # Job boards
-    'linkedin.com', 'www.linkedin.com', 'in.linkedin.com',
-    'naukri.com', 'www.naukri.com',
-    'indeed.com', 'www.indeed.com', 'indeed.co.in', 'in.indeed.com',
-    'glassdoor.com', 'www.glassdoor.com', 'glassdoor.co.in',
-    'foundit.in', 'www.foundit.in',
-    'monster.com', 'www.monster.com', 'monsterindia.com',
-    'shine.com', 'www.shine.com',
-    'timesjobs.com', 'www.timesjobs.com',
-    'apna.co', 'www.apna.co',
-    'freshersworld.com', 'www.freshersworld.com',
-    'jobsora.com', 'www.jobsora.com',
-    'jooble.org', 'www.jooble.org', 'in.jooble.org',
-    'talent.com', 'www.talent.com', 'in.talent.com',
-    'ziprecruiter.com', 'www.ziprecruiter.com',
-    'internshala.com', 'www.internshala.com',
-    'unstop.com', 'www.unstop.com',
-    'hirist.com', 'www.hirist.com',
-    'cutshort.io', 'www.cutshort.io',
-    'upwork.com', 'www.upwork.com',
-    'freejobalert.com', 'www.freejobalert.com',
-    'reliefweb.int', 'www.reliefweb.int',
-    'indiabioscience.org', 'www.indiabioscience.org',
-    # News & wrappers
-    'news.google.com', 'www.news.google.com',
-    'google.com', 'www.google.com',
-    'feedproxy.google.com',
-    # Social & messaging
-    't.me', 'telegram.me',
-    'wa.me', 'chat.whatsapp.com', 'www.chat.whatsapp.com',
-    'facebook.com', 'www.facebook.com', 'fb.com', 'm.facebook.com',
-    'x.com', 'www.x.com', 'twitter.com', 'www.twitter.com',
-    'instagram.com', 'www.instagram.com',
-    'youtube.com', 'www.youtube.com',
-    # Shorteners
-    'bit.ly', 'tinyurl.com', 't.co', 'lnkd.in', 'goo.gl',
-    'ow.ly', 'is.gd', 'buff.ly', 'adf.ly', 'shorte.st',
-    # File hosts
-    'drive.google.com', 'docs.google.com', 'sheets.google.com',
-    'dropbox.com', 'www.dropbox.com',
-    'onedrive.live.com', '1drv.ms',
-    'we.tl', 'wetransfer.com',
-}
-
-# Government/academic TLD patterns that are allowed when matching employer domain
-GOV_ACADEMIC_PATTERNS = (
-    '.gov.in', '.nic.in', '.ac.in', '.edu.in', '.res.in', 
-    '.org.in', '.ernet.in', '.gov', '.mil', '.edu'
-)
-
-# ATS host patterns (employer-controlled)
 ATS_PATTERNS = (
-    'myworkdayjobs.com',
-    'boards.greenhouse.io',
-    'jobs.lever.co',
-    'jobs.smartrecruiters.com',
-    'recruitee.com',
-    'workable.com',
-    'bamboohr.com',
-    'icims.com',
-    'taleo.net',
-    'successfactors.com',
-    'oraclecloud.com',
-    'sapsf.com',
-    'jobvite.com',
-    'lever.co',
-    'greenhouse.io',
-    'smartrecruiters.com',
+    "myworkdayjobs.com", "boards.greenhouse.io", "jobs.lever.co",
+    "jobs.smartrecruiters.com", "recruitee.com", "workable.com",
+    "bamboohr.com", "icims.com", "taleo.net", "successfactors.com",
+    "oraclecloud.com", "sapsf.com", "jobvite.com", "lever.co",
+    "greenhouse.io", "smartrecruiters.com", "careers.ey.com",
 )
+
+GOV_ACADEMIC_PATTERNS = (
+    ".gov.in", ".nic.in", ".ac.in", ".edu.in", ".res.in", ".org.in",
+    ".ernet.in", ".gov", ".mil", ".edu",
+)
+
+# Reason codes (policy v2)
+OK = "OK"
+DEAD_LINK = "DEAD_LINK"
+NOT_DIRECT_LINK = "NOT_DIRECT_LINK"
+UNRESOLVED_WRAPPER = "UNRESOLVED_WRAPPER"
+UNKNOWN_KEEP = "UNKNOWN_KEEP"
 
 
 @dataclass
 class VerificationResult:
-    """Structured verification result with machine-readable reason codes."""
     ok: bool
     final_url: str
     final_host: str
     http_status: int
     redirect_chain: List[str]
-    verification_level: str  # "page_verified" | "domain_verified" | "unverified"
-    host_class: str          # "employer_primary" | "employer_ats" | "government_notice" | "blocklisted" | "unregistered"
-    reason_code: str         # BLOCKED_HOST, HOST_NOT_IN_REGISTRY, HTTP_404, SOFT_404, CONTENT_MISMATCH, GENERIC_LANDING_PAGE, TIMEOUT, REDIRECT_LOOP, SSL_ERROR, UNREACHABLE_FROM_RUNNER, EMPLOYER_NOT_IN_REGISTRY, VERIFICATION_ERROR, OK
+    verification_level: str   # page_verified | url_verified | domain_verified | unverified
+    host_class: str           # platform | employer_primary | employer_ats | government_notice | unknown_host
+    reason_code: str          # OK | DEAD_LINK | NOT_DIRECT_LINK | UNRESOLVED_WRAPPER | UNKNOWN_KEEP
     evidence_snippet: str
     content_hash: str
     verified_at: str
-    entry_type: str          # "posting" | "careers_portal" | "unknown"
-    error_detail: str        # exception class + message for debugging
+    entry_type: str           # posting | careers_portal | award_portal | unknown
+    error_detail: str
     warnings: List[str] = field(default_factory=list)
-    
+    platform: str = ""
+    direct: bool = False
+
     def to_dict(self) -> Dict[str, Any]:
         return {
-            'ok': self.ok,
-            'final_url': self.final_url,
-            'final_host': self.final_host,
-            'http_status': self.http_status,
-            'redirect_chain': self.redirect_chain,
-            'verification_level': self.verification_level,
-            'host_class': self.host_class,
-            'reason_code': self.reason_code,
-            'evidence_snippet': self.evidence_snippet,
-            'content_hash': self.content_hash,
-            'verified_at': self.verified_at,
-            'entry_type': self.entry_type,
-            'error_detail': self.error_detail,
-            'warnings': self.warnings
+            "ok": self.ok,
+            "final_url": self.final_url,
+            "final_host": self.final_host,
+            "http_status": self.http_status,
+            "redirect_chain": self.redirect_chain,
+            "verification_level": self.verification_level,
+            "host_class": self.host_class,
+            "reason_code": self.reason_code,
+            "evidence_snippet": self.evidence_snippet,
+            "content_hash": self.content_hash,
+            "verified_at": self.verified_at,
+            "entry_type": self.entry_type,
+            "error_detail": self.error_detail,
+            "warnings": self.warnings,
+            "platform": self.platform,
+            "direct": self.direct,
         }
 
 
 class LinkVerifier:
-    """Verifies apply_url links against the employer registry and blocklist."""
-    
-    def __init__(self, employers_registry: Dict[str, Any], use_playwright: bool = False):
-        self.employers = employers_registry
+    """Classifies links against the editable direct-link policy."""
+
+    def __init__(self, employers_registry: Optional[Dict[str, Any]] = None,
+                 use_playwright: bool = False):
+        self.employers = employers_registry or {"employers": []}
         self.use_playwright = use_playwright
+        self.policy = load_policy()
         self._session = self._create_session()
-    
+
+    # ------------------------------------------------------------------
+    # Session / SSRF
+    # ------------------------------------------------------------------
     def _create_session(self) -> requests.Session:
-        """Create a requests session with retries and polite headers."""
         session = requests.Session()
         retry = Retry(
-            total=2,
-            backoff_factor=0.5,
+            total=1,
+            backoff_factor=0.4,
             status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=('HEAD', 'GET', 'OPTIONS')
+            allowed_methods=("HEAD", "GET", "OPTIONS"),
         )
         adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=20)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
-        session.headers.update({'User-Agent': USER_AGENT})
-        # Use certifi's CA bundle to avoid system cert issues
-        session.verify = certifi.where()
+        session.mount("http://", adapter)
+        session.mount("https://", adapter)
+        session.headers.update({"User-Agent": USER_AGENT})
+        session.verify = certifi.where()  # certificate verification stays on
         return session
-    
-    def _strip_tracking_params(self, url: str) -> str:
-        """Remove tracking parameters from URL."""
-        parsed = urlparse(url)
-        query = [(k, v) for k, v in parse_qsl(parsed.query, keep_blank_values=True) 
-                 if k.lower() not in TRACKING_PARAMS]
-        new_query = urlencode(query)
-        return urlunparse(parsed._replace(query=new_query))
-    
-    def _is_private_ip(self, host: str) -> bool:
-        """Check if host resolves to private/loopback/link-local IP (SSRF protection).
-        
-        Checks ALL A/AAAA records. Returns True only if ALL resolved IPs are private.
-        Public CDN addresses (Cloudflare, AWS, etc.) are allowed.
-        """
+
+    def _is_private_ip(self, host: str):
         try:
             import socket
-            # Get all A records
             ips = set()
             try:
                 for res in socket.getaddrinfo(host, None, socket.AF_INET):
                     ips.add(res[4][0])
             except Exception:
                 pass
-            # Get all AAAA records
             try:
                 for res in socket.getaddrinfo(host, None, socket.AF_INET6):
                     ips.add(res[4][0])
             except Exception:
                 pass
-            
             if not ips:
-                return False  # No IPs resolved - allow (will fail later anyway)
-            
-            # Check for DNS filtering: if any resolved IP is 0.0.0.0, ::, or non-global
+                return False
             for ip_str in ips:
                 try:
                     ip_obj = ipaddress.ip_address(ip_str)
                     if ip_str in ("0.0.0.0", "::") or not ip_obj.is_global:
-                        logger.warning(f"DNS filtered locally for {host}: {ip_str}")
-                        return 'dns_filtered'
+                        return "dns_filtered"
                 except Exception:
                     continue
-            
-            # Check if ALL resolved IPs are private/loopback/link-local
             for ip_str in ips:
                 try:
                     ip_obj = ipaddress.ip_address(ip_str)
                     if not (ip_obj.is_private or ip_obj.is_loopback or ip_obj.is_link_local):
-                        return False  # At least one public IP - allow
+                        return False
                 except Exception:
                     continue
-            # All resolved IPs are private/loopback/link-local
             return True
         except Exception:
             return False
-    
-    def _normalize_host(self, host: str) -> str:
-        """Normalize host for comparison (lowercase, strip www)."""
-        host = host.lower().strip()
-        if host.startswith('www.'):
-            host = host[4:]
-        return host
-    
-    def _host_matches_domain(self, host: str, domain: str) -> bool:
-        """Check if host matches domain or is a subdomain of it."""
-        host = self._normalize_host(host)
-        domain = self._normalize_host(domain)
-        return host == domain or host.endswith('.' + domain)
-    
-    def _is_blocklisted(self, host: str) -> bool:
-        """Check if host is in blocklist."""
-        host = self._normalize_host(host)
-        for blocked in BLOCKLISTED_HOSTS:
-            if host == blocked or host.endswith('.' + blocked):
-                return True
-        return False
-    
-    def _is_ats_host(self, host: str) -> bool:
-        """Check if host matches known ATS patterns."""
-        host = self._normalize_host(host)
-        for pattern in ATS_PATTERNS:
-            if host == pattern or host.endswith('.' + pattern):
-                return True
-        return False
-    
-    def _is_gov_academic(self, host: str) -> bool:
-        """Check if host is a government/academic domain."""
-        host = self._normalize_host(host)
-        return any(host.endswith(p) for p in GOV_ACADEMIC_PATTERNS)
-    
+
+    # ------------------------------------------------------------------
+    # Registry helpers (naming/domains only - never a publish gate)
+    # ------------------------------------------------------------------
     def _find_employer(self, employer_id: str) -> Optional[Dict]:
-        """Find employer by ID in registry."""
-        for emp in self.employers.get('employers', []):
-            if emp['id'] == employer_id:
+        for emp in self.employers.get("employers", []):
+            if emp.get("id") == employer_id:
                 return emp
         return None
-    
+
     def _find_employer_by_domain(self, host: str) -> Optional[Dict]:
-        """Find employer whose domain matches the host."""
-        host = self._normalize_host(host)
-        for emp in self.employers.get('employers', []):
-            for domain in emp.get('domains', []):
-                if self._host_matches_domain(host, domain):
-                    return emp
-            # Also check ATS hosts
-            for ats in emp.get('ats_hosts', []):
-                if self._host_matches_domain(host, ats):
+        host = normalize_host(host)
+        for emp in self.employers.get("employers", []):
+            for domain in (emp.get("domains") or []) + (emp.get("ats_hosts") or []):
+                if host_matches(host, [str(domain)]):
                     return emp
         return None
-    
-    def _determine_host_class(self, final_host: str, employer: Optional[Dict]) -> str:
-        """Determine the host class per policy P2."""
-        if self._is_blocklisted(final_host):
-            return 'blocklisted'
-        
+
+    def _is_ats_host(self, host: str) -> bool:
+        host = normalize_host(host)
+        return any(host == p or host.endswith("." + p) for p in ATS_PATTERNS)
+
+    def _is_gov_academic(self, host: str) -> bool:
+        host = normalize_host(host)
+        return any(host.endswith(p) for p in GOV_ACADEMIC_PATTERNS)
+
+    def _determine_host_class(self, host: str, employer: Optional[Dict]) -> str:
+        if platform_for(host, self.policy):
+            return "platform"
         if employer:
-            for domain in employer.get('domains', []):
-                if self._host_matches_domain(final_host, domain):
-                    return 'employer_primary'
-            for ats in employer.get('ats_hosts', []):
-                if self._host_matches_domain(final_host, ats):
-                    return 'employer_ats'
-        
-        # Check if it's a government/academic notice matching employer domain
-        found_emp = self._find_employer_by_domain(final_host)
-        if found_emp and self._is_gov_academic(final_host):
-            return 'government_notice'
-        
-        return 'unregistered'
-    
+            for domain in (employer.get("domains") or []) + (employer.get("ats_hosts") or []):
+                if host_matches(host, [str(domain)]):
+                    return "employer_ats" if self._is_ats_host(host) else "employer_primary"
+        if self._is_ats_host(host):
+            return "employer_ats"
+        if self._is_gov_academic(host):
+            return "government_notice"
+        return "unknown_host"
+
+    # ------------------------------------------------------------------
+    # URL helpers
+    # ------------------------------------------------------------------
+    def _strip_tracking_params(self, url: str) -> str:
+        return strip_tracking(url, self.policy)
+
+    def _is_blocklisted(self, host: str) -> bool:
+        # Compatibility shim: policy v2 has no host blocklist. Only wrappers
+        # and shorteners are removed, and they are resolved first.
+        return is_wrapper("https://" + (host or ""), self.policy) or is_shortener(
+            "https://" + (host or ""), self.policy
+        )
+
+    # ------------------------------------------------------------------
+    # Fetching
+    # ------------------------------------------------------------------
     def _fetch_with_redirects(self, url: str) -> tuple:
-        """Fetch URL following redirects, return (response, redirect_chain, error_detail).
-        
-        error_detail is empty on success, or contains 'stage|exception_class|message' on failure.
-        Stages: dns | ssrf_guard | connect | tls | read | status | redirect
-        """
         redirect_chain = [url]
         current_url = url
-        
-        for hop in range(MAX_REDIRECTS):
+        for _hop in range(MAX_REDIRECTS):
             try:
-                # Check for private IP (SSRF) - before DNS/connect
                 parsed = urlparse(current_url)
-                hostname = parsed.hostname or ''
-                # Skip SSRF check if hostname is empty (relative redirect) or looks like a path
-                if hostname and not hostname.startswith('/'):
+                hostname = parsed.hostname or ""
+                if hostname and not hostname.startswith("/"):
                     ssrf_result = self._is_private_ip(hostname)
-                    if ssrf_result == True:
-                        logger.warning(f"SSRF blocked: {current_url} resolves to private IP")
-                        return None, redirect_chain, 'ssrf_guard|PrivateIPError|Blocked private IP'
-                    elif ssrf_result == 'dns_filtered':
-                        logger.warning(f"DNS filtered locally: {current_url} resolves to filtered IP")
-                        return None, redirect_chain, 'dns|DNSFiltered|DNS filtered locally'
-                elif not hostname:
-                    logger.warning(f"SSRF skipped: {current_url} has no hostname (relative redirect)")
-                
-                # Stream to control size
+                    if ssrf_result is True:
+                        return None, redirect_chain, "ssrf_guard|PrivateIPError|Blocked private IP"
+                    if ssrf_result == "dns_filtered":
+                        return None, redirect_chain, "dns|DNSFiltered|DNS filtered locally"
                 resp = self._session.get(
                     current_url,
                     timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
                     allow_redirects=False,
                     stream=True,
-                    headers={'Accept': 'text/html,application/pdf,*/*'}
+                    headers={"Accept": "text/html,application/pdf,*/*"},
                 )
-                
                 redirect_chain.append(resp.url)
-                
-                # Check content length
-                content_length = resp.headers.get('Content-Length')
-                max_size = MAX_PDF_SIZE if 'pdf' in resp.headers.get('Content-Type', '') else MAX_HTML_SIZE
+                content_length = resp.headers.get("Content-Length")
+                max_size = MAX_PDF_SIZE if "pdf" in resp.headers.get("Content-Type", "") else MAX_HTML_SIZE
                 if content_length and int(content_length) > max_size:
-                    logger.warning(f"Content too large: {content_length} > {max_size}")
                     resp.close()
-                    return resp, redirect_chain, ''
-                
-                # Read limited content
-                content = b''
+                    return resp, redirect_chain, ""
+                content = b""
                 for chunk in resp.iter_content(chunk_size=8192):
                     content += chunk
                     if len(content) > max_size:
                         break
                 resp.close()
-                
-                # Store content for later analysis
                 resp._content_for_analysis = content
-                
                 if resp.status_code in (301, 302, 303, 307, 308):
-                    location = resp.headers.get('Location')
+                    location = resp.headers.get("Location")
                     if location:
-                        current_url = location
+                        current_url = requests.compat.urljoin(current_url, location)
                         continue
-                
-                return resp, redirect_chain, ''
-                
-            except requests.exceptions.SSLError as e:
-                return None, redirect_chain, f'tls|SSLError|{e}'
-            except requests.exceptions.ConnectTimeout as e:
-                return None, redirect_chain, f'connect|ConnectTimeout|{e}'
-            except requests.exceptions.ReadTimeout as e:
-                return None, redirect_chain, f'read|ReadTimeout|{e}'
-            except requests.exceptions.Timeout as e:
-                return None, redirect_chain, f'timeout|Timeout|{e}'
-            except requests.exceptions.ConnectionError as e:
-                return None, redirect_chain, f'connect|ConnectionError|{e}'
-            except requests.exceptions.TooManyRedirects as e:
-                return None, redirect_chain, f'redirect|TooManyRedirects|{e}'
-            except requests.exceptions.RequestException as e:
-                return None, redirect_chain, f'request|{type(e).__name__}|{e}'
-            except Exception as e:
-                return None, redirect_chain, f'unknown|{type(e).__name__}|{e}'
-        
-        # Too many redirects
-        return None, redirect_chain, 'redirect|RedirectLoop|Max redirects exceeded'
-    
+                return resp, redirect_chain, ""
+            except requests.exceptions.SSLError as exc:
+                return None, redirect_chain, f"tls|SSLError|{exc}"
+            except requests.exceptions.ConnectTimeout as exc:
+                return None, redirect_chain, f"connect|ConnectTimeout|{exc}"
+            except requests.exceptions.ReadTimeout as exc:
+                return None, redirect_chain, f"read|ReadTimeout|{exc}"
+            except requests.exceptions.Timeout as exc:
+                return None, redirect_chain, f"timeout|Timeout|{exc}"
+            except requests.exceptions.ConnectionError as exc:
+                return None, redirect_chain, f"connect|ConnectionError|{exc}"
+            except requests.exceptions.TooManyRedirects as exc:
+                return None, redirect_chain, f"redirect|TooManyRedirects|{exc}"
+            except requests.exceptions.RequestException as exc:
+                return None, redirect_chain, f"request|{type(exc).__name__}|{exc}"
+            except Exception as exc:
+                return None, redirect_chain, f"unknown|{type(exc).__name__}|{exc}"
+        return None, redirect_chain, "redirect|RedirectLoop|Max redirects exceeded"
+
+    def _resolve_destination(self, url: str) -> Optional[str]:
+        """Resolve a wrapper/shortener server-side, or return None."""
+        if is_wrapper(url, self.policy):
+            match = re.search(r"/articles/([A-Za-z0-9_\-]+)", url)
+            try:
+                if match:
+                    from fetch_and_humanize import _resolve_google_news_via_batchexecute
+                    resolved = _resolve_google_news_via_batchexecute(match.group(1), timeout=12)
+                    if resolved:
+                        return resolved
+                from fetch_and_humanize import resolve_google_news_link
+                resolved = resolve_google_news_link(url)
+                if resolved and not is_wrapper(resolved, self.policy):
+                    return resolved
+            except Exception:
+                return None
+            return None
+        response, chain, error = self._fetch_with_redirects(url)
+        if error or response is None:
+            return None
+        final = chain[-1] if chain else url
+        if response.status_code in (404, 410):
+            return None
+        return final
+
     def _extract_text_content(self, response, content_type: str) -> str:
-        """Extract text content from response for content matching."""
-        if not response or not hasattr(response, '_content_for_analysis'):
-            return ''
-        
+        if not response or not hasattr(response, "_content_for_analysis"):
+            return ""
         content = response._content_for_analysis
         if not content:
-            return ''
-        
-        if 'pdf' in content_type:
+            return ""
+        if "pdf" in content_type:
             try:
-                import pdfplumber
                 import io
-                text = ''
+                import pdfplumber
+                text = ""
                 with pdfplumber.open(io.BytesIO(content)) as pdf:
-                    for page in pdf.pages[:5]:  # First 5 pages
+                    for page in pdf.pages[:5]:
                         page_text = page.extract_text()
                         if page_text:
-                            text += page_text + '\n'
-                return text[:5000]
+                            text += page_text + "\n"
+                return text[:8000]
             except Exception:
-                return ''
-        else:
-            # HTML - extract visible text
-            try:
-                from bs4 import BeautifulSoup
-                soup = BeautifulSoup(content, 'html.parser')
-                # Remove script/style
-                for tag in soup(['script', 'style', 'nav', 'footer', 'header', 'aside']):
-                    tag.decompose()
-                text = soup.get_text(separator=' ', strip=True)
-                return text[:5000]
-            except Exception:
-                return content.decode('utf-8', errors='ignore')[:5000]
-    
-    def _content_match(self, text: str, org_name: str, job_title: str) -> tuple:
-        """Check if fetched content matches org name and job title."""
-        if not text:
-            return False, 0.0, ''
-        
-        text_lower = text.lower()
-        org_lower = org_name.lower()
-        
-        # Check org name presence (fuzzy)
-        org_words = [w for w in org_lower.split() if len(w) > 3]
-        org_found = any(word in text_lower for word in org_words)
-        
-        # Check job title token overlap
-        title_words = [w for w in job_title.lower().split() if len(w) > 3]
-        if not title_words:
-            title_overlap = 0.0
-        else:
-            matches = sum(1 for w in title_words if w in text_lower)
-            title_overlap = matches / len(title_words)
-        
-        # Evidence snippet (first 200 chars around match)
-        evidence = ''
-        if org_found and title_overlap >= 0.6:
-            # Find position of org name
-            for word in org_words:
-                pos = text_lower.find(word)
-                if pos >= 0:
-                    start = max(0, pos - 100)
-                    end = min(len(text), pos + 200)
-                    evidence = text[start:end].strip()
-                    break
-        
-        return org_found and title_overlap >= 0.6, title_overlap, evidence
-    
-    def _is_soft_404(self, text: str, status: int) -> bool:
-        """Detect soft 404 pages."""
-        if not text:
-            return False
-        text_lower = text.lower()
-        soft_404_phrases = [
-            'no longer available', 'position closed', 'page not found',
-            'job has expired', 'vacancy closed', 'this job is no longer',
-            'position has been filled', 'recruitment closed',
-            'application deadline has passed', 'job not found',
-            'error 404', 'page doesn\'t exist'
-        ]
-        return any(phrase in text_lower for phrase in soft_404_phrases)
-    
+                return ""
+        try:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(content, "html.parser")
+            for tag in soup(["script", "style", "nav", "footer", "header", "aside"]):
+                tag.decompose()
+            return soup.get_text(separator=" ", strip=True)[:8000]
+        except Exception:
+            return content.decode("utf-8", errors="ignore")[:8000]
+
     def _compute_hash(self, content: bytes) -> str:
-        """Compute SHA-256 hash of content."""
         return hashlib.sha256(content).hexdigest()[:32]
-    
+
     def _detect_entry_type(self, text: str, final_url: str, final_host: str) -> str:
-        """Detect if page is a job-specific posting, generic careers portal, or award portal."""
-        if not text:
-            return 'unknown'
-        
-        text_lower = text.lower()
-        url_lower = final_url.lower()
-        
-        # Award portal indicators (scholarships, prizes, awards)
-        award_url_patterns = [
-            '/award', '/prize', '/scholarship', '/fellowship', '/grant',
-            '/competition', '/challenge', '/call-for'
-        ]
-        
-        award_content_phrases = [
-            'scholarship', 'fellowship', 'prize', 'award', 'grant',
-            'application deadline', 'eligibility criteria', 'selection criteria',
-            'application form', 'submit your application'
-        ]
-        
-        # Generic portal indicators in URL
-        generic_url_patterns = [
-            '/careers', '/jobs', '/vacancies', '/recruitment', '/openings',
-            '/positions', '/opportunities', '/apply', '/work-with-us'
-        ]
-        
-        # Generic portal indicators in content
-        generic_content_phrases = [
-            'view all jobs', 'view all positions', 'all vacancies',
-            'search jobs', 'browse jobs', 'current openings',
-            'join our team', 'career opportunities', 'work with us',
-            'explore careers', 'find your next role'
-        ]
-        
-        # Job-specific indicators
-        job_specific_phrases = [
-            'job description', 'position summary', 'key responsibilities',
-            'qualifications', 'requirements', 'essential duties',
-            'apply now', 'apply for this position', 'reference number',
-            'requisition', 'job id', 'vacancy number'
-        ]
-        
-        generic_score = 0
-        specific_score = 0
-        award_score = 0
-        
-        # URL check
-        for pattern in generic_url_patterns:
-            if pattern in url_lower:
-                # Check if URL has job-specific path (e.g., /careers/job/123, /careers/slug-title)
-                if re.search(r'(job|position|vacancy|requisition)[-/]\d+', url_lower):
-                    specific_score += 2
-                # Also check for slug-style job paths: /careers/something-something, /jobs/something-something
-                elif re.search(rf'{re.escape(pattern)}/[a-z0-9-]+(?:-[a-z0-9]+)+', url_lower):
-                    specific_score += 2
-                else:
-                    generic_score += 1
-        
-        for pattern in award_url_patterns:
-            if pattern in url_lower:
-                award_score += 2
-        
-        # Content check
-        for phrase in generic_content_phrases:
-            if phrase in text_lower:
-                generic_score += 1
-        
-        for phrase in award_content_phrases:
-            if phrase in text_lower:
-                award_score += 1
-        
-        for phrase in job_specific_phrases:
-            if phrase in text_lower:
-                specific_score += 2
-        
-        # Priority: award > posting > careers_portal
+        text_lower = (text or "").lower()
+        url_lower = (final_url or "").lower()
+        award_url_patterns = ["/award", "/prize", "/scholarship", "/fellowship", "/grant", "/competition", "/challenge", "/call-for"]
+        award_phrases = ["scholarship", "fellowship", "prize", "award", "grant", "application deadline", "eligibility criteria", "selection criteria"]
+        generic_url = ["/careers", "/jobs", "/vacancies", "/recruitment", "/openings", "/positions", "/opportunities", "/work-with-us"]
+        generic_phrases = ["view all jobs", "view all positions", "all vacancies", "search jobs", "browse jobs", "current openings", "join our team", "career opportunities", "work with us", "explore careers"]
+        specific_phrases = ["job description", "position summary", "key responsibilities", "qualifications", "requirements", "essential duties", "apply now", "apply for this position", "reference number", "requisition", "job id", "vacancy number"]
+
+        generic_score = sum(1 for p in generic_url if p in url_lower and not re.search(rf"{re.escape(p)}/[a-z0-9-]+", url_lower))
+        generic_score += sum(1 for p in generic_phrases if p in text_lower)
+        award_score = sum(2 for p in award_url_patterns if p in url_lower)
+        award_score += sum(1 for p in award_phrases if p in text_lower)
+        specific_score = sum(2 for p in specific_phrases if p in text_lower)
+
         if award_score > max(generic_score, specific_score):
-            return 'award_portal'
-        elif generic_score > specific_score and generic_score > 0:
-            return 'careers_portal'
-        elif specific_score > 0:
-            return 'posting'
-        elif generic_score > 0:
-            return 'careers_portal'
-        return 'unknown'
-    
-    def _is_generic_landing_page(self, text: str, final_url: str, final_host: str, 
-                                  matched: bool, overlap: float) -> bool:
-        """Check if page is a generic careers/recruitment landing page.
-        
-        Award portals (scholarships, prizes) are legitimate even without job title match.
-        """
-        if not text:
-            return True
-        
-        entry_type = self._detect_entry_type(text, final_url, final_host)
-        
-        # Award portals are legitimate even without job title match
-        if entry_type == 'award_portal':
-            return False
-        
-        # If content match failed AND it's a generic portal, it's a generic landing page
-        if not matched and entry_type == 'careers_portal':
-            return True
-        
-        # If overlap is very low and it's a portal, it's generic
-        if entry_type == 'careers_portal' and overlap < 0.3:
-            return True
-        
-        return False
-    
-    def verify(self, apply_url: str, employer_id: str, job_title: str = '', 
-               org_name: str = '') -> VerificationResult:
-        """
-        Main verification entry point.
-        
-        Returns VerificationResult with all policy checks.
-        Order of checks: P3 blocklist -> registry/host class -> fetch -> 
-        landing-page check -> content match. Reason code = first check that failed.
-        """
+            return "award_portal"
+        if generic_score > specific_score:
+            return "careers_portal"
+        if specific_score:
+            return "posting"
+        if is_generic_url(final_url, self.policy):
+            return "careers_portal"
+        return "posting" if not text else "posting"
+
+    def _is_soft_404(self, text: str) -> bool:
+        return closed_phrase(text, self.policy) or any(
+            phrase in (text or "").lower()
+            for phrase in ("page not found", "job not found", "error 404", "page doesn't exist")
+        )
+
+    def _result(self, **kwargs) -> VerificationResult:
+        base = {
+            "ok": False,
+            "final_url": "",
+            "final_host": "",
+            "http_status": 0,
+            "redirect_chain": [],
+            "verification_level": "unverified",
+            "host_class": "",
+            "reason_code": OK,
+            "evidence_snippet": "",
+            "content_hash": "",
+            "verified_at": datetime.now(timezone.utc).isoformat(),
+            "entry_type": "unknown",
+            "error_detail": "",
+            "warnings": [],
+            "platform": "",
+            "direct": False,
+        }
+        base.update(kwargs)
+        return VerificationResult(**base)
+
+    # ------------------------------------------------------------------
+    # Main entry point
+    # ------------------------------------------------------------------
+    def verify(self, apply_url: str, employer_id: str = "", job_title: str = "",
+               org_name: str = "") -> VerificationResult:
         now = datetime.now(timezone.utc).isoformat()
-        clean_url = self._strip_tracking_params(apply_url)
-        error_detail = ''
-        
-        # Find employer
-        employer = self._find_employer(employer_id)
-        
-        # If employer not in registry, check by domain
-        if not employer:
-            parsed = urlparse(clean_url)
-            employer = self._find_employer_by_domain(parsed.hostname or '')
-        
-        if not employer:
-            return VerificationResult(
-                ok=False,
-                final_url=clean_url,
-                final_host=urlparse(clean_url).hostname or '',
-                http_status=0,
-                redirect_chain=[clean_url],
-                verification_level='unverified',
-                host_class='unregistered',
-                reason_code='EMPLOYER_NOT_IN_REGISTRY',
-                evidence_snippet='',
-                content_hash='',
-                verified_at=now,
-                entry_type='unknown',
-                error_detail='',
-                warnings=[f'Employer {employer_id} not found in registry']
+        raw_url = str(apply_url or "").strip()
+        if not raw_url.lower().startswith(("http://", "https://")):
+            return self._result(
+                final_url=raw_url, reason_code=DEAD_LINK,
+                error_detail="invalid|InvalidURL|URL is not http(s)",
+                warnings=["Invalid URL"],
             )
-        
-        # P3 BLOCKLIST CHECK - BEFORE ANY NETWORK CALL
-        parsed_url = urlparse(clean_url)
-        apply_host = parsed_url.hostname or ''
-        if self._is_blocklisted(apply_host):
-            return VerificationResult(
-                ok=False,
-                final_url=clean_url,
-                final_host=apply_host,
-                http_status=0,
-                redirect_chain=[clean_url],
-                verification_level='unverified',
-                host_class='blocklisted',
-                reason_code='BLOCKED_HOST',
-                evidence_snippet='',
-                content_hash='',
-                verified_at=now,
-                entry_type='unknown',  # never fetched
-                error_detail='blocklist|BlocklistedHost|Host in blocklist',
-                warnings=[f'Blocklisted host: {apply_host}']
-            )
-        
-        # Determine host class from employer registry
-        host_class = self._determine_host_class(apply_host, employer)
-        if host_class == 'unregistered':
-            return VerificationResult(
-                ok=False,
-                final_url=clean_url,
-                final_host=apply_host,
-                http_status=0,
-                redirect_chain=[clean_url],
-                verification_level='unverified',
-                host_class='unregistered',
-                reason_code='HOST_NOT_IN_REGISTRY',
-                evidence_snippet='',
-                content_hash='',
-                verified_at=now,
-                entry_type='unknown',
-                error_detail='registry|HostNotInRegistry|Host not in employer registry',
-                warnings=[f'Host {apply_host} not in employer registry']
-            )
-        
-        # Now fetch with redirects
-        response, redirect_chain, fetch_error = self._fetch_with_redirects(clean_url)
-        final_url = redirect_chain[-1] if redirect_chain else clean_url
-        final_host = urlparse(final_url).hostname or ''
-        
-        # Update host_class based on final host (in case of redirect)
-        host_class = self._determine_host_class(final_host, employer)
-        if host_class == 'blocklisted':
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=0,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class='blocklisted',
-                reason_code='BLOCKED_HOST',
-                evidence_snippet='',
-                content_hash='',
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type='unknown',
-                error_detail='blocklist|BlocklistedHost|Redirect to blocklisted host',
-                warnings=[f'Redirect to blocklisted host: {final_host}']
-            )
-        if host_class == 'unregistered':
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=0,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class='unregistered',
-                reason_code='HOST_NOT_IN_REGISTRY',
-                evidence_snippet='',
-                content_hash='',
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type='unknown',
-                error_detail='registry|HostNotInRegistry|Redirect to unregistered host',
-                warnings=[f'Redirect to unregistered host: {final_host}']
-            )
-        
-        if fetch_error:
-            # Parse fetch_error to get stage
-            stage = fetch_error.split('|')[0] if '|' in fetch_error else 'unknown'
-            reason = fetch_error.split('|')[1] if '|' in fetch_error else 'FETCH_ERROR'
-            entry_type = 'unknown'
-            # DNS filtering -> NEEDS_MANUAL_CHECK
-            if stage == 'dns':
-                reason = 'NEEDS_MANUAL_CHECK'
-            # SSL errors for specific problematic domains -> NEEDS_MANUAL_CHECK
-            if stage == 'tls' and reason == 'SSLError':
-                reason = 'NEEDS_MANUAL_CHECK'
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=0,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code=reason,
-                evidence_snippet='',
-                content_hash='',
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail=fetch_error,
-                warnings=[f'Fetch failed at {stage}: {fetch_error}']
-            )
-        
-        # Success - got response
-        status = response.status_code
-        content_type = response.headers.get('Content-Type', '')
-        content = getattr(response, '_content_for_analysis', b'')
-        text = self._extract_text_content(response, content_type)
-        content_hash = self._compute_hash(content) if content else ''
-        
-        # Determine entry_type from content and ORIGINAL apply URL (before redirects)
-        # Use clean_url (original apply_url with tracking params stripped) for entry_type detection
-        # to preserve job-specific path information that may be lost in redirects
-        entry_type = self._detect_entry_type(text, clean_url, final_host)
-        
-        # Check HTTP status
-        if status in (404, 410):
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code='HTTP_404',
-                evidence_snippet='',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail=f'status|HTTP{status}|Not found',
-                warnings=[f'HTTP {status}']
-            )
-        
-        if status == 403:
-            # 403 Forbidden - could be bot protection, geographic restriction, etc.
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code='NEEDS_MANUAL_CHECK',
-                evidence_snippet='',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail=f'status|HTTP403|Forbidden - may need manual verification',
-                warnings=['HTTP 403 Forbidden - may require manual verification']
-            )
-        
-        if status >= 400:
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code=f'HTTP_{status}',
-                evidence_snippet='',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail=f'status|HTTP{status}|Server error',
-                warnings=[f'HTTP {status}']
-            )
-        
-        # Soft 404 check
-        if self._is_soft_404(text, status):
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code='SOFT_404',
+        clean_url = self._strip_tracking_params(raw_url)
+        redirect_chain = [clean_url]
+        employer = self._find_employer(employer_id) or self._find_employer_by_domain(
+            urlparse(clean_url).hostname or ""
+        )
+
+        # 1. Resolve news wrappers and shorteners first.
+        if is_wrapper(clean_url, self.policy) or is_shortener(clean_url, self.policy):
+            resolved = self._resolve_destination(clean_url)
+            if not resolved:
+                return self._result(
+                    final_url=clean_url,
+                    final_host=urlparse(clean_url).hostname or "",
+                    redirect_chain=redirect_chain,
+                    reason_code=UNRESOLVED_WRAPPER,
+                    error_detail="wrapper|Unresolved|Could not resolve wrapper or shortener",
+                    warnings=["Unresolved wrapper/shortener"],
+                )
+            redirect_chain.append(resolved)
+            clean_url = self._strip_tracking_params(resolved)
+
+        host = urlparse(clean_url).hostname or ""
+        platform = platform_for(host, self.policy)
+        host_class = self._determine_host_class(host, employer)
+
+        # 2. Platform URL-pattern validation. Never scrape bot-blocked sites.
+        if platform:
+            label = str(platform.get("name") or "")
+            if not matches_platform_pattern(clean_url, platform):
+                return self._result(
+                    ok=True,
+                    final_url=clean_url,
+                    final_host=host,
+                    http_status=0,
+                    redirect_chain=redirect_chain,
+                    verification_level="url_verified",
+                    host_class="platform",
+                    reason_code=NOT_DIRECT_LINK,
+                    entry_type="careers_portal",
+                    platform=label,
+                    direct=False,
+                    error_detail="pattern|NotDirect|URL is a search, listing or root page",
+                    warnings=["Not a specific job page - placed in Careers portals"],
+                )
+            if platform.get("bot_blocked"):
+                return self._result(
+                    ok=True,
+                    final_url=clean_url,
+                    final_host=host,
+                    http_status=0,
+                    redirect_chain=redirect_chain,
+                    verification_level="url_verified",
+                    host_class="platform",
+                    reason_code=UNKNOWN_KEEP,
+                    entry_type="posting",
+                    platform=label,
+                    direct=True,
+                    error_detail="platform|BotBlocked|Pattern-valid; content not fetched",
+                    warnings=[f"{label} blocks automated content checks - kept"],
+                )
+            # Non-bot-blocked platforms get a light status/closed check.
+            response, chain, error = self._fetch_with_redirects(clean_url)
+            final_url = chain[-1] if chain else clean_url
+            final_host = urlparse(final_url).hostname or host
+            if error or response is None:
+                return self._result(
+                    ok=True, final_url=final_url, final_host=final_host,
+                    redirect_chain=chain, verification_level="url_verified",
+                    host_class="platform", reason_code=UNKNOWN_KEEP,
+                    entry_type="posting", platform=label, direct=True,
+                    error_detail=error, warnings=["Status check inconclusive - kept"],
+                )
+            status = response.status_code
+            text = self._extract_text_content(response, response.headers.get("Content-Type", ""))
+            if status in (404, 410) or self._is_soft_404(text):
+                return self._result(
+                    final_url=final_url, final_host=final_host,
+                    http_status=status, redirect_chain=chain,
+                    verification_level="unverified", host_class="platform",
+                    reason_code=DEAD_LINK, entry_type="posting", platform=label,
+                    content_hash=self._compute_hash(getattr(response, "_content_for_analysis", b"")),
+                    evidence_snippet=text[:200],
+                    error_detail=f"status|HTTP{status}|Dead or closed",
+                    warnings=["Dead link"],
+                )
+            if status in (401, 403, 429, 999) or status >= 400:
+                return self._result(
+                    ok=True, final_url=final_url, final_host=final_host,
+                    http_status=status, redirect_chain=chain,
+                    verification_level="url_verified", host_class="platform",
+                    reason_code=UNKNOWN_KEEP, entry_type="posting",
+                    platform=label, direct=True,
+                    error_detail=f"status|HTTP{status}|Bot block or server refusal",
+                    warnings=["Inconclusive status - kept"],
+                )
+            return self._result(
+                ok=True, final_url=final_url, final_host=final_host,
+                http_status=status, redirect_chain=chain,
+                verification_level="page_verified", host_class="platform",
+                reason_code=OK, entry_type="posting", platform=label, direct=True,
+                content_hash=self._compute_hash(getattr(response, "_content_for_analysis", b"")),
                 evidence_snippet=text[:200],
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail='content|Soft404|Page indicates position closed',
-                warnings=['Soft 404 detected']
             )
-        
-        # Re-check host class on final URL (in case of redirect)
+
+        # 3. Employer / unknown host: URL-pattern check first, then fetch.
+        if is_generic_url(clean_url, self.policy):
+            return self._result(
+                ok=True, final_url=clean_url, final_host=host,
+                http_status=0, redirect_chain=redirect_chain,
+                verification_level="url_verified", host_class=host_class,
+                reason_code=NOT_DIRECT_LINK, entry_type="careers_portal",
+                direct=False,
+                error_detail="pattern|NotDirect|Home, search or section page",
+                warnings=["Not a specific job page - placed in Careers portals"],
+            )
+
+        response, chain, error = self._fetch_with_redirects(clean_url)
+        final_url = chain[-1] if chain else clean_url
+        final_host = urlparse(final_url).hostname or host
         host_class = self._determine_host_class(final_host, employer)
-        if host_class == 'blocklisted':
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class='blocklisted',
-                reason_code='BLOCKED_HOST',
-                evidence_snippet='',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail='blocklist|BlocklistedHost|Redirect to blocklisted host',
-                warnings=[f'Redirect to blocklisted host: {final_host}']
+
+        if error or response is None:
+            # UNKNOWN is not dead: keep visible.
+            return self._result(
+                ok=True, final_url=final_url, final_host=final_host,
+                redirect_chain=chain, verification_level="domain_verified",
+                host_class=host_class, reason_code=UNKNOWN_KEEP,
+                entry_type="posting", direct=True,
+                error_detail=error,
+                warnings=["Fetch inconclusive (timeout/TLS/DNS/bot block) - kept"],
             )
-        
-        if host_class == 'unregistered':
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class='unregistered',
-                reason_code='HOST_NOT_IN_REGISTRY',
-                evidence_snippet='',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type=entry_type,
-                error_detail='registry|HostNotInRegistry|Redirect to unregistered host',
-                warnings=[f'Redirect to unregistered host: {final_host}']
+
+        status = response.status_code
+        content = getattr(response, "_content_for_analysis", b"")
+        content_hash = self._compute_hash(content) if content else ""
+        text = self._extract_text_content(response, response.headers.get("Content-Type", ""))
+
+        if status in (404, 410):
+            return self._result(
+                final_url=final_url, final_host=final_host, http_status=status,
+                redirect_chain=chain, host_class=host_class, reason_code=DEAD_LINK,
+                entry_type="posting", content_hash=content_hash,
+                error_detail=f"status|HTTP{status}|Not found", warnings=["Dead link"],
             )
-        
-        # Content match check (for page_verified)
-        org_name = employer.get('name', '')
-        job_title_clean = job_title or org_name
-        matched, overlap, evidence = self._content_match(text, org_name, job_title_clean)
-        
-        # Check for generic landing page
-        is_generic = self._is_generic_landing_page(text, final_url, final_host, matched, overlap)
-        
-        if is_generic:
-            return VerificationResult(
-                ok=False,
-                final_url=final_url,
-                final_host=final_host,
-                http_status=status,
-                redirect_chain=redirect_chain,
-                verification_level='unverified',
-                host_class=host_class,
-                reason_code='GENERIC_LANDING_PAGE',
-                evidence_snippet=text[:200] if text else '',
-                content_hash=content_hash,
-                verified_at=datetime.now(timezone.utc).isoformat(),
-                entry_type='careers_portal',
-                error_detail='content|GenericLandingPage|Generic careers/recruitment page',
-                warnings=['Generic careers/recruitment landing page']
+        if status in (401, 403, 429, 999) or status >= 500:
+            return self._result(
+                ok=True, final_url=final_url, final_host=final_host,
+                http_status=status, redirect_chain=chain,
+                verification_level="domain_verified", host_class=host_class,
+                reason_code=UNKNOWN_KEEP, entry_type="posting", direct=True,
+                error_detail=f"status|HTTP{status}|Bot block or server error",
+                warnings=["Inconclusive status - kept"],
             )
-        
-        # Tightened OK: require BOTH org name AND job title on page
-        # (title_overlap >= 0.6 already checked in _content_match)
-        if matched:
-            verification_level = 'page_verified'
-            reason_code = 'OK'
-            ok = True
-            warnings = []
-        else:
-            # Check if content check could run
-            if not text or len(text.strip()) < 100:
-                # Content check couldn't run - empty/thin body, likely JS-rendered
-                verification_level = 'domain_verified'
-                reason_code = 'CONTENT_CHECK_SKIPPED'
-                ok = True  # domain_verified is still OK per policy
-                warnings = ['Content check skipped: empty/thin body (likely JS-rendered)']
-            else:
-                # Page loaded but job title not found - CONTENT_MISMATCH = FAIL
-                verification_level = 'unverified'
-                reason_code = 'CONTENT_MISMATCH'
-                ok = False  # FAIL - quarantined
-                warnings = ['Job title not found on page - content mismatch']
-        
-        return VerificationResult(
-            ok=ok,
-            final_url=final_url,
-            final_host=final_host,
-            http_status=status,
-            redirect_chain=redirect_chain,
-            verification_level=verification_level,
-            host_class=host_class,
-            reason_code=reason_code,
-            evidence_snippet=evidence[:200] if evidence else '',
-            content_hash=content_hash,
-            verified_at=datetime.now(timezone.utc).isoformat(),
-            entry_type=entry_type,
-            error_detail='',
-            warnings=warnings
+        if status >= 400:
+            return self._result(
+                ok=True, final_url=final_url, final_host=final_host,
+                http_status=status, redirect_chain=chain,
+                verification_level="domain_verified", host_class=host_class,
+                reason_code=UNKNOWN_KEEP, entry_type="posting", direct=True,
+                error_detail=f"status|HTTP{status}", warnings=["Inconclusive status - kept"],
+            )
+
+        if self._is_soft_404(text):
+            return self._result(
+                final_url=final_url, final_host=final_host, http_status=status,
+                redirect_chain=chain, host_class=host_class, reason_code=DEAD_LINK,
+                entry_type="posting", content_hash=content_hash,
+                evidence_snippet=text[:200],
+                error_detail="content|Closed|Page says the job is closed or expired",
+                warnings=["Dead or closed page"],
+            )
+
+        entry_type = self._detect_entry_type(text, clean_url, final_host)
+        if is_generic_url(clean_url, self.policy) or is_generic_url(final_url, self.policy):
+            return self._result(
+                ok=True, final_url=final_url, final_host=final_host,
+                http_status=status, redirect_chain=chain,
+                verification_level="page_verified", host_class=host_class,
+                reason_code=NOT_DIRECT_LINK,
+                entry_type="award_portal" if entry_type == "award_portal" else "careers_portal",
+                content_hash=content_hash, direct=False,
+                evidence_snippet=text[:200],
+                error_detail="pattern|NotDirect|Home, search or section page",
+                warnings=["Not a specific job page - placed in Careers portals"],
+            )
+
+        return self._result(
+            ok=True, final_url=final_url, final_host=final_host,
+            http_status=status, redirect_chain=chain,
+            verification_level="page_verified", host_class=host_class,
+            reason_code=OK, entry_type=entry_type if entry_type != "unknown" else "posting",
+            content_hash=content_hash, direct=True,
+            evidence_snippet=text[:200],
         )
 
 
-def load_employers_registry(path: str = 'public/employers.json') -> Dict[str, Any]:
-    """Load employer registry from JSON file."""
-    with open(path, encoding='utf-8') as f:
-        return json.load(f)
+def load_employers_registry(path: str = "public/employers.json") -> Dict[str, Any]:
+    with open(path, encoding="utf-8") as handle:
+        return json.load(handle)
 
 
-def verify_link(apply_url: str, employer_id: str, job_title: str = '', 
-                org_name: str = '', employers_registry: Optional[Dict] = None,
+def verify_link(apply_url: str, employer_id: str = "", job_title: str = "",
+                org_name: str = "", employers_registry: Optional[Dict] = None,
                 use_playwright: bool = False) -> VerificationResult:
-    """
-    Convenience function to verify a single link.
-    
-    Args:
-        apply_url: The application URL to verify
-        employer_id: Employer ID from employers.json
-        job_title: Job title for content matching
-        org_name: Organisation name for content matching
-        employers_registry: Pre-loaded registry (optional)
-        use_playwright: Use Playwright fallback for JS-rendered pages
-    
-    Returns:
-        VerificationResult with all checks
-    """
     if employers_registry is None:
-        employers_registry = load_employers_registry()
-    
-    verifier = LinkVerifier(employers_registry, use_playwright)
-    return verifier.verify(apply_url, employer_id, job_title, org_name)
+        try:
+            employers_registry = load_employers_registry()
+        except Exception:
+            employers_registry = {"employers": []}
+    return LinkVerifier(employers_registry, use_playwright).verify(
+        apply_url, employer_id, job_title, org_name
+    )
 
 
-if __name__ == '__main__':
-    # CLI for testing
+if __name__ == "__main__":
     import sys
-    if len(sys.argv) < 3:
-        print("Usage: python verify_link.py <apply_url> <employer_id> [job_title] [org_name]")
+
+    if len(sys.argv) < 2:
+        print("Usage: python verify_link.py <apply_url> [employer_id] [job_title] [org_name]")
         sys.exit(1)
-    
-    apply_url = sys.argv[1]
-    employer_id = sys.argv[2]
-    job_title = sys.argv[3] if len(sys.argv) > 3 else ''
-    org_name = sys.argv[4] if len(sys.argv) > 4 else ''
-    
-    result = verify_link(apply_url, employer_id, job_title, org_name)
+    result = verify_link(
+        sys.argv[1],
+        sys.argv[2] if len(sys.argv) > 2 else "",
+        sys.argv[3] if len(sys.argv) > 3 else "",
+        sys.argv[4] if len(sys.argv) > 4 else "",
+    )
     print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))

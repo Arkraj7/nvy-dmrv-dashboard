@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Nightly re-verification of every live (non-quarantined) listing.
 
-Policy:
-  * dead page (HTTP 404 / SOFT_404 "closed") -> archive immediately
-  * any other failure -> consecutive-failure counter; quarantine on the 3rd
-  * success -> reset the counter
-  * records without a stated deadline carry ``reverify_after`` (day 15)
+Policy v2:
+  * DEAD_LINK (404/410, confirmed soft-404, closed text) increments a counter;
+    archive after 3 consecutive confirmed-dead results
+  * UNKNOWN (403/429/999, timeout, TLS, SSRF guard) is never dead: keep visible
+    and reset the counter
+  * NOT_DIRECT_LINK is kept and placed in Careers portals
   * one summary line per run, printed to stdout
 """
 from __future__ import annotations
@@ -22,7 +23,7 @@ from verify_link import load_employers_registry, verify_link
 
 ROOT = Path(__file__).resolve().parent.parent
 FAIL_THRESHOLD = 3
-DEAD_REASONS = {"HTTP_404", "SOFT_404", "HTTP_410"}
+DEAD_REASONS = {"DEAD_LINK"}
 
 
 def load_json(path: Path) -> List[Dict[str, Any]]:
@@ -82,11 +83,6 @@ def recheck_file(
             keep.append(record)
             continue
         employer_id = employer_for(record, registry)
-        if not employer_id:
-            # Registry is the source of truth; unmatched rows wait for review.
-            keep.append(record)
-            stats["failing"] += 1
-            continue
         result = verify_link(
             record.get("apply_url", ""),
             employer_id,
@@ -99,21 +95,35 @@ def recheck_file(
         entry["last_checked"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         entry["last_reason"] = result.reason_code
 
-        if result.ok and result.verification_level == "page_verified":
+        if result.ok:
             entry["consecutive_failures"] = 0
-            record["verification"] = {
-                "verified_at": result.verified_at,
-                "final_url": result.final_url,
-                "final_host": result.final_host,
-                "http_status": result.http_status,
-                "content_hash": result.content_hash,
-                "entry_type": result.entry_type,
-                "host_class": result.host_class,
-                "verifier": "verify_link",
-            }
-            record["entry_type"] = result.entry_type
+            if result.verification_level == "page_verified":
+                record["verification"] = {
+                    "verified_at": result.verified_at,
+                    "final_url": result.final_url,
+                    "final_host": result.final_host,
+                    "http_status": result.http_status,
+                    "content_hash": result.content_hash,
+                    "entry_type": result.entry_type,
+                    "host_class": result.host_class,
+                    "reason_code": result.reason_code,
+                    "platform": result.platform,
+                    "verifier": "verify_link_v2",
+                }
+            if result.entry_type in {"posting", "careers_portal", "award_portal"}:
+                record["entry_type"] = result.entry_type
+            record.pop("quarantine", None)
+            record.pop("status_before_quarantine", None)
+            record["status"] = "active"
             keep.append(record)
             stats["pass"] += 1
+            continue
+
+        if result.reason_code not in DEAD_REASONS:
+            # UNKNOWN or unresolved wrapper: never treat as dead.
+            entry["consecutive_failures"] = 0
+            keep.append(record)
+            stats["failing"] += 1
             continue
 
         entry["consecutive_failures"] = int(entry.get("consecutive_failures") or 0) + 1
@@ -123,21 +133,10 @@ def recheck_file(
             "http_status": result.http_status,
             "consecutive_failures": entry["consecutive_failures"],
         }
-        if result.reason_code in DEAD_REASONS:
+        if entry["consecutive_failures"] >= FAIL_THRESHOLD:
             archive_dead(record, today)
             archived_now.append(record)
             stats["archived"] += 1
-        elif entry["consecutive_failures"] >= FAIL_THRESHOLD:
-            quarantine_record(
-                record,
-                result.reason_code,
-                f"failed {entry['consecutive_failures']} consecutive nightly checks",
-                result=result,
-                today=today,
-                source="nightly_recheck",
-            )
-            keep.append(record)
-            stats["quarantined"] += 1
         else:
             keep.append(record)
             stats["failing"] += 1

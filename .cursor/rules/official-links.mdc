@@ -1,30 +1,31 @@
 ---
-description: Official-link policy — never publish a job link that is not the employer's own page
+description: Direct-link policy - any employer or platform, remove only dead or non-direct links
 globs: ["scripts/**/*.py", "public/js/**/*.js", "public/*.json", "tests/**/*.py"]
 alwaysApply: true
 ---
 
-# Official links only
+# Direct links from any platform
 
-- A public listing may link only to the employer's own page (apply URL,
-  careers page or first-party ATS host). Job boards, aggregators, Google News
-  wrappers, fundsforngos, indiawaterportal and similar are **discovery only**.
-- Never store a blocklisted/aggregator URL in a public field. Drop the lead or
-  resolve it to the employer page first.
-- `apply_url`, `org_website` and `org_domain` come from the verified page plus
-  `public/employers.json` — never from the LLM.
-- Anything that is not `verification_level == "page_verified"` is quarantined
-  (`status: "quarantined"`), never published and never deleted.
-- Title, deadline, compensation, qualifications and every must-have skill must
-  appear on the fetched page (exact or fuzzy ≥ 0.9). Otherwise quarantine with
-  `FIELD_NOT_IN_SOURCE`.
-- Do not weaken `verify_link` (no `verify=False`, no blocklist bypass, no
-  Playwright-only fallback that skips content checks).
-- Never add a domain to `public/employers.json` without fetching it and
-  confirming it is that organisation's own site.
-- Front end: dossier URLs only; archived records render no outbound link;
-  quarantined and `entry_type: "unknown"` records are hidden everywhere.
-- Before committing: `python -m pytest tests -q`, `python scripts/link_guard.py`.
-  Before deploying: `npm run build` then
-  `python scripts/link_guard.py --dist dist`.
-- Full policy and remediation runbook: `docs/LINK_POLICY.md`.
+- Use `public/link_policy.json` as the editable source of truth. Add platforms
+  there, not in code.
+- Any employer domain is allowed. Allow-listed platforms (LinkedIn, Indeed,
+  Naukri, FreeJobAlert, Foundit, Shine, TimesJobs, Internshala, Apna and peers)
+  are allowed when the URL points at one specific job/notice page.
+- Do not fetch or scrape LinkedIn, Indeed or Naukri. Validate their URL
+  patterns only. 403, 429, 999, timeouts and TLS errors are UNKNOWN → keep.
+- Remove only DEAD links (404/410, confirmed soft-404, closed/expired text).
+  Never delete data: archive it.
+- Home pages, search/listing pages and section roots are NOT_DIRECT → publish
+  in "Careers portals", not as individual jobs.
+- Resolve news wrappers and shorteners first; drop only if unresolvable. Strip
+  tracking parameters.
+- `apply_url` must come from the source/candidate, never the LLM. Blank invented
+  fields instead of generating them.
+- Front end: "Apply" / "Apply on <platform>" + hostname,
+  `rel="noopener noreferrer"`; "Report a broken link" stays; archived records
+  render no outbound link.
+- Keep SSRF checks and certificate verification on. `verify=False` is
+  forbidden.
+- Before committing: `py -m pytest tests -q`, `py scripts/link_guard.py`.
+  Before deploying: `npm run build` then `py scripts/link_guard.py --dist dist`.
+- Full policy: `docs/LINK_POLICY.md`.

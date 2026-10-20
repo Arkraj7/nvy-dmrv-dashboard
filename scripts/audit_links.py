@@ -390,18 +390,11 @@ def main():
         for r in off_topic[:10]:
             print(f"    {r['slug']}: {r['employer']}")
     
-    # Quarantine patch preparation
-    print("\n=== QUARANTINE PATCH (records that would be hidden) ===")
-    quarantine_candidates = []
-    for row in results:
-        if row['verdict'] == 'FAIL':
-            reason = row['reason_code']
-            if reason in ('BLOCKED_HOST', 'GENERIC_LANDING_PAGE', 'HOST_NOT_IN_REGISTRY', 
-                         'UNREACHABLE_FROM_RUNNER', 'EMPLOYER_NOT_IN_REGISTRY',
-                         'HTTP_404', 'SOFT_404', 'CONTENT_MISMATCH'):
-                quarantine_candidates.append(row)
+    # Archive patch preparation (policy v2: only dead links are removed).
+    print("\n=== ARCHIVE PATCH (dead links only) ===")
+    quarantine_candidates = [row for row in results if row['reason_code'] == 'DEAD_LINK']
     
-    print(f"Total quarantine candidates: {len(quarantine_candidates)} out of {len(results)}")
+    print(f"Total dead-link candidates: {len(quarantine_candidates)} out of {len(results)}")
     print(f"Would remain public: {len(results) - len(quarantine_candidates)}")
     
     quarantine_by_employer = {}

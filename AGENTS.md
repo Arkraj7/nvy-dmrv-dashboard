@@ -11,21 +11,24 @@ extensionless URLs.
 
 ## Non-negotiable link policy
 
-Read `docs/LINK_POLICY.md` before touching job data, the pipeline, the front end
-or the sitemap. Short version:
+Read `docs/LINK_POLICY.md` and `public/link_policy.json` before touching job
+data, the pipeline, the front end or the sitemap. Short version:
 
-- Employer-owned pages only. No job boards, aggregators or news wrappers in any
-  public field.
-- The ingestion gate verifies every candidate at source before writing. It is
-  fail-closed; do not bypass, weaken or "temporarily disable" it.
-- Quarantined records (`status: "quarantined"`) keep their data but are hidden
-  from the site, hubs, snapshot, sitemap, JSON-LD, email and broadcasts. Never
-  delete them and never reactivate them automatically.
-- `apply_url`, `org_website`, `org_domain` come from the verified fetch +
-  `public/employers.json`, not from model output.
-- Do not edit `public/employers.json` domains without fetching the domain and
-  confirming it belongs to that organisation. NXDOMAIN/unverifiable domains stay
-  out.
+- Show direct job links from any platform (employer sites, LinkedIn, Indeed,
+  Naukri, FreeJobAlert, Foundit, Shine and peers). The platform list is config.
+- A link is direct only when it points at one specific job/notice page. Home,
+  search, listing, category and section roots are "Careers portals".
+- Remove only dead links (404/410, confirmed soft-404, closed/expired text) or
+  unresolvable news wrappers/shorteners. Archive dead records; never delete.
+- UNKNOWN is not dead. 403, 429, 999, timeouts and TLS errors keep the listing.
+  Never fetch or scrape LinkedIn, Indeed or Naukri; validate URL patterns only.
+- `apply_url` comes from the candidate/source, never from model output. Blank
+  invented title, deadline, pay, qualification or skill fields.
+- The employer registry supplies naming/domains only; a missing entry never
+  blocks publishing.
+- Front end: "Apply" / "Apply on <platform>" + hostname, noopener noreferrer,
+  "Report a broken link", archived records render no outbound link.
+- Keep SSRF checks and certificate verification on. `verify=False` is forbidden.
 
 ## Commands (Windows)
 

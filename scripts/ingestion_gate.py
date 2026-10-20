@@ -30,8 +30,12 @@ import certifi
 import requests
 from bs4 import BeautifulSoup
 
+from link_policy import is_shortener, is_wrapper, strip_tracking as policy_strip_tracking
 from verify_link import (
-    BLOCKLISTED_HOSTS,
+    DEAD_LINK,
+    NOT_DIRECT_LINK,
+    UNKNOWN_KEEP,
+    UNRESOLVED_WRAPPER,
     load_employers_registry,
     verify_link,
 )
@@ -450,12 +454,8 @@ def quarantine_record(
 # ---------------------------------------------------------------------------
 # The gate
 # ---------------------------------------------------------------------------
-def _is_blocklisted(url: str) -> bool:
-    host = (urlparse(str(url or "")).hostname or "").lower()
-    if not host:
-        return False
-    bare = host[4:] if host.startswith("www.") else host
-    return host in BLOCKLISTED_HOSTS or bare in BLOCKLISTED_HOSTS
+def _is_wrapper_or_shortener(url: str) -> bool:
+    return is_wrapper(url) or is_shortener(url)
 
 
 def _source_portal(host: str, employer: Dict[str, Any]) -> str:
@@ -479,114 +479,101 @@ def gate_candidate(
     verifier: Callable[..., Any] = verify_link,
     fetcher: Callable[..., Dict[str, Any]] = fetch_page_text,
 ) -> Tuple[Optional[Dict[str, Any]], str]:
-    """Run the full gate. Returns (record, reason).
+    """Run the direct-link gate. Returns ``(record, reason)``.
 
-    * Published record: ``status == "active"`` and ``reason == ""``.
-    * Gate failure: ``status == "quarantined"`` (kept, never published).
-    * ``None``: discovery-only lead dropped before storage (aggregator /
-      unresolvable news wrapper). Aggregator URLs are never written to a
-      public field.
+    * published: ``status == "active"`` (or ``"archived"`` when dead)
+    * ``None``: unresolvable wrapper/lead dropped before storage
+    * UNKNOWN results are kept (fail-open); only dead links are archived.
     """
     apply_url = strip_tracking(str(record.get("apply_url") or "").strip())
     if not apply_url.lower().startswith("http"):
         return None, "apply URL missing or invalid"
     record["apply_url"] = apply_url
 
-    # 1. News wrappers are discovery-only: unwrap, or drop the lead.
-    host = (urlparse(apply_url).hostname or "").lower()
-    if host.endswith("news.google.com"):
-        if resolve_news_url is None:
-            return None, "news.google.com wrapper dropped (no resolver)"
-        resolved = resolve_news_url(apply_url)
+    # 1. News wrappers / shorteners: resolve first, drop only if unresolved.
+    if _is_wrapper_or_shortener(apply_url):
+        resolved = resolve_news_url(apply_url) if resolve_news_url else None
         if not resolved:
-            return None, "news.google.com wrapper could not be resolved"
+            return None, "wrapper/shortener could not be resolved"
         apply_url = strip_tracking(resolved)
         record["apply_url"] = apply_url
 
-    # 2. P3 blocklist BEFORE any network call. Job boards / aggregators are
-    #    discovery-only; they may never become a stored public apply URL.
-    if _is_blocklisted(apply_url):
-        return None, "aggregator/job-board lead dropped (blocklisted host)"
-
-    # 3. Registry match.
+    # 2. Registry match is optional: it supplies naming/domains only.
     employer = find_employer(record.get("organization"), registry)
-    if employer is None:
-        quarantine_record(
-            record,
-            "EMPLOYER_NOT_IN_REGISTRY",
-            "organisation not found in public/employers.json",
-            today=today,
-        )
-        return record, "employer not in registry"
 
-    # 4. Verified fetch, landing-page and content-match checks.
+    # 3. Direct-link policy check (fail-open on UNKNOWN).
     result = verifier(
         apply_url,
-        employer.get("id", ""),
+        employer.get("id", "") if employer else "",
         record.get("clean_title", ""),
         record.get("organization", ""),
         employers_registry=registry,
     )
-    if not getattr(result, "ok", False) or getattr(
-        result, "verification_level", ""
-    ) != "page_verified":
-        reason = getattr(result, "reason_code", "") or "VERIFICATION_ERROR"
-        quarantine_record(
-            record,
-            reason,
-            getattr(result, "error_detail", ""),
-            result=result,
-            today=today,
-        )
-        return record, reason
+    reason = getattr(result, "reason_code", "") or UNKNOWN_KEEP
+    if reason == UNRESOLVED_WRAPPER:
+        return None, "wrapper/shortener could not be resolved"
+    if reason == DEAD_LINK:
+        record["status"] = "archived"
+        record["date_archived"] = today
+        record["apply_url"] = apply_url
+        record.pop("quarantine", None)
+        record.pop("status_before_quarantine", None)
+        record["link_policy"] = {
+            "policy_version": 2,
+            "reason_code": DEAD_LINK,
+            "checked_at": getattr(result, "verified_at", ""),
+            "final_url": getattr(result, "final_url", "") or apply_url,
+        }
+        return record, DEAD_LINK
 
-    # 5. The page must still be open and must carry every claimed field.
-    page = fetcher(getattr(result, "final_url", "") or apply_url)
-    page_text = page.get("text") or ""
-    if not page.get("ok") or not page_text:
-        quarantine_record(
-            record,
-            "PAGE_TEXT_UNAVAILABLE",
-            page.get("error") or "verified page returned no readable text",
-            result=result,
-            today=today,
-        )
-        return record, "PAGE_TEXT_UNAVAILABLE"
+    # 4. If the page was actually fetched, confirm it is open and blank any
+    #    field the model supplied that is not present in the source text.
+    page_text = ""
+    if getattr(result, "verification_level", "") == "page_verified":
+        page = fetcher(getattr(result, "final_url", "") or apply_url)
+        page_text = page.get("text") or ""
+        if page_text and page_says_closed(page_text):
+            record["status"] = "archived"
+            record["date_archived"] = today
+            record.pop("quarantine", None)
+            record.pop("status_before_quarantine", None)
+            record["link_policy"] = {
+                "policy_version": 2,
+                "reason_code": DEAD_LINK,
+                "checked_at": getattr(result, "verified_at", ""),
+                "final_url": getattr(result, "final_url", "") or apply_url,
+            }
+            return record, DEAD_LINK
+        if page_text:
+            missing = missing_fields_in_source(record, page_text)
+            for field in missing:
+                if field == "must_have_skills":
+                    record["must_have_skills"] = []
+                else:
+                    record[field] = ""
 
-    if page_says_closed(page_text):
-        quarantine_record(
-            record,
-            "POSITION_CLOSED",
-            "page says applications are closed",
-            result=result,
-            today=today,
-        )
-        return record, "POSITION_CLOSED"
-
-    missing = missing_fields_in_source(record, page_text)
-    if missing:
-        labels = [FIELD_LABELS.get(field, field) for field in missing]
-        quarantine_record(
-            record,
-            "FIELD_NOT_IN_SOURCE",
-            "not found on fetched page: " + ", ".join(labels),
-            result=result,
-            today=today,
-            extra={"fields": missing},
-        )
-        return record, "FIELD_NOT_IN_SOURCE: " + ", ".join(labels)
-
-    # 6. Publish: identity only from the verified page + registry, never LLM.
-    website, domain = registry_identity(employer)
+    # 5. Publish. Identity comes from the registry when matched, never the LLM.
+    website, domain = registry_identity(employer) if employer else ("", "")
     record["apply_url"] = strip_tracking(getattr(result, "final_url", "") or apply_url)
-    record["org_website"] = website
-    record["org_domain"] = domain
-    record["source_portal"] = _source_portal(
-        getattr(result, "final_host", ""), employer
+    if website:
+        record["org_website"] = website
+    if domain:
+        record["org_domain"] = domain
+    label = getattr(result, "platform", "") or ""
+    record["source_portal"] = label or _source_portal(
+        getattr(result, "final_host", ""), employer or {}
     )
-    record["entry_type"] = getattr(result, "entry_type", "unknown") or "unknown"
-    record["employer_id"] = employer.get("id", "")
+    entry_type = getattr(result, "entry_type", "posting") or "posting"
+    if reason == NOT_DIRECT_LINK:
+        entry_type = entry_type if entry_type in {"careers_portal", "award_portal"} else "careers_portal"
+    elif entry_type == "unknown":
+        entry_type = "posting"
+    record["entry_type"] = entry_type
+    if employer:
+        record["employer_id"] = employer.get("id", "")
     record["status"] = "active"
+    record.pop("quarantine", None)
+    record.pop("status_before_quarantine", None)
     record["verification"] = {
         "verified_at": getattr(result, "verified_at", ""),
         "final_url": record["apply_url"],
@@ -596,9 +583,15 @@ def gate_candidate(
         "evidence_snippet": (getattr(result, "evidence_snippet", "") or "")[:200],
         "entry_type": record["entry_type"],
         "host_class": getattr(result, "host_class", ""),
-        "verifier": "verify_link",
+        "reason_code": reason,
+        "platform": label,
+        "verifier": "verify_link_v2",
     }
-    # Internal flags from coerce_to_job_record are never published.
+    record["link_policy"] = {
+        "policy_version": 2,
+        "reason_code": reason,
+        "checked_at": getattr(result, "verified_at", ""),
+    }
     for key in ("_qualification_is_default", "_compensation_is_default",
                 "_deadline_is_default"):
         record.pop(key, None)
