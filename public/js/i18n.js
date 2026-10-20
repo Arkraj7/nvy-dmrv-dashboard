@@ -235,7 +235,7 @@
       'detail.suggest.h3': 'Currently Active Positions in This Sector',
       'detail.suggest.aria': 'View active position: ',
 
-      'verify.kicker': 'Official Verification & Application Portal',
+      'verify.kicker': 'Application record',
       'verify.source': 'Source: ',
       'verify.apply.on': 'Apply on ',
       'verify.apply.archive': 'View Original Application Portal',
@@ -298,7 +298,7 @@
       'faq.title': 'Frequently Asked Questions',
       'faq.sub': 'A formal reference for candidates, institutions, researchers and partners on how this registry is governed, verified and maintained. Corresponding structured data is published as FAQPage schema in this page\u2019s metadata.',
       'faq.q1': 'What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?',
-      'faq.a1': 'India\u2019s environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed institutional notices — recruitment PDFs and advertisements issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities, alongside opportunities published separately by development think-tanks such as CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this information asymmetry by aggregating, verifying and structuring these mandates into a single searchable national registry, with every entry linked to its official application source.',
+      'faq.a1': 'India\u2019s environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed institutional notices — recruitment PDFs and advertisements issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities, alongside opportunities published separately by development think-tanks such as CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this information asymmetry by aggregating, verifying and structuring these mandates into a single searchable national registry, with every entry linked to a direct application source.',
       'faq.q2': 'How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?',
       'faq.a2': 'Every listing passes through an automated verification pipeline before publication. Candidates are surfaced from employer portals, job platforms, verified feeds and institutional notices; each record then undergoes domain verification, redirect unwrapping (so links resolve to the publisher rather than a news wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier presents both a direct application link and the verified website of the parent organisation, so applicants can confirm every detail at its authoritative source.',
       'faq.q3': 'What happens to expired or closed job mandates, and why is a historical archive maintained?',
@@ -504,7 +504,7 @@
       'detail.suggest.h3': 'इस सेक्टर में वर्तमान सक्रिय पद',
       'detail.suggest.aria': 'सक्रिय पद देखें: ',
 
-      'verify.kicker': 'आधिकारिक सत्यापन एवं आवेदन पोर्टल',
+      'verify.kicker': 'आवेदन रिकॉर्ड',
       'verify.source': 'स्रोत: ',
       'verify.apply.on': 'आवेदन करें: ',
       'verify.apply.archive': 'मूल आवेदन पोर्टल देखें',
