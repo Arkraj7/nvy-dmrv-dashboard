@@ -379,7 +379,6 @@
     if (job.valid_through) lines.push('\u23f3 *Apply before:* ' + job.valid_through);
     lines.push('');
     lines.push('\ud83d\udd17 *Full Details & Apply:* ' + shareableUrl(job.id));
-    if (job.org_website) lines.push('\ud83c\udf10 *Official Site:* ' + job.org_website);
     return lines.join('\n');
   }
 
@@ -424,37 +423,48 @@
     var portal = sourcePortalOf(job);
     var orgDomain = orgDomainOf(job);
     var applyHost = applyHostOf(job);
-    var primaryLabel = isArchived
-      ? t('verify.apply.archive', 'View Original Application Portal')
-      : t('verify.apply.on', 'Apply on ') + portal;
-    var secondary;
+    var verifiedDate = verifiedDateOf(job);
+
+    if (isArchived) {
+      /* Archived records keep their data but render no outbound link; the
+         original application host is shown as plain text. */
+      return '' +
+        '<div class="verify-card is-archived">' +
+          '<div class="verify-head">' +
+            '<span class="verify-kicker">' + t('verify.kicker', 'Official application record') + '</span>' +
+            '<span class="verify-source">' + t('verify.source', 'Source: ') + '<strong>' + escapeHtml(portal) + '</strong></span>' +
+          '</div>' +
+          '<p class="apply-note">' + t('verify.note.archive', 'This mandate is archived \u2014 the application window has closed. No outbound application link is shown. The original application host was ') +
+            '<strong>' + escapeHtml(applyHost || 'not recorded') + '</strong>.</p>' +
+        '</div>';
+    }
+
+    var secondary = '';
     if (job.org_website) {
       secondary = '<a class="verify-btn verify-btn-org" href="' + escapeHtml(job.org_website) +
         '" target="_blank" rel="noopener noreferrer">' +
         '<span class="vb-label">' + t('verify.website', 'Visit Official Website') + ' ' + iconSvg('external') + '</span>' +
         '<span class="vb-sub">' + escapeHtml(orgDomain || t('verify.website.sub', 'official portal')) + '</span></a>';
-    } else {
-      secondary = '<span class="verify-btn verify-btn-org is-empty">' +
-        '<span class="vb-label">' + t('verify.website.empty', 'Official Website') + '</span>' +
-        '<span class="vb-sub">' + t('verify.website.empty.sub', 'Not listed \u2014 use the source portal') + '</span></span>';
     }
-    var note = isArchived
-      ? t('verify.note.archive', 'This mandate is archived \u2014 the application window has closed. Both links open the original portal for institutional reference only.')
-      : t('verify.note.active', 'Both links open in a new tab. Always verify eligibility, fellowship norms and deadlines on the employer\u2019s page before applying.');
+
     return '' +
-      '<div class="verify-card' + (isArchived ? ' is-archived' : '') + '">' +
+      '<div class="verify-card">' +
         '<div class="verify-head">' +
-          '<span class="verify-kicker">' + t('verify.kicker', 'Official Verification &amp; Application Portal') + '</span>' +
+          '<span class="verify-kicker">' + t('verify.kicker.active', 'Official Verification &amp; Application Portal') + '</span>' +
           '<span class="verify-source">' + t('verify.source', 'Source: ') + '<strong>' + escapeHtml(portal) + '</strong></span>' +
         '</div>' +
         '<div class="verify-actions">' +
-          '<a class="verify-btn verify-btn-apply' + (isArchived ? ' is-closed' : '') + '" href="' +
-            escapeHtml(job.apply_url) + '" target="_blank" rel="noopener noreferrer nofollow">' +
-            '<span class="vb-label">' + escapeHtml(primaryLabel) + ' ' + iconSvg('external') + '</span>' +
-            '<span class="vb-sub">' + t('verify.source', 'Source: ') + escapeHtml(applyHost || 'external portal') + '</span></a>' +
+          '<a class="verify-btn verify-btn-apply" href="' + escapeHtml(job.apply_url) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            '<span class="vb-label">' + t('verify.apply.on', 'Apply on official site') + ' ' + iconSvg('external') + '</span>' +
+            '<span class="vb-sub">' + escapeHtml(applyHost || 'official site') + '</span></a>' +
           secondary +
         '</div>' +
-        '<p class="apply-note">' + note + '</p>' +
+        '<p class="verify-trust">' + t('verify.trust', 'Verified at source on') + ' ' +
+          escapeHtml(verifiedDate) + '</p>' +
+        '<p class="apply-note">' + t('verify.note.active', 'The apply link opens the employer\u2019s own page in a new tab. Always verify eligibility, fellowship norms and deadlines before applying. ') +
+          '<a class="verify-report" href="' + reportBrokenLinkHref(job) + '">' +
+          t('verify.report', 'Report a broken link') + '</a></p>' +
       '</div>';
   }
 
@@ -619,6 +629,39 @@
     return list;
   }
 
+  /* Quarantined records stay in the data files for review but never reach
+     the public UI, dossier routing, JSON-LD, hubs or the sitemap. */
+  function publicOnly(list) {
+    return (Array.isArray(list) ? list : []).filter(function (job) {
+      return job && job.status !== 'quarantined';
+    });
+  }
+
+  /* Placement rule: posting -> Jobs; careers_portal -> Careers portals;
+     award_portal -> Fellowships & programmes; unknown -> hidden. */
+  function entrySectionOf(job) {
+    var type = job.entry_type || (job.quarantine && job.quarantine.entry_type) || 'posting';
+    if (type === 'careers_portal') return 'careers';
+    if (type === 'award_portal') return 'programmes';
+    if (type === 'posting') return 'jobs';
+    return 'hidden';
+  }
+
+  function verifiedDateOf(job) {
+    var verification = job.verification || {};
+    var stamp = String(verification.verified_at || '').slice(0, 10);
+    return stamp || String(job.date_added || '').slice(0, 10);
+  }
+
+  function reportBrokenLinkHref(job) {
+    var subject = 'Broken link: ' + (job.clean_title || job.id || 'registry record');
+    var body = 'Dossier: ' + shareableUrl(job.id) +
+      '\nApply host: ' + (applyHostOf(job) || 'unknown') +
+      '\nWhat happened: ';
+    return 'mailto:urbanforestpark@gmail.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
   function loadAll() {
     els.grid.innerHTML = '<div class="loading-state" role="status">' + t('feed.loadingstate', 'Loading registry mandates\u2026') + '</div>';
     Promise.all([
@@ -628,11 +671,11 @@
       fetchJson(CONFIG.GLOBAL_DATA_URL, false),
       fetchJson(CONFIG.GLOBAL_ARCHIVE_URL, false)
     ]).then(function (results) {
-      state.jobs = sortByDateDesc(Array.isArray(results[0]) ? results[0] : [], 'date_added');
-      state.archive = sortByDateDesc(Array.isArray(results[1]) ? results[1] : [], 'date_archived');
+      state.jobs = sortByDateDesc(publicOnly(results[0]), 'date_added');
+      state.archive = sortByDateDesc(publicOnly(results[1]), 'date_archived');
       state.stats = (results[2] && typeof results[2] === 'object') ? results[2] : null;
-      state.globalJobs = sortByDateDesc(Array.isArray(results[3]) ? results[3] : [], 'date_added');
-      state.globalArchive = sortByDateDesc(Array.isArray(results[4]) ? results[4] : [], 'date_archived');
+      state.globalJobs = sortByDateDesc(publicOnly(results[3]), 'date_added');
+      state.globalArchive = sortByDateDesc(publicOnly(results[4]), 'date_archived');
       state.loaded = true;
 
       DEFAULT_HERO_HTML = els.heroHeading ? els.heroHeading.innerHTML : '';
@@ -1025,6 +1068,7 @@
     var cutoff = archiveCutoff();
 
     state.filtered = source.filter(function (job) {
+      if (!isArchive && entrySectionOf(job) === 'hidden') return false;
       if (state.registry === 'global') {
         if (state.region !== 'all' && (job.region || 'Global / Remote') !== state.region) return false;
       } else if (state.state !== 'all' && job.state !== state.state) {
@@ -1087,9 +1131,32 @@
     }
 
     var html = '';
-    jobs.forEach(function (job) {
-      html += jobCardHtml(job, isArchive);
-    });
+    if (isArchive) {
+      jobs.forEach(function (job) {
+        html += jobCardHtml(job, true);
+      });
+    } else {
+      /* Two extra registry sections, same card layout and styling. */
+      var groups = [
+        { key: 'jobs', title: t('section.jobs', 'Jobs'), items: [] },
+        { key: 'careers', title: t('section.careers', 'Careers portals'), items: [] },
+        { key: 'programmes', title: t('section.programmes', 'Fellowships & programmes'), items: [] }
+      ];
+      jobs.forEach(function (job) {
+        var section = entrySectionOf(job);
+        groups.forEach(function (group) {
+          if (group.key === section) group.items.push(job);
+        });
+      });
+      groups.forEach(function (group) {
+        if (!group.items.length) return;
+        html += '<h3 class="feed-group-title">' + escapeHtml(group.title) +
+          ' <span class="feed-group-count">' + group.items.length + '</span></h3>';
+        group.items.forEach(function (job) {
+          html += jobCardHtml(job, false);
+        });
+      });
+    }
     els.grid.innerHTML = html;
     els.grid.setAttribute('aria-busy', 'false');
   }
@@ -1874,6 +1941,9 @@
 
   function injectFeedJsonLd(jobs) {
     if (document.getElementById('feed-jobs-jsonld')) return;
+    jobs = (jobs || []).filter(function (job) {
+      return entrySectionOf(job) !== 'hidden';
+    });
     var schema = {
       '@context': 'https://schema.org',
       '@type': 'ItemList',

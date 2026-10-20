@@ -166,7 +166,12 @@ def load_jobs(path: Path) -> List[Dict[str, Any]]:
         data = json.load(handle)
     if isinstance(data, dict):  # tolerate {"jobs": [...]} wrappers
         data = data.get("jobs", [])
-    return [row for row in data if isinstance(row, dict)]
+    # Quarantined records are never emailed. Broadcasts carry dossier URLs only.
+    return [
+        row
+        for row in data
+        if isinstance(row, dict) and row.get("status") != "quarantined"
+    ]
 
 
 def job_dossier_url(job_id: str) -> str:

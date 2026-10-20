@@ -839,8 +839,15 @@ def load_records(public: Path, filename: str) -> List[Dict[str, Any]]:
         return []
     records: List[Dict[str, Any]] = []
     for entry in data:
-        if isinstance(entry, dict):
-            records.append(fh.normalize_job_fields(entry))
+        if not isinstance(entry, dict):
+            continue
+        # Quarantined records are kept in the data files but never rendered.
+        # Records with no classifiable entry type are hidden by placement policy.
+        if entry.get("status") == "quarantined":
+            continue
+        if str(entry.get("entry_type") or "posting") == "unknown":
+            continue
+        records.append(fh.normalize_job_fields(entry))
     return records
 
 

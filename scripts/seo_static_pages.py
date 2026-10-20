@@ -345,14 +345,20 @@ def _normalise_images(text: str) -> str:
     return "".join(out)
 
 
+FEED_JSONLD_RE = re.compile(
+    r'<script type="application/ld\+json" id="feed-jobs-jsonld">.*?</script>',
+    re.S,
+)
+
+
 def _ensure_index_item_list(text: str, public: Path) -> str:
     """Expose a static ItemList of the live mandates on the homepage.
 
-    jobs.js checks for the same ``feed-jobs-jsonld`` id, so the runtime feed
-    schema never duplicates this crawlable snapshot.
+    Regenerated on every SEO build (not append-only): quarantined records and
+    records whose entry type is unknown must never appear in JSON-LD. jobs.js
+    checks for the same ``feed-jobs-jsonld`` id, so the runtime feed schema
+    never duplicates this crawlable snapshot.
     """
-    if 'id="feed-jobs-jsonld"' in text:
-        return text
     jobs_path = public / "jobs.json"
     if not jobs_path.exists():
         return text
@@ -360,8 +366,17 @@ def _ensure_index_item_list(text: str, public: Path) -> str:
         jobs = json.loads(jobs_path.read_text(encoding="utf-8"))
     except Exception:
         return text
+    if not isinstance(jobs, list):
+        return text
+    publishable = [
+        job
+        for job in jobs
+        if isinstance(job, dict)
+        and job.get("status") != "quarantined"
+        and str(job.get("entry_type") or "posting") != "unknown"
+    ]
     entries = []
-    for index, job in enumerate(jobs[:20], start=1):
+    for index, job in enumerate(publishable[:20], start=1):
         entries.append(
             {
                 "@type": "ListItem",
@@ -384,6 +399,8 @@ def _ensure_index_item_list(text: str, public: Path) -> str:
         '<script type="application/ld+json" id="feed-jobs-jsonld">',
         1,
     )
+    if FEED_JSONLD_RE.search(text):
+        return FEED_JSONLD_RE.sub(lambda _match: script, text, count=1)
     return text.replace("</head>", script + "\n</head>", 1)
 
 

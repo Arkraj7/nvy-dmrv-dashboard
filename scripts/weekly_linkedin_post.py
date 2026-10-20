@@ -562,8 +562,16 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     india = load_json(public / "jobs.json") or []
     global_jobs = load_json(public / "global_jobs.json") or []
-    india = [j for j in india if isinstance(j, dict) and clean(j.get("id"))]
-    global_jobs = [j for j in global_jobs if isinstance(j, dict) and clean(j.get("id"))]
+    india = [
+        j for j in india
+        if isinstance(j, dict) and clean(j.get("id"))
+        and j.get("status") != "quarantined"
+    ]
+    global_jobs = [
+        j for j in global_jobs
+        if isinstance(j, dict) and clean(j.get("id"))
+        and j.get("status") != "quarantined"
+    ]
 
     india_pool, india_window = pool_for_window(india, today, args.days)
     global_pool, global_window = pool_for_window(global_jobs, today, args.days)
