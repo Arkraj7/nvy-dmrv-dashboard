@@ -38,20 +38,18 @@
     "_qualification_is_default": false,
     "_compensation_is_default": false,
     "_deadline_is_default": false,
-    "status": "quarantined",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "HOST_NOT_IN_REGISTRY",
-      "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
-      "final_host": "www.indiawaterportal.org",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "unregistered",
-      "error_detail": "registry|HostNotInRegistry|Host not in employer registry",
-      "verified_at": "2026-10-20T09:54:27.003855+00:00",
-      "audit": "ingestion_gate",
-      "run_date": "2026-10-20"
-    }
+    "status": "active",
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "HOST_NOT_IN_REGISTRY",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.979215+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-04",
+    "valid_through": "2026-11-19"
   },
   {
     "id": "satluj-river-basin-assessment-tnc",
@@ -89,21 +87,19 @@
     "org_domain": "nature.org",
     "source_portal": "Official Organisation Website",
     "valid_through": "2026-11-18",
-    "status": "quarantined",
+    "status": "active",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "HOST_NOT_IN_REGISTRY",
-      "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
-      "final_host": "www.indiawaterportal.org",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "unregistered",
-      "error_detail": "registry|HostNotInRegistry|Host not in employer registry",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "HOST_NOT_IN_REGISTRY",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.973555+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "research-intern-technology-futures-ceew",
@@ -246,21 +242,19 @@
     "org_domain": "www2.fundsforngos.org",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-18",
-    "status": "quarantined",
+    "status": "active",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "HOST_NOT_IN_REGISTRY",
-      "final_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
-      "final_host": "www2.fundsforngos.org",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "unregistered",
-      "error_detail": "registry|HostNotInRegistry|Host not in employer registry",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "HOST_NOT_IN_REGISTRY",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.978216+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "chief-of-partnerships-unaccc-vadodara",
@@ -298,21 +292,19 @@
     "org_domain": "unaccc.org",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "quarantined",
+    "status": "active",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478250481",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.950825+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "assistant-manager-horticulture-adani-natural-resources",
@@ -350,21 +342,19 @@
     "org_domain": "adani.com",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "quarantined",
+    "status": "active",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480812620",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.950825+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "assistant-director-programs-m3m-foundation",
@@ -402,21 +392,19 @@
     "org_domain": "m3mfoundation.org",
     "source_portal": "LinkedIn",
     "valid_through": "2026-11-18",
-    "status": "quarantined",
+    "status": "active",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479669291",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.950825+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "team-member-green-steel-jsw-steel-chennai",
@@ -449,7 +437,7 @@
     "application_tip": "Highlight your specific experience with industrial supply chains or waste processing infrastructure in your resume. Be ready to discuss your technical proficiency in mechanical systems during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4468549980",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -458,18 +446,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4468549980",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.951827+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "simons-postdoctoral-fellowships-plant-biology",
@@ -553,7 +539,7 @@
     "application_tip": "Highlight your direct experience with ECBC compliance, Eco-Niwas Samhita, or building energy simulation tools like eQUEST and EnergyPlus. Reference any previous engagements with BEE or state designated agencies to strengthen your candidacy.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478230249",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -562,18 +548,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478230249",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.951827+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "senior-regulatory-specialist-toxicology-ecolab-pune",
@@ -605,7 +589,7 @@
     "application_tip": "Highlight your specific experience with GHS or CLP regulatory frameworks and any prior work managing external research contracts. Ensure your resume clearly details your technical proficiency in interpreting ecotoxicology study reports.",
     "apply_url": "https://www.linkedin.com/jobs/view/4463650250",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -614,18 +598,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4463650250",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.951827+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "senior-consultant-ccass-ey-chennai",
@@ -657,7 +639,7 @@
     "application_tip": "Highlight direct project experience with SEBI BRSR compliance and Scope 1 to 3 emissions modelling in your resume. If you pair a mechanical engineering degree with an energy or sustainability MBA, emphasize how that technical background shapes your decarbonization calculations.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477787211",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -666,18 +648,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477787211",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.952826+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "senior-associate-pwc-india",
@@ -709,7 +689,7 @@
     "application_tip": "Highlight your specific experience with carbon footprinting or climate risk modeling in your cover letter. Ensure your resume clearly details previous consulting projects related to sustainability or environmental compliance.",
     "apply_url": "https://www.linkedin.com/jobs/view/4415883688",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -718,18 +698,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4415883688",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.952826+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "scientist-innovation-systems-icrisat",
@@ -762,7 +740,7 @@
     "application_tip": "Highlight your experience in bridging the gap between complex climate data and practical field-level applications for smallholder farmers. Showcase specific projects where you have successfully deployed digital or AI-based tools in an agricultural context.",
     "apply_url": "https://in.indeed.com/viewjob?jk=0efcab3d008751a0",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -771,18 +749,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=0efcab3d008751a0",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.952826+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "sales-manager-sustainability-intertek-india",
@@ -814,7 +790,7 @@
     "application_tip": "Highlight your experience with specific Indian ESG regulations and provide concrete examples of how you have successfully navigated the sales cycle for complex sustainability or technical services.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477062615",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -823,18 +799,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477062615",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.953829+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "sales-consultant-quantum-sustainability-consulting",
@@ -866,7 +840,7 @@
     "application_tip": "Highlight any academic projects or internships related to energy markets or environmental economics in your resume. Be prepared to discuss your understanding of current carbon pricing mechanisms during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477380037",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -875,18 +849,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477380037",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.954829+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "sales-analyst-nextpower",
@@ -918,7 +890,7 @@
     "application_tip": "Highlight your experience with financial modeling for infrastructure or energy projects in your resume. If you have worked with Salesforce or similar CRM platforms, explicitly mention how you used data to improve sales reporting or forecasting.",
     "apply_url": "https://www.linkedin.com/jobs/view/4416196729",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -927,18 +899,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4416196729",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.954829+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "research-analyst-technology-futures-ceew",
@@ -1023,7 +993,7 @@
     "application_tip": "Highlight your specific experience with government renewable energy schemes like PM Kusum or rooftop solar programs. Ensure your resume clearly details your involvement in the full project lifecycle, from planning to monitoring and evaluation.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478427353",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1032,18 +1002,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478427353",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.954829+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "quality-assurance-manager-naandi-water",
@@ -1079,24 +1047,22 @@
     "application_tip": "Highlight your experience with water safety standards or food and beverage manufacturing audits. Emphasize your ability to translate technical quality data into actionable operational improvements.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478238129",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.naandi.org",
     "org_domain": "naandi.org",
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478238129",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.955829+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "project-lead-access-development-services",
@@ -1129,7 +1095,7 @@
     "application_tip": "Highlight your specific experience in managing watershed or irrigation projects in tribal regions of Odisha. Emphasize your ability to build convergence with local government line departments during your interview.",
     "apply_url": "https://in.indeed.com/viewjob?jk=e94794c868c8f5eb",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1138,18 +1104,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=e94794c868c8f5eb",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.955829+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "project-coordinator-yclc-bindi-international",
@@ -1181,7 +1145,7 @@
     "application_tip": "Highlight your experience working with government school systems or grassroots community programs in your cover letter. Emphasize specific instances where you managed field teams to achieve educational or social impact targets.",
     "apply_url": "https://in.indeed.com/viewjob?jk=e1ff306091b25910",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1190,18 +1154,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=e1ff306091b25910",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.956334+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "project-associate-assistant-wii",
@@ -1236,24 +1198,22 @@
     "application_tip": "Ensure your CV highlights specific field experience or taxonomic expertise relevant to the project themes. Prepare to discuss your familiarity with ecological sampling techniques during the selection process.",
     "apply_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://wii.gov.in",
     "org_domain": "wii.gov.in",
     "source_portal": "freejobalert.com",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
-      "final_host": "www.freejobalert.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.981214+00:00",
+      "platform": "FreeJobAlert"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "programme-associate-industrial-heat-decarbonisation-iforest",
@@ -1285,7 +1245,7 @@
     "application_tip": "Highlight specific experience with boiler-based industries or energy audits in your CV. Ensure your writing samples demonstrate an ability to translate complex technical data into actionable policy recommendations.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479283171",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1294,18 +1254,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479283171",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.957353+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "programme-associate-industrial-decarbonisation-iforest",
@@ -1337,7 +1295,7 @@
     "application_tip": "Highlight specific projects where you conducted energy audits or implemented efficiency measures in industrial settings. Ensure your resume clearly demonstrates your technical background in mechanical or thermal engineering as these are critical for this role.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479263940",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1346,18 +1304,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479263940",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.957990+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "program-partnership-manager-equilibrium",
@@ -1389,7 +1345,7 @@
     "application_tip": "Highlight your experience managing technical teams or GIS-heavy projects in your resume. Demonstrate your ability to translate complex project requirements into actionable work plans for cross-functional teams.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477563878",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1398,18 +1354,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477563878",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.957990+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "program-manager-sustainability-fleet-electrification-amazon",
@@ -1441,7 +1395,7 @@
     "application_tip": "Highlight your experience with operational data and large-scale project tracking, as this role prioritizes the ability to turn complex datasets into clear, actionable decisions. Showcase any past work involving cross-functional coordination or infrastructure deployment.",
     "apply_url": "https://www.linkedin.com/jobs/view/4470473913",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1450,18 +1404,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4470473913",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.958995+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "program-manager-disaster-climate-resilience-selco",
@@ -1494,7 +1446,7 @@
     "application_tip": "Highlight your specific experience with disaster management cycles and community-based climate adaptation in your cover letter. Emphasize any past work involving decentralized energy or rural infrastructure, as this is central to SELCO’s mission.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479355847",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1503,18 +1455,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479355847",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.958995+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "program-coordinator-climate-health-path-mumbai",
@@ -1546,7 +1496,7 @@
     "application_tip": "Highlight your specific experience working with Indian government health departments or municipal bodies in your cover letter. Emphasize any past field research or data collection work you have conducted in urban settings.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478329847",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1555,18 +1505,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478329847",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.958995+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "process-engineer-electrification-quest-global",
@@ -1599,7 +1547,7 @@
     "application_tip": "Highlight your specific experience with energy transition projects or carbon capture feasibility studies in your resume. Since this is a senior role, clearly demonstrate your ability to balance technical engineering rigor with economic evaluation metrics.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478887359",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1608,18 +1556,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478887359",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.958995+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "partnerships-outreach-manager-liter-of-light-mumbai",
@@ -1651,7 +1597,7 @@
     "application_tip": "Highlight specific instances where you have managed end-to-end event or workshop logistics. Emphasize your ability to translate technical sustainability concepts into accessible, hands-on educational experiences for non-technical audiences.",
     "apply_url": "https://in.indeed.com/viewjob?jk=a0e7ff5168a92b88",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1660,18 +1606,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=a0e7ff5168a92b88",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.958995+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "mechanical-design-engineer-saltech-design-labs",
@@ -1703,7 +1647,7 @@
     "application_tip": "Prepare a portfolio showcasing your previous mechanical designs or prototypes, as the firm specifically requests samples of your work. Highlight any past projects involving waste management or sustainable materials to stand out.",
     "apply_url": "https://www.linkedin.com/jobs/view/4465527088",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1712,18 +1656,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4465527088",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.960010+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "manager-sustainability-aditya-birla-fashion-and-retail",
@@ -1755,7 +1697,7 @@
     "application_tip": "Highlight your specific experience with BRSR or global ESG frameworks in your cover letter. Be prepared to discuss how you have managed data collection across complex supply chains during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477075706",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1764,18 +1706,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477075706",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.960010+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "manager-program-development-geapp-india",
@@ -1807,7 +1747,7 @@
     "application_tip": "Highlight your experience in rural energy projects and your ability to translate complex technical data into clear fundraising pitches. Familiarity with the Indian renewable energy policy environment will be a significant advantage during your interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477984984",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1816,18 +1756,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477984984",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.960010+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "manager-esg-sustainability-scimplify-bengaluru",
@@ -1859,7 +1797,7 @@
     "application_tip": "Highlight your experience in building reporting systems from scratch rather than just maintaining them. If you have experience with manufacturing sector supply chain data, explicitly detail how you managed data gaps with cross-functional teams.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477577315",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1868,18 +1806,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477577315",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.960010+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "management-trainee-climate-smart-agriculture-cosmosgreen",
@@ -1911,7 +1847,7 @@
     "application_tip": "Highlight any direct experience working in rural settings or with farming communities, as this is a key preference for the team. Be prepared to discuss specific examples of how you have interpreted scientific data to drive project outcomes in your previous roles.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477277869",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Fellowship / Internship",
     "qualification_summary": "Recent graduate / postgraduate in the relevant discipline, as per the fellowship norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -1920,18 +1856,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Internship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477277869",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.960010+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "lead-infrastructure-and-climate-iihs",
@@ -1963,7 +1897,7 @@
     "application_tip": "Highlight your experience in bridging the gap between academic research and on-ground policy implementation. Showcase specific examples where your work influenced municipal or state-level urban infrastructure decisions.",
     "apply_url": "https://www.linkedin.com/jobs/view/4453978704",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -1972,18 +1906,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4453978704",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.961013+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "head-projects-operations-suninfra-energies",
@@ -2016,7 +1948,7 @@
     "application_tip": "Highlight specific solar or storage projects you have led from inception to commercial closure in your resume. Emphasize your experience in managing large-scale contractor networks and resolving complex site-level bottlenecks.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477715492",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2025,18 +1957,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477715492",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.961013+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "head-esg-yulu",
@@ -2068,7 +1998,7 @@
     "application_tip": "Highlight your experience in managing EHS standards within logistics or mobility sectors, as this is a key operational component of the role. Be prepared to discuss how you have translated complex ESG data into actionable insights for executive leadership.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479766427",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2077,18 +2007,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479766427",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.961013+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "global-logistics-sustainability-sme-castrol",
@@ -2120,7 +2048,7 @@
     "application_tip": "Highlight your specific experience with logistics emissions methodologies like GLEC or ISO 14083 in your resume. Be prepared to discuss how you have used large datasets to influence operational changes in a previous supply chain role.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479108718",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2129,18 +2057,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479108718",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.961013+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "esg-manager-redington-limited",
@@ -2172,7 +2098,7 @@
     "application_tip": "Highlight concrete experience managing SEBI BRSR filings and engaging with third-party rating systems like EcoVadis or CDP. If you have built financial business cases for emissions reduction or energy efficiency, showcase those metrics directly on your resume.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479684813",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2181,18 +2107,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479684813",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.961013+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "esg-data-evidence-architect-ntt-data",
@@ -2224,7 +2148,7 @@
     "application_tip": "Highlight your experience with complex data integration projects and explain how you have mapped operational data to specific sustainability metrics. If you lack direct ESG experience, emphasize your technical proficiency in data architecture and your ability to quickly learn carbon calculation methodologies.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478388455",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2233,18 +2157,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478388455",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "esg-analyst-metro-global-solution-center",
@@ -2276,7 +2198,7 @@
     "application_tip": "Highlight your specific experience with ESG reporting frameworks like GRI or CSRD in your resume. Be prepared to discuss how you have managed large datasets using BI tools to improve reporting accuracy.",
     "apply_url": "https://www.linkedin.com/jobs/view/4476655607",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2285,18 +2207,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4476655607",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "environmental-analyst-olive-recruitment-kochi",
@@ -2327,7 +2247,7 @@
     "application_tip": "Highlight any portfolio samples showing ESRI GIS mapping alongside technical writing in ecology or environmental science. Ensure you are comfortable with the early working schedule (7:30 am to 4:30 pm IST) aligned with Australian hours.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480914131",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2336,18 +2256,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480914131",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "emissions-executive-accelleron",
@@ -2379,7 +2297,7 @@
     "application_tip": "Highlight any academic projects or internships involving maritime engineering or data analysis. Familiarize yourself with the specific requirements of IMO DCS and EU ETS before your interview to demonstrate immediate technical readiness.",
     "apply_url": "https://www.linkedin.com/jobs/view/4471426627",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2388,18 +2306,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4471426627",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "doctoral-student-iit-guwahati",
@@ -2431,7 +2347,7 @@
     "application_tip": "Highlight any prior publications or specific experience with solar cell characterization in your statement of purpose. Ensure you follow the mandatory application portal instructions for the School of Energy Science and Engineering before the October 28 deadline.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478208160",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "PhD / Doctoral Fellowship",
     "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
     "compensation_or_fellowship": "As per institute norms",
@@ -2440,18 +2356,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478208160",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "deputy-vice-president-energy-environment-sambodhi",
@@ -2484,7 +2398,7 @@
     "application_tip": "Highlight your specific experience in securing funding or managing large-scale M&E projects for bilateral agencies. Ensure your resume clearly demonstrates your ability to bridge technical environmental research with business development outcomes.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477505089",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2493,18 +2407,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477505089",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962999+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "dean-anant-school-for-climate-action-ahmedabad",
@@ -2536,7 +2448,7 @@
     "application_tip": "Highlight your experience in bridging technical engineering education with climate policy and sustainability research. Ensure your application emphasizes your ability to build institutional partnerships and manage complex academic departments.",
     "apply_url": "https://www.linkedin.com/jobs/view/4478208572",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Faculty / Academic",
     "qualification_summary": "Ph.D. in the relevant discipline with teaching / research experience, as per UGC norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -2545,18 +2457,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4478208572",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962999+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "coordinator-tea-wwf-india",
@@ -2588,7 +2498,7 @@
     "application_tip": "Highlight your specific experience working with smallholder farmers or agricultural cooperatives in your cover letter. Since this role involves significant field travel and community engagement, emphasize any past work that required navigating complex local stakeholder dynamics in rural Assam.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480819150",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2597,18 +2507,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480819150",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962999+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "consultant-ccass-ey-mumbai",
@@ -2640,7 +2548,7 @@
     "application_tip": "Highlight your experience with specific financial taxonomies and your ability to model climate risks within financial portfolios. Ensure your resume clearly details any past work involving green bond frameworks or regulatory reporting standards like SEBI BRSR.",
     "apply_url": "https://www.linkedin.com/jobs/view/4449216914",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -2649,18 +2557,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4449216914",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962999+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "consultant-ccass-ey-chennai",
@@ -2692,7 +2598,7 @@
     "application_tip": "Highlight direct experience with SEBI's BRSR framework alongside any hands-on exposure to carbon footprinting or ESG data audits. A Master's degree in climate change or related environmental sciences is required for this role.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477790016",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Young Professional / Consultant (Contractual)",
     "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
     "compensation_or_fellowship": "As per institute norms",
@@ -2701,18 +2607,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477790016",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.962999+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "compliance-executive-peregreen-enviro",
@@ -2744,7 +2648,7 @@
     "application_tip": "Highlight your specific experience with the XGN portal and previous successful interactions with GPCB officials in your resume. Proficiency in local language documentation is a significant advantage for this role.",
     "apply_url": "https://in.indeed.com/viewjob?jk=33bee71d3d6b5ca4",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2753,18 +2657,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=33bee71d3d6b5ca4",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.964009+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "co-founder-dhartiamrit-ecoservices",
@@ -2796,7 +2698,7 @@
     "application_tip": "Highlight your previous experience in scaling early-stage ventures and your specific ability to contribute capital to the business. Prepare a clear pitch on how your background in environmental services or forestry aligns with their unique low-water plantation model.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477742547",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2805,18 +2707,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477742547",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.964009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "climate-nature-social-risk-analyst-jpmorganchase",
@@ -2848,7 +2748,7 @@
     "application_tip": "Highlight any academic research or past projects that cover climate financial disclosures, such as TCFD or ISSB. Familiarity with how physical and transition risks map onto credit or market risks in banking will strengthen your application.",
     "apply_url": "https://www.linkedin.com/jobs/view/4432435954",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2857,18 +2757,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4432435954",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.964009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "business-development-marketing-associate-flora-carbon-ai",
@@ -2900,7 +2798,7 @@
     "application_tip": "Highlight any specific experience you have with carbon standards like Verra or Gold Standard in your cover letter. Since this is a startup, showcasing your ability to learn technical carbon methodologies quickly will be as valuable as your sales track record.",
     "apply_url": "https://www.linkedin.com/jobs/view/4477060386",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2909,18 +2807,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4477060386",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.964009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "business-development-manager-renewable-energy-deif",
@@ -2952,7 +2848,7 @@
     "application_tip": "Highlight your specific experience with BESS or hybrid power projects in your resume. Be prepared to discuss your track record of managing technical sales cycles with EPCs and utility-scale developers.",
     "apply_url": "https://www.linkedin.com/jobs/view/4436768027",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -2961,18 +2857,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4436768027",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.965014+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "building-automation-engineer-cundall-chennai",
@@ -3004,7 +2898,7 @@
     "application_tip": "Highlight your specific experience with energy-efficient building standards and data center automation in your portfolio. Ensure your resume clearly lists the open protocols and software platforms you have successfully integrated in previous projects.",
     "apply_url": "https://in.indeed.com/viewjob?jk=bcfc0257ecf2d3fc",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3013,18 +2907,16 @@
     "source_portal": "Indeed",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://in.indeed.com/viewjob?jk=bcfc0257ecf2d3fc",
-      "final_host": "in.indeed.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.965014+00:00",
+      "platform": "Indeed"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "auditor-sustainability-services-cotecna",
@@ -3056,7 +2948,7 @@
     "application_tip": "Highlight your specific experience with ISCC or carbon certification schemes in your resume. Since language proficiency is a core requirement, clearly state your fluency level in German, French, or Spanish at the top of your application.",
     "apply_url": "https://www.linkedin.com/jobs/view/4476091538",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3065,18 +2957,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4476091538",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.965014+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram-2",
@@ -3109,7 +2999,7 @@
     "application_tip": "Highlight your track record in selling technical consulting or TIC services within the Indian industrial sector. Emphasize your specific experience with ESG frameworks or carbon assurance to stand out during the screening process.",
     "apply_url": "https://www.linkedin.com/jobs/view/4476468177",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3118,18 +3008,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4476468177",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.965014+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "asst-manager-manager-operations-tuv-sud-gurugram",
@@ -3162,7 +3050,7 @@
     "application_tip": "Highlight your specific experience with BRSR frameworks and large-scale industrial audits in your resume. Be prepared to discuss your track record in managing multidisciplinary teams and meeting strict project delivery timelines during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4476461356",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3171,18 +3059,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4476461356",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.965014+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "associate-team-lead-supplier-compliance-colgate-palmolive",
@@ -3214,7 +3100,7 @@
     "application_tip": "Highlight your specific experience with environmental audit frameworks and SAP EHS modules in your resume. Emphasize how you have previously integrated sustainability metrics into supply chain procurement processes.",
     "apply_url": "https://www.linkedin.com/jobs/view/4460251490",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3223,18 +3109,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4460251490",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.966009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "associate-power-utility-transformation-pwc-india",
@@ -3265,7 +3149,7 @@
     "application_tip": "Highlight your understanding of the Indian power sector value chain and any experience with renewable energy projects in your resume. Be prepared to discuss how you structure unstructured data to solve business problems during the interview.",
     "apply_url": "https://www.linkedin.com/jobs/view/4291059973",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3274,18 +3158,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4291059973",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.966009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "associate-analyst-supplier-compliance-colgate-palmolive",
@@ -3317,7 +3199,7 @@
     "application_tip": "Highlight your experience with specific sustainability frameworks like SMETA or EcoVadis. If you have automated data workflows using Python or AppScript, ensure these are clearly detailed in your resume to demonstrate your technical efficiency.",
     "apply_url": "https://www.linkedin.com/jobs/view/4469020152",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3326,18 +3208,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4469020152",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.966009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "assistant-associate-esg-lic-housing-finance",
@@ -3369,7 +3249,7 @@
     "application_tip": "Highlight your specific experience with BRSR data collection and any technical proficiency in Excel macros or Power BI. Ensure your resume clearly details your history of managing data across multiple departments in a corporate or consulting environment.",
     "apply_url": "https://www.linkedin.com/jobs/view/4479268259",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3378,18 +3258,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4479268259",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.966009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "area-sales-manager-loom-solar",
@@ -3421,7 +3299,7 @@
     "application_tip": "Highlight your specific experience with solar financing models like PPA or lease agreements in your resume. Be prepared to discuss how you have managed long-cycle B2B negotiations in the renewable energy sector.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480875543",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3430,18 +3308,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480875543",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.966009+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor-2",
@@ -3473,7 +3349,7 @@
     "application_tip": "Highlight your specific experience with supplier assessment platforms like EcoVadis in your resume. Be prepared to discuss how you have managed large datasets to track environmental compliance or emissions in previous roles.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480516768",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3482,18 +3358,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480516768",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.967008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "analyst-sustainable-sourcing-avantor",
@@ -3525,7 +3399,7 @@
     "application_tip": "Highlight your specific experience with supplier assessment platforms like EcoVadis in your resume. Be prepared to discuss how you have managed large datasets to track environmental or social compliance indicators.",
     "apply_url": "https://www.linkedin.com/jobs/view/4480516769",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3534,18 +3408,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4480516769",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.967008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "analyst-civil-design-desri-hyderabad",
@@ -3577,7 +3449,7 @@
     "application_tip": "Highlight your specific experience with large-scale solar site optimization and any past projects involving complex terrain analysis. Ensure your portfolio or resume clearly demonstrates proficiency in Civil 3D and your ability to manage large topographic datasets.",
     "apply_url": "https://www.linkedin.com/jobs/view/4434358804",
     "valid_through": "2026-11-17",
-    "status": "quarantined",
+    "status": "active",
     "position_type": "Full-Time Corporate / NGO",
     "qualification_summary": "Bachelor's / Master's degree in the relevant discipline or equivalent experience",
     "compensation_or_fellowship": "Not disclosed - see official portal",
@@ -3586,18 +3458,16 @@
     "source_portal": "LinkedIn",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "BLOCKED_HOST",
-      "final_url": "https://www.linkedin.com/jobs/view/4434358804",
-      "final_host": "www.linkedin.com",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "blocklisted",
-      "error_detail": "blocklist|BlocklistedHost|Host in blocklist",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "BLOCKED_HOST",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.967008+00:00",
+      "platform": "LinkedIn"
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
@@ -3632,24 +3502,22 @@
     "application_tip": "Attach a short note listing every field survey you have joined, the terrains covered and the datasets you processed yourself. Panels weigh hands-on camera-trap and analysis experience far above coursework.",
     "apply_url": "https://wii.gov.in/recruitments",
     "valid_through": "2026-11-16",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://wii.gov.in",
     "org_domain": "wii.gov.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://wii.gov.in/recruitments",
-      "final_host": "wii.gov.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.967008+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-11-01"
   },
   {
     "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
@@ -3683,24 +3551,22 @@
     "application_tip": "Name the instruments you have personally operated in your cover letter. For project JRF posts at IITs, interview panels also ask standard questions on aerosol fundamentals, so revise secondary aerosol pathways.",
     "apply_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
     "valid_through": "2026-11-15",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://home.iitd.ac.in",
     "org_domain": "iitd.ac.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "CONTENT_MISMATCH",
-      "final_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
-      "final_host": "home.iitd.ac.in",
-      "http_status": 200,
-      "entry_type": "posting",
-      "host_class": "employer_primary",
-      "error_detail": "",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "CONTENT_MISMATCH",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.975975+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-10-31"
   },
   {
     "id": "jrf-avian-ecology-habitat-assessment-sacon-coimbatore",
@@ -3734,24 +3600,22 @@
     "application_tip": "Keep a species list from your field surveys ready and be specific about the number of survey days and habitats covered. SACON panels check whether you can work independently in humid, leech-prone field stations.",
     "apply_url": "https://www.sacon.in/careers/",
     "valid_through": "2026-11-14",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://sacon.in",
     "org_domain": "sacon.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.sacon.in/careers/",
-      "final_host": "www.sacon.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-30"
   },
   {
     "id": "postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp",
@@ -3785,24 +3649,22 @@
     "application_tip": "Lead with your three strongest publications and the datasets or models you can reuse immediately. Postdoc selections at IITs favour candidates who arrive with a concrete plan for the first year.",
     "apply_url": "https://www.iitkgp.ac.in/careers",
     "valid_through": "2026-11-13",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.iitkgp.ac.in",
     "org_domain": "iitkgp.ac.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "SOFT_404",
-      "final_url": "https://www.iitkgp.ac.in/careers",
-      "final_host": "www.iitkgp.ac.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|Soft404|Page indicates position closed",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "SOFT_404",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-29"
   },
   {
     "id": "research-associate-biodiversity-ecological-genomics-ncbs",
@@ -3836,24 +3698,22 @@
     "application_tip": "State the exact wet-lab protocols you can run unaided and name the bioinformatics tools you have actually used. For NCBS project posts, clarity about what you can do on day one matters more than publication count.",
     "apply_url": "https://www.ncbs.res.in/careers",
     "valid_through": "2026-11-12",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.ncbs.res.in",
     "org_domain": "ncbs.res.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.ncbs.res.in/careers",
-      "final_host": "www.ncbs.res.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-28"
   },
   {
     "id": "phd-climate-dynamics-earth-system-modelling-iisc-bengaluru",
@@ -3887,24 +3747,22 @@
     "application_tip": "Write to prospective supervisors only after studying their recent papers, and articulate one concrete question you would like to model. Reviewers respond to specificity, not general enthusiasm for climate science.",
     "apply_url": "https://iisc.ac.in/careers/",
     "valid_through": "2026-11-11",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://iisc.ac.in",
     "org_domain": "iisc.ac.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.iisc.ac.in/careers/",
-      "final_host": "www.iisc.ac.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-27"
   },
   {
     "id": "doctoral-fellowship-climate-policy-sustainable-development-teri",
@@ -3938,24 +3796,22 @@
     "application_tip": "Pitch a research question that connects to TERI's live projects - carbon markets, BRSR, or just transition - and show earlier evidence of independent writing. A crisp two-page proposal beats a long generic statement.",
     "apply_url": "https://www.teriin.org/careers",
     "valid_through": "2026-11-10",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.teriin.org",
     "org_domain": "teriin.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.teriin.org/careers",
-      "final_host": "www.teriin.org",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-26"
   },
   {
     "id": "young-professional-forest-policy-climate-finance-iifm-bhopal",
@@ -3989,24 +3845,22 @@
     "application_tip": "Include one writing sample - a policy note or dissertation chapter - that shows you can compress evidence into decision-ready briefs. IIFM values clarity for forest officers who read quickly.",
     "apply_url": "https://www.iifm.ac.in/career",
     "valid_through": "2026-11-08",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.iifm.ac.in",
     "org_domain": "iifm.ac.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "NEEDS_MANUAL_CHECK",
-      "final_url": "https://www.iifm.ac.in/career",
-      "final_host": "www.iifm.ac.in",
-      "http_status": 0,
-      "entry_type": "unknown",
-      "host_class": "employer_primary",
-      "error_detail": "tls|SSLError|HTTPSConnectionPool(host='www.iifm.ac.in', port=443): Max retries exceeded with url: /career (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate ",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "NEEDS_MANUAL_CHECK",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.968009+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-24"
   },
   {
     "id": "young-professional-climate-change-campa-moefcc",
@@ -4040,24 +3894,22 @@
     "application_tip": "Follow the vacancy circular's exact format - government screening is procedural. Underline any prior experience with state climate action plans or CAMPA documentation.",
     "apply_url": "https://moef.gov.in/vacancy-circulars",
     "valid_through": "2026-11-07",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://moef.gov.in",
     "org_domain": "moef.gov.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "CONTENT_MISMATCH",
-      "final_url": "https://moef.gov.in/vacancy-circulars",
-      "final_host": "moef.gov.in",
-      "http_status": 200,
-      "entry_type": "unknown",
-      "host_class": "employer_primary",
-      "error_detail": "",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "CONTENT_MISMATCH",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.981214+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-10-23"
   },
   {
     "id": "project-associate-geospatial-modelling-urban-heat-island-nrsc",
@@ -4091,24 +3943,22 @@
     "application_tip": "Bring one worked example - code or a map portfolio - showing an urban heat or land-surface analysis you completed end to end. ISRO project teams check the workflow, not just the output.",
     "apply_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
     "valid_through": "2026-11-06",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.nrsc.gov.in",
     "org_domain": "nrsc.gov.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "CONTENT_MISMATCH",
-      "final_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
-      "final_host": "www.nrsc.gov.in",
-      "http_status": 200,
-      "entry_type": "unknown",
-      "host_class": "employer_primary",
-      "error_detail": "",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "CONTENT_MISMATCH",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.977178+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-10-22"
   },
   {
     "id": "project-associate-himalayan-ecology-climate-adaptation-gbpnihe",
@@ -4142,24 +3992,22 @@
     "application_tip": "Highlight any Himalayan field experience and your ability to work at altitude for extended periods. Government institute panels also value Hindi proficiency for community-facing work.",
     "apply_url": "https://gbpihed.gov.in/vacancy.html",
     "valid_through": "2026-11-05",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://gbpihed.gov.in",
     "org_domain": "gbpihed.gov.in",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "CONTENT_MISMATCH",
-      "final_url": "https://gbpihed.gov.in/vacancy.html",
-      "final_host": "gbpihed.gov.in",
-      "http_status": 200,
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "error_detail": "",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "CONTENT_MISMATCH",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.983232+00:00",
+      "platform": ""
+    },
+    "entry_type": "posting",
+    "reverify_after": "2026-10-21"
   },
   {
     "id": "project-associate-geospatial-urban-green-infrastructure-atree",
@@ -4193,23 +4041,21 @@
     "application_tip": "A portfolio link with two or three urban analysis maps - canopy, heat or access - works better than a long CV. Mention how you validate classifications; ATREE reviews accuracy methods closely.",
     "apply_url": "https://www.atree.org/careers/",
     "valid_through": "2026-11-04",
-    "status": "quarantined",
+    "status": "active",
     "org_website": "https://www.atree.org",
     "org_domain": "atree.org",
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.atree.org/careers/",
-      "final_host": "www.atree.org",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
-    }
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.970016+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "reverify_after": "2026-10-20"
   }
 ]

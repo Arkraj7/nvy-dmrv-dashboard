@@ -4,7 +4,7 @@
     "date_added": "2026-09-10",
     "valid_through": "2026-10-10",
     "date_archived": "2026-10-17",
-    "status": "quarantined",
+    "status": "archived",
     "clean_title": "Geospatial Analyst – Forest & Land-Use Mapping",
     "title_hi": "भू-स्थानिक विश्लेषक – वन & Land-Use मानचित्रण — ATREE",
     "organization": "ATREE",
@@ -39,17 +39,13 @@
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "archived",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.atree.org/careers/",
-      "final_host": "www.atree.org",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.981214+00:00",
+      "platform": ""
     }
   },
   {
@@ -110,7 +106,7 @@
     "date_added": "2026-09-02",
     "valid_through": "2026-10-02",
     "date_archived": "2026-10-15",
-    "status": "quarantined",
+    "status": "archived",
     "clean_title": "Programme Officer – Urban Forestry & Green Cover",
     "title_hi": "कार्यक्रम अधिकारी – शहरी वानिकी & हरित Cover — WWF-India",
     "organization": "WWF-India",
@@ -145,17 +141,13 @@
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "archived",
-    "quarantine": {
-      "reason_code": "NEEDS_MANUAL_CHECK",
-      "final_url": "https://www.wwfindia.org/about_wwf/careers/",
-      "final_host": "www.wwfindia.org",
-      "http_status": 403,
-      "entry_type": "unknown",
-      "host_class": "employer_primary",
-      "error_detail": "status|HTTP403|Forbidden - may need manual verification",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "NEEDS_MANUAL_CHECK",
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-20T10:19:57.995865+00:00",
+      "platform": ""
     }
   },
   {
@@ -163,7 +155,7 @@
     "date_added": "2026-09-08",
     "valid_through": "2026-10-08",
     "date_archived": "2026-10-14",
-    "status": "quarantined",
+    "status": "archived",
     "clean_title": "Consultant – ESG Disclosures & BRSR Reporting",
     "title_hi": "सलाहकार – ESG Disclosures & BRSR Reporting — CEEW",
     "organization": "CEEW",
@@ -198,17 +190,13 @@
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "archived",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.ceew.in/careers",
-      "final_host": "www.ceew.in",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.981214+00:00",
+      "platform": ""
     }
   },
   {
@@ -216,7 +204,7 @@
     "date_added": "2026-09-12",
     "valid_through": "2026-10-12",
     "date_archived": "2026-10-13",
-    "status": "quarantined",
+    "status": "archived",
     "clean_title": "Research Fellowship – Environmental Policy & Climate Governance",
     "title_hi": "अनुसंधान फेलोशिप – पर्यावरणीय नीति & जलवायु शासन — TERI",
     "organization": "TERI",
@@ -251,17 +239,13 @@
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "archived",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://www.teriin.org/careers",
-      "final_host": "www.teriin.org",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.981214+00:00",
+      "platform": ""
     }
   },
   {
@@ -269,7 +253,7 @@
     "date_added": "2026-09-04",
     "valid_through": "2026-10-04",
     "date_archived": "2026-10-12",
-    "status": "quarantined",
+    "status": "archived",
     "clean_title": "Manager – Carbon Credit Origination",
     "title_hi": "प्रबंधक – कार्बन Credit Origination — EKI Energy Services",
     "organization": "EKI Energy Services",
@@ -304,17 +288,13 @@
     "source_portal": "Official Organization Website",
     "opportunity_kind": "Job / Career",
     "deadline_or_window": "Rolling / Open",
-    "status_before_quarantine": "archived",
-    "quarantine": {
-      "reason_code": "GENERIC_LANDING_PAGE",
-      "final_url": "https://enkingint.org/careers",
-      "final_host": "enkingint.org",
-      "http_status": 200,
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "error_detail": "content|GenericLandingPage|Generic careers/recruitment page",
-      "verified_at": "2026-10-20T08:26:18Z",
-      "audit": "audit_report.csv"
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "GENERIC_LANDING_PAGE",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.982215+00:00",
+      "platform": ""
     }
   }
 ]
