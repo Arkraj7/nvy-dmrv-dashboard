@@ -85,3 +85,41 @@ def test_passed_deadline_archives_the_record():
     assert active == []
     assert newly == 1
     assert archive[0]["status"] == "archived"
+
+
+def test_quarantined_evergreen_record_is_not_reactivated():
+    """Evergreen seeds must never override a quarantine block."""
+    from fetch_and_humanize import apply_global_lifecycle
+
+    jobs = [
+        {
+            "id": "quarantined-evergreen",
+            "date_added": "2026-01-01",
+            "evergreen": True,
+            "status": "quarantined",
+            "status_before_quarantine": "active",
+            "quarantine": {"reason_code": "NEEDS_MANUAL_CHECK"},
+            "apply_url": "https://example.org/job",
+            "organization": "Acme",
+        }
+    ]
+    active, archive, _ = apply_global_lifecycle(jobs, [], "2026-10-20")
+    assert archive == []
+    assert active[0]["status"] == "quarantined"
+    assert active[0]["quarantine"]["reason_code"] == "NEEDS_MANUAL_CHECK"
+
+
+def test_stale_quarantine_block_wins_over_active_status():
+    """Defence in depth: a status flip cannot leak a recorded quarantine."""
+    jobs = [
+        {
+            "id": "stale-flag",
+            "date_added": "2026-10-01",
+            "status": "active",
+            "quarantine": {"reason_code": "GENERIC_LANDING_PAGE"},
+            "apply_url": "https://example.org/job",
+            "organization": "Acme",
+        }
+    ]
+    active, _, _ = apply_job_lifecycle(jobs, [], "2026-10-20")
+    assert active[0]["status"] == "quarantined"

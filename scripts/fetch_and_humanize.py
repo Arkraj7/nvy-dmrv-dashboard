@@ -3367,6 +3367,13 @@ def apply_global_lifecycle(
 
     today_value = parse_iso_date(today) or date.today()
     for job in evergreen:
+        # Evergreen never expires -- but it can still be quarantined. A
+        # quarantine block always wins over the evergreen status reset.
+        if job.get("status") == "quarantined" or job.get("quarantine"):
+            job["status"] = "quarantined"
+            job.setdefault("status_before_quarantine", "active")
+            active.append(job)
+            continue
         job["status"] = "active"
         added = parse_iso_date(job.get("date_added")) or today_value
         job["date_added"] = added.isoformat()
@@ -3848,10 +3855,12 @@ def apply_job_lifecycle(
         record_id = str(record.get("id") or "").strip()
         if not record_id:
             continue
-        if record.get("status") != "quarantined":
+        if record.get("status") != "quarantined" and not record.get("quarantine"):
             record["status"] = "archived"
             record.setdefault("date_archived", today)
         else:
+            # Quarantine wins over archive: keep it hidden and unreachable.
+            record["status"] = "quarantined"
             record.setdefault("status_before_quarantine", "archived")
         added = parse_iso_date(record.get("date_added"))
         if added is not None and not record.get("valid_through"):
@@ -3866,7 +3875,9 @@ def apply_job_lifecycle(
             continue
         # Quarantined listings stay in the review queue: hidden from the site,
         # never aged into the archive and never reactivated automatically.
-        if job.get("status") == "quarantined":
+        # A stale quarantine block (status flipped by an older bug) still wins.
+        if job.get("status") == "quarantined" or job.get("quarantine"):
+            job["status"] = "quarantined"
             job.setdefault("status_before_quarantine", "active")
             active.append(job)
             continue
@@ -3907,6 +3918,21 @@ def apply_job_lifecycle(
         reverse=True,
     )
     return active, archive_out, newly_archived
+
+
+def published_records(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Records that are publicly visible: not quarantined, not hidden.
+
+    ``entry_type == "unknown"`` is hidden by placement policy; legacy records
+    without the field are treated as postings for backward compatibility.
+    """
+    return [
+        job
+        for job in jobs
+        if job.get("status") != "quarantined"
+        and not job.get("quarantine")
+        and str(job.get("entry_type") or "posting") != "unknown"
+    ]
 
 
 def compute_stats(
@@ -4108,7 +4134,21 @@ def write_digests(
     `new_jobs` are the listings accepted by this run; on maintenance-only
     runs the digest falls back to the freshest active mandates so the files
     (and the footer copy button) are refreshed on every run.
+
+    Quarantined records and records hidden by placement policy never appear
+    in a digest, even if a caller passes the raw active list.
     """
+    def publishable(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        return [
+            job
+            for job in rows
+            if job.get("status") != "quarantined"
+            and str(job.get("entry_type") or "posting") != "unknown"
+        ]
+
+    new_jobs = publishable(new_jobs)
+    active = publishable(active)
+
     if new_jobs:
         listed = new_jobs[:DIGEST_MAX_JOBS]
         heading = f"{len(new_jobs)} new verified mandate(s) added today"
@@ -4582,6 +4622,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="Run the full pipeline but do not write jobs.json, archive.json, stats.json or sitemap.xml",
     )
     parser.add_argument(
+        "--digest-only",
+        action="store_true",
+        help=(
+            "Regenerate daily_digest.json + whatsapp_digest.txt from the current "
+            "published records without scraping or sending anything."
+        ),
+    )
+    parser.add_argument(
         "--no-broadcast",
         action="store_true",
         help=(
@@ -4645,12 +4693,18 @@ def main(argv: Optional[List[str]] = None) -> int:
         write_sitemap(existing, archive, sitemap_path)
         return 0
 
+    if args.digest_only:
+        write_digests(existing, [], today, digest_json_path, whatsapp_digest_path)
+        return 0
+
     if args.sync_only:
         # Maintenance-only run: expire passed listings into the archive,
         # refresh the weekly telemetry and rewrite every published data file.
         # No scraping and no Gemini calls, so it works without an API key.
         active, archive, newly_archived = apply_job_lifecycle(existing, archive, today)
-        stats = compute_stats(active, archive, today)
+        stats = compute_stats(
+            published_records(active), published_records(archive), today
+        )
         write_jobs(active, jobs_path)
         write_archive(archive, archive_path)
         write_stats(stats, stats_path)
@@ -4820,15 +4874,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     active, archive, newly_archived = apply_job_lifecycle(merged, archive, today)
     # Telemetry counts only published records: quarantined rows and records
     # whose entry type is unknown (hidden by placement policy) are excluded.
-    published = [
-        job
-        for job in active
-        if job.get("status") != "quarantined"
-        and (job.get("entry_type") or "posting") != "unknown"
-    ]
-    published_archive = [
-        record for record in archive if record.get("status") != "quarantined"
-    ]
+    published = published_records(active)
+    published_archive = published_records(archive)
     stats = compute_stats(published, published_archive, today)
 
     write_jobs(active, jobs_path)
@@ -4845,7 +4892,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # 6. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
     #    TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (or a WhatsApp webhook) are set.
     broadcast_new_jobs(
-        active,
+        published,
         accepted,
         today,
         digest_json_path,
