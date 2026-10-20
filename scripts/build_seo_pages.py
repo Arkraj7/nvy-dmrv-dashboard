@@ -1387,6 +1387,137 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+RSS_ALTERNATE = (
+    '<link rel="alternate" type="application/rss+xml" '
+    'title="Urban Forest Park — Climate, Forestry, ESG &amp; JRF Jobs RSS" '
+    'href="https://www.urbanforestpark.com/feed.xml" />'
+)
+JRF_ALTERNATE = (
+    '<link rel="alternate" type="application/rss+xml" '
+    'title="Urban Forest Park — JRF, SRF, PhD &amp; Fellowship Feed" '
+    'href="https://www.urbanforestpark.com/jrf-feed.xml" />'
+)
+RSS_FOOTER = (
+    '<div class="footer-rss" style="margin-top:10px;font-size:12px;">'
+    '<a href="/feed.xml">RSS: all mandates</a> &middot; '
+    '<a href="/jrf-feed.xml">RSS: JRF, SRF &amp; fellowships</a></div>'
+)
+
+
+def _rss_date(value: Any, fallback: datetime) -> str:
+    from email.utils import format_datetime
+    text = str(value or "").strip()
+    parsed: Optional[datetime] = None
+    for fmt in ("%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+        try:
+            parsed = datetime.strptime(text[:19], fmt).replace(tzinfo=timezone.utc)
+            break
+        except ValueError:
+            continue
+    return format_datetime(parsed or fallback)
+
+
+def _rss_item(job: Dict[str, Any], fallback: datetime) -> str:
+    job_id = str(job.get("id") or "")
+    title = str(job.get("clean_title") or "Untitled mandate")
+    org = str(job.get("organization") or "")
+    location = " · ".join(
+        part for part in (job.get("city"), job.get("state"), job.get("country")) if part
+    ) or str(job.get("region") or "India")
+    deadline = str(job.get("deadline_or_window") or job.get("valid_through") or "")
+    qualification = str(job.get("qualification_summary") or "")
+    comp = str(job.get("compensation_or_fellowship") or "")
+    desc_parts = [org, location]
+    if deadline:
+        desc_parts.append("Deadline: " + deadline)
+    if qualification:
+        desc_parts.append("Eligibility: " + qualification)
+    if comp:
+        desc_parts.append("Pay: " + comp)
+    link = SITE + "/?job=" + html.escape(job_id, quote=True)
+    category = html.escape(str(job.get("category") or "Climate / Forestry / ESG"))
+    return (
+        "<item>"
+        f"<title>{html.escape(title)}</title>"
+        f"<link>{link}</link>"
+        f"<guid isPermaLink=\"true\">{link}</guid>"
+        f"<pubDate>{_rss_date(job.get('date_added'), fallback)}</pubDate>"
+        f"<category>{category}</category>"
+        f"<description>{html.escape(' | '.join(desc_parts))}</description>"
+        "</item>"
+    )
+
+
+def build_rss_feed(
+    jobs: List[Dict[str, Any]], title: str, description: str, self_path: str
+) -> str:
+    fallback = datetime.now(timezone.utc)
+    ordered = sorted(jobs, key=lambda job: str(job.get("date_added") or ""), reverse=True)
+    items = "\n".join(_rss_item(job, fallback) for job in ordered)
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "<channel>\n"
+        f"<title>{html.escape(title)}</title>\n"
+        f"<link>{SITE}/</link>\n"
+        f"<description>{html.escape(description)}</description>\n"
+        "<language>en-in</language>\n"
+        f"<lastBuildDate>{_rss_date(fallback, fallback)}</lastBuildDate>\n"
+        f'<atom:link href="{SITE}{self_path}" rel="self" type="application/rss+xml" />\n'
+        f"{items}\n"
+        "</channel>\n"
+        "</rss>\n"
+    )
+
+
+def write_feeds(public: Path, active: List[Dict[str, Any]], global_active: List[Dict[str, Any]]) -> None:
+    all_jobs = active + global_active
+    (public / "feed.xml").write_text(
+        build_rss_feed(
+            all_jobs,
+            "Urban Forest Park — Climate, Forestry, ESG & Research Jobs",
+            "Verified climate, forestry, wildlife, ESG, geospatial, academic and clean-energy mandates in India and worldwide.",
+            "/feed.xml",
+        ),
+        encoding="utf-8",
+    )
+    academic = [
+        job for job in all_jobs
+        if re.search(
+            r"\b(jrf|junior research fellow|srf|senior research fellow|project associate|"
+            r"research associate|research fellow|young professional|phd|doctoral|"
+            r"postdoc|post-?doctoral|fellowship|research intern)\b",
+            " ".join(str(job.get(key) or "") for key in ("clean_title", "position_type")),
+            re.I,
+        )
+    ]
+    (public / "jrf-feed.xml").write_text(
+        build_rss_feed(
+            academic,
+            "Urban Forest Park — JRF, SRF, PhD & Fellowship Feed",
+            "Current JRF, SRF, Project Associate, Research Associate, PhD and postdoctoral opportunities in India.",
+            "/jrf-feed.xml",
+        ),
+        encoding="utf-8",
+    )
+    log.info("Wrote feed.xml (%d items) and jrf-feed.xml (%d items)", len(all_jobs), len(academic))
+
+
+def inject_feed_links(public: Path) -> int:
+    changed = 0
+    for path in sorted(public.glob("*.html")):
+        text = path.read_text(encoding="utf-8")
+        updated = text
+        if "application/rss+xml" not in updated and "</head>" in updated:
+            updated = updated.replace("</head>", "    " + RSS_ALTERNATE + "\n    " + JRF_ALTERNATE + "\n</head>", 1)
+        if "footer-rss" not in updated and "</footer>" in updated:
+            updated = updated.replace("</footer>", "  " + RSS_FOOTER + "\n</footer>", 1)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+            changed += 1
+    return changed
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     logging.basicConfig(
         level=logging.INFO,
@@ -1453,6 +1584,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     seo_static_pages.write_institutional_pages(public, today)
     seo_static_pages.normalise_static_pages(public)
     log.info("Wrote institutional pages and normalised static SEO metadata")
+
+    # ---- RSS 2.0 feeds + discovery links ---------------------------------
+    write_feeds(public, active, global_active)
+    feed_pages = inject_feed_links(public)
+    log.info("Injected RSS discovery/footer links on %d page(s)", feed_pages)
 
     # ---- pretty-URL normalisation ----------------------------------------
     # Cloudflare Pages serves /about and 308s /about.html. Everything the
