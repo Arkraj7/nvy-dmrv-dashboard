@@ -426,6 +426,16 @@ TOP_STATE_LINKS: List[Tuple[str, str]] = [
     ("Punjab", "/?state=Punjab"),
     ("Odisha", "/?state=Odisha"),
     ("Assam", "/?state=Assam"),
+    ("Himachal Pradesh", "/?state=Himachal%20Pradesh"),
+    ("Jharkhand", "/?state=Jharkhand"),
+    ("Chhattisgarh", "/?state=Chhattisgarh"),
+    ("Andhra Pradesh", "/?state=Andhra%20Pradesh"),
+    ("Goa", "/?state=Goa"),
+    ("Meghalaya", "/?state=Meghalaya"),
+    ("Nagaland", "/?state=Nagaland"),
+    ("Tripura", "/?state=Tripura"),
+    ("Manipur", "/?state=Manipur"),
+    ("Arunachal Pradesh", "/?state=Arunachal%20Pradesh"),
 ]
 
 
@@ -652,7 +662,7 @@ HUBS: List[Dict[str, Any]] = [
         "file": "forestry-wildlife-government-jobs.html",
         "match": match_forestry,
         "kicker": "Government & Forestry Track",
-        "title": "Forest Guard, Forester, RFO, ACF & IFS Recruitment in India | Urban Forest Park",
+        "title": "Forest Guard, RFO, ACF & IFS Recruitment | Urban Forest Park",
         "h1": "Government Forest Recruitment in India",
         "desc": (
             "Forest guard, forester, RFO, ACF and IFS recruitment plus forest department, "
