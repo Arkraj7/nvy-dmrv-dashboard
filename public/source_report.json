@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-10-20T17:42:24",
+  "policy_version": 2,
+  "limits": {
+    "jobspy_results_per_query": {
+      "old": 15,
+      "new": 50
+    },
+    "max_new_per_run": {
+      "old": 12,
+      "new": 60
+    },
+    "global_max_new_per_run": {
+      "old": 4,
+      "new": 12
+    },
+    "google_news_results_per_query": {
+      "old": 25,
+      "new": 50
+    },
+    "reliefweb_limit": {
+      "old": 60,
+      "new": 100
+    },
+    "freejobalert_per_query": {
+      "old": 0,
+      "new": 8
+    },
+    "official_pages": {
+      "old": 0,
+      "new": 13
+    }
+  },
+  "state_queries": 15,
+  "sources": {
+    "linkedin": {
+      "leads": 300,
+      "passed": 6,
+      "active": 6
+    },
+    "official-page": {
+      "leads": 30,
+      "passed": 3,
+      "active": 3
+    },
+    "portal:ceew": {
+      "leads": 15,
+      "passed": 3,
+      "active": 3
+    },
+    "portal:atree": {
+      "leads": 7,
+      "passed": 0,
+      "active": 0
+    },
+    "reliefweb-rss": {
+      "leads": 6,
+      "passed": 3,
+      "active": 3
+    },
+    "google-news": {
+      "leads": 4,
+      "passed": 1,
+      "active": 1
+    },
+    "indeed": {
+      "leads": 3,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:wri-india": {
+      "leads": 2,
+      "passed": 1,
+      "active": 1
+    },
+    "freejobalert": {
+      "leads": 1,
+      "passed": 0,
+      "active": 0
+    }
+  },
+  "totals": {
+    "leads": 368,
+    "passed": 17,
+    "active": 17
+  }
+}

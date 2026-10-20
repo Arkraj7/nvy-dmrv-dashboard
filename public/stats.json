@@ -1,29 +1,37 @@
 {
-  "last_updated": "2026-10-20T16:03:03",
-  "active_open_jobs": 81,
-  "opened_this_week": 74,
+  "last_updated": "2026-10-20T17:47:48",
+  "active_open_jobs": 98,
+  "opened_this_week": 91,
   "passed_this_week": 5,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 87,
+  "total_historical_indexed": 104,
   "by_category": {
     "Forestry, Wildlife & Afforestation": {
-      "active": 7,
+      "active": 10,
       "archived": 1
     },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 7,
-      "archived": 1
+    "Internships & Student Traineeships": {
+      "active": 2,
+      "archived": 0
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 55,
+      "active": 60,
       "archived": 3
     },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 7,
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 12,
+      "archived": 1
+    },
+    "Scholarships & Doctoral Support": {
+      "active": 1,
       "archived": 0
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 3,
+      "active": 4,
+      "archived": 0
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 7,
       "archived": 0
     },
     "GIS, Remote Sensing & Earth Observation": {
@@ -32,16 +40,16 @@
     }
   },
   "by_state": {
-    "Delhi NCR": 15,
-    "Maharashtra": 13,
-    "Karnataka": 11,
+    "Delhi NCR": 17,
+    "Maharashtra": 14,
+    "Karnataka": 12,
     "Tamil Nadu": 8,
     "Gujarat": 5,
     "Telangana": 5,
-    "Punjab": 3,
-    "Uttarakhand": 3,
+    "Punjab": 4,
+    "Uttarakhand": 4,
+    "Assam": 3,
     "West Bengal": 3,
-    "Assam": 2,
     "Bihar": 1,
     "Chhattisgarh": 1,
     "Kerala": 1,
