@@ -50,6 +50,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
+      - name: Unit tests (verify_link + ingestion gate)
+        run: python -m pytest tests -q
+
       - name: Fetch, humanize & publish green jobs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -83,6 +86,11 @@ jobs:
         # Fails the run before deploy if titles, descriptions, canonicals,
         # hreflang, JSON-LD, sitemap entries, internal links or headers drift.
         run: python scripts/seo_checklist_audit.py
+
+      - name: Guard the official-link policy (data)
+        # Fails before commit/deploy if a published record carries a job-board,
+        # aggregator or news-wrapper URL, or lost its verification metadata.
+        run: python scripts/link_guard.py
 
       - name: Commit updated registry data (jobs, archive, stats, global, sitemap, SEO pages)
         run: |
@@ -130,8 +138,16 @@ jobs:
       - name: Install site dependencies
         run: npm ci
 
-      - name: Build & deploy to Cloudflare Pages
+      - name: Build site
+        run: npm run build
+
+      - name: Guard the built site (links + quarantined slugs)
+        # Every outbound link must stay within the dossier, the employer's own
+        # apply host / homepage, or urbanforestpark.com.
+        run: python scripts/link_guard.py --dist dist
+
+      - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npm run deploy
+        run: npx -y wrangler@4.151.1 pages deploy dist --project-name=nvy-dmrv-dashboard --commit-dirty=true

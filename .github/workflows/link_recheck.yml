@@ -1,0 +1,61 @@
+name: Nightly link recheck
+
+# Re-verifies every live listing against its source. Failures are counted per
+# record; the third consecutive failure quarantines the record. Dead pages
+# (HTTP 404/SOFT_404) are archived immediately. One summary line per run.
+
+on:
+  schedule:
+    # 02:00 IST == 20:30 UTC (previous day)
+    - cron: "30 20 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly-link-recheck
+  cancel-in-progress: false
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Unit tests
+        run: python -m pytest tests -q
+
+      - name: Recheck live links
+        run: python scripts/recheck_live_links.py
+
+      - name: Guard the data after recheck
+        run: python scripts/link_guard.py
+
+      - name: Commit quarantine / archive changes
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          git add public/jobs.json public/archive.json public/global_jobs.json \
+                  public/global_archive.json scripts/link_recheck_state.json
+          if git diff --cached --quiet; then
+            echo "No link changes tonight - nothing to commit."
+          else
+            git commit -m "chore(links): nightly recheck $(date -u +'%Y-%m-%d')"
+            git pull --rebase --autostash
+            git push
+          fi

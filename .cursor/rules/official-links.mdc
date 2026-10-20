@@ -1,0 +1,30 @@
+---
+description: Official-link policy — never publish a job link that is not the employer's own page
+globs: ["scripts/**/*.py", "public/js/**/*.js", "public/*.json", "tests/**/*.py"]
+alwaysApply: true
+---
+
+# Official links only
+
+- A public listing may link only to the employer's own page (apply URL,
+  careers page or first-party ATS host). Job boards, aggregators, Google News
+  wrappers, fundsforngos, indiawaterportal and similar are **discovery only**.
+- Never store a blocklisted/aggregator URL in a public field. Drop the lead or
+  resolve it to the employer page first.
+- `apply_url`, `org_website` and `org_domain` come from the verified page plus
+  `public/employers.json` — never from the LLM.
+- Anything that is not `verification_level == "page_verified"` is quarantined
+  (`status: "quarantined"`), never published and never deleted.
+- Title, deadline, compensation, qualifications and every must-have skill must
+  appear on the fetched page (exact or fuzzy ≥ 0.9). Otherwise quarantine with
+  `FIELD_NOT_IN_SOURCE`.
+- Do not weaken `verify_link` (no `verify=False`, no blocklist bypass, no
+  Playwright-only fallback that skips content checks).
+- Never add a domain to `public/employers.json` without fetching it and
+  confirming it is that organisation's own site.
+- Front end: dossier URLs only; archived records render no outbound link;
+  quarantined and `entry_type: "unknown"` records are hidden everywhere.
+- Before committing: `python -m pytest tests -q`, `python scripts/link_guard.py`.
+  Before deploying: `npm run build` then
+  `python scripts/link_guard.py --dist dist`.
+- Full policy and remediation runbook: `docs/LINK_POLICY.md`.
