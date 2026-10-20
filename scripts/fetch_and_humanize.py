@@ -101,6 +101,7 @@ import os
 import re
 import sys
 import time
+from collections import Counter
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -117,6 +118,14 @@ from ingestion_gate import (
     gate_candidate,
     load_registry,
     quarantine_record,
+)
+from source_expansion import (
+    SOURCE_LIMITS,
+    STATE_QUERIES,
+    fetch_ats_feeds,
+    fetch_freejobalert,
+    fetch_official_pages,
+    write_source_report,
 )
 
 # ---------------------------------------------------------------------------
@@ -206,10 +215,10 @@ TELEGRAM_CHANNEL_URL = "https://t.me/urbanforestpark"
 # (status "archived", date_archived stamped) and is never deleted.
 VALID_DAYS = 30
 
-RESULTS_PER_QUERY = 15          # jobspy results wanted per search query
+RESULTS_PER_QUERY = 50          # jobspy results wanted per search query (was 15)
 REQUEST_TIMEOUT = 30            # seconds; HTTP timeout for ReliefWeb calls
 DEFAULT_LOOKBACK_HOURS = 72     # posting-age window; LOOKBACK_HOURS env overrides
-DEFAULT_MAX_NEW_PER_RUN = 12    # cap on Gemini calls per run (cost control)
+DEFAULT_MAX_NEW_PER_RUN = 60    # cap on Gemini calls per run (was 12)
 GEMINI_SLEEP_SECONDS = 4.0      # gentle rate limit between model calls
 GEMINI_RATE_LIMIT_SLEEP = 25.0  # longer pause when rate-limited/overloaded
 GEMINI_RATE_LIMIT_ABORT_AFTER = 3  # consecutive rate-limited candidates -> stop run
@@ -266,6 +275,10 @@ SEARCH_QUERIES = [
     "Rural Livelihoods Natural Resource Management India",
     "Disaster Resilience Climate Adaptation Jobs India",
 ]
+
+# Policy v2: cover the 15 states/regions that previously had few or no
+# listings. One combined high-intent query per state keeps the sweep bounded.
+SEARCH_QUERIES.extend(STATE_QUERIES)
 
 # Front-end vocabulary (must match index.html filters, js/jobs.js and the
 # values inside jobs.json / archive.json).
@@ -748,9 +761,11 @@ scope: jobs, grants & research funding calls, scholarships & doctoral \
 support, fellowships & leadership programmes, internships & traineeships, \
 and competitions / hackathons / awards. Academic, JRF/SRF, doctoral, \
 postdoctoral, faculty and project-staff positions in these fields are fully \
-in scope. Generic software, IT support, sales, marketing, finance or HR \
-postings are out of scope even in green companies, unless the role itself \
-works on the domains above.
+in scope. Generic software, IT support, sales, marketing, finance, HR or QA \
+postings, pure mechanical or civil design roles with no environmental scope, \
+and any listing that asks the candidate to pay a fee, deposit or investment \
+are out of scope even in green companies, unless the role itself works on \
+the domains above.
   (b) The role is located in India, or explicitly open to India-based or \
 remote-India candidates.
 If EITHER fails - for example a generic software, IT support, sales, \
@@ -1787,7 +1802,7 @@ def fetch_targeted_green_jobs() -> List[Dict[str, Any]]:
 # Source 3: Indian academic & institute recruitment (Google News RSS, zero key)
 # ---------------------------------------------------------------------------
 GOOGLE_NEWS_RSS_SEARCH = "https://news.google.com/rss/search"
-GOOGLE_NEWS_RESULTS_PER_QUERY = 25
+GOOGLE_NEWS_RESULTS_PER_QUERY = 50
 # Google News happily resurfaces years-old announcements; anything older than
 # this window is almost certainly an expired advertisement and is dropped at
 # harvest time so only genuinely current vacancies reach the humanizer.
@@ -2280,7 +2295,7 @@ def fetch_reliefweb_v2_jobs(appname: str) -> Optional[List[Dict[str, Any]]]:
         return None
 
     base_payload: Dict[str, Any] = {
-        "limit": 60,
+        "limit": 100,
         "profile": "full",
         "query": {"value": RELIEFWEB_KEYWORDS, "fields": ["title", "body"]},
         "sort": ["date.created:desc"],
@@ -2520,7 +2535,7 @@ def fetch_reliefweb_jobs() -> List[Dict[str, Any]]:
 # ---------------------------------------------------------------------------
 DEFAULT_GLOBAL_JOBS_PATH = Path("public/global_jobs.json")
 DEFAULT_GLOBAL_ARCHIVE_PATH = Path("public/global_archive.json")
-GLOBAL_MAX_NEW_PER_RUN = 4        # cap on Gemini calls per run for the global stage
+GLOBAL_MAX_NEW_PER_RUN = 12       # cap on Gemini calls per run for the global stage (was 4)
 GLOBAL_NEWS_MAX_AGE_DAYS = 21     # same freshness discipline as the India stage
 
 GLOBAL_SYSTEM_PROMPT = """You are the editorial engine for UrbanForestPark \
@@ -4739,9 +4754,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     reliefweb_candidates = fetch_reliefweb_jobs()
     academic_candidates = fetch_indian_academic_and_institute_jobs()
     portal_candidates = fetch_verified_indian_portals()
+    freejobalert_candidates = fetch_freejobalert()
+    official_candidates = fetch_official_pages()
+    ats_candidates = fetch_ats_feeds(_employer_registry())
     candidates = interleave_candidates(
         [
             academic_candidates,
+            freejobalert_candidates,
+            official_candidates,
+            ats_candidates,
             portal_candidates,
             reliefweb_candidates,
             targeted_candidates,
@@ -4750,9 +4771,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     log.info(
         "Collected %d raw candidate(s) from all sources "
-        "(institute-news=%d, portals=%d, reliefweb=%d, targeted=%d, boards=%d)",
+        "(institute-news=%d, freejobalert=%d, official=%d, ats=%d, portals=%d, "
+        "reliefweb=%d, targeted=%d, boards=%d)",
         len(candidates),
         len(academic_candidates),
+        len(freejobalert_candidates),
+        len(official_candidates),
+        len(ats_candidates),
         len(portal_candidates),
         len(reliefweb_candidates),
         len(targeted_candidates),
@@ -4794,6 +4819,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     }
     accepted: List[Dict[str, Any]] = []
     quarantined: List[Dict[str, Any]] = []
+    source_leads = Counter(str(item.get("source") or "unknown") for item in candidates)
+    source_stats = {
+        name: {"leads": count, "passed": 0, "active": 0}
+        for name, count in source_leads.items()
+    }
     rate_limit_streak = 0
     for index, candidate in enumerate(fresh, start=1):
         label = squash(candidate.get("title"))[:70]
@@ -4826,6 +4856,11 @@ def main(argv: Optional[List[str]] = None) -> int:
                     continue
                 seen.add(record_key)
                 record["id"] = unique_id(record["id"], taken_ids)
+                source_name = str(candidate.get("source") or "unknown")
+                source_stats.setdefault(
+                    source_name, {"leads": 0, "passed": 0, "active": 0}
+                )
+                source_stats[source_name]["passed"] += 1
                 if record.get("status") == "quarantined":
                     quarantined.append(record)
                     log.warning(
@@ -4835,6 +4870,8 @@ def main(argv: Optional[List[str]] = None) -> int:
                     )
                 else:
                     accepted.append(record)
+                    if record.get("status") == "active":
+                        source_stats[source_name]["active"] += 1
                     log.info("[%d/%d] accepted %s", index, len(fresh), record["id"])
         except GeminiRateLimited as exc:
             rate_limit_streak += 1
@@ -4889,7 +4926,29 @@ def main(argv: Optional[List[str]] = None) -> int:
     #     (global_jobs.json / global_archive.json), seed + fresh harvest.
     run_global_stage(global_jobs_path, global_archive_path, today, api_key=api_key)
 
-    # 6. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
+    # 6. Per-source yield report (leads -> passed -> active).
+    write_source_report(
+        jobs_path.parent / "source_report.json",
+        {
+            "generated_at": datetime.now().isoformat(timespec="seconds"),
+            "policy_version": 2,
+            "limits": SOURCE_LIMITS,
+            "state_queries": len(STATE_QUERIES),
+            "sources": dict(
+                sorted(
+                    source_stats.items(),
+                    key=lambda item: (-item[1]["leads"], item[0]),
+                )
+            ),
+            "totals": {
+                "leads": sum(item["leads"] for item in source_stats.values()),
+                "passed": sum(item["passed"] for item in source_stats.values()),
+                "active": sum(item["active"] for item in source_stats.values()),
+            },
+        },
+    )
+
+    # 7. Refresh the daily WhatsApp bulletin + broadcast to Telegram when
     #    TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (or a WhatsApp webhook) are set.
     broadcast_new_jobs(
         published,
