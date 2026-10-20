@@ -49,9 +49,21 @@
       "checked_at": "2026-10-20T10:19:57.982215+00:00",
       "platform": ""
     },
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "reverify_after": "2026-11-04",
-    "valid_through": "2026-11-19"
+    "valid_through": "2026-11-19",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:50.502031+00:00",
+      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+      "final_host": "www.simonsfoundation.org",
+      "http_status": 200,
+      "content_hash": "91b91464d58ec40fd43801e17ddb24f1",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",
@@ -207,7 +219,19 @@
       "checked_at": "2026-10-20T10:19:57.980214+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "careers_portal",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:50.746910+00:00",
+      "final_url": "https://www.worldbank.org/ext/en/careers",
+      "final_host": "www.worldbank.org",
+      "http_status": 200,
+      "content_hash": "f313695e89074436e9573b59d9e152ae",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",
@@ -259,7 +283,13 @@
       "checked_at": "2026-10-20T10:19:57.984213+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "posting",
+    "last_link_check": {
+      "checked_at": "2026-10-20T23:16:53Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 404,
+      "consecutive_failures": 1
+    }
   },
   {
     "state": "",
@@ -310,7 +340,19 @@
       "checked_at": "2026-10-20T10:19:57.984213+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "posting",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:53.919908+00:00",
+      "final_url": "https://unfccc.int/about-us/internships",
+      "final_host": "unfccc.int",
+      "http_status": 200,
+      "content_hash": "dfd66793c65fdd67acc968dcd6f42f0d",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",
@@ -415,7 +457,19 @@
       "checked_at": "2026-10-20T10:19:57.983232+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "careers_portal",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:55.575397+00:00",
+      "final_url": "https://jobs.undp.org/cj_view_jobs.cfm",
+      "final_host": "jobs.undp.org",
+      "http_status": 200,
+      "content_hash": "bd65aaef96e88e219c715ce3ed0fc77e",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",
@@ -466,7 +520,19 @@
       "checked_at": "2026-10-20T10:19:57.984213+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "posting",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:56.943871+00:00",
+      "final_url": "https://iucn.org/our-work/region/south-america",
+      "final_host": "iucn.org",
+      "http_status": 200,
+      "content_hash": "61cebcfb4bf10f80906d063d48be2dc3",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",
@@ -512,14 +578,16 @@
     "entry_type": "careers_portal",
     "employer_id": "green-climate-fund-gcf",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:57.140497+00:00",
       "final_url": "https://www.greenclimate.fund/about/careers",
       "final_host": "www.greenclimate.fund",
       "http_status": 200,
       "content_hash": "3fcb104e58de9bfa29d17ee536566043",
       "entry_type": "careers_portal",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -614,17 +682,19 @@
     "org_domain": "esa.int",
     "date_added": "2026-10-19",
     "valid_through": "2036-10-16",
-    "entry_type": "unknown",
+    "entry_type": "posting",
     "employer_id": "european-space-agency-esa-climate-office",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:58.163431+00:00",
       "final_url": "https://climate.esa.int/en/",
       "final_host": "climate.esa.int",
       "http_status": 200,
       "content_hash": "aa669364ad5a3dd20dd1305f715d14cc",
-      "entry_type": "unknown",
+      "entry_type": "posting",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -676,7 +746,19 @@
       "checked_at": "2026-10-20T10:19:57.995865+00:00",
       "platform": ""
     },
-    "entry_type": "posting"
+    "entry_type": "award_portal",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:59.242694+00:00",
+      "final_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+      "final_host": "www.eacea.ec.europa.eu",
+      "http_status": 200,
+      "content_hash": "ca0454fe59ad975049325eae6c70a67f",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "state": "",

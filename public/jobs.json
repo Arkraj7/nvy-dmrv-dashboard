@@ -33,12 +33,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T18:51:37.968698+00:00",
+      "verified_at": "2026-10-20T23:16:22.580522+00:00",
       "final_url": "https://www.atree.org/career/ffwlf/",
       "final_host": "www.atree.org",
       "http_status": 200,
       "content_hash": "d661409a248d8fc647357dacae126935",
-      "evidence_snippet": "From Food Waste to Livestock Feed: PhD Research on Sustainable Rurban Food Systems Skip to content Position Title From Food Waste to Livestock Feed: PhD Research on Sustainable Rurban Food Systems Des",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -325,13 +324,12 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T12:01:15.117216+00:00",
+      "verified_at": "2026-10-20T23:16:25.082263+00:00",
       "final_url": "https://wii.gov.in/course-in-wildlife-trade-&-forensics-for-revenue-officers",
       "final_host": "wii.gov.in",
       "http_status": 200,
       "content_hash": "c58ed2a5e0dfda412b4c08199da8ad69",
-      "evidence_snippet": "Course in Wildlife Trade & Forensics for Revenue Officers Course in Wildlife Trade & Forensics for Revenue Officers Course in Wildlife Trade & Forensics for Revenue Officers The Wildlife Institute of ",
-      "entry_type": "posting",
+      "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
       "platform": "",
@@ -378,13 +376,12 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T11:57:37.321875+00:00",
+      "verified_at": "2026-10-20T23:16:29.506608+00:00",
       "final_url": "https://wii.gov.in/wildlife-enthusiasts-course",
       "final_host": "wii.gov.in",
       "http_status": 200,
       "content_hash": "5df6c12e517af71756e9d097c929852f",
-      "evidence_snippet": "Wildlife Enthusiasts Course Wildlife Enthusiasts Course The Wildlife Institute of India (WII) offers several short-term certificate\r\n        and orientation programs to promote awareness and build cap",
-      "entry_type": "posting",
+      "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
       "platform": "",
@@ -566,7 +563,19 @@
       "platform": ""
     },
     "entry_type": "posting",
-    "reverify_after": "2026-11-03"
+    "reverify_after": "2026-11-03",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:29.891057+00:00",
+      "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+      "final_host": "www.indiawaterportal.org",
+      "http_status": 200,
+      "content_hash": "540057991161143d479c8df465a2f744",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "research-intern-sustainable-food-systems-ceew",
@@ -601,12 +610,11 @@
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T17:50:36.265153+00:00",
+      "verified_at": "2026-10-20T23:16:30.403162+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-sustainable-food-systems-0",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "4f23bea3fc3942cbe42a82bab864c583",
-      "evidence_snippet": "Research Intern - Sustainable Food Systems | CEEW Council on Energy, Environment and Water (CEEW), New Delhi Research Intern - Sustainable Food Systems At CEEW, we are deliberate about what we stand f",
+      "content_hash": "e7b8c8ea1f1d4736d7deb41ea4235d48",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -654,12 +662,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T18:24:47.854307+00:00",
+      "verified_at": "2026-10-20T23:16:32.123394+00:00",
       "final_url": "https://www.atree.org/career/research-associate-maharastratgi/",
       "final_host": "www.atree.org",
       "http_status": 200,
       "content_hash": "4f5956c70158c878e1ccba51d24a8c21",
-      "evidence_snippet": "Research Associate- Maharastra (TGI) Skip to content Position Title Research Associate- Maharastra (TGI) Description About the Grasslands Initiative ATREE’s Grasslands Initiative (TGI) is a mission-mo",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -714,15 +721,14 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T12:06:34.354067+00:00",
+      "verified_at": "2026-10-20T23:16:32.436846+00:00",
       "final_url": "https://reliefweb.int/job/4232853/regional-health-and-wash-coordinator-asia-hub",
       "final_host": "reliefweb.int",
-      "http_status": 0,
-      "content_hash": "",
-      "evidence_snippet": "",
-      "entry_type": "careers_portal",
+      "http_status": 202,
+      "content_hash": "c890fd63942294018f62a664116c07cf",
+      "entry_type": "posting",
       "host_class": "platform",
-      "reason_code": "NOT_DIRECT_LINK",
+      "reason_code": "OK",
       "platform": "ReliefWeb",
       "verifier": "verify_link_v2"
     },
@@ -889,13 +895,12 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T12:05:03.692723+00:00",
+      "verified_at": "2026-10-20T23:16:34.457422+00:00",
       "final_url": "https://wii.gov.in/pg-diploma-in-wildlife",
       "final_host": "wii.gov.in",
       "http_status": 200,
       "content_hash": "74dea1ce2fe7031c1cb73bc36730c4cc",
-      "evidence_snippet": "PG Diploma in Wildlife PG Diploma in Wildlife Course Background The conservation of biological diversity through the establishment and management of Protected Areas (PAs) is\r\n    globally recognized. ",
-      "entry_type": "posting",
+      "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
       "platform": "",
@@ -1070,12 +1075,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T17:51:14.903113+00:00",
+      "verified_at": "2026-10-20T23:16:37.201322+00:00",
       "final_url": "https://bsi.gov.in/uploads/documents/whatsnew/hindi/BSI-ADDITIONAL_LIST_OF_4_CANDIDATES_FOR_JRF_2026.pdf",
       "final_host": "bsi.gov.in",
       "http_status": 200,
       "content_hash": "57f5540446950074f88cfa12756351b4",
-      "evidence_snippet": "",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -1184,12 +1188,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-20T17:51:47.855669+00:00",
+      "verified_at": "2026-10-20T23:16:39.485744+00:00",
       "final_url": "https://wii.gov.in/international-course-on-heritage-conservation",
       "final_host": "wii.gov.in",
       "http_status": 200,
       "content_hash": "c38f81974942be3b2c198ae723ce73b9",
-      "evidence_snippet": "International course on Heritage Conservation International course on Heritage Conservation The Wildlife Institute of India (WII) offers a specialized course in Natural\r\n    Heritage Conservation, aim",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1488,14 +1491,16 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:40.063619+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-technology-futures-2",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "c90fe35e5051fa6fc0a1029c7e2bf220",
+      "content_hash": "bdb0839c0e17f29bee699a7a4e089d7c",
       "entry_type": "posting",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "reverify_after": "2026-11-03"
   },
@@ -1541,14 +1546,16 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:40.469632+00:00",
       "final_url": "https://www.ceew.in/careers/programme-associate-%E2%80%93-energy-transitions",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "01fba66722760bfc0bab5ce24dc5935c",
+      "content_hash": "5c464cd547f1176b657bc1b2b1f7c7c7",
       "entry_type": "posting",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "reverify_after": "2026-11-03"
   },
@@ -1794,14 +1801,16 @@
     "entry_type": "award_portal",
     "employer_id": "simons-foundation",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:42.045981+00:00",
       "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
       "final_host": "www.simonsfoundation.org",
       "http_status": 200,
-      "content_hash": "14518b9a386abba940416c399772bed2",
+      "content_hash": "bd9f4a5a339bde8e535f70bf8a18be72",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "reverify_after": "2026-11-02"
   },
@@ -2097,14 +2106,16 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
+      "verified_at": "2026-10-20T23:16:42.448142+00:00",
       "final_url": "https://www.ceew.in/careers/research-analyst-programme-associate-technology-futures",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "ae51e2a81256bca17140279b727a1c48",
+      "content_hash": "144dc6be5a68c935722326683a636926",
       "entry_type": "posting",
       "host_class": "employer_primary",
-      "verifier": "verify_link"
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "reverify_after": "2026-11-02"
   },
@@ -2257,7 +2268,19 @@
       "platform": "FreeJobAlert"
     },
     "entry_type": "posting",
-    "reverify_after": "2026-11-02"
+    "reverify_after": "2026-11-02",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:42.639037+00:00",
+      "final_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
+      "final_host": "www.freejobalert.com",
+      "http_status": 200,
+      "content_hash": "240ee49e24b6ec2f4d320c484ee7f8e9",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "FreeJobAlert",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "programme-associate-industrial-heat-decarbonisation-iforest",
@@ -4310,7 +4333,19 @@
       "platform": ""
     },
     "entry_type": "posting",
-    "reverify_after": "2026-10-31"
+    "reverify_after": "2026-10-31",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:44.873508+00:00",
+      "final_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
+      "final_host": "home.iitd.ac.in",
+      "http_status": 200,
+      "content_hash": "154229cbb2533675b232b21bc9bcbb5d",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "jrf-avian-ecology-habitat-assessment-sacon-coimbatore",
@@ -4653,7 +4688,19 @@
       "platform": ""
     },
     "entry_type": "posting",
-    "reverify_after": "2026-10-23"
+    "reverify_after": "2026-10-23",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:47.246992+00:00",
+      "final_url": "https://moef.gov.in/vacancy-circulars",
+      "final_host": "moef.gov.in",
+      "http_status": 200,
+      "content_hash": "5d3152743acfe8c96ddb6663eb5e5969",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "project-associate-geospatial-modelling-urban-heat-island-nrsc",
@@ -4702,7 +4749,19 @@
       "platform": ""
     },
     "entry_type": "posting",
-    "reverify_after": "2026-10-22"
+    "reverify_after": "2026-10-22",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:47.906692+00:00",
+      "final_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
+      "final_host": "www.nrsc.gov.in",
+      "http_status": 200,
+      "content_hash": "007fced5b68ce224ce9bac4900f5f5c4",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "project-associate-himalayan-ecology-climate-adaptation-gbpnihe",
@@ -4750,8 +4809,20 @@
       "checked_at": "2026-10-20T10:19:57.983232+00:00",
       "platform": ""
     },
-    "entry_type": "posting",
-    "reverify_after": "2026-10-21"
+    "entry_type": "award_portal",
+    "reverify_after": "2026-10-21",
+    "verification": {
+      "verified_at": "2026-10-20T23:16:50.341718+00:00",
+      "final_url": "https://gbpihed.gov.in/vacancy.html",
+      "final_host": "gbpihed.gov.in",
+      "http_status": 200,
+      "content_hash": "3d50f75f1bc2eb5bc74007dc1305701a",
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    }
   },
   {
     "id": "project-associate-geospatial-urban-green-infrastructure-atree",
