@@ -218,6 +218,16 @@ class LinkVerifier:
             if not ips:
                 return False  # No IPs resolved - allow (will fail later anyway)
             
+            # Check for DNS filtering: if any resolved IP is 0.0.0.0, ::, or non-global
+            for ip_str in ips:
+                try:
+                    ip_obj = ipaddress.ip_address(ip_str)
+                    if ip_str in ("0.0.0.0", "::") or not ip_obj.is_global:
+                        logger.warning(f"DNS filtered locally for {host}: {ip_str}")
+                        return 'dns_filtered'
+                except Exception:
+                    continue
+            
             # Check if ALL resolved IPs are private/loopback/link-local
             for ip_str in ips:
                 try:
@@ -318,9 +328,18 @@ class LinkVerifier:
             try:
                 # Check for private IP (SSRF) - before DNS/connect
                 parsed = urlparse(current_url)
-                if self._is_private_ip(parsed.hostname or ''):
-                    logger.warning(f"SSRF blocked: {current_url} resolves to private IP")
-                    return None, redirect_chain, 'ssrf_guard|PrivateIPError|Blocked private IP'
+                hostname = parsed.hostname or ''
+                # Skip SSRF check if hostname is empty (relative redirect) or looks like a path
+                if hostname and not hostname.startswith('/'):
+                    ssrf_result = self._is_private_ip(hostname)
+                    if ssrf_result == True:
+                        logger.warning(f"SSRF blocked: {current_url} resolves to private IP")
+                        return None, redirect_chain, 'ssrf_guard|PrivateIPError|Blocked private IP'
+                    elif ssrf_result == 'dns_filtered':
+                        logger.warning(f"DNS filtered locally: {current_url} resolves to filtered IP")
+                        return None, redirect_chain, 'dns|DNSFiltered|DNS filtered locally'
+                elif not hostname:
+                    logger.warning(f"SSRF skipped: {current_url} has no hostname (relative redirect)")
                 
                 # Stream to control size
                 resp = self._session.get(
@@ -516,8 +535,11 @@ class LinkVerifier:
         # URL check
         for pattern in generic_url_patterns:
             if pattern in url_lower:
-                # Check if URL has job-specific path (e.g., /careers/job/123)
+                # Check if URL has job-specific path (e.g., /careers/job/123, /careers/slug-title)
                 if re.search(r'(job|position|vacancy|requisition)[-/]\d+', url_lower):
+                    specific_score += 2
+                # Also check for slug-style job paths: /careers/something-something, /jobs/something-something
+                elif re.search(rf'{re.escape(pattern)}/[a-z0-9-]+(?:-[a-z0-9]+)+', url_lower):
                     specific_score += 2
                 else:
                     generic_score += 1
@@ -702,6 +724,12 @@ class LinkVerifier:
             stage = fetch_error.split('|')[0] if '|' in fetch_error else 'unknown'
             reason = fetch_error.split('|')[1] if '|' in fetch_error else 'FETCH_ERROR'
             entry_type = 'unknown'
+            # DNS filtering -> NEEDS_MANUAL_CHECK
+            if stage == 'dns':
+                reason = 'NEEDS_MANUAL_CHECK'
+            # SSL errors for specific problematic domains -> NEEDS_MANUAL_CHECK
+            if stage == 'tls' and reason == 'SSLError':
+                reason = 'NEEDS_MANUAL_CHECK'
             return VerificationResult(
                 ok=False,
                 final_url=final_url,
@@ -726,8 +754,10 @@ class LinkVerifier:
         text = self._extract_text_content(response, content_type)
         content_hash = self._compute_hash(content) if content else ''
         
-        # Determine entry_type from content
-        entry_type = self._detect_entry_type(text, final_url, final_host)
+        # Determine entry_type from content and ORIGINAL apply URL (before redirects)
+        # Use clean_url (original apply_url with tracking params stripped) for entry_type detection
+        # to preserve job-specific path information that may be lost in redirects
+        entry_type = self._detect_entry_type(text, clean_url, final_host)
         
         # Check HTTP status
         if status in (404, 410):
