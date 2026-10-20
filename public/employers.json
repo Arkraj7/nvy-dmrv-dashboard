@@ -984,6 +984,7 @@
       "id": "world-resources-institute-wri",
       "name": "World Resources Institute (WRI)",
       "domains": [
+        "wri.org",
         "wri-india.org"
       ],
       "ats_hosts": [],
@@ -1042,7 +1043,8 @@
       "id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
       "name": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
       "domains": [
-        "ias.unu.edu"
+        "ias.unu.edu",
+        "unu.edu"
       ],
       "ats_hosts": [],
       "type": "international_organization",
@@ -1070,7 +1072,7 @@
       "id": "global-environment-facility-small-grants-programme-sgp-implemented-by-undp",
       "name": "Global Environment Facility Small Grants Programme (SGP), implemented by UNDP",
       "domains": [
-        "thegef.org"
+        "sgp.undp.org"
       ],
       "ats_hosts": [],
       "type": "ngo",

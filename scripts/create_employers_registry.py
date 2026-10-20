@@ -63,7 +63,7 @@ manual_overrides = {
     'TERI': {'website': 'https://www.teriin.org', 'domain': 'teriin.org'},
     'Wildlife Institute of India': {'website': 'https://wii.gov.in', 'domain': 'wii.gov.in'},
     'Wildlife Institute of India (WII)': {'website': 'https://wii.gov.in', 'domain': 'wii.gov.in'},
-    'World Resources Institute (WRI)': {'website': 'https://wri-india.org', 'domain': 'wri-india.org'},
+    'World Resources Institute (WRI)': {'website': 'https://www.wri.org', 'domain': 'wri.org'},
     'WRI India': {'website': 'https://wri-india.org', 'domain': 'wri-india.org'},
     'WWF-India': {'website': 'https://www.wwfindia.org', 'domain': 'wwfindia.org'},
     'WWF India': {'website': 'https://www.wwfindia.org', 'domain': 'wwfindia.org'},
@@ -82,7 +82,7 @@ manual_overrides = {
     'United Nations Framework Convention on Climate Change (UNFCCC)': {'website': 'https://unfccc.int', 'domain': 'unfccc.int'},
     'United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)': {'website': 'https://ias.unu.edu', 'domain': 'ias.unu.edu'},
     'Green Climate Fund (GCF)': {'website': 'https://greenclimate.fund', 'domain': 'greenclimate.fund'},
-    'Global Environment Facility Small Grants Programme (SGP), implemented by UNDP': {'website': 'https://www.thegef.org', 'domain': 'thegef.org'},
+    'Global Environment Facility Small Grants Programme (SGP), implemented by UNDP': {'website': 'https://sgp.undp.org', 'domain': 'sgp.undp.org'},
     'The Earthshot Prize (Royal Foundation)': {'website': 'https://earthshotprize.org', 'domain': 'earthshotprize.org'},
     'Zayed Sustainability Prize (UAE)': {'website': 'https://zayedsustainabilityprize.org', 'domain': 'zayedsustainabilityprize.org'},
     'Chevening Scholarships - UK Government (FCDO)': {'website': 'https://www.chevening.org', 'domain': 'chevening.org'},
@@ -259,6 +259,17 @@ for alias, info in known_by_exact.items():
         }
 
 # Write employers.json
+# Multi-domain entries verified 2026-10-20 (see docs/LINK_POLICY.md + audit_report.csv).
+# Kept here so regeneration preserves them.
+extra_domains = {
+    'world-resources-institute-wri': ['wri.org', 'wri-india.org'],
+    'united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias': ['ias.unu.edu', 'unu.edu'],
+    'global-environment-facility-small-grants-programme-sgp-implemented-by-undp': ['sgp.undp.org'],
+}
+for emp in canonical_orgs.values():
+    if emp['id'] in extra_domains:
+        emp['domains'] = extra_domains[emp['id']]
+
 output = {
     'version': 1,
     'updated': '2026-10-20',
