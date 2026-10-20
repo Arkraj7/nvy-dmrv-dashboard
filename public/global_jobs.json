@@ -1,5 +1,67 @@
 [
   {
+    "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
+    "date_added": "2026-10-20",
+    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
+    "organization": "Simons Foundation",
+    "state": "Multiple States / Remote",
+    "city": "New York, USA",
+    "category": "Academic, JRF, SRF & PhD Positions",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "North America",
+    "country": "USA",
+    "qualification_summary": "PhD in Plant Biology, Botany, or related life sciences required.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Simons Foundation invites applications for postdoctoral fellowships focused on advancing research in plant biology. Selected fellows will conduct independent research projects that address fundamental questions in plant science and ecological resilience. This program supports early-career scientists aiming to transition into independent academic or research roles within the global scientific community.",
+    "key_responsibilities": [
+      "Conduct original research in plant biology",
+      "Collaborate with leading academic mentors",
+      "Publish findings in peer-reviewed journals",
+      "Participate in foundation-led scientific symposia"
+    ],
+    "must_have_skills": [
+      "Plant Biology",
+      "Molecular Botany",
+      "Genomics",
+      "Scientific Writing",
+      "Experimental Design",
+      "Data Analysis"
+    ],
+    "application_tip": "Highlight how your proposed research aligns with the foundation's specific interest in fundamental biological mechanisms. Ensure your publication record is clearly articulated in your CV.",
+    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+    "org_website": "https://www.simonsfoundation.org",
+    "org_domain": "simonsfoundation.org",
+    "source_portal": "Official Organization Website",
+    "_qualification_is_default": false,
+    "_compensation_is_default": false,
+    "_deadline_is_default": false,
+    "global": true,
+    "evergreen": false,
+    "status": "quarantined",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "FIELD_NOT_IN_SOURCE",
+      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+      "final_host": "www.simonsfoundation.org",
+      "http_status": 200,
+      "entry_type": "award_portal",
+      "host_class": "employer_primary",
+      "error_detail": "not found on fetched page: deadline, compensation, qualifications, must-have skills",
+      "verified_at": "2026-10-20T10:00:24.964011+00:00",
+      "audit": "ingestion_gate",
+      "run_date": "2026-10-20",
+      "fields": [
+        "deadline_or_window",
+        "compensation_or_fellowship",
+        "qualification_summary",
+        "must_have_skills"
+      ]
+    }
+  },
+  {
     "state": "",
     "global": true,
     "evergreen": true,

@@ -1,5 +1,59 @@
 [
   {
+    "id": "satluj-river-basin-assessment-consultant-tnc-india",
+    "date_added": "2026-10-20",
+    "clean_title": "Consultant / Agency – Satluj River Basin Assessment for Agroforestry and Freshwater Conservation",
+    "organization": "The Nature Conservancy (TNC) India",
+    "state": "Punjab",
+    "city": "Satluj Basin",
+    "category": "Forestry, Wildlife & Afforestation",
+    "experience_level": "Senior",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "opportunity_kind": "Grant / Funding",
+    "deadline_or_window": "Rolling / Open",
+    "region": "",
+    "country": "",
+    "qualification_summary": "Master's / PhD in Water Resources, Agroforestry, Environmental Science, or allied field (Agencies / Consultants)",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Nature Conservancy (TNC) India invites proposals from qualified agencies or consultants to conduct a comprehensive assessment of the Satluj River Basin in Punjab. The assignment evaluates opportunities for agroforestry, freshwater conservation, and ecological restoration across the basin. Findings will directly guide targeted watershed interventions and nature-based solutions to enhance regional water and soil security.",
+    "key_responsibilities": [
+      "Conduct baseline assessments of hydrology, agroforestry potential, and degraded lands across the Satluj River Basin",
+      "Identify priority intervention sites for freshwater conservation and nature-based restoration in Punjab",
+      "Engage local farming communities, research bodies, and state departments to validate restoration pathways",
+      "Deliver a comprehensive strategy document with spatial maps, actionable recommendations, and monitoring metrics"
+    ],
+    "must_have_skills": [
+      "River basin management",
+      "Agroforestry systems",
+      "Freshwater conservation",
+      "Remote sensing and GIS",
+      "Stakeholder consultation",
+      "Watershed planning"
+    ],
+    "application_tip": "Demonstrate past experience executing river basin or hydrology assessments in Punjab's agro-ecological context. Ensure your proposal includes clear methodologies for GIS spatial mapping and community-level consultations.",
+    "apply_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+    "org_website": "https://www.tncindia.in",
+    "org_domain": "tncindia.in",
+    "source_portal": "indiawaterportal.org",
+    "_qualification_is_default": false,
+    "_compensation_is_default": false,
+    "_deadline_is_default": false,
+    "status": "quarantined",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason_code": "HOST_NOT_IN_REGISTRY",
+      "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+      "final_host": "www.indiawaterportal.org",
+      "http_status": 0,
+      "entry_type": "unknown",
+      "host_class": "unregistered",
+      "error_detail": "registry|HostNotInRegistry|Host not in employer registry",
+      "verified_at": "2026-10-20T09:54:27.003855+00:00",
+      "audit": "ingestion_gate",
+      "run_date": "2026-10-20"
+    }
+  },
+  {
     "id": "satluj-river-basin-assessment-tnc",
     "date_added": "2026-10-19",
     "clean_title": "Consultant for Satluj River Basin Assessment",
@@ -101,7 +155,8 @@
       "entry_type": "posting",
       "host_class": "employer_primary",
       "verifier": "verify_link"
-    }
+    },
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "programme-associate-energy-transitions-ceew",
@@ -153,7 +208,8 @@
       "entry_type": "posting",
       "host_class": "employer_primary",
       "verifier": "verify_link"
-    }
+    },
+    "reverify_after": "2026-11-03"
   },
   {
     "id": "mittal-family-climate-fellowship-program",
@@ -465,7 +521,8 @@
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "verifier": "verify_link"
-    }
+    },
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "senior-sector-expert-building-energy-efficiency-asci",
@@ -933,7 +990,8 @@
       "entry_type": "posting",
       "host_class": "employer_primary",
       "verifier": "verify_link"
-    }
+    },
+    "reverify_after": "2026-11-02"
   },
   {
     "id": "renewable-energy-program-manager-pwc-patna",

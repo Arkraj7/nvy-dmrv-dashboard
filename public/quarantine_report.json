@@ -1,32 +1,41 @@
 {
-  "generated_at": "2026-10-20T08:26:18Z",
-  "source": "audit_report.csv (11 PASS / 90 FAIL)",
+  "generated_at": "2026-10-20T10:05:53Z",
+  "source": "live quarantine queue (status=quarantined)",
   "policy": "docs/LINK_POLICY.md",
   "tag": "pre-gate-2026-10-20",
   "totals": {
-    "records": 101,
-    "quarantined": 90,
+    "records": 103,
+    "quarantined": 92,
     "public": 11
   },
   "by_reason": {
     "BLOCKED_HOST": 62,
     "GENERIC_LANDING_PAGE": 14,
     "CONTENT_MISMATCH": 5,
+    "HOST_NOT_IN_REGISTRY": 3,
     "NEEDS_MANUAL_CHECK": 3,
-    "HOST_NOT_IN_REGISTRY": 2,
     "HTTP_404": 2,
     "SOFT_404": 1,
+    "FIELD_NOT_IN_SOURCE": 1,
     "MissingSchema": 1
   },
   "fix_hints": {
-    "HOST_NOT_IN_REGISTRY": "Lead came from an aggregator (indiawaterportal/fundsforngos). Resolve to the employer's own page; never store the aggregator URL.",
+    "HOST_NOT_IN_REGISTRY": "Lead came from a host that is not an approved employer domain. Resolve to the employer's own page; never store the aggregator URL.",
     "BLOCKED_HOST": "Replace with the employer's own posting/careers URL from the registry (job-board links may only be used for discovery).",
     "GENERIC_LANDING_PAGE": "Replace the portal URL with the specific posting URL (job title must appear on the page).",
     "CONTENT_MISMATCH": "Replace with the page that carries this exact posting, or add the correct domain/ATS host to the registry.",
     "SOFT_404": "Page says \"404 / not found\" though HTTP=200 - find the current posting URL.",
-    "NEEDS_MANUAL_CHECK": "Manual review: TLS/403 host. Open in a browser inside India, capture the true posting URL, then re-run verify_link.",
+    "NEEDS_MANUAL_CHECK": "Manual review: TLS/403/DNS-filtered host. Open in a browser inside India, capture the true posting URL, then re-run verify_link.",
     "HTTP_404": "Dead link - find the current posting URL or drop the record.",
-    "MissingSchema": "Fetch broke on a relative redirect - retry/replace URL."
+    "MissingSchema": "Fetch broke on a relative redirect - retry/replace URL.",
+    "EMPLOYER_NOT_IN_REGISTRY": "Add the employer (with a verified own domain) to public/employers.json, or drop the lead.",
+    "FIELD_NOT_IN_SOURCE": "The LLM claimed a title/deadline/compensation/qualification/skill that is not on the fetched page. Re-fetch the page and restructure only what it says.",
+    "PAGE_TEXT_UNAVAILABLE": "The verified page returned no readable text - re-fetch or replace the URL.",
+    "POSITION_CLOSED": "The page says applications are closed - archive or replace the record.",
+    "TIMEOUT": "Source timed out - retry; quarantine persists after 3 nightly failures.",
+    "UNREACHABLE_FROM_RUNNER": "Runner could not reach the host - retry from another network.",
+    "SSL_ERROR": "TLS certificate problem - verify the official host; do not bypass verification.",
+    "REDIRECT_LOOP": "Redirect loop - replace with the final canonical posting URL."
   },
   "by_employer": [
     {
@@ -44,8 +53,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477790016",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "consultant-ccass-ey-mumbai",
@@ -54,8 +62,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4449216914",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "senior-consultant-ccass-ey-chennai",
@@ -64,8 +71,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477787211",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -84,8 +90,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4291059973",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "renewable-energy-program-manager-pwc-patna",
@@ -94,8 +99,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478427353",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "senior-associate-pwc-india",
@@ -104,8 +108,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4415883688",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -124,8 +127,7 @@
           "final_host": "www.atree.org",
           "apply_url": "https://www.atree.org/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-09-10",
-          "manual_seed": false
+          "date_added": "2026-09-10"
         },
         {
           "slug": "project-associate-geospatial-urban-green-infrastructure-atree",
@@ -134,8 +136,7 @@
           "final_host": "www.atree.org",
           "apply_url": "https://www.atree.org/careers/",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-05",
-          "manual_seed": false
+          "date_added": "2026-10-05"
         }
       ]
     },
@@ -154,8 +155,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480516769",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "analyst-sustainable-sourcing-avantor-2",
@@ -164,8 +164,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480516768",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -184,8 +183,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4469020152",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "associate-team-lead-supplier-compliance-colgate-palmolive",
@@ -194,8 +192,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4460251490",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -214,8 +211,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479263940",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "programme-associate-industrial-heat-decarbonisation-iforest",
@@ -224,8 +220,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479283171",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -244,8 +239,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4476461356",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "asst-manager-manager-operations-tuv-sud-gurugram-2",
@@ -254,8 +248,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4476468177",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -274,8 +267,7 @@
           "final_host": "unfccc.int",
           "apply_url": "https://unfccc.int/about-us/internships",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         },
         {
           "slug": "unfccc-secretariat-climate-careers",
@@ -284,8 +276,7 @@
           "final_host": "unfccc.int",
           "apply_url": "https://unfccc.int/about-us/vacancies",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -305,8 +296,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480819150",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         },
         {
           "slug": "programme-officer-urban-forestry-green-cover-wwf-india-new-delhi",
@@ -315,8 +305,7 @@
           "final_host": "www.wwfindia.org",
           "apply_url": "https://www.wwfindia.org/about_wwf/careers/",
           "entry_type": "unknown",
-          "date_added": "2026-09-02",
-          "manual_seed": false
+          "date_added": "2026-09-02"
         }
       ]
     },
@@ -335,8 +324,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4471426627",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -355,8 +343,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=e94794c868c8f5eb",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -375,8 +362,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480812620",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -395,8 +381,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477075706",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -415,8 +400,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4470473913",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -435,8 +419,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478208572",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -455,8 +438,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478230249",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -475,8 +457,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=e1ff306091b25910",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -495,14 +476,13 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479108718",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
     {
       "employer": "CEEW",
-      "employer_id": "council-on-energy-environment-and-water-ceew",
+      "employer_id": "",
       "count": 1,
       "reason_codes": {
         "GENERIC_LANDING_PAGE": 1
@@ -515,8 +495,7 @@
           "final_host": "www.ceew.in",
           "apply_url": "https://www.ceew.in/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-09-08",
-          "manual_seed": false
+          "date_added": "2026-09-08"
         }
       ]
     },
@@ -535,8 +514,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477277869",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -555,8 +533,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4476091538",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -575,8 +552,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=bcfc0257ecf2d3fc",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -595,8 +571,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4436768027",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -615,8 +590,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4434358804",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -635,8 +609,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477742547",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -655,8 +628,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4463650250",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -675,8 +647,7 @@
           "final_host": "enkingint.org",
           "apply_url": "https://enkingint.org/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-09-04",
-          "manual_seed": false
+          "date_added": "2026-09-04"
         }
       ]
     },
@@ -695,8 +666,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477563878",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -715,8 +685,7 @@
           "final_host": "www.eacea.ec.europa.eu",
           "apply_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
           "entry_type": "award_portal",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -735,8 +704,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477060386",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -755,8 +723,7 @@
           "final_host": "futureearth.org",
           "apply_url": "https://futureearth.org/opportunities/",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -775,8 +742,7 @@
           "final_host": "gbpihed.gov.in",
           "apply_url": "https://gbpihed.gov.in/vacancy.html",
           "entry_type": "award_portal",
-          "date_added": "2026-10-06",
-          "manual_seed": false
+          "date_added": "2026-10-06"
         }
       ]
     },
@@ -795,8 +761,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4453978704",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -815,8 +780,7 @@
           "final_host": "www.iifm.ac.in",
           "apply_url": "https://www.iifm.ac.in/career",
           "entry_type": "unknown",
-          "date_added": "2026-10-09",
-          "manual_seed": false
+          "date_added": "2026-10-09"
         }
       ]
     },
@@ -835,8 +799,7 @@
           "final_host": "www.iisc.ac.in",
           "apply_url": "https://iisc.ac.in/careers/",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-12",
-          "manual_seed": false
+          "date_added": "2026-10-12"
         }
       ]
     },
@@ -855,8 +818,7 @@
           "final_host": "home.iitd.ac.in",
           "apply_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
           "entry_type": "posting",
-          "date_added": "2026-10-16",
-          "manual_seed": false
+          "date_added": "2026-10-16"
         }
       ]
     },
@@ -875,8 +837,7 @@
           "final_host": "www.iitkgp.ac.in",
           "apply_url": "https://www.iitkgp.ac.in/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-14",
-          "manual_seed": false
+          "date_added": "2026-10-14"
         }
       ]
     },
@@ -895,8 +856,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478208160",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -915,8 +875,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=0efcab3d008751a0",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -935,8 +894,7 @@
           "final_host": "iucn.org",
           "apply_url": "https://www.iucn.org/regions/south-america",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -955,8 +913,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477062615",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -975,8 +932,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4432435954",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -995,8 +951,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4468549980",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1015,8 +970,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479268259",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1035,8 +989,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=a0e7ff5168a92b88",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1055,8 +1008,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480875543",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1075,8 +1027,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479669291",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1095,8 +1046,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4476655607",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1115,8 +1065,7 @@
           "final_host": "moef.gov.in",
           "apply_url": "https://moef.gov.in/vacancy-circulars",
           "entry_type": "unknown",
-          "date_added": "2026-10-08",
-          "manual_seed": false
+          "date_added": "2026-10-08"
         }
       ]
     },
@@ -1135,8 +1084,7 @@
           "final_host": "www2.fundsforngos.org",
           "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1155,8 +1103,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478238129",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1175,8 +1122,7 @@
           "final_host": "www.ncbs.res.in",
           "apply_url": "https://www.ncbs.res.in/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-13",
-          "manual_seed": false
+          "date_added": "2026-10-13"
         }
       ]
     },
@@ -1195,8 +1141,7 @@
           "final_host": "www.nrsc.gov.in",
           "apply_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
           "entry_type": "unknown",
-          "date_added": "2026-10-07",
-          "manual_seed": false
+          "date_added": "2026-10-07"
         }
       ]
     },
@@ -1215,8 +1160,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4416196729",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1235,8 +1179,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478388455",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1255,8 +1198,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4480914131",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1275,8 +1217,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478329847",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1295,8 +1236,7 @@
           "final_host": "in.indeed.com",
           "apply_url": "https://in.indeed.com/viewjob?jk=33bee71d3d6b5ca4",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1315,8 +1255,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477380037",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1335,8 +1274,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478887359",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1355,8 +1293,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479684813",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1375,8 +1312,7 @@
           "final_host": "www.sacon.in",
           "apply_url": "https://www.sacon.in/careers/",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-15",
-          "manual_seed": false
+          "date_added": "2026-10-15"
         }
       ]
     },
@@ -1395,8 +1331,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4465527088",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1415,8 +1350,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477505089",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1435,8 +1369,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477577315",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1455,8 +1388,26 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479355847",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
+        }
+      ]
+    },
+    {
+      "employer": "Simons Foundation",
+      "employer_id": "simons-foundation",
+      "count": 1,
+      "reason_codes": {
+        "FIELD_NOT_IN_SOURCE": 1
+      },
+      "records": [
+        {
+          "slug": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
+          "file": "public/global_jobs.json",
+          "reason_code": "FIELD_NOT_IN_SOURCE",
+          "final_host": "www.simonsfoundation.org",
+          "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+          "entry_type": "award_portal",
+          "date_added": "2026-10-20"
         }
       ]
     },
@@ -1475,14 +1426,13 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477715492",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
     {
       "employer": "TERI",
-      "employer_id": "the-energy-and-resources-institute-teri",
+      "employer_id": "",
       "count": 1,
       "reason_codes": {
         "GENERIC_LANDING_PAGE": 1
@@ -1495,8 +1445,7 @@
           "final_host": "www.teriin.org",
           "apply_url": "https://www.teriin.org/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-09-12",
-          "manual_seed": false
+          "date_added": "2026-09-12"
         }
       ]
     },
@@ -1515,8 +1464,7 @@
           "final_host": "www.teriin.org",
           "apply_url": "https://www.teriin.org/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-11",
-          "manual_seed": false
+          "date_added": "2026-10-11"
         }
       ]
     },
@@ -1535,8 +1483,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4477984984",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1555,8 +1502,26 @@
           "final_host": "www.indiawaterportal.org",
           "apply_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
+        }
+      ]
+    },
+    {
+      "employer": "The Nature Conservancy (TNC) India",
+      "employer_id": "the-nature-conservancy-tnc",
+      "count": 1,
+      "reason_codes": {
+        "HOST_NOT_IN_REGISTRY": 1
+      },
+      "records": [
+        {
+          "slug": "satluj-river-basin-assessment-consultant-tnc-india",
+          "file": "public/jobs.json",
+          "reason_code": "HOST_NOT_IN_REGISTRY",
+          "final_host": "www.indiawaterportal.org",
+          "apply_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
+          "entry_type": "unknown",
+          "date_added": "2026-10-20"
         }
       ]
     },
@@ -1575,8 +1540,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4478250481",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1595,8 +1559,7 @@
           "final_host": "jobs.undp.org",
           "apply_url": "https://jobs.undp.org/cj_view_jobs.cfm",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1615,8 +1578,7 @@
           "final_host": "unu.edu",
           "apply_url": "https://ias.unu.edu/en/opportunities",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1635,8 +1597,7 @@
           "final_host": "www.freejobalert.com",
           "apply_url": "https://www.freejobalert.com/articles/wii-recruitment-2026-apply-online-for-19-project-associate-project-assistant-and-more-posts-3074310",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": true
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1655,8 +1616,7 @@
           "final_host": "wii.gov.in",
           "apply_url": "https://wii.gov.in/recruitments",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-17",
-          "manual_seed": false
+          "date_added": "2026-10-17"
         }
       ]
     },
@@ -1675,8 +1635,7 @@
           "final_host": "www.worldbank.org",
           "apply_url": "https://www.worldbank.org/en/about/careers",
           "entry_type": "careers_portal",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     },
@@ -1695,8 +1654,7 @@
           "final_host": "www.linkedin.com",
           "apply_url": "https://www.linkedin.com/jobs/view/4479766427",
           "entry_type": "unknown",
-          "date_added": "2026-10-18",
-          "manual_seed": false
+          "date_added": "2026-10-18"
         }
       ]
     },
@@ -1715,8 +1673,7 @@
           "final_host": "zayedsustainabilityprize.org",
           "apply_url": "https://zayedsustainabilityprize.org/",
           "entry_type": "unknown",
-          "date_added": "2026-10-19",
-          "manual_seed": false
+          "date_added": "2026-10-19"
         }
       ]
     }
