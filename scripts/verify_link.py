@@ -21,6 +21,7 @@ from __future__ import annotations
 import hashlib
 import ipaddress
 import json
+import os
 import logging
 import re
 from dataclasses import dataclass, field
@@ -49,6 +50,17 @@ from link_policy import (
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def _sanitize_ca_env() -> None:
+    """Ignore stale CA-bundle paths left by other Windows installs."""
+    for variable in ("CURL_CA_BUNDLE", "REQUESTS_CA_BUNDLE", "SSL_CERT_FILE"):
+        value = os.environ.get(variable)
+        if value and not os.path.exists(value):
+            os.environ.pop(variable, None)
+
+
+_sanitize_ca_env()
 
 MAX_REDIRECTS = 5
 MAX_HTML_SIZE = 2 * 1024 * 1024
@@ -256,6 +268,7 @@ class LinkVerifier:
                     timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
                     allow_redirects=False,
                     stream=True,
+                    verify=certifi.where(),
                     headers={"Accept": "text/html,application/pdf,*/*"},
                 )
                 redirect_chain.append(resp.url)
@@ -359,6 +372,16 @@ class LinkVerifier:
         generic_url = ["/careers", "/jobs", "/vacancies", "/recruitment", "/openings", "/positions", "/opportunities", "/work-with-us"]
         generic_phrases = ["view all jobs", "view all positions", "all vacancies", "search jobs", "browse jobs", "current openings", "join our team", "career opportunities", "work with us", "explore careers"]
         specific_phrases = ["job description", "position summary", "key responsibilities", "qualifications", "requirements", "essential duties", "apply now", "apply for this position", "reference number", "requisition", "job id", "vacancy number"]
+
+        # An explicit job slug on a careers/jobs path is a posting even when the
+        # page also mentions fellowships or deadlines.
+        if (
+            re.search(r"/(careers|jobs|vacancies|recruitment)/[a-z0-9%][a-z0-9%._-]{7,}", url_lower)
+            and not re.search(r"/(award|prize|scholarship|fellowship|grant|competition|challenge)/", url_lower)
+        ):
+            return "posting"
+        if re.search(r"[-/](course|diploma|training)([-/]|$)", url_lower):
+            return "award_portal"
 
         generic_score = sum(1 for p in generic_url if p in url_lower and not re.search(rf"{re.escape(p)}/[a-z0-9-]+", url_lower))
         generic_score += sum(1 for p in generic_phrases if p in text_lower)

@@ -97,8 +97,16 @@ SOURCE_LIMITS = {
 }
 
 
+JUNK_TERMS = (
+    "admit card", "answer key", "result", "syllabus", "previous papers",
+    "cut off", "exam date", "hall ticket", "merit list", "question paper",
+)
+
+
 def _relevant(title: str) -> bool:
     lowered = (title or "").lower()
+    if any(term in lowered for term in JUNK_TERMS):
+        return False
     return any(term in lowered for term in GREEN_TERMS)
 
 

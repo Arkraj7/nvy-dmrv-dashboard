@@ -216,6 +216,7 @@ TELEGRAM_CHANNEL_URL = "https://t.me/urbanforestpark"
 VALID_DAYS = 30
 
 RESULTS_PER_QUERY = 50          # jobspy results wanted per search query (was 15)
+BOARD_CANDIDATE_CAP = 150      # stop the board sweep once this many raw leads exist
 REQUEST_TIMEOUT = 30            # seconds; HTTP timeout for ReliefWeb calls
 DEFAULT_LOOKBACK_HOURS = 72     # posting-age window; LOOKBACK_HOURS env overrides
 DEFAULT_MAX_NEW_PER_RUN = 60    # cap on Gemini calls per run (was 12)
@@ -1715,6 +1716,12 @@ def scrape_jobspy_queries(
                 source_name = candidate.get("source") or "unknown"
                 site_counts[source_name] = site_counts.get(source_name, 0) + 1
 
+        if len(candidates) >= BOARD_CANDIDATE_CAP:
+            log.info(
+                "Board sweep reached the %d-candidate cap; stopping early to keep the run bounded",
+                BOARD_CANDIDATE_CAP,
+            )
+            break
         time.sleep(2)  # be polite between queries
 
     return candidates, site_counts
@@ -3346,13 +3353,19 @@ def normalize_global_record(job: Dict[str, Any]) -> Dict[str, Any]:
     return job
 
 
-def ensure_global_seed(jobs: List[Dict[str, Any]], today: str) -> int:
+def ensure_global_seed(
+    jobs: List[Dict[str, Any]],
+    today: str,
+    archive: Optional[List[Dict[str, Any]]] = None,
+) -> int:
     """Merge the verified evergreen global seed into the active list.
 
-    Idempotent: seed ids already present (active or archived) are left
-    untouched, so manual edits and archive history are never overwritten.
+    Idempotent: seed ids already present in the active list or in the archive
+    are left untouched, so archived (including dead-link) records are never
+    resurrected by the seed.
     """
     taken_ids = {str(job.get("id") or "") for job in jobs}
+    taken_ids.update(str(job.get("id") or "") for job in (archive or []))
     added = 0
     for seed in GLOBAL_SEED_OPPORTUNITIES:
         seed_id = str(seed.get("id") or "")
@@ -3427,7 +3440,7 @@ def run_global_stage(
         "Global registry: %d active, %d archived before this run",
         len(existing), len(archive),
     )
-    ensure_global_seed(existing, today)
+    ensure_global_seed(existing, today, archive)
 
     accepted: List[Dict[str, Any]] = []
     quarantined: List[Dict[str, Any]] = []

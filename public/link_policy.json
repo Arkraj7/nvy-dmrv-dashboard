@@ -3,11 +3,32 @@
   "updated": "2026-10-20",
   "description": "Editable direct-link policy. Any employer domain is allowed. Platforms below are allow-listed; add or remove entries without code changes.",
   "tracking_params": [
-    "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
-    "utm_id", "utm_source_platform", "utm_creative_format", "utm_marketing_tactic",
-    "utm_reader", "utm_place", "fbclid", "gclid", "msclkid", "yclid",
-    "_ga", "_gl", "mc_cid", "mc_eid", "ref", "referrer", "source", "campaign",
-    "trk", "trackingid", "igshid"
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "utm_source_platform",
+    "utm_creative_format",
+    "utm_marketing_tactic",
+    "utm_reader",
+    "utm_place",
+    "fbclid",
+    "gclid",
+    "msclkid",
+    "yclid",
+    "_ga",
+    "_gl",
+    "mc_cid",
+    "mc_eid",
+    "ref",
+    "referrer",
+    "source",
+    "campaign",
+    "trk",
+    "trackingid",
+    "igshid"
   ],
   "always_remove_hosts": [
     "news.google.com",
@@ -16,112 +37,230 @@
     "flipboard.com"
   ],
   "shortener_hosts": [
-    "bit.ly", "tinyurl.com", "t.co", "lnkd.in", "goo.gl", "ow.ly",
-    "is.gd", "buff.ly", "adf.ly", "shorte.st", "rb.gy", "cutt.ly",
-    "shorturl.at", "tiny.cc", "rebrand.ly"
+    "bit.ly",
+    "tinyurl.com",
+    "t.co",
+    "lnkd.in",
+    "goo.gl",
+    "ow.ly",
+    "is.gd",
+    "buff.ly",
+    "adf.ly",
+    "shorte.st",
+    "rb.gy",
+    "cutt.ly",
+    "shorturl.at",
+    "tiny.cc",
+    "rebrand.ly"
   ],
-  "bot_blocked_statuses": [401, 403, 429, 999],
+  "bot_blocked_statuses": [
+    401,
+    403,
+    429,
+    999
+  ],
   "direct_required": true,
   "platforms": [
     {
       "name": "LinkedIn",
-      "hosts": ["linkedin.com", "in.linkedin.com"],
-      "direct_patterns": ["/jobs/view/\\d+"],
+      "hosts": [
+        "linkedin.com",
+        "in.linkedin.com"
+      ],
+      "direct_patterns": [
+        "/jobs/view/\\d+"
+      ],
       "bot_blocked": true
     },
     {
       "name": "Indeed",
-      "hosts": ["indeed.com", "in.indeed.com", "indeed.co.in"],
-      "direct_patterns": ["viewjob\\?.*\\bjk=[A-Za-z0-9]+", "/viewjob\\?"],
+      "hosts": [
+        "indeed.com",
+        "in.indeed.com",
+        "indeed.co.in"
+      ],
+      "direct_patterns": [
+        "viewjob\\?.*\\bjk=[A-Za-z0-9]+",
+        "/viewjob\\?"
+      ],
       "bot_blocked": true
     },
     {
       "name": "Naukri",
-      "hosts": ["naukri.com"],
-      "direct_patterns": ["/job-listings-[^/?#]*-\\d+", "/job/[^/?#]*-\\d+"],
+      "hosts": [
+        "naukri.com"
+      ],
+      "direct_patterns": [
+        "/job-listings-[^/?#]*-\\d+",
+        "/job/[^/?#]*-\\d+"
+      ],
       "bot_blocked": true
     },
     {
       "name": "FreeJobAlert",
-      "hosts": ["freejobalert.com"],
-      "direct_patterns": ["/[a-z0-9][a-z0-9-]{8,}/?$", "/[a-z0-9-]+-recruitment", "/job/"],
+      "hosts": [
+        "freejobalert.com"
+      ],
+      "direct_patterns": [
+        "/[a-z0-9][a-z0-9-]{8,}/?$",
+        "/[a-z0-9-]+-recruitment",
+        "/job/"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Foundit",
-      "hosts": ["foundit.in"],
-      "direct_patterns": ["/job-details/", "/jobs/[a-z0-9-]+-[0-9]+"],
+      "hosts": [
+        "foundit.in"
+      ],
+      "direct_patterns": [
+        "/job-details/",
+        "/jobs/[a-z0-9-]+-[0-9]+"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Shine",
-      "hosts": ["shine.com"],
-      "direct_patterns": ["/jobs/[a-z0-9-]+-[0-9]+", "/job-detail/"],
+      "hosts": [
+        "shine.com"
+      ],
+      "direct_patterns": [
+        "/jobs/[a-z0-9-]+-[0-9]+",
+        "/job-detail/"
+      ],
       "bot_blocked": false
     },
     {
       "name": "TimesJobs",
-      "hosts": ["timesjobs.com"],
-      "direct_patterns": ["/job-detail/", "/job/[a-z0-9-]+-[0-9]+"],
+      "hosts": [
+        "timesjobs.com"
+      ],
+      "direct_patterns": [
+        "/job-detail/",
+        "/job/[a-z0-9-]+-[0-9]+"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Internshala",
-      "hosts": ["internshala.com"],
-      "direct_patterns": ["/(internship|job)/detail/"],
+      "hosts": [
+        "internshala.com"
+      ],
+      "direct_patterns": [
+        "/(internship|job)/detail/"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Apna",
-      "hosts": ["apna.co"],
-      "direct_patterns": ["/jobs/[a-z0-9-]+", "/job/"],
+      "hosts": [
+        "apna.co"
+      ],
+      "direct_patterns": [
+        "/jobs/[a-z0-9-]+",
+        "/job/"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Unstop",
-      "hosts": ["unstop.com"],
-      "direct_patterns": ["/(competitions|jobs|internships|scholarships)/[a-z0-9-]+"],
+      "hosts": [
+        "unstop.com"
+      ],
+      "direct_patterns": [
+        "/(competitions|jobs|internships|scholarships)/[a-z0-9-]+"
+      ],
       "bot_blocked": false
     },
     {
       "name": "Glassdoor",
-      "hosts": ["glassdoor.com", "glassdoor.co.in"],
-      "direct_patterns": ["/job-listing/", "/Job/.*-JV"],
+      "hosts": [
+        "glassdoor.com",
+        "glassdoor.co.in"
+      ],
+      "direct_patterns": [
+        "/job-listing/",
+        "/Job/.*-JV"
+      ],
       "bot_blocked": true
     },
     {
       "name": "Monster",
-      "hosts": ["monster.com", "monsterindia.com"],
-      "direct_patterns": ["/job-openings/", "/jobs/.*-\\d+"],
+      "hosts": [
+        "monster.com",
+        "monsterindia.com"
+      ],
+      "direct_patterns": [
+        "/job-openings/",
+        "/jobs/.*-\\d+"
+      ],
       "bot_blocked": true
     },
     {
       "name": "Freshersworld",
-      "hosts": ["freshersworld.com"],
-      "direct_patterns": ["/jobs/[a-z0-9-]+-\\d+", "/job/"],
+      "hosts": [
+        "freshersworld.com"
+      ],
+      "direct_patterns": [
+        "/jobs/[a-z0-9-]+-\\d+",
+        "/job/"
+      ],
       "bot_blocked": false
     },
     {
       "name": "ReliefWeb",
-      "hosts": ["reliefweb.int"],
-      "direct_patterns": ["/job/[a-z0-9-]+-\\d+", "/jobs/\\d+"],
+      "hosts": [
+        "reliefweb.int"
+      ],
+      "direct_patterns": [
+        "/job/\\d+",
+        "/job/[a-z0-9-]+-\\d+",
+        "/jobs/\\d+"
+      ],
       "bot_blocked": false
     },
     {
       "name": "IndiaBioscience",
-      "hosts": ["indiabioscience.org"],
-      "direct_patterns": ["/jobs/[a-z0-9-]+"],
+      "hosts": [
+        "indiabioscience.org"
+      ],
+      "direct_patterns": [
+        "/jobs/[a-z0-9-]+"
+      ],
       "bot_blocked": false
     }
   ],
   "not_direct_paths": [
-    "/", "/careers", "/career", "/jobs", "/job", "/vacancies", "/vacancy",
-    "/recruitment", "/recruitments", "/openings", "/positions",
-    "/opportunities", "/work-with-us", "/join-us", "/search", "/job-search",
-    "/category", "/categories", "/listing", "/listings", "/results"
+    "/",
+    "/careers",
+    "/career",
+    "/jobs",
+    "/job",
+    "/vacancies",
+    "/vacancy",
+    "/recruitment",
+    "/recruitments",
+    "/openings",
+    "/positions",
+    "/opportunities",
+    "/work-with-us",
+    "/join-us",
+    "/search",
+    "/job-search",
+    "/category",
+    "/categories",
+    "/listing",
+    "/listings",
+    "/results"
   ],
   "not_direct_query_markers": [
-    "q=", "query=", "search=", "keyword=", "keywords=", "page=", "location="
+    "q=",
+    "query=",
+    "search=",
+    "keyword=",
+    "keywords=",
+    "page=",
+    "location="
   ],
   "closed_phrases": [
     "applications are closed",
