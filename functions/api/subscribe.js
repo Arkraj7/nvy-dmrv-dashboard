@@ -42,6 +42,13 @@
  *   commits the updated subscriber file. If repository_dispatch is
  *   unavailable, the function falls back to a workflow_dispatch event with
  *   `subscriber_email`, `frequency` and `sector` inputs.
+ *
+ * Deployment note:
+ *   The Pages project reads `GITHUB_PAT` and `GITHUB_REPO` from its
+ *   production/preview environment variables. Direct `wrangler pages deploy`
+ *   uploads reset environment variables that are not declared in a Wrangler
+ *   configuration file, so the Git-integration build is the canonical
+ *   production path after changing project variables.
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
