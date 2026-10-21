@@ -1,6 +1,6 @@
 name: Mandate Dispatch — 3-Day Email Newsletter
 
-# Issues the subscriber email briefing (the "Mandate Dispatch") every third
+# Issues the subscriber email briefing (job & fellowship alerts) every third
 # day at 08:00 AM IST (02:30 UTC). The mailer reads public/jobs.json, writes
 # the web edition to public/newsletter_latest.html, delivers one personalised
 # copy per subscriber through the first configured channel
@@ -54,6 +54,11 @@ on:
         required: false
         type: boolean
         default: false
+      force:
+        description: "Force today's alert now (1-day window, then recent-job fallback)"
+        required: false
+        type: boolean
+        default: false
   repository_dispatch:
     types: [welcome_email]   # fired by functions/api/subscribe.js on a new subscription
 
@@ -77,7 +82,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate & deliver the Mandate Dispatch
+      - name: Generate & deliver the job alert
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.subscriber_email == '' && !inputs.test_welcome) }}
         env:
           # Delivery channels — set whichever you use in repository secrets.
@@ -92,7 +97,12 @@ jobs:
           # Subscriber sources (optional):
           NEWSLETTER_SUBSCRIBERS: ${{ secrets.NEWSLETTER_SUBSCRIBERS }}
           NEWSLETTER_SUBSCRIBERS_CSV: ${{ secrets.NEWSLETTER_SUBSCRIBERS_CSV }}
-        run: python scripts/send_newsletter.py
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then
+            python scripts/send_newsletter.py --force
+          else
+            python scripts/send_newsletter.py
+          fi
 
       - name: Deliver welcome email(s) on demand
         if: ${{ github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && (inputs.subscriber_email != '' || inputs.test_welcome)) }}
@@ -127,7 +137,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No dispatch changes to commit."
           else
-            git commit -m "chore(newsletter): refresh Mandate Dispatch web edition ($(date -u +'%Y-%m-%d'))"
+            git commit -m "chore(newsletter): refresh job alert web edition ($(date -u +'%Y-%m-%d'))"
             git pull --rebase --autostash
             git push
           fi

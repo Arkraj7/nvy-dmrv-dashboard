@@ -237,6 +237,18 @@ FALLBACK_SITES = ["linkedin", "indeed"]
 SEARCH_QUERIES = [
     "Climate Change Sustainability India",
     "ESG BRSR Carbon Credits Net Zero India",
+    # Government forestry, statutory bodies and pollution-control streams.
+    "CAMPA Project Associate Monitoring Evaluation GIS Consultant India",
+    "Forest Survey of India FSI Dehradun Technical Associate JRF Recruitment",
+    "UPSC Indian Forest Service IFS State PSC ACF Range Forest Officer Recruitment",
+    "State Forest Department Wildlife GIS Cell Contractual Recruitment India",
+    "NTCA National Tiger Conservation Authority WCCB NBA CZMA NCSCM Vacancy",
+    "CPCB Central Pollution Control Board Scientist B JRF Recruitment",
+    "SPCB DPCC MPCB KSPCB GPCB UPPCB TNPCB Environmental Engineer Recruitment",
+    "UGC NET Environmental Sciences JRF Project Associate Recruitment",
+    "CSIR NET Earth Sciences Life Sciences JRF SRF Recruitment",
+    "ICAR NET ASRB NET JRF SRF Environmental Science Recruitment",
+    "GATE Environmental Science Engineering Ecology Evolution Geomatics Jobs India",
     "Forestry Wildlife Afforestation Ecology Conservation India",
     "GIS Remote Sensing Earth Engine Geoinformatics India",
     "JRF SRF Project Associate Environmental Science Forestry",
@@ -907,7 +919,69 @@ EXCLUDED_ROLE_PATTERNS = tuple(
         r"\bsocial\s+media\s+(manager|executive)\b",
         r"\bcontent\s+writer\b",
         r"\baccount\s+executive\b",
+        # AI-training / LLM evaluation gigs that leaked through broad searches.
+        r"\bai\s+(trainer|training|evaluator|annotation|data\s+specialist)\b",
+        r"\bdata\s+annotat(or|ion)\b",
+        r"\bprompt\s+engineer\b",
+        r"\bllm\s+(evaluator|trainer|annotation)\b",
+        r"\bmodel\s+(trainer|evaluator)\b",
+        r"\bsubject\s+matter\s+expert\s*\(?\s*ai\b",
+        # Unrelated engineering, manufacturing and site roles.
+        r"\bmechanical(\s+design)?\s+engineer\b",
+        r"\bautocad\b",
+        r"\bdrafts(man|person)\b",
+        r"\bhvac\b",
+        r"\bpiping\s+engineer\b",
+        r"\bproduction\s+supervisor\b",
+        r"\bquality\s+inspector\b",
+        r"\bcnc\b",
+        r"\bcivil\s+site\s+engineer\b",
+        # Generic supply-chain, procurement and commercial roles.
+        r"\bsupplier\s+compliance\b",
+        r"\bvendor\s+management\b",
+        r"\bprocurement\b",
+        r"\bpurchase\s+(officer|manager|executive)\b",
+        r"\bwarehouse\b",
+        r"\blogistics\s+coordinator\b",
+        # Commercial, finance and non-domain engineering roles.
+        r"\beditorial\s+reviewer\b",
+        r"\bco-?founder\b",
+        r"\binvestment\s+director\b",
+        r"\bpartnerships?\s*(?:&|and)?\s*outreach\b",
+        r"\bbuilding\s+automation\b",
+        r"\bcivil\s+design\b",
+        r"\bprocess\s+engineer\b",
+        r"\bclient\s+acquisition\b",
+        r"\bbusiness\s+growth\b",
     )
+)
+
+# Employers whose "environmental" listings are actually AI-training,
+# annotation or generic gig-work platforms. Matched against the employer
+# field only, never the description, so genuine research mentions survive.
+EXCLUDED_ORGANIZATION_PATTERNS = tuple(
+    re.compile(pattern, re.I)
+    for pattern in (
+        r"^\s*alignerr\b",
+        r"^\s*afterquery\b",
+        r"^\s*cactus\s+communications\b",
+        r"^\s*outlier(?:\.ai)?\b",
+        r"^\s*scale\s*ai\b",
+        r"^\s*soul\s*ai\b",
+        r"^\s*turing\b",
+        r"^\s*telus\b",
+        r"^\s*appen\b",
+        r"^\s*mercor\b",
+    )
+)
+
+# Civil site engineers are admissible only when the posting explicitly names
+# coastal, water, flood or climate infrastructure work.
+CIVIL_SITE_ENGINEER_RE = re.compile(r"\bcivil\s+site\s+engineer\b", re.I)
+INFRASTRUCTURE_SIGNAL_RE = re.compile(
+    r"\b(coastal|shoreline|water|watershed|flood|drainage|irrigation|"
+    r"climate|resilien|marine|river|wetland|embankment|erosion)\b",
+    re.I,
 )
 
 # Business-development and software roles are allowed only when the title
@@ -970,9 +1044,15 @@ def is_excluded_role(title: str, organization: str = "", description: str = "") 
     employer itself is a climate organisation.
     """
     title_text = squash(title)
-    combined = " ".join((title_text, squash(organization), squash(description)[:800]))
+    org_text = squash(organization)
+    combined = " ".join((title_text, org_text, squash(description)[:800]))
     if not title_text:
         return False
+    if any(pattern.search(org_text) for pattern in EXCLUDED_ORGANIZATION_PATTERNS):
+        return True
+    if CIVIL_SITE_ENGINEER_RE.search(title_text):
+        # Allow only explicit coastal/water/climate infrastructure work.
+        return not INFRASTRUCTURE_SIGNAL_RE.search(combined)
     if any(pattern.search(title_text) for pattern in EXCLUDED_ROLE_PATTERNS):
         return True
     if BD_ROLE_RE.search(title_text) and not BD_ALLOWED_RE.search(title_text):
@@ -1754,9 +1834,11 @@ BLOCKED_ORG_TERMS = (
 
 
 def has_blocked_organization(job: Dict[str, Any]) -> bool:
-    """True when the employer name is an anonymous placeholder."""
+    """True for anonymous placeholders and known non-domain employers."""
     org = squash(job.get("organization")).casefold()
-    return any(term in org for term in BLOCKED_ORG_TERMS)
+    if any(term in org for term in BLOCKED_ORG_TERMS):
+        return True
+    return any(pattern.search(org) for pattern in EXCLUDED_ORGANIZATION_PATTERNS)
 
 
 def is_verifiable_job(job: Dict[str, Any]) -> Tuple[bool, str]:
@@ -1770,7 +1852,7 @@ def is_verifiable_job(job: Dict[str, Any]) -> Tuple[bool, str]:
     if len(org) < 3 or re.fullmatch(r"[^a-z0-9]+", org):
         return False, "organization is not a named entity"
     if has_blocked_organization(job):
-        return False, "organization is an anonymous placeholder"
+        return False, "organization is anonymous or on the excluded-employer list"
     if any(marker in org for marker in BAD_ORG_MARKERS):
         return False, "organization is not a named entity"
     if not is_valid_apply_url(squash(job.get("org_website"))):
@@ -2084,6 +2166,28 @@ INDIAN_ACADEMIC_NEWS_QUERIES = [
     ' OR JRF OR SRF OR Fellowship) India when:30d',
     '("Young Professional" OR "Contractual" OR "Consultant") AND ("MoEFCC" OR "Forest"'
     ' OR "Climate Change" OR "Sustainability" OR "CAMPA" OR "Pollution Control") India',
+    '("CAMPA" OR "Compensatory Afforestation" OR "National CAMPA" OR "State CAMPA")'
+    ' ("Project Associate" OR "Monitoring and Evaluation" OR "GIS Consultant"'
+    ' OR "Technical Assistant" OR Recruitment) when:45d',
+    '("Forest Survey of India" OR "FSI Dehradun") (Technical Associate OR "Junior Research Fellow"'
+    ' OR JRF OR Recruitment OR Vacancy) when:45d',
+    '("Indian Forest Service" OR "UPSC IFS" OR "ACF" OR "Range Forest Officer"'
+    ' OR "Forest Ranger") (Recruitment OR Notification OR Vacancy OR Exam) when:45d',
+    '("State Forest Department" OR "Forest Department" OR "Wildlife Wing")'
+    ' ("GIS" OR "Wildlife" OR "Project Associate" OR "Research Fellow" OR Contractual) India when:30d',
+    '("NTCA" OR "National Tiger Conservation Authority" OR "WCCB"'
+    ' OR "National Biodiversity Authority" OR "NBA" OR "CZMA" OR "NCSCM")'
+    ' (Recruitment OR Vacancy OR Fellow OR Associate OR Consultant) when:45d',
+    '("CPCB" OR "Central Pollution Control Board" OR "DPCC" OR "MPCB" OR "KSPCB"'
+    ' OR "GPCB" OR "UPPCB" OR "TNPCB" OR "State Pollution Control Board")'
+    ' ("Scientist B" OR "Junior Research Fellow" OR JRF OR "Senior Scientific Assistant"'
+    ' OR "Environmental Engineer" OR "Project Associate" OR Recruitment) when:30d',
+    '("UGC-NET" OR "CSIR-NET" OR "ICAR-NET" OR "ASRB-NET")'
+    ' ("Environmental Sciences" OR "Earth Sciences" OR "Life Sciences")'
+    ' (JRF OR SRF OR "Project Associate" OR Recruitment) India when:45d',
+    '("GATE" OR "GATE 2026" OR "GATE 2025")'
+    ' ("Environmental Science" OR "Environmental Engineering" OR "Ecology and Evolution"'
+    ' OR Geomatics) (JRF OR SRF OR "Project Associate" OR Recruitment) India when:45d',
     '("PhD Fellowship" OR "Postdoctoral" OR "PhD Position")'
     ' (Climate OR Forestry OR Environment OR Ecology OR "Earth Sciences") when:7d',
     '("IndiaBioscience" OR "agrijob" OR "CEEW" OR "WRI India" OR "iFOREST" OR "ATREE"'
@@ -3755,6 +3859,28 @@ def run_global_stage(
     """
     existing = [normalize_global_record(job) for job in load_jobs(jobs_path)]
     archive = [normalize_global_record(job) for job in load_jobs(archive_path)]
+    existing, archive, purged = purge_excluded_records(existing, archive)
+    if purged:
+        report_path = jobs_path.parent.parent / "data" / "global_role_purge_report.json"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            json.dumps(
+                {
+                    "generated_at": datetime.now().isoformat(timespec="seconds"),
+                    "reason": "hard-negative role/organization blocklist",
+                    "removed": purged,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        log.warning(
+            "Global registry: purged %d off-topic record(s): %s",
+            len(purged),
+            ", ".join(item["id"] for item in purged[:8]),
+        )
     log.info(
         "Global registry: %d active, %d archived before this run",
         len(existing), len(archive),
@@ -4500,7 +4626,7 @@ def _location_line(job: Dict[str, Any]) -> str:
 
 def build_whatsapp_job_block(job: Dict[str, Any], index: Optional[int] = None) -> str:
     """One rich, forward-ready WhatsApp alert block for a single job."""
-    share_url = f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}"
+    share_url = f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}"
     lines = []
     if index is not None:
         lines.append(f"{index}. *{squash(job.get('clean_title'))}*")
@@ -4526,7 +4652,7 @@ def build_whatsapp_digest_text(
     whatsapp, telegram = _community_links()
     parts = [
         "🌱 *India Green, Forestry, JRF & ESG Jobs | पर्यावरण एवं अनुसंधान भर्ती अपडेट*",
-        f"🗓️ {today} · {len(jobs)} mandate(s) · {len(jobs)} भर्तियाँ",
+        f"🗓️ {today} · {len(jobs)} job(s) · {len(jobs)} भर्तियाँ",
         "━━━━━━━━━━━━━━━━━━━━",
         "",
     ]
@@ -4552,13 +4678,13 @@ def build_telegram_digest_html(
     whatsapp, telegram = _community_links()
     lines = [
         "🌱 <b>India Green, Forestry, JRF &amp; ESG Jobs</b> | पर्यावरण एवं अनुसंधान भर्ती अपडेट",
-        f"<i>{_html_escape_text(today)} · {len(jobs)} mandate(s) · {len(jobs)} भर्तियाँ</i>",
+        f"<i>{_html_escape_text(today)} · {len(jobs)} job(s) · {len(jobs)} भर्तियाँ</i>",
         "",
         f"<b>{_html_escape_text(heading)}</b>",
         "",
     ]
     for position, job in enumerate(jobs, start=1):
-        share_url = f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}"
+        share_url = f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}"
         links = f'<a href="{_html_escape_text(share_url)}">Full details &amp; apply</a>'
         lines += [
             f"<b>{position}. {_html_escape_text(squash(job.get('clean_title')))}</b> — "
@@ -4621,7 +4747,7 @@ def write_digests(
 
     if new_jobs:
         listed = new_jobs[:DIGEST_MAX_JOBS]
-        heading = f"{len(new_jobs)} new verified mandate(s) added today"
+        heading = f"{len(new_jobs)} new verified job(s) added today"
     else:
         listed = sorted(
             active,
@@ -4631,7 +4757,7 @@ def write_digests(
             ),
             reverse=True,
         )[:DIGEST_MAX_JOBS]
-        heading = "Latest verified mandates on the registry"
+        heading = "Latest verified jobs & fellowships on the registry"
 
     jobs_payload = []
     for job in listed:
@@ -4650,7 +4776,7 @@ def write_digests(
                 # Broadcasts and the public digest carry dossier URLs only.
                 # apply_url / org_website / org_domain are never included.
                 "source_portal": squash(job.get("source_portal")),
-                "url": f"{SITE_BASE_URL}/?job={quote(str(job.get('id') or ''))}",
+                "url": f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}",
             }
         )
 
@@ -4837,11 +4963,11 @@ def broadcast_new_jobs(
         if not featured:
             log.warning("Telegram heartbeat skipped: no active mandates to feature")
             return
-        heading = "📌 Daily Featured Mandates & Closing-Soon JRF/ESG Roundup"
+        heading = "📌 Daily Featured Jobs & Fellowships & Closing-Soon JRF/ESG Roundup"
         telegram_html = build_telegram_digest_html(featured, today, heading)
         whatsapp_text = build_whatsapp_digest_text(featured, today, heading)
         log.info(
-            "No new listings today - sending featured heartbeat with %d active mandate(s)",
+            "No new listings today - sending featured heartbeat with %d active job(s)",
             len(featured),
         )
 
@@ -4886,10 +5012,11 @@ def write_sitemap(
 
     Includes the homepage, /dashboard, the archive view (/?view=archive), the
     category landing views (/?category=<slug>), the busiest state landing views
-    (/?state=<State>), every active listing (/?job=<id>, priority 0.8,
+    (/?state=<State>), every active listing (/jobs/<id>, priority 0.8,
     lastmod = date_added) and every archived listing (priority 0.5,
     lastmod = date_archived). All page URLs are emitted in the extensionless
-    form the host serves with HTTP 200.
+    form the host serves with HTTP 200. The corresponding static files are
+    generated by scripts/build_seo_pages.py after this runs.
     """
     jobs = [
         job
@@ -5018,12 +5145,12 @@ def write_sitemap(
             "priority": "0.7",
         }
 
-    # Every active listing, in feed order (feed order = newest first).
+    # Every active listing gets a static page, in feed order (newest first).
     for job in jobs:
         job_id = (job.get("id") or "").strip()
         if not job_id:
             continue
-        entries[SITE_BASE_URL + "/?job=" + job_id] = {
+        entries[SITE_BASE_URL + "/jobs/" + job_id] = {
             "lastmod": (job.get("date_added") or today),
             "changefreq": "daily",
             "priority": "0.8",
@@ -5034,7 +5161,7 @@ def write_sitemap(
         job_id = (job.get("id") or "").strip()
         if not job_id:
             continue
-        entries[SITE_BASE_URL + "/?job=" + job_id] = {
+        entries[SITE_BASE_URL + "/jobs/" + job_id] = {
             "lastmod": (job.get("date_archived") or job.get("date_added") or today),
             "changefreq": "monthly",
             "priority": "0.5",

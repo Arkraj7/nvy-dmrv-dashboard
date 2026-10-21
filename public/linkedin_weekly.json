@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-19T13:14:12+05:30",
-  "week_of": "2026-10-19",
+  "generated_at": "2026-10-21T11:52:16+05:30",
+  "week_of": "2026-10-21",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
   "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:",
-  "cta": "Apply through direct application links — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
+  "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
@@ -16,6 +16,18 @@
   "items": [
     {
       "position": 1,
+      "registry": "india",
+      "id": "pg-diploma-in-wildlife-wii",
+      "title": "PG Diploma in Wildlife",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 50.0,
+      "url": "https://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii"
+    },
+    {
+      "position": 2,
       "registry": "global",
       "id": "chevening-scholarships-masters",
       "title": "Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks)",
@@ -24,46 +36,22 @@
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Scholarship",
       "score": 50.0,
-      "url": "https://www.urbanforestpark.com/?job=chevening-scholarships-masters"
-    },
-    {
-      "position": 2,
-      "registry": "india",
-      "id": "doctoral-student-iit-guwahati",
-      "title": "Doctoral Student (Energy and Sustainability)",
-      "organization": "Indian Institute of Technology, Guwahati",
-      "location": "Guwahati, Assam",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Fellowship",
-      "score": 49.0,
-      "url": "https://www.urbanforestpark.com/?job=doctoral-student-iit-guwahati"
+      "url": "https://www.urbanforestpark.com/jobs/chevening-scholarships-masters"
     },
     {
       "position": 3,
       "registry": "india",
-      "id": "jrf-tiger-ecology-landscape-connectivity-wii-dehradun",
-      "title": "Junior Research Fellow (JRF) - Tiger Ecology & Landscape Connectivity",
+      "id": "wildlife-trade-forensics-course-wii",
+      "title": "Course in Wildlife Trade & Forensics for Revenue Officers",
       "organization": "Wildlife Institute of India (WII)",
-      "location": "Dehradun, Uttarakhand",
-      "position_type": "JRF / SRF",
-      "opportunity_kind": "Fellowship",
-      "score": 49.0,
-      "url": "https://www.urbanforestpark.com/?job=jrf-tiger-ecology-landscape-connectivity-wii-dehradun"
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Young Professional / Consultant (Contractual)",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii"
     },
     {
       "position": 4,
-      "registry": "india",
-      "id": "project-associate-assistant-wii",
-      "title": "Project Associate and Project Assistant",
-      "organization": "Wildlife Institute of India",
-      "location": "Dehradun, Uttarakhand",
-      "position_type": "Project Associate / Research Associate",
-      "opportunity_kind": "Job / Career",
-      "score": 48.0,
-      "url": "https://www.urbanforestpark.com/?job=project-associate-assistant-wii"
-    },
-    {
-      "position": 5,
       "registry": "global",
       "id": "future-earth-global-opportunities",
       "title": "Global Sustainability Opportunities - Future Earth Network",
@@ -72,68 +60,80 @@
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
       "score": 48.0,
-      "url": "https://www.urbanforestpark.com/?job=future-earth-global-opportunities"
+      "url": "https://www.urbanforestpark.com/jobs/future-earth-global-opportunities"
+    },
+    {
+      "position": 5,
+      "registry": "india",
+      "id": "international-course-on-heritage-conservation-wii",
+      "title": "International Course on Heritage Conservation",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "Faculty / Academic",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii"
     },
     {
       "position": 6,
       "registry": "india",
-      "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
-      "title": "Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry",
-      "organization": "Indian Institute of Technology Delhi (IIT Delhi)",
-      "location": "New Delhi, Delhi NCR",
-      "position_type": "JRF / SRF",
-      "opportunity_kind": "Fellowship",
-      "score": 45.0,
-      "url": "https://www.urbanforestpark.com/?job=jrf-air-quality-atmospheric-chemistry-iit-delhi"
+      "id": "wildlife-enthusiasts-course-wii",
+      "title": "Wildlife Enthusiasts Course",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 47.0,
+      "url": "https://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii"
     },
     {
       "position": 7,
       "registry": "india",
-      "id": "programme-associate-energy-transitions-ceew",
-      "title": "Programme Associate – Energy Transitions",
-      "organization": "Council on Energy, Environment and Water (CEEW)",
+      "id": "phd-research-sustainable-rurban-food-systems-atree",
+      "title": "PhD Research on Sustainable Rurban Food Systems",
+      "organization": "ATREE",
       "location": "Remote (India), Multiple States / Remote",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/?job=programme-associate-energy-transitions-ceew"
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 46.0,
+      "url": "https://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree"
     },
     {
       "position": 8,
       "registry": "india",
-      "id": "research-analyst-technology-futures-ceew",
-      "title": "Research Analyst / Programme Associate - Technology Futures",
-      "organization": "Council on Energy, Environment and Water (CEEW)",
-      "location": "Remote (India), Multiple States / Remote",
-      "position_type": "Full-Time Corporate / NGO",
+      "id": "research-associate-maharashtra-atree",
+      "title": "Research Associate - TGI",
+      "organization": "ATREE",
+      "location": "Maharashtra, Maharashtra",
+      "position_type": "Project Associate / Research Associate",
       "opportunity_kind": "Job / Career",
       "score": 44.0,
-      "url": "https://www.urbanforestpark.com/?job=research-analyst-technology-futures-ceew"
+      "url": "https://www.urbanforestpark.com/jobs/research-associate-maharashtra-atree"
     },
     {
       "position": 9,
       "registry": "india",
-      "id": "research-intern-technology-futures-ceew",
-      "title": "Research Intern - Technology Futures",
-      "organization": "Council on Energy, Environment and Water (CEEW)",
-      "location": "Remote (India), Multiple States / Remote",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
+      "id": "sustainable-finance-specialist-unep-india",
+      "title": "Sustainable Finance Specialist - Integrated Watershed Management",
+      "organization": "UNEP India",
+      "location": "New Delhi, Delhi NCR",
+      "position_type": "Young Professional / Consultant (Contractual)",
+      "opportunity_kind": "Fellowship",
       "score": 43.0,
-      "url": "https://www.urbanforestpark.com/?job=research-intern-technology-futures-ceew"
+      "url": "https://www.urbanforestpark.com/jobs/sustainable-finance-specialist-unep-india"
     },
     {
       "position": 10,
       "registry": "global",
-      "id": "unu-ias-postdoctoral-fellowships",
-      "title": "Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability)",
-      "organization": "United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS)",
-      "location": "Tokyo, Japan",
+      "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
+      "title": "Simons Postdoctoral Fellowships in Plant Biology",
+      "organization": "Simons Foundation",
+      "location": "New York, USA",
       "position_type": "PhD / Doctoral Fellowship",
       "opportunity_kind": "Fellowship",
-      "score": 43.0,
-      "url": "https://www.urbanforestpark.com/?job=unu-ias-postdoctoral-fellowships"
+      "score": 41.0,
+      "url": "https://www.urbanforestpark.com/jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-foun"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Mandates · 🌍 Global Opportunities\n\n1. [GLOBAL] Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks) — Chevening Scholarships - UK Government (FCDO) (UK Universities | Fellowship / Internship)\nhttps://www.urbanforestpark.com/?job=chevening-scholarships-masters\n\n2. [INDIA] Doctoral Student (Energy and Sustainability) — Indian Institute of Technology, Guwahati (Guwahati, Assam | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/?job=doctoral-student-iit-guwahati\n\n3. [INDIA] Junior Research Fellow (JRF) - Tiger Ecology & Landscape Connectivity — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | JRF / SRF)\nhttps://www.urbanforestpark.com/?job=jrf-tiger-ecology-landscape-connectivity-wii-dehradun\n\n4. [INDIA] Project Associate and Project Assistant — Wildlife Institute of India (Dehradun, Uttarakhand | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/?job=project-associate-assistant-wii\n\n5. [GLOBAL] Global Sustainability Opportunities - Future Earth Network — Future Earth (Remote (Global) / Stockholm Secretariat | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=future-earth-global-opportunities\n\n6. [INDIA] Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry — Indian Institute of Technology Delhi (IIT Delhi) (New Delhi, Delhi NCR | JRF / SRF)\nhttps://www.urbanforestpark.com/?job=jrf-air-quality-atmospheric-chemistry-iit-delhi\n\n7. [INDIA] Programme Associate – Energy Transitions — Council on Energy, Environment and Water (CEEW) (Remote (India), Multiple States / Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=programme-associate-energy-transitions-ceew\n\n8. [INDIA] Research Analyst / Programme Associate - Technology Futures — Council on Energy, Environment and Water (CEEW) (Remote (India), Multiple States / Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/?job=research-analyst-technology-futures-ceew\n\n9. [INDIA] Research Intern - Technology Futures — Council on Energy, Environment and Water (CEEW) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/?job=research-intern-technology-futures-ceew\n\n10. [GLOBAL] Postdoctoral & Research Fellowships - UNU-IAS, Tokyo (Sustainability) — United Nations University - Institute for the Advanced Study of Sustainability (UNU-IAS) (Tokyo, Japan | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/?job=unu-ias-postdoctoral-fellowships\n\nApply through direct application links — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] PG Diploma in Wildlife — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii\n\n2. [GLOBAL] Chevening Scholarships - Fully Funded Master's in the UK (Climate & Sustainability Tracks) — Chevening Scholarships - UK Government (FCDO) (UK Universities | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/chevening-scholarships-masters\n\n3. [INDIA] Course in Wildlife Trade & Forensics for Revenue Officers — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii\n\n4. [GLOBAL] Global Sustainability Opportunities - Future Earth Network — Future Earth (Remote (Global) / Stockholm Secretariat | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/future-earth-global-opportunities\n\n5. [INDIA] International Course on Heritage Conservation — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii\n\n6. [INDIA] Wildlife Enthusiasts Course — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii\n\n7. [INDIA] PhD Research on Sustainable Rurban Food Systems — ATREE (Remote (India), Multiple States / Remote | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree\n\n8. [INDIA] Research Associate - TGI — ATREE (Maharashtra, Maharashtra | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-associate-maharashtra-atree\n\n9. [INDIA] Sustainable Finance Specialist - Integrated Watershed Management — UNEP India (New Delhi, Delhi NCR | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/sustainable-finance-specialist-unep-india\n\n10. [GLOBAL] Simons Postdoctoral Fellowships in Plant Biology — Simons Foundation (New York, USA | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-foun\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }

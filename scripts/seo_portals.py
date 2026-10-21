@@ -187,7 +187,7 @@ def hindi_card_html(job: Dict[str, Any]) -> str:
     )
     summary = plain(job.get("summary_hi")) or trim(job.get("role_summary"), 220)
     summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
-    link = f'/?job={esc(job.get("id"))}&amp;lang=hi'
+    link = f'/jobs/{esc(job.get("id"))}'
 
     return f"""        <article class="hub-card hi-card">
           <div class="hub-card-top">
@@ -490,7 +490,7 @@ def build_hindi_hub_page(
 REGIONAL_FAQS: List[Tuple[str, str]] = [
     (
         "How are state-wise green jobs grouped on this portal?",
-        "The regional portal groups active mandates into language and cultural regions used by India's "
+        "The regional portal groups active jobs into language and cultural regions used by India's "
         "environmental employers: the Hindi belt, Marathi-speaking Maharashtra, Tamil Nadu, Telugu states, "
         "Karnataka, West Bengal and Gujarat. Each state link opens the live registry pre-filtered to that "
         "state, with the same verified records and official application links as the main registry.",
@@ -503,7 +503,7 @@ REGIONAL_FAQS: List[Tuple[str, str]] = [
     ),
     (
         "Are the regional listings bilingual?",
-        "Every verified mandate carries an English title and summary, and the main registry includes an "
+        "Every verified job carries an English title and summary, and the main registry includes an "
         "EN | हिंदी switch. The Hindi portal and this regional portal provide additional language-native "
         "entry points for candidates who prefer to browse in Hindi or another Indian language.",
     ),
@@ -544,7 +544,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         cards.append(
             f"""      <article class="region-card" lang="{region['key']}" id="region-{region['key']}">
         <h2>{esc(region['heading'])}</h2>
-        <p class="region-total"><strong>{total}</strong> active green mandate(s) across {len(matched)} state(s) / region(s)</p>
+        <p class="region-total"><strong>{total}</strong> active environmental job(s) across {len(matched)} state(s) / region(s)</p>
         <ul class="region-states">
 {state_links}
         </ul>
@@ -573,11 +573,11 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     ) or '            <li class="region-empty">&mdash;</li>'
     others_card = f"""      <article class="region-card region-card-other" lang="en">
         <h2>Other States &amp; Regions — अन्य राज्य एवं क्षेत्र</h2>
-        <p class="region-total"><strong>{sum(n for _s, n in others)}</strong> active green mandate(s) in {len(others)} further state(s) / region(s)</p>
+        <p class="region-total"><strong>{sum(n for _s, n in others)}</strong> active environmental job(s) in {len(others)} further state(s) / region(s)</p>
         <ul class="region-states">
 {other_links}
         </ul>
-        <p class="region-note">Bilingual listing metadata (EN / हिंदी) is available for every mandate — switch the registry to हिंदी with the EN | हिंदी toggle.</p>
+        <p class="region-note">Bilingual listing metadata (EN / हिंदी) is available for every job — switch the registry to हिंदी with the EN | हिंदी toggle.</p>
       </article>"""
 
     cards_html = "\n\n".join(cards) + "\n\n" + others_card
@@ -688,7 +688,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         <p class="eyebrow">Bharat Regional &amp; Multilingual Portal</p>
         <h1>{esc(h1)}</h1>
         <p class="hub-hero-sub">
-          State-wise environment, forestry, wildlife, climate, ESG and geospatial mandates —
+          State-wise environment, forestry, wildlife, climate, ESG and geospatial jobs —
           हिंदी, मराठी, தமிழ், తెలుగు, ಕನ್ನಡ, বাংলা एवं ગુજરાતી क्षेत्रों हेतु क्षेत्रीय प्रवेश द्वार।
           Every listing links straight to a direct application page.
         </p>
@@ -780,9 +780,9 @@ GLOBAL_FAQS: List[Tuple[str, str]] = [
         "page \u2014 no fees.",
     ),
     (
-        "How are India mandates and Global opportunities kept apart?",
+        "How are India jobs and Global opportunities kept apart?",
         "The two registries are strictly separated and never mixed. The jurisdiction switcher "
-        "(India Mandates / Global Opportunities) swaps the whole dataset: India mandates are "
+        "(India Jobs / Global Opportunities) swaps the whole dataset: India jobs are "
         "state-filtered and include JRF, SRF, PhD and government vacancies, while Global "
         "opportunities replace the state dropdown with a region filter (Global / Remote, Europe, "
         "North America, Asia-Pacific, Africa & Middle East, Latin America, UN / Multilateral). "
@@ -836,7 +836,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
             if deadline and deadline.lower() != "rolling / open":
                 suffix += f" \u00b7 {esc(deadline)}"
             links.append(
-                f'            <li><a href="/?job={quote(job_id)}">{esc(title)} &mdash; {esc(org)}'
+                f'            <li><a href="/jobs/{quote(job_id)}">{esc(title)} &mdash; {esc(org)}'
                 f'{suffix}</a></li>'
             )
         if not links:
@@ -860,7 +860,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
                 {
                     "@type": "ListItem",
                     "position": len(item_entries) + 1,
-                    "url": SITE + "/?job=" + quote(plain(job.get("id"))),
+                    "url": SITE + "/jobs/" + quote(plain(job.get("id"))),
                     "name": plain(job.get("clean_title")),
                 }
             )
@@ -995,7 +995,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         </p>
         <div class="hub-hero-actions">
           <a class="btn btn-primary" href="/?region=global">Open the Global registry &rarr;</a>
-          <a class="btn btn-outline" href="/">India Mandates</a>
+          <a class="btn btn-outline" href="/">India Jobs</a>
         </div>
         <dl class="hub-stats">
           <div><dt>Global listings</dt><dd>{total_jobs}</dd></div>
@@ -1011,7 +1011,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         <div class="hub-main-head">
           <h2>Browse global opportunities by region</h2>
           <p>Counts refresh with every pipeline run; each region link opens the live registry
-          pre-filtered to that region. India mandates remain in their own registry \u2014 the two
+          pre-filtered to that region. India jobs remain in their own registry \u2014 the two
           datasets are never mixed.</p>
         </div>
         <div class="region-grid">

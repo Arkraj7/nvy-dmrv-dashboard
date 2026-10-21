@@ -55,7 +55,7 @@ log = logging.getLogger("weekly_linkedin")
 
 IST = timezone(timedelta(hours=5, minutes=30))
 SITE = "https://www.urbanforestpark.com"
-JOB_URL = SITE + "/?job={id}"
+JOB_URL = SITE + "/jobs/{id}"
 GLOBAL_HUB = SITE + "/global-climate-sustainability-opportunities.html"
 
 EMAIL_SUBJECT = "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup"
@@ -392,7 +392,7 @@ def build_post_text(rows: List[Dict[str, Any]], today: date) -> str:
         "climate, forestry, ESG, geospatial & sustainability (" +
         f"{india_count} India" + (f" + {global_count} Global" if global_count else "") +
         "), verified with direct application links:\n"
-        "\U0001F1EE\U0001F1F3 India Mandates \u00b7 \U0001F30D Global Opportunities"
+        "\U0001F1EE\U0001F1F3 India Jobs \u00b7 \U0001F30D Global Opportunities"
     )
 
     lines: List[str] = [hook, ""]

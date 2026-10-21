@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Urban Forest Park - Mandate Dispatch (3-day email newsletter engine).
+"""Urban Forest Park - free job & fellowship email alerts (3-day newsletter engine).
 
 Reads public/jobs.json (+ public/archive.json for telemetry), filters the
-mandates added in the last few days (default window: 4 days - a 72-hour
-cadence plus slack), falls back to the most recent verified mandates when the
+jobs and fellowships added in the last few days (default window: 4 days - a 72-hour
+cadence plus slack), falls back to the most recent verified jobs when the
 window is quiet, renders an executive HTML briefing into
 ``public/newsletter_latest.html`` (the deployable web edition), and then
 delivers one personalised copy per subscriber when email credentials are
@@ -69,11 +69,11 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 SITE = "https://www.urbanforestpark.com"
-DASHBOARD_URL = SITE + "/dashboard.html"
-CALCULATOR_URL = SITE + "/green-calculator.html"
+DASHBOARD_URL = SITE + "/dashboard"
+CALCULATOR_URL = SITE + "/green-calculator"
 TELEGRAM_URL = "https://t.me/urbanforestpark"
 WHATSAPP_URL = "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw"
-UNSUBSCRIBE_PAGE = SITE + "/unsubscribe.html"
+UNSUBSCRIBE_PAGE = SITE + "/unsubscribe"
 CONTACT_EMAIL = "urbanforestpark@gmail.com"
 
 # The audience is India-based and the workflow runs at 08:00 IST — dispatch
@@ -110,8 +110,8 @@ CARD = "#FFFFFF"
 # Welcome email (sent once per new subscriber, on every cadence)
 # ---------------------------------------------------------------------------
 WELCOME_SUBJECT = (
-    "Welcome to Urban Forest Park \u2014 India & Global Climate, Forestry, "
-    "ESG & Research Career Dispatch"
+    "Welcome to Urban Forest Park \u2014 India & Global Environmental, "
+    "Forestry, JRF, GIS & ESG Job Alerts"
 )
 WELCOME_PREVIEW = REPO_ROOT / "welcome_email_preview.html"
 APP_INSTALL_URL = SITE + "/?source=welcome_email"
@@ -126,10 +126,10 @@ FREQUENCY_LABELS = {
 }
 
 SECTOR_LABELS = {
-    "all": "All mandates \u2014 academic, forestry, GIS, ESG, climate policy & water",
-    "academic": "JRF / PhD / Academic and research mandates",
-    "forestry-gis": "Forestry, Wildlife, GIS & Remote Sensing mandates",
-    "corporate-esg": "Corporate ESG, carbon markets & sustainability mandates",
+    "all": "All environmental jobs \u2014 academic, forestry, GIS, ESG, climate policy & water",
+    "academic": "JRF, SRF, PhD & academic research jobs",
+    "forestry-gis": "Govt forestry, wildlife, CAMPA, SPCB, GIS & remote sensing jobs",
+    "corporate-esg": "ESG, carbon & sustainability jobs",
 }
 
 
@@ -175,7 +175,8 @@ def load_jobs(path: Path) -> List[Dict[str, Any]]:
 
 
 def job_dossier_url(job_id: str) -> str:
-    return f"{SITE}/?job={urllib.parse.quote(str(job_id))}"
+    slug = urllib.parse.quote(str(job_id).strip().lower())
+    return f"{SITE}/jobs/{slug}"
 
 
 def unsubscribe_url_for(email: str) -> str:
@@ -418,7 +419,7 @@ def _stat_cell(label: str, value: str, width: str = "25%") -> str:
 
 def _job_card(job: Dict[str, Any]) -> str:
     job_id = squash(job.get("id"))
-    title = squash(job.get("clean_title")) or "Verified mandate"
+    title = squash(job.get("clean_title")) or "Verified job"
     organization = squash(job.get("organization")) or "Institution not disclosed"
     state = squash(job.get("state")) or "India"
     city = squash(job.get("city"))
@@ -437,13 +438,13 @@ def _job_card(job: Dict[str, Any]) -> str:
     return f"""<tr><td style="padding:0 0 14px 0;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid {BORDER};border-left:3px solid {BRAND_ACCENT};border-radius:10px;background:{CARD};">
   <tr><td style="padding:16px 18px 14px 18px;">
-    <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{BRAND_ACCENT};">Verified mandate{f' &middot; added {esc(added)}' if added else ''}</div>
+    <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{BRAND_ACCENT};">Verified job{f' &middot; added {esc(added)}' if added else ''}</div>
     <div style="margin-top:6px;font-size:16.5px;font-weight:700;line-height:1.35;color:{INK};">{esc(title)}</div>
     <div style="margin-top:4px;font-size:13px;line-height:1.5;color:{INK_2};"><strong>{esc(organization)}</strong> &middot; {' &middot; '.join(meta_bits)}</div>
     <div style="margin-top:10px;">{_badge(position_type or 'Verified position', 'accent')}&nbsp;{_badge(compensation, 'muted')}</div>
     <div style="margin-top:10px;font-size:12.5px;line-height:1.6;color:{INK_3};"><strong style="color:{INK_2};">Qualification:</strong> {esc(qualification)}</div>
     <div style="margin-top:14px;">
-      <a href="{esc(dossier)}" style="display:inline-block;padding:10px 16px;background:{BRAND_ACCENT};color:#FFFFFF;border-radius:8px;font-size:12.5px;font-weight:700;text-decoration:none;">View Position Dossier &nearr;</a>
+      <a href="{esc(dossier)}" style="display:inline-block;padding:10px 16px;background:{BRAND_ACCENT};color:#FFFFFF;border-radius:8px;font-size:12.5px;font-weight:700;text-decoration:none;">View Job &amp; Apply &nearr;</a>
     </div>
   </td></tr>
 </table>
@@ -453,10 +454,10 @@ def _job_card(job: Dict[str, Any]) -> str:
 def dispatch_heading(new_count: int, cards_count: int, used_fallback: bool) -> str:
     """Human heading for the masthead and subject line (cards may be a subset)."""
     if used_fallback:
-        return "Registry briefing"
+        return "Latest verified jobs"
     if new_count > cards_count:
-        return f"{cards_count} of {new_count} new verified mandates"
-    return f"{new_count} new verified mandate{'s' if new_count != 1 else ''}"
+        return f"{cards_count} of {new_count} new verified jobs"
+    return f"{new_count} new verified job{'s' if new_count != 1 else ''}"
 
 
 def render_email(
@@ -473,20 +474,20 @@ def render_email(
 
     if used_fallback:
         intro = (
-            "No new verified mandates were recorded in this brief window. As a service to "
-            "subscribers, the most recent verified positions on the registry are summarised below."
+            "No new verified jobs were recorded in this brief window. As a service to "
+            "subscribers, the most recent verified jobs on the registry are summarised below."
         )
     else:
         intro = (
-            "The following verified mandates were added to the national registry in this "
-            "dispatch cycle, sourced from official institutional notifications and application "
+            "The following verified jobs and fellowships were added to the national registry in this "
+            "alert cycle, sourced from official institutional notifications and application "
             "portals across India."
         )
 
     cards_html = "\n".join(_job_card(job) for job in cards) if cards else (
         f'<tr><td style="padding:18px;border:1px solid {BORDER};border-radius:10px;'
         f'background:{CARD};font-size:13px;color:{INK_3};">The registry is between cycles — '
-        "the next verified mandates will appear here.</td></tr>"
+        "the next verified jobs will appear here.</td></tr>"
     )
 
     preheader = clip(intro, 120)
@@ -496,7 +497,20 @@ def render_email(
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urban Forest Park — Mandate Dispatch</title>
+<title>Urban Forest Park Job &amp; Fellowship Email Alert | India 2026</title>
+<meta name="description" content="Read the latest Urban Forest Park email alert with verified environmental, forestry, JRF, GIS, ESG and government job openings from across India every week.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.urbanforestpark.com/newsletter_latest">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Urban Forest Park Job &amp; Fellowship Email Alert | India 2026">
+<meta property="og:description" content="Read the latest Urban Forest Park email alert with verified environmental, forestry, JRF, GIS, ESG and government job openings from across India every week.">
+<meta property="og:url" content="https://www.urbanforestpark.com/newsletter_latest">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"Urban Forest Park Job & Fellowship Email Alert","url":"https://www.urbanforestpark.com/newsletter_latest","description":"Read the latest Urban Forest Park email alert with verified environmental, forestry, JRF, GIS, ESG and government job openings from across India every week.","inLanguage":"en-IN"}}</script>
 </head>
 <body style="margin:0;padding:0;background:{BG};">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;">{esc(preheader)}</div>
@@ -507,8 +521,9 @@ def render_email(
   <!-- Masthead -->
   <tr><td style="padding:24px 26px;background:{BRAND_DARK};border-radius:12px 12px 0 0;">
     <div style="font-size:16px;font-weight:800;letter-spacing:.16em;color:#FFFFFF;">URBAN FOREST PARK</div>
-    <div style="margin-top:6px;font-size:12.5px;line-height:1.5;color:#9FB6AB;">India Climate, Forestry, Academic &amp; ESG Career Dispatch</div>
-    <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#10B981;">Mandate Dispatch &middot; {esc(date_line)} &middot; {esc(heading_count)}</div>
+    <h1 style="margin:8px 0 0 0;font-size:20px;line-height:1.3;color:#FFFFFF;">Urban Forest Park Job &amp; Fellowship Email Alert</h1>
+    <div style="margin-top:6px;font-size:12.5px;line-height:1.5;color:#9FB6AB;">India Environmental, Forestry, JRF, GIS &amp; ESG Job Alerts</div>
+    <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#10B981;">Job &amp; Fellowship Alerts &middot; {esc(date_line)} &middot; {esc(heading_count)}</div>
   </td></tr>
 
   <!-- Body -->
@@ -518,7 +533,7 @@ def render_email(
     <!-- Telemetry -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:8px 0;margin:0 -8px 18px -8px;">
       <tr>
-        {_stat_cell('Total Active Mandates', str(stats['total']))}
+        {_stat_cell('Total Active Jobs', str(stats['total']))}
         {_stat_cell('New This Week', str(stats['new_week']))}
         {_stat_cell('Academic / JRF', str(stats['academic']))}
         {_stat_cell('Corporate ESG', str(stats['corporate']))}
@@ -551,9 +566,9 @@ def render_email(
       <a href="{esc(WHATSAPP_URL)}" style="color:#E8F0EC;font-weight:600;text-decoration:none;">WhatsApp</a>
     </div>
     <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(232,240,236,.14);font-size:11px;line-height:1.7;color:#7E9A8C;">
-      You are receiving this dispatch because you subscribed at urbanforestpark.com.
+      You are receiving this email because you subscribed to job alerts at urbanforestpark.com.
       <a href="{esc(unsubscribe_url)}" style="color:#10B981;font-weight:700;text-decoration:none;">Unsubscribe</a> or manage your
-      <a href="{esc(UNSUBSCRIBE_PAGE)}" style="color:#10B981;text-decoration:none;">dispatch preferences</a>.
+      <a href="{esc(UNSUBSCRIBE_PAGE)}" style="color:#10B981;text-decoration:none;">email alert preferences</a>.
       Opt-out requests are honoured within 7 working days.
     </div>
     <div style="margin-top:12px;font-size:11px;line-height:1.7;color:#5F7A6C;">
@@ -571,12 +586,12 @@ def render_email(
 
     text_lines = [
         "URBAN FOREST PARK",
-        "India Climate, Forestry, Academic & ESG Career Dispatch",
-        f"Mandate Dispatch - {date_line} - {heading_count}",
+        "India Environmental, Forestry, JRF, GIS & ESG Job Alerts",
+        f"Job & Fellowship Alerts - {date_line} - {heading_count}",
         "",
         intro,
         "",
-        f"Total active mandates: {stats['total']} | New this week: {stats['new_week']} | "
+        f"Total active jobs: {stats['total']} | New this week: {stats['new_week']} | "
         f"Academic/JRF: {stats['academic']} | Corporate ESG: {stats['corporate']}",
         "",
     ]
@@ -614,7 +629,7 @@ def sector_label(sector: Any) -> str:
 
 
 def featured_jobs(jobs: List[Dict[str, Any]], limit: int = 3) -> List[Dict[str, Any]]:
-    """The three most recently verified active mandates, newest first."""
+    """The three most recently verified active jobs, newest first."""
     ranked = sorted(
         jobs,
         key=lambda job: (parse_iso_date(job.get("date_added")) or date.min, squash(job.get("clean_title"))),
@@ -676,12 +691,12 @@ def build_welcome_email_html(
         f'<tr><td style="padding:16px 18px;border:1px solid {BORDER};border-radius:10px;'
         f'background:{CARD};font-size:13px;color:{INK_3};">The live registry is between harvest '
         f'cycles \u2014 open <a href="{esc(SITE)}" style="color:{BRAND_ACCENT};font-weight:700;'
-        'text-decoration:none;">urbanforestpark.com</a> for the current verified mandates.</td></tr>'
+        'text-decoration:none;">urbanforestpark.com</a> for the current verified jobs.</td></tr>'
     )
 
     tracked = (
         _welcome_li(
-            "Academic & research mandates",
+            "Academic & research jobs",
             "JRF, SRF, Project Associate I/II, Research Associate, PhD fellowships and Young "
             "Professional roles published by WII, ICFRE, IIFM, IIRS, ICAR, IITs and IISc.",
         )
@@ -707,7 +722,7 @@ def build_welcome_email_html(
     guide = (
         _welcome_li(
             "Right-side instant search",
-            "Search every active mandate and past archived position \u2014 archived records are "
+            "Search every active job and past archived position \u2014 archived records are "
             "ideal for benchmarking stipends, required skills and eligibility.",
         )
         + _welcome_li(
@@ -730,7 +745,7 @@ def build_welcome_email_html(
 <title>Welcome to Urban Forest Park</title>
 </head>
 <body style="margin:0;padding:0;background:{BG};">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Welcome aboard - your {esc(cadence)} dispatch of verified India &amp; Global climate, forestry, ESG and research mandates starts now.</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Welcome aboard - your {esc(cadence)} email alerts for verified India &amp; Global environmental, forestry, JRF, GIS and ESG jobs starts now.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{BG};">
 <tr><td align="center" style="padding:26px 12px;">
 <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="width:640px;max-width:100%;">
@@ -747,7 +762,7 @@ def build_welcome_email_html(
     <p style="margin:0 0 12px 0;font-size:15px;line-height:1.65;color:{INK};"><strong>Welcome to Urban Forest Park \u2014 <a href="{esc(SITE)}" style="color:{BRAND_ACCENT};font-weight:700;text-decoration:none;">urbanforestpark.com</a></strong></p>
     <p style="margin:0 0 12px 0;font-size:13.5px;line-height:1.7;color:{INK_2};">
       This mailbox{(' (' + esc(address) + ')') if address else ''} is now registered on the official
-      registry dispatch. Your confirmed preference: <strong>{esc(cadence)}</strong> &middot;
+      job alert list. Your confirmed preference: <strong>{esc(cadence)}</strong> &middot;
       <strong>{esc(sector_text)}</strong>. Every briefing is compiled from official institutional
       notifications and application portals \u2014 verified before it is sent, with direct links to
       the authoritative source.
@@ -756,7 +771,7 @@ def build_welcome_email_html(
       <tr>
         <td width="50%" style="padding:0 6px 0 0;">
           <div style="padding:12px 14px;border:1px solid {BORDER};border-radius:10px;background:{CARD};">
-            <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{INK_3};">Dispatch cadence</div>
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:{INK_3};">Email alert cadence</div>
             <div style="margin-top:4px;font-size:15px;font-weight:800;color:{INK};">{esc(cadence)}</div>
           </div>
         </td>
@@ -828,7 +843,7 @@ def build_welcome_email_html(
     <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(232,240,236,.14);font-size:11px;line-height:1.7;color:#7E9A8C;">
       You are receiving this welcome message because this mailbox subscribed at urbanforestpark.com.
       <a href="{esc(unsubscribe_url_for(address))}" style="color:#10B981;font-weight:700;text-decoration:none;">Unsubscribe</a> or manage your
-      <a href="{esc(UNSUBSCRIBE_PAGE)}" style="color:#10B981;text-decoration:none;">dispatch preferences</a>.
+      <a href="{esc(UNSUBSCRIBE_PAGE)}" style="color:#10B981;text-decoration:none;">email alert preferences</a>.
       Opt-out requests are honoured within 7 working days.
     </div>
     <div style="margin-top:12px;font-size:11px;line-height:1.7;color:#5F7A6C;">
@@ -846,21 +861,21 @@ def build_welcome_email_html(
 
     text_lines = [
         "URBAN FOREST PARK",
-        "Welcome - India & Global Climate, Forestry, ESG & Research Career Dispatch",
+        "Welcome - India & Global Environmental, Forestry, JRF, GIS & ESG Job Alerts",
         "",
         f"Hello{(' (' + address + ')') if address else ''},",
         "",
-        f"Your confirmed dispatch preference: {cadence} | {sector_text}.",
+        f"Your confirmed email alert preference: {cadence} | {sector_text}.",
         "Every briefing is compiled from official institutional notifications and application portals.",
         "",
         "WHAT WE TRACK & VERIFY FOR YOU",
-        "- Academic & research mandates: JRF, SRF, Project Associate I/II, Research Associate, PhD fellowships and Young Professional roles (WII, ICFRE, IIFM, IIRS, ICAR, IITs, IISc).",
+        "- Academic & research jobs: JRF, SRF, Project Associate I/II, Research Associate, PhD fellowships and Young Professional roles (WII, ICFRE, IIFM, IIRS, ICAR, IITs, IISc).",
         "- Corporate ESG, carbon & sustainability roles: ESG analysts, BRSR reporting, carbon market / dMRV specialists, CSR managers.",
         "- Forestry, GIS & climate policy: think-tank positions (CEEW, WRI India, TERI, ATREE, UNDP), GIS / remote sensing roles, fellowships, grants, scholarships, internships and competitions.",
         "- Separate India & Global portals: switch between the India Registry and Global Opportunities on the homepage.",
         "",
         "HOW TO USE URBAN FOREST PARK EFFECTIVELY",
-        "- Right-side instant search: query every active mandate and past archived position (ideal for benchmarking stipends and skills).",
+        "- Right-side instant search: query every active job and past archived position (ideal for benchmarking stipends and skills).",
         "- One-click filters: Indian state, global region, career track, opportunity type, experience tier.",
         "- Nagar Van dMRV Dashboard & Green Calculator: urban forestry and heat-island impact analysis.",
         "",
@@ -1103,14 +1118,14 @@ DELIVERERS = {"smtp": deliver_smtp, "resend": deliver_resend, "brevo": deliver_b
 # --------------------------------------------------------------------------
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate (and optionally deliver) the Urban Forest Park Mandate Dispatch."
+        description="Generate (and optionally deliver) the Urban Forest Park job and fellowship email alert."
     )
     parser.add_argument("--jobs", type=Path, default=DEFAULT_JOBS, help="Path to jobs.json")
     parser.add_argument("--archive", type=Path, default=DEFAULT_ARCHIVE, help="Path to archive.json (telemetry context)")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Output HTML path")
     parser.add_argument("--days", type=int, default=4, help="Freshness window in days (default 4 = 3-day cadence + slack)")
-    parser.add_argument("--min-new", type=int, default=3, help="Fall back to recent mandates when fewer than this are fresh")
-    parser.add_argument("--max-cards", type=int, default=10, help="Maximum job cards in the dispatch")
+    parser.add_argument("--min-new", type=int, default=3, help="Fall back to recent jobs when fewer than this are fresh")
+    parser.add_argument("--max-cards", type=int, default=10, help="Maximum job cards in the email")
     parser.add_argument("--date", default="", help="Override 'today' (YYYY-MM-DD) - for testing")
     parser.add_argument("--to", default="", help="Send only to these address(es), comma separated - test mode")
     parser.add_argument(
@@ -1128,13 +1143,18 @@ def build_parser() -> argparse.ArgumentParser:
         "--frequency",
         default="3-day",
         choices=["3-day", "weekly"],
-        help="Dispatch cadence stamped into the Welcome email (default 3-day)",
+        help="Email alert cadence stamped into the Welcome email (default 3-day)",
     )
     parser.add_argument(
         "--sector",
         default="all",
         choices=["all", "academic", "forestry-gis", "corporate-esg"],
         help="Sector preference stamped into the Welcome email (default all)",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force today's alert: use a 1-day freshness window (falling back to recent verified jobs) and send even outside the 3-day cadence.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Generate the HTML edition only; do not send")
     parser.add_argument("--strict", action="store_true", help="Exit non-zero when delivery was attempted and nothing was delivered")
@@ -1212,19 +1232,22 @@ def main(argv: Optional[List[str]] = None) -> int:
         return run_welcome_command(args)
 
     today = parse_iso_date(args.date) or datetime.now(IST).date()
+    if args.force:
+        args.days = 1
+        logging.info("--force: using a 1-day freshness window for today's alert.")
 
     if not args.jobs.exists():
         logging.error("jobs.json not found at %s - nothing to dispatch.", args.jobs)
         return 1
     jobs = load_jobs(args.jobs)
-    logging.info("Registry snapshot: %d active mandates read.", len(jobs))
+    logging.info("Registry snapshot: %d active jobs read.", len(jobs))
 
     cards, used_fallback, new_count = select_cards(
         jobs, today, args.days, args.min_new, args.max_cards
     )
     stats = telemetry(jobs, today)
     logging.info(
-        "Dispatch selection: %d card(s) | %d fresh in the last %d day window%s | telemetry: %s",
+        "Alert selection: %d card(s) | %d fresh in the last %d day window%s | telemetry: %s",
         len(cards), new_count, args.days, " (RECENT-MANDATE FALLBACK)" if used_fallback else "", stats,
     )
 
@@ -1270,7 +1293,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         return 0
 
     heading = dispatch_heading(new_count, len(cards), used_fallback)
-    subject = f"Urban Forest Park \u2014 Mandate Dispatch \u00b7 {today.strftime('%d %b %Y')} \u00b7 {heading}"
+    subject = f"Urban Forest Park \u2014 Job & Fellowship Alerts \u00b7 {today.strftime('%d %b %Y')} \u00b7 {heading}"
     deliver = DELIVERERS[channel]
     logging.info("Delivering via %s to %d subscriber(s).", channel.upper(), len(recipients))
 
@@ -1292,7 +1315,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             time.sleep(args.pace)
 
     logging.info(
-        "Dispatch summary: %d/%d delivered | %d failed | channel=%s | cards=%d | file=%s",
+        "Alert summary: %d/%d delivered | %d failed | channel=%s | cards=%d | file=%s",
         delivered, len(recipients), len(failures), channel, len(cards), args.out,
     )
     if failures:

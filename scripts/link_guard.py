@@ -129,9 +129,6 @@ def dist_guard(dist: Path) -> list[str]:
             if qid and qid in text:
                 violations.append(f"{rel}: quarantined slug present: {qid}")
 
-        if "?job=" not in text:
-            continue
-
         for href in re.findall(r'href=["\']([^"\']+)["\']', text, flags=re.I):
             value = href.strip()
             if not value or value.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
@@ -151,6 +148,12 @@ def dist_guard(dist: Path) -> list[str]:
             if job_id in quarantined_ids:
                 violations.append(f"{rel}: link to quarantined dossier {job_id}")
 
+        for job_id in re.findall(r"/jobs/([A-Za-z0-9._-]+)", text):
+            if job_id not in published_ids:
+                violations.append(f"{rel}: link to unknown job page {job_id}")
+            elif not (dist / "jobs" / f"{job_id}.html").exists():
+                violations.append(f"{rel}: static job page missing for {job_id}")
+
     sitemap = dist / "sitemap.xml"
     if sitemap.exists():
         sm = sitemap.read_text(encoding="utf-8", errors="ignore")
@@ -160,6 +163,11 @@ def dist_guard(dist: Path) -> list[str]:
         for job_id in re.findall(r"\?job=([A-Za-z0-9._-]+)", sm):
             if job_id not in published_ids:
                 violations.append(f"sitemap.xml: unknown job slug {job_id}")
+        for job_id in re.findall(r"/jobs/([A-Za-z0-9._-]+)", sm):
+            if job_id not in published_ids:
+                violations.append(f"sitemap.xml: unknown job page {job_id}")
+            elif not (dist / "jobs" / f"{job_id}.html").exists():
+                violations.append(f"sitemap.xml: missing static page {job_id}")
     else:
         violations.append("dist/sitemap.xml missing")
     return violations

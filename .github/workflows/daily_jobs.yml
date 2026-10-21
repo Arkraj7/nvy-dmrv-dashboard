@@ -119,8 +119,10 @@ jobs:
                   public/daily_digest.json public/whatsapp_digest.txt \
                   public/global_jobs.json public/global_archive.json \
                   public/source_report.json data/role_purge_report.json \
+                  data/global_role_purge_report.json \
                   public/linkedin_weekly_post.txt public/linkedin_weekly.json \
                   public/index.html public/feed.xml public/jrf-feed.xml \
+                  public/jobs public/styles/job-page.css \
                   public/a9f3c2d7e8b14f60a2c5e9d3b7f14c68.txt \
                   public/jrf-srf-project-associate-jobs.html \
                   public/phd-fellowships-climate-sustainability.html \

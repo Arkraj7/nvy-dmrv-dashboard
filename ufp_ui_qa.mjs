@@ -87,7 +87,7 @@ const txt = fs.readFileSync(REPO + '/linkedin_weekly_post.txt', 'utf-8');
 const weekly = read('linkedin_weekly.json');
 const numbered = txt.split('\n').filter(l => /^\d{1,2}\.\s/.test(l));
 check('roundup txt has 8-10 numbered items', numbered.length >= 8 && numbered.length <= 10, 'items=' + numbered.length);
-const urls = [...txt.matchAll(/https:\/\/www\.urbanforestpark\.com\/\?job=([A-Za-z0-9_.\-%]+)/g)].map(m => decodeURIComponent(m[1]));
+const urls = [...txt.matchAll(/https:\/\/www\.urbanforestpark\.com\/jobs\/([A-Za-z0-9_.\-%]+)/g)].map(m => decodeURIComponent(m[1]));
 check('roundup txt has as many links as items', urls.length === numbered.length, `urls=${urls.length} items=${numbered.length}`);
 const badUrls = urls.filter(id => !indiaIds.has(id) && !globalIds.has(id));
 check('every roundup link resolves to a registry id', badUrls.length === 0, badUrls.join(','));
@@ -96,9 +96,74 @@ check('roundup txt carries the required hashtags', txt.includes('#ClimateJobs') 
 check('roundup has 2-3 global highlights', weekly.counts.global >= 2 && weekly.counts.global <= 3, 'global=' + weekly.counts.global);
 check('roundup json matches txt item count', weekly.counts.total === numbered.length, `${weekly.counts.total} vs ${numbered.length}`);
 check('roundup json has hook + cta', !!weekly.hook && !!weekly.cta);
-check('roundup json items carry registry + url', weekly.items.every(i => (i.registry === 'india' || i.registry === 'global') && /^https:\/\/www\.urbanforestpark\.com\/\?job=/.test(i.url)));
+check('roundup json items carry registry + static job url', weekly.items.every(i => (i.registry === 'india' || i.registry === 'global') && /^https:\/\/www\.urbanforestpark\.com\/jobs\//.test(i.url)));
 const wrongSubject = weekly.subject !== 'Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup';
 check('exact weekly LinkedIn email subject', !wrongSubject, weekly.subject);
+
+/* Static /jobs/<slug> detail pages: one per active and archived record. */
+const allStaticJobs = [...indiaAll, ...globalAll];
+const activeStaticJobs = [...india, ...globalJobs];
+const pageText = (id) => {
+  const file = REPO + '/jobs/' + id + '.html';
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf-8') : '';
+};
+const missingStatic = allStaticJobs.filter(j => !fs.existsSync(REPO + '/jobs/' + j.id + '.html'));
+check('static /jobs/<id>.html page exists for every registry record',
+  missingStatic.length === 0, 'missing=' + missingStatic.map(j => j.id).slice(0, 4).join(','));
+
+const badCanonical = allStaticJobs.filter(j => {
+  const html = pageText(j.id);
+  return !html.includes('<link rel="canonical" href="https://www.urbanforestpark.com/jobs/' + j.id + '">');
+});
+check('every static job page has a self-referencing www canonical',
+  badCanonical.length === 0, badCanonical.map(j => j.id).slice(0, 4).join(','));
+
+const staticTitles = allStaticJobs.map(j => {
+  const m = pageText(j.id).match(/<title>([^<]+)<\/title>/i);
+  return m ? m[1] : '';
+});
+check('static job pages carry unique, non-empty titles',
+  staticTitles.every(Boolean) && new Set(staticTitles).size === staticTitles.length,
+  'n=' + staticTitles.length + ' unique=' + new Set(staticTitles).size);
+
+const badActiveSchema = activeStaticJobs.filter(j => {
+  const html = pageText(j.id);
+  return !html.includes('"@type": "JobPosting"') || !html.includes('"url": "https://www.urbanforestpark.com/jobs/' + j.id + '"');
+});
+check('every active static page carries JobPosting JSON-LD with its static URL',
+  badActiveSchema.length === 0, badActiveSchema.map(j => j.id).slice(0, 4).join(','));
+
+const badArchiveSchema = indiaArchive.filter(j => pageText(j.id).includes('"@type": "JobPosting"'));
+check('archived static pages carry WebPage, never stale JobPosting schema',
+  badArchiveSchema.length === 0, badArchiveSchema.map(j => j.id).slice(0, 4).join(','));
+
+const badRelated = activeStaticJobs.filter(j => (pageText(j.id).match(/class="related-card"/g) || []).length !== 5);
+check('every active static job page links exactly five related jobs',
+  badRelated.length === 0, badRelated.map(j => j.id).slice(0, 4).join(','));
+
+const badApply = activeStaticJobs.filter(j => {
+  const html = pageText(j.id);
+  const apply = String(j.apply_url || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  return !html.includes('href="' + apply + '" target="_blank"');
+});
+check('every active static page exposes the official apply link in a new tab',
+  badApply.length === 0, badApply.map(j => j.id).slice(0, 4).join(','));
+
+const indexRaw = fs.readFileSync(REPO + '/index.html', 'utf-8');
+const feedStart = indexRaw.indexOf('<!-- JOB_FEED_START -->');
+const feedEnd = indexRaw.indexOf('<!-- JOB_FEED_END -->');
+const rawFeed = feedStart >= 0 && feedEnd > feedStart ? indexRaw.slice(feedStart, feedEnd) : '';
+check('index.html pre-renders 25 job cards inside #jobs-feed markers',
+  (rawFeed.match(/<article class="job-card/g) || []).length === 25,
+  'n=' + (rawFeed.match(/<article class="job-card/g) || []).length);
+check('raw index.html contains no Loading... feed placeholder',
+  !/Loading(?:\.\.\.|&hellip;|…)/i.test(indexRaw));
+
+const sitemapRaw = fs.readFileSync(REPO + '/sitemap.xml', 'utf-8');
+const missingSitemapJobs = allStaticJobs.filter(j => !sitemapRaw.includes('<loc>https://www.urbanforestpark.com/jobs/' + j.id + '</loc>'));
+check('sitemap.xml lists every static job URL',
+  missingSitemapJobs.length === 0 && !sitemapRaw.includes('?job='),
+  'missing=' + missingSitemapJobs.length + ' legacy=' + sitemapRaw.includes('?job='));
 
 /* ======================================================================
    B. Browser setup
@@ -226,8 +291,8 @@ const heroPills = page.locator('.hero-js [data-jurisdiction]');
 check('hero jurisdiction switcher has 2 pills', await heroPills.count() === 2);
 const heroIndiaText = (await heroPills.nth(0).innerText()).replace(/\s+/g, ' ');
 const heroGlobalText = (await heroPills.nth(1).innerText()).replace(/\s+/g, ' ');
-check('hero India pill labelled "India Mandates" + "Jobs, JRF, Fellowships & Grants"',
-  /India Mandates/.test(heroIndiaText) && /Jobs, JRF, Fellowships & Grants/.test(heroIndiaText), heroIndiaText);
+check('hero India pill labelled "India Jobs" + "Jobs, JRF, Fellowships & Grants"',
+  /India Jobs/.test(heroIndiaText) && /Jobs, JRF, Fellowships & Grants/.test(heroIndiaText), heroIndiaText);
 check('hero Global pill labelled "Global Opportunities" + "International Jobs, Grants & Scholarships"',
   /Global Opportunities/.test(heroGlobalText) && /International Jobs, Grants & Scholarships/.test(heroGlobalText), heroGlobalText);
 check('header jurisdiction switcher removed from the header', await page.locator('.header-js [data-jurisdiction]').count() === 0);
@@ -542,7 +607,7 @@ check('global hub title targets global queries', /Global Climate & Sustainabilit
 check('global hub canonical exact', (await page.getAttribute('link[rel="canonical"]', 'href')) === 'https://www.urbanforestpark.com/global-climate-sustainability-opportunities');
 const hubRegionCards = await page.locator('.region-card').count();
 check('global hub groups by region', hubRegionCards >= 6, 'cards=' + hubRegionCards);
-check('global hub shows 15 seeded listings', (await page.locator('.region-states li a[href*="?job="]').count()) >= 12, 'n=' + await page.locator('.region-states li a[href*="?job="]').count());
+check('global hub shows 15 seeded static job links', (await page.locator('.region-states li a[href^="/jobs/"]').count()) >= 12, 'n=' + await page.locator('.region-states li a[href^="/jobs/"]').count());
 check('global hub kind links route to the registry', (await page.locator('a[href*="kind="]').count()) >= 6);
 check('global hub has NO india state links', (await page.locator('a[href*="?state="]').count()) === 0);
 check('global hub CTA opens ?region=global', (await page.locator('a[href="/?region=global"]').count()) >= 1);
@@ -550,7 +615,7 @@ const hubLd = await page.$$eval('script[type="application/ld+json"]', els => els
 check('global hub JSON-LD: CollectionPage + ItemList + FAQPage + BreadcrumbList',
   hubLd.includes('"CollectionPage"') && hubLd.includes('"ItemList"') && hubLd.includes('"FAQPage"') && hubLd.includes('"BreadcrumbList"'));
 check('global hub has no India registry ids in its links', await page.evaluate(() => {
-  const hrefs = [...document.querySelectorAll('a[href*="?job="]')].map(a => a.getAttribute('href'));
+  const hrefs = [...document.querySelectorAll('a[href^="/jobs/"]')].map(a => a.getAttribute('href'));
   return hrefs.every(h => !/wii-dehradun|iit-|iisc|jrf-tiger/.test(h));
 }));
 check('global hub lists India pathways separately', (await page.locator('a[href="/jrf-srf-project-associate-jobs"]').count()) >= 1);
@@ -915,7 +980,7 @@ if (activePlan) {
   }));
   check('J: Enter mirrors the query into the main search box',
     feedState.mainSearch === activePlan.token, 'main=' + feedState.mainSearch);
-  check('J: Enter filters the feed down to the matching mandate',
+  check('J: Enter filters the feed down to the matching job',
     feedState.cards.length >= 1 && feedState.cards.includes(activePlan.ids[0]),
     'cards=' + feedState.cards.slice(0, 4).join(','));
   check('J: dropdown collapses after submitting', feedState.panelHidden);
@@ -931,14 +996,15 @@ if (archivePlan) {
   await page.waitForTimeout(600);
   const dossierState = await page.evaluate(() => ({
     jobParam: new URLSearchParams(window.location.search).get('job'),
+    pathname: window.location.pathname,
     detailCard: !!document.querySelector('#job-detail .detail-card'),
     canonical: (document.querySelector('link[rel="canonical"]') || {}).href || ''
   }));
-  check('J: clicking an archived dropdown row opens its ?job= dossier',
-    dossierState.detailCard && dossierState.jobParam === archivePlan.ids[0],
-    JSON.stringify({ job: dossierState.jobParam, expected: archivePlan.ids[0], detail: dossierState.detailCard }));
-  check('J: archived dossier keeps the self-referencing canonical',
-    dossierState.canonical === 'https://www.urbanforestpark.com/?job=' + archivePlan.ids[0],
+  check('J: clicking an archived dropdown row opens its static job dossier',
+    dossierState.detailCard && dossierState.pathname === '/jobs/' + archivePlan.ids[0],
+    JSON.stringify({ path: dossierState.pathname, expected: archivePlan.ids[0], detail: dossierState.detailCard }));
+  check('J: archived dossier keeps the self-referencing static canonical',
+    dossierState.canonical === 'https://www.urbanforestpark.com/jobs/' + archivePlan.ids[0],
     dossierState.canonical);
 }
 
@@ -977,7 +1043,7 @@ check('J: mailer exposes --welcome and --test-welcome modes',
 check('J: mailer auto-welcomes pending subscribers on every run',
   /def process_welcome_backlog\(/.test(mailerSource) && /process_welcome_backlog\(channel, config, jobs/.test(mailerSource));
 check('J: welcome subject line matches the institutional template',
-  mailerSource.includes('Welcome to Urban Forest Park \\u2014 India & Global Climate, Forestry,'));
+  mailerSource.includes('Welcome to Urban Forest Park \\u2014 India & Global Environmental,'));
 check('J: welcome email carries the top-3 featured active opportunities',
   /def featured_jobs\(/.test(mailerSource) && /TOP 3 FEATURED ACTIVE OPPORTUNITIES/.test(mailerSource));
 check('J: welcome email links the app install with the source campaign tag',
@@ -1164,8 +1230,8 @@ check('C: mobile action bar has back, save and apply controls',
 await mobilePage.goto(BASE + '/', { waitUntil: 'domcontentloaded' });
 await mobilePage.waitForSelector('.job-card', { timeout: 20000 });
 await mobilePage.waitForTimeout(250);
-check('C: quick-filter strip renders 5 researcher filters + Saved',
-  await mobilePage.locator('#quick-filters [data-quick]').count() === 5 &&
+check('C: quick-filter strip renders 7 researcher filters + Saved',
+  await mobilePage.locator('#quick-filters [data-quick]').count() === 7 &&
   await mobilePage.locator('#saved-filter-btn').count() === 1,
   'n=' + await mobilePage.locator('#quick-filters [data-quick]').count());
 check('C: every job card has save + share + WhatsApp actions',
@@ -1183,7 +1249,7 @@ check('C: ★ Save persists the job id in ufp_saved_jobs',
   savedAfterTap.includes(firstMobileId), savedAfterTap.join(','));
 await mobilePage.locator('#saved-header-btn').click();
 await mobilePage.waitForTimeout(180);
-check('C: Saved drawer opens with the shortlisted mandate',
+check('C: Saved drawer opens with the shortlisted job',
   await mobilePage.locator('#saved-drawer.open').count() === 1 &&
   await mobilePage.locator('#saved-drawer [data-saved-open]').count() >= 1);
 await mobilePage.locator('#saved-close').click();

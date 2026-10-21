@@ -1,0 +1,202 @@
+/* Static /jobs/<slug> detail pages.
+   Shares the design tokens in jobs.css; this file only adds the two-column
+   job dossier, related cards and mobile stacking. */
+
+.job-page { background: var(--bg); }
+
+.job-page-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.job-page-hero {
+  padding: 42px 0 34px;
+  background:
+    radial-gradient(900px 300px at 15% 0%, rgba(16, 122, 87, 0.12), transparent 70%),
+    var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.job-page-hero h1 {
+  margin: 8px 0 10px;
+  max-width: 24ch;
+  font-size: clamp(28px, 4.2vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.job-page-org {
+  margin: 0 0 14px;
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.job-page-org strong { color: var(--ink); }
+
+.job-page-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 22px;
+}
+
+.job-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.job-page-archive-note {
+  max-width: 720px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-2);
+  border-left: 4px solid var(--amber-ink);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.job-page-layout {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 42px;
+  padding: 44px 0 52px;
+  align-items: start;
+}
+
+.job-page-main section { margin-bottom: 34px; }
+
+.job-page-main h2,
+.job-page-side h2,
+.job-page-related h2 {
+  margin: 0 0 11px;
+  font-size: 20px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.job-page-main p,
+.job-page-main li {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.job-page-main ul { margin: 0; padding-left: 20px; }
+.job-page-main li + li { margin-top: 7px; }
+
+.job-page-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.job-page-side {
+  position: sticky;
+  top: 88px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm, 0 2px 12px rgba(15, 23, 42, 0.04));
+}
+
+.job-facts { margin: 0; }
+.job-facts > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.job-facts > div:last-child { border-bottom: 0; }
+.job-facts dt {
+  color: var(--ink-4);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.job-facts dd {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.job-page-note {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-2);
+  color: var(--ink-4);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.job-page-related {
+  padding: 42px 0 56px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 154px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+.related-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.related-kicker {
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.related-card strong {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.related-meta {
+  margin-top: auto;
+  color: var(--ink-4);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1040px) {
+  .job-page-layout { grid-template-columns: minmax(0, 1fr); }
+  .job-page-side { position: static; order: -1; }
+  .related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .job-page-inner,
+  .job-page-layout { width: min(100% - 28px, 1180px); }
+  .job-page-hero { padding-top: 28px; }
+  .job-page-actions .btn { width: 100%; justify-content: center; }
+  .related-grid { grid-template-columns: 1fr; }
+  .related-card { min-height: 0; }
+  .job-facts > div { grid-template-columns: 96px minmax(0, 1fr); }
+}

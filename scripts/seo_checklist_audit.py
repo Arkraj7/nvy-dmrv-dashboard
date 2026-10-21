@@ -9,6 +9,7 @@ Groups
   5. International    - reciprocal hreflang cluster on the language pages
   6. Internal linking - no broken links/images, depth <= 2, no orphan pages
   7. Delivery         - headers, logo weight, favicons, confidential gate
+  8. Job pages        - nested /jobs/<slug> metadata, canonical, schema, sitemap
 
 Exits non-zero when any ERROR is recorded. Warnings do not fail the run.
 """
@@ -722,6 +723,115 @@ def group_7(pages: Dict[str, str]) -> None:
 
 
 # --------------------------------------------------------------------------
+# Group 8 - Static job detail pages
+# --------------------------------------------------------------------------
+
+def _job_slug(job: dict) -> str:
+    raw = str(job.get("id") or "").lower()
+    return re.sub(r"[^a-z0-9-]+", "-", raw).strip("-") or "job"
+
+
+def group_8_job_pages() -> None:
+    registries = ("jobs.json", "archive.json", "global_jobs.json", "global_archive.json")
+    records: Dict[str, dict] = {}
+    archived: Set[str] = set()
+    for name in registries:
+        payload = load_json(PUBLIC / name)
+        if not isinstance(payload, list):
+            error(8, f"{name}: cannot read job registry for static-page audit")
+            continue
+        for record in payload:
+            if not isinstance(record, dict):
+                continue
+            slug = _job_slug(record)
+            records[slug] = record
+            if "archive" in name or record.get("date_archived") or str(record.get("status")).lower() == "archived":
+                archived.add(slug)
+
+    files = sorted((PUBLIC / "jobs").glob("*.html"))
+    if len(files) != len(records):
+        error(8, f"expected {len(records)} static job page(s), found {len(files)}")
+    stale = {path.stem for path in files} - set(records)
+    for slug in sorted(stale):
+        error(8, f"stale static job page not present in any registry: /jobs/{slug}")
+
+    sitemap = read_text(PUBLIC / "sitemap.xml")
+    locs = set(re.findall(r"<loc>([^<]+)</loc>", sitemap))
+    titles: Dict[str, str] = {}
+    descs: Dict[str, str] = {}
+
+    for path in files:
+        slug = path.stem
+        rel = f"/jobs/{slug}"
+        text = read_text(path)
+        canonical = link_hrefs(text, "canonical")
+        expected = SITE + rel
+        if canonical != [expected]:
+            error(8, f"{rel}: canonical {canonical!r} != {expected!r}")
+        if meta_content(text, prop="og:url") != expected:
+            error(8, f"{rel}: og:url does not match the static canonical")
+        if (meta_content(text, name="robots") or "").lower().find("noindex") >= 0:
+            error(8, f"{rel}: static job page is noindex")
+
+        title_match = re.search(r"<title\b[^>]*>(.*?)</title>", text, re.I | re.S)
+        title = visible(title_match.group(1)) if title_match else ""
+        desc = unescape(meta_content(text, name="description") or "").strip()
+        if not title:
+            error(8, f"{rel}: missing <title>")
+        else:
+            if not (30 <= len(title) <= 75):
+                error(8, f"{rel}: title length {len(title)} outside 30-75: {title!r}")
+            if title in titles:
+                error(8, f"{rel}: duplicate title shared with {titles[title]}")
+            else:
+                titles[title] = rel
+        if not desc:
+            error(8, f"{rel}: missing meta description")
+        else:
+            if not (120 <= len(desc) <= 170):
+                error(8, f"{rel}: description length {len(desc)} outside 120-170")
+            if desc in descs:
+                error(8, f"{rel}: duplicate description shared with {descs[desc]}")
+            else:
+                descs[desc] = rel
+
+        h1s = [visible(m.group(1)) for m in H1_RE.finditer(text)]
+        if len(h1s) != 1:
+            error(8, f"{rel}: expected exactly one <h1>, found {len(h1s)}")
+        elif slug in records:
+            wanted = visible(str(records[slug].get("clean_title") or ""))
+            if wanted and h1s[0] != wanted:
+                error(8, f"{rel}: H1 does not match the registry title")
+
+        try:
+            nodes, _ = schema_nodes(text)
+            found = types_in(nodes)
+        except ValueError as exc:
+            error(8, f"{rel}: {exc}")
+            continue
+        if slug in archived:
+            if "JobPosting" in found:
+                error(8, f"{rel}: archived page still emits JobPosting schema")
+            if "WebPage" not in found:
+                error(8, f"{rel}: archived page is missing WebPage schema")
+        else:
+            if "JobPosting" not in found:
+                error(8, f"{rel}: active page is missing JobPosting schema")
+            related = len(re.findall(r'class="related-card"', text))
+            if related != 5:
+                error(8, f"{rel}: expected 5 related jobs, found {related}")
+
+        if expected not in locs:
+            error(8, f"{rel}: static job page is missing from sitemap.xml")
+        if re.search(r'href="[^"]*\?job=', text):
+            error(8, f"{rel}: contains a legacy ?job= link")
+        if re.search(r'href="/jobs/[^"]*\.html"', text):
+            error(8, f"{rel}: links to the redirecting .html job form")
+
+    info(f"audited {len(files)} static job page(s) under /jobs/")
+
+
+# --------------------------------------------------------------------------
 
 def main() -> int:
     pages = {path.name: read_text(path) for path in html_pages()}
@@ -739,6 +849,7 @@ def main() -> int:
     group_5(pages)
     group_6(pages, kmap)
     group_7(pages)
+    group_8_job_pages()
 
     print("=" * 78)
     print("SEO checklist audit - Urban Forest Park")

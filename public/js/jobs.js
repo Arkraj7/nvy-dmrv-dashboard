@@ -4,7 +4,7 @@
    js/jobs.js — registry data loading (jobs.json + archive.json + stats.json),
    weekly telemetry, active/archived views, ?job= ?view= ?state= ?category=
    routing, position dossiers, schema.org lifecycle (JobPosting for active
-   mandates, WebPage + BreadcrumbList for archived ones), sharing, and the
+   jobs, WebPage + BreadcrumbList for archived ones), sharing, and the
    institutional partnership modal. Vanilla JS, no dependencies.
    ========================================================================== */
 (function () {
@@ -25,13 +25,13 @@
   /* Config & state                                                      */
   /* ------------------------------------------------------------------ */
   var CONFIG = {
-    DATA_URL: 'jobs.json',
-    ARCHIVE_URL: 'archive.json',
-    STATS_URL: 'stats.json',
+    DATA_URL: '/jobs.json',
+    ARCHIVE_URL: '/archive.json',
+    STATS_URL: '/stats.json',
     /* Strictly separated Global opportunities registry: these two files
        never contain India records and are never mixed into jobs.json. */
-    GLOBAL_DATA_URL: 'global_jobs.json',
-    GLOBAL_ARCHIVE_URL: 'global_archive.json',
+    GLOBAL_DATA_URL: '/global_jobs.json',
+    GLOBAL_ARCHIVE_URL: '/global_archive.json',
     CONTACT_EMAIL: 'urbanforestpark@gmail.com',
     VALID_DAYS: 30,            // fallback jobPosting validThrough = datePosted + N days
     ARCHIVE_RECENT_DAYS: 7,    // "Closed in the last 7 days" archive window
@@ -99,7 +99,7 @@
   /* Career tracks: the quick-filter strip over position_type + category.
      Order matters - trackOf() returns exactly one track per record. */
   var TRACK_META = [
-    { id: 'all', label: 'All Mandates' },
+    { id: 'all', label: 'All Environmental Jobs' },
     { id: 'research', label: 'JRF / SRF & Project Associates' },
     { id: 'phd', label: 'PhD & Postdoctoral Fellowships' },
     { id: 'contractual', label: 'Young Professional & Govt Contractual' },
@@ -173,7 +173,7 @@
         .test(jobText(job) + ' ' + String((job.academic_meta || {}).net_gate || ''));
     },
     govt: function (job) {
-      return /(icfre|wildlife institute|\bwii\b|icar|iit|iisc|iiser|csir|isro|iirs|nrsc|moefcc|forest survey|\bfsi\b|iifm|university|institute|government|govt\.?|autonomous)/i
+      return /(icfre|wildlife institute|\bwii\b|icar|iit|iisc|iiser|csir|isro|iirs|nrsc|moefcc|forest survey|\bfsi\b|campa|\bcpcb\b|\bspcb\b|dpcc|mpcb|kspcb|gpcb|uppcb|tnpcb|ntca|nba\b|czma|ncscm|iifm|university|institute|government|govt\.?|autonomous|forest department)/i
         .test(String(job.organization || '') + ' ' + jobText(job));
     },
     corporate: function (job) {
@@ -183,8 +183,23 @@
     gis: function (job) {
       return /(gis|remote sensing|earth observation|lidar|qgis|arcgis|google earth engine|geospatial|satellite)/i
         .test(jobText(job) + ' ' + String(job.category || '') + ' ' + (job.must_have_skills || []).join(' '));
+    },
+    wildlife: function (job) {
+      return /(wildlife|conservation|biodiversity|ecology|tiger|elephant|mangrove|marine|sanctuary|national park|ntca|wii|wcs|wwf|ncf|atree)/i
+        .test(jobText(job) + ' ' + String(job.category || '') + ' ' + String(job.organization || ''));
+    },
+    phd: function (job) {
+      return /(phd|doctoral|postdoc|fellowship|scholarship|grant|research funding|stipend)/i
+        .test(jobText(job) + ' ' + String(job.category || '') + ' ' + String(job.opportunity_kind || ''));
     }
   };
+
+  /* Canonical static detail page for every registry record. The physical file
+     is /jobs/<id>.html; Cloudflare serves it at the extensionless URL and the
+     static page declares that URL as its canonical. */
+  function jobPath(id) {
+    return '/jobs/' + encodeURIComponent(String(id || '')).replace(/%2F/gi, '');
+  }
 
   function jobText(job) {
     return [
@@ -220,7 +235,7 @@
     if (index >= 0) ids.splice(index, 1);
     else ids.unshift(id);
     storeSaved(ids);
-    toast(index >= 0 ? 'Removed from saved mandates' : 'Saved — find it under ★ Saved');
+    toast(index >= 0 ? 'Removed from saved jobs' : 'Saved — find it under ★ Saved');
     if (state.savedOnly) applyFilters();
     return index < 0;
   }
@@ -262,7 +277,7 @@
     if (!listEl) return;
     var jobs = savedJobs();
     if (!jobs.length) {
-      listEl.innerHTML = '<p class="saved-empty">No saved mandates yet. Tap <strong>★ Save</strong> on any card to build your shortlist.</p>';
+      listEl.innerHTML = '<p class="saved-empty">No saved jobs yet. Tap <strong>★ Save</strong> on any card to build your shortlist.</p>';
       return;
     }
     listEl.innerHTML = jobs.map(function (job) {
@@ -271,7 +286,7 @@
           '<span class="saved-item-title">' + escapeHtml(displayTitle(job)) + '</span>' +
           '<span class="saved-item-org">' + escapeHtml(job.organization) + ' · ' + escapeHtml(stateLabel(job)) + '</span>' +
         '</button>' +
-        '<button class="saved-item-remove" type="button" data-saved-remove="' + escapeHtml(job.id) + '" aria-label="Remove saved mandate">×</button>' +
+        '<button class="saved-item-remove" type="button" data-saved-remove="' + escapeHtml(job.id) + '" aria-label="Remove saved job">×</button>' +
       '</div>';
     }).join('');
   }
@@ -564,7 +579,7 @@
     return out;
   }
 
-  /* Rich, forward-ready WhatsApp alert for one mandate. */
+  /* Rich, forward-ready WhatsApp alert for one job. */
   function whatsappAlertText(job) {
     var location = job.state === 'Multiple States / Remote'
       ? 'Multiple States / Remote (India)'
@@ -600,7 +615,7 @@
       '<div class="community-callout">' +
         '<div class="cc-copy">' +
           '<strong class="cc-title">' + iconSvg('bell') + ' ' + t('cc.title', 'Get Daily JRF, Forestry, GIS &amp; ESG Job Alerts') + '</strong>' +
-          '<span class="cc-sub">' + t('cc.sub', 'Join India\u2019s green & academic job-alert network \u2014 verified mandates delivered every morning at 7 AM IST.') + '</span>' +
+          '<span class="cc-sub">' + t('cc.sub', 'Join India\u2019s green & academic job-alert network \u2014 verified jobs delivered every morning at 7 AM IST.') + '</span>' +
         '</div>' +
         '<div class="cc-actions">' +
           '<a class="cc-btn cc-wa" href="' + escapeHtml(COMMUNITY_CHANNELS.whatsapp_group_url) +
@@ -877,7 +892,7 @@
       '<div class="sk-line sk-meta short"></div>' +
       '<div class="sk-line sk-bar"></div>' +
     '</div>';
-    return '<div class="skeleton-grid" role="status" aria-label="Loading registry mandates">' + card.repeat(6) + '</div>';
+    return '<div class="skeleton-grid" role="status" aria-label="Loading registry jobs">' + card.repeat(6) + '</div>';
   }
 
   function loadAll() {
@@ -1050,7 +1065,7 @@
     if (changed && !opts.silent) {
       toast(registry === 'global'
         ? t('registry.switch.global', 'Showing Global Opportunities (international jobs, grants & scholarships)')
-        : t('registry.switch.india', 'Showing India Mandates (jobs, JRF, fellowships & grants)'));
+        : t('registry.switch.india', 'Showing India jobs (JRF, fellowships & grants)'));
     }
   }
 
@@ -1350,8 +1365,8 @@
     var source = getViewData();
     if (!source.length) {
       els.grid.innerHTML = isArchive
-        ? '<div class="empty-state"><h3>' + t('empty.nolist.archive.title', 'The historical archive is being catalogued') + '</h3><p>' + t('empty.nolist.archive.sub', 'Past mandates appear here once their application windows close.') + '</p></div>'
-        : '<div class="empty-state"><h3>' + t('empty.nolist.active.title', 'No listings yet') + '</h3><p>' + t('empty.nolist.active.sub', 'New green-sector mandates are published regularly. Check back soon.') + '</p></div>';
+        ? '<div class="empty-state"><h3>' + t('empty.nolist.archive.title', 'The historical archive is being catalogued') + '</h3><p>' + t('empty.nolist.archive.sub', 'Past jobs appear here once their application windows close.') + '</p></div>'
+        : '<div class="empty-state"><h3>' + t('empty.nolist.active.title', 'No listings yet') + '</h3><p>' + t('empty.nolist.active.sub', 'New environmental jobs are published regularly. Check back soon.') + '</p></div>';
       els.grid.setAttribute('aria-busy', 'false');
       return;
     }
@@ -1398,7 +1413,7 @@
     var html = '<div class="empty-state">';
     html += '<h3>' + (isArchive
       ? t('empty.nomatch.archive', 'No archived records match these filters')
-      : t('empty.nomatch.active', 'No active mandates match these filters')) + '</h3>';
+      : t('empty.nomatch.active', 'No active jobs match these filters')) + '</h3>';
     html += '<p>' + t('empty.hint', 'Try a different keyword, region or sector \u2014 or reset the filters.') + '</p>';
 
     /* Active view with zero matches in a sector that has historical records:
@@ -1406,7 +1421,7 @@
     if (!isArchive && state.category !== 'all') {
       var archivedCount = state.archive.filter(function (j) { return j.category === state.category; }).length;
       if (archivedCount > 0) {
-        html += '<p>' + t('empty.archive.note', 'No active mandates are open in this sector at present \u2014 {n} historical record(s) exist in the archive.', { n: archivedCount }) + '</p>';
+        html += '<p>' + t('empty.archive.note', 'No active jobs are open in this sector at present \u2014 {n} historical record(s) exist in the archive.', { n: archivedCount }) + '</p>';
         html += '<button class="btn btn-outline" type="button" data-switch-archive>' + t('empty.switcharchive', 'View Historical Archive') + ' ' + iconSvg('arrow') + '</button>';
       }
     }
@@ -1475,14 +1490,15 @@
 
     var ctaLabel = isArchived
       ? t('card.cta.archive', 'Open Archived Record')
-      : t('card.cta.active', 'View Position Dossier');
+      : t('card.cta.active', 'View Job & Apply');
 
     var saved = isSaved(job.id);
     var waShareHref = 'https://wa.me/?text=' + encodeURIComponent(shareTextFor(job));
+    var detailHref = jobPath(job.id);
 
     return '' +
-      '<article class="job-card' + (isArchived ? ' is-archived' : '') + '" data-id="' + escapeHtml(job.id) + '" tabindex="0" role="link" ' +
-        'aria-label="' + (isArchived ? t('card.aria.archive', 'Open archived record: ') : t('card.aria.view', 'View position dossier: ')) +
+      '<article class="job-card' + (isArchived ? ' is-archived' : '') + '" data-id="' + escapeHtml(job.id) + '" data-href="' + escapeHtml(detailHref) + '" tabindex="0" role="group" ' +
+        'aria-label="' + (isArchived ? t('card.aria.archive', 'Open archived record: ') : t('card.aria.view', 'View job and apply: ')) +
         escapeHtml(job.clean_title) + ' at ' + escapeHtml(job.organization) + '">' +
         '<div class="jc-top">' +
           '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
@@ -1494,7 +1510,7 @@
         '</div>' +
         '<div class="jc-main">' +
           '<div class="jc-main-text">' +
-            '<h3 class="jc-title">' + escapeHtml(displayTitle(job)) + '</h3>' +
+            '<h3 class="jc-title"><a class="jc-title-link" href="' + escapeHtml(detailHref) + '">' + escapeHtml(displayTitle(job)) + '</a></h3>' +
             (isHindi() && job.title_hi ? '<p class="jc-title-en">' + escapeHtml(job.clean_title) + '</p>' : '') +
             '<p class="jc-org">' + escapeHtml(job.organization) + '</p>' +
             '<div class="jc-meta">' +
@@ -1507,16 +1523,16 @@
           '</div>' +
           logoFigureHtml(job, 'card') +
         '</div>' +
-        '<div class="jc-actions" aria-label="Save or share this mandate">' +
+        '<div class="jc-actions" aria-label="Save or share this job">' +
           '<button class="jc-action jc-save' + (saved ? ' is-saved' : '') + '" type="button" data-save-id="' + escapeHtml(job.id) + '" aria-pressed="' + (saved ? 'true' : 'false') + '">' +
             '<span aria-hidden="true">★</span> <span class="save-label">' + (saved ? 'Saved' : 'Save') + '</span>' +
           '</button>' +
           '<a class="jc-action jc-wa" href="' + waShareHref + '" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">' + iconSvg('whatsapp') + ' WhatsApp</a>' +
-          '<button class="jc-action" type="button" data-share-id="' + escapeHtml(job.id) + '" aria-label="Share this mandate">Share ↗</button>' +
+          '<button class="jc-action" type="button" data-share-id="' + escapeHtml(job.id) + '" aria-label="Share this job">Share ↗</button>' +
         '</div>' +
         '<div class="jc-foot">' +
           '<span class="jc-date">' + footDate + '</span>' +
-          '<span class="jc-view">' + ctaLabel + ' ' + iconSvg('arrow') + '</span>' +
+          '<a class="jc-view" href="' + escapeHtml(detailHref) + '">' + ctaLabel + ' ' + iconSvg('arrow') + '</a>' +
         '</div>' +
       '</article>';
   }
@@ -1579,7 +1595,10 @@
       var params = new URLSearchParams(window.location.search || '');
       var queryId = params.get('job');
       if (queryId) return queryId.trim();
-    } catch (e) { /* URLSearchParams unavailable: fall through to the hash form */ }
+    } catch (e) { /* URLSearchParams unavailable: fall through to the path form */ }
+
+    var pathMatch = (window.location.pathname || '').match(/^\/jobs\/([A-Za-z0-9._-]+)\/?$/);
+    if (pathMatch) return decodeURIComponent(pathMatch[1]);
 
     var hash = window.location.hash || '';
     var match = hash.match(/^#\/job\/([A-Za-z0-9._-]+)/);
@@ -1646,7 +1665,7 @@
   }
 
   function goHome() {
-    var path = window.location.pathname + queryForState();
+    var path = '/' + queryForState();
     if (window.history && window.history.pushState) {
       try {
         window.history.pushState({}, '', path);
@@ -1680,6 +1699,10 @@
         }
         renderDetail(found.job, found.archived);
         document.body.classList.add('view-detail');
+        /* Upgrade legacy ?job=<id> links to the clean static job URL. */
+        if (window.location.pathname.indexOf('/jobs/') !== 0) {
+          setUrlQuietly('/' + jobPath(id).replace(/^\//, ''));
+        }
         /* The dossier always opens at its own beginning, never at the
            feed offset the reader came from. */
         scrollToTopInstant();
@@ -1705,7 +1728,7 @@
        Opening a related role from inside a dossier must not overwrite the
        position the reader originally came from. */
     if (!state.detailId) saveFeedScroll(id);
-    var url = '?job=' + encodeURIComponent(id);
+    var url = jobPath(id);
     if (window.history && window.history.pushState) {
       try {
         window.history.pushState({ jobId: id }, '', url);
@@ -1790,7 +1813,7 @@
       banner = '' +
         '<div class="archive-banner" role="note">' +
           '<span class="archive-flag">' + t('card.archived', 'Archived') + '</span>' +
-          '<p><strong>' + t('detail.banner.archived', 'Archived Mandate:') + '</strong> ' +
+          '<p><strong>' + t('detail.banner.archived', 'Archived Job:') + '</strong> ' +
             t('detail.banner.body', 'the application window for this position closed on {date}. This record is maintained in the Urban Forest Park Career Registry for compensation, skill, and institutional reference.', { date: formatLongDate(job.date_archived || job.valid_through || job.date_added) }) +
           '</p>' +
         '</div>';
@@ -1855,7 +1878,7 @@
             '</div>'
           : '') +
         '<div class="detail-section">' +
-          '<h2>' + t('detail.summary.h2', 'Mandate Summary') + '</h2>' +
+          '<h2>' + t('detail.summary.h2', 'Job Summary') + '</h2>' +
           '<p>' + formatReadableText(job.role_summary) + '</p>' +
         '</div>' +
 
@@ -1953,7 +1976,7 @@
   }
 
   function shareableUrl(id) {
-    return CONFIG.SITE_URL + '?job=' + encodeURIComponent(id);
+    return CONFIG.SITE_URL.replace(/\/$/, '') + jobPath(id);
   }
 
   function copyShareLink(event) {
@@ -2039,8 +2062,8 @@
       ? t('hero.global.title_html', 'Worldwide <span class="accent">Climate &amp; Sustainability</span> Opportunities')
       : heroDefaultHtml();
     var heroText = null;
-    var feedEyebrow = t('feed.eyebrow', 'Active Sector Mandates');
-    var feedTitle = t('feed.title', 'Active Opportunities');
+    var feedEyebrow = t('feed.eyebrow', 'Active Environmental Jobs');
+    var feedTitle = t('feed.title', 'Active Jobs & Fellowships');
 
     if (isGlobal) {
       feedEyebrow = t('feed.eyebrow.global', 'Global Opportunities Registry');
@@ -2058,16 +2081,16 @@
       }
       if (hasKind) feedTitle = state.kind;
     } else if (isArchive) {
-      feedEyebrow = t('feed.eyebrow.archive', 'Historical Mandate Archive');
+      feedEyebrow = t('feed.eyebrow.archive', 'Historical Job Archive');
       feedTitle = t('feed.title.archive', 'Archived / Past Positions');
-      title = 'Historical Mandate Archive \u2014 Past Climate, Forestry, ESG & GIS Positions | Urban Forest Park';
-      desc = 'Archived climate, forestry, ESG, carbon-market and geospatial mandates' +
+      title = 'Historical Job Archive \u2014 Past Climate, Forestry, ESG & GIS Jobs | Urban Forest Park';
+      desc = 'Archived climate, forestry, ESG, carbon-market and geospatial jobs' +
         (hasState ? ' in ' + state.state : '') +
         (hasCat ? ' (\u2018' + state.category + '\u2019 sector)' : '') +
         ', preserved in the Urban Forest Park career registry for institutional reference.';
       if (hasCat || hasState) {
         feedTitle = t('feed.title.archive', 'Archived / Past Positions');
-        heroText = 'Historical Mandate Archive \u2014 ' + (hasCat ? state.category : '') +
+        heroText = 'Historical Job Archive \u2014 ' + (hasCat ? state.category : '') +
           (hasCat && hasState ? ' \u00b7 ' : '') + (hasState ? state.state : '');
       }
       url = CONFIG.SITE_URL + queryForState();
@@ -2085,8 +2108,8 @@
         ' \u2014 verified listings with direct application links, maintained by the Urban Forest Park registry.';
       heroText = hasCat
         ? state.category + ' Jobs \u2014 ' + (hasState ? state.state : 'All India')
-        : 'Climate, Forestry, ESG & Geospatial Jobs \u2014 ' + state.state;
-      feedTitle = hasCat ? state.category : t('feed.title', 'Active Opportunities');
+        : 'Environmental, Forestry, JRF, GIS & ESG Jobs \u2014 ' + state.state;
+      feedTitle = hasCat ? state.category : t('feed.title', 'Active Jobs & Fellowships');
       url = CONFIG.SITE_URL + queryForState();
     }
 
@@ -2119,8 +2142,8 @@
     injectJsonLd(breadcrumbSchema(job, isArchived), 'job-breadcrumb-jsonld');
 
     applyMetaBlock(title, desc, url);
-    setText('feed-eyebrow', isArchived ? 'Historical Mandate Archive' : 'Active Sector Mandates');
-    setText('feed-title', isArchived ? 'Archived / Past Positions' : 'Active Opportunities');
+    setText('feed-eyebrow', isArchived ? 'Historical Job Archive' : 'Active Environmental Jobs');
+    setText('feed-title', isArchived ? 'Archived / Past Positions' : 'Active Jobs & Fellowships');
   }
 
   function jobPostingSchema(job) {
@@ -2194,7 +2217,7 @@
     return {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
-      name: job.clean_title + ' \u2014 ' + job.organization + ' (Archived Mandate)',
+      name: job.clean_title + ' \u2014 ' + job.organization + ' (Archived Job)',
       description: (job.role_summary || '').slice(0, 158),
       url: shareableUrl(job.id),
       dateModified: job.date_archived || undefined,
@@ -2246,7 +2269,7 @@
     var schema = {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'Active green-sector mandates in India \u2014 Climate, Forestry, ESG & GIS',
+      name: 'Environmental, Forestry, JRF, GIS & ESG Jobs in India (2026)',
       numberOfItems: jobs.length,
       itemListElement: jobs.slice(0, 20).map(function (job, i) {
         return {
@@ -2333,7 +2356,7 @@
       'Position title: ' + role,
       'Contact email: ' + email,
       '',
-      'Mandate details:',
+      'Job details:',
       message,
       '',
       '\u2014 Sent from the Urban Forest Park career registry'
@@ -2591,7 +2614,7 @@
 
     html += '<p class="hs-group">' + (isQuery
       ? t('hero.search.direct', 'Direct Matches') + ' \u2014 ' + t('hero.search.directNote', 'Active &amp; Archived')
-      : t('hero.search.latest', 'Latest Verified Mandates')) + '</p>';
+      : t('hero.search.latest', 'Latest Verified Jobs')) + '</p>';
 
     if (matches.length) {
       matches.forEach(function (rec) {
@@ -2599,7 +2622,7 @@
         items.push(rec);
       });
     } else {
-      html += '<p class="hs-empty">' + t('hero.search.none', 'No mandate matches that phrase. Try a skill, institution, state or category \u2014 related positions are listed below.') + '</p>';
+      html += '<p class="hs-empty">' + t('hero.search.none', 'No job matches that phrase. Try a skill, institution, state or category \u2014 related positions are listed below.') + '</p>';
     }
 
     if ((isQuery || related.length) && related.length) {
@@ -2698,7 +2721,7 @@
         setView('active', { keepUrl: true, force: true });
         toast(target === 'global'
           ? t('hero.search.toastGlobal', 'Showing matching Global Opportunities.')
-          : t('hero.search.toastIndia', 'Showing matching India mandates.'));
+          : t('hero.search.toastIndia', 'Showing matching India jobs.'));
       }
     }
 
@@ -2958,7 +2981,7 @@
     if (savedCopy) {
       savedCopy.addEventListener('click', function () {
         var links = savedJobs().map(function (job) { return shareableUrl(job.id); });
-        if (!links.length) { toast('No saved mandates to copy yet'); return; }
+        if (!links.length) { toast('No saved jobs to copy yet'); return; }
         copyTextToClipboard(links.join('\n'), links.length + ' saved link(s) copied');
       });
     }
@@ -3064,7 +3087,14 @@
         }
         if (e.target.closest('.jc-actions')) return;
         var card = e.target.closest('.job-card');
-        if (card) openJob(card.getAttribute('data-id'));
+        if (card) {
+          /* Normal left-clicks open the in-page job view; the real href is
+             still the crawlable /jobs/<id> static page for new tabs and
+             search engines. */
+          var cardLink = e.target.closest('a[href]');
+          if (cardLink) e.preventDefault();
+          openJob(card.getAttribute('data-id'));
+        }
       });
       els.grid.addEventListener('keydown', function (e) {
         if (e.key !== 'Enter' && e.key !== ' ') return;
@@ -3207,12 +3237,12 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Mandate Dispatch — 72-hour email briefing subscription              */
+  /* Free job & fellowship email alerts — 72-hour briefing subscription              */
   /* ------------------------------------------------------------------ */
   var NEWSLETTER_STORE_KEY = 'ufp_newsletter';
 
   var SECTOR_LABELS = {
-    'all': 'All mandates',
+    'all': 'All jobs',
     'academic': 'JRF / PhD / Academic',
     'forestry-gis': 'Forestry & GIS',
     'corporate-esg': 'Corporate ESG'
@@ -3277,7 +3307,7 @@
       form.hidden = true;
       dispatchSetStatus(
         form,
-        t('dispatch.mini.ok', 'Subscribed \u2014 next briefing within 72 hours.') + (note ? ' ' + note : ''),
+        t('dispatch.mini.ok', 'Subscribed \u2014 next email alert within 72 hours.') + (note ? ' ' + note : ''),
         'is-ok'
       );
       return;
@@ -3292,7 +3322,7 @@
       '<dl class="dd-meta">' +
       '<div><dt>' + t('dd.address', 'Address') + '</dt><dd>' + escapeHtml(record.email) + '</dd></div>' +
       '<div><dt>' + t('dd.frequency', 'Frequency') + '</dt><dd>' + (record.frequency === 'weekly' ? t('dd.freq.weekly', 'Weekly digest') : t('dd.freq.3day', 'Every 3 days')) + '</dd></div>' +
-      '<div><dt>' + t('dd.sector', 'Sector') + '</dt><dd>' + escapeHtml(t('sector.' + (record.sector || 'all'), SECTOR_LABELS[record.sector] || 'All mandates')) + '</dd></div>' +
+      '<div><dt>' + t('dd.sector', 'Sector') + '</dt><dd>' + escapeHtml(t('sector.' + (record.sector || 'all'), SECTOR_LABELS[record.sector] || 'All jobs')) + '</dd></div>' +
       '</dl>' +
       (note ? '<p class="dd-note">' + escapeHtml(note) + '</p>' : '') +
       '<p class="dd-actions">' +
@@ -3318,7 +3348,7 @@
     event.preventDefault();
     var payload = dispatchPayload(form);
     if (!payload) {
-      dispatchSetStatus(form, t('dispatch.invalid', 'Enter a valid official email address to subscribe.'), 'is-error');
+      dispatchSetStatus(form, t('dispatch.invalid', 'Enter a valid email address to subscribe.'), 'is-error');
       var badInput = form.querySelector('input[type="email"]');
       if (badInput) badInput.focus();
       return;
@@ -3351,21 +3381,21 @@
       newsletterStore(record);
       if (result.ok) {
         dispatchDone(form, record, result.persisted ? '' :
-          t('dd.note.local', 'Saved on this device. To join the current dispatch list immediately, write to urbanforestpark@gmail.com.'));
+          t('dd.note.local', 'Saved on this device. To join the current email alert list immediately, write to urbanforestpark@gmail.com.'));
         toast(result.persisted
-          ? t('toast.subscribed', 'Dispatch subscribed \u2014 next briefing within 72 hours.')
-          : t('toast.saved', 'Dispatch preference saved on this device.'));
+          ? t('toast.subscribed', 'Email alerts subscribed \u2014 next briefing within 72 hours.')
+          : t('toast.saved', 'Email alert preference saved on this device.'));
       } else {
         dispatchDone(form, record,
-          t('dd.note.local', 'Saved on this device. To join the current dispatch list immediately, write to urbanforestpark@gmail.com.'));
-        toast(t('toast.saved', 'Dispatch preference saved on this device.'));
+          t('dd.note.local', 'Saved on this device. To join the current email alert list immediately, write to urbanforestpark@gmail.com.'));
+        toast(t('toast.saved', 'Email alert preference saved on this device.'));
       }
     }).catch(function () {
       record.status = 'local';
       newsletterStore(record);
       dispatchDone(form, record,
-        t('dd.note.local', 'Saved on this device. To join the current dispatch list immediately, write to urbanforestpark@gmail.com.'));
-      toast(t('toast.saved', 'Dispatch preference saved on this device.'));
+        t('dd.note.local', 'Saved on this device. To join the current email alert list immediately, write to urbanforestpark@gmail.com.'));
+      toast(t('toast.saved', 'Email alert preference saved on this device.'));
     }).then(function () {
       if (submitBtn) submitBtn.disabled = false;
     });

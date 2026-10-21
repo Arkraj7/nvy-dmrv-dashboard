@@ -1,36 +1,119 @@
 {
-  "generated_at": "2026-10-20T21:56:03",
-  "reason": "hard-negative sales/commercial/support blocklist",
+  "generated_at": "2026-10-21T11:24:27",
+  "reason": "Topical purity: remove AI-training, unrelated engineering/manufacturing, generic supply-chain, commercial, procurement and sales roles",
+  "removed_count": 16,
   "removed": [
     {
-      "bucket": "active",
-      "id": "sales-manager-sustainability-intertek-india",
-      "title": "Sales Manager - Sustainability",
-      "organization": "Intertek India"
+      "id": "natural-resource-conservation-scientist-alignerr",
+      "title": "Natural Resource Conservation Scientist (AI Training)",
+      "organization": "Alignerr",
+      "category": "Research Associate & Project Staff (Contractual)",
+      "reason": "AI-training dataset work (Alignerr)"
     },
     {
-      "bucket": "active",
-      "id": "sales-consultant-quantum-sustainability-consulting",
-      "title": "Sales Consultant",
-      "organization": "Quantum Sustainability Consulting Pvt. Ltd."
+      "id": "editorial-reviewer-plant-animal-science-cactus-communication",
+      "title": "Editorial Reviewer: Plant and Animal Science",
+      "organization": "Cactus Communications",
+      "category": "Research Associate & Project Staff (Contractual)",
+      "reason": "Commercial manuscript editing, not an environmental/forestry role"
     },
     {
-      "bucket": "active",
-      "id": "sales-analyst-nextpower",
-      "title": "Sales Analyst",
-      "organization": "Nextpower"
+      "id": "earth-ocean-climate-science-researcher-afterquery",
+      "title": "Earth, Ocean and Climate Science Researcher",
+      "organization": "AfterQuery",
+      "category": "Research Associate & Project Staff (Contractual)",
+      "reason": "AI evaluation task design (AfterQuery)"
     },
     {
-      "bucket": "active",
-      "id": "business-development-marketing-associate-flora-carbon-ai",
-      "title": "Business Development & Marketing Associate",
-      "organization": "Flora Carbon AI"
+      "id": "climate-data-specialist-alignerr",
+      "title": "Climate Data Specialist (AI Training)",
+      "organization": "Alignerr",
+      "category": "Research Associate & Project Staff (Contractual)",
+      "reason": "AI-training dataset work (Alignerr)"
     },
     {
-      "bucket": "active",
-      "id": "area-sales-manager-loom-solar",
-      "title": "Area Sales Manager",
-      "organization": "Loom Solar Pvt. Ltd."
+      "id": "investment-director-climate-tech-sagana",
+      "title": "Investment Director - Climate Tech",
+      "organization": "Sagana",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Commercial investment role"
+    },
+    {
+      "id": "team-member-green-steel-jsw-steel-chennai",
+      "title": "Team Member - Green Steel",
+      "organization": "JSW Steel",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Manufacturing and scrap value-chain operations"
+    },
+    {
+      "id": "process-engineer-electrification-quest-global",
+      "title": "Process Engineer - Electrification, Energy Efficiency & GHG Emissions",
+      "organization": "Quest Global",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Industrial process engineering, not an environmental job"
+    },
+    {
+      "id": "mechanical-design-engineer-saltech-design-labs",
+      "title": "Mechanical Design Engineer",
+      "organization": "Saltech Design Labs",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Unrelated mechanical design engineering"
+    },
+    {
+      "id": "co-founder-dhartiamrit-ecoservices",
+      "title": "Co-founder with Investment",
+      "organization": "DhartiAmrit Ecoservices",
+      "category": "Forestry, Wildlife & Afforestation",
+      "reason": "Commercial co-founder / investment role"
+    },
+    {
+      "id": "asst-manager-manager-operations-tuv-sud-gurugram-2",
+      "title": "Manager - Environmental, Social & Sustainability Services",
+      "organization": "TÜV SÜD",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Business-growth / client-acquisition role"
+    },
+    {
+      "id": "associate-team-lead-supplier-compliance-colgate-palmolive",
+      "title": "Associate Team Lead, Supplier Compliance",
+      "organization": "Colgate-Palmolive",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Generic supplier compliance / procurement"
+    },
+    {
+      "id": "associate-analyst-supplier-compliance-colgate-palmolive",
+      "title": "Associate Analyst, Supplier Compliance",
+      "organization": "Colgate-Palmolive",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Generic supplier compliance / procurement"
+    },
+    {
+      "id": "analyst-civil-design-desri-hyderabad",
+      "title": "Analyst/Senior Analyst - Civil Design Engineering",
+      "organization": "DESRI",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Civil design engineering, not an environmental job"
+    },
+    {
+      "id": "partnerships-outreach-manager-liter-of-light-mumbai",
+      "title": "Partnerships & Outreach Manager",
+      "organization": "Liter of Light India",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Commercial partnerships and outreach role"
+    },
+    {
+      "id": "building-automation-engineer-cundall-chennai",
+      "title": "Engineer/Senior Engineer - Building Automation, ELV/ICT",
+      "organization": "Cundall",
+      "category": "ESG, Carbon Markets & Corporate Sustainability",
+      "reason": "Building automation engineering, not an environmental job"
+    },
+    {
+      "id": "simons-postdoctoral-fellowships-plant-biology",
+      "title": "Simons Postdoctoral Fellowships in Plant Biology",
+      "organization": "Simons Foundation",
+      "category": "Academic, JRF, SRF & PhD Positions",
+      "reason": "Duplicate of the global Simons Foundation fellowship; India/Global registries must stay disjoint"
     }
   ]
 }

@@ -35,8 +35,8 @@ def test_rss_feed_is_well_formed_and_escaped():
     item = channel.find("item")
     assert item is not None
     assert "Forest & Ecology" in item.findtext("title")
-    assert "?job=a&b" in item.findtext("link")
-    assert "?job=a&amp;b" in xml
+    assert item.findtext("link") == "https://www.urbanforestpark.com/jobs/a-b"
+    assert "Forest &amp; Ecology" in xml
 
 
 def test_inject_feed_links_adds_alternate_and_footer(tmp_path):

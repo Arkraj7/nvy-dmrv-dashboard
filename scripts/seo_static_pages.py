@@ -352,7 +352,7 @@ FEED_JSONLD_RE = re.compile(
 
 
 def _ensure_index_item_list(text: str, public: Path) -> str:
-    """Expose a static ItemList of the live mandates on the homepage.
+    """Expose a static ItemList of the live jobs on the homepage.
 
     Regenerated on every SEO build (not append-only): quarantined records and
     records whose entry type is unknown must never appear in JSON-LD. jobs.js
@@ -384,13 +384,13 @@ def _ensure_index_item_list(text: str, public: Path) -> str:
                 "name": str(job.get("clean_title") or "")
                 + " \u2014 "
                 + str(job.get("organization") or ""),
-                "url": bsp.SITE + "/?job=" + str(job.get("id") or ""),
+                "url": bsp.SITE + "/jobs/" + str(job.get("id") or ""),
             }
         )
     payload = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Active green-sector mandates in India \u2014 Climate, Forestry, ESG & GIS",
+        "name": "Active environmental, forestry, JRF and ESG jobs in India \u2014 Climate, Forestry, ESG & GIS",
         "numberOfItems": len(entries),
         "itemListElement": entries,
     }
@@ -567,12 +567,12 @@ def build_about_page(today: date) -> str:
 
     <section class="hub-main">
       <div class="hub-main-inner about-copy">
-        <h2>Our mandate</h2>
+        <h2>Our mission</h2>
         <p>
           India's climate transition depends on people being able to find credible, timely
           opportunities in forestry, conservation, environmental science, sustainability,
           geospatial analysis and academic research. Urban Forest Park exists to make that
-          search transparent. Every active and archived mandate is presented with its
+          search transparent. Every active and archived job is presented with its
           organisation, state, position type, deadline and a direct link to the official
           application page &mdash; no application fees and no sponsored
           ranking.
@@ -599,7 +599,7 @@ def build_about_page(today: date) -> str:
           </li>
           <li>
             <h3>4. Publication, monitoring &amp; correction</h3>
-            <p>Active mandates are refreshed daily. Expired mandates move to the public archive rather than disappearing. Corrections can be submitted through the <a href="/report.html">issue-reporting form</a>; we aim to acknowledge substantive corrections within two business days.</p>
+            <p>Active jobs are refreshed daily. Expired jobs move to the public archive rather than disappearing. Corrections can be submitted through the <a href="/report.html">issue-reporting form</a>; we aim to acknowledge substantive corrections within two business days.</p>
           </li>
         </ol>
 
@@ -615,7 +615,7 @@ def build_about_page(today: date) -> str:
           </article>
           <article class="about-card">
             <h3>Urban forestry &amp; heat-island mitigation</h3>
-            <p>We prioritise mandates and research that connect plantation, maintenance and community outcomes to measurable cooling, carbon and biodiversity benefits.</p>
+            <p>We prioritise jobs and research that connect plantation, maintenance and community outcomes to measurable cooling, carbon and biodiversity benefits.</p>
           </article>
           <article class="about-card">
             <h3>Environmental law &amp; public policy</h3>

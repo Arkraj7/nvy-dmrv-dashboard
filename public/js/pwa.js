@@ -16,7 +16,7 @@
   var LS_NOTIFY = 'ufp_notifications_enabled';
   var LS_LAST_SEEN = 'ufp_last_seen_job_id';
   var LS_COLLAPSED = 'ufp_app_widget_collapsed';
-  var DATA_URLS = ['jobs.json', 'global_jobs.json'];
+  var DATA_URLS = ['/jobs.json', '/global_jobs.json'];
   var POLL_MS = 10 * 60 * 1000;
 
   var initialized = false;
@@ -119,7 +119,7 @@
         'New on UrbanForestPark: ' + (job.clean_title || 'New opportunity'),
         (job.organization ? job.organization + ' \u00b7 ' : '') + jobLocation(job) +
           ' \u2014 tap to view and apply',
-        '/?job=' + encodeURIComponent(job.id)
+        '/jobs/' + encodeURIComponent(job.id)
       );
     });
   }

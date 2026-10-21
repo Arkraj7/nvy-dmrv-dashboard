@@ -5,17 +5,20 @@
       "path": "/",
       "file": "index.html",
       "canonical": "https://www.urbanforestpark.com/",
-      "title": "Climate, Forestry, ESG Jobs in India | Urban Forest Park",
-      "description": "Verified climate, forestry, ESG, carbon-market, geospatial and academic jobs across India, each linked by a direct application link and refreshed every day.",
-      "primary_keyword": "Climate, Forestry, ESG",
+      "title": "Environmental, Forestry, JRF, GIS & ESG Jobs in India 2026",
+      "description": "Verified Government Forestry, JRF/SRF Environmental Science, CAMPA, Wildlife, GIS and ESG jobs across India and globally. Apply directly on official portals.",
+      "primary_keyword": "Environmental, Forestry, JRF, GIS & ESG Jobs in India",
       "secondary_keywords": [
-        "climate jobs India",
+        "environmental jobs India",
         "forestry jobs India",
-        "ESG jobs India",
-        "environmental research jobs"
+        "JRF SRF project associate jobs",
+        "CAMPA FSI SPCB recruitment",
+        "GIS remote sensing jobs",
+        "ESG carbon sustainability jobs",
+        "PhD fellowships India"
       ],
       "search_intent": "transactional",
-      "h1": "India’s Climate, Forestry, ESG, Geospatial & Academic Career Registry",
+      "h1": "Environmental, Forestry, JRF, GIS & ESG Jobs in India (2026)",
       "indexable": true
     },
     {
@@ -56,18 +59,19 @@
       "path": "/forestry-wildlife-government-jobs",
       "file": "forestry-wildlife-government-jobs.html",
       "canonical": "https://www.urbanforestpark.com/forestry-wildlife-government-jobs",
-      "title": "Forest Guard, RFO, ACF & IFS Recruitment | Urban Forest Park",
-      "description": "Forest guard, forester, RFO, ACF and IFS recruitment plus forest department, ICFRE, WII and MoEFCC vacancies across India, with free direct application links.",
-      "primary_keyword": "Forest Guard, RFO, ACF & IFS Recruitment",
+      "title": "Government Forestry, CAMPA, FSI & SPCB Jobs in India 2026",
+      "description": "Government forestry, CAMPA, FSI and SPCB recruitment plus forest guard, RFO, ACF, IFS, ICFRE, WII and MoEFCC jobs across India. Free direct application links.",
+      "primary_keyword": "Government Forestry, CAMPA, FSI & SPCB Jobs in India",
       "secondary_keywords": [
         "forest guard recruitment",
-        "forester jobs",
         "RFO ACF IFS recruitment",
+        "CAMPA FSI jobs",
         "state forest department jobs",
+        "SPCB recruitment",
         "ICFRE WII vacancies"
       ],
       "search_intent": "transactional",
-      "h1": "Government Forest Recruitment in India",
+      "h1": "Government Forestry, CAMPA, FSI & SPCB Jobs in India",
       "indexable": true
     },
     {
@@ -261,17 +265,17 @@
       "path": "/unsubscribe",
       "file": "unsubscribe.html",
       "canonical": "https://www.urbanforestpark.com/unsubscribe",
-      "title": "Dispatch Subscription Preferences | Urban Forest Park India",
-      "description": "Manage your Urban Forest Park Mandate Dispatch subscription, update email preferences or unsubscribe from the weekly climate, forestry and ESG jobs briefing.",
-      "primary_keyword": "Dispatch Subscription Preferences",
+      "title": "Email Alert Preferences & Unsubscribe | Urban Forest Park",
+      "description": "Manage your Urban Forest Park email job alert subscription, update delivery preferences or unsubscribe from the free environmental and forestry jobs briefing.",
+      "primary_keyword": "Email Alert Preferences",
       "secondary_keywords": [
         "unsubscribe",
         "email preferences",
-        "newsletter management",
-        "dispatch subscription"
+        "job alert management",
+        "email alert subscription"
       ],
       "search_intent": "navigational",
-      "h1": "Dispatch Subscription Preferences",
+      "h1": "Email Alert Preferences",
       "indexable": false
     },
     {
@@ -397,17 +401,17 @@
       "path": "/newsletter_latest",
       "file": "newsletter_latest.html",
       "canonical": "https://www.urbanforestpark.com/newsletter_latest",
-      "title": "Mandate Dispatch Archive | Urban Forest Park Weekly India",
-      "description": "Read the latest Urban Forest Park Mandate Dispatch with verified climate, forestry, ESG, geospatial and academic job highlights from across India every week.",
-      "primary_keyword": "Mandate Dispatch",
+      "title": "Urban Forest Park Job & Fellowship Email Alert | India 2026",
+      "description": "Read the latest Urban Forest Park email alert with verified environmental, forestry, JRF, GIS, ESG and government job openings from across India every week.",
+      "primary_keyword": "Job & Fellowship Email Alert",
       "secondary_keywords": [
-        "weekly job dispatch",
+        "weekly job alert",
         "climate jobs email",
         "forestry jobs newsletter",
         "ESG jobs digest"
       ],
       "search_intent": "informational",
-      "h1": "Urban Forest Park Mandate Dispatch — 19 October 2026",
+      "h1": "Urban Forest Park Job & Fellowship Email Alert",
       "indexable": false
     },
     {

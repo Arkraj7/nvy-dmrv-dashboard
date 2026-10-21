@@ -18,11 +18,11 @@ def _job():
     }
 
 
-def test_telegram_html_escapes_record_content_and_links_to_dossier():
-    html = fh.build_telegram_digest_html([_job()], "2026-10-20", "New mandates")
+def test_telegram_html_escapes_record_content_and_links_to_static_page():
+    html = fh.build_telegram_digest_html([_job()], "2026-10-20", "New jobs")
     assert "&lt;Forest Ecology&gt;" in html
     assert "ICFRE &amp; FRI" in html
-    assert "https://www.urbanforestpark.com/?job=jrf-forestry-1" in html
+    assert "https://www.urbanforestpark.com/jobs/jrf-forestry-1" in html
     assert "parse_mode" not in html
 
 
