@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Seven-group SEO checklist auditor for the Urban Forest Park registry.
+"""Nine-group SEO checklist auditor for the Urban Forest Park registry.
 
 Groups
   1. URL hygiene      - one canonical host, no http://, no non-www variants
@@ -10,6 +10,7 @@ Groups
   6. Internal linking - no broken links/images, depth <= 2, no orphan pages
   7. Delivery         - headers, logo weight, favicons, confidential gate
   8. Job pages        - nested /jobs/<slug> metadata, canonical, schema, sitemap
+  9. Content hygiene  - word count, repeated blocks, title/H1, anchors, query links
 
 Exits non-zero when any ERROR is recorded. Warnings do not fail the run.
 """
@@ -60,22 +61,22 @@ MATRIX_FILES = [
 ]
 
 TOP_STATE_HREFS = [
-    ("Uttar Pradesh", "/?state=Uttar%20Pradesh"),
-    ("Maharashtra", "/?state=Maharashtra"),
-    ("Delhi NCR", "/?state=Delhi%20NCR"),
-    ("Karnataka", "/?state=Karnataka"),
-    ("Tamil Nadu", "/?state=Tamil%20Nadu"),
-    ("Madhya Pradesh", "/?state=Madhya%20Pradesh"),
-    ("Rajasthan", "/?state=Rajasthan"),
-    ("Gujarat", "/?state=Gujarat"),
-    ("Telangana", "/?state=Telangana"),
-    ("Uttarakhand", "/?state=Uttarakhand"),
-    ("West Bengal", "/?state=West%20Bengal"),
-    ("Bihar", "/?state=Bihar"),
-    ("Kerala", "/?state=Kerala"),
-    ("Punjab", "/?state=Punjab"),
-    ("Odisha", "/?state=Odisha"),
-    ("Assam", "/?state=Assam"),
+    ("Uttar Pradesh", "/bharat-regional-green-jobs#state-uttar-pradesh"),
+    ("Maharashtra", "/bharat-regional-green-jobs#state-maharashtra"),
+    ("Delhi NCR", "/bharat-regional-green-jobs#state-delhi-ncr"),
+    ("Karnataka", "/bharat-regional-green-jobs#state-karnataka"),
+    ("Tamil Nadu", "/bharat-regional-green-jobs#state-tamil-nadu"),
+    ("Madhya Pradesh", "/bharat-regional-green-jobs#state-madhya-pradesh"),
+    ("Rajasthan", "/bharat-regional-green-jobs#state-rajasthan"),
+    ("Gujarat", "/bharat-regional-green-jobs#state-gujarat"),
+    ("Telangana", "/bharat-regional-green-jobs#state-telangana"),
+    ("Uttarakhand", "/bharat-regional-green-jobs#state-uttarakhand"),
+    ("West Bengal", "/bharat-regional-green-jobs#state-west-bengal"),
+    ("Bihar", "/bharat-regional-green-jobs#state-bihar"),
+    ("Kerala", "/bharat-regional-green-jobs#state-kerala"),
+    ("Punjab", "/bharat-regional-green-jobs#state-punjab"),
+    ("Odisha", "/bharat-regional-green-jobs#state-odisha"),
+    ("Assam", "/bharat-regional-green-jobs#state-assam"),
 ]
 
 ERRORS: List[str] = []
@@ -833,6 +834,115 @@ def group_8_job_pages() -> None:
 
 # --------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------
+# Group 9 - Content weight, title/H1 alignment, anchor hygiene
+# --------------------------------------------------------------------------
+
+STOPWORDS = set(
+    "a an and are as at be by for from in into is it of on or the to with your our "
+    "we you this that these those jobs job india 2026".split()
+)
+CONTENT_ANCHOR_FILES = {
+    "index.html",
+    *HUB_FILES,
+    "global-climate-sustainability-opportunities.html",
+    "bharat-regional-green-jobs.html",
+    "hindi-environment-forestry-jobs.html",
+}
+
+
+def _visible_page_text(text: str) -> str:
+    text = re.sub(r"<(script|style|noscript)\b[^>]*>.*?</\1>", " ", text, flags=re.I | re.S)
+    return visible(text)
+
+
+def _anchors(text: str) -> List[Tuple[str, str, str]]:
+    found: List[Tuple[str, str, str]] = []
+    for match in re.finditer(r"<a\b[^>]*>.*?</a>", text, re.I | re.S):
+        tag = match.group(0)
+        href = attr(tag, "href") or ""
+        label = visible(match.group(0))
+        rel = (attr(tag, "rel") or "").lower()
+        found.append((label, href, rel))
+    return found
+
+
+def _internal_query(href: str) -> bool:
+    href = unescape(href).strip()
+    if not href or "?" not in href:
+        return False
+    if href.startswith(("mailto:", "tel:", "javascript:", "data:")):
+        return False
+    return href.startswith(("/", "?")) or href.startswith(SITE)
+
+
+def group_9(pages: Dict[str, str]) -> None:
+    # Homepage should stay a concise gateway, not a duplicate of the registry.
+    index_text = _visible_page_text(pages.get("index.html", ""))
+    words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'’./&-]*", index_text)
+    if len(words) >= 1800:
+        error(9, f"index.html has {len(words)} visible words; target is under 1,800")
+    else:
+        info(f"index.html visible word count: {len(words)}")
+
+    # No paragraph-sized block should repeat more than twice on the homepage.
+    blocks = [
+        visible(m.group(2))
+        for m in re.finditer(r"<(p|li|blockquote|h[2-3])\b[^>]*>(.*?)</\1>", pages.get("index.html", ""), re.I | re.S)
+    ]
+    sentences = re.split(r"(?<=[.!?])\s+", index_text)
+    counts: Dict[str, int] = {}
+    for block in [*blocks, *sentences]:
+        norm = re.sub(r"\s+", " ", block).strip()
+        if len(norm.split()) >= 8:
+            counts[norm] = counts.get(norm, 0) + 1
+    for block, count in counts.items():
+        if count > 2:
+            error(9, f"index.html repeats an 8+ word block {count} times: {block[:120]!r}")
+
+    # Every non-stopword in the title must also appear in the H1 on hub pages.
+    for name in HUB_FILES:
+        text = pages.get(name, "")
+        title_match = re.search(r"<title\b[^>]*>(.*?)</title>", text, re.I | re.S)
+        h1s = [visible(m.group(1)) for m in H1_RE.finditer(text)]
+        if not title_match or len(h1s) != 1:
+            error(9, f"{name}: cannot compare title and H1")
+            continue
+        title_tokens = re.findall(r"[a-z0-9]+", unescape(title_match.group(1)).lower())
+        h1_text = h1s[0].lower()
+        missing = [
+            token
+            for token in title_tokens
+            if token not in STOPWORDS and len(token) > 1 and token not in h1_text
+        ]
+        if missing:
+            error(9, f"{name}: title words missing from H1: {sorted(set(missing))}")
+
+    # Link-text hygiene across every page.
+    page_files = [path for path in html_pages()]
+    job_files = sorted((PUBLIC / "jobs").glob("*.html"))
+    for path in [*page_files, *job_files]:
+        name = path.name if path.parent == PUBLIC else f"/jobs/{path.stem}"
+        text = read_text(path)
+        anchors = _anchors(text)
+        for label, href, rel in anchors:
+            if _internal_query(href) and "nofollow" not in rel:
+                error(9, f"{name}: dofollow internal query link {href!r} ({label[:60]!r})")
+            if len(label) > 75:
+                error(9, f"{name}: anchor text {len(label)} chars (>75): {label[:90]!r}")
+
+        if (path.parent == PUBLIC and path.name in CONTENT_ANCHOR_FILES) or path.parent != PUBLIC:
+            seen: Dict[str, str] = {}
+            for label, href, _rel in anchors:
+                key = label.casefold().strip()
+                if not key:
+                    continue
+                if key in seen:
+                    error(9, f"{name}: duplicate anchor text {label!r} ({seen[key]!r} and {href!r})")
+                else:
+                    seen[key] = href
+
+
 def main() -> int:
     pages = {path.name: read_text(path) for path in html_pages()}
     if not pages:
@@ -850,6 +960,7 @@ def main() -> int:
     group_6(pages, kmap)
     group_7(pages)
     group_8_job_pages()
+    group_9(pages)
 
     print("=" * 78)
     print("SEO checklist audit - Urban Forest Park")

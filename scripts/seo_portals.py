@@ -183,7 +183,7 @@ def hindi_card_html(job: Dict[str, Any]) -> str:
     qual = plain(job.get("qualification_summary"))
     elig_html = (
         f'<p class="hub-card-elig"><strong>योग्यता:</strong> {esc(trim(qual, 200))}</p>'
-        if qual
+        if qual and bsp.is_specific_qualification(qual)
         else ""
     )
     summary = plain(job.get("summary_hi")) or trim(job.get("role_summary"), 220)
@@ -192,33 +192,33 @@ def hindi_card_html(job: Dict[str, Any]) -> str:
 
     return f"""        <article class="hub-card hi-card">
           <div class="hub-card-top">
-            {''.join(badges)}
+            {bsp.BADGE_SEP.join(badges)}
           </div>
-          <h3 class="hub-card-title"><a href="{link}">{esc(title)}</a></h3>
+          <h3 class="hub-card-title"><a href="{link}" title="{esc(title)}">{esc(bsp.anchor_text(title))}</a></h3>
           {english_line}
           <p class="hub-card-org">{esc(org_line)}</p>
           {elig_html}
           {summary_html}
-          <p class="hub-card-foot"><a href="{link}">पूर्ण विवरण एवं आवेदन लिंक &rarr;</a></p>
+          <p class="hub-card-foot"><span>पूर्ण विवरण एवं आवेदन लिंक &rarr;</span></p>
         </article>"""
 
 
 def header_html_hi() -> str:
     return """  <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="/?lang=hi" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
+      <a class="brand" href="#hindi-list" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
         <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park — India Climate, Forestry, ESG &amp; Research Jobs Registry Logo" title="Urban Forest Park Official Emblem" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
         <span class="brand-sub">राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="मुख्य नेविगेशन">
-        <a class="nav-link" href="/?lang=hi">करियर रजिस्ट्री (हिंदी)</a>
-        <a class="nav-link" href="/?view=archive&amp;lang=hi">संग्रहित भर्तियाँ</a>
-        <a class="nav-link" href="/global-climate-sustainability-opportunities.html">वैश्विक अवसर</a>
+        <a class="nav-link" href="#hindi-list">करियर रजिस्ट्री (हिंदी)</a>
+        <a class="nav-link" href="/?view=archive&amp;lang=hi" rel="nofollow">संग्रहित भर्तियाँ</a>
+        <a class="nav-link" href="/global-climate-sustainability-opportunities">वैश्विक अवसर</a>
         <a class="nav-link" href="/">EN Registry</a>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-outline nav-cta" href="/?lang=hi#filter-bar">रजिस्ट्री ब्राउज़ करें</a>
+        <a class="btn btn-outline nav-cta" href="#hindi-list">रजिस्ट्री ब्राउज़ करें</a>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="रात्रि मोड पर स्विच करें">
           <svg class="theme-icon icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3 17 7M7 17l-1.7 1.7"/></svg>
           <svg class="theme-icon icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.2A8.5 8.5 0 1 1 9.8 3.6a7 7 0 0 0 10.6 10.6z"/></svg>
@@ -249,11 +249,11 @@ def footer_html_hi() -> str:
       <div class="footer-col">
         <h3>करियर पथ</h3>
         <ul>
-          <li><a href="/jrf-srf-project-associate-jobs.html">JRF / SRF एवं प्रोजेक्ट एसोसिएट भर्तियाँ</a></li>
-          <li><a href="/phd-fellowships-climate-sustainability.html">PhD एवं पोस्टडॉक्टोरल फेलोशिप</a></li>
-          <li><a href="/forestry-wildlife-government-jobs.html">वानिकी एवं वन्यजीव सरकारी भर्तियाँ</a></li>
-          <li><a href="/gis-remote-sensing-climate-jobs.html">GIS एवं रिमोट सेंसिंग भर्तियाँ</a></li>
-          <li><a href="/esg-carbon-sustainability-jobs.html">ESG एवं कार्बन बाज़ार भर्तियाँ</a></li>
+          <li><a href="/jrf-srf-project-associate-jobs">JRF / SRF एवं प्रोजेक्ट एसोसिएट भर्तियाँ</a></li>
+          <li><a href="/phd-fellowships-climate-sustainability">PhD एवं पोस्टडॉक्टोरल फेलोशिप</a></li>
+          <li><a href="/forestry-wildlife-government-jobs">वानिकी एवं वन्यजीव सरकारी भर्तियाँ</a></li>
+          <li><a href="/gis-remote-sensing-climate-jobs">GIS एवं रिमोट सेंसिंग भर्तियाँ</a></li>
+          <li><a href="/esg-carbon-sustainability-jobs">ESG एवं कार्बन बाज़ार भर्तियाँ</a></li>
         </ul>
       </div>
 
@@ -261,7 +261,7 @@ def footer_html_hi() -> str:
         <h3>क्षेत्रीय एवं बहुभाषी पोर्टल (भारत / हिंदी)</h3>
         <ul>
           <li><span class="footer-current">हिंदी करियर पोर्टल (यह पृष्ठ)</span></li>
-          <li><a href="/bharat-regional-green-jobs.html">भारत क्षेत्रीय हरित भर्तियाँ</a></li>
+          <li><a href="/bharat-regional-green-jobs">भारत क्षेत्रीय हरित भर्तियाँ</a></li>
           <li><a href="/">English Career Registry</a></li>
         </ul>
       </div>
@@ -295,7 +295,7 @@ def build_hindi_hub_page(
     jobs = _sort_recent_first(active_jobs)
     cards = "\n".join(hindi_card_html(j) for j in jobs) or (
         '        <p class="hub-empty">इस समय कोई सक्रिय भर्ती उपलब्ध नहीं — नई भर्तियाँ प्रतिदिन जोड़ी जाती हैं। '
-        '<a href="/?lang=hi">लाइव रजिस्ट्री देखें</a>।</p>'
+        '<a href="#hindi-list">लाइव रजिस्ट्री देखें</a>।</p>'
     )
     archived = recent_archive(archived_jobs, today, bsp.RECENT_ARCHIVE_DAYS)[: bsp.HUB_ARCHIVE_LIMIT]
     archive_block = ""
@@ -415,7 +415,7 @@ def build_hindi_hub_page(
     <section class="hub-hero">
       <div class="hub-hero-inner">
         <nav class="hub-crumbs" aria-label="ब्रेडक्रम्ब">
-          <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>हिंदी करियर पोर्टल</span>
+          <a href="/">All jobs</a><span aria-hidden="true">/</span><span>हिंदी करियर पोर्टल</span>
         </nav>
         <p class="eyebrow">हिंदी ग्रीन करियर पोर्टल</p>
         <h1>{esc(h1)}</h1>
@@ -426,9 +426,9 @@ def build_hindi_hub_page(
           बंद भर्तियाँ ऐतिहासिक संग्रह में संरक्षित रहती हैं।
         </p>
         <div class="hub-hero-actions">
-          <a class="btn btn-primary" href="/?lang=hi">लाइव रजिस्ट्री खोलें &rarr;</a>
-          <a class="btn btn-outline" href="/?view=archive&amp;lang=hi">संग्रहित भर्तियाँ</a>
-          <a class="btn btn-outline" href="/bharat-regional-green-jobs.html">क्षेत्रीय पोर्टल (भारत)</a>
+          <a class="btn btn-primary" href="#hindi-list">लाइव रजिस्ट्री खोलें &rarr;</a>
+          <a class="btn btn-outline" href="/?view=archive&amp;lang=hi" rel="nofollow">पुरानी भर्तियाँ</a>
+          <a class="btn btn-outline" href="/bharat-regional-green-jobs">क्षेत्रीय पोर्टल (भारत)</a>
         </div>
         <dl class="hub-stats">
           <div><dt>सक्रिय भर्तियाँ</dt><dd>{len(jobs)}</dd></div>
@@ -458,13 +458,13 @@ def build_hindi_hub_page(
             <h2>रोज़ाना नई भर्तियाँ — प्रत्येक सुबह 07:00 बजे IST</h2>
             <p>Telegram एवं WhatsApp पर तुरंत अलर्ट, तथा प्रत्येक 72 घंटे में ईमेल डाइजेस्ट। कोई शुल्क नहीं।</p>
           </div>
-          <a class="btn btn-primary" href="/?lang=hi">रजिस्ट्री में खोजें &rarr;</a>
+          <a class="btn btn-primary" href="#hindi-list">रजिस्ट्री में खोजें &rarr;</a>
         </section>
 
         <section class="hub-others" aria-labelledby="hub-others-title">
           <h2 id="hub-others-title">अन्य करियर पथ एवं पोर्टल</h2>
           <ul class="hub-other-grid">
-            <li><a href="/bharat-regional-green-jobs.html"><span class="hub-other-name">भारत क्षेत्रीय हरित भर्तियाँ</span><span class="hub-other-cnt">सभी राज्य</span></a></li>
+            <li><a href="/bharat-regional-green-jobs"><span class="hub-other-name">भारत क्षेत्रीय हरित भर्तियाँ</span><span class="hub-other-cnt">सभी राज्य</span></a></li>
             <li><a href="/"><span class="hub-other-name">English Career Registry</span><span class="hub-other-cnt">EN</span></a></li>
 {pathway_links}
           </ul>
@@ -529,7 +529,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
             used.add(st)
         total = sum(n for _st, n in matched)
         state_links = "\n".join(
-            f'            <li><a href="/?state={quote(st)}">{esc(st)} '
+            f'            <li id="state-{bsp.state_slug(st)}"><a href="#state-{bsp.state_slug(st)}">{esc(st)} '
             f'<span class="region-cnt">{n}</span></a></li>'
             for st, n in matched
         ) or (
@@ -558,7 +558,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
                 {
                     "@type": "ListItem",
                     "position": len(item_entries) + 1,
-                    "url": SITE + "/?state=" + quote(st),
+                    "url": SITE + "/bharat-regional-green-jobs#state-" + bsp.state_slug(st),
                     "name": st,
                 }
             )
@@ -568,7 +568,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         key=lambda kv: (-kv[1], kv[0]),
     )
     other_links = "\n".join(
-        f'            <li><a href="/?state={quote(st)}">{esc(st)} '
+        f'            <li id="state-{bsp.state_slug(st)}"><a href="#state-{bsp.state_slug(st)}">{esc(st)} '
         f'<span class="region-cnt">{n}</span></a></li>'
         for st, n in others
     ) or '            <li class="region-empty">&mdash;</li>'
@@ -684,7 +684,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
     <section class="hub-hero">
       <div class="hub-hero-inner">
         <nav class="hub-crumbs" aria-label="Breadcrumb">
-          <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>Bharat Regional Portal</span>
+          <a href="/">All jobs</a><span aria-hidden="true">/</span><span>Bharat Regional Portal</span>
         </nav>
         <p class="eyebrow">Bharat Regional &amp; Multilingual Portal</p>
         <h1>{esc(h1)}</h1>
@@ -694,7 +694,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
           Every listing links straight to a direct application page.
         </p>
         <div class="hub-hero-actions">
-          <a class="btn btn-primary" href="/hindi-environment-forestry-jobs.html">हिंदी पोर्टल खोलें &rarr;</a>
+          <a class="btn btn-primary" href="/hindi-environment-forestry-jobs">हिंदी पोर्टल खोलें &rarr;</a>
           <a class="btn btn-outline" href="/">Open the live registry</a>
         </div>
         <dl class="hub-stats">
@@ -720,12 +720,12 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         <section class="hub-others" aria-labelledby="hub-others-title">
           <h2 id="hub-others-title">Explore career pathways</h2>
           <ul class="hub-other-grid">
-            <li><a href="/hindi-environment-forestry-jobs.html"><span class="hub-other-name">हिंदी करियर पोर्टल</span><span class="hub-other-cnt">Hindi</span></a></li>
-            <li><a href="/jrf-srf-project-associate-jobs.html"><span class="hub-other-name">JRF / SRF &amp; Project Associate Jobs</span><span class="hub-other-cnt">Academic</span></a></li>
-            <li><a href="/phd-fellowships-climate-sustainability.html"><span class="hub-other-name">PhD &amp; Postdoctoral Fellowships</span><span class="hub-other-cnt">Doctoral</span></a></li>
-            <li><a href="/forestry-wildlife-government-jobs.html"><span class="hub-other-name">Forestry, Wildlife &amp; Government Jobs</span><span class="hub-other-cnt">Government</span></a></li>
-            <li><a href="/gis-remote-sensing-climate-jobs.html"><span class="hub-other-name">GIS &amp; Remote Sensing Jobs</span><span class="hub-other-cnt">Geospatial</span></a></li>
-            <li><a href="/esg-carbon-sustainability-jobs.html"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">Corporate</span></a></li>
+            <li><a href="/hindi-environment-forestry-jobs"><span class="hub-other-name">हिंदी करियर पोर्टल</span><span class="hub-other-cnt">Hindi</span></a></li>
+            <li><a href="/jrf-srf-project-associate-jobs"><span class="hub-other-name">JRF / SRF &amp; Project Associate Jobs</span><span class="hub-other-cnt">Academic</span></a></li>
+            <li><a href="/phd-fellowships-climate-sustainability"><span class="hub-other-name">PhD &amp; Postdoctoral Fellowships</span><span class="hub-other-cnt">Doctoral</span></a></li>
+            <li><a href="/forestry-wildlife-government-jobs"><span class="hub-other-name">Forestry, Wildlife &amp; Government Jobs</span><span class="hub-other-cnt">Government</span></a></li>
+            <li><a href="/gis-remote-sensing-climate-jobs"><span class="hub-other-name">GIS &amp; Remote Sensing Jobs</span><span class="hub-other-cnt">Geospatial</span></a></li>
+            <li><a href="/esg-carbon-sustainability-jobs"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">Corporate</span></a></li>
           </ul>
         </section>
       </div>
@@ -833,19 +833,17 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
             org = plain(job.get("organization"))
             kind = plain(job.get("opportunity_kind")) or "Job / Career"
             deadline = plain(job.get("deadline_or_window"))
-            suffix = f" \u00b7 {esc(kind)}" if kind != "Job / Career" else ""
+            label = f"{title} \u2014 {org}" if org else title
+            if kind != "Job / Career":
+                label += f" \u00b7 {kind}"
             if deadline and deadline.lower() != "rolling / open":
-                suffix += f" \u00b7 {esc(deadline)}"
+                label += f" \u00b7 {deadline}"
             links.append(
-                f'            <li><a href="/jobs/{quote(job_id)}">{esc(title)} &mdash; {esc(org)}'
-                f'{suffix}</a></li>'
+                f'            <li><a href="/jobs/{quote(job_id)}" title="{esc(label)}">'
+                f'{esc(bsp.anchor_text(label))}</a></li>'
             )
         if not links:
             links.append('            <li class="region-empty">Listings coming soon.</li>')
-        view_all = (
-            f'        <p class="region-hub"><a href="/?region=global&amp;gregion={quote(region)}">'
-            f'Open the live registry filtered to {esc(region)} &rarr;</a></p>'
-        )
         region_sections.append(
             f"""      <article class="region-card" id="gregion-{quote(region)}">
         <h2>{esc(region)} <span class="region-cnt">{region_counts[region]}</span></h2>
@@ -853,7 +851,6 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         <ul class="region-states">
 {chr(10).join(links)}
         </ul>
-{view_all}
       </article>"""
         )
         for job in matched[:6]:
@@ -872,7 +869,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     )
 
     kind_links = "\n".join(
-        f'            <li><a href="/?region=global&amp;kind={quote(kind)}">'
+        f'            <li><a href="/?region=global&amp;kind={quote(kind)}" rel="nofollow">'
         f'{esc(kind)} <span class="region-cnt">{kind_counts.get(kind, 0)}</span></a></li>'
         for kind in GLOBAL_KIND_ORDER
     )
@@ -984,7 +981,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
     <section class="hub-hero">
       <div class="hub-hero-inner">
         <nav class="hub-crumbs" aria-label="Breadcrumb">
-          <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>Global Opportunities</span>
+          <a href="/">All jobs</a><span aria-hidden="true">/</span><span>Global Opportunities</span>
         </nav>
         <p class="eyebrow">\U0001F30D Global Opportunities Registry \u2014 International</p>
         <h1>{esc(h1)}</h1>
@@ -995,7 +992,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
           organisations. Every listing links straight to a direct application page.
         </p>
         <div class="hub-hero-actions">
-          <a class="btn btn-primary" href="/?region=global">Open the Global registry &rarr;</a>
+          <a class="btn btn-primary" href="#global-grid">Browse global opportunities &rarr;</a>
           <a class="btn btn-outline" href="/">India Jobs</a>
         </div>
         <dl class="hub-stats">
@@ -1011,9 +1008,9 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
       <div class="hub-main-inner">
         <div class="hub-main-head">
           <h2>Browse global opportunities by region</h2>
-          <p>Counts refresh with every pipeline run; each region link opens the live registry
-          pre-filtered to that region. India jobs remain in their own registry \u2014 the two
-          datasets are never mixed.</p>
+          <p>Counts refresh with every pipeline run; each region card lists the latest verified
+          opportunities. India jobs remain in their own registry \u2014 the two datasets are never
+          mixed.</p>
         </div>
         <div class="region-grid">
 {regions_html}
@@ -1029,14 +1026,14 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         <section class="hub-others" aria-labelledby="global-others-title">
           <h2 id="global-others-title">Explore career pathways</h2>
           <ul class="hub-other-grid">
-            <li><a href="/?region=global"><span class="hub-other-name">Global Opportunities</span><span class="hub-other-cnt">International</span></a></li>
-            <li><a href="/jrf-srf-project-associate-jobs.html"><span class="hub-other-name">JRF / SRF &amp; Project Associate Jobs</span><span class="hub-other-cnt">India</span></a></li>
-            <li><a href="/phd-fellowships-climate-sustainability.html"><span class="hub-other-name">PhD &amp; Postdoctoral Fellowships</span><span class="hub-other-cnt">India</span></a></li>
-            <li><a href="/forestry-wildlife-government-jobs.html"><span class="hub-other-name">Forestry, Wildlife &amp; Government Jobs</span><span class="hub-other-cnt">India</span></a></li>
-            <li><a href="/gis-remote-sensing-climate-jobs.html"><span class="hub-other-name">GIS &amp; Remote Sensing Jobs</span><span class="hub-other-cnt">India</span></a></li>
-            <li><a href="/esg-carbon-sustainability-jobs.html"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">India</span></a></li>
-            <li><a href="/hindi-environment-forestry-jobs.html"><span class="hub-other-name">हिंदी करियर पोर्टल</span><span class="hub-other-cnt">Hindi</span></a></li>
-            <li><a href="/bharat-regional-green-jobs.html"><span class="hub-other-name">Bharat Regional Portal</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="#global-grid"><span class="hub-other-name">Global opportunities by region</span><span class="hub-other-cnt">International</span></a></li>
+            <li><a href="/jrf-srf-project-associate-jobs"><span class="hub-other-name">JRF / SRF &amp; Project Associate Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/phd-fellowships-climate-sustainability"><span class="hub-other-name">PhD &amp; Postdoctoral Fellowships</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/forestry-wildlife-government-jobs"><span class="hub-other-name">Forestry, Wildlife &amp; Government Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/gis-remote-sensing-climate-jobs"><span class="hub-other-name">GIS &amp; Remote Sensing Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/esg-carbon-sustainability-jobs"><span class="hub-other-name">ESG &amp; Carbon Market Jobs</span><span class="hub-other-cnt">India</span></a></li>
+            <li><a href="/hindi-environment-forestry-jobs"><span class="hub-other-name">हिंदी करियर पोर्टल</span><span class="hub-other-cnt">Hindi</span></a></li>
+            <li><a href="/bharat-regional-green-jobs"><span class="hub-other-name">Bharat Regional Portal</span><span class="hub-other-cnt">India</span></a></li>
           </ul>
         </section>
 

@@ -127,12 +127,47 @@ SNAPSHOT_START = "<!-- SEO_DIRECTORY_START -->"
 SNAPSHOT_END = "<!-- SEO_DIRECTORY_END -->"
 JOB_FEED_START = "<!-- JOB_FEED_START -->"
 JOB_FEED_END = "<!-- JOB_FEED_END -->"
-PRERENDER_CARDS = 25
+PRERENDER_CARDS = 12
 JOBS_DIRNAME = "jobs"
 
 RECENT_ARCHIVE_DAYS = 180     # archived mandates shown on the index snapshot
 HUB_ARCHIVE_LIMIT = 6         # archived mandates per hub page
 ITEM_LIST_CAP = 60            # ItemList entries per hub page
+
+# A literal, crawlable separator between adjacent badge <span> elements. The
+# spaces matter: tag-stripping crawlers otherwise concatenate the badges into
+# one unreadable token.
+BADGE_SEP = '<span class="badge-sep" aria-hidden="true"> · </span>'
+
+# Boilerplate qualification / pay strings are deliberately suppressed on feed
+# and hub cards. They describe no specific job, repeat across many records and
+# create duplicate on-page text. The full dossier keeps the original fields.
+_GENERIC_QUAL_RE = re.compile(
+    r"relevant discipline|as per (?:the )?(?:institute|project|scheme|fellowship|advertisement|norms)|"
+    r"recent graduate\s*/\s*postgraduate|as per institute norms|as per university norms|"
+    r"as per funding agency norms",
+    re.I,
+)
+_GENERIC_COMP_RE = re.compile(
+    r"not disclosed|as per (?:institute|university|project|scheme|fellowship|un volunteer|ugc|icfre|"
+    r"funding agency|organization|organisation) norms|as per norms",
+    re.I,
+)
+
+
+def is_specific_qualification(value: Any) -> bool:
+    text = plain(value)
+    return bool(text) and not bool(_GENERIC_QUAL_RE.search(text))
+
+
+def is_specific_compensation(value: Any) -> bool:
+    text = plain(value)
+    return bool(text) and not bool(_GENERIC_COMP_RE.search(text))
+
+
+def anchor_text(value: Any, limit: int = 68) -> str:
+    """Keep visible anchor text short; the full title stays in aria/title."""
+    return trim(value, limit)
 
 GA_SCRIPT = """    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E7BLPFWP7"></script>
@@ -414,60 +449,80 @@ SITE_MATRIX_LINKS: List[Tuple[str, str]] = [
     ("Report an Issue", "/report.html"),
 ]
 
+def state_slug(label: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", plain(label).lower()).strip("-")
+
+
 # Contextual state gateways keep every major state within two clicks of the
-# homepage and give crawlers a path to the live ?state= filtered views.
+# homepage. They point at stable anchors on the regional portal, never at a
+# query-string filter.
 TOP_STATE_LINKS: List[Tuple[str, str]] = [
-    ("Uttar Pradesh", "/?state=Uttar%20Pradesh"),
-    ("Maharashtra", "/?state=Maharashtra"),
-    ("Delhi NCR", "/?state=Delhi%20NCR"),
-    ("Karnataka", "/?state=Karnataka"),
-    ("Tamil Nadu", "/?state=Tamil%20Nadu"),
-    ("Madhya Pradesh", "/?state=Madhya%20Pradesh"),
-    ("Rajasthan", "/?state=Rajasthan"),
-    ("Gujarat", "/?state=Gujarat"),
-    ("Telangana", "/?state=Telangana"),
-    ("Uttarakhand", "/?state=Uttarakhand"),
-    ("West Bengal", "/?state=West%20Bengal"),
-    ("Bihar", "/?state=Bihar"),
-    ("Kerala", "/?state=Kerala"),
-    ("Punjab", "/?state=Punjab"),
-    ("Odisha", "/?state=Odisha"),
-    ("Assam", "/?state=Assam"),
-    ("Himachal Pradesh", "/?state=Himachal%20Pradesh"),
-    ("Jharkhand", "/?state=Jharkhand"),
-    ("Chhattisgarh", "/?state=Chhattisgarh"),
-    ("Andhra Pradesh", "/?state=Andhra%20Pradesh"),
-    ("Goa", "/?state=Goa"),
-    ("Meghalaya", "/?state=Meghalaya"),
-    ("Nagaland", "/?state=Nagaland"),
-    ("Tripura", "/?state=Tripura"),
-    ("Manipur", "/?state=Manipur"),
-    ("Arunachal Pradesh", "/?state=Arunachal%20Pradesh"),
+    (label, f"/bharat-regional-green-jobs#state-{state_slug(label)}")
+    for label in (
+        "Uttar Pradesh",
+        "Maharashtra",
+        "Delhi NCR",
+        "Karnataka",
+        "Tamil Nadu",
+        "Madhya Pradesh",
+        "Rajasthan",
+        "Gujarat",
+        "Telangana",
+        "Uttarakhand",
+        "West Bengal",
+        "Bihar",
+        "Kerala",
+        "Punjab",
+        "Odisha",
+        "Assam",
+        "Himachal Pradesh",
+        "Jharkhand",
+        "Chhattisgarh",
+        "Andhra Pradesh",
+        "Goa",
+        "Meghalaya",
+        "Nagaland",
+        "Tripura",
+        "Manipur",
+        "Arunachal Pradesh",
+    )
 ]
 
 
 def site_matrix_html(current_path: str = "", include_states: bool = True) -> str:
-    """The unified crawlable hub matrix used by the homepage and every hub."""
+    """Compact crawlable portal directory used on the homepage and every hub."""
+    portals = [
+        ("India career registry", "/"),
+        ("Global career opportunities", "/global-climate-sustainability-opportunities"),
+        ("Hindi environment jobs", "/hindi-environment-forestry-jobs"),
+        ("State &amp; language portals", "/bharat-regional-green-jobs"),
+        ("About this registry", "/about"),
+    ]
     items = []
-    for label, href in SITE_MATRIX_LINKS:
+    for label, href in portals:
         if href == current_path:
-            items.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
+            items.append(f'<li><span aria-current="page">{label}</span></li>')
         else:
-            items.append(f'<li><a href="{href}">{esc(label)}</a></li>')
-    state_items = "".join(
-        f'<li><a href="{href}">{esc(label)} state jobs</a></li>' for label, href in TOP_STATE_LINKS
-    )
-    state_block = ""
-    if include_states:
-        state_block = f"""      <p class="site-matrix-sub" style="margin:18px 0 6px;font-weight:700;">Browse live state gateways</p>
-      <ul class="site-matrix-list">
+            items.append(f'<li><a href="{href}">{label}</a></li>')
+    state_items = ""
+    if include_states and current_path != "/bharat-regional-green-jobs":
+        state_items = "".join(
+            f'<li><a href="{href}">{esc(label)} jobs</a></li>'
+            for label, href in TOP_STATE_LINKS[:4]
+        )
+    state_block = (
+        f"""      <p class="site-matrix-sub">State gateways</p>
+      <ul class="site-matrix-list site-matrix-states">
         {state_items}
       </ul>"""
+        if state_items
+        else ""
+    )
     return f"""  <section class="site-matrix" aria-labelledby="site-matrix-title">
     <div class="site-matrix-inner">
       <p class="eyebrow">National &amp; Global Career Pathways</p>
       <h2 id="site-matrix-title">National &amp; Global Career Pathways &amp; Research Hubs</h2>
-      <p class="site-matrix-sub">Every career pathway, language portal, institutional research tool, governance page and statutory policy in one crawlable directory.</p>
+      <p class="site-matrix-sub">A short directory of the registry, language portals, state gateways and editorial pages.</p>
       <ul class="site-matrix-list">
         {''.join(items)}
       </ul>
@@ -478,29 +533,32 @@ def site_matrix_html(current_path: str = "", include_states: bool = True) -> str
 
 def compact_site_matrix_html(current_path: str = "") -> str:
     """Footer-level fallback for legacy static pages outside the hub generator."""
+    portals = [
+        ("India career registry", "/"),
+        ("Global career opportunities", "/global-climate-sustainability-opportunities"),
+        ("Hindi environment jobs", "/hindi-environment-forestry-jobs"),
+        ("State &amp; language portals", "/bharat-regional-green-jobs"),
+        ("About this registry", "/about"),
+    ]
     items = []
-    for label, href in SITE_MATRIX_LINKS:
+    for label, href in portals:
         if href == current_path:
-            items.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
+            items.append(f'<li><span aria-current="page">{label}</span></li>')
         else:
-            items.append(f'<li><a href="{href}">{esc(label)}</a></li>')
+            items.append(f'<li><a href="{href}">{label}</a></li>')
     state_items = "".join(
-        f'<li><a href="{href}">{esc(label)} state jobs</a></li>' for label, href in TOP_STATE_LINKS
+        f'<li><a href="{href}">{esc(label)} jobs</a></li>'
+        for label, href in TOP_STATE_LINKS[:4]
     )
     return f"""<nav class="ufp-site-matrix" aria-labelledby="ufp-site-matrix-title" style="max-width:1240px;margin:0 auto;padding:22px 18px 28px;font-family:Inter,system-ui,sans-serif;color:#334155;border-top:1px solid #E2E8F0;background:#F8FAFC;">
   <h2 id="ufp-site-matrix-title" style="font-size:15px;margin:0 0 10px;color:#0F172A;">National &amp; Global Career Pathways &amp; Research Hubs</h2>
   <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 20px;list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.55;">
     {''.join(items)}
   </ul>
-  <p style="font-size:13px;font-weight:700;margin:16px 0 6px;">Browse live state gateways</p>
+  <p style="font-size:13px;font-weight:700;margin:16px 0 6px;">State gateways</p>
   <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 20px;list-style:none;padding:0;margin:0;font-size:12.5px;line-height:1.55;">
     {state_items}
   </ul>
-  <p style="font-size:12px;line-height:1.6;margin:16px 0 0;color:#475569;">Cite this registry:
-    <a href="/about.html#cite">citation &amp; embed widget</a> &middot;
-    <a href="https://t.me/urbanforestpark" rel="noopener">Telegram</a> &middot;
-    <a href="mailto:urbanforestpark@gmail.com">urbanforestpark@gmail.com</a>
-  </p>
 </nav>"""
 
 
@@ -554,8 +612,8 @@ HUBS: List[Dict[str, Any]] = [
         "file": "jrf-srf-project-associate-jobs.html",
         "match": match_research,
         "kicker": "Academic & Research Track",
-        "title": "JRF, SRF & Project Associate Jobs in India | Urban Forest Park",
-        "h1": "JRF / SRF & Project Associate Jobs in India",
+        "title": "Verified JRF / SRF & Project Associate Jobs in India 2026",
+        "h1": "Verified JRF / SRF & Project Associate Jobs in India 2026",
         "desc": (
             "Verified Junior Research Fellow (JRF), Senior Research Fellow (SRF), Research "
             "Associate and Project Associate vacancies across Indian universities, IITs, IISc, "
@@ -573,7 +631,7 @@ HUBS: List[Dict[str, Any]] = [
             "change, sustainability, agriculture and allied disciplines. Each listing links "
             "straight to the official advertisement and application portal."
         ),
-        "cta_href": "/?track=research",
+        "cta_href": "/#filter-bar",
         "matched_noun": "research fellowship and project-staff",
         "faqs": [
             (
@@ -613,8 +671,8 @@ HUBS: List[Dict[str, Any]] = [
         "file": "phd-fellowships-climate-sustainability.html",
         "match": match_phd,
         "kicker": "Doctoral & Postdoctoral Track",
-        "title": "PhD & Postdoctoral Fellowships \u2014 Climate & Sustainability, India | Urban Forest Park",
-        "h1": "PhD & Postdoctoral Fellowships \u2014 Climate, Sustainability & Environment",
+        "title": "Verified PhD Climate & Ecology Fellowships in India 2026",
+        "h1": "Verified PhD Climate & Ecology Fellowships in India 2026",
         "desc": (
             "Doctoral fellowships, PhD positions and postdoctoral vacancies in climate change, "
             "sustainability, ecology and environmental science at IITs, IISc, central universities "
@@ -631,7 +689,7 @@ HUBS: List[Dict[str, Any]] = [
             "sciences and allied fields at Indian institutes of national importance and research "
             "organisations."
         ),
-        "cta_href": "/?track=phd",
+        "cta_href": "/#filter-bar",
         "matched_noun": "doctoral and postdoctoral",
         "faqs": [
             (
@@ -669,8 +727,8 @@ HUBS: List[Dict[str, Any]] = [
         "file": "forestry-wildlife-government-jobs.html",
         "match": match_forestry,
         "kicker": "Government & Forestry Track",
-        "title": "Forest Guard, RFO, ACF & IFS Recruitment | Urban Forest Park",
-        "h1": "Government Forest Recruitment in India",
+        "title": "Government Forestry, CAMPA, FSI & SPCB Jobs in India 2026",
+        "h1": "Government Forestry, CAMPA, FSI & SPCB Jobs in India 2026",
         "desc": (
             "Forest guard, forester, RFO, ACF and IFS recruitment plus forest department, "
             "wildlife institute, ICFRE and environment ministry vacancies across India \u2014 "
@@ -689,7 +747,7 @@ HUBS: List[Dict[str, Any]] = [
             "afforestation, wildlife biology, ecology and habitat management. Use the "
             "state-wise filter to narrow the registry to your state."
         ),
-        "cta_href": "/?category=forestry-wildlife-afforestation",
+        "cta_href": "/#filter-bar",
         "matched_noun": "forestry, wildlife and government",
         "faqs": [
             (
@@ -727,8 +785,8 @@ HUBS: List[Dict[str, Any]] = [
         "file": "gis-remote-sensing-climate-jobs.html",
         "match": match_gis,
         "kicker": "Geospatial Track",
-        "title": "GIS & Remote Sensing Jobs in India \u2014 Geospatial & Earth Observation | Urban Forest Park",
-        "h1": "GIS, Remote Sensing & Earth Observation Jobs in India",
+        "title": "GIS, Remote Sensing & Earth Observation Jobs in India 2026",
+        "h1": "GIS, Remote Sensing & Earth Observation Jobs in India 2026",
         "desc": (
             "GIS analyst, remote sensing, geospatial and earth observation vacancies across ISRO "
             "centres, environmental institutes, urban planning bodies and consultancies in India "
@@ -743,7 +801,7 @@ HUBS: List[Dict[str, Any]] = [
             "satellite data analysis, urban heat-island mapping, land-use change and spatial "
             "planning \u2014 each with a direct application link."
         ),
-        "cta_href": "/?category=gis-remote-sensing-earth-observation",
+        "cta_href": "/#filter-bar",
         "matched_noun": "GIS, remote sensing and geospatial",
         "faqs": [
             (
@@ -780,8 +838,8 @@ HUBS: List[Dict[str, Any]] = [
         "file": "esg-carbon-sustainability-jobs.html",
         "match": match_esg,
         "kicker": "Corporate & Carbon Track",
-        "title": "ESG, Carbon Market & Sustainability Jobs in India | Urban Forest Park",
-        "h1": "ESG, Carbon Markets & Corporate Sustainability Jobs",
+        "title": "ESG, Carbon Markets & Corporate Sustainability Jobs 2026",
+        "h1": "ESG, Carbon Markets & Corporate Sustainability Jobs 2026",
         "desc": (
             "ESG analyst, sustainability manager, carbon market, climate finance and corporate "
             "sustainability vacancies across Indian companies, consultancies and NGOs \u2014 "
@@ -797,7 +855,7 @@ HUBS: List[Dict[str, Any]] = [
             "\u2014 from companies, consultancies, rating agencies and NGOs. Every listing links "
             "to the official careers portal."
         ),
-        "cta_href": "/?category=esg-carbon-sustainability",
+        "cta_href": "/#filter-bar",
         "matched_noun": "ESG and sustainability",
         "faqs": [
             (
@@ -898,12 +956,12 @@ def header_html(active: Optional[str] = None) -> str:
       <a class="brand" href="/" aria-label="Urban Forest Park - National Career Registry, India">
         <img src="/assets/images/Logo_UFF.png" alt="{BRAND_ALT_HTML}" title="{BRAND_TITLE}" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
-        <span class="brand-sub">National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)</span>
+        <span class="brand-sub">Green Jobs &amp; Research Registry</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
         <a class="{cls('registry')}" href="/">Career Registry</a>
-        <a class="{cls('archive')}" href="/?view=archive">Historical Archive</a>
-        <a class="{cls('global')}" href="/global-climate-sustainability-opportunities.html">Global Opportunities</a>
+        <a class="{cls('archive')}" href="/?view=archive" rel="nofollow">Historical Archive</a>
+        <a class="{cls('global')}" href="/global-climate-sustainability-opportunities">Global Opportunities</a>
       </nav>
       <div class="header-actions">
         <a class="btn btn-outline nav-cta" href="/#filter-bar">Browse Registry</a>
@@ -921,84 +979,56 @@ def header_html(active: Optional[str] = None) -> str:
 
 
 def footer_html(current_hub: Optional[str] = None) -> str:
-    hub_links = []
-    for hub in HUBS:
-        if hub["file"] == current_hub:
-            hub_links.append(f'          <li><span class="footer-current">{esc(hub["h1"])}</span></li>')
-        else:
-            hub_links.append(f'          <li><a href="/{hub["file"]}">{esc(hub["h1"])}</a></li>')
-    hubs_block = "\n".join(hub_links)
-
     return f"""  <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-col">
         <h3>Urban Forest Park</h3>
         <p>
-          National Climate, Forestry, ESG &amp; Geospatial Career Registry (India). We monitor
-          official portals, universities, research institutions, consultancies and development
-          organisations &mdash; and publish verified jobs that link straight to the source.
+          Verified green jobs, research fellowships and climate careers in India and worldwide.
+          Every listing links to the official application source.
         </p>
         <p style="margin-top:10px;">
-          Also home of the <a href="/dashboard.html">Nagar Van dMRV Dashboard &amp; Green Calculator</a>.
+          Also home of the <a href="/dashboard">Nagar Van dMRV Dashboard</a>.
         </p>
-      </div>
-
-      <div class="footer-col">
-        <h3>Career Pathways</h3>
-        <ul>
-{hubs_block}
-        </ul>
-        <h3 style="margin-top:16px;">Regional &amp; Multilingual Portals (भारत / हिंदी)</h3>
-        <ul>
-          <li><a href="/hindi-environment-forestry-jobs.html">हिंदी करियर पोर्टल — पर्यावरण एवं वानिकी भर्तियाँ</a></li>
-          <li><a href="/bharat-regional-green-jobs.html">Bharat Regional &amp; State-Wise Green Jobs</a></li>
-        </ul>
       </div>
 
       <div class="footer-col">
         <h3>Registry</h3>
         <ul>
-          <li><a href="/">Active Opportunities</a></li>
-          <li><a href="/?view=archive">Historical Job Archive</a></li>
-          <li><a href="/global-climate-sustainability-opportunities.html">&#127757; Global Opportunities (International)</a></li>
-          <li><a href="/#filter-bar">Browse by State</a></li>
-          <li><a href="/#seo-dir-title">Browse by Sector</a></li>
+          <li><a href="/">All active opportunities</a></li>
+          <li><a href="/#pathway-title">Career pathway hubs</a></li>
+          <li><a href="/?view=archive" rel="nofollow">Archived jobs</a></li>
+          <li><a href="/global-climate-sustainability-opportunities">International opportunities</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h3>Institutional Tools</h3>
         <ul>
-          <li><a href="/dashboard.html">Live dMRV Dashboard</a></li>
-          <li><a href="/green-calculator.html">Green Calculator</a></li>
-          <li><a href="/nagar-van-finder.html">Nagar Van Finder</a></li>
-          <li><a href="/spatial-data.html">Spatial Data Explorer</a></li>
+          <li><a href="/dashboard">Live dMRV dashboard</a></li>
+          <li><a href="/green-calculator">Green Calculator</a></li>
+          <li><a href="/nagar-van-finder">Nagar Van Finder</a></li>
+          <li><a href="/green-calculator-app">Calculator app</a></li>
+          <li><a href="/green-calculator-report">Impact report</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h3>Legal &amp; Contact</h3>
         <ul>
-          <li><a href="/about.html">About</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
-          <li><a href="/terms.html">Terms of Use</a></li>
-          <li><a href="/cookies.html">Cookie Policy</a></li>
-          <li><a href="/accessibility.html">Accessibility</a></li>
-          <li><a href="/unsubscribe.html">Email Alert Preferences</a></li>
-          <li><a href="/cookies.html" data-ufp-cookie-settings>Cookie Preferences</a></li>
-          <li><a href="/report.html">Report an Issue</a></li>
-          <li><a href="mailto:urbanforestpark@gmail.com">Contact the Registry</a></li>
-          <li><a href="https://t.me/urbanforestpark" target="_blank" rel="noopener">Telegram Channel</a></li>
-          <li><a href="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw" target="_blank" rel="noopener">WhatsApp Job Group</a></li>
-          <li><button type="button" class="footer-link-btn" data-syndication-open title="Internal broadcast &amp; backlink workspace (Ctrl+Shift+U)">Syndication Desk</button></li>
+          <li><a href="/about">About Urban Forest Park</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/terms">Terms of use</a></li>
+          <li><a href="/report">Report an issue</a></li>
+          <li><a href="mailto:urbanforestpark@gmail.com">Contact the registry</a></li>
+          <li><button type="button" class="footer-link-btn" data-syndication-open title="Internal broadcast &amp; backlink workspace (Ctrl+Shift+U)">Syndication desk</button></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>National Climate, Forestry, ESG &amp; Geospatial Career Registry (India)
-      <span class="dot">&bull;</span>All listings link to direct application pages &mdash; please verify details before applying.
-      <span class="dot">&bull;</span><a href="/about.html#cite">Cite this registry &amp; embed a link</a>
+      &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>Green Jobs &amp; Research Registry (India)
+      <span class="dot">&bull;</span>Verify details on the official application page.
     </div>
   </footer>"""
 
@@ -1026,59 +1056,36 @@ def build_index_block(
     archived: List[Dict[str, Any]],
     today: date,
 ) -> str:
-    active_sorted = sort_recent_first(active)
-    archived_sorted = recent_archive(archived, today, RECENT_ARCHIVE_DAYS)[:24]
+    """A compact, crawlable link bar to the five static career hubs.
 
-    active_links = "\n".join(snapshot_link(j) for j in active_sorted)
-    archived_links = "\n".join(snapshot_link(j) for j in archived_sorted) or (
-        '            <li class="seo-pr-empty">No recently archived jobs.</li>'
+    The old block dumped every active and recently archived job into the
+    homepage. That produced thousands of words, duplicate anchor text and a
+    large repeated job-card boilerplate. Crawlers now reach each job through
+    its hub page and the sitemap instead.
+    """
+    hubs = [
+        ("jrf-srf-project-associate-jobs", "JRF, SRF & project associate jobs"),
+        ("phd-fellowships-climate-sustainability", "PhD & postdoctoral fellowships"),
+        ("forestry-wildlife-government-jobs", "Forestry, wildlife & government jobs"),
+        ("gis-remote-sensing-climate-jobs", "GIS, remote sensing & earth observation"),
+        ("esg-carbon-sustainability-jobs", "ESG, carbon markets & sustainability"),
+    ]
+    hub_items = "\n".join(
+        f'        <li><a href="/{href}">{esc(label)}</a></li>' for href, label in hubs
     )
-
-    hub_links = "\n".join(
-        f'            <li><a href="/{h["file"]}">{esc(h["h1"])}</a></li>' for h in HUBS
-    )
-    hub_links += (
-        '\n            <li><a href="/global-climate-sustainability-opportunities.html">'
-        '&#127757; Global Opportunities (International Jobs, Grants &amp; Scholarships)</a></li>'
-    )
-
-    intro = (
-        f"The complete static index of active environmental, forestry, JRF, GIS and ESG jobs "
-        f"tracked by Urban Forest Park \u2014 Government Forestry, CAMPA, FSI, CPCB/SPCB, "
-        f"wildlife, carbon market, remote sensing, PhD, postdoctoral and project associate "
-        f"vacancies across Indian states and cities. Every entry links to its own static job "
-        f"page with the official application link. Snapshot updated {long_date(today)} (IST) "
-        f"\u2014 {len(active_sorted)} active and {len(archived_sorted)} recently archived jobs."
-    )
-
-    block = f"""{SNAPSHOT_START}
-    <section class="seo-prerendered" aria-labelledby="seo-pr-title">
+    updated = long_date(today)
+    return f"""{SNAPSHOT_START}
+    <section class="seo-prerendered hub-summary" aria-labelledby="seo-pr-title">
       <div class="seo-pr-inner">
-        <p class="eyebrow">Pre-Rendered Registry Snapshot</p>
-        <h2 id="seo-pr-title">Complete List of Environmental, Forestry, JRF, GIS &amp; ESG Jobs in India</h2>
-        <p class="seo-pr-intro">{esc(intro)}</p>
-        <div class="seo-pr-grid">
-          <div class="seo-pr-col">
-            <h3>Active Jobs &amp; Fellowships ({len(active_sorted)})</h3>
-            <ul class="seo-pr-list">
-{active_links}
-            </ul>
-          </div>
-          <div class="seo-pr-col">
-            <h3>Recently Archived Jobs ({len(archived_sorted)})</h3>
-            <ul class="seo-pr-list">
-{archived_links}
-            </ul>
-            <h3 style="margin-top:22px;">Career Pathway Hubs</h3>
-            <ul class="seo-pr-list">
-{hub_links}
-            </ul>
-          </div>
-        </div>
+        <p class="eyebrow">Career Pathway Hubs</p>
+        <h2 id="seo-pr-title">Browse Green Jobs by Career Pathway</h2>
+        <p class="seo-pr-intro">Five static hubs, refreshed from the registry on {updated}.</p>
+        <ul class="hub-summary-grid">
+{hub_items}
+        </ul>
       </div>
     </section>
     {SNAPSHOT_END}"""
-    return block
 
 
 def job_slug(job: Dict[str, Any]) -> str:
@@ -1115,7 +1122,11 @@ def _valid_through(job: Dict[str, Any]) -> str:
 
 def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     """Match the JavaScript card structure closely enough that hydration is a
-    no-op visually, while keeping a real crawlable link even without JS."""
+    no-op visually, while keeping a real crawlable link even without JS.
+
+    Only the heading is an anchor. The card remains clickable through
+    ``data-href`` and the JavaScript card handler.
+    """
     cat = plain(job.get("category")) or "Environmental Jobs"
     title = plain(job.get("clean_title")) or "Untitled job"
     org = plain(job.get("organization")) or "Organisation not specified"
@@ -1125,8 +1136,8 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     exp = plain(job.get("experience_level"))
     href = job_url(job)
     deadline = plain(job.get("deadline_or_window")) or "Rolling / Open"
-    quals = trim(job.get("qualification_summary"), 120)
-    comp = trim(job.get("compensation_or_fellowship"), 100)
+    quals = plain(job.get("qualification_summary"))
+    comp = plain(job.get("compensation_or_fellowship"))
     skills = [plain(item) for item in (job.get("must_have_skills") or []) if plain(item)][:3]
     loc = ", ".join(part for part in (city, state) if part and part not in ("India", "Global / Remote"))
     loc = loc or state or "India / Global"
@@ -1140,25 +1151,31 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
         badges.append(f'<span class="badge badge-exp">{esc(exp)}</span>')
     if archived:
         badges.append('<span class="badge badge-archived">Archived</span>')
-    elig = ""
-    if quals or comp:
-        rows = []
-        if quals:
-            rows.append(f'<span class="jc-elig-item"><strong>Qualification:</strong> {esc(quals)}</span>')
-        if comp:
-            rows.append(f'<span class="jc-elig-item"><strong>Pay / fellowship:</strong> {esc(comp)}</span>')
-        elig = '<div class="jc-eligibility">' + "".join(rows) + "</div>"
+
+    rows = []
+    if is_specific_qualification(quals):
+        rows.append(
+            f'<span class="jc-elig-item"><strong>Qualification:</strong> {esc(trim(quals, 120))}</span>'
+        )
+    elif skills:
+        focus = ", ".join(skills) + (f" \u00b7 {loc}" if loc else "")
+        rows.append(f'<span class="jc-elig-item"><strong>Focus:</strong> {esc(focus)}</span>')
+    if is_specific_compensation(comp):
+        rows.append(
+            f'<span class="jc-elig-item"><strong>Pay / fellowship:</strong> {esc(trim(comp, 100))}</span>'
+        )
+    elig = '<div class="jc-eligibility">' + "".join(rows) + "</div>" if rows else ""
+
     skill_html = ""
     if skills:
         skill_html = '<div class="jc-skills">' + "".join(
             f'<span class="skill-chip">{esc(skill)}</span>' for skill in skills
         ) + "</div>"
-    cta = "Open Archived Record" if archived else "View Job &amp; Apply"
-    return f"""        <article class="job-card{' is-archived' if archived else ''}" data-id="{esc(job_slug(job))}" data-href="{href}" tabindex="0" role="group" aria-label="View job and apply: {esc(title)} at {esc(org)}">
-          <div class="jc-top">{''.join(badges)}</div>
+    return f"""        <article class="job-card{' is-archived' if archived else ''}" data-id="{esc(job_slug(job))}" data-href="{href}" tabindex="0" role="group" aria-label="View job details: {esc(title)} at {esc(org)}">
+          <div class="jc-top">{BADGE_SEP.join(badges)}</div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="{href}">{esc(title)}</a></h3>
+              <h3 class="jc-title"><a class="jc-title-link" href="{href}" title="{esc(title)}">{esc(anchor_text(title))}</a></h3>
               <p class="jc-org">{esc(org)}</p>
               <div class="jc-meta">
                 <span>{PIN_SVG}{esc(loc)}</span>
@@ -1170,7 +1187,7 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
           </div>
           <div class="jc-foot">
             <span class="jc-date">Added {esc(date_label)}</span>
-            <a class="jc-view" href="{href}">{cta} <span aria-hidden="true">&nearr;</span></a>
+            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>"""
 
@@ -1232,27 +1249,36 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
         closed_on = plain(job.get("date_archived")) or plain(job.get("valid_through"))
         badges.append(f'<span class="badge badge-archived">Closed {esc(closed_on)}</span>')
 
+    skills = [plain(item) for item in (job.get("must_have_skills") or []) if plain(item)][:3]
+    loc = ", ".join(part for part in (city, state) if part and part not in ("India", "Global / Remote"))
+    loc = loc or state
     elig_bits = []
-    if plain(job.get("qualification_summary")):
-        elig_bits.append(f"<span><strong>Qualification:</strong> {esc(job['qualification_summary'])}</span>")
-    if plain(job.get("compensation_or_fellowship")):
-        elig_bits.append(f"<span><strong>Compensation:</strong> {esc(job['compensation_or_fellowship'])}</span>")
+    quals = plain(job.get("qualification_summary"))
+    comp = plain(job.get("compensation_or_fellowship"))
+    if is_specific_qualification(quals):
+        elig_bits.append(f"<span><strong>Qualification:</strong> {esc(trim(quals, 140))}</span>")
+    elif skills:
+        focus = ", ".join(skills) + (f" \u00b7 {loc}" if loc else "")
+        elig_bits.append(f"<span><strong>Focus:</strong> {esc(focus)}</span>")
+    if is_specific_compensation(comp):
+        elig_bits.append(f"<span><strong>Compensation:</strong> {esc(trim(comp, 120))}</span>")
     elig_html = (
         '<p class="hub-card-elig">' + " ".join(elig_bits) + "</p>" if elig_bits else ""
     )
 
     summary = trim(job.get("role_summary"), 240)
     summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
+    title = plain(job.get("clean_title")) or org
 
     return f"""        <article class="hub-card{' hub-card-archived' if archived else ''}">
           <div class="hub-card-top">
-            {''.join(badges)}
+            {BADGE_SEP.join(badges)}
           </div>
-          <h3 class="hub-card-title"><a href="{job_url(job)}">{esc(plain(job.get('clean_title')) or org)}</a></h3>
+          <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a></h3>
           <p class="hub-card-org">{esc(org_line)}</p>
           {elig_html}
           {summary_html}
-          <p class="hub-card-foot"><a href="{job_url(job)}">View Job &amp; Apply &nearr;</a></p>
+          <p class="hub-card-foot"><span>View details &nearr;</span></p>
         </article>"""
 
 
@@ -1434,14 +1460,14 @@ def build_hub_page(
     <section class="hub-hero">
       <div class="hub-hero-inner">
         <nav class="hub-crumbs" aria-label="Breadcrumb">
-          <a href="/">Career Registry</a><span aria-hidden="true">/</span><span>{esc(hub['h1'])}</span>
+          <a href="/">All jobs</a><span aria-hidden="true">/</span><span>{esc(hub['h1'])}</span>
         </nav>
         <p class="eyebrow">{esc(hub['kicker'])}</p>
         <h1>{esc(hub['h1'])}</h1>
         <p class="hub-hero-sub">{esc(hub['hero_sub'])}</p>
         <div class="hub-hero-actions">
           <a class="btn btn-primary" href="{hub['cta_href']}">Open in the live registry &rarr;</a>
-          <a class="btn btn-outline" href="/?view=archive">Historical Archive</a>
+          <a class="btn btn-outline" href="/?view=archive" rel="nofollow">Past deadlines</a>
         </div>
         <dl class="hub-stats">
           <div><dt>Active listings</dt><dd>{len(matched_active)}</dd></div>
@@ -1498,12 +1524,18 @@ def build_hub_page(
 # --------------------------------------------------------------------------
 # Static /jobs/<slug> detail pages
 # --------------------------------------------------------------------------
-def category_query_slug(category: Any) -> str:
-    name = plain(category)
-    for canonical, slug in fh.CATEGORY_SLUGS.items():
-        if canonical == name:
-            return slug
-    return ""
+CATEGORY_HUB_PATHS = {
+    "Academic, JRF, SRF & PhD Positions": "/jrf-srf-project-associate-jobs",
+    "Research Associate & Project Staff (Contractual)": "/jrf-srf-project-associate-jobs",
+    "Forestry, Wildlife & Afforestation": "/forestry-wildlife-government-jobs",
+    "GIS, Remote Sensing & Earth Observation": "/gis-remote-sensing-climate-jobs",
+    "ESG, Carbon Markets & Corporate Sustainability": "/esg-carbon-sustainability-jobs",
+    "Climate Policy, Think-Tanks & Fellowships": "/jrf-srf-project-associate-jobs",
+}
+
+
+def category_hub_path(category: Any) -> str:
+    return CATEGORY_HUB_PATHS.get(plain(category), "/")
 
 
 def job_page_title(job: Dict[str, Any]) -> str:
@@ -1656,11 +1688,12 @@ def related_jobs_html(related: List[Dict[str, Any]]) -> str:
         return '<p class="job-page-note">No related listings at present. <a href="/">Browse the full registry</a>.</p>'
     cards = []
     for job in related:
-        cards.append(f"""          <a class="related-card" href="{job_url(job)}">
+        title = plain(job.get("clean_title")) or "Untitled job"
+        cards.append(f"""          <article class="related-card">
             <span class="related-kicker">{esc(plain(job.get("category")))}</span>
-            <strong>{esc(plain(job.get("clean_title")))}</strong>
+            <strong><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a></strong>
             <span class="related-meta">{esc(plain(job.get("organization")))} &middot; {esc(state_label(job))}</span>
-          </a>""")
+          </article>""")
     return "\n".join(cards)
 
 
@@ -1790,7 +1823,7 @@ def build_job_page(
     <section class="job-page-hero">
       <div class="job-page-inner">
         <nav class="hub-crumbs" aria-label="Breadcrumb">
-          <a href="/">Career Registry</a><span aria-hidden="true">/</span><a href="/?category={esc(category_query_slug(job.get('category')))}">{esc(plain(job.get('category')) or 'Jobs')}</a><span aria-hidden="true">/</span><span>{esc(job_title)}</span>
+          <a href="/">All jobs</a><span aria-hidden="true">/</span><a href="{category_hub_path(job.get('category'))}">{esc(plain(job.get('category')) or 'Jobs')}</a><span aria-hidden="true">/</span><span>{esc(job_title)}</span>
         </nav>
         <p class="eyebrow">{esc(plain(job.get("category")) or "Environmental Job")}</p>
         <h1>{esc(job_title)}</h1>
@@ -2091,6 +2124,80 @@ def inject_feed_links(public: Path) -> int:
     return changed
 
 
+ANCHOR_TAG_RE = re.compile(r"<a\b([^>]*)>", re.I)
+
+
+def _add_nofollow_to_anchor(match: re.Match[str]) -> str:
+    attrs = match.group(1)
+    href_match = re.search(r'href\s*=\s*"([^"]*)"', attrs, re.I)
+    if not href_match:
+        return match.group(0)
+    url = href_match.group(1)
+    if "?" not in url:
+        return match.group(0)
+    if not (url.startswith("/") or url.startswith("?") or url.startswith(SITE)):
+        return match.group(0)
+    if re.search(r'rel\s*=\s*"[^"]*nofollow', attrs, re.I):
+        return match.group(0)
+    if re.search(r"rel\s*=", attrs, re.I):
+        return re.sub(
+            r'rel\s*=\s*"([^"]*)"',
+            lambda m: 'rel="' + m.group(1).strip() + ' nofollow"',
+            match.group(0),
+            count=1,
+            flags=re.I,
+        )
+    return match.group(0).replace("<a", '<a rel="nofollow"', 1)
+
+
+def harden_query_links(public: Path) -> int:
+    """Safety net: every internal query-string anchor is nofollow.
+
+    Interactive registry filters (archive, global region/kind, language) still
+    work, but crawlers are not asked to index an infinite query surface. State
+    and category links are already rewritten to static hubs at source.
+    """
+    changed = 0
+    for path in list(sorted(public.glob("*.html"))) + list(sorted((public / JOBS_DIRNAME).glob("*.html"))):
+        text = path.read_text(encoding="utf-8")
+        updated = ANCHOR_TAG_RE.sub(_add_nofollow_to_anchor, text)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+            changed += 1
+    return changed
+
+
+BRAND_SUB_RE = re.compile(r'(<span class="brand-sub"[^>]*>).*?(</span>)', re.S)
+LW_SUB_RE = re.compile(r'(<span class="lw-sub">).*?(</span>)', re.S)
+
+
+def shorten_brand_labels(public: Path) -> int:
+    """Keep the header brand anchor short enough for link-text guidelines."""
+    changed = 0
+    for path in list(sorted(public.glob("*.html"))) + list(sorted((public / JOBS_DIRNAME).glob("*.html"))):
+        text = path.read_text(encoding="utf-8")
+        is_hindi = 'lang="hi"' in text[:300]
+        short = "हरित करियर रजिस्ट्री" if is_hindi else "Green Jobs &amp; Research Registry"
+        updated = BRAND_SUB_RE.sub(lambda m: m.group(1) + short + m.group(2), text)
+        updated = LW_SUB_RE.sub(lambda m: m.group(1) + short + m.group(2), updated)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+            changed += 1
+    return changed
+
+
+def strip_trailing_whitespace(public: Path) -> int:
+    """Keep generated HTML clean for diff review and CI whitespace checks."""
+    changed = 0
+    for path in list(sorted(public.glob("*.html"))) + list(sorted((public / JOBS_DIRNAME).glob("*.html"))):
+        text = path.read_text(encoding="utf-8")
+        cleaned = "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+        if cleaned != text:
+            path.write_text(cleaned, encoding="utf-8")
+            changed += 1
+    return changed
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     logging.basicConfig(
         level=logging.INFO,
@@ -2200,6 +2307,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     log.info(
         "Normalised internal URLs on %d top-level and %d job page(s)",
         rewritten, job_rewritten,
+    )
+
+    nofollow_pages = harden_query_links(public)
+    brand_pages = shorten_brand_labels(public)
+    whitespace_pages = strip_trailing_whitespace(public)
+    log.info(
+        "Hardened query links on %d page(s); shortened brand labels on %d page(s); cleaned whitespace on %d page(s)",
+        nofollow_pages, brand_pages, whitespace_pages,
     )
 
     sync_sitemap_jobs(public, active, archived, global_active, global_archived, today)

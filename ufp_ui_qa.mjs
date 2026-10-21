@@ -153,8 +153,8 @@ const indexRaw = fs.readFileSync(REPO + '/index.html', 'utf-8');
 const feedStart = indexRaw.indexOf('<!-- JOB_FEED_START -->');
 const feedEnd = indexRaw.indexOf('<!-- JOB_FEED_END -->');
 const rawFeed = feedStart >= 0 && feedEnd > feedStart ? indexRaw.slice(feedStart, feedEnd) : '';
-check('index.html pre-renders 25 job cards inside #jobs-feed markers',
-  (rawFeed.match(/<article class="job-card/g) || []).length === 25,
+check('index.html pre-renders 12 job cards inside #jobs-feed markers',
+  (rawFeed.match(/<article class="job-card/g) || []).length === 12,
   'n=' + (rawFeed.match(/<article class="job-card/g) || []).length);
 check('raw index.html contains no Loading... feed placeholder',
   !/Loading(?:\.\.\.|&hellip;|…)/i.test(indexRaw));
@@ -610,7 +610,7 @@ check('global hub groups by region', hubRegionCards >= 6, 'cards=' + hubRegionCa
 check('global hub shows 15 seeded static job links', (await page.locator('.region-states li a[href^="/jobs/"]').count()) >= 12, 'n=' + await page.locator('.region-states li a[href^="/jobs/"]').count());
 check('global hub kind links route to the registry', (await page.locator('a[href*="kind="]').count()) >= 6);
 check('global hub has NO india state links', (await page.locator('a[href*="?state="]').count()) === 0);
-check('global hub CTA opens ?region=global', (await page.locator('a[href="/?region=global"]').count()) >= 1);
+check('global hub CTA jumps to the static global grid', (await page.locator('a[href="#global-grid"]').count()) >= 1);
 const hubLd = await page.$$eval('script[type="application/ld+json"]', els => els.map(e => e.textContent).join(' '));
 check('global hub JSON-LD: CollectionPage + ItemList + FAQPage + BreadcrumbList',
   hubLd.includes('"CollectionPage"') && hubLd.includes('"ItemList"') && hubLd.includes('"FAQPage"') && hubLd.includes('"BreadcrumbList"'));

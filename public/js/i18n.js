@@ -46,7 +46,7 @@
     en: {
       'skip.link': 'Skip to registry listings',
 
-      'brand.sub': 'National Climate, Forestry, ESG & Geospatial Career Registry (India)',
+      'brand.sub': 'Green Jobs & Research Registry',
       'nav.registry': 'Career Registry',
       'nav.archive': 'Historical Archive',
       'nav.browse': 'Browse by State',
@@ -315,7 +315,7 @@
     hi: {
       'skip.link': 'सूचीबद्ध भर्तियों पर जाएँ',
 
-      'brand.sub': 'राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)',
+      'brand.sub': 'हरित करियर रजिस्ट्री',
       'nav.registry': 'करियर रजिस्ट्री',
       'nav.archive': 'ऐतिहासिक संग्रह',
       'nav.browse': 'राज्य अनुसार देखें',

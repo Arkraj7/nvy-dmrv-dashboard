@@ -78,6 +78,46 @@
     'Climate Policy, Think-Tanks & Fellowships': 'climate-policy-think-tanks-fellowships'
   };
 
+  /* Static hub for each category. Used by breadcrumbs and directory links so
+     crawlers never need a query-string filter. */
+  var STATIC_HUB_BY_CATEGORY = {
+    'Academic, JRF, SRF & PhD Positions': '/jrf-srf-project-associate-jobs',
+    'Research Associate & Project Staff (Contractual)': '/jrf-srf-project-associate-jobs',
+    'Forestry, Wildlife & Afforestation': '/forestry-wildlife-government-jobs',
+    'GIS, Remote Sensing & Earth Observation': '/gis-remote-sensing-climate-jobs',
+    'ESG, Carbon Markets & Corporate Sustainability': '/esg-carbon-sustainability-jobs',
+    'Climate Policy, Think-Tanks & Fellowships': '/jrf-srf-project-associate-jobs'
+  };
+
+  var BADGE_SEP = '<span class="badge-sep" aria-hidden="true"> · </span>';
+  var GENERIC_QUAL_RE = /relevant discipline|as per (?:the )?(?:institute|project|scheme|fellowship|advertisement|norms)|recent graduate\s*\/\s*postgraduate|as per institute norms|as per university norms|as per funding agency norms/i;
+  var GENERIC_COMP_RE = /not disclosed|as per (?:institute|university|project|scheme|fellowship|un volunteer|ugc|icfre|funding agency|organization|organisation) norms|as per norms/i;
+
+  function isSpecificQualification(value) {
+    var text = String(value || '').trim();
+    return !!text && !GENERIC_QUAL_RE.test(text);
+  }
+
+  function isSpecificCompensation(value) {
+    var text = String(value || '').trim();
+    return !!text && !GENERIC_COMP_RE.test(text);
+  }
+
+  function shortAnchor(value, limit) {
+    var text = String(value || '').replace(/\s+/g, ' ').trim();
+    var max = limit || 68;
+    return text.length > max ? text.slice(0, max - 1).replace(/[\s,;:.-]+$/, '') + '…' : text;
+  }
+
+  function stateAnchor(value) {
+    var slug = String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return '/bharat-regional-green-jobs#state-' + slug;
+  }
+
+  function staticHubForCategory(category) {
+    return STATIC_HUB_BY_CATEGORY[category] || '/';
+  }
+
   /* Pre-upgrade category slugs and display names keep resolving as aliases so
      old bookmarks, sitemap-era links and search-engine results never dead-end. */
   var LEGACY_CATEGORY_SLUGS = {
@@ -1440,15 +1480,21 @@
     if (!badges.length) return '';
     return '<div class="jc-academic-badges">' + badges.map(function (badge) {
       return '<span class="jc-academic-badge">' + escapeHtml(badge) + '</span>';
-    }).join('') + '</div>';
+    }).join(BADGE_SEP) + '</div>';
   }
 
   function jcEligibilityHtml(job) {
     var items = [];
-    if (job.qualification_summary) {
+    var skills = job.must_have_skills || [];
+    var loc = [job.city, stateLabel(job)].filter(function (part) {
+      return part && part !== 'India' && part !== 'Global / Remote';
+    }).join(', ') || stateLabel(job);
+    if (isSpecificQualification(job.qualification_summary)) {
       items.push('<span class="jc-elig-item">' + iconSvg('cap') + escapeHtml(job.qualification_summary) + '</span>');
+    } else if (skills.length) {
+      items.push('<span class="jc-elig-item">' + iconSvg('cap') + '<strong>Focus:</strong> ' + escapeHtml(skills.slice(0, 3).join(', ') + (loc ? ' · ' + loc : '')) + '</span>');
     }
-    if (job.compensation_or_fellowship) {
+    if (isSpecificCompensation(job.compensation_or_fellowship)) {
       items.push('<span class="jc-elig-item">' + iconSvg('rupee') + escapeHtml(job.compensation_or_fellowship) + '</span>');
     }
     if (!items.length && !academicBadgesHtml(job)) return '';
@@ -1496,21 +1542,23 @@
     var waShareHref = 'https://wa.me/?text=' + encodeURIComponent(shareTextFor(job));
     var detailHref = jobPath(job.id);
 
+    var badges = [
+      '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>',
+      '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>'
+    ];
+    if (kindBadge) badges.push(kindBadge);
+    if (regionBadge) badges.push(regionBadge);
+    if (job.experience_level) badges.push('<span class="badge badge-exp">' + escapeHtml(job.experience_level) + '</span>');
+    if (statusBadge) badges.push(statusBadge);
+
     return '' +
       '<article class="job-card' + (isArchived ? ' is-archived' : '') + '" data-id="' + escapeHtml(job.id) + '" data-href="' + escapeHtml(detailHref) + '" tabindex="0" role="group" ' +
         'aria-label="' + (isArchived ? t('card.aria.archive', 'Open archived record: ') : t('card.aria.view', 'View job and apply: ')) +
         escapeHtml(job.clean_title) + ' at ' + escapeHtml(job.organization) + '">' +
-        '<div class="jc-top">' +
-          '<span class="badge ' + catClass(job.category) + '">' + escapeHtml(job.category) + '</span>' +
-          '<span class="badge badge-type">' + escapeHtml(positionTypeOf(job)) + '</span>' +
-          kindBadge +
-          regionBadge +
-          '<span class="badge badge-exp">' + escapeHtml(job.experience_level || '') + '</span>' +
-          statusBadge +
-        '</div>' +
+        '<div class="jc-top">' + badges.join(BADGE_SEP) + '</div>' +
         '<div class="jc-main">' +
           '<div class="jc-main-text">' +
-            '<h3 class="jc-title"><a class="jc-title-link" href="' + escapeHtml(detailHref) + '">' + escapeHtml(displayTitle(job)) + '</a></h3>' +
+            '<h3 class="jc-title"><a class="jc-title-link" href="' + escapeHtml(detailHref) + '" title="' + escapeHtml(displayTitle(job)) + '">' + escapeHtml(shortAnchor(displayTitle(job))) + '</a></h3>' +
             (isHindi() && job.title_hi ? '<p class="jc-title-en">' + escapeHtml(job.clean_title) + '</p>' : '') +
             '<p class="jc-org">' + escapeHtml(job.organization) + '</p>' +
             '<div class="jc-meta">' +
@@ -1532,7 +1580,7 @@
         '</div>' +
         '<div class="jc-foot">' +
           '<span class="jc-date">' + footDate + '</span>' +
-          '<a class="jc-view" href="' + escapeHtml(detailHref) + '">' + ctaLabel + ' ' + iconSvg('arrow') + '</a>' +
+          '<span class="jc-view">' + ctaLabel + ' ' + iconSvg('arrow') + '</span>' +
         '</div>' +
       '</article>';
   }
@@ -1582,7 +1630,7 @@
     }
     states.sort(function (a, b) { return (counts[b] - counts[a]) || a.localeCompare(b); });
     els.seoStates.innerHTML = states.map(function (s) {
-      return '<li><a href="?state=' + encodeURIComponent(s) + '">' + escapeHtml(s) +
+      return '<li><a href="' + stateAnchor(s) + '">' + escapeHtml(s) +
         ' <span class="seo-cnt">' + counts[s] + '</span></a></li>';
     }).join('');
   }
@@ -1783,8 +1831,8 @@
   function detailBreadcrumbHtml(job, isArchived) {
     var categorySlug = CATEGORY_SLUGS[job.category] || job.category;
     var middle = isArchived
-      ? '<a href="' + CONFIG.SITE_URL + '?view=archive">' + t('detail.crumb.archive', 'Historical Archive') + '</a>'
-      : '<a href="' + CONFIG.SITE_URL + '?category=' + encodeURIComponent(categorySlug) + '">' + escapeHtml(job.category) + '</a>';
+      ? '<a href="' + CONFIG.SITE_URL + '/?view=archive" rel="nofollow">' + t('detail.crumb.archive', 'Historical Archive') + '</a>'
+      : '<a href="' + CONFIG.SITE_URL + staticHubForCategory(job.category) + '">' + escapeHtml(job.category) + '</a>';
     return '<nav class="job-crumbs" aria-label="Breadcrumb">' +
       '<a href="' + CONFIG.SITE_URL + '">' + t('detail.crumb.home', 'Career Registry') + '</a>' +
       '<span aria-hidden="true">/</span>' + middle +
@@ -2234,8 +2282,8 @@
   function breadcrumbSchema(job, isArchived) {
     var categorySlug = CATEGORY_SLUGS[job.category] || job.category;
     var middle = isArchived
-      ? { name: 'Historical Archive', item: CONFIG.SITE_URL + '?view=archive' }
-      : { name: job.category, item: CONFIG.SITE_URL + '?category=' + encodeURIComponent(categorySlug) };
+      ? { name: 'Historical Archive', item: CONFIG.SITE_URL + '/?view=archive' }
+      : { name: job.category, item: CONFIG.SITE_URL + staticHubForCategory(job.category) };
     return {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -3328,7 +3376,7 @@
       '</dl>' +
       (note ? '<p class="dd-note">' + escapeHtml(note) + '</p>' : '') +
       '<p class="dd-actions">' +
-      '<a href="/unsubscribe?email=' + encodeURIComponent(record.email) + '">' + t('dd.manage', 'Manage or withdraw this subscription') + '</a>' +
+      '<a href="/unsubscribe?email=' + encodeURIComponent(record.email) + '" rel="nofollow">' + t('dd.manage', 'Manage or withdraw this subscription') + '</a>' +
       ' <span class="dd-sep">&middot;</span> ' +
       '<button type="button" class="dd-update">' + t('dd.update', 'Update preferences') + '</button>' +
       '</p>';

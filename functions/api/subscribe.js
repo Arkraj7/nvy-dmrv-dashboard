@@ -451,9 +451,13 @@ export async function onRequestPost(context) {
 
   const persisted = !!(persistence && persistence.ok);
   const existing = (github.ok && github.existing) || (kv.ok && kv.existing) || null;
-  const welcome = welcomeAlreadyHandled(existing)
-    ? { status: "already_sent" }
-    : await triggerWelcomeEmail(runtimeEnv, record);
+  const welcomePromise = welcomeAlreadyHandled(existing)
+    ? Promise.resolve({ status: "already_sent" })
+    : triggerWelcomeEmail(runtimeEnv, record);
+  if (typeof context.waitUntil === "function") {
+    context.waitUntil(welcomePromise);
+  }
+  const welcome = await welcomePromise;
 
   if (!persisted) {
     /* Cloudflare Pages Function logs are the zero-key durable trace. The
