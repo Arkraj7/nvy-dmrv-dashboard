@@ -1628,7 +1628,7 @@ def job_posting_jsonld(job: Dict[str, Any], today: date) -> str:
         },
         "jobLocation": location,
         "url": url,
-        "directApply": True,
+        "directApply": False,
         "identifier": {
             "@type": "PropertyValue",
             "name": org,
