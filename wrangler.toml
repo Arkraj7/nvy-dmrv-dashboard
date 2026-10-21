@@ -1,2 +1,5 @@
 name = "nvy-dmrv-dashboard"
 pages_build_output_dir = "dist"
+
+[vars]
+GITHUB_REPO = "Arkraj7/nvy-dmrv-dashboard"
