@@ -1,2 +1,14 @@
 [
+  {
+    "email": "urbanforestpark+rotate-check-20261021@gmail.com",
+    "frequency": "3-days",
+    "sector": "all",
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-10-21T11:56:19.468Z",
+    "updated_at": "2026-10-21T11:56:19.468Z",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; en-IN) PowerShell/7.6.7",
+    "welcome_sent": false,
+    "welcome_queued": false
+  }
 ]
