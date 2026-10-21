@@ -18,17 +18,21 @@ Delivery channels (first configured one wins):
        (NEWSLETTER_FROM_EMAIL optional; defaults to SMTP_USER - works with
        a Gmail App Password, 100% free)
 
-Subscriber sources (first one that yields addresses wins):
+Subscriber sources (all active addresses are merged and de-duplicated):
 
-    1. NEWSLETTER_SUBSCRIBERS      env - JSON array, or comma/semicolon/
+    1. data/subscribers.json       repo file - [] or [{"email": ...}] or
+                                   {"subscribers": [...]}. Records with
+                                   `active: false` or an unsubscribe/bounce
+                                   status are skipped.
+    2. NEWSLETTER_SUBSCRIBERS      env - JSON array, or comma/semicolon/
                                    newline separated list. Example:
                                    ["a@b.in", {"email": "c@d.in"}]
-    2. NEWSLETTER_SUBSCRIBERS_CSV  env - URL of a published CSV (e.g. the
+    3. NEWSLETTER_SUBSCRIBERS_CSV  env - URL of a published CSV (e.g. the
                                    Google Sheet filled by the Apps Script in
                                    google-apps-script/newsletter-subscribe.gs).
                                    A column titled "Email"/"email" is used.
-    3. data/subscribers.json       repo file - [] or [{"email": ...}] or
-                                   {"subscribers": [...]}.
+    4. SMTP_USER                   env - the sending mailbox also receives an
+                                   owner copy of every dispatch.
 
 By design the script NEVER fails CI when there is nothing to send or no
 credentials are set: it writes the HTML edition, logs what was skipped, and
@@ -120,8 +124,10 @@ WELCOME_TELEGRAM_COLOR = "#229ED9"
 
 FREQUENCY_LABELS = {
     "3-day": "Every 3 Days",
+    "3-days": "Every 3 Days",
     "3days": "Every 3 Days",
     "3_days": "Every 3 Days",
+    "every-3-days": "Every 3 Days",
     "weekly": "Weekly Digest",
 }
 
@@ -186,6 +192,23 @@ def unsubscribe_url_for(email: str) -> str:
 # --------------------------------------------------------------------------
 # Recipients
 # --------------------------------------------------------------------------
+def _record_is_active(item: Any) -> bool:
+    """True unless a subscriber record is explicitly inactive/withdrawn."""
+    if not isinstance(item, dict):
+        return True
+    if item.get("active") is False:
+        return False
+    status = squash(item.get("status")).lower()
+    return status not in {
+        "unsubscribed",
+        "inactive",
+        "bounced",
+        "complained",
+        "deleted",
+        "suppressed",
+    }
+
+
 def _coerce_recipients(raw: Any) -> List[Dict[str, str]]:
     """Normalise any accepted container into [{"email": ...}] records."""
     out: List[Dict[str, str]] = []
@@ -209,11 +232,13 @@ def _coerce_recipients(raw: Any) -> List[Dict[str, str]]:
     if isinstance(raw, dict):
         if "subscribers" in raw:
             return _coerce_recipients(raw["subscribers"])
-        if "email" in raw:
+        if "email" in raw and _record_is_active(raw):
             out.append({"email": str(raw["email"]).strip().lower()})
         return out
     if isinstance(raw, (list, tuple)):
         for item in raw:
+            if not _record_is_active(item):
+                continue
             out.extend(_coerce_recipients(item))
     return out
 
@@ -278,45 +303,60 @@ def _looks_like_test_email(email: str) -> bool:
     )
 
 
+def _subscriber_file_label() -> str:
+    try:
+        return str(SUBSCRIBERS_FILE.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(SUBSCRIBERS_FILE)
+
+
 def load_recipients(override: Optional[str] = None) -> Tuple[List[Dict[str, str]], str]:
     """Return (recipients, human-readable source label).
 
-    Owner fallback: when no subscriber list is configured yet - or every
-    configured address is a QA/placeholder entry - the site owner's own
-    mailbox (NEWSLETTER_OWNER_EMAIL, else SMTP_USER, else
-    NEWSLETTER_FROM_EMAIL) is substituted as the primary dispatch recipient,
-    so the 3-day digest lands in the owner's inbox for verification and
-    forwarding until real subscribers are collected.
+    Every configured source is merged, not treated as an either/or fallback:
+    the repository subscriber file, the optional NEWSLETTER_SUBSCRIBERS
+    secret, the optional published CSV, and the SMTP_USER owner mailbox.
+    Inactive / unsubscribed records are skipped. If nothing usable remains,
+    the owner mailbox is substituted so the dispatch still lands somewhere
+    for verification and forwarding.
     """
     if override:
         return _dedupe_valid(_coerce_recipients(override)), "--to override"
 
     recipients: List[Dict[str, str]] = []
-    source = "none configured"
+    sources: List[str] = []
 
-    env_json = os.environ.get("NEWSLETTER_SUBSCRIBERS", "").strip()
-    if env_json:
-        recipients = _dedupe_valid(_coerce_recipients(env_json))
-        if recipients:
-            source = "NEWSLETTER_SUBSCRIBERS"
-
-    if not recipients:
-        csv_url = os.environ.get("NEWSLETTER_SUBSCRIBERS_CSV", "").strip()
-        if csv_url:
-            recipients = _dedupe_valid(fetch_csv_recipients(csv_url))
-            if recipients:
-                source = "NEWSLETTER_SUBSCRIBERS_CSV"
-
-    if not recipients and SUBSCRIBERS_FILE.exists():
+    if SUBSCRIBERS_FILE.exists():
         try:
             raw = json.loads(SUBSCRIBERS_FILE.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             logging.warning("Could not read %s (%s)", SUBSCRIBERS_FILE, exc)
             raw = []
-        recipients = _dedupe_valid(_coerce_recipients(raw))
-        if recipients:
-            source = str(SUBSCRIBERS_FILE.relative_to(REPO_ROOT))
+        file_recipients = _dedupe_valid(_coerce_recipients(raw))
+        if file_recipients:
+            recipients.extend(file_recipients)
+            sources.append(_subscriber_file_label())
 
+    env_json = os.environ.get("NEWSLETTER_SUBSCRIBERS", "").strip()
+    if env_json:
+        env_recipients = _dedupe_valid(_coerce_recipients(env_json))
+        if env_recipients:
+            recipients.extend(env_recipients)
+            sources.append("NEWSLETTER_SUBSCRIBERS")
+
+    csv_url = os.environ.get("NEWSLETTER_SUBSCRIBERS_CSV", "").strip()
+    if csv_url:
+        csv_recipients = _dedupe_valid(fetch_csv_recipients(csv_url))
+        if csv_recipients:
+            recipients.extend(csv_recipients)
+            sources.append("NEWSLETTER_SUBSCRIBERS_CSV")
+
+    smtp_user = os.environ.get("SMTP_USER", "").strip().lower()
+    if smtp_user and EMAIL_RE.match(smtp_user):
+        recipients.append({"email": smtp_user})
+        sources.append("SMTP_USER")
+
+    recipients = _dedupe_valid(recipients)
     usable = [record for record in recipients if not _looks_like_test_email(record["email"])]
     dropped = len(recipients) - len(usable)
     if dropped:
@@ -331,16 +371,16 @@ def load_recipients(override: Optional[str] = None) -> Tuple[List[Dict[str, str]
         if owner and EMAIL_RE.match(owner):
             note = (
                 "owner copy via SMTP_USER (no subscriber list yet)"
-                if source == "none configured"
-                else f"owner copy via SMTP_USER ({source} held only test entries)"
+                if not sources
+                else f"owner copy via SMTP_USER ({' + '.join(sources)} held only test entries)"
             )
             logging.info(
                 "No mailable subscribers - routing this dispatch to the owner mailbox (%s).", owner
             )
             return [{"email": owner}], note
-        return [], source
+        return [], "none configured"
 
-    return usable, source
+    return usable, " + ".join(sources) if sources else "none configured"
 
 
 # --------------------------------------------------------------------------
@@ -624,6 +664,37 @@ def frequency_label(frequency: Any) -> str:
     return FREQUENCY_LABELS.get(squash(frequency).lower(), "Every 3 Days")
 
 
+def normalize_frequency(value: Any, default: str = "3-days") -> str:
+    """Canonical cadence used by the API, workflow and subscriber store."""
+    text = squash(value).lower()
+    if text in {"3-day", "3-days", "3days", "3_days", "every-3-days"}:
+        return "3-days"
+    if text == "weekly":
+        return "weekly"
+    return default
+
+
+def normalize_sector(value: Any, default: str = "all") -> str:
+    text = squash(value).lower()
+    return text if text in SECTOR_LABELS else default
+
+
+def frequency_arg(value: str) -> str:
+    normalized = normalize_frequency(value, default="")
+    if not normalized:
+        raise argparse.ArgumentTypeError("frequency must be 3-days or weekly")
+    return normalized
+
+
+def sector_arg(value: str) -> str:
+    normalized = normalize_sector(value, default="")
+    if not normalized:
+        raise argparse.ArgumentTypeError(
+            "sector must be all, academic, forestry-gis or corporate-esg"
+        )
+    return normalized
+
+
 def sector_label(sector: Any) -> str:
     return SECTOR_LABELS.get(squash(sector).lower(), SECTOR_LABELS["all"])
 
@@ -672,7 +743,7 @@ def _welcome_li(title: str, body: str) -> str:
 
 def build_welcome_email_html(
     subscriber_email: str,
-    frequency: Any = "3-day",
+    frequency: Any = "3-days",
     sector: Any = "all",
     jobs: Optional[List[Dict[str, Any]]] = None,
 ) -> Tuple[str, str]:
@@ -951,6 +1022,70 @@ def save_subscriber_records(records: List[Dict[str, Any]]) -> None:
     tmp_path.replace(SUBSCRIBERS_FILE)
 
 
+def upsert_subscriber(
+    email: str,
+    frequency: Any = "3-days",
+    sector: Any = "all",
+    source: str = "subscribe",
+) -> Dict[str, Any]:
+    """Add or refresh one subscriber in the persistent repository store.
+
+    Existing welcome markers are preserved so a preference update never
+    triggers a duplicate onboarding email. New records start with
+    ``welcome_sent: false`` so the scheduled backlog can recover a failed
+    instant welcome.
+    """
+    address = squash(email).lower()
+    cadence = normalize_frequency(frequency)
+    preference = normalize_sector(sector)
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    records = load_subscriber_records()
+
+    for record in records:
+        if squash(record.get("email")).lower() != address:
+            continue
+        record["email"] = address
+        record["frequency"] = cadence
+        record["sector"] = preference
+        record["active"] = True
+        record["updated_at"] = now
+        record.setdefault("subscribed_at", now)
+        record.setdefault("source", source)
+        save_subscriber_records(records)
+        return record
+
+    record = {
+        "email": address,
+        "frequency": cadence,
+        "sector": preference,
+        "active": True,
+        "source": source,
+        "subscribed_at": now,
+        "updated_at": now,
+        "welcome_sent": False,
+    }
+    records.append(record)
+    save_subscriber_records(records)
+    return record
+
+
+def mark_welcome_sent(email: str) -> None:
+    address = squash(email).lower()
+    records = load_subscriber_records()
+    changed = False
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for record in records:
+        if squash(record.get("email")).lower() != address:
+            continue
+        record["email"] = address
+        record["active"] = True
+        record["welcome_sent"] = True
+        record["welcome_sent_at"] = now
+        changed = True
+    if changed:
+        save_subscriber_records(records)
+
+
 def process_welcome_backlog(
     channel: str,
     config: Dict[str, str],
@@ -969,6 +1104,7 @@ def process_welcome_backlog(
     pending = [
         record for record in records
         if EMAIL_RE.match(squash(record.get("email")))
+        and _record_is_active(record)
         and record.get("welcome_sent") is not True
         and not _looks_like_test_email(squash(record.get("email")))
     ]
@@ -1123,6 +1259,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--jobs", type=Path, default=DEFAULT_JOBS, help="Path to jobs.json")
     parser.add_argument("--archive", type=Path, default=DEFAULT_ARCHIVE, help="Path to archive.json (telemetry context)")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Output HTML path")
+    parser.add_argument(
+        "--subscribers",
+        type=Path,
+        default=SUBSCRIBERS_FILE,
+        help="Persistent subscriber store (default data/subscribers.json)",
+    )
     parser.add_argument("--days", type=int, default=4, help="Freshness window in days (default 4 = 3-day cadence + slack)")
     parser.add_argument("--min-new", type=int, default=3, help="Fall back to recent jobs when fewer than this are fresh")
     parser.add_argument("--max-cards", type=int, default=10, help="Maximum job cards in the email")
@@ -1132,7 +1274,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--welcome",
         default="",
         metavar="EMAIL",
-        help="Send the one-time Welcome email to this address now, then exit",
+        help="Upsert this address in subscribers.json, send the one-time Welcome email now, then exit",
     )
     parser.add_argument(
         "--test-welcome",
@@ -1141,12 +1283,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--frequency",
-        default="3-day",
-        choices=["3-day", "weekly"],
-        help="Email alert cadence stamped into the Welcome email (default 3-day)",
+        type=frequency_arg,
+        default="3-days",
+        choices=["3-days", "weekly"],
+        help="Email alert cadence stamped into the Welcome email (default 3-days)",
     )
     parser.add_argument(
         "--sector",
+        type=sector_arg,
         default="all",
         choices=["all", "academic", "forestry-gis", "corporate-esg"],
         help="Sector preference stamped into the Welcome email (default all)",
@@ -1169,6 +1313,9 @@ def run_welcome_command(args: argparse.Namespace) -> int:
     if args.jobs.exists():
         jobs = load_jobs(args.jobs)
 
+    frequency = normalize_frequency(args.frequency)
+    sector = normalize_sector(args.sector)
+
     if args.test_welcome:
         recipient = (
             (args.to or "").split(",")[0].strip()
@@ -1184,7 +1331,7 @@ def run_welcome_command(args: argparse.Namespace) -> int:
             )
         mode = "test"
     else:
-        recipient = args.welcome.strip()
+        recipient = args.welcome.strip().lower()
         mode = "single"
 
     if not recipient or not EMAIL_RE.match(recipient):
@@ -1193,7 +1340,15 @@ def run_welcome_command(args: argparse.Namespace) -> int:
         )
         return 1
 
-    html_body, _text_body = build_welcome_email_html(recipient, args.frequency, args.sector, jobs)
+    if not args.test_welcome:
+        try:
+            upsert_subscriber(recipient, frequency, sector, source="welcome_email")
+            logging.info("Subscriber persisted in %s -> %s", _subscriber_file_label(), recipient)
+        except OSError as exc:
+            logging.error("Could not persist subscriber %s: %s", recipient, clip(exc, 180))
+            return 1
+
+    html_body, _text_body = build_welcome_email_html(recipient, frequency, sector, jobs)
     try:
         WELCOME_PREVIEW.write_text(html_body, encoding="utf-8")
         logging.info(
@@ -1207,15 +1362,21 @@ def run_welcome_command(args: argparse.Namespace) -> int:
     if channel is None:
         logging.info(
             "No email credentials configured (RESEND_API_KEY / BREVO_API_KEY / SMTP_*) - "
-            "preview saved only; nothing was sent."
+            "subscriber persisted and preview saved; nothing was sent."
         )
         return 0
 
     try:
-        deliver_welcome(channel, config, recipient, args.frequency, args.sector, jobs)
+        deliver_welcome(channel, config, recipient, frequency, sector, jobs)
     except Exception as exc:  # noqa: BLE001 - surface the failure for this explicit request
         logging.error("Welcome email delivery failed via %s: %s", channel.upper(), clip(exc, 240))
         return 1
+
+    if not args.test_welcome:
+        try:
+            mark_welcome_sent(recipient)
+        except OSError as exc:
+            logging.warning("Could not mark welcome_sent for %s (%s)", recipient, clip(exc, 160))
     logging.info("Welcome email (%s mode) delivered via %s -> %s", mode, channel.upper(), recipient)
     return 0
 
@@ -1227,6 +1388,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         format="%(asctime)s [%(levelname)s] %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+
+    global SUBSCRIBERS_FILE
+    SUBSCRIBERS_FILE = Path(args.subscribers)
 
     if args.welcome or args.test_welcome:
         return run_welcome_command(args)
@@ -1280,8 +1444,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     logging.info("Subscriber source: %s (%d valid unique recipient(s)).", source, len(recipients))
     if not recipients:
         logging.info(
-            "No subscribers configured - skipping delivery (set NEWSLETTER_SUBSCRIBERS, "
-            "NEWSLETTER_SUBSCRIBERS_CSV, or populate data/subscribers.json)."
+            "No subscribers configured - skipping delivery (populate data/subscribers.json, "
+            "set NEWSLETTER_SUBSCRIBERS, or configure NEWSLETTER_SUBSCRIBERS_CSV)."
         )
         return 0
 

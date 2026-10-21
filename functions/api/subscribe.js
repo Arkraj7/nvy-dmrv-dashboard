@@ -1,62 +1,63 @@
 /**
- * Urban Forest Park — Mandate Dispatch subscription endpoint
+ * Urban Forest Park - Mandate Dispatch subscription endpoint
  * ---------------------------------------------------------------------------
  * Cloudflare Pages Function, deployed automatically with the site
  * (`wrangler pages deploy dist` bundles the /functions directory).
  *
  *   POST /api/subscribe
  *   Content-Type: application/json
- *   { "email": "…", "frequency": "3-day" | "weekly", "sector": "all" | "academic" | "forestry-gis" | "corporate-esg" }
+ *   { "email": "name@example.in", "frequency": "3-days" | "weekly",
+ *     "sector": "all" | "academic" | "forestry-gis" | "corporate-esg" }
  *
- * Response:  { "ok": true, "persisted": true|false }
+ * Response:
+ *   { "ok": true, "persisted": true|false, "storage": "github|kv|webhook|none",
+ *     "welcome": "queued|already_sent|not_configured|failed" }
  *
- * Persistence cascade (configured entirely through the Pages project's
- * environment variables / bindings — no code change required):
+ * Persistence cascade (first successful store wins, all configured stores are
+ * mirrored where possible):
  *
- *   1. KV binding `NEWSLETTER_KV`
- *      Pages project → Settings → Functions → KV namespace bindings:
- *          Variable name: NEWSLETTER_KV
- *      Subscribers are stored under `sub:<email>` as JSON. Recommended.
+ *   1. GitHub Contents API - `GITHUB_PAT` (or `GITHUB_TOKEN`) plus
+ *      `GITHUB_REPO` (defaults to this repository). The subscriber is
+ *      upserted into `data/subscribers.json` on `main`, which is the same
+ *      file read by scripts/send_newsletter.py in GitHub Actions. The PAT
+ *      needs `contents: write` and `actions: write` (repository_dispatch).
  *
- *   2. Environment variable `NEWSLETTER_WEBHOOK_URL`
- *      Any HTTPS endpoint that accepts a JSON POST — e.g. the companion
- *      Google Apps Script in google-apps-script/newsletter-subscribe.gs
- *      (writes straight into a Google Sheet; free to host). Optionally set
- *      `NEWSLETTER_WEBHOOK_TOKEN` and it is forwarded as the
- *      `X-UFP-Token` header for shared-secret verification.
+ *   2. Cloudflare KV binding `UFP_SUBSCRIBERS` (legacy alias
+ *      `NEWSLETTER_KV`). Subscribers are stored under `sub:<email>` as JSON.
+ *      This is the durable zero-GitHub-token fallback.
  *
- *   3. Neither configured → the subscription is acknowledged
- *      (`persisted: false`) and the frontend transparently records the
- *      preference on the subscriber's device, showing the contact-mailbox
- *      route so no request is ever lost or errors out.
+ *   3. `NEWSLETTER_WEBHOOK_URL` - any HTTPS endpoint that accepts a JSON POST
+ *      (e.g. a Google Apps Script sheet writer). Optional
+ *      `NEWSLETTER_WEBHOOK_TOKEN` is forwarded as `X-UFP-Token`.
  *
- * Instant welcome email (optional, first configured channel wins):
+ *   4. No server-side store configured - the subscription is acknowledged
+ *      with `persisted: false`. The frontend stores the preference on the
+ *      subscriber's device, retries it on a later visit, and shows the
+ *      contact-mailbox route, so a signup is never silently lost.
  *
- *   1. `GITHUB_PAT` + `GITHUB_REPO` (e.g. "owner/urbanforestpark")
- *      Fires a repository_dispatch event `welcome_email` whose payload is
- *      consumed by .github/workflows/newsletter_dispatch.yml, which runs
- *      `scripts/send_newsletter.py --welcome <email>` — so the new
- *      subscriber receives the formal onboarding email within minutes.
- *      The PAT needs `contents: write` (fine-grained, this repository only).
- *
- *   2. `WELCOME_WEBHOOK_URL`
- *      Any HTTPS endpoint that accepts a JSON POST with the full subscriber
- *      record plus `{"event": "welcome_email"}`.
- *
- * The trigger is fire-and-forget (`context.waitUntil`) and never blocks or
- * breaks the subscription response. Re-submissions of an address that was
- * already queued/welcomed are skipped, so no duplicate welcomes are sent.
- *
- * The main-site copy of the subscriber list used by the 3-day mailer
- * (scripts/send_newsletter.py) can come from repository data
- * (data/subscribers.json), a 📄 published Google Sheet CSV
- * (NEWSLETTER_SUBSCRIBERS_CSV), or a workflow secret
- * (NEWSLETTER_SUBSCRIBERS). See the mailer script header for details.
+ * Instant welcome email:
+ *   A successful GitHub store fires a `welcome_email` repository_dispatch
+ *   event. .github/workflows/newsletter_dispatch.yml consumes it, upserts the
+ *   address (idempotent), sends `scripts/send_newsletter.py --welcome`, and
+ *   commits the updated subscriber file. If repository_dispatch is
+ *   unavailable, the function falls back to a workflow_dispatch event with
+ *   `subscriber_email`, `frequency` and `sector` inputs.
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const FREQUENCIES = new Set(["3-day", "weekly"]);
+const FREQUENCY_ALIASES = new Map([
+  ["3-day", "3-days"],
+  ["3-days", "3-days"],
+  ["3days", "3-days"],
+  ["3_days", "3-days"],
+  ["every-3-days", "3-days"],
+  ["weekly", "weekly"],
+]);
 const SECTORS = new Set(["all", "academic", "forestry-gis", "corporate-esg"]);
+const DEFAULT_REPO = "Arkraj7/nvy-dmrv-dashboard";
+const SUBSCRIBERS_PATH = "data/subscribers.json";
+const BRANCH = "main";
+const GITHUB_API = "https://api.github.com";
 
 function json(body, status) {
   return new Response(JSON.stringify(body), {
@@ -68,141 +69,406 @@ function json(body, status) {
   });
 }
 
-/* Fire the instant-welcome trigger. Fire-and-forget: never throws. */
-async function triggerWelcomeEmail(env, record) {
-  try {
-    if (env && env.GITHUB_PAT && env.GITHUB_REPO) {
-      const response = await fetch(
-        "https://api.github.com/repos/" + env.GITHUB_REPO + "/dispatches",
-        {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + env.GITHUB_PAT,
-            Accept: "application/vnd.github+json",
-            "Content-Type": "application/json",
-            "User-Agent": "urbanforestpark-subscribe",
-          },
-          body: JSON.stringify({
-            event_type: "welcome_email",
-            client_payload: {
-              email: record.email,
-              frequency: record.frequency,
-              sector: record.sector,
-              source: record.source,
-            },
-          }),
-        }
-      );
-      return response.ok ? "github" : "github_failed";
-    }
-    if (env && env.WELCOME_WEBHOOK_URL) {
-      const response = await fetch(env.WELCOME_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ event: "welcome_email", ...record }),
-      });
-      return response.ok ? "webhook" : "webhook_failed";
-    }
-  } catch (err) {
-    return "failed";
+function clean(value) {
+  return String(value == null ? "" : value).trim();
+}
+
+function normalizeFrequency(value) {
+  return FREQUENCY_ALIASES.get(clean(value).toLowerCase()) || null;
+}
+
+function normalizeSector(value) {
+  const sector = clean(value).toLowerCase();
+  return SECTORS.has(sector) ? sector : null;
+}
+
+function githubToken(env) {
+  return clean(env && (env.GITHUB_PAT || env.GITHUB_TOKEN));
+}
+
+function repoName(env) {
+  return clean(env && env.GITHUB_REPO) || DEFAULT_REPO;
+}
+
+function githubHeaders(token) {
+  return {
+    Authorization: "Bearer " + token,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "urbanforestpark-subscribe",
+  };
+}
+
+/* Workers expose btoa/atob; TextEncoder/TextDecoder keep non-ASCII emails and
+   names intact across the GitHub Contents API. */
+function encodeBase64(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (let index = 0; index < bytes.length; index += 1) {
+    binary += String.fromCharCode(bytes[index]);
   }
-  return "not_configured";
+  return btoa(binary);
+}
+
+function decodeBase64(value) {
+  const binary = atob(String(value || "").replace(/\s+/g, ""));
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+function parseSubscribers(text) {
+  const parsed = JSON.parse(String(text || "[]"));
+  const list = Array.isArray(parsed)
+    ? parsed
+    : Array.isArray(parsed && parsed.subscribers)
+      ? parsed.subscribers
+      : [];
+  return list.filter((item) => item && typeof item === "object" && !Array.isArray(item));
+}
+
+function serialiseSubscribers(records) {
+  return JSON.stringify(records, null, 2) + "\n";
+}
+
+function findRecord(records, email) {
+  const needle = clean(email).toLowerCase();
+  for (const record of records) {
+    if (clean(record && record.email).toLowerCase() === needle) return record;
+  }
+  return null;
+}
+
+function mergeRecord(existing, incoming) {
+  if (!existing) {
+    return {
+      ...incoming,
+      active: true,
+      welcome_sent: false,
+      welcome_queued: false,
+    };
+  }
+
+  return {
+    ...existing,
+    ...incoming,
+    active: true,
+    subscribed_at: existing.subscribed_at || incoming.subscribed_at,
+    welcome_sent: existing.welcome_sent === true,
+    welcome_sent_at: existing.welcome_sent_at,
+    welcome_queued: existing.welcome_sent === true ? false : existing.welcome_queued === true,
+    welcome_queued_at: existing.welcome_queued_at,
+    updated_at: incoming.updated_at,
+  };
+}
+
+function welcomeAlreadyHandled(record) {
+  if (!record) return false;
+  if (record.welcome_sent === true) return true;
+  if (record.welcome_queued === true) {
+    const queuedAt = Date.parse(clean(record.welcome_queued_at));
+    if (!Number.isFinite(queuedAt) || Date.now() - queuedAt < 24 * 60 * 60 * 1000) {
+      return true;
+    }
+  }
+  return false;
+}
+
+async function readGitHubSubscribers(env) {
+  const token = githubToken(env);
+  if (!token) return null;
+
+  const repo = repoName(env);
+  const url = `${GITHUB_API}/repos/${repo}/contents/${SUBSCRIBERS_PATH}?ref=${encodeURIComponent(BRANCH)}`;
+  const response = await fetch(url, { headers: githubHeaders(token) });
+
+  if (response.status === 404) {
+    return { records: [], sha: null };
+  }
+  if (!response.ok) {
+    throw new Error(`GitHub contents read failed (HTTP ${response.status})`);
+  }
+
+  const payload = await response.json();
+  return {
+    records: parseSubscribers(decodeBase64(payload.content || "")),
+    sha: payload.sha || null,
+  };
+}
+
+async function writeGitHubSubscribers(env, records, sha, message) {
+  const token = githubToken(env);
+  if (!token) return false;
+
+  const repo = repoName(env);
+  const body = {
+    message,
+    content: encodeBase64(serialiseSubscribers(records)),
+    branch: BRANCH,
+  };
+  if (sha) body.sha = sha;
+
+  const response = await fetch(
+    `${GITHUB_API}/repos/${repo}/contents/${SUBSCRIBERS_PATH}`,
+    {
+      method: "PUT",
+      headers: githubHeaders(token),
+      body: JSON.stringify(body),
+    }
+  );
+  return response.ok;
+}
+
+async function upsertGitHubSubscriber(env, incoming) {
+  if (!githubToken(env)) return { ok: false, reason: "not_configured" };
+
+  let lastError = "unknown";
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const current = await readGitHubSubscribers(env);
+      const records = current.records;
+      const existing = findRecord(records, incoming.email);
+      const merged = mergeRecord(existing, incoming);
+
+      if (existing) {
+        records[records.indexOf(existing)] = merged;
+      } else {
+        records.push(merged);
+      }
+
+      const message = existing
+        ? `chore(subscribers): update ${incoming.email}`
+        : `chore(subscribers): add ${incoming.email}`;
+      const written = await writeGitHubSubscribers(env, records, current.sha, message);
+      if (written) {
+        return {
+          ok: true,
+          storage: "github",
+          existing,
+          record: merged,
+        };
+      }
+      lastError = "GitHub contents write failed";
+    } catch (error) {
+      lastError = String((error && error.message) || error);
+    }
+  }
+
+  return { ok: false, reason: lastError };
+}
+
+function kvBinding(env) {
+  const binding = env && (env.UFP_SUBSCRIBERS || env.NEWSLETTER_KV);
+  if (!binding || typeof binding.get !== "function" || typeof binding.put !== "function") {
+    return null;
+  }
+  return binding;
+}
+
+async function upsertKVSubscriber(env, incoming) {
+  const kv = kvBinding(env);
+  if (!kv) return { ok: false, reason: "not_configured" };
+
+  try {
+    const raw = await kv.get("sub:" + incoming.email);
+    let existing = null;
+    if (raw) {
+      try {
+        existing = JSON.parse(raw);
+      } catch (error) {
+        existing = null;
+      }
+    }
+    const merged = mergeRecord(existing, incoming);
+    await kv.put("sub:" + incoming.email, JSON.stringify(merged));
+    return {
+      ok: true,
+      storage: "kv",
+      existing,
+      record: merged,
+    };
+  } catch (error) {
+    return { ok: false, reason: String((error && error.message) || error) };
+  }
+}
+
+async function forwardWebhook(env, record) {
+  if (!env || !env.NEWSLETTER_WEBHOOK_URL) return { ok: false, reason: "not_configured" };
+
+  try {
+    const headers = { "Content-Type": "application/json" };
+    if (env.NEWSLETTER_WEBHOOK_TOKEN) {
+      headers["X-UFP-Token"] = env.NEWSLETTER_WEBHOOK_TOKEN;
+    }
+    const response = await fetch(env.NEWSLETTER_WEBHOOK_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(record),
+    });
+    return response.ok
+      ? { ok: true, storage: "webhook" }
+      : { ok: false, reason: `webhook HTTP ${response.status}` };
+  } catch (error) {
+    return { ok: false, reason: String((error && error.message) || error) };
+  }
+}
+
+async function triggerWelcomeEmail(env, record) {
+  const token = githubToken(env);
+  if (!token) return { status: "not_configured" };
+
+  const repo = repoName(env);
+  const payload = {
+    subscriber_email: record.email,
+    email: record.email,
+    frequency: record.frequency,
+    sector: record.sector,
+    source: record.source,
+  };
+
+  try {
+    const dispatch = await fetch(`${GITHUB_API}/repos/${repo}/dispatches`, {
+      method: "POST",
+      headers: githubHeaders(token),
+      body: JSON.stringify({
+        event_type: "welcome_email",
+        client_payload: payload,
+      }),
+    });
+    if (dispatch.ok) {
+      return { status: "queued", via: "repository_dispatch" };
+    }
+
+    const workflow = await fetch(
+      `${GITHUB_API}/repos/${repo}/actions/workflows/newsletter_dispatch.yml/dispatches`,
+      {
+        method: "POST",
+        headers: githubHeaders(token),
+        body: JSON.stringify({
+          ref: BRANCH,
+          inputs: {
+            subscriber_email: record.email,
+            frequency: record.frequency,
+            sector: record.sector,
+          },
+        }),
+      }
+    );
+    if (workflow.ok) {
+      return { status: "queued", via: "workflow_dispatch" };
+    }
+    return {
+      status: "failed",
+      via: "workflow_dispatch",
+      http: workflow.status,
+    };
+  } catch (error) {
+    return { status: "failed", error: String((error && error.message) || error) };
+  }
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  const runtimeEnv = env || {};
 
   let payload;
   try {
     payload = await request.json();
-  } catch (err) {
+  } catch (error) {
     return json({ ok: false, error: "invalid_json" }, 400);
   }
-  if (!payload || typeof payload !== "object") {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
     return json({ ok: false, error: "invalid_payload" }, 400);
   }
 
-  const email = String(payload.email || "").trim().toLowerCase();
-  const frequency = FREQUENCIES.has(String(payload.frequency)) ? String(payload.frequency) : "3-day";
-  const sector = SECTORS.has(String(payload.sector)) ? String(payload.sector) : "all";
-
-  if (email.length === 0 || email.length > 254 || !EMAIL_RE.test(email)) {
+  const email = clean(payload.email).toLowerCase();
+  if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
     return json({ ok: false, error: "invalid_email" }, 422);
   }
 
-  /* Skip the welcome trigger for an address already queued/welcomed. */
-  let alreadyKnown = false;
-  if (env && env.NEWSLETTER_KV && typeof env.NEWSLETTER_KV.get === "function") {
-    try {
-      const existing = await env.NEWSLETTER_KV.get("sub:" + email);
-      alreadyKnown = !!(
-        existing && /"welcome_sent"\s*:\s*true|"welcome_queued"\s*:\s*true/.test(existing)
-      );
-    } catch (err) {
-      /* A KV read failure must never block the subscription. */
-    }
+  const requestedFrequency = clean(payload.frequency);
+  const frequency = normalizeFrequency(requestedFrequency) || (requestedFrequency ? null : "3-days");
+  if (!frequency) {
+    return json(
+      {
+        ok: false,
+        error: "invalid_frequency",
+        allowed: ["3-days", "weekly"],
+      },
+      422
+    );
   }
 
-  const canTrigger = !alreadyKnown &&
-    !!((env && env.GITHUB_PAT && env.GITHUB_REPO) || (env && env.WELCOME_WEBHOOK_URL));
+  const requestedSector = clean(payload.sector);
+  const sector = normalizeSector(requestedSector) || (requestedSector ? null : "all");
+  if (!sector) {
+    return json(
+      {
+        ok: false,
+        error: "invalid_sector",
+        allowed: Array.from(SECTORS),
+      },
+      422
+    );
+  }
 
+  const now = new Date().toISOString();
   const record = {
     email,
     frequency,
     sector,
+    active: true,
     source: "urbanforestpark.com",
-    subscribed_at: new Date().toISOString(),
+    subscribed_at: now,
+    updated_at: now,
     user_agent: request.headers.get("User-Agent") || "",
     welcome_sent: false,
-    welcome_queued: alreadyKnown || canTrigger,
+    welcome_queued: false,
   };
 
-  /* 1. KV binding --------------------------------------------------------- */
-  let storage = "client";
-  let persisted = false;
-  if (env && env.NEWSLETTER_KV && typeof env.NEWSLETTER_KV.put === "function") {
-    try {
-      await env.NEWSLETTER_KV.put("sub:" + email, JSON.stringify(record));
-      storage = "kv";
-      persisted = true;
-    } catch (err) {
-      // Fall through to the webhook / acknowledgement paths below.
-    }
+  const github = await upsertGitHubSubscriber(runtimeEnv, record);
+  const kv = await upsertKVSubscriber(runtimeEnv, record);
+
+  let persistence = null;
+  if (github.ok) {
+    persistence = { ...github, storage: kv.ok ? "github+kv" : "github" };
+  } else if (kv.ok) {
+    persistence = kv;
+  } else {
+    const webhook = await forwardWebhook(runtimeEnv, record);
+    if (webhook.ok) persistence = webhook;
   }
 
-  /* 2. Webhook forwarding ------------------------------------------------- */
-  if (!persisted && env && env.NEWSLETTER_WEBHOOK_URL) {
-    try {
-      const headers = { "Content-Type": "application/json" };
-      if (env.NEWSLETTER_WEBHOOK_TOKEN) {
-        headers["X-UFP-Token"] = env.NEWSLETTER_WEBHOOK_TOKEN;
-      }
-      const upstream = await fetch(env.NEWSLETTER_WEBHOOK_URL, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(record),
-      });
-      if (upstream.ok) {
-        storage = "webhook";
-        persisted = true;
-      }
-    } catch (err) {
-      // Fall through to the acknowledgement path below.
-    }
+  const persisted = !!(persistence && persistence.ok);
+  const existing = (github.ok && github.existing) || (kv.ok && kv.existing) || null;
+  const welcome = welcomeAlreadyHandled(existing)
+    ? { status: "already_sent" }
+    : await triggerWelcomeEmail(runtimeEnv, record);
+
+  if (!persisted) {
+    /* Cloudflare Pages Function logs are the zero-key durable trace. The
+       browser also stores the preference locally and retries it later. */
+    console.log(
+      JSON.stringify({
+        event: "subscriber_unpersisted",
+        email,
+        frequency,
+        sector,
+        at: now,
+      })
+    );
   }
 
-  /* 3. Instant welcome email (fire-and-forget) ----------------------------- */
-  if (canTrigger) {
-    const trigger = triggerWelcomeEmail(env, record);
-    if (typeof context.waitUntil === "function") {
-      context.waitUntil(trigger);
-    }
-  }
-
-  /* 4. Acknowledgement without server-side persistence --------------------- */
-  // The frontend records the preference on the subscriber's device and
-  // surfaces the contact route; this must never surface as a hard error.
-  return json({ ok: true, persisted, storage });
+  return json({
+    ok: true,
+    persisted,
+    storage: persistence ? persistence.storage : "none",
+    welcome: welcome.status,
+    welcome_via: welcome.via || null,
+  });
 }
 
 export async function onRequestGet() {
@@ -213,7 +479,9 @@ export async function onRequestOptions() {
   return new Response(null, {
     status: 204,
     headers: {
-      "Allow": "POST, OPTIONS",
+      Allow: "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Cache-Control": "no-store",
     },
   });

@@ -1,4 +1,4 @@
-name: Mandate Dispatch — 3-Day Email Newsletter
+name: Mandate Dispatch - 3-Day Email Newsletter
 
 # Issues the subscriber email briefing (job & fellowship alerts) every third
 # day at 08:00 AM IST (02:30 UTC). The mailer reads public/jobs.json, writes
@@ -6,25 +6,27 @@ name: Mandate Dispatch — 3-Day Email Newsletter
 # copy per subscriber through the first configured channel
 # (RESEND_API_KEY -> BREVO_API_KEY -> SMTP_*), then commits the web edition
 # and redeploys the site. With no email credentials configured it still
-# regenerates the web edition and exits 0 — CI never fails for silence.
+# regenerates the web edition and exits 0 - CI never fails for silence.
 #
 # Welcome emails
 # --------------
 # Every new subscriber receives the formal one-time onboarding email:
-#   * instantly — functions/api/subscribe.js fires a `welcome_email`
-#     repository_dispatch (GITHUB_PAT + GITHUB_REPO on the Pages project),
-#     which runs `send_newsletter.py --welcome <email>` below; and
-#   * as a safety net — every scheduled run of the mailer welcomes any
+#   * instantly - functions/api/subscribe.js upserts the address into
+#     data/subscribers.json through the GitHub Contents API and fires a
+#     `welcome_email` repository_dispatch (GITHUB_PAT + GITHUB_REPO on the
+#     Pages project), which runs `send_newsletter.py --welcome <email>` below;
+#   * as a safety net - every scheduled run of the mailer welcomes any
 #     subscriber in data/subscribers.json whose `welcome_sent` marker is
 #     still missing.
 # The manual "Run workflow" form also accepts a subscriber email (plus
 # cadence/sector) for an ad-hoc welcome, or the test-welcome switch to mail
 # the layout straight to SMTP_USER / NEWSLETTER_OWNER_EMAIL.
 #
-# Subscriber sources (see scripts/send_newsletter.py header):
-#   NEWSLETTER_SUBSCRIBERS      JSON list secret, or
-#   NEWSLETTER_SUBSCRIBERS_CSV  published-CSV URL secret (Google Sheet), or
-#   data/subscribers.json       repository file.
+# Subscriber sources (merged and de-duplicated by scripts/send_newsletter.py):
+#   data/subscribers.json       repository file (primary shared store),
+#   NEWSLETTER_SUBSCRIBERS      JSON list secret, and/or
+#   NEWSLETTER_SUBSCRIBERS_CSV  published-CSV URL secret (Google Sheet),
+#   SMTP_USER                   owner copy of every dispatch.
 
 on:
   schedule:
@@ -33,7 +35,7 @@ on:
   workflow_dispatch:      # manual 1-click test, ad-hoc welcome, or full dispatch
     inputs:
       subscriber_email:
-        description: "Send the Welcome email now to this address (leave empty for a normal dispatch)"
+        description: "Persist + send the Welcome email now to this address (leave empty for a normal dispatch)"
         required: false
         type: string
         default: ""
@@ -41,8 +43,8 @@ on:
         description: "Welcome email cadence stamp"
         required: false
         type: choice
-        options: ["3-day", "weekly"]
-        default: "3-day"
+        options: ["3-days", "weekly"]
+        default: "3-days"
       sector:
         description: "Welcome email sector stamp"
         required: false
@@ -63,7 +65,7 @@ on:
     types: [welcome_email]   # fired by functions/api/subscribe.js on a new subscription
 
 permissions:
-  contents: write         # the bot commits the dispatch web edition
+  contents: write         # the bot commits the dispatch web edition + subscribers
 
 concurrency:
   group: newsletter-dispatch
@@ -85,7 +87,7 @@ jobs:
       - name: Generate & deliver the job alert
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.subscriber_email == '' && !inputs.test_welcome) }}
         env:
-          # Delivery channels — set whichever you use in repository secrets.
+          # Delivery channels - set whichever you use in repository secrets.
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -94,7 +96,8 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           NEWSLETTER_FROM_EMAIL: ${{ secrets.NEWSLETTER_FROM_EMAIL }}
           NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME }}
-          # Subscriber sources (optional):
+          NEWSLETTER_OWNER_EMAIL: ${{ secrets.NEWSLETTER_OWNER_EMAIL }}
+          # Subscriber sources (optional; the repository file is always read):
           NEWSLETTER_SUBSCRIBERS: ${{ secrets.NEWSLETTER_SUBSCRIBERS }}
           NEWSLETTER_SUBSCRIBERS_CSV: ${{ secrets.NEWSLETTER_SUBSCRIBERS_CSV }}
         run: |
@@ -104,7 +107,7 @@ jobs:
             python scripts/send_newsletter.py
           fi
 
-      - name: Deliver welcome email(s) on demand
+      - name: Persist subscriber + deliver welcome email
         if: ${{ github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && (inputs.subscriber_email != '' || inputs.test_welcome)) }}
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -116,24 +119,38 @@ jobs:
           NEWSLETTER_FROM_EMAIL: ${{ secrets.NEWSLETTER_FROM_EMAIL }}
           NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME }}
           NEWSLETTER_OWNER_EMAIL: ${{ secrets.NEWSLETTER_OWNER_EMAIL }}
-          WELCOME_EMAIL: ${{ inputs.subscriber_email || github.event.client_payload.email }}
-          WELCOME_FREQ: ${{ inputs.frequency || github.event.client_payload.frequency }}
-          WELCOME_SECTOR: ${{ inputs.sector || github.event.client_payload.sector }}
+          WELCOME_EMAIL: ${{ inputs.subscriber_email || github.event.client_payload.subscriber_email || github.event.client_payload.email }}
+          WELCOME_FREQ: ${{ inputs.frequency || github.event.client_payload.frequency || '3-days' }}
+          WELCOME_SECTOR: ${{ inputs.sector || github.event.client_payload.sector || 'all' }}
         run: |
           if [ -n "$WELCOME_EMAIL" ]; then
             python scripts/send_newsletter.py --welcome "$WELCOME_EMAIL" \
-              --frequency "${WELCOME_FREQ:-3-day}" \
+              --frequency "${WELCOME_FREQ:-3-days}" \
               --sector "${WELCOME_SECTOR:-all}"
           else
             python scripts/send_newsletter.py --test-welcome
           fi
 
-      - name: Commit the dispatch web edition
+      - name: Commit the welcome subscriber
+        if: ${{ github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.subscriber_email != '') }}
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          git add data/subscribers.json
+          if git diff --cached --quiet; then
+            echo "No subscriber changes to commit."
+          else
+            git commit -m "chore(subscribers): persist welcome signup"
+            git pull --rebase --autostash
+            git push
+          fi
+
+      - name: Commit the dispatch web edition and subscriber store
         if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.subscriber_email == '' && !inputs.test_welcome) }}
         run: |
           git config user.name "urbanforestpark-bot"
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
-          git add public/newsletter_latest.html
+          git add public/newsletter_latest.html data/subscribers.json
           if git diff --cached --quiet; then
             echo "No dispatch changes to commit."
           else

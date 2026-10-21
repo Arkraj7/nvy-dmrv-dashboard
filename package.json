@@ -8,7 +8,8 @@
     "build": "npm run tailwind:build && astro build",
     "preview": "astro preview",
     "deploy": "npm run build && npx -y wrangler@4.151.1 pages deploy dist --project-name=nvy-dmrv-dashboard --commit-dirty=true",
-    "tailwind:build": "tailwindcss -i src/tailwind-input.css -o public/assets/css/tailwind.css --content \"./src/**/*.{astro,html}\" --minify"
+    "tailwind:build": "tailwindcss -i src/tailwind-input.css -o public/assets/css/tailwind.css --content \"./src/**/*.{astro,html}\" --minify",
+    "test:functions": "node --test tests/functions.test.mjs"
   },
   "repository": {
     "type": "git",

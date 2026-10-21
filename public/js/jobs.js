@@ -3290,9 +3290,11 @@
     if (!validEmail(email)) return null;
     var frequencyEl = form.querySelector('input[name="frequency"]:checked');
     var sectorEl = form.querySelector('select[name="sector"]');
+    var frequency = frequencyEl ? frequencyEl.value : '3-days';
+    if (frequency === '3-day') frequency = '3-days';
     return {
       email: email,
-      frequency: frequencyEl ? frequencyEl.value : '3-day',
+      frequency: frequency,
       sector: sectorEl ? sectorEl.value : 'all'
     };
   }
@@ -3376,8 +3378,10 @@
         return { ok: response.ok && !(data && data.ok === false), persisted: !!(data && data.persisted) };
       });
     }).then(function (result) {
-      record.status = result.ok ? 'subscribed' : 'local';
+      record.status = result.ok && result.persisted ? 'subscribed' : 'local';
       record.persisted = result.persisted;
+      record.pending = !result.persisted;
+      record.synced_at = result.persisted ? new Date().toISOString() : record.synced_at;
       newsletterStore(record);
       if (result.ok) {
         dispatchDone(form, record, result.persisted ? '' :
@@ -3392,6 +3396,7 @@
       }
     }).catch(function () {
       record.status = 'local';
+      record.pending = true;
       newsletterStore(record);
       dispatchDone(form, record,
         t('dd.note.local', 'Saved on this device. To join the current email alert list immediately, write to urbanforestpark@gmail.com.'));
@@ -3399,6 +3404,35 @@
     }).then(function () {
       if (submitBtn) submitBtn.disabled = false;
     });
+  }
+
+  /* A signup made while the endpoint had no server-side store is kept on the
+     device. Retry it silently on the next visit so it reaches the shared
+     subscriber file as soon as the backend is configured. */
+  function syncPendingNewsletter() {
+    var stored = newsletterStored();
+    if (!stored || !stored.email || stored.status === 'subscribed' || !stored.pending) return;
+
+    fetch(newsletterEndpoint(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: stored.email,
+        frequency: stored.frequency === 'weekly' ? 'weekly' : '3-days',
+        sector: stored.sector || 'all'
+      })
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        return { ok: response.ok && !(data && data.ok === false), persisted: !!(data && data.persisted) };
+      });
+    }).then(function (result) {
+      if (!result.ok || !result.persisted) return;
+      stored.status = 'subscribed';
+      stored.persisted = true;
+      stored.pending = false;
+      stored.synced_at = new Date().toISOString();
+      newsletterStore(stored);
+    }).catch(function () { /* keep the device copy for the next visit */ });
   }
 
   function initNewsletter() {
@@ -3413,13 +3447,14 @@
       /* Returning visitor with a recorded preference: show the confirmation
          state instead of an empty form. */
       if (stored && stored.email && (stored.status === 'subscribed' || stored.status === 'local')) {
-        var frequencyInput = form.querySelector('input[name="frequency"][value="' + (stored.frequency || '3-day') + '"]');
+        var frequencyInput = form.querySelector('input[name="frequency"][value="' + (stored.frequency || '3-days') + '"]');
         if (frequencyInput) frequencyInput.checked = true;
         var sectorSelect = form.querySelector('select[name="sector"]');
         if (sectorSelect && SECTOR_LABELS[stored.sector]) sectorSelect.value = stored.sector;
         dispatchDone(form, stored, stored.persisted ? '' : '');
       }
     });
+    syncPendingNewsletter();
   }
 
   /* ------------------------------------------------------------------ */
