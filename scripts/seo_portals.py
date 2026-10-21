@@ -44,6 +44,7 @@ HINDI_HUB_URL = SITE + "/" + HINDI_HUB_FILE
 REGIONAL_HUB_URL = SITE + "/" + REGIONAL_HUB_FILE
 HINDI_META = bsp.page_meta(HINDI_HUB_FILE)
 REGIONAL_META = bsp.page_meta(REGIONAL_HUB_FILE)
+GLOBAL_FAQ_HEADING = "Global Opportunities \u2014 Frequently Asked Questions"
 
 # Devanagari + all major Indic scripts used by the regional portal.
 FONTS_HI = """    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1039,7 +1040,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
           </ul>
         </section>
 
-{faq_section_html(GLOBAL_FAQS, "Global Opportunities \u2014 Frequently Asked Questions")}
+{faq_section_html(GLOBAL_FAQS, GLOBAL_FAQ_HEADING)}
       </div>
     </section>
   </main>
