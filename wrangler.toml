@@ -1,5 +1,9 @@
 name = "nvy-dmrv-dashboard"
 pages_build_output_dir = "dist"
 
+# GITHUB_PAT is an encrypted Pages secret, not a committed var:
+#   wrangler pages secret put GITHUB_PAT --project-name=nvy-dmrv-dashboard
+# Secrets survive direct `wrangler pages deploy` uploads; plain dashboard-only
+# variables do not. GITHUB_REPO is non-sensitive and lives here.
 [vars]
 GITHUB_REPO = "Arkraj7/nvy-dmrv-dashboard"

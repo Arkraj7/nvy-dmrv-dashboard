@@ -44,11 +44,11 @@
  *   `subscriber_email`, `frequency` and `sector` inputs.
  *
  * Deployment note:
- *   The Pages project reads `GITHUB_PAT` and `GITHUB_REPO` from its
- *   production/preview environment variables. Direct `wrangler pages deploy`
- *   uploads reset environment variables that are not declared in a Wrangler
- *   configuration file, so the Git-integration build is the canonical
- *   production path after changing project variables.
+ *   `GITHUB_REPO` is declared in the tracked wrangler.toml `[vars]` block.
+ *   `GITHUB_PAT` is stored as an encrypted Pages secret:
+ *     wrangler pages secret put GITHUB_PAT --project-name=nvy-dmrv-dashboard
+ *   Pages secrets survive direct `wrangler pages deploy` uploads; plain
+ *   dashboard-only variables do not. Never commit the PAT.
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
