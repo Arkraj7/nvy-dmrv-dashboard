@@ -1,2 +1,14 @@
 [
+  {
+    "email": "urbanforestpark+live-check-20261021d@gmail.com",
+    "frequency": "3-days",
+    "sector": "all",
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-10-21T07:33:52.517Z",
+    "updated_at": "2026-10-21T07:33:52.517Z",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; en-IN) PowerShell/7.6.7",
+    "welcome_sent": false,
+    "welcome_queued": false
+  }
 ]
