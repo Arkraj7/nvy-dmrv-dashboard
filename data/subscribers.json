@@ -11,5 +11,17 @@
     "welcome_sent": true,
     "welcome_queued": false,
     "welcome_sent_at": "2026-10-21T12:29:35+00:00"
+  },
+  {
+    "email": "khushiashvi152@gmail.com",
+    "frequency": "3-days",
+    "sector": "all",
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-10-21T12:45:01.665Z",
+    "updated_at": "2026-10-21T12:45:01.665Z",
+    "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "welcome_sent": false,
+    "welcome_queued": false
   }
 ]
