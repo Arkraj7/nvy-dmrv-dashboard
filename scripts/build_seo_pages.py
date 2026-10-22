@@ -127,6 +127,13 @@ SNAPSHOT_START = "<!-- SEO_DIRECTORY_START -->"
 SNAPSHOT_END = "<!-- SEO_DIRECTORY_END -->"
 JOB_FEED_START = "<!-- JOB_FEED_START -->"
 JOB_FEED_END = "<!-- JOB_FEED_END -->"
+
+# Official social profiles. Keep these URLs in one place so the footer links,
+# Organization JSON-LD sameAs array and the SEO auditor never drift apart.
+LINKEDIN_GROUP_URL = "https://www.linkedin.com/groups/40965341/"
+FACEBOOK_PAGE_URL = "https://www.facebook.com/share/1EwgtMnfcx/"
+OFFICIAL_SOCIAL_URLS = (LINKEDIN_GROUP_URL, FACEBOOK_PAGE_URL)
+CARD_STOP = '<span class="visually-hidden">.</span>'
 PRERENDER_CARDS = 12
 JOBS_DIRNAME = "jobs"
 
@@ -235,6 +242,20 @@ def trim(value: Any, limit: int) -> str:
     if " " in cut:
         cut = cut[: cut.rfind(" ")]
     return cut.rstrip(" ,;:") + "\u2026"
+
+
+def sentence(value: Any, limit: Optional[int] = None) -> str:
+    """Return one clean sentence for crawlable card metadata.
+
+    Tag-stripping crawlers do not insert spaces at block boundaries.  Ending
+    each card line with a terminal period prevents neighbouring titles,
+    badges, locations and skills from collapsing into a run-on sentence.
+    """
+    text = trim(value, limit) if limit else plain(value)
+    text = text.strip()
+    if not text:
+        return ""
+    return text.rstrip(" .;:,\u2026") + "."
 
 
 def load_keyword_map(path: Path = KEYWORD_MAP_PATH) -> Dict[str, Dict[str, Any]]:
@@ -531,6 +552,8 @@ def organization_jsonld() -> str:
             "sameAs": [
                 "https://t.me/urbanforestpark",
                 "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw",
+                LINKEDIN_GROUP_URL,
+                FACEBOOK_PAGE_URL,
             ],
         }
     )
@@ -1596,6 +1619,19 @@ def header_html(active: Optional[str] = None) -> str:
   </header>"""
 
 
+def footer_social_html() -> str:
+    """Official social/community bar shared by every generated page."""
+    return f"""    <div class="footer-social" aria-label="Official social and community profiles">
+      <span class="footer-social-label">Official communities</span>
+      <div class="footer-social-links">
+        <a href="{LINKEDIN_GROUP_URL}" target="_blank" rel="noopener noreferrer"
+           aria-label="Join the official Urban Forest Park LinkedIn Group (opens in a new tab)">LinkedIn Group <span aria-hidden="true">&nearr;</span></a>
+        <a href="{FACEBOOK_PAGE_URL}" target="_blank" rel="noopener noreferrer"
+           aria-label="Follow the official Urban Forest Park Facebook page (opens in a new tab)">Facebook <span aria-hidden="true">&nearr;</span></a>
+      </div>
+    </div>"""
+
+
 def footer_html(current_hub: Optional[str] = None) -> str:
     return f"""  <footer class="site-footer">
     <div class="footer-grid">
@@ -1643,6 +1679,8 @@ def footer_html(current_hub: Optional[str] = None) -> str:
         </ul>
       </div>
     </div>
+
+{footer_social_html()}
 
     <div class="footer-bottom">
       &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>Green Jobs &amp; Research Registry (India)
@@ -1773,14 +1811,14 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     rows = []
     if is_specific_qualification(quals):
         rows.append(
-            f'<span class="jc-elig-item"><strong>Qualification:</strong> {esc(trim(quals, 120))}</span>'
+            f'<span class="jc-elig-item"><strong>Qualification:</strong> {esc(sentence(quals, 120))}</span>'
         )
     elif skills:
-        focus = ", ".join(skills) + (f" \u00b7 {loc}" if loc else "")
+        focus = sentence(", ".join(skills) + (f" \u00b7 {loc}" if loc else ""))
         rows.append(f'<span class="jc-elig-item"><strong>Focus:</strong> {esc(focus)}</span>')
     if is_specific_compensation(comp):
         rows.append(
-            f'<span class="jc-elig-item"><strong>Pay / fellowship:</strong> {esc(trim(comp, 100))}</span>'
+            f'<span class="jc-elig-item"><strong>Pay / fellowship:</strong> {esc(sentence(comp, 100))}</span>'
         )
     elig = '<div class="jc-eligibility">' + "".join(rows) + "</div>" if rows else ""
 
@@ -1788,24 +1826,24 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     if skills:
         skill_html = '<div class="jc-skills">' + "".join(
             f'<span class="skill-chip">{esc(skill)}</span>' for skill in skills
-        ) + "</div>"
+        ) + CARD_STOP + "</div>"
     return f"""        <article class="job-card{' is-archived' if archived else ''}" data-id="{esc(job_slug(job))}" data-href="{href}" tabindex="0" role="group" aria-label="View job details: {esc(title)} at {esc(org)}">
-          <div class="jc-top">{BADGE_SEP.join(badges)}</div>
+          <div class="jc-top">{BADGE_SEP.join(badges)}{CARD_STOP}</div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="{href}" title="{esc(title)}">{esc(anchor_text(title))}</a></h3>
-              <p class="jc-org">{esc(org)}</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="{href}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</h3>
+              <p class="jc-org">{esc(sentence(org))}</p>
               <div class="jc-meta">
-                <span>{PIN_SVG}{esc(loc)}</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>{esc(deadline)}</span>
+                <span>{PIN_SVG}{esc(sentence(loc))}</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>{esc(sentence(deadline))}</span>
               </div>
               {elig}
               {skill_html}
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added {esc(date_label)}</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added {esc(sentence(date_label))}</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>"""
 
@@ -1857,6 +1895,7 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     org = plain(job.get("organization")) or "Organisation not specified"
     city = plain(job.get("city"))
     org_line = org + (f" \u00b7 {city}" if city and city.lower() != org.lower() else "")
+    org_line = sentence(org_line)
 
     badges = [
         f'<span class="badge {cat_class(cat)}">{esc(cat)}</span>',
@@ -1874,29 +1913,29 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     quals = plain(job.get("qualification_summary"))
     comp = plain(job.get("compensation_or_fellowship"))
     if is_specific_qualification(quals):
-        elig_bits.append(f"<span><strong>Qualification:</strong> {esc(trim(quals, 140))}</span>")
+        elig_bits.append(f"<span><strong>Qualification:</strong> {esc(sentence(quals, 140))}</span>")
     elif skills:
-        focus = ", ".join(skills) + (f" \u00b7 {loc}" if loc else "")
+        focus = sentence(", ".join(skills) + (f" \u00b7 {loc}" if loc else ""))
         elig_bits.append(f"<span><strong>Focus:</strong> {esc(focus)}</span>")
     if is_specific_compensation(comp):
-        elig_bits.append(f"<span><strong>Compensation:</strong> {esc(trim(comp, 120))}</span>")
+        elig_bits.append(f"<span><strong>Compensation:</strong> {esc(sentence(comp, 120))}</span>")
     elig_html = (
         '<p class="hub-card-elig">' + " ".join(elig_bits) + "</p>" if elig_bits else ""
     )
 
     summary = trim(job.get("role_summary"), 240)
-    summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
+    summary_html = f'<p class="hub-card-sum">{esc(sentence(summary))}</p>' if summary else ""
     title = plain(job.get("clean_title")) or org
 
     return f"""        <article class="hub-card{' hub-card-archived' if archived else ''}">
           <div class="hub-card-top">
-            {BADGE_SEP.join(badges)}
+            {BADGE_SEP.join(badges)}{CARD_STOP}
           </div>
-          <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a></h3>
+          <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</h3>
           <p class="hub-card-org">{esc(org_line)}</p>
           {elig_html}
           {summary_html}
-          <p class="hub-card-foot"><span>View details &nearr;</span></p>
+          <p class="hub-card-foot"><span>View details. <span aria-hidden="true">&nearr;</span></span></p>
         </article>"""
 
 
@@ -2307,10 +2346,13 @@ def related_jobs_html(related: List[Dict[str, Any]]) -> str:
     cards = []
     for job in related:
         title = plain(job.get("clean_title")) or "Untitled job"
+        related_meta = sentence(
+            f"{plain(job.get('organization'))} \u00b7 {state_label(job)}"
+        )
         cards.append(f"""          <article class="related-card">
-            <span class="related-kicker">{esc(plain(job.get("category")))}</span>
-            <strong><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a></strong>
-            <span class="related-meta">{esc(plain(job.get("organization")))} &middot; {esc(state_label(job))}</span>
+            <span class="related-kicker">{esc(sentence(plain(job.get("category"))))}</span>
+            <strong><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</strong>
+            <span class="related-meta">{esc(related_meta)}</span>
           </article>""")
     return "\n".join(cards)
 
@@ -2364,7 +2406,7 @@ def build_job_page(
     if skills:
         skills_html = '<div class="job-page-skills">' + "".join(
             f'<span class="skill-chip">{esc(skill)}</span>' for skill in skills
-        ) + "</div>"
+        ) + CARD_STOP + "</div>"
 
     schema = job_posting_jsonld(job, today) if not is_archived else jsonld_script(
         {

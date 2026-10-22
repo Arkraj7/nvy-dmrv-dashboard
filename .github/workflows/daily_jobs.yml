@@ -11,7 +11,7 @@ name: Daily India Green Jobs Update
 # with a job-level auto-sanitizer, commits the result and deploys the live
 # site to Cloudflare Pages.
 #
-# A second 07:15 AM IST (01:45 UTC) watchdog run exits in seconds when the
+# A second 07:45 AM IST (02:15 UTC) watchdog run exits in seconds when the
 # 06:45 run already completed both the pipeline and the Telegram broadcast.
 # If GitHub drops or fails the first cron, the watchdog performs the full
 # update instead. The logout is recorded in public/stats.json under
@@ -21,8 +21,9 @@ on:
   schedule:
     # 06:45 AM IST == 01:15 UTC. Avoids GitHub's congested :00/:30 windows.
     - cron: "15 1 * * *"
-    # 07:15 AM IST == 01:45 UTC. Backup/watchdog run.
-    - cron: "45 1 * * *"
+    # 07:45 AM IST == 02:15 UTC. Backup/watchdog run, after the 37-minute
+    # primary run has normally finished.
+    - cron: "15 2 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -35,7 +36,7 @@ permissions:
   contents: write         # the bot commits registry + SEO page updates
 
 concurrency:
-  group: daily-jobs
+  group: daily-jobs-pipeline
   cancel-in-progress: false
 
 jobs:

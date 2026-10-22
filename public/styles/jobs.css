@@ -1531,6 +1531,41 @@ body.view-detail .telemetry-band { display: none; }
   opacity: 0.92;
 }
 .footer-col a:hover { color: var(--emerald); opacity: 1; text-decoration: underline; }
+.footer-social {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+.footer-social-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--footer-ink-2);
+}
+.footer-social-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.footer-social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border: 1px solid var(--footer-line);
+  border-radius: 999px;
+  color: var(--footer-ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+.footer-social-links a:hover {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  text-decoration: none;
+}
 .footer-bottom {
   border-top: 1px solid var(--footer-line);
   padding: 16px 20px 22px;
@@ -1858,6 +1893,10 @@ body.view-detail .telemetry-band { display: none; }
 .cc-wa:hover { background: #1FC65C; border-color: #178A44; color: #073B1E; }
 .cc-tg { background: #229ED9; border-color: #1B8ABF; color: #FFFFFF; }
 .cc-tg:hover { background: #1E92C9; border-color: #166E9B; color: #FFFFFF; }
+.cc-li { background: #0A66C2; border-color: #084F96; color: #FFFFFF; }
+.cc-li:hover { background: #084F96; border-color: #063D74; color: #FFFFFF; }
+.cc-fb { background: #1877F2; border-color: #1266D6; color: #FFFFFF; }
+.cc-fb:hover { background: #1266D6; border-color: #0E51AB; color: #FFFFFF; }
 
 /* ---------- 15e. Official Verification & Application Portal card ---------- */
 .verify-card {
@@ -1983,6 +2022,10 @@ body.view-detail .telemetry-band { display: none; }
 .cs-wa:hover { background: #1FC65C; color: #073B1E; }
 .cs-tg { background: #229ED9; color: #FFFFFF; }
 .cs-tg:hover { background: #1E92C9; color: #FFFFFF; }
+.cs-li { background: #0A66C2; color: #FFFFFF; }
+.cs-li:hover { background: #084F96; color: #FFFFFF; }
+.cs-fb { background: #1877F2; color: #FFFFFF; }
+.cs-fb:hover { background: #1266D6; color: #FFFFFF; }
 
 /* ---------- 15h. (footer broadcast copy row removed — moved to the
    discreet internal Syndication Desk drawer, js/syndication-drawer.js) ---------- */
@@ -2897,7 +2940,7 @@ html, body { overflow-x: hidden; }
     gap: 6px;
     width: 100%;
   }
-  .cs-btn { justify-content: center; padding: 7px 10px; font-size: 11.5px; }
+  .cs-btn { justify-content: center; padding: 7px 10px; font-size: 11.5px; min-height: 44px; }
 
   .pill-row,
   .track-row {

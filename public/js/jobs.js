@@ -39,9 +39,8 @@
     SITE_NAME: 'Urban Forest Park'
   };
 
-  /* WhatsApp / Telegram job-alert network. The owner can point these at the
-     real invite links in one line by editing the two <meta> tags in
-     index.html (<meta name="ufp-whatsapp-group"> / ufp-telegram-channel). */
+  /* WhatsApp / Telegram / LinkedIn / Facebook job-alert network. The owner can
+     point these at the real profiles by editing the <meta> tags in index.html. */
   var COMMUNITY_CHANNELS = (function () {
     function metaValue(name, fallback) {
       var el = document.querySelector('meta[name="' + name + '"]');
@@ -50,7 +49,9 @@
     }
     return {
       whatsapp_group_url: metaValue('ufp-whatsapp-group', 'https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw'),
-      telegram_channel_url: metaValue('ufp-telegram-channel', 'https://t.me/urbanforestpark')
+      telegram_channel_url: metaValue('ufp-telegram-channel', 'https://t.me/urbanforestpark'),
+      linkedin_group_url: metaValue('ufp-linkedin-group', 'https://www.linkedin.com/groups/40965341/'),
+      facebook_url: metaValue('ufp-facebook-page', 'https://www.facebook.com/share/1EwgtMnfcx/')
     };
   })();
 
@@ -401,6 +402,19 @@
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
+  /* Card metadata must end in a terminal period. Tag-stripping crawlers do
+     not insert spaces at <span> boundaries, so without this every title,
+     badge and skill chip would merge into one long run-on sentence. */
+  function sentenceText(value) {
+    var text = String(value == null ? '' : value).replace(/\s+/g, ' ').trim();
+    if (!text) return '';
+    return text.replace(/[.!?\u2026]+$/, '') + '.';
+  }
+
+  function cardStop() {
+    return '<span class="visually-hidden">.</span>';
+  }
+
   function debounce(fn, wait) {
     var t = null;
     return function () {
@@ -420,6 +434,7 @@
       external: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4L10 14"/><path d="M19 13v6a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h6"/></svg>',
       whatsapp: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.5 14.1c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1-1.7-.5-4.7-2.6-6-5.2-.4-.8-.6-1.6-.4-2.3.1-.5.7-1.3 1.1-1.5.3-.2.8-.2 1 0 .2.2 1 1.7 1.1 1.9.1.2.1.4 0 .6-.1.2-.5.7-.6.9-.1.1-.2.3-.1.5.4.8 1.7 2.3 2.8 2.8.2.1.4.1.5-.1.2-.2.7-.7.9-.9.2-.2.4-.2.6-.1.2.1 1.6.9 1.8 1.1.2.2.2.7-.2 1.1z"/></svg>',
       linkedin: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
+      facebook: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5h3V5h-3c-3 0-5 2-5 5v2H6v3.5h3V22h4v-6.5h3.2l.8-3.5H13v-2c0-1 .4-1.5 1-1.5z"/></svg>',
       copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg>',
       bulb: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-4 10.5c.7.7 1 1.6 1 2.5h6c0-.9.3-1.8 1-2.5A6 6 0 0012 3z"/></svg>',
       archive: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 001 1h12a1 1 0 001-1V8"/><path d="M10 12h4"/></svg>',
@@ -662,8 +677,14 @@
             '" target="_blank" rel="noopener"' + communityGuardAttr('whatsapp') + '>' +
             iconSvg('whatsapp') + t('cc.join.wa', 'Join WhatsApp Job Group \u2197') + '</a>' +
           '<a class="cc-btn cc-tg" href="' + escapeHtml(COMMUNITY_CHANNELS.telegram_channel_url) +
-            '" target="_blank" rel="noopener"' + communityGuardAttr('telegram') + '>' +
+            '" target="_blank" rel="noopener noreferrer"' + communityGuardAttr('telegram') + '>' +
             iconSvg('telegram') + t('cc.join.tg', 'Join Telegram Job Channel \u2197') + '</a>' +
+          '<a class="cc-btn cc-li" href="' + escapeHtml(COMMUNITY_CHANNELS.linkedin_group_url) +
+            '" target="_blank" rel="noopener noreferrer" aria-label="Join the official Urban Forest Park LinkedIn Group (opens in a new tab)">' +
+            iconSvg('linkedin') + t('cc.join.li', 'Join LinkedIn Group \u2197') + '</a>' +
+          '<a class="cc-btn cc-fb" href="' + escapeHtml(COMMUNITY_CHANNELS.facebook_url) +
+            '" target="_blank" rel="noopener noreferrer" aria-label="Follow the official Urban Forest Park Facebook page (opens in a new tab)">' +
+            iconSvg('facebook') + t('cc.join.fb', 'Follow on Facebook \u2197') + '</a>' +
           '<a class="cc-btn cc-share" href="' + escapeHtml(whatsappShareHref(job)) +
             '" target="_blank" rel="noopener noreferrer">' +
             iconSvg('whatsapp') + t('cc.share.wa', 'Share Formatted Alert to WhatsApp') + '</a>' +
@@ -1479,7 +1500,7 @@
     if (meta.stipend && job.compensation_or_fellowship !== meta.stipend) badges.push(meta.stipend);
     if (!badges.length) return '';
     return '<div class="jc-academic-badges">' + badges.map(function (badge) {
-      return '<span class="jc-academic-badge">' + escapeHtml(badge) + '</span>';
+      return '<span class="jc-academic-badge">' + escapeHtml(sentenceText(badge)) + '</span>';
     }).join(BADGE_SEP) + '</div>';
   }
 
@@ -1490,15 +1511,15 @@
       return part && part !== 'India' && part !== 'Global / Remote';
     }).join(', ') || stateLabel(job);
     if (isSpecificQualification(job.qualification_summary)) {
-      items.push('<span class="jc-elig-item">' + iconSvg('cap') + escapeHtml(job.qualification_summary) + '</span>');
+      items.push('<span class="jc-elig-item">' + iconSvg('cap') + escapeHtml(sentenceText(job.qualification_summary)) + '</span>');
     } else if (skills.length) {
-      items.push('<span class="jc-elig-item">' + iconSvg('cap') + '<strong>Focus:</strong> ' + escapeHtml(skills.slice(0, 3).join(', ') + (loc ? ' · ' + loc : '')) + '</span>');
+      items.push('<span class="jc-elig-item">' + iconSvg('cap') + '<strong>Focus:</strong> ' + escapeHtml(sentenceText(skills.slice(0, 3).join(', ') + (loc ? ' · ' + loc : ''))) + '</span>');
     }
     if (isSpecificCompensation(job.compensation_or_fellowship)) {
-      items.push('<span class="jc-elig-item">' + iconSvg('rupee') + escapeHtml(job.compensation_or_fellowship) + '</span>');
+      items.push('<span class="jc-elig-item">' + iconSvg('rupee') + escapeHtml(sentenceText(job.compensation_or_fellowship)) + '</span>');
     }
     if (!items.length && !academicBadgesHtml(job)) return '';
-    return '<div class="jc-eligibility">' + items.join('') + '</div>' + academicBadgesHtml(job);
+    return '<div class="jc-eligibility">' + items.join('') + '</div>' + academicBadgesHtml(job) + cardStop();
   }
 
   function jobCardHtml(job, isArchived) {
@@ -1523,20 +1544,20 @@
       : '';
 
     var dateMeta = isArchived
-      ? iconSvg('clock') + escapeHtml(formatClosed(job.date_archived))
-      : iconSvg('calendar') + escapeHtml(formatPosted(job.date_added));
+      ? iconSvg('clock') + escapeHtml(sentenceText(formatClosed(job.date_archived)))
+      : iconSvg('calendar') + escapeHtml(sentenceText(formatPosted(job.date_added)));
 
     var deadlineMeta = (!isArchived && deadlineOf(job))
-      ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(t('card.deadline', 'Apply: {d}', { d: deadlineOf(job) })) + '</span>'
+      ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(sentenceText(t('card.deadline', 'Apply: {d}', { d: deadlineOf(job) }))) + '</span>'
       : '';
 
     var footDate = isArchived
-      ? t('card.closed', 'Closed ') + escapeHtml(job.date_archived || '')
-      : escapeHtml(job.date_added || '');
+      ? sentenceText(t('card.closed', 'Closed ') + (job.date_archived || ''))
+      : sentenceText(job.date_added || '');
 
     var ctaLabel = isArchived
-      ? t('card.cta.archive', 'Open Archived Record')
-      : t('card.cta.active', 'View Job & Apply');
+      ? sentenceText(t('card.cta.archive', 'Open Archived Record'))
+      : sentenceText(t('card.cta.active', 'View Job & Apply'));
 
     var saved = isSaved(job.id);
     var waShareHref = 'https://wa.me/?text=' + encodeURIComponent(shareTextFor(job));
@@ -1555,19 +1576,19 @@
       '<article class="job-card' + (isArchived ? ' is-archived' : '') + '" data-id="' + escapeHtml(job.id) + '" data-href="' + escapeHtml(detailHref) + '" tabindex="0" role="group" ' +
         'aria-label="' + (isArchived ? t('card.aria.archive', 'Open archived record: ') : t('card.aria.view', 'View job and apply: ')) +
         escapeHtml(job.clean_title) + ' at ' + escapeHtml(job.organization) + '">' +
-        '<div class="jc-top">' + badges.join(BADGE_SEP) + '</div>' +
+        '<div class="jc-top">' + badges.join(BADGE_SEP) + cardStop() + '</div>' +
         '<div class="jc-main">' +
           '<div class="jc-main-text">' +
-            '<h3 class="jc-title"><a class="jc-title-link" href="' + escapeHtml(detailHref) + '" title="' + escapeHtml(displayTitle(job)) + '">' + escapeHtml(shortAnchor(displayTitle(job))) + '</a></h3>' +
-            (isHindi() && job.title_hi ? '<p class="jc-title-en">' + escapeHtml(job.clean_title) + '</p>' : '') +
-            '<p class="jc-org">' + escapeHtml(job.organization) + '</p>' +
+            '<h3 class="jc-title"><a class="jc-title-link" href="' + escapeHtml(detailHref) + '" title="' + escapeHtml(displayTitle(job)) + '">' + escapeHtml(shortAnchor(displayTitle(job))) + '</a>' + cardStop() + '</h3>' +
+            (isHindi() && job.title_hi ? '<p class="jc-title-en">' + escapeHtml(sentenceText(job.clean_title)) + '</p>' : '') +
+            '<p class="jc-org">' + escapeHtml(sentenceText(job.organization)) + '</p>' +
             '<div class="jc-meta">' +
-              '<span>' + iconSvg('pin') + escapeHtml(stateLabel(job)) + '</span>' +
+              '<span>' + iconSvg('pin') + escapeHtml(sentenceText(stateLabel(job))) + '</span>' +
               '<span>' + dateMeta + '</span>' +
               deadlineMeta +
             '</div>' +
             jcEligibilityHtml(job) +
-            '<div class="jc-skills">' + chips + '</div>' +
+            '<div class="jc-skills">' + chips + cardStop() + '</div>' +
           '</div>' +
           logoFigureHtml(job, 'card') +
         '</div>' +

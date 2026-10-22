@@ -30,10 +30,12 @@
 
     <!-- Multilingual alternates: English registry <-> Hindi SEO hub (en-IN / hi-IN) -->
     <!-- Open Graph / social -->
-    <!-- Community channels used by the job-alert network (edit these two lines to
+    <!-- Community channels used by the job-alert network (edit these lines to
          point at the real invite links; js/jobs.js reads them automatically). -->
     <meta name="ufp-whatsapp-group" content="https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw">
     <meta name="ufp-telegram-channel" content="https://t.me/urbanforestpark">
+    <meta name="ufp-linkedin-group" content="https://www.linkedin.com/groups/40965341/">
+    <meta name="ufp-facebook-page" content="https://www.facebook.com/share/1EwgtMnfcx/">
 
     <!-- Email Job Alert subscription endpoint (js/jobs.js reads this; the
          Cloudflare Pages Function at /api/subscribe is deployed with the
@@ -80,7 +82,9 @@
       "areaServed": ["IN", "Global"],
       "sameAs": [
         "https://t.me/urbanforestpark",
-        "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw"
+        "https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw",
+        "https://www.linkedin.com/groups/40965341/",
+        "https://www.facebook.com/share/1EwgtMnfcx/"
       ]
     }
     </script>
@@ -106,59 +110,59 @@
 
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "India's environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed institutional notices — recruitment PDFs and advertisements issued by ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities, alongside opportunities published separately by development think-tanks such as CEEW, WRI India, TERI and ATREE, and by corporate ESG portals. Urban Forest Park resolves this information asymmetry by aggregating, verifying and structuring these jobs and fellowships into a single searchable national registry, with every entry linked to a direct application source."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Every listing passes through an automated verification pipeline before publication. Candidates are surfaced from employer portals, job platforms, verified feeds and institutional notices; each record then undergoes domain verification, redirect unwrapping (so links resolve to the publisher rather than a news wrapper), duplicate hashing and editorial structuring into a standardised dossier. Each dossier presents a direct application link together with the employer's verified website, so applicants can confirm every detail at its source."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens to expired or closed jobs, and why is a historical archive maintained?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Active jobs remain in the registry for a 30-day lifecycle; when an application window closes, the record transitions automatically into the Historical Job Archive (archive.json). The archive is maintained as a public research asset: students, researchers and policy analysts can benchmark historical fellowship stipends, recurring technical requirements (GIS, Google Earth Engine, BRSR reporting, carbon markets) and seasonal hiring velocity across Indian states and union territories."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How frequently is the registry updated, and how do the Email, WhatsApp and Telegram job alerts work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The registry is harvested by an automated pipeline every day at 07:00 AM IST. Verified jobs are published immediately and broadcast through instant Telegram and WhatsApp alert channels; a free email briefing of new jobs and fellowships is issued every 72 hours, summarising each period's verified positions, registry telemetry and geographical coverage."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the relationship between the Career Registry and the Nagar Van Yojana dMRV Dashboard & Green Calculator?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Urban Forest Park originated as a digital Monitoring, Reporting and Verification (dMRV) and Urban Heat Island (UHI) analytics initiative for urban forestry in India. Alongside the national career registry, the platform continues to operate and maintain its open-access public research utilities — the Nagar Van dMRV Dashboard and the Green Calculator — freely available to institutions, researchers and citizens."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is there any fee for candidates or institutions to access listings or subscribe to email alerts?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "None. The registry and every alert channel — the website, the 72-hour email briefing, the Telegram channel and the WhatsApp group — are 100% open-access for candidates, researchers, academic scholars and institutional partners. Urban Forest Park does not charge candidates any fee at any stage and does not act as a recruitment intermediary; all applications are submitted through the direct application link."
-          }
-        }
-      ]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the core mission of the Urban Forest Park Career Registry, and what gap does it resolve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "India's environmental, forestry, geospatial and academic recruitment landscape is fragmented across hundreds of unindexed notices. These notices come from ICFRE institutes, the Wildlife Institute of India, IIFM, IIRS, ICAR bodies and Indian universities. Development think-tanks such as CEEW, WRI India, TERI and ATREE publish separate opportunities. Corporate ESG portals add another layer of listings. Urban Forest Park aggregates, verifies and structures these roles into one national registry. Every entry links to a direct application source."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are job listings, JRF/SRF fellowships, and institutional links verified on this platform?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every listing passes through an automated verification pipeline before publication. Candidates come from employer portals, verified feeds and institutional notices. Each record then undergoes domain verification, redirect unwrapping and duplicate hashing. Editorial review structures the result into a standardised dossier. The dossier links to the direct application page and the employer's official website. Applicants can confirm every detail at its source."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to expired or closed jobs, and why is a historical archive maintained?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Active jobs remain in the registry for 30 days. When an application window closes, the record moves automatically into the Historical Job Archive. The archive is a public research asset for students, researchers and policy analysts. It supports comparisons of fellowship stipends, recurring technical requirements and seasonal hiring patterns. Requirements include GIS, Google Earth Engine, BRSR reporting and carbon markets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How frequently is the registry updated, and how do the Email, WhatsApp and Telegram job alerts work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The registry is harvested by an automated pipeline every day at 07:00 AM IST. Verified jobs are published immediately. They are broadcast through Telegram and WhatsApp alert channels. A free email briefing is issued every 72 hours. It summarises verified positions, registry telemetry and geographical coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the relationship between the Career Registry and the Nagar Van Yojana dMRV Dashboard & Green Calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Urban Forest Park began as a digital Monitoring, Reporting and Verification (dMRV) initiative. It also focused on Urban Heat Island (UHI) analytics for urban forestry in India. The platform still maintains the open-access Nagar Van dMRV Dashboard and Green Calculator. Both tools remain free for institutions, researchers and citizens."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there any fee for candidates or institutions to access listings or subscribe to email alerts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "None. The website, 72-hour email briefing, Telegram channel and WhatsApp group are open-access. They serve candidates, researchers, academic scholars and institutional partners. Urban Forest Park never charges candidates a fee. It does not act as a recruitment intermediary. All applications go through the direct application link."
+      }
     }
+  ]
+}
     </script>
 
     <script defer src="js/i18n.js"></script>
@@ -484,6 +488,14 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.6c.3-1.2-.4-1.7-1.2-1.4L2.6 9.1c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.5c.2.6.4.8 1 .3l2.6-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3-16.3zM9.4 12.5l8.4-5.3c.4-.2.7-.1.4.2l-7.2 6.5-.3 3-1.3-4.4z"/></svg>
             <span data-i18n="community.tg">Join Telegram Channel</span>
           </a>
+          <a class="cs-btn cs-li" href="https://www.linkedin.com/groups/40965341/" target="_blank" rel="noopener noreferrer" aria-label="Join the official Urban Forest Park LinkedIn Group (opens in a new tab)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>
+            <span data-i18n="community.li">Join LinkedIn Group &#8599;</span>
+          </a>
+          <a class="cs-btn cs-fb" href="https://www.facebook.com/share/1EwgtMnfcx/" target="_blank" rel="noopener noreferrer" aria-label="Follow the official Urban Forest Park Facebook page (opens in a new tab)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5h3V5h-3c-3 0-5 2-5 5v2H6v3.5h3V22h4v-6.5h3.2l.8-3.5H13v-2c0-1 .4-1.5 1-1.5z"/></svg>
+            <span data-i18n="community.fb">Follow on Facebook &#8599;</span>
+          </a>
         </div>
       </div>
     </section>
@@ -623,231 +635,231 @@
       <div id="jobs-grid" aria-busy="false">
         <!-- JOB_FEED_START -->
         <article class="job-card" data-id="programme-lead-senior-programme-associate-clean-energy-ifore" data-href="/jobs/programme-lead-senior-programme-associate-clean-energy-ifore" tabindex="0" role="group" aria-label="View job details: Programme Lead / Senior Programme Associate - Clean Energy at International Forum for Environment, Sustainability &amp; Technology (iFOREST)">
-          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Delhi NCR</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Delhi NCR</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/programme-lead-senior-programme-associate-clean-energy-ifore" title="Programme Lead / Senior Programme Associate - Clean Energy">Programme Lead / Senior Programme Associate - Clean Energy</a></h3>
-              <p class="jc-org">International Forum for Environment, Sustainability &amp; Technology (iFOREST)</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/programme-lead-senior-programme-associate-clean-energy-ifore" title="Programme Lead / Senior Programme Associate - Clean Energy">Programme Lead / Senior Programme Associate - Clean Energy</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">International Forum for Environment, Sustainability &amp; Technology (iFOREST).</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Noida, Delhi NCR</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Noida, Delhi NCR.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
               <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Master&#x27;s degree in Energy, Economics, Environmental Policy, or Engineering with relevant sector experience.</span></div>
-              <div class="jc-skills"><span class="skill-chip">Renewable energy policy</span><span class="skill-chip">Techno-economic assessment</span><span class="skill-chip">Stakeholder engagement</span></div>
+              <div class="jc-skills"><span class="skill-chip">Renewable energy policy</span><span class="skill-chip">Techno-economic assessment</span><span class="skill-chip">Stakeholder engagement</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-22</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-22.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="phd-research-sustainable-rurban-food-systems-atree" data-href="/jobs/phd-research-sustainable-rurban-food-systems-atree" tabindex="0" role="group" aria-label="View job details: PhD Research on Sustainable Rurban Food Systems at ATREE">
-          <div class="jc-top"><span class="badge cat-academic">Academic, JRF, SRF &amp; PhD Positions</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">PhD / Doctoral Fellowship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span></div>
+          <div class="jc-top"><span class="badge cat-academic">Academic, JRF, SRF &amp; PhD Positions</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">PhD / Doctoral Fellowship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/phd-research-sustainable-rurban-food-systems-atree" title="PhD Research on Sustainable Rurban Food Systems">PhD Research on Sustainable Rurban Food Systems</a></h3>
-              <p class="jc-org">ATREE</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/phd-research-sustainable-rurban-food-systems-atree" title="PhD Research on Sustainable Rurban Food Systems">PhD Research on Sustainable Rurban Food Systems</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">ATREE.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
 
 
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-21</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-21.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="wildlife-enthusiasts-course-wii" data-href="/jobs/wildlife-enthusiasts-course-wii" tabindex="0" role="group" aria-label="View job details: Wildlife Enthusiasts Course at Wildlife Institute of India (WII)">
-          <div class="jc-top"><span class="badge cat-policy">Internships &amp; Student Traineeships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Fellowship / Internship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Internships &amp; Student Traineeships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Fellowship / Internship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/wildlife-enthusiasts-course-wii" title="Wildlife Enthusiasts Course">Wildlife Enthusiasts Course</a></h3>
-              <p class="jc-org">Wildlife Institute of India (WII)</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/wildlife-enthusiasts-course-wii" title="Wildlife Enthusiasts Course">Wildlife Enthusiasts Course</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">Wildlife Institute of India (WII).</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
 
 
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="sustainable-finance-specialist-unep-india" data-href="/jobs/sustainable-finance-specialist-unep-india" tabindex="0" role="group" aria-label="View job details: Sustainable Finance Specialist - Integrated Watershed Management at UNEP India">
-          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Young Professional / Consultant (Contractual)</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Delhi NCR</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span></div>
+          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Young Professional / Consultant (Contractual)</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Delhi NCR</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/sustainable-finance-specialist-unep-india" title="Sustainable Finance Specialist - Integrated Watershed Management">Sustainable Finance Specialist - Integrated Watershed Management</a></h3>
-              <p class="jc-org">UNEP India</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/sustainable-finance-specialist-unep-india" title="Sustainable Finance Specialist - Integrated Watershed Management">Sustainable Finance Specialist - Integrated Watershed Management</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">UNEP India.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>New Delhi, Delhi NCR</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Apply by 23 Oct 2026</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>New Delhi, Delhi NCR.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Apply by 23 Oct 2026.</span>
               </div>
-              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Master&#x27;s degree in Finance, Economics, Environmental Science, or related field.</span><span class="jc-elig-item"><strong>Pay / fellowship:</strong> As per UN Volunteer (Specialist) norms</span></div>
-              <div class="jc-skills"><span class="skill-chip">Sustainable finance</span><span class="skill-chip">Watershed management</span><span class="skill-chip">Policy research</span></div>
+              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Master&#x27;s degree in Finance, Economics, Environmental Science, or related field.</span><span class="jc-elig-item"><strong>Pay / fellowship:</strong> As per UN Volunteer (Specialist) norms.</span></div>
+              <div class="jc-skills"><span class="skill-chip">Sustainable finance</span><span class="skill-chip">Watershed management</span><span class="skill-chip">Policy research</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="senior-energy-researcher-and-policy-consultant-wsp-india" data-href="/jobs/senior-energy-researcher-and-policy-consultant-wsp-india" tabindex="0" role="group" aria-label="View job details: Senior Energy Researcher and Policy Consultant at WSP in India">
-          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/senior-energy-researcher-and-policy-consultant-wsp-india" title="Senior Energy Researcher and Policy Consultant">Senior Energy Researcher and Policy Consultant</a></h3>
-              <p class="jc-org">WSP in India</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/senior-energy-researcher-and-policy-consultant-wsp-india" title="Senior Energy Researcher and Policy Consultant">Senior Energy Researcher and Policy Consultant</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">WSP in India.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Mumbai, Maharashtra</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Mumbai, Maharashtra.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
               <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> M.Sc. or PhD in Engineering, Applied Mathematics, Economics, Energy/Climate Policy, or Physics.</span></div>
-              <div class="jc-skills"><span class="skill-chip">Energy systems analysis</span><span class="skill-chip">Integrated assessment modelling</span><span class="skill-chip">Python / R / GAMS</span></div>
+              <div class="jc-skills"><span class="skill-chip">Energy systems analysis</span><span class="skill-chip">Integrated assessment modelling</span><span class="skill-chip">Python / R / GAMS</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="research-intern-sustainable-food-systems-ceew" data-href="/jobs/research-intern-sustainable-food-systems-ceew" tabindex="0" role="group" aria-label="View job details: Research Intern - Sustainable Food Systems at Council on Energy, Environment and Water (CEEW)">
-          <div class="jc-top"><span class="badge cat-policy">Internships &amp; Student Traineeships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Fellowship / Internship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Internships &amp; Student Traineeships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Fellowship / Internship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/research-intern-sustainable-food-systems-ceew" title="Research Intern - Sustainable Food Systems">Research Intern - Sustainable Food Systems</a></h3>
-              <p class="jc-org">Council on Energy, Environment and Water (CEEW)</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/research-intern-sustainable-food-systems-ceew" title="Research Intern - Sustainable Food Systems">Research Intern - Sustainable Food Systems</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">Council on Energy, Environment and Water (CEEW).</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
 
 
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="research-associate-maharashtra-atree" data-href="/jobs/research-associate-maharashtra-atree" tabindex="0" role="group" aria-label="View job details: Research Associate - TGI at ATREE">
-          <div class="jc-top"><span class="badge cat-research">Research Associate &amp; Project Staff (Contractual)</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Project Associate / Research Associate</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">1-3 Years</span></div>
+          <div class="jc-top"><span class="badge cat-research">Research Associate &amp; Project Staff (Contractual)</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Project Associate / Research Associate</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">1-3 Years</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/research-associate-maharashtra-atree" title="Research Associate - TGI">Research Associate - TGI</a></h3>
-              <p class="jc-org">ATREE</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/research-associate-maharashtra-atree" title="Research Associate - TGI">Research Associate - TGI</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">ATREE.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra, Maharashtra</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra, Maharashtra.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
 
 
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="regional-health-and-wash-coordinator-terre-des-hommes" data-href="/jobs/regional-health-and-wash-coordinator-terre-des-hommes" tabindex="0" role="group" aria-label="View job details: Regional Health and WaSH Coordinator at Terre des hommes">
-          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Senior</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Climate Policy, Think-Tanks &amp; Fellowships</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Senior</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/regional-health-and-wash-coordinator-terre-des-hommes" title="Regional Health and WaSH Coordinator">Regional Health and WaSH Coordinator</a></h3>
-              <p class="jc-org">Terre des hommes</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/regional-health-and-wash-coordinator-terre-des-hommes" title="Regional Health and WaSH Coordinator">Regional Health and WaSH Coordinator</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">Terre des hommes.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
-              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Master&#x27;s degree in Public Health, WaSH, or related medical/public health field</span></div>
-              <div class="jc-skills"><span class="skill-chip">WaSH programming</span><span class="skill-chip">Public health systems strengthening</span><span class="skill-chip">Maternal and child health</span></div>
+              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Master&#x27;s degree in Public Health, WaSH, or related medical/public health field.</span></div>
+              <div class="jc-skills"><span class="skill-chip">WaSH programming</span><span class="skill-chip">Public health systems strengthening</span><span class="skill-chip">Maternal and child health</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="program-manager-water-supply-planet-water-foundation" data-href="/jobs/program-manager-water-supply-planet-water-foundation" tabindex="0" role="group" aria-label="View job details: Program Manager (Water Supply) at Planet Water Foundation">
-          <div class="jc-top"><span class="badge cat-forestry">Forestry, Wildlife &amp; Afforestation</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span></div>
+          <div class="jc-top"><span class="badge cat-forestry">Forestry, Wildlife &amp; Afforestation</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Maharashtra</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/program-manager-water-supply-planet-water-foundation" title="Program Manager (Water Supply)">Program Manager (Water Supply)</a></h3>
-              <p class="jc-org">Planet Water Foundation</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/program-manager-water-supply-planet-water-foundation" title="Program Manager (Water Supply)">Program Manager (Water Supply)</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">Planet Water Foundation.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Pune, Maharashtra</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Pune, Maharashtra.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
-              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> University graduate with 5+ years of relevant experience</span></div>
-              <div class="jc-skills"><span class="skill-chip">Water infrastructure management</span><span class="skill-chip">Project deployment</span><span class="skill-chip">Technical training</span></div>
+              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> University graduate with 5+ years of relevant experience.</span></div>
+              <div class="jc-skills"><span class="skill-chip">Water infrastructure management</span><span class="skill-chip">Project deployment</span><span class="skill-chip">Technical training</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="product-manager-sustainability-climate-ai-msci" data-href="/jobs/product-manager-sustainability-climate-ai-msci" tabindex="0" role="group" aria-label="View job details: Product Manager - Sustainability &amp; Climate AI Solutions at MSCI Inc.">
-          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Senior</span></div>
+          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Multiple States / Remote</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Senior</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/product-manager-sustainability-climate-ai-msci" title="Product Manager - Sustainability &amp; Climate AI Solutions">Product Manager - Sustainability &amp; Climate AI Solutions</a></h3>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/product-manager-sustainability-climate-ai-msci" title="Product Manager - Sustainability &amp; Climate AI Solutions">Product Manager - Sustainability &amp; Climate AI Solutions</a><span class="visually-hidden">.</span></h3>
               <p class="jc-org">MSCI Inc.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Remote (India), Multiple States / Remote.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
               <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> 7+ years in product management with experience in data, AI applications, and financial services.</span></div>
-              <div class="jc-skills"><span class="skill-chip">Product Management</span><span class="skill-chip">Artificial Intelligence (AI)</span><span class="skill-chip">Climate Data Analytics</span></div>
+              <div class="jc-skills"><span class="skill-chip">Product Management</span><span class="skill-chip">Artificial Intelligence (AI)</span><span class="skill-chip">Climate Data Analytics</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="pg-diploma-in-wildlife-wii" data-href="/jobs/pg-diploma-in-wildlife-wii" tabindex="0" role="group" aria-label="View job details: PG Diploma in Wildlife at Wildlife Institute of India (WII)">
-          <div class="jc-top"><span class="badge cat-policy">Scholarships &amp; Doctoral Support</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">PhD / Doctoral Fellowship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Uttarakhand</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span></div>
+          <div class="jc-top"><span class="badge cat-policy">Scholarships &amp; Doctoral Support</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">PhD / Doctoral Fellowship</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Uttarakhand</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Entry Level / Fellowship</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/pg-diploma-in-wildlife-wii" title="PG Diploma in Wildlife">PG Diploma in Wildlife</a></h3>
-              <p class="jc-org">Wildlife Institute of India (WII)</p>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/pg-diploma-in-wildlife-wii" title="PG Diploma in Wildlife">PG Diploma in Wildlife</a><span class="visually-hidden">.</span></h3>
+              <p class="jc-org">Wildlife Institute of India (WII).</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Dehradun, Uttarakhand</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Dehradun, Uttarakhand.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
 
 
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
         <article class="job-card" data-id="manager-special-projects-sustainability-united-breweries" data-href="/jobs/manager-special-projects-sustainability-united-breweries" tabindex="0" role="group" aria-label="View job details: Manager - Special Projects &amp; Sustainability at United Breweries Ltd.">
-          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Karnataka</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span></div>
+          <div class="jc-top"><span class="badge cat-esg">ESG, Carbon Markets &amp; Corporate Sustainability</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-type">Full-Time Corporate / NGO</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-state"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Karnataka</span><span class="badge-sep" aria-hidden="true"> · </span><span class="badge badge-exp">Mid-Senior (3-6 Years)</span><span class="visually-hidden">.</span></div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/manager-special-projects-sustainability-united-breweries" title="Manager - Special Projects &amp; Sustainability">Manager - Special Projects &amp; Sustainability</a></h3>
+              <h3 class="jc-title"><a class="jc-title-link" href="/jobs/manager-special-projects-sustainability-united-breweries" title="Manager - Special Projects &amp; Sustainability">Manager - Special Projects &amp; Sustainability</a><span class="visually-hidden">.</span></h3>
               <p class="jc-org">United Breweries Ltd.</p>
               <div class="jc-meta">
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Bengaluru, Karnataka</span>
-                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Bengaluru, Karnataka.</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3v4M16.5 3v4M3.5 10h17"/></svg>Rolling / Open.</span>
               </div>
-              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Bachelor&#x27;s/Master&#x27;s in Engineering, Sustainability, or Business Management with experience in industrial process…</span></div>
-              <div class="jc-skills"><span class="skill-chip">Financial modeling (NPV/IRR)</span><span class="skill-chip">Industrial energy efficiency</span><span class="skill-chip">Circular economy principles</span></div>
+              <div class="jc-eligibility"><span class="jc-elig-item"><strong>Qualification:</strong> Bachelor&#x27;s/Master&#x27;s in Engineering, Sustainability, or Business Management with experience in industrial process.</span></div>
+              <div class="jc-skills"><span class="skill-chip">Financial modeling (NPV/IRR)</span><span class="skill-chip">Industrial energy efficiency</span><span class="skill-chip">Circular economy principles</span><span class="visually-hidden">.</span></div>
             </div>
           </div>
           <div class="jc-foot">
-            <span class="jc-date">Added 2026-10-20</span>
-            <span class="jc-view">View details <span aria-hidden="true">&nearr;</span></span>
+            <span class="jc-date">Added 2026-10-20.</span>
+            <span class="jc-view">View details. <span aria-hidden="true">&nearr;</span></span>
           </div>
         </article>
 <!-- JOB_FEED_END -->
@@ -960,7 +972,7 @@
             <span class="faq-q">How often is the registry updated?</span>
             <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </summary>
-          <div class="faq-body"><p>The pipeline runs daily at 07:00 IST. New jobs are published immediately and shared on Telegram and WhatsApp; the free email briefing is issued every 72 hours.</p></div>
+          <div class="faq-body"><p>The pipeline runs daily at 07:00 IST. New jobs are published immediately. They are shared on Telegram and WhatsApp. The free email briefing is issued every 72 hours.</p></div>
         </details>
 
         <details class="faq-item">
@@ -1067,6 +1079,16 @@
           <li><a href="mailto:urbanforestpark@gmail.com">Contact the registry</a></li>
           <li><button type="button" class="footer-link-btn" data-syndication-open title="Internal broadcast &amp; backlink workspace (Ctrl+Shift+U)">Syndication desk</button></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="footer-social" aria-label="Official social and community profiles">
+      <span class="footer-social-label">Official communities</span>
+      <div class="footer-social-links">
+        <a href="https://www.linkedin.com/groups/40965341/" target="_blank" rel="noopener noreferrer"
+           aria-label="Join the official Urban Forest Park LinkedIn Group (opens in a new tab)">LinkedIn Group <span aria-hidden="true">&nearr;</span></a>
+        <a href="https://www.facebook.com/share/1EwgtMnfcx/" target="_blank" rel="noopener noreferrer"
+           aria-label="Follow the official Urban Forest Park Facebook page (opens in a new tab)">Facebook <span aria-hidden="true">&nearr;</span></a>
       </div>
     </div>
 

@@ -79,6 +79,18 @@ TOP_STATE_HREFS = [
     ("Assam", "/bharat-regional-green-jobs#state-assam"),
 ]
 
+OFFICIAL_SOCIAL_URLS = (
+    "https://www.linkedin.com/groups/40965341/",
+    "https://www.facebook.com/share/1EwgtMnfcx/",
+)
+SOCIAL_PAGE_FILES = (
+    "index.html",
+    *HUB_FILES,
+    "hindi-environment-forestry-jobs.html",
+    "bharat-regional-green-jobs.html",
+    "global-climate-sustainability-opportunities.html",
+)
+
 ERRORS: List[str] = []
 WARNINGS: List[str] = []
 INFO: List[str] = []
@@ -505,6 +517,34 @@ def group_4(pages: Dict[str, str]) -> None:
             if not org.get(field):
                 warn(4, f"index.html: Organization.{field} is empty")
 
+    # The official LinkedIn Group and Facebook profiles must be discoverable
+    # both as crawlable links and in Organization.sameAs on every hub surface.
+    for name in SOCIAL_PAGE_FILES:
+        text = pages.get(name, "")
+        if not text:
+            continue
+        for url in OFFICIAL_SOCIAL_URLS:
+            if f'href="{url}"' not in text:
+                error(4, f"{name}: missing official social link {url}")
+        try:
+            social_nodes, _ = schema_nodes(text)
+        except ValueError:
+            continue
+        organizations = [
+            node for node in social_nodes if node.get("@type") == "Organization"
+        ]
+        if not organizations:
+            error(4, f"{name}: Organization schema missing for social sameAs")
+            continue
+        same_as = organizations[0].get("sameAs") or []
+        if isinstance(same_as, str):
+            same_as = [same_as]
+        if not isinstance(same_as, list):
+            same_as = []
+        for url in OFFICIAL_SOCIAL_URLS:
+            if url not in same_as:
+                error(4, f"{name}: Organization.sameAs missing {url}")
+
 
 # --------------------------------------------------------------------------
 # Group 5 - International targeting
@@ -856,6 +896,7 @@ CONTENT_ANCHOR_FILES = {
 
 
 def _visible_page_text(text: str) -> str:
+    text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
     text = re.sub(r"<(script|style|noscript)\b[^>]*>.*?</\1>", " ", text, flags=re.I | re.S)
     return visible(text)
 
@@ -888,6 +929,64 @@ def group_9(pages: Dict[str, str]) -> None:
         error(9, f"index.html has {len(words)} visible words; target is under 1,800")
     else:
         info(f"index.html visible word count: {len(words)}")
+
+    # Readability guard: tag-stripping crawlers merge adjacent card lines when
+    # subtitles, badges and skill summaries lack terminal punctuation. Measure
+    # the same visible text they see and keep the average below 22 words.
+    sentence_units = [
+        part.strip()
+        for part in re.split(r"(?<=[.!?])\s+", index_text)
+        if part.strip()
+    ]
+    sentence_pairs = [
+        (len(re.findall(r"[A-Za-z0-9][A-Za-z0-9''./&-]*", part)), part)
+        for part in sentence_units
+    ]
+    sentence_pairs = [pair for pair in sentence_pairs if pair[0]]
+    sentence_word_counts = [count for count, _part in sentence_pairs]
+    if sentence_word_counts:
+        average = sum(sentence_word_counts) / len(sentence_word_counts)
+        info(
+            "index.html average sentence length: "
+            f"{average:.2f} words/sentence (target <20; hard limit <22)"
+        )
+        if average >= 22:
+            error(
+                9,
+                f"index.html average sentence length is {average:.2f}; "
+                "must be under 22 words/sentence",
+            )
+        elif average >= 20:
+            warn(
+                9,
+                f"index.html average sentence length is {average:.2f}; "
+                "target is under 20 words/sentence",
+            )
+        # The editorial FAQ / E-E-A-T governance block is prose, not interface
+        # chrome. Flag any 35+ word compound sentence there specifically.
+        faq_match = re.search(
+            r'(?is)<section\b[^>]*id="executive-faq".*?</section>',
+            pages.get("index.html", ""),
+        )
+        if faq_match:
+            faq_text = _visible_page_text(faq_match.group(0))
+            faq_sentences = [
+                part.strip()
+                for part in re.split(r"(?<=[.!?])\s+", faq_text)
+                if part.strip()
+            ]
+            for part in faq_sentences:
+                count = len(
+                    re.findall(r"[A-Za-z0-9][A-Za-z0-9''./&-]*", part)
+                )
+                if count >= 35:
+                    warn(
+                        9,
+                        "index.html FAQ/governance has a "
+                        f"{count}-word sentence; split it: {part[:140]!r}",
+                    )
+        else:
+            warn(9, "index.html: FAQ/governance section could not be inspected")
 
     # No paragraph-sized block should repeat more than twice on the homepage.
     blocks = [
@@ -948,6 +1047,8 @@ def group_9(pages: Dict[str, str]) -> None:
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     pages = {path.name: read_text(path) for path in html_pages()}
     if not pages:
         print("no HTML pages found under public/")

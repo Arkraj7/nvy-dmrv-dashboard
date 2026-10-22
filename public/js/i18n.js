@@ -85,6 +85,8 @@
       'community.sub': 'Daily JRF, forestry, GIS, ESG and climate jobs - verified and broadcast every morning at 7 AM IST.',
       'community.wa': 'Join WhatsApp Job Group',
       'community.tg': 'Join Telegram Channel',
+      'community.li': 'Join LinkedIn Group \u2197',
+      'community.fb': 'Follow on Facebook \u2197',
 
       'tabs.aria': 'Registry view',
       'tabs.active': 'Active Opportunities',
@@ -250,6 +252,8 @@
       'cc.sub': 'Join India\u2019s green & academic job-alert network - verified jobs delivered every morning at 7 AM IST.',
       'cc.join.wa': 'Join WhatsApp Job Group \u2197',
       'cc.join.tg': 'Join Telegram Job Channel \u2197',
+      'cc.join.li': 'Join LinkedIn Group \u2197',
+      'cc.join.fb': 'Follow on Facebook \u2197',
       'cc.share.wa': 'Share Formatted Alert to WhatsApp',
       'cc.share.tg': 'Share to Telegram',
 
@@ -354,6 +358,8 @@
       'community.sub': 'प्रतिदिन JRF, वानिकी, GIS, ESG एवं जलवायु अधिदेश — प्रत्येक सुबह 7 बजे IST पर सत्यापित एवं प्रसारित।',
       'community.wa': 'WhatsApp जॉब ग्रुप जॉइन करें',
       'community.tg': 'Telegram चैनल जॉइन करें',
+      'community.li': 'LinkedIn \u0917\u094d\u0930\u0941\u092a \u091c\u0949\u0907\u0928 \u0915\u0930\u0947\u0902 \u2197',
+      'community.fb': 'Facebook \u092a\u0930 \u092b\u0949\u0932\u094b \u0915\u0930\u0947\u0902 \u2197',
 
       'tabs.aria': 'रजिस्ट्री दृश्य',
       'tabs.active': 'सक्रिय अवसर',
@@ -519,6 +525,8 @@
       'cc.sub': 'भारत के ग्रीन एवं शैक्षणिक जॉब अलर्ट नेटवर्क से जुड़ें — प्रत्येक सुबह 7 बजे IST पर सत्यापित अधिदेश।',
       'cc.join.wa': 'WhatsApp जॉब ग्रुप जॉइन करें \u2197',
       'cc.join.tg': 'Telegram जॉब चैनल जॉइन करें \u2197',
+      'cc.join.li': 'LinkedIn \u0917\u094d\u0930\u0941\u092a \u091c\u0949\u0907\u0928 \u0915\u0930\u0947\u0902 \u2197',
+      'cc.join.fb': 'Facebook \u092a\u0930 \u092b\u0949\u0932\u094b \u0915\u0930\u0947\u0902 \u2197',
       'cc.share.wa': 'स्वरूपित अलर्ट WhatsApp पर साझा करें',
       'cc.share.tg': 'Telegram पर साझा करें',
 

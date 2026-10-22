@@ -36,6 +36,7 @@ recent_archive = bsp.recent_archive
 faq_section_html = bsp.faq_section_html
 faq_jsonld = bsp.faq_jsonld
 footer_html = bsp.footer_html
+footer_social_html = bsp.footer_social_html
 header_html = bsp.header_html
 
 HINDI_HUB_FILE = "hindi-environment-forestry-jobs.html"
@@ -278,6 +279,8 @@ def footer_html_hi() -> str:
         </ul>
       </div>
     </div>
+
+{footer_social_html()}
 
     <div class="footer-bottom">
       &copy; {ist_today().year} Urban Forest Park<span class="dot">&bull;</span>राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)
