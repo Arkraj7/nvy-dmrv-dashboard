@@ -53,7 +53,7 @@
       ],
       "search_intent": "informational",
       "h1": "Verified PhD Climate & Ecology Fellowships in India 2026",
-      "indexable": true
+      "indexable": false
     },
     {
       "path": "/forestry-wildlife-government-jobs",
@@ -71,7 +71,7 @@
         "ICFRE WII vacancies"
       ],
       "search_intent": "transactional",
-      "h1": "Government Forestry, CAMPA, FSI & SPCB Jobs in India 2026",
+      "h1": "Government Environmental Jobs 2026 — Forestry, CAMPA, FSI & SPCB",
       "indexable": true
     },
     {
@@ -89,13 +89,13 @@
       ],
       "search_intent": "transactional",
       "h1": "GIS, Remote Sensing & Earth Observation Jobs in India 2026",
-      "indexable": true
+      "indexable": false
     },
     {
       "path": "/esg-carbon-sustainability-jobs",
       "file": "esg-carbon-sustainability-jobs.html",
       "canonical": "https://www.urbanforestpark.com/esg-carbon-sustainability-jobs",
-      "title": "ESG, Carbon Markets & Corporate Sustainability Jobs 2026",
+      "title": "ESG, Carbon Markets & Corp Sustainability Jobs in India 2026",
       "description": "ESG, BRSR, carbon market, climate finance and corporate sustainability jobs across Indian companies, consultancies, rating agencies and NGOs, updated daily.",
       "primary_keyword": "ESG, Carbon Markets",
       "secondary_keywords": [
@@ -105,7 +105,7 @@
         "climate finance jobs"
       ],
       "search_intent": "transactional",
-      "h1": "ESG, Carbon Markets & Corporate Sustainability Jobs 2026",
+      "h1": "ESG Jobs in India 2026 | Carbon, Markets & Corp Sustainability",
       "indexable": true
     },
     {
@@ -139,7 +139,7 @@
         "JRF भारत"
       ],
       "search_intent": "transactional",
-      "h1": "भारत में पर्यावरण एवं वानिकी भर्तियाँ — JRF, ESG, GIS एवं जलवायु करियर",
+      "h1": "पर्यावरण एवं वानिकी भर्तियाँ भारत 2026 — JRF, ESG, GIS व जलवायु",
       "indexable": true
     },
     {
@@ -464,6 +464,158 @@
       "search_intent": "informational",
       "h1": "30 Selected Nagar Vans Environmental Impact Dashboard",
       "indexable": true
+    },
+    {
+      "path": "/sustainability-jobs-india",
+      "file": "sustainability-jobs-india.html",
+      "canonical": "https://www.urbanforestpark.com/sustainability-jobs-india",
+      "title": "Verified Sustainability Jobs India 2026 | Forestry & Climate",
+      "description": "Verified sustainability, forestry, climate policy and ESG jobs across India — forest depts, research institutes, corporate ESG teams and climate consultancies.",
+      "primary_keyword": "Sustainability Jobs in India",
+      "secondary_keywords": [
+        "sustainability jobs India",
+        "forestry jobs India",
+        "climate policy jobs",
+        "ESG jobs India",
+        "conservation careers"
+      ],
+      "search_intent": "transactional",
+      "h1": "Verified Sustainability Jobs India 2026 | Forestry, Climate & ESG",
+      "indexable": true
+    },
+    {
+      "path": "/esg-jobs-for-freshers",
+      "file": "esg-jobs-for-freshers.html",
+      "canonical": "https://www.urbanforestpark.com/esg-jobs-for-freshers",
+      "title": "ESG Jobs for Freshers India 2026 | Entry-Level ESG Roles",
+      "description": "Verified entry-level ESG, carbon and sustainability roles for fresh graduates — analyst, reporting, research and associate roles with direct official links.",
+      "primary_keyword": "ESG Jobs for Freshers",
+      "secondary_keywords": [
+        "entry level ESG jobs",
+        "freshers ESG analyst",
+        "carbon reporting fresher",
+        "sustainability intern India"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG Jobs for Freshers India 2026 | Entry-Level Roles",
+      "indexable": false
+    },
+    {
+      "path": "/entry-level-environmental-jobs",
+      "file": "entry-level-environmental-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/entry-level-environmental-jobs",
+      "title": "Entry Level Environmental Jobs India 2026 | JRF & Field",
+      "description": "Verified entry-level environmental, forestry, GIS and research jobs across India — JRF, project associate, field assistant, GIS intern roles with direct links.",
+      "primary_keyword": "Entry Level Environmental Jobs",
+      "secondary_keywords": [
+        "entry level environmental jobs",
+        "JRF fresher jobs",
+        "project associate fresher",
+        "GIS intern India",
+        "field assistant jobs"
+      ],
+      "search_intent": "transactional",
+      "h1": "Entry Level Environmental Jobs India 2026 | JRF & Field",
+      "indexable": false
+    },
+    {
+      "path": "/remote-environmental-jobs",
+      "file": "remote-environmental-jobs.html",
+      "canonical": "https://www.urbanforestpark.com/remote-environmental-jobs",
+      "title": "Remote Environmental Jobs India 2026 | Hybrid & Climate",
+      "description": "Verified remote and hybrid environmental, climate, ESG and GIS jobs — work from anywhere in India with direct official links for every role across India today.",
+      "primary_keyword": "Remote Environmental Jobs",
+      "secondary_keywords": [
+        "remote environmental jobs",
+        "remote climate jobs",
+        "work from home ESG",
+        "remote GIS jobs",
+        "hybrid environmental roles"
+      ],
+      "search_intent": "transactional",
+      "h1": "Remote Environmental Jobs India 2026 | Hybrid & Climate",
+      "indexable": false
+    },
+    {
+      "path": "/esg-sustainability-jobs-delhi-ncr",
+      "file": "esg-sustainability-jobs-delhi-ncr.html",
+      "canonical": "https://www.urbanforestpark.com/esg-sustainability-jobs-delhi-ncr",
+      "title": "ESG & Sustainability Jobs Delhi NCR 2026 | Gurugram Noida",
+      "description": "Verified ESG, sustainability and climate jobs across Delhi, Gurugram, Noida, Faridabad and Ghaziabad — corporate, consulting, multilateral and govt roles today.",
+      "primary_keyword": "ESG Jobs Delhi NCR",
+      "secondary_keywords": [
+        "ESG jobs Gurugram",
+        "sustainability jobs Noida",
+        "climate finance Delhi",
+        "carbon jobs Faridabad"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG & Sustainability Jobs Delhi NCR 2026 | Gurugram Noida",
+      "indexable": true
+    },
+    {
+      "path": "/esg-sustainability-jobs-karnataka",
+      "file": "esg-sustainability-jobs-karnataka.html",
+      "canonical": "https://www.urbanforestpark.com/esg-sustainability-jobs-karnataka",
+      "title": "Verified ESG & Sustainability Jobs Karnataka 2026 Bengaluru",
+      "description": "Verified ESG, sustainability and climate jobs across Karnataka — Bengaluru corporate hub, research institutes and emerging districts with direct links today.",
+      "primary_keyword": "ESG Jobs Karnataka",
+      "secondary_keywords": [
+        "ESG jobs Bangalore",
+        "sustainability jobs Karnataka",
+        "climate jobs Bengaluru"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG & Sustainability Jobs Karnataka 2026 | Bengaluru",
+      "indexable": false
+    },
+    {
+      "path": "/esg-jobs-bangalore",
+      "file": "esg-jobs-bangalore.html",
+      "canonical": "https://www.urbanforestpark.com/esg-jobs-bangalore",
+      "title": "Verified ESG Jobs Bengaluru 2026 | Corporate Climate Tech",
+      "description": "Verified ESG jobs in Bengaluru — India's deepest corporate ESG hub with GCCs, climate tech startups and consultancies, direct official links for all roles.",
+      "primary_keyword": "ESG Jobs Bangalore",
+      "secondary_keywords": [
+        "ESG jobs Bengaluru",
+        "climate tech jobs Bangalore",
+        "GCC ESG jobs Bangalore"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG Jobs Bengaluru 2026 | Corporate Climate Tech",
+      "indexable": false
+    },
+    {
+      "path": "/esg-sustainability-jobs-maharashtra",
+      "file": "esg-sustainability-jobs-maharashtra.html",
+      "canonical": "https://www.urbanforestpark.com/esg-sustainability-jobs-maharashtra",
+      "title": "ESG & Sustainability Jobs Maharashtra 2026 | Mumbai Pune",
+      "description": "Verified ESG, sustainability and climate jobs across Maharashtra — Mumbai finance hub, Pune research, Thane industry, direct official links for all roles today.",
+      "primary_keyword": "ESG Jobs Maharashtra",
+      "secondary_keywords": [
+        "ESG jobs Maharashtra",
+        "sustainability jobs Mumbai",
+        "climate finance Pune"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG & Sustainability Jobs Maharashtra 2026 | Mumbai",
+      "indexable": true
+    },
+    {
+      "path": "/esg-jobs-mumbai",
+      "file": "esg-jobs-mumbai.html",
+      "canonical": "https://www.urbanforestpark.com/esg-jobs-mumbai",
+      "title": "Verified ESG Jobs Mumbai 2026 | Finance Corporate Climate",
+      "description": "Verified ESG jobs in Mumbai — India's financial capital with corporate HQs, consultancies and climate finance firms, direct official links for all roles today.",
+      "primary_keyword": "ESG Jobs Mumbai",
+      "secondary_keywords": [
+        "ESG jobs Mumbai",
+        "climate finance Mumbai",
+        "sustainability jobs Mumbai"
+      ],
+      "search_intent": "transactional",
+      "h1": "ESG Jobs Mumbai 2026 | Finance Corporate Climate",
+      "indexable": false
     }
   ]
 }

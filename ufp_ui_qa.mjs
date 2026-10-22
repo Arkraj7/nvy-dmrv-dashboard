@@ -79,8 +79,22 @@ const regionsUsed = new Set(globalJobs.map(j => j.region));
 check('global registry spans 5+ regions', regionsUsed.size >= 5, [...regionsUsed].join(', '));
 const kindsUsed = new Set(globalJobs.map(j => j.opportunity_kind));
 check('global registry spans 4+ opportunity kinds', kindsUsed.size >= 4, [...kindsUsed].join(', '));
-const globalUrlOk = globalJobs.every(j => /^https:\/\/([a-z0-9-]+\.)*(unfccc\.int|greenclimate\.fund|undp\.org|thegef\.org|worldbank\.org|iucn\.org|wri\.org|wri-india\.org|esa\.int|climate\.esa\.int|eacea\.ec\.europa\.eu|erasmus-plus\.ec\.europa\.eu|futureearth\.org|chevening\.org|unu\.edu|zayedsustainabilityprize\.(org|com)|earthshotprize\.org|simonsfoundation\.org)/.test(j.org_website || ''));
-check('global seed records use official organisation URLs', globalUrlOk, 'bad=' + globalJobs.filter(j => !/^https:\/\//.test(j.org_website || '')).map(j => j.id).join(','));
+const GLOBAL_SEED_URL_RE = /^https:\/\/([a-z0-9-]+\.)*(unfccc\.int|greenclimate\.fund|undp\.org|thegef\.org|worldbank\.org|iucn\.org|wri\.org|wri-india\.org|esa\.int|climate\.esa\.int|eacea\.ec\.europa\.eu|erasmus-plus\.ec\.europa\.eu|futureearth\.org|chevening\.org|unu\.edu|zayedsustainabilityprize\.(org|com)|earthshotprize\.org|simonsfoundation\.org)/;
+function hasOfficialGlobalUrl(j) {
+  const org = String(j.org_website || '');
+  if (GLOBAL_SEED_URL_RE.test(org)) return true;
+  // Harvested opportunities must apply on the organisation's own host.
+  try {
+    const orgHost = new URL(org).hostname.replace(/^www\./, '');
+    const applyHost = new URL(String(j.apply_url || '')).hostname.replace(/^www\./, '');
+    return Boolean(orgHost) && (applyHost === orgHost || applyHost.endsWith('.' + orgHost));
+  } catch {
+    return false;
+  }
+}
+const badGlobalUrls = globalJobs.filter(j => !hasOfficialGlobalUrl(j));
+check('global records use official organisation URLs', badGlobalUrls.length === 0,
+  'bad=' + badGlobalUrls.map(j => j.id + ':' + (j.org_website || '')).join(','));
 
 /* Weekly LinkedIn roundup files */
 const txt = fs.readFileSync(REPO + '/linkedin_weekly_post.txt', 'utf-8');

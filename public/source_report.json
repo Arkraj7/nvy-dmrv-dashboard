@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T00:29:10",
+  "generated_at": "2026-10-22T06:05:47",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,24 +34,59 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 11,
-      "passed": 5,
-      "active": 5
+      "leads": 277,
+      "passed": 0,
+      "active": 0
     },
-    "google-news": {
-      "leads": 1,
+    "official-page": {
+      "leads": 161,
+      "passed": 0,
+      "active": 0
+    },
+    "naukri": {
+      "leads": 57,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:agrijob": {
+      "leads": 20,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:ceew": {
+      "leads": 15,
+      "passed": 0,
+      "active": 0
+    },
+    "indeed": {
+      "leads": 12,
       "passed": 0,
       "active": 0
     },
     "portal:atree": {
-      "leads": 1,
-      "passed": 1,
-      "active": 1
+      "leads": 7,
+      "passed": 0,
+      "active": 0
+    },
+    "reliefweb-rss": {
+      "leads": 6,
+      "passed": 0,
+      "active": 0
+    },
+    "google-news": {
+      "leads": 4,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:wri-india": {
+      "leads": 2,
+      "passed": 0,
+      "active": 0
     }
   },
   "totals": {
-    "leads": 13,
-    "passed": 6,
-    "active": 6
+    "leads": 561,
+    "passed": 0,
+    "active": 0
   }
 }

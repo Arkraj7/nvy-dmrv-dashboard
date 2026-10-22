@@ -1,0 +1,121 @@
+{
+  "hubs": {
+    "jrf-srf-project-associate-jobs.html": {
+      "streak_on": 18,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=13, streak_on=3)"
+      ]
+    },
+    "phd-fellowships-climate-sustainability.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "forestry-wildlife-government-jobs.html": {
+      "streak_on": 18,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=19, streak_on=3)"
+      ]
+    },
+    "gis-remote-sensing-climate-jobs.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "esg-carbon-sustainability-jobs.html": {
+      "streak_on": 18,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=42, streak_on=3)"
+      ]
+    },
+    "sustainability-jobs-india.html": {
+      "streak_on": 18,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=59, streak_on=3)"
+      ]
+    },
+    "esg-jobs-for-freshers.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "entry-level-environmental-jobs.html": {
+      "streak_on": 0,
+      "streak_off": 10,
+      "indexable": false,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=18, streak_on=3)",
+        "2026-10-21: OFF (count=4, streak_off=7)"
+      ]
+    },
+    "remote-environmental-jobs.html": {
+      "streak_on": 0,
+      "streak_off": 10,
+      "indexable": false,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=12, streak_on=3)",
+        "2026-10-21: OFF (count=7, streak_off=7)"
+      ]
+    },
+    "esg-sustainability-jobs-delhi-ncr.html": {
+      "streak_on": 18,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=13, streak_on=3)"
+      ]
+    },
+    "esg-sustainability-jobs-karnataka.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "esg-sustainability-jobs-maharashtra.html": {
+      "streak_on": 10,
+      "streak_off": 0,
+      "indexable": true,
+      "last_flip": "2026-10-21",
+      "flip_log": [
+        "2026-10-21: ON (count=13, streak_on=3)"
+      ]
+    },
+    "esg-jobs-bangalore.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "esg-jobs-mumbai.html": {
+      "streak_on": 0,
+      "streak_off": 15,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    }
+  },
+  "last_run_date": "2026-10-22"
+}

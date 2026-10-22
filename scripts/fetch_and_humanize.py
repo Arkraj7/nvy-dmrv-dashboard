@@ -3859,6 +3859,27 @@ def run_global_stage(
     """
     existing = [normalize_global_record(job) for job in load_jobs(jobs_path)]
     archive = [normalize_global_record(job) for job in load_jobs(archive_path)]
+    # The India and global registries are disjoint by contract. A record that
+    # already exists in India must never be harvested into global as well.
+    india_path = jobs_path.parent / "jobs.json"
+    india_ids: set[str] = set()
+    if india_path.exists():
+        try:
+            india_ids = {
+                str(job.get("id") or "")
+                for job in load_jobs(india_path)
+                if job.get("id")
+            }
+        except Exception as exc:  # noqa: BLE001
+            log.warning("Global registry: could not read %s: %s", india_path, exc)
+    overlap = [job for job in existing if str(job.get("id") or "") in india_ids]
+    if overlap:
+        log.warning(
+            "Global registry: dropping %d record(s) already present in India: %s",
+            len(overlap),
+            ", ".join(str(job.get("id")) for job in overlap[:8]),
+        )
+        existing = [job for job in existing if str(job.get("id") or "") not in india_ids]
     existing, archive, purged = purge_excluded_records(existing, archive)
     if purged:
         report_path = jobs_path.parent.parent / "data" / "global_role_purge_report.json"
@@ -3915,7 +3936,7 @@ def run_global_stage(
                 str(job.get("id") or "")
                 for job in existing + archive
                 if job.get("id")
-            }
+            } | india_ids
             rate_limited = False
             for index, candidate in enumerate(fresh, start=1):
                 label = squash(candidate.get("title"))[:70]
@@ -3929,6 +3950,9 @@ def run_global_stage(
                         record = normalize_global_record(record)
                         record["global"] = True
                         record["evergreen"] = False
+                        if str(record.get("id") or "") in india_ids:
+                            record, reason = None, "already in India registry"
+                    if record is not None:
                         record, reason = gate_candidate(
                             record,
                             _employer_registry(),
