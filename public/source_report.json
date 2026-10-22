@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T06:05:47",
+  "generated_at": "2026-10-22T07:54:49",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +34,17 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 277,
-      "passed": 0,
-      "active": 0
+      "leads": 281,
+      "passed": 1,
+      "active": 1
     },
     "official-page": {
-      "leads": 161,
+      "leads": 160,
       "passed": 0,
       "active": 0
     },
     "naukri": {
-      "leads": 57,
+      "leads": 50,
       "passed": 0,
       "active": 0
     },
@@ -59,7 +59,7 @@
       "active": 0
     },
     "indeed": {
-      "leads": 12,
+      "leads": 13,
       "passed": 0,
       "active": 0
     },
@@ -85,8 +85,8 @@
     }
   },
   "totals": {
-    "leads": 561,
-    "passed": 0,
-    "active": 0
+    "leads": 558,
+    "passed": 1,
+    "active": 1
   }
 }

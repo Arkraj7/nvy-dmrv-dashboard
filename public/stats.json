@@ -1,12 +1,40 @@
 {
-  "last_updated": "2026-10-22T12:35:34+05:30",
-  "active_open_jobs": 81,
-  "opened_this_week": 72,
+  "last_updated": "2026-10-22T13:22:00+05:30",
+  "last_updated_ist": "2026-10-22T13:22:00+05:30",
+  "last_pipeline_run_date_ist": "2026-10-22",
+  "active_open_jobs": 82,
+  "opened_this_week": 73,
   "passed_this_week": 3,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 87,
+  "total_historical_indexed": 88,
   "last_telegram_broadcast_date": "2026-10-22",
+  "recent_telegram_job_ids": [
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "wildlife-trade-forensics-course-wii",
+    "wildlife-enthusiasts-course-wii",
+    "sustainable-finance-specialist-unep-india",
+    "senior-energy-researcher-and-policy-consultant-wsp-india",
+    "research-intern-sustainable-food-systems-ceew",
+    "research-associate-maharashtra-atree",
+    "regional-health-and-wash-coordinator-terre-des-hommes",
+    "program-manager-water-supply-planet-water-foundation",
+    "product-manager-sustainability-climate-ai-msci",
+    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
+    "director-brahmaputra-programme-wwf-india",
+    "programme-lead-senior-programme-associate-clean-energy-ifore",
+    "project-associate-geospatial-modelling-urban-heat-island-nrsc",
+    "gund-institute-funded-phd-competition-university-of-vermont",
+    "biology-phd-programme-iiser",
+    "head-director-national-conservation-programme-wwf-india",
+    "manager-special-projects-sustainability-united-breweries",
+    "international-course-on-heritage-conservation-wii",
+    "junior-research-fellow-bsi"
+  ],
   "by_category": {
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 10,
+      "archived": 1
+    },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 11,
       "archived": 0
@@ -22,10 +50,6 @@
     "ESG, Carbon Markets & Corporate Sustainability": {
       "active": 42,
       "archived": 3
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 9,
-      "archived": 1
     },
     "Research Associate & Project Staff (Contractual)": {
       "active": 4,
@@ -45,7 +69,7 @@
     }
   },
   "by_state": {
-    "Delhi NCR": 15,
+    "Delhi NCR": 16,
     "Maharashtra": 13,
     "Karnataka": 11,
     "Tamil Nadu": 5,
@@ -61,30 +85,17 @@
     "Odisha": 1,
     "Uttar Pradesh": 1
   },
-  "last_updated_ist": "2026-10-22T12:35:34+05:30",
-  "last_pipeline_run_date_ist": "2026-10-22",
-  "recent_telegram_job_ids": [
-    "phd-research-sustainable-rurban-food-systems-atree",
-    "wildlife-trade-forensics-course-wii",
-    "wildlife-enthusiasts-course-wii",
-    "sustainable-finance-specialist-unep-india",
-    "senior-energy-researcher-and-policy-consultant-wsp-india",
-    "research-intern-sustainable-food-systems-ceew",
-    "research-associate-maharashtra-atree",
-    "regional-health-and-wash-coordinator-terre-des-hommes",
-    "program-manager-water-supply-planet-water-foundation",
-    "product-manager-sustainability-climate-ai-msci"
-  ],
   "last_broadcast_job_ids": [
-    "phd-research-sustainable-rurban-food-systems-atree",
-    "wildlife-trade-forensics-course-wii",
-    "wildlife-enthusiasts-course-wii",
-    "sustainable-finance-specialist-unep-india",
-    "senior-energy-researcher-and-policy-consultant-wsp-india",
-    "research-intern-sustainable-food-systems-ceew",
-    "research-associate-maharashtra-atree",
-    "regional-health-and-wash-coordinator-terre-des-hommes",
-    "program-manager-water-supply-planet-water-foundation",
-    "product-manager-sustainability-climate-ai-msci"
-  ]
+    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
+    "director-brahmaputra-programme-wwf-india",
+    "programme-lead-senior-programme-associate-clean-energy-ifore",
+    "project-associate-geospatial-modelling-urban-heat-island-nrsc",
+    "gund-institute-funded-phd-competition-university-of-vermont",
+    "biology-phd-programme-iiser",
+    "head-director-national-conservation-programme-wwf-india",
+    "manager-special-projects-sustainability-united-breweries",
+    "international-course-on-heritage-conservation-wii",
+    "junior-research-fellow-bsi"
+  ],
+  "telegram_last_status": "delivered"
 }

@@ -1,5 +1,66 @@
 [
   {
+    "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
+    "date_added": "2026-10-22",
+    "clean_title": "Programme Lead / Senior Programme Associate - Clean Energy",
+    "organization": "International Forum for Environment, Sustainability & Technology (iFOREST)",
+    "state": "Delhi NCR",
+    "city": "Noida",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open",
+    "region": "",
+    "country": "",
+    "qualification_summary": "Master's degree in Energy, Economics, Environmental Policy, or Engineering with relevant sector experience.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The selected candidate will drive research, policy advisory, and implementation for the Clean Energy Programme. You will work closely with state governments and industrial stakeholders to accelerate renewable energy deployment across India. The role involves managing workstreams, conducting techno-economic assessments, and providing regulatory recommendations to support equitable energy transitions in priority regions.",
+    "key_responsibilities": [
+      "Manage project workplans and ensure timely delivery of research outputs and milestones.",
+      "Conduct techno-economic assessments for industrial renewable energy adoption and storage integration.",
+      "Develop policy briefs, regulatory recommendations, and investment-oriented strategies for state governments.",
+      "Facilitate engagement with utilities, industrial associations, and MSMEs to drive renewable energy procurement.",
+      "Oversee primary and secondary research methodologies to inform clean energy transition initiatives."
+    ],
+    "must_have_skills": [
+      "Renewable energy policy",
+      "Techno-economic assessment",
+      "Stakeholder engagement",
+      "Policy analysis",
+      "Energy sector research",
+      "Project management"
+    ],
+    "application_tip": "Highlight your specific experience with Indian state-level renewable energy policy or industrial procurement frameworks in your cover letter. Ensure your resume clearly details your involvement in past implementation-oriented energy projects.",
+    "apply_url": "https://docs.google.com/forms/d/e/1FAIpQLSdw8hNDCW0rPWZZrIqMTR0fewDL8Ooezz0RKO4705zeEnQfmg/viewform?usp=send_form",
+    "org_website": "https://iforest.in",
+    "org_domain": "iforest.in",
+    "source_portal": "Official Organisation Website",
+    "entry_type": "posting",
+    "employer_id": "international-forum-for-environment-sustainability-technology-iforest",
+    "status": "active",
+    "verification": {
+      "verified_at": "2026-10-22T07:41:40.933541+00:00",
+      "final_url": "https://docs.google.com/forms/d/e/1FAIpQLSdw8hNDCW0rPWZZrIqMTR0fewDL8Ooezz0RKO4705zeEnQfmg/viewform?usp=send_form",
+      "final_host": "docs.google.com",
+      "http_status": 401,
+      "content_hash": "",
+      "evidence_snippet": "",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "UNKNOWN_KEEP",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
+    "link_policy": {
+      "policy_version": 2,
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-22T07:41:40.933541+00:00"
+    },
+    "reverify_after": "2026-11-06",
+    "valid_through": "2026-11-21"
+  },
+  {
     "id": "phd-research-sustainable-rurban-food-systems-atree",
     "date_added": "2026-10-21",
     "clean_title": "PhD Research on Sustainable Rurban Food Systems",
