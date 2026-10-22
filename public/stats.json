@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-10-21T11:52:15",
+  "last_updated": "2026-10-22T06:03:39",
   "active_open_jobs": 81,
-  "opened_this_week": 73,
-  "passed_this_week": 4,
+  "opened_this_week": 72,
+  "passed_this_week": 3,
   "total_archived_jobs": 6,
   "total_historical_indexed": 87,
   "last_telegram_broadcast_date": "2026-10-22",
@@ -60,6 +60,5 @@
     "Madhya Pradesh": 1,
     "Odisha": 1,
     "Uttar Pradesh": 1
-  },
-  "telegram_last_status": "delivered"
+  }
 }
