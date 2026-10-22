@@ -258,6 +258,35 @@ def sentence(value: Any, limit: Optional[int] = None) -> str:
     return text.rstrip(" .;:,\u2026") + "."
 
 
+def excerpt(value: Any, limit: int) -> str:
+    """Return a complete, punctuated card excerpt within ``limit`` characters.
+
+    Prefer the first full sentence. If that is too long, use the last complete
+    sentence inside the window. Only fall back to an ellipsis when no sentence
+    boundary exists, so cards never end with dangling words like "and." or
+    "The role." after punctuation repair.
+    """
+    text = plain(value)
+    if not text:
+        return ""
+    if len(text) <= limit:
+        return sentence(text)
+
+    first = re.match(r"^(.+?[.!?])(?:\s|$)", text)
+    if first and len(first.group(1)) <= limit:
+        return sentence(first.group(1))
+
+    window = text[: limit + 1]
+    boundaries = list(re.finditer(r"[.!?](?=\s|$)", window))
+    if boundaries:
+        candidate = window[: boundaries[-1].end()]
+        if len(candidate) >= 80:
+            return sentence(candidate)
+
+    cut = window[: window.rfind(" ")] if " " in window else window
+    return cut.rstrip(" ,;:") + "\u2026"
+
+
 def load_keyword_map(path: Path = KEYWORD_MAP_PATH) -> Dict[str, Dict[str, Any]]:
     """Load the single source of truth for page titles, descriptions and H1s."""
     try:
@@ -928,10 +957,10 @@ HUBS: List[Dict[str, Any]] = [
             "and government portals across India."
         ),
         "list_copy": (
-            "Junior Research Fellow (JRF), Senior Research Fellow (SRF), Research Associate and "
-            "Project Associate positions in environmental science, forestry, ecology, climate "
-            "change, sustainability, agriculture and allied disciplines. Each listing links "
-            "straight to the official advertisement and application portal."
+            "Junior Research Fellow (JRF) jobs, Senior Research Fellow (SRF) vacancies, research "
+            "associate and project associate positions in environmental science, forestry, ecology, "
+            "climate change, sustainability, agriculture and allied disciplines. Each listing "
+            "links straight to the official advertisement and application portal."
         ),
         "cta_href": "/#filter-bar",
         "matched_noun": "research fellowship and project-staff",
@@ -966,6 +995,12 @@ HUBS: List[Dict[str, Any]] = [
                 "verified job feeds and news alerts for JRF, SRF and project associate "
                 "advertisements are scanned automatically, so new openings usually appear within "
                 "24 hours of publication.",
+            ),
+            (
+                "What is the difference between JRF jobs, SRF vacancies and project associate posts?",
+                "JRF jobs are entry research fellowships, usually requiring UGC-NET or GATE. "
+                "SRF vacancies require about two years of research experience. Project associate "
+                "and research associate posts are project-funded roles with institute-specific pay.",
             ),
         ],
     },
@@ -1038,16 +1073,16 @@ HUBS: List[Dict[str, Any]] = [
             "direct application links."
         ),
         "hero_sub": (
-            "Forest guard, forester, RFO, ACF and IFS recruitment, plus forestry, wildlife, "
-            "conservation and environment-ministry jobs across Indian states. Filter "
-            "state-wise links below for local forest department notices."
+            "Forest guard and forest ranger recruitment, forester, RFO, ACF and IFS posts, plus "
+            "wildlife biologist, conservation, ecology and environment-ministry jobs across Indian "
+            "states. Filter state-wise links below for local forest department notices."
         ),
         "list_copy": (
             "Vacancies with state forest departments, the Wildlife Institute of India, ICFRE "
             "institutes, SACON, the environment ministry and conservation organisations \u2014 "
-            "covering forest guard and forester recruitment, RFO / ACF / IFS notifications, "
-            "afforestation, wildlife biology, ecology and habitat management. Use the "
-            "state-wise filter to narrow the registry to your state."
+            "covering forest guard and forest ranger recruitment, forester jobs, RFO / ACF / IFS "
+            "notifications, wildlife biologist and wildlife conservation jobs, ecology and habitat "
+            "management. Use the state-wise filter to narrow the registry to your state."
         ),
         "cta_href": "/#filter-bar",
         "matched_noun": "forestry, wildlife and government",
@@ -1081,6 +1116,12 @@ HUBS: List[Dict[str, Any]] = [
                 "portals, walk-in interviews or email applications as stated in the "
                 "advertisement. The registry never charges fees for listings.",
             ),
+            (
+                "What field roles are included beyond forest guard recruitment?",
+                "The hub covers forest ranger and forester jobs, wildlife biologist and wildlife "
+                "conservation roles, ecology jobs and conservation jobs, and environmental officer posts. "
+                "It also lists RFO, ACF and IFS recruitment and research positions.",
+            ),
         ],
     },
     {
@@ -1099,9 +1140,10 @@ HUBS: List[Dict[str, Any]] = [
             "with ISRO / NRSC, research institutes, urban bodies and consultancies across India."
         ),
         "list_copy": (
-            "GIS, remote sensing and earth-observation positions spanning geospatial modelling, "
-            "satellite data analysis, urban heat-island mapping, land-use change and spatial "
-            "planning \u2014 each with a direct application link."
+            "GIS analyst, GIS specialist and GIS technician jobs, remote sensing and "
+            "earth-observation roles spanning geospatial modelling, satellite data analysis, "
+            "urban heat-island mapping, land-use change and spatial planning \u2014 plus remote "
+            "GIS jobs and GIS internships, each with a direct application link."
         ),
         "cta_href": "/#filter-bar",
         "matched_noun": "GIS, remote sensing and geospatial",
@@ -1148,14 +1190,15 @@ HUBS: List[Dict[str, Any]] = [
             "verified and updated daily."
         ),
         "hero_sub": (
-            "ESG analyst, sustainability manager, carbon-market and climate-finance jobs "
-            "across corporate India, consultancies and development organisations."
+            "ESG analyst, sustainability manager, BRSR reporting, carbon accounting, climate-risk, "
+            "environmental consultant, climate-finance and CSR jobs across corporate India, "
+            "consultancies and development organisations."
         ),
         "list_copy": (
             "Corporate sustainability and ESG positions \u2014 ESG analysis and reporting, BRSR "
-            "disclosure, carbon accounting and markets, climate risk and climate finance "
-            "\u2014 from companies, consultancies, rating agencies and NGOs. Every listing links "
-            "to the official careers portal."
+            "disclosure, carbon accounting and markets, climate risk, climate finance, "
+            "environmental consulting and CSR \u2014 from companies, consultancies, rating agencies "
+            "and NGOs. Every listing links to the official careers portal."
         ),
         "cta_href": "/#filter-bar",
         "matched_noun": "ESG and sustainability",
@@ -1176,10 +1219,11 @@ HUBS: List[Dict[str, Any]] = [
                 "chips on each listing summarise the stated requirements.",
             ),
             (
-                "Do these listings include BRSR and climate-disclosure roles?",
-                "Yes \u2014 BRSR reporting, climate disclosure and assurance jobs are tracked "
-                "under this pathway, alongside environmental compliance and EHS sustainability "
-                "roles where they carry a climate / ESG remit.",
+                "Do these listings include BRSR, carbon accounting and CSR roles?",
+                "Yes \u2014 BRSR reporting, carbon accounting, climate disclosure and assurance jobs "
+                "are tracked under this pathway. Corporate social responsibility jobs (CSR), "
+                "environmental consulting and EHS sustainability roles appear when they carry a "
+                "climate or ESG remit.",
             ),
             (
                 "How does the registry verify corporate ESG vacancies?",
@@ -1200,13 +1244,15 @@ HUBS: List[Dict[str, Any]] = [
             "from forest departments and research institutes to corporate ESG teams and climate consultancies."
         ),
         "hero_sub": (
-            "India's broadest sustainability job hub: forestry & conservation, climate policy & research, "
-            "corporate ESG & carbon — every listing links to the official source."
+            "India's broadest sustainability job hub: environmental consultant, EIA and compliance, "
+            "forestry and conservation, climate policy and research, renewable energy, waste management, "
+            "EHS and corporate ESG roles. Every listing links to the official source."
         ),
         "list_copy": (
-            "Sustainability jobs across the full spectrum: forest departments, research institutes, "
-            "climate think-tanks, corporate ESG teams, carbon consultancies and multilateral organisations. "
-            "Each listing links to the official application page."
+            "Sustainability jobs across the full spectrum: environmental consulting and EIA, forest "
+            "departments, research institutes, climate think-tanks, corporate ESG teams, renewable energy, "
+            "waste management, EHS and multilateral organisations. Each listing links to the official "
+            "application page."
         ),
         "cta_href": "/#filter-bar",
         "matched_noun": "sustainability and climate",
@@ -1229,8 +1275,26 @@ HUBS: List[Dict[str, Any]] = [
             ),
             (
                 "Can freshers find sustainability jobs here?",
-                "Yes — JRF, project associate and research intern roles appear here. "
+                "Yes - JRF, project associate and research intern roles appear here. "
                 "For a dedicated fresher view, see the ESG Jobs for Freshers hub."
+            ),
+            (
+                "What environmental consultant and EIA jobs are listed?",
+                "Environmental consultant jobs and climate consultant roles cover impact assessment, environmental clearance, "
+                "compliance auditing, pollution control and sustainability advisory. Clients include "
+                "consultancies, infrastructure firms and industry."
+            ),
+            (
+                "Are waste management careers, renewable energy and EHS jobs included?",
+                "Yes. The hub includes waste management jobs and careers, circular-economy roles, renewable "
+                "energy and clean-energy jobs. It also covers EHS / health-and-safety positions and HSE "
+                "manager roles. Use the category and experience filters to narrow the list."
+            ),
+            (
+                "How is this different from a general environmental jobs board?",
+                "This green jobs board is broader than a corporate ESG list. It includes environmental "
+                "jobs in forestry, ecology, EIA, climate policy, renewable energy, waste management "
+                "and EHS, plus corporate sustainability and corporate social responsibility jobs."
             ),
         ],
     },
@@ -1923,8 +1987,8 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
         '<p class="hub-card-elig">' + " ".join(elig_bits) + "</p>" if elig_bits else ""
     )
 
-    summary = trim(job.get("role_summary"), 240)
-    summary_html = f'<p class="hub-card-sum">{esc(sentence(summary))}</p>' if summary else ""
+    summary = excerpt(job.get("role_summary"), 240)
+    summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
     title = plain(job.get("clean_title")) or org
 
     return f"""        <article class="hub-card{' hub-card-archived' if archived else ''}">

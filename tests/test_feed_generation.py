@@ -39,6 +39,14 @@ def test_rss_feed_is_well_formed_and_escaped():
     assert "Forest &amp; Ecology" in xml
 
 
+def test_excerpt_prefers_a_complete_sentence():
+    text = "First sentence. " + ("Second sentence with many words. " * 20)
+    assert seo.excerpt(text, 120) == "First sentence."
+    fallback = seo.excerpt("word " * 100, 40)
+    assert fallback.endswith("\u2026")
+    assert not fallback.endswith(".\u2026")
+
+
 def test_inject_feed_links_adds_alternate_and_footer(tmp_path):
     page = tmp_path / "index.html"
     page.write_text(

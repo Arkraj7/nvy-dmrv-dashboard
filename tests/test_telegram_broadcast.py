@@ -43,6 +43,15 @@ def test_telegram_html_escapes_record_content_and_links_to_static_page():
     assert "parse_mode" not in html
 
 
+def test_facebook_digest_is_plain_text_and_capped():
+    jobs, _ = _mixed_registry()
+    text = fh.build_facebook_digest_text(jobs[:8], "2026-10-22", "Morning brief")
+    assert text.startswith("🌿 India Green, Forestry, JRF & ESG Jobs")
+    assert "#GreenJobs" in text
+    assert "**" not in text
+    assert text.count("🔗") == 6
+
+
 def test_plain_text_fallback_strips_tags_and_unescapes():
     plain = fh._telegram_plain_text("<b>Hello &amp; welcome</b><br><a href='x'>link</a>")
     assert "<" not in plain
@@ -210,3 +219,5 @@ def test_write_digests_uses_rotation_and_badges(tmp_path):
     assert any(job["badge"] == "🆕" for job in digest["jobs"])
     assert all(job["url"].startswith(fh.SITE_BASE_URL + "/jobs/") for job in digest["jobs"])
     assert (tmp_path / "whatsapp_digest.txt").exists()
+    assert digest["facebook_text"].startswith("🌿 India Green, Forestry, JRF & ESG Jobs")
+    assert (tmp_path / "facebook_digest.txt").exists()

@@ -4773,6 +4773,52 @@ def build_whatsapp_digest_text(
     return "\n".join(parts).strip() + "\n"
 
 
+def build_facebook_digest_text(
+    jobs: List[Dict[str, Any]], today: str, heading: str
+) -> str:
+    """Plain-text Facebook post built from the daily digest selection.
+
+    Facebook does not render Markdown or HTML in ordinary posts, so this
+    variant uses short lines, emoji labels and direct dossier links. Keep the
+    post to six role highlights and point readers to the registry for the full
+    list.
+    """
+    whatsapp, telegram = _community_links()
+    picks = jobs[:6]
+    lines = [
+        "🌿 India Green, Forestry, JRF & ESG Jobs",
+        "",
+        heading,
+        "",
+        f"Today's verified picks ({len(picks)}):",
+        "",
+    ]
+    for position, job in enumerate(picks, start=1):
+        title = squash(job.get("clean_title"))
+        org = squash(job.get("organization"))
+        location = _location_line(job)
+        deadline = squash(job.get("valid_through"))[:10]
+        share_url = f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}"
+        lines.append(f"{position}. {title} — {org}")
+        meta = " · ".join(part for part in (location, f"Apply by {deadline}" if deadline else "") if part)
+        if meta:
+            lines.append(f"📍 {meta}")
+        lines.append(f"🔗 {share_url}")
+        lines.append("")
+    remaining = max(0, len(jobs) - len(picks))
+    if remaining:
+        lines.append(f"Plus {remaining} more verified roles: {SITE_BASE_URL}/")
+    else:
+        lines.append(f"Browse the full registry: {SITE_BASE_URL}/")
+    lines += [
+        f"💬 WhatsApp: {whatsapp}",
+        f"📣 Telegram: {telegram}",
+        "",
+        "#GreenJobs #EnvironmentalJobs #ForestryJobs #ESGJobs #JRF #GIS #ClimateJobs #Sustainability",
+    ]
+    return "\n".join(lines).strip() + "\n"
+
+
 def build_telegram_digest_html(
     jobs: List[Dict[str, Any]], today: str, heading: str
 ) -> str:
@@ -5138,6 +5184,7 @@ def write_digests(
 
     whatsapp_text = build_whatsapp_digest_text(listed, today, heading)
     telegram_html = build_telegram_digest_html(listed, today, heading)
+    facebook_text = build_facebook_digest_text(listed, today, heading)
     digest = {
         "generated_at": today,
         "new_count": selected_new,
@@ -5147,6 +5194,7 @@ def write_digests(
         "jobs": jobs_payload,
         "whatsapp_text": whatsapp_text,
         "telegram_html": telegram_html,
+        "facebook_text": facebook_text,
         "recent_job_ids": [
             str(item)
             for item in (stats or {}).get("recent_telegram_job_ids", [])
@@ -5160,9 +5208,11 @@ def write_digests(
     )
     whatsapp_path.parent.mkdir(parents=True, exist_ok=True)
     whatsapp_path.write_text(whatsapp_text, encoding="utf-8")
+    facebook_path = whatsapp_path.with_name("facebook_digest.txt")
+    facebook_path.write_text(facebook_text, encoding="utf-8")
     log.info(
-        "Wrote daily digest (%d job(s), %d new) to %s + %s",
-        len(jobs_payload), selected_new, digest_path, whatsapp_path,
+        "Wrote daily digest (%d job(s), %d new) to %s + %s + %s",
+        len(jobs_payload), selected_new, digest_path, whatsapp_path, facebook_path,
     )
     return digest
 

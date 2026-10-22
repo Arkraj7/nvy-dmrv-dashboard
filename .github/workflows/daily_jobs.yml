@@ -141,7 +141,7 @@ jobs:
           git pull --rebase origin main || true
           git stash pop || true
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
-                  public/daily_digest.json public/whatsapp_digest.txt \
+                  public/daily_digest.json public/whatsapp_digest.txt public/facebook_digest.txt \
                   public/global_jobs.json public/global_archive.json \
                   public/source_report.json
           for report in data/role_purge_report.json data/global_role_purge_report.json; do
@@ -208,7 +208,7 @@ jobs:
           git stash pop || true
 
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
-                  public/daily_digest.json public/whatsapp_digest.txt \
+                  public/daily_digest.json public/whatsapp_digest.txt public/facebook_digest.txt \
                   public/global_jobs.json public/global_archive.json \
                   public/source_report.json \
                   public/linkedin_weekly_post.txt public/linkedin_weekly.json \

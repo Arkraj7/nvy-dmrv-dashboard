@@ -76,7 +76,7 @@
       'tel.archive.note': 'Total historical roles tracked',
 
       'hero.kicker': 'Verified Environmental, Forestry, JRF, GIS & ESG Jobs - India',
-      'hero.title_html': 'Environmental, Forestry, JRF, GIS &amp; ESG Jobs in India <span class="accent">(2026)</span>',
+      'hero.title_html': 'Environmental Jobs in India <span class="accent">2026</span> &mdash; Forestry, JRF, GIS &amp; ESG',
       'hero.sub_html': 'Verified Government Forestry, JRF/SRF Environmental Science, CAMPA, Wildlife, GIS/Remote Sensing, Corporate ESG &amp; PhD Fellowships across India &amp; Globally. <strong>Every listing links straight to the official application page</strong> - free, no fees. Closed roles stay in the Historical Archive for stipend, skills and institutional reference.',
       'hero.cta.browse': 'Browse Active Jobs & Fellowships',
       'hero.cta.archive': 'Historical Job Archive',
@@ -349,7 +349,7 @@
       'tel.archive.note': 'कुल ऐतिहासिक पद दर्ज',
 
       'hero.kicker': 'राष्ट्रीय पर्यावरणीय अधिदेश रजिस्ट्री — भारत',
-      'hero.title_html': 'भारत में पर्यावरण, वानिकी, JRF, GIS एवं ESG नौकरियाँ <span class="accent">(2026)</span>',
+      'hero.title_html': 'भारत में पर्यावरण नौकरियाँ <span class="accent">2026</span> &mdash; वानिकी, JRF, GIS एवं ESG',
       'hero.sub_html': 'भारत एवं वैश्विक स्तर पर सत्यापित सरकारी वानिकी, JRF/SRF पर्यावरण विज्ञान, CAMPA, वन्यजीव, GIS/रिमोट सेंसिंग, कॉर्पोरेट ESG एवं PhD फेलोशिप। <strong>प्रत्येक सूची सीधे आधिकारिक आवेदन पोर्टल से जुड़ी है</strong> — निःशुल्क, कोई शुल्क नहीं। बंद नौकरियाँ वेतन, कौशल एवं संस्थागत संदर्भ हेतु ऐतिहासिक संग्रह में सुरक्षित रहती हैं।',
       'hero.cta.browse': 'सक्रिय अधिदेश देखें',
       'hero.cta.archive': 'ऐतिहासिक अधिदेश संग्रह',
