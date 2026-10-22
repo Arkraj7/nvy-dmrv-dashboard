@@ -412,6 +412,34 @@ def ist_today() -> date:
     return datetime.now(IST).date()
 
 
+def touch_stats_ist(public: Path) -> None:
+    """Stamp stats.json with the current IST date on every SEO rebuild.
+
+    The pipeline already writes these fields, but a maintenance-only build or
+    a zero-new-jobs morning must still move the visible "last updated" date.
+    Existing telemetry and broadcast rotation history are preserved verbatim.
+    """
+    path = public / "stats.json"
+    if not path.exists():
+        return
+    try:
+        stats = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    if not isinstance(stats, dict):
+        return
+    now_ist = datetime.now(IST)
+    stats["last_updated"] = now_ist.isoformat(timespec="seconds")
+    stats["last_updated_ist"] = now_ist.isoformat(timespec="seconds")
+    stats["last_pipeline_run_date_ist"] = now_ist.date().isoformat()
+    path.write_text(
+        json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    log.info(
+        "Stamped %s with IST date %s", path, stats["last_pipeline_run_date_ist"]
+    )
+
+
 def long_date(value: date) -> str:
     return value.strftime("%d %B %Y")
 
@@ -1669,7 +1697,7 @@ def build_index_block(
       <div class="seo-pr-inner">
         <p class="eyebrow">Career Pathway Hubs</p>
         <h2 id="seo-pr-title">Browse Green Jobs by Career Pathway</h2>
-        <p class="seo-pr-intro">Five static hubs, refreshed from the registry on {updated}.</p>
+        <p class="seo-pr-intro">Registry last refreshed on {updated} IST. New verified roles are added every morning at 7 AM IST.</p>
         <ul class="hub-summary-grid">
 {hub_items}
         </ul>
@@ -2854,6 +2882,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "Loaded %d active + %d archived India record(s); %d + %d global record(s)",
         len(active), len(archived), len(global_active), len(global_archived),
     )
+    touch_stats_ist(public)
 
     # ---- index snapshot + crawlable first-screen cards ------------------
     block = build_index_block(active, archived, today)

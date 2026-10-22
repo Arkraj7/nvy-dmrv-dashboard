@@ -383,6 +383,194 @@
 
   /* --------------------------------------------------------------- assets */
 
+  function istDateKey() {
+    try {
+      return new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
+      }).format(new Date());
+    } catch (e) {
+      var shifted = new Date(Date.now() + (5.5 * 60 * 60 * 1000));
+      return shifted.toISOString().slice(0, 10);
+    }
+  }
+
+  function clientTrack(job, isGlobal) {
+    if (isGlobal) return 'global';
+    var text = [job.clean_title, job.title, job.category, job.position_type, job.opportunity_kind]
+      .join(' ');
+    if (/\b(gis|remote sensing|geospatial|earth observation|satellite|land use|land-use|cartograph|photogrammetr)/i.test(text)) return 'gis';
+    if (/\b(jrf|srf|project associate|research associate|research fellow|phd|postdoc|post-doc|doctoral|academic|project staff|scientist|research assistant|field assistant)/i.test(text)) return 'academic';
+    if (/\b(forest|forestry|wildlife|afforestation|campa|fsi|spcb|pollution control|biodiversity|conservation|ecology|environment officer|range officer|van|nagar van)/i.test(text)) return 'forestry';
+    if (/\b(esg|sustainability|carbon|climate finance|csr|corporate|net[- ]zero|decarbon|environmental social|green finance|climate policy|think[- ]tank|climate risk)/i.test(text)) return 'esg';
+    return 'other';
+  }
+
+  function clientOrdinal(value) {
+    var parts = String(value || '').slice(0, 10).split('-');
+    if (parts.length !== 3) return 0;
+    var stamp = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    return isNaN(stamp) ? 0 : Math.floor(stamp / 86400000);
+  }
+
+  function clientBadge(job, today) {
+    if (String(job.date_added || '').slice(0, 10) === today) return '🆕';
+    var left = clientOrdinal(job.valid_through) - clientOrdinal(today);
+    return (left >= 0 && left <= 7) ? '⏳' : '📌';
+  }
+
+  function clientSelect(jobs, globalJobs, stats) {
+    var today = istDateKey();
+    var recent = (stats && stats.recent_telegram_job_ids) || [];
+    var recentSet = {};
+    recent.forEach(function (id) { recentSet[String(id)] = true; });
+
+    var pool = [];
+    var seen = {};
+    function add(source, isGlobal) {
+      (source || []).forEach(function (raw) {
+        if (!raw || !raw.id || seen[String(raw.id)]) return;
+        if (raw.status === 'quarantined' || raw.quarantine) return;
+        if (String(raw.entry_type || 'posting') === 'unknown') return;
+        var job = Object.assign({}, raw);
+        job._track = clientTrack(job, isGlobal);
+        job._recent = !!recentSet[String(job.id)];
+        job._new = !job._recent && String(job.date_added || '').slice(0, 10) === today;
+        job._ord = clientOrdinal(job.date_added);
+        job._badge = job._new ? '🆕' : clientBadge(job, today);
+        seen[String(job.id)] = true;
+        pool.push(job);
+      });
+    }
+    add(jobs, false);
+    add(globalJobs, true);
+
+    var fresh = pool.filter(function (job) { return !job._recent; });
+    var stale = pool.filter(function (job) { return job._recent; });
+    fresh.sort(function (a, b) {
+      if (a._new !== b._new) return a._new ? -1 : 1;
+      if (a._ord !== b._ord) return b._ord - a._ord;
+      return a.id < b.id ? -1 : 1;
+    });
+    stale.sort(function (a, b) {
+      if (a._ord !== b._ord) return a._ord - b._ord;
+      return a.id < b.id ? -1 : 1;
+    });
+
+    var quotas = [['academic', 4], ['forestry', 2], ['esg', 2], ['gis', 1], ['global', 1]];
+    var sequence = ['academic', 'forestry', 'esg', 'gis', 'global', 'academic', 'forestry', 'esg', 'academic', 'academic'];
+    var selected = [];
+    var selectedIds = {};
+    var newCount = 0;
+
+    function take(job) {
+      if (!job || selected.length >= 10 || selectedIds[String(job.id)]) return false;
+      if (job._new && newCount >= 6) return false;
+      selected.push(job);
+      selectedIds[String(job.id)] = true;
+      if (job._new) newCount += 1;
+      return true;
+    }
+    function countTrack(track) {
+      return selected.filter(function (job) { return job._track === track; }).length;
+    }
+
+    quotas.forEach(function (pair) {
+      var track = pair[0];
+      var quota = pair[1];
+      fresh.forEach(function (job) {
+        if (countTrack(track) >= quota) return;
+        if (job._track === track) take(job);
+      });
+    });
+    fresh.forEach(function (job) { if (selected.length < 10) take(job); });
+    quotas.forEach(function (pair) {
+      var track = pair[0];
+      var quota = pair[1];
+      stale.forEach(function (job) {
+        if (countTrack(track) >= quota) return;
+        if (job._track === track) take(job);
+      });
+    });
+    stale.forEach(function (job) { if (selected.length < 10) take(job); });
+
+    var buckets = {};
+    selected.forEach(function (job) {
+      if (!buckets[job._track]) buckets[job._track] = [];
+      buckets[job._track].push(job);
+    });
+    var ordered = [];
+    sequence.forEach(function (track) {
+      if (buckets[track] && buckets[track].length) ordered.push(buckets[track].shift());
+    });
+    selected.forEach(function (job) {
+      if (ordered.indexOf(job) === -1) ordered.push(job);
+    });
+    return ordered.slice(0, 10);
+  }
+
+  function buildClientDigestText(picks, today) {
+    var headings = [
+      '🌿 Morning Career & Fellowship Brief',
+      '🎓 JRF, Forestry, GIS & ESG Daily Alert',
+      '📡 Verified Environmental & Research Openings',
+      '🌱 Fresh Green Jobs, Fellowships & Research Roles',
+      '🧭 Your Daily Green Career Mix',
+      '🌍 India + Global Sustainability Opportunities',
+      '📚 Research, Forestry, GIS & ESG Roundup'
+    ];
+    var stamp = clientOrdinal(today);
+    var heading = headings[stamp % headings.length];
+    var dateLabel = today;
+    try {
+      dateLabel = new Date(today + 'T00:00:00+05:30').toLocaleDateString('en-GB', {
+        day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata'
+      });
+    } catch (e) { /* keep ISO date */ }
+
+    var lines = [
+      '🌱 *India Green, Forestry, JRF & ESG Jobs*',
+      '🗓️ ' + dateLabel + ' · ' + picks.length + ' verified picks',
+      '━━━━━━━━━━━━━━━━━━━━',
+      '',
+      '*' + heading + ' — ' + dateLabel + '*',
+      ''
+    ];
+    picks.forEach(function (job, index) {
+      var location = [job.city, job.state].filter(Boolean).join(', ') || job.country || 'India';
+      lines.push((index + 1) + '. ' + job._badge + ' *' + (job.clean_title || job.title || '') + '*');
+      if (job.organization) lines.push('🏛️ *Organization:* ' + job.organization);
+      if (location) lines.push('📍 *Location:* ' + location);
+      if (job.qualification_summary) lines.push('🎓 *Eligibility:* ' + job.qualification_summary);
+      if (job.compensation_or_fellowship) lines.push('💰 *Fellowship/Pay:* ' + job.compensation_or_fellowship);
+      if (job.valid_through) lines.push('🕒 *Apply before:* ' + String(job.valid_through).slice(0, 10));
+      lines.push('🔗 *Full Details & Apply:* ' + SITE + '/jobs/' + encodeURIComponent(job.id));
+      lines.push('');
+    });
+    lines.push('━━━━━━━━━━━━━━━━━━━━');
+    lines.push('📡 *Never miss a verified green job:*');
+    lines.push('• Telegram channel: https://t.me/urbanforestpark');
+    lines.push('• WhatsApp group: https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw');
+    lines.push('• Full registry: ' + SITE);
+    return lines.join('\n').trim() + '\n';
+  }
+
+  function loadClientDigest() {
+    Promise.all([
+      fetch('/jobs.json', { cache: 'no-store' }).then(function (res) { return res.json(); }),
+      fetch('/global_jobs.json', { cache: 'no-store' }).then(function (res) { return res.json(); }).catch(function () { return []; }),
+      fetch('/stats.json', { cache: 'no-store' }).then(function (res) { return res.json(); }).catch(function () { return {}; })
+    ]).then(function (results) {
+      var picks = clientSelect(results[0] || [], results[1] || [], results[2] || {});
+      if (!picks.length) throw new Error('no active jobs');
+      var text = buildClientDigestText(picks, istDateKey());
+      digestPre.textContent = text;
+      digestPre.setAttribute('data-text', text);
+      digestPre.setAttribute('data-source', 'client-rotation');
+    }).catch(function () {
+      digestPre.textContent = 'Broadcast asset not available yet - it is published by the daily 07:00 IST pipeline run.';
+    });
+  }
+
   function loadAssets() {
     if (assetsLoaded) return;
     assetsLoaded = true;
@@ -392,15 +580,15 @@
       .then(function (digest) {
         var text = (digest && (digest.whatsapp_text || digest.text || digest.digest_text)) || '';
         text = String(text).trim();
-        if (text) {
-          digestPre.textContent = text;
-          digestPre.setAttribute('data-text', text);
-        } else {
-          digestPre.textContent = 'No broadcast has been generated yet - the 7 AM IST pipeline run will publish it here.';
-        }
+        var today = istDateKey();
+        var generated = String((digest && digest.generated_at) || '').slice(0, 10);
+        if (!text || generated !== today) throw new Error('stale digest');
+        digestPre.textContent = text;
+        digestPre.setAttribute('data-text', text);
+        digestPre.setAttribute('data-source', 'pipeline');
       })
       .catch(function () {
-        digestPre.textContent = 'Broadcast asset not available yet - it is published by the daily 07:00 IST pipeline run.';
+        loadClientDigest();
       });
 
     fetch('/linkedin_weekly_post.txt', { cache: 'no-store' })

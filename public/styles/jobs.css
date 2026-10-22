@@ -2076,6 +2076,13 @@ body.view-detail .telemetry-band { display: none; }
   outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
+.field-hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
 .df-fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .df-fieldset legend {
   padding: 0 0 7px;

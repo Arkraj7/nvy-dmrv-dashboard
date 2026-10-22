@@ -716,6 +716,8 @@ def group_7(pages: Dict[str, str]) -> None:
         for record in records:
             if not isinstance(record, dict):
                 continue
+            if record.get("status") == "quarantined" or record.get("quarantine"):
+                continue
             org = str(record.get("organization", "")).casefold()
             for term in ("confidential", "undisclosed", "unknown"):
                 if term in org:
@@ -743,6 +745,8 @@ def group_8_job_pages() -> None:
             continue
         for record in payload:
             if not isinstance(record, dict):
+                continue
+            if record.get("status") == "quarantined" or record.get("quarantine"):
                 continue
             slug = _job_slug(record)
             records[slug] = record

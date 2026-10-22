@@ -1231,7 +1231,7 @@
       passed_this_week: typeof stats.passed_this_week === 'number' ? stats.passed_this_week : computed.passed_this_week,
       total_archived_jobs: typeof stats.total_archived_jobs === 'number' ? stats.total_archived_jobs : computed.total_archived_jobs,
       total_historical_indexed: typeof stats.total_historical_indexed === 'number' ? stats.total_historical_indexed : computed.total_historical_indexed,
-      last_updated: stats.last_updated || null
+      last_updated: stats.last_updated_ist || stats.last_updated || null
     };
   }
 

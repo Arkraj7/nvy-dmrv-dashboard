@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-22T06:03:39",
+  "last_updated": "2026-10-22T12:35:34+05:30",
   "active_open_jobs": 81,
   "opened_this_week": 72,
   "passed_this_week": 3,
@@ -60,5 +60,31 @@
     "Madhya Pradesh": 1,
     "Odisha": 1,
     "Uttar Pradesh": 1
-  }
+  },
+  "last_updated_ist": "2026-10-22T12:35:34+05:30",
+  "last_pipeline_run_date_ist": "2026-10-22",
+  "recent_telegram_job_ids": [
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "wildlife-trade-forensics-course-wii",
+    "wildlife-enthusiasts-course-wii",
+    "sustainable-finance-specialist-unep-india",
+    "senior-energy-researcher-and-policy-consultant-wsp-india",
+    "research-intern-sustainable-food-systems-ceew",
+    "research-associate-maharashtra-atree",
+    "regional-health-and-wash-coordinator-terre-des-hommes",
+    "program-manager-water-supply-planet-water-foundation",
+    "product-manager-sustainability-climate-ai-msci"
+  ],
+  "last_broadcast_job_ids": [
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "wildlife-trade-forensics-course-wii",
+    "wildlife-enthusiasts-course-wii",
+    "sustainable-finance-specialist-unep-india",
+    "senior-energy-researcher-and-policy-consultant-wsp-india",
+    "research-intern-sustainable-food-systems-ceew",
+    "research-associate-maharashtra-atree",
+    "regional-health-and-wash-coordinator-terre-des-hommes",
+    "program-manager-water-supply-planet-water-foundation",
+    "product-manager-sustainability-climate-ai-msci"
+  ]
 }

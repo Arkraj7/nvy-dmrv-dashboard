@@ -173,9 +173,9 @@
 
       'mini.aria': 'Subscribe to free job and fellowship email alerts',
       'mini.title': 'Free Job & Fellowship Email Alerts',
-      'mini.sub': 'New verified jobs and fellowships - issued every 72 hours.',
+      'mini.sub': 'Free alerts for job seekers, JRF aspirants and researchers. Personal (Gmail, Outlook, Yahoo) and university emails are equally welcome.',
       'mini.join': 'Join',
-      'mini.placeholder': 'you@organisation.in',
+      'mini.placeholder': 'you@gmail.com',
 
       'feed.eyebrow': 'Active Environmental Jobs',
       'feed.title': 'Active Jobs & Fellowships',
@@ -442,9 +442,9 @@
 
       'mini.aria': '72-घंटे मैंडेट डिस्पैच की सदस्यता लें',
       'mini.title': '72-घंटे मैंडेट डिस्पैच',
-      'mini.sub': 'नए सत्यापित अधिदेशों की ईमेल ब्रीफिंग — प्रत्येक 72 घंटे में प्रकाशित।',
+      'mini.sub': 'नए सत्यापित अवसरों की ईमेल ब्रीफिंग — Gmail, Outlook, Yahoo या विश्वविद्यालय ईमेल, सभी स्वागत योग्य।',
       'mini.join': 'जुड़ें',
-      'mini.placeholder': 'you@organisation.in',
+      'mini.placeholder': 'you@gmail.com',
 
       'feed.eyebrow': 'सक्रिय सेक्टर अधिदेश',
       'feed.title': 'सक्रिय अवसर',

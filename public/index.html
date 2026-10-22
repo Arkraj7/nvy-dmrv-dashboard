@@ -598,11 +598,11 @@
         <div class="dispatch-mini" aria-label="Subscribe to free job and fellowship email alerts" data-i18n-aria="mini.aria">
           <div class="dm-copy">
             <strong data-i18n="mini.title">Free Job &amp; Fellowship Email Alerts</strong>
-            <span data-i18n="mini.sub">New verified jobs and fellowships &mdash; issued every 72 hours.</span>
+            <span data-i18n="mini.sub">Free alerts for job seekers, JRF aspirants and researchers. Personal (Gmail, Outlook, Yahoo) and university emails are equally welcome.</span>
           </div>
           <form class="dm-form" data-newsletter-form="mini" novalidate>
             <label class="visually-hidden" for="dispatch-mini-email" data-i18n="mini.email.aria">Email address</label>
-            <input id="dispatch-mini-email" name="email" type="email" required autocomplete="email" placeholder="you@organisation.in" data-i18n-placeholder="mini.placeholder">
+            <input id="dispatch-mini-email" name="email" type="email" required autocomplete="email" placeholder="you@gmail.com" data-i18n-placeholder="mini.placeholder">
             <button class="btn btn-outline dm-btn" type="submit" data-i18n="mini.join">Join</button>
           </form>
           <p class="dispatch-status dm-status" role="status" aria-live="polite"></p>
@@ -885,7 +885,8 @@
 
         <div class="form-field">
           <label for="dispatch-email">Email Address</label>
-          <input id="dispatch-email" name="email" type="email" required autocomplete="email" placeholder="you@organisation.in">
+          <input id="dispatch-email" name="email" type="email" required autocomplete="email" placeholder="you@gmail.com">
+          <small class="field-hint">Any personal email (Gmail, Outlook, Yahoo) or university email works — all are welcome.</small>
         </div>
 
         <fieldset class="df-fieldset">
@@ -991,7 +992,7 @@
       <div class="seo-pr-inner">
         <p class="eyebrow">Career Pathway Hubs</p>
         <h2 id="seo-pr-title">Browse Green Jobs by Career Pathway</h2>
-        <p class="seo-pr-intro">Five static hubs, refreshed from the registry on 22 October 2026.</p>
+        <p class="seo-pr-intro">Registry last refreshed on 22 October 2026 IST. New verified roles are added every morning at 7 AM IST.</p>
         <ul class="hub-summary-grid">
         <li><a href="/jrf-srf-project-associate-jobs">JRF, SRF &amp; project associate jobs</a></li>
         <li><a href="/phd-fellowships-climate-sustainability">PhD &amp; postdoctoral fellowships</a></li>
@@ -1115,8 +1116,9 @@
           <input id="pj-role" name="role" type="text" placeholder="e.g. Urban Forestry Programme Officer">
         </div>
         <div class="form-field">
-          <label for="pj-email">Work Email</label>
-          <input id="pj-email" name="email" type="email" placeholder="you@organisation.in" required>
+          <label for="pj-email">Email (personal or university)</label>
+          <input id="pj-email" name="email" type="email" placeholder="you@gmail.com" required>
+          <small class="field-hint">Gmail, Outlook, Yahoo or your university address — all are welcome.</small>
         </div>
         <div class="form-field">
           <label for="pj-message">Job Details (location, experience tier, application window)</label>

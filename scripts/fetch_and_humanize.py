@@ -107,6 +107,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlparse
 from xml.etree import ElementTree as ET
+from zoneinfo import ZoneInfo
 
 # Official-link gate (Phase 3): every candidate is verified at its source
 # before anything is written. Kept in its own module so pytest exercises the
@@ -185,6 +186,12 @@ log = logging.getLogger("ufp-jobs")
 # Configuration
 # ---------------------------------------------------------------------------
 SITE_BASE_URL = "https://www.urbanforestpark.com"
+IST = ZoneInfo("Asia/Kolkata")
+
+
+def ist_today() -> date:
+    """Return the calendar date in India, independent of the runner's UTC clock."""
+    return datetime.now(IST).date()
 
 # Gemini model order: the first entry is tried first. The humanizer falls
 # back to the next entry when a model is retired for this key ("404 ... no
@@ -2273,7 +2280,7 @@ def _news_entry_to_candidate(entry: Dict[str, Any], query: str) -> Optional[Dict
         except (TypeError, ValueError, IndexError, AttributeError):
             date_posted = ""
     if date_posted:
-        age_cutoff = (date.today() - timedelta(days=GOOGLE_NEWS_MAX_AGE_DAYS)).isoformat()
+        age_cutoff = (ist_today() - timedelta(days=GOOGLE_NEWS_MAX_AGE_DAYS)).isoformat()
         if date_posted < age_cutoff:
             return None
     # Strict verifiability (last, so resolution cost only hits real ads):
@@ -3699,7 +3706,7 @@ def _global_news_entry_to_candidate(
         except (TypeError, ValueError, IndexError, AttributeError):
             date_posted = ""
     if date_posted:
-        age_cutoff = (date.today() - timedelta(days=GLOBAL_NEWS_MAX_AGE_DAYS)).isoformat()
+        age_cutoff = (ist_today() - timedelta(days=GLOBAL_NEWS_MAX_AGE_DAYS)).isoformat()
         if date_posted < age_cutoff:
             return None
     if is_google_news_url(link):
@@ -3816,7 +3823,7 @@ def apply_global_lifecycle(
     decayable = [job for job in jobs if not job.get("evergreen")]
     active, archive_out, newly_archived = apply_job_lifecycle(decayable, archive, today)
 
-    today_value = parse_iso_date(today) or date.today()
+    today_value = parse_iso_date(today) or ist_today()
     for job in evergreen:
         # Evergreen never expires -- but it can still be quarantined. A
         # quarantine block always wins over the evergreen status reset.
@@ -4374,7 +4381,7 @@ def apply_job_lifecycle(
     ``status: "archived"`` and a ``date_archived`` stamp, and is never
     deleted from the registry. Returns ``(active, archive, newly_archived)``.
     """
-    today_value = parse_iso_date(today) or date.today()
+    today_value = parse_iso_date(today) or ist_today()
 
     archive_by_id: Dict[str, Dict[str, Any]] = {}
     for record in archive:
@@ -4467,8 +4474,9 @@ def compute_stats(
     today: str,
 ) -> Dict[str, Any]:
     """Weekly hiring telemetry written to stats.json for the front-end."""
-    today_value = parse_iso_date(today) or date.today()
+    today_value = parse_iso_date(today) or ist_today()
     week_ago = (today_value - timedelta(days=7)).isoformat()
+    now_ist = datetime.now(IST)
 
     by_category: Dict[str, Dict[str, int]] = {}
     for job in active:
@@ -4487,7 +4495,9 @@ def compute_stats(
             by_state[state] = by_state.get(state, 0) + 1
 
     return {
-        "last_updated": datetime.now().isoformat(timespec="seconds"),
+        "last_updated": now_ist.isoformat(timespec="seconds"),
+        "last_updated_ist": now_ist.isoformat(timespec="seconds"),
+        "last_pipeline_run_date_ist": today,
         "active_open_jobs": len(active),
         "opened_this_week": sum(
             1 for job in active if str(job.get("date_added") or "") >= week_ago
@@ -4498,6 +4508,7 @@ def compute_stats(
         "total_archived_jobs": len(archive),
         "total_historical_indexed": len(active) + len(archive),
         "last_telegram_broadcast_date": None,
+        "recent_telegram_job_ids": [],
         "by_category": by_category,
         "by_state": dict(
             sorted(by_state.items(), key=lambda item: (-item[1], item[0]))
@@ -4515,18 +4526,34 @@ def write_archive(jobs: List[Dict[str, Any]], path: Path) -> None:
 
 
 def write_stats(stats: Dict[str, Any], path: Path) -> None:
-    # Preserve the daily-broadcast marker across telemetry rebuilds. Without
-    # this, a later sync would erase it and the featured heartbeat could be
-    # sent twice on the same day.
-    if path.exists() and not stats.get("last_telegram_broadcast_date"):
+    # Preserve the daily-broadcast markers and rotation history across
+    # telemetry rebuilds. Without this, a later sync would erase them and the
+    # same jobs could be sent twice.
+    previous: Dict[str, Any] = {}
+    if path.exists():
         try:
-            previous = json.loads(path.read_text(encoding="utf-8"))
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                previous = loaded
         except Exception:
             previous = {}
-        if isinstance(previous, dict) and previous.get("last_telegram_broadcast_date"):
-            stats["last_telegram_broadcast_date"] = previous[
-                "last_telegram_broadcast_date"
-            ]
+
+    for key in (
+        "last_telegram_broadcast_date",
+        "telegram_last_status",
+        "last_broadcast_job_ids",
+        "recent_telegram_job_ids",
+    ):
+        if not stats.get(key) and previous.get(key):
+            stats[key] = previous[key]
+
+    now_ist = datetime.now(IST)
+    stats["last_updated"] = now_ist.isoformat(timespec="seconds")
+    stats["last_updated_ist"] = now_ist.isoformat(timespec="seconds")
+    stats["last_pipeline_run_date_ist"] = now_ist.date().isoformat()
+    if not isinstance(stats.get("recent_telegram_job_ids"), list):
+        stats["recent_telegram_job_ids"] = []
+
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -4548,7 +4575,6 @@ TELEGRAM_GETME_URL = "https://api.telegram.org/bot{token}/getMe"
 TELEGRAM_GETCHAT_URL = "https://api.telegram.org/bot{token}/getChat"
 TELEGRAM_MESSAGE_LIMIT = 3900   # Telegram hard limit is 4096; keep headroom
 DIGEST_MAX_JOBS = 10            # jobs listed per digest / broadcast
-TELEGRAM_HEARTBEAT_JOBS = 5     # featured cards when a day has no brand-new jobs
 
 
 def normalize_telegram_chat_id(raw: str) -> str:
@@ -4615,14 +4641,42 @@ def _telegram_logged_call(url: str, payload: Dict[str, Any], label: str) -> Any:
         return None
 
 
-def update_last_telegram_broadcast(stats_path: Path, today: str) -> None:
-    """Persist the once-per-day heartbeat marker without losing telemetry."""
+def update_last_telegram_broadcast(
+    stats_path: Path,
+    today: str,
+    job_ids: Optional[List[str]] = None,
+) -> None:
+    """Persist the once-per-day marker and the rolling rotation history."""
     try:
         stats = json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {}
     except Exception:
         stats = {}
+    if not isinstance(stats, dict):
+        stats = {}
     stats["last_telegram_broadcast_date"] = today
     stats["telegram_last_status"] = "delivered"
+
+    recent = stats.get("recent_telegram_job_ids")
+    if not isinstance(recent, list):
+        recent = []
+    sent_ids = [str(item) for item in (job_ids or []) if str(item or "").strip()]
+    if sent_ids:
+        combined = [str(item) for item in recent if str(item or "").strip()]
+        combined.extend(sent_ids)
+        # Keep the most recent 40 unique ids; the newest broadcast wins.
+        deduped: List[str] = []
+        seen: Set[str] = set()
+        for item in reversed(combined):
+            if item in seen:
+                continue
+            seen.add(item)
+            deduped.append(item)
+        stats["recent_telegram_job_ids"] = list(reversed(deduped))[-DIGEST_RECENT_LIMIT:]
+        stats["last_broadcast_job_ids"] = sent_ids
+
+    now_ist = datetime.now(IST)
+    stats.setdefault("last_updated_ist", now_ist.isoformat(timespec="seconds"))
+    stats.setdefault("last_pipeline_run_date_ist", now_ist.date().isoformat())
     stats_path.parent.mkdir(parents=True, exist_ok=True)
     stats_path.write_text(
         json.dumps(stats, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -4648,15 +4702,39 @@ def _location_line(job: Dict[str, Any]) -> str:
     return city or state or "India"
 
 
+def digest_badge(job: Dict[str, Any], today: str) -> str:
+    """Freshness badge for a rotating digest item.
+
+    🆕 genuinely new today, ⏳ closing within seven days, otherwise 📌.
+    The caller may override with a ``_digest_badge`` marker when the selector
+    has already classified the item.
+    """
+    explicit = squash(job.get("_digest_badge"))
+    if explicit:
+        return explicit
+    added = squash(job.get("date_added"))[:10]
+    if added and added == today:
+        return "🆕"
+    deadline = squash(job.get("valid_through"))[:10]
+    try:
+        days_left = (date.fromisoformat(deadline) - date.fromisoformat(today)).days
+    except Exception:  # noqa: BLE001
+        days_left = 999
+    if 0 <= days_left <= 7:
+        return "⏳"
+    return "📌"
+
+
 def build_whatsapp_job_block(job: Dict[str, Any], index: Optional[int] = None) -> str:
     """One rich, forward-ready WhatsApp alert block for a single job."""
     share_url = f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}"
+    badge = squash(job.get("_digest_badge")) or "📌"
     lines = []
     if index is not None:
-        lines.append(f"{index}. *{squash(job.get('clean_title'))}*")
+        lines.append(f"{index}. {badge} *{squash(job.get('clean_title'))}*")
     else:
         lines += ["🌱 *NEW GREEN / RESEARCH JOB ALERT*", ""]
-        lines.append(f"📌 *Role:* {squash(job.get('clean_title'))}")
+        lines.append(f"{badge} *Role:* {squash(job.get('clean_title'))}")
     lines.append(f"🏛️ *Organization:* {squash(job.get('organization'))}")
     lines.append(f"📍 *Location:* {_location_line(job)}")
     lines.append(f"🎓 *Eligibility:* {squash(job.get('qualification_summary')) or 'As per institute norms'}")
@@ -4710,8 +4788,9 @@ def build_telegram_digest_html(
     for position, job in enumerate(jobs, start=1):
         share_url = f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}"
         links = f'<a href="{_html_escape_text(share_url)}">Full details &amp; apply</a>'
+        badge = squash(job.get("_digest_badge")) or "📌"
         lines += [
-            f"<b>{position}. {_html_escape_text(squash(job.get('clean_title')))}</b> — "
+            f"<b>{position}. {badge} {_html_escape_text(squash(job.get('clean_title')))}</b> — "
             f"{_html_escape_text(squash(job.get('organization')))} "
             f"({_html_escape_text(_location_line(job))})",
             f"🎓 {_html_escape_text(squash(job.get('qualification_summary')))}",
@@ -4742,46 +4821,296 @@ def _chunk_text(text: str, limit: int) -> List[str]:
     return chunks
 
 
+# ---------------------------------------------------------------------------
+# Daily digest rotation
+# ---------------------------------------------------------------------------
+# The digest is deliberately mixed: at least one academic/JRF slot, one
+# forestry/government slot, one ESG/carbon slot, one GIS slot and one global
+# fellowship/grant slot. Quotas are best-effort when a track is exhausted.
+DIGEST_TRACK_QUOTAS: Tuple[Tuple[str, int], ...] = (
+    ("academic", 4),
+    ("forestry", 2),
+    ("esg", 2),
+    ("gis", 1),
+    ("global", 1),
+)
+DIGEST_TRACK_SEQUENCE = (
+    "academic",
+    "forestry",
+    "esg",
+    "gis",
+    "global",
+    "academic",
+    "forestry",
+    "esg",
+    "academic",
+    "academic",
+)
+DIGEST_RECENT_LIMIT = 40
+DIGEST_NEW_LIMIT = 6
+
+_ACADEMIC_RE = re.compile(
+    r"\b(jrf|srf|project associate|research associate|research fellow|"
+    r"phd|postdoc|post-doc|doctoral|academic|project staff|scientist|"
+    r"research assistant|field assistant)\b",
+    re.I,
+)
+_FORESTRY_RE = re.compile(
+    r"\b(forest|forestry|wildlife|afforestation|campa|fsi|spcb|"
+    r"pollution control|biodiversity|conservation|ecology|environment officer|"
+    r"range officer|van|nagar van)\b",
+    re.I,
+)
+_GIS_RE = re.compile(
+    r"\b(gis|remote sensing|geospatial|earth observation|satellite|"
+    r"land use|land-use|cartograph|photogrammetr)\b",
+    re.I,
+)
+_ESG_RE = re.compile(
+    r"\b(esg|sustainability|carbon|climate finance|csr|corporate|"
+    r"net[- ]zero|decarbon|environmental social|green finance|"
+    r"climate policy|think[- ]tank|climate risk)\b",
+    re.I,
+)
+
+DIGEST_HEADLINES = (
+    "🌿 Morning Career & Fellowship Brief — {date}",
+    "🎓 JRF, Forestry, GIS & ESG Daily Alert — {date}",
+    "📡 Verified Environmental & Research Openings — {date}",
+    "🌱 Fresh Green Jobs, Fellowships & Research Roles — {date}",
+    "🧭 Your Daily Green Career Mix — {date}",
+    "🌍 India + Global Sustainability Opportunities — {date}",
+    "📚 Research, Forestry, GIS & ESG Roundup — {date}",
+)
+
+
+def digest_heading(today: str) -> str:
+    """Rotate the opening headline deterministically by calendar day."""
+    try:
+        current = date.fromisoformat(str(today)[:10])
+    except Exception:  # noqa: BLE001
+        current = ist_today()
+    template = DIGEST_HEADLINES[current.toordinal() % len(DIGEST_HEADLINES)]
+    return template.format(date=current.strftime("%d %b %Y"))
+
+
+def _digest_date_ordinal(job: Dict[str, Any]) -> int:
+    try:
+        return date.fromisoformat(squash(job.get("date_added"))[:10]).toordinal()
+    except Exception:  # noqa: BLE001
+        return 0
+
+
+def _digest_track(job: Dict[str, Any], is_global: bool) -> str:
+    if is_global:
+        return "global"
+    text = " ".join(
+        squash(job.get(key))
+        for key in ("clean_title", "title", "category", "position_type", "opportunity_kind")
+    )
+    if _GIS_RE.search(text):
+        return "gis"
+    if _ACADEMIC_RE.search(text):
+        return "academic"
+    if _FORESTRY_RE.search(text):
+        return "forestry"
+    if _ESG_RE.search(text):
+        return "esg"
+    return "other"
+
+
+def _digest_is_publishable(job: Dict[str, Any]) -> bool:
+    return (
+        isinstance(job, dict)
+        and bool(str(job.get("id") or "").strip())
+        and job.get("status") != "quarantined"
+        and not job.get("quarantine")
+        and str(job.get("entry_type") or "posting") != "unknown"
+    )
+
+
+def select_daily_digest_jobs(
+    jobs: List[Dict[str, Any]],
+    global_jobs: List[Dict[str, Any]],
+    stats: Dict[str, Any],
+    count: int = 10,
+) -> List[Dict[str, Any]]:
+    """Pick a non-repeating, mixed-category daily digest.
+
+    Priority:
+      1. up to six genuinely new, never-broadcast roles;
+      2. fill the remaining slots with unseen active roles across tracks;
+      3. if fewer than ``count`` unseen roles exist, recycle the oldest
+         previously broadcast roles so the rotation never stalls.
+
+    ``recent_telegram_job_ids`` is treated as a rolling exclusion list. The
+    return value is a list of shallow copies with ``_digest_track``,
+    ``_digest_new`` and ``_digest_badge`` annotations; the registry is never
+    mutated.
+    """
+    if count <= 0:
+        return []
+    today = ist_today().isoformat()
+    recent_ids = [
+        str(item)
+        for item in (stats or {}).get("recent_telegram_job_ids", [])
+        if str(item or "").strip()
+    ]
+    recent_set = set(recent_ids)
+
+    pool: List[Dict[str, Any]] = []
+    seen: Set[str] = set()
+    for source, is_global in ((jobs or [], False), (global_jobs or [], True)):
+        for raw in source:
+            if not _digest_is_publishable(raw):
+                continue
+            job_id = str(raw.get("id") or "").strip()
+            if job_id in seen:
+                continue
+            seen.add(job_id)
+            job = dict(raw)
+            job["_digest_global"] = is_global
+            job["_digest_track"] = _digest_track(job, is_global)
+            job["_digest_new"] = (
+                job_id not in recent_set
+                and squash(job.get("date_added"))[:10] == today
+            )
+            if job_id in recent_set:
+                # A recycled role is not "new" even if it was first added
+                # earlier today. Recompute the badge from the deadline only.
+                job["_digest_badge"] = digest_badge(
+                    {**job, "_digest_badge": "", "date_added": ""}, today
+                )
+            else:
+                job["_digest_badge"] = "🆕" if job["_digest_new"] else digest_badge(job, today)
+            pool.append(job)
+
+    fresh = [job for job in pool if str(job.get("id")) not in recent_set]
+    stale = [job for job in pool if str(job.get("id")) in recent_set]
+    fresh.sort(
+        key=lambda job: (
+            0 if job.get("_digest_new") else 1,
+            -_digest_date_ordinal(job),
+            str(job.get("id") or ""),
+        )
+    )
+    stale.sort(key=lambda job: (_digest_date_ordinal(job), str(job.get("id") or "")))
+
+    selected: List[Dict[str, Any]] = []
+    selected_ids: Set[str] = set()
+    new_count = 0
+
+    def take(job: Dict[str, Any]) -> bool:
+        nonlocal new_count
+        job_id = str(job.get("id") or "")
+        if len(selected) >= count or not job_id or job_id in selected_ids:
+            return False
+        if job.get("_digest_new") and new_count >= DIGEST_NEW_LIMIT:
+            return False
+        selected.append(job)
+        selected_ids.add(job_id)
+        if job.get("_digest_new"):
+            new_count += 1
+        return True
+
+    # 1. Quota-aware pass over unseen roles, preferring today's new arrivals.
+    for track, quota in DIGEST_TRACK_QUOTAS:
+        if len(selected) >= count:
+            break
+        current = sum(1 for job in selected if job.get("_digest_track") == track)
+        for job in fresh:
+            if current >= quota or len(selected) >= count:
+                break
+            if job.get("_digest_track") != track:
+                continue
+            if take(job):
+                current += 1
+
+    # 2. Fill any shortfall from other unseen tracks (still capped at six new).
+    for job in fresh:
+        if len(selected) >= count:
+            break
+        take(job)
+
+    # 3. Preserve the mix by recycling the oldest previously sent roles when
+    #    a track has no unseen inventory left.
+    for track, quota in DIGEST_TRACK_QUOTAS:
+        if len(selected) >= count:
+            break
+        current = sum(1 for job in selected if job.get("_digest_track") == track)
+        for job in stale:
+            if current >= quota or len(selected) >= count:
+                break
+            if job.get("_digest_track") != track:
+                continue
+            if take(job):
+                current += 1
+
+    # 4. Last resort: oldest previously broadcast roles.
+    for job in stale:
+        if len(selected) >= count:
+            break
+        take(job)
+
+    # Interleave tracks so the post does not read as ten consecutive ESG roles.
+    buckets: Dict[str, List[Dict[str, Any]]] = {}
+    for job in selected:
+        buckets.setdefault(str(job.get("_digest_track")), []).append(job)
+    ordered: List[Dict[str, Any]] = []
+    for track in DIGEST_TRACK_SEQUENCE:
+        if buckets.get(track):
+            ordered.append(buckets[track].pop(0))
+    for job in selected:
+        if job not in ordered:
+            ordered.append(job)
+    return ordered[:count]
+
+
 def write_digests(
     active: List[Dict[str, Any]],
     new_jobs: List[Dict[str, Any]],
     today: str,
     digest_path: Path,
     whatsapp_path: Path,
+    stats: Optional[Dict[str, Any]] = None,
+    global_jobs: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """Generate daily_digest.json + whatsapp_digest.txt for the site owner.
 
-    `new_jobs` are the listings accepted by this run; on maintenance-only
-    runs the digest falls back to the freshest active mandates so the files
-    (and the footer copy button) are refreshed on every run.
+    The listing is not simply the newest ten roles. It uses the rolling
+    ``recent_telegram_job_ids`` exclusion list and a category quota so every
+    morning's post is a fresh, mixed brief. On maintenance-only runs the same
+    selector still produces a rotating digest instead of repeating yesterday's
+    featured jobs.
 
-    Quarantined records and records hidden by placement policy never appear
-    in a digest, even if a caller passes the raw active list.
+    Quarantined records and records hidden by placement policy never appear in
+    a digest, even if a caller passes the raw active list.
     """
     def publishable(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        return [
-            job
-            for job in rows
-            if job.get("status") != "quarantined"
-            and str(job.get("entry_type") or "posting") != "unknown"
-        ]
+        return [job for job in rows if _digest_is_publishable(job)]
 
     new_jobs = publishable(new_jobs)
     active = publishable(active)
 
-    if new_jobs:
-        listed = new_jobs[:DIGEST_MAX_JOBS]
-        heading = f"{len(new_jobs)} new verified job(s) added today"
-    else:
-        listed = sorted(
-            active,
-            key=lambda job: (
-                str(job.get("date_added") or ""),
-                str(job.get("id") or ""),
-            ),
-            reverse=True,
-        )[:DIGEST_MAX_JOBS]
-        heading = "Latest verified jobs & fellowships on the registry"
+    if stats is None:
+        stats_path = digest_path.parent / "stats.json"
+        try:
+            stats = json.loads(stats_path.read_text(encoding="utf-8"))
+        except Exception:
+            stats = {}
+    if global_jobs is None:
+        global_path = digest_path.parent / "global_jobs.json"
+        try:
+            loaded_global = json.loads(global_path.read_text(encoding="utf-8"))
+            global_jobs = loaded_global if isinstance(loaded_global, list) else []
+        except Exception:
+            global_jobs = []
+
+    listed = select_daily_digest_jobs(
+        active, global_jobs or [], stats or {}, count=DIGEST_MAX_JOBS
+    )
+    heading = digest_heading(today)
+    selected_new = sum(1 for job in listed if job.get("_digest_new"))
 
     jobs_payload = []
     for job in listed:
@@ -4801,6 +5130,9 @@ def write_digests(
                 # apply_url / org_website / org_domain are never included.
                 "source_portal": squash(job.get("source_portal")),
                 "url": f"{SITE_BASE_URL}/jobs/{quote(str(job.get('id') or ''))}",
+                "badge": squash(job.get("_digest_badge")) or "📌",
+                "track": squash(job.get("_digest_track")),
+                "is_new": bool(job.get("_digest_new")),
             }
         )
 
@@ -4808,13 +5140,18 @@ def write_digests(
     telegram_html = build_telegram_digest_html(listed, today, heading)
     digest = {
         "generated_at": today,
-        "new_count": len(new_jobs),
+        "new_count": selected_new,
         "count": len(jobs_payload),
         "heading": heading,
         "site": SITE_BASE_URL,
         "jobs": jobs_payload,
         "whatsapp_text": whatsapp_text,
         "telegram_html": telegram_html,
+        "recent_job_ids": [
+            str(item)
+            for item in (stats or {}).get("recent_telegram_job_ids", [])
+            if str(item or "").strip()
+        ],
     }
 
     digest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -4824,8 +5161,8 @@ def write_digests(
     whatsapp_path.parent.mkdir(parents=True, exist_ok=True)
     whatsapp_path.write_text(whatsapp_text, encoding="utf-8")
     log.info(
-        "Wrote daily digest (%d job(s)) to %s + %s",
-        len(jobs_payload), digest_path, whatsapp_path,
+        "Wrote daily digest (%d job(s), %d new) to %s + %s",
+        len(jobs_payload), selected_new, digest_path, whatsapp_path,
     )
     return digest
 
@@ -4944,21 +5281,17 @@ def broadcast_new_jobs(
     whatsapp_path: Path,
     send: bool = True,
     stats_path: Optional[Path] = None,
+    force: bool = False,
 ) -> None:
     """Regenerate the digest files and broadcast once per day.
 
-    When a scheduled morning run finds no brand-new listings, it still posts a
-    featured round-up of the top active mandates. ``stats.json`` records
-    ``last_telegram_broadcast_date`` so retries cannot spam the channel.
+    The ten jobs are selected by :func:`select_daily_digest_jobs`, which
+    excludes the rolling ``recent_telegram_job_ids`` history and enforces a
+    mixed-category quota. ``stats.json`` records both the once-per-day marker
+    and the ids that were actually sent, so retries and the next morning's
+    rotation cannot repeat the same post. ``force`` is reserved for an explicit
+    manual test and bypasses only the once-per-day guard.
     """
-    digest = write_digests(active, new_jobs, today, digest_path, whatsapp_path)
-    if not send:
-        log.info(
-            "Broadcast HELD: digest written, Telegram/WhatsApp not sent "
-            "(--no-broadcast). Review daily_digest.json + whatsapp_digest.txt."
-        )
-        return
-
     stats_path = stats_path or (digest_path.parent / "stats.json")
     try:
         current_stats = (
@@ -4968,36 +5301,65 @@ def broadcast_new_jobs(
         )
     except Exception:
         current_stats = {}
-    if str(current_stats.get("last_telegram_broadcast_date") or "") == today:
+    if not isinstance(current_stats, dict):
+        current_stats = {}
+
+    global_path = digest_path.parent / "global_jobs.json"
+    try:
+        loaded_global = json.loads(global_path.read_text(encoding="utf-8"))
+        global_jobs = loaded_global if isinstance(loaded_global, list) else []
+    except Exception:
+        global_jobs = []
+
+    digest = write_digests(
+        active,
+        new_jobs,
+        today,
+        digest_path,
+        whatsapp_path,
+        stats=current_stats,
+        global_jobs=global_jobs,
+    )
+    if not send:
+        log.info(
+            "Broadcast HELD: digest written, Telegram/WhatsApp not sent "
+            "(--no-broadcast). Review daily_digest.json + whatsapp_digest.txt."
+        )
+        return
+
+    if (
+        not force
+        and str(current_stats.get("last_telegram_broadcast_date") or "") == today
+    ):
         log.info("Telegram heartbeat already delivered today (%s) - skipping", today)
         return
 
-    if new_jobs:
-        telegram_html = digest["telegram_html"]
-        whatsapp_text = digest["whatsapp_text"]
-    else:
-        featured = sorted(
-            active,
-            key=lambda job: (
-                str(job.get("date_added") or ""),
-                str(job.get("id") or ""),
-            ),
-            reverse=True,
-        )[:TELEGRAM_HEARTBEAT_JOBS]
-        if not featured:
-            log.warning("Telegram heartbeat skipped: no active mandates to feature")
-            return
-        heading = "📌 Daily Featured Jobs & Fellowships & Closing-Soon JRF/ESG Roundup"
-        telegram_html = build_telegram_digest_html(featured, today, heading)
-        whatsapp_text = build_whatsapp_digest_text(featured, today, heading)
-        log.info(
-            "No new listings today - sending featured heartbeat with %d active job(s)",
-            len(featured),
+    sent_jobs = digest.get("jobs") or []
+    if not sent_jobs:
+        log.warning("Telegram heartbeat skipped: no active mandates to feature")
+        return
+    if force and str(current_stats.get("last_telegram_broadcast_date") or "") == today:
+        log.warning(
+            "FORCE broadcast requested: bypassing the once-per-day guard for a live test"
         )
 
-    if send_telegram_digest(telegram_html):
-        update_last_telegram_broadcast(stats_path, today)
-    send_whatsapp_webhook(whatsapp_text)
+    telegram_ok = send_telegram_digest(str(digest.get("telegram_html") or ""))
+    whatsapp_ok = send_whatsapp_webhook(str(digest.get("whatsapp_text") or ""))
+    if telegram_ok:
+        update_last_telegram_broadcast(
+            stats_path,
+            today,
+            job_ids=[str(job.get("id")) for job in sent_jobs if job.get("id")],
+        )
+        log.info(
+            "Rotation advanced: %d id(s) added to recent_telegram_job_ids",
+            len(sent_jobs),
+        )
+    elif whatsapp_ok:
+        log.warning(
+            "Telegram delivery failed but WhatsApp accepted the digest; "
+            "rotation history was not advanced because Telegram is the source of truth"
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -5053,7 +5415,7 @@ def write_sitemap(
         for record in filter_valid_jobs(archive_jobs)
         if record.get("status") != "quarantined"
     ]
-    today = date.today().isoformat()
+    today = ist_today().isoformat()
 
     preserved: Dict[str, Dict[str, str]] = {}
     if path.exists():
@@ -5348,6 +5710,14 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
             "Telegram/WhatsApp messages (hold for review)."
         ),
     )
+    parser.add_argument(
+        "--force-broadcast",
+        action="store_true",
+        help=(
+            "Bypass the once-per-day Telegram guard for an explicit live test. "
+            "The rotation still excludes recent_telegram_job_ids."
+        ),
+    )
     parser.add_argument("--verbose", action="store_true", help="Debug logging")
     return parser.parse_args(argv)
 
@@ -5522,7 +5892,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             ", ".join(item["id"] for item in purged_roles[:8]),
         )
 
-    today = date.today().isoformat()
+    today = ist_today().isoformat()
 
     if args.sitemap_only:
         write_sitemap(existing, archive, sitemap_path)
@@ -5861,6 +6231,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         whatsapp_digest_path,
         send=not args.no_broadcast,
         stats_path=stats_path,
+        force=(
+            args.force_broadcast
+            or os.environ.get("FORCE_TELEGRAM_BROADCAST", "").strip().lower()
+            in {"1", "true", "yes"}
+        ),
     )
 
     log.info(
