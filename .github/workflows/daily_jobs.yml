@@ -119,7 +119,6 @@ jobs:
                   public/daily_digest.json public/whatsapp_digest.txt \
                   public/global_jobs.json public/global_archive.json \
                   public/source_report.json data/role_purge_report.json \
-                  data/global_role_purge_report.json \
                   public/linkedin_weekly_post.txt public/linkedin_weekly.json \
                   public/index.html public/feed.xml public/jrf-feed.xml \
                   public/jobs public/styles/job-page.css \
@@ -144,6 +143,11 @@ jobs:
                   public/about.html public/404.html public/500.html \
                   public/seo_keyword_map.json \
                   scripts/seo_keyword_map.json scripts/hub_streak_state.json
+          # Only written when the global purge actually ran; staging a
+          # missing path aborts the whole git add with exit 128.
+          if [ -f data/global_role_purge_report.json ]; then
+            git add data/global_role_purge_report.json
+          fi
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else
