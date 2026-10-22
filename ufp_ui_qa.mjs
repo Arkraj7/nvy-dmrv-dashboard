@@ -114,9 +114,11 @@ check('roundup json items carry registry + static job url', weekly.items.every(i
 const wrongSubject = weekly.subject !== 'Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup';
 check('exact weekly LinkedIn email subject', !wrongSubject, weekly.subject);
 
-/* Static /jobs/<slug> detail pages: one per active and archived record. */
-const allStaticJobs = [...indiaAll, ...globalAll];
-const activeStaticJobs = [...india, ...globalJobs];
+/* Static /jobs/<slug> detail pages: one per active and archived record.
+   Quarantined records stay in the registry for review but are never rendered. */
+const isPublished = (job) => job.status !== 'quarantined';
+const allStaticJobs = [...indiaAll, ...globalAll].filter(isPublished);
+const activeStaticJobs = [...india, ...globalJobs].filter(isPublished);
 const pageText = (id) => {
   const file = REPO + '/jobs/' + id + '.html';
   return fs.existsSync(file) ? fs.readFileSync(file, 'utf-8') : '';
