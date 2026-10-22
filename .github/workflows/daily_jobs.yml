@@ -152,7 +152,9 @@ jobs:
             echo "No registry changes to persist."
             exit 0
           fi
-          git commit -m "chore(jobs): persist daily registry + broadcast marker ($(date -u +'%Y-%m-%d'))"
+          # Cloudflare Pages must not auto-build these bot commits: the verified
+          # Wrangler deploy below is the only production publisher.
+          git commit -m "[CF-Pages-Skip] chore(jobs): persist daily registry + broadcast marker ($(date -u +'%Y-%m-%d'))"
           PUSHED=0
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
@@ -243,7 +245,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore(seo): rebuild pages + Hindi metadata ($(date -u +'%Y-%m-%d'))"
+          git commit -m "[CF-Pages-Skip] chore(seo): rebuild pages + Hindi metadata ($(date -u +'%Y-%m-%d'))"
           PUSHED=0
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
