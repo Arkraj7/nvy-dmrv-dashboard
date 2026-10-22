@@ -33,7 +33,7 @@
     "evergreen": false,
     "entry_type": "award_portal",
     "employer_id": "simons-foundation",
-    "status": "active",
+    "status": "quarantined",
     "verification": {
       "verified_at": "2026-10-22T07:53:31.580458+00:00",
       "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
@@ -53,7 +53,14 @@
       "checked_at": "2026-10-22T07:53:31.580458+00:00"
     },
     "reverify_after": "2026-11-06",
-    "valid_through": "2026-11-21"
+    "valid_through": "2026-11-21",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "duplicate title shared with /jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
+      "date": "2026-10-22",
+      "source": "audit_and_sanitize.py"
+    }
   },
   {
     "id": "gund-institute-funded-phd-competition-university-of-vermont",
