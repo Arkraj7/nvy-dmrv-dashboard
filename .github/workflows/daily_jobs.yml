@@ -129,11 +129,21 @@ jobs:
                   public/forestry-wildlife-government-jobs.html \
                   public/gis-remote-sensing-climate-jobs.html \
                   public/esg-carbon-sustainability-jobs.html \
+                  public/sustainability-jobs-india.html \
+                  public/esg-jobs-for-freshers.html \
+                  public/entry-level-environmental-jobs.html \
+                  public/remote-environmental-jobs.html \
+                  public/esg-sustainability-jobs-delhi-ncr.html \
+                  public/esg-sustainability-jobs-karnataka.html \
+                  public/esg-sustainability-jobs-maharashtra.html \
+                  public/esg-jobs-bangalore.html \
+                  public/esg-jobs-mumbai.html \
                   public/hindi-environment-forestry-jobs.html \
                   public/bharat-regional-green-jobs.html \
                   public/global-climate-sustainability-opportunities.html \
                   public/about.html public/404.html public/500.html \
-                  public/seo_keyword_map.json
+                  public/seo_keyword_map.json \
+                  scripts/seo_keyword_map.json scripts/hub_streak_state.json
           if git diff --cached --quiet; then
             echo "No registry changes today - nothing to commit."
           else

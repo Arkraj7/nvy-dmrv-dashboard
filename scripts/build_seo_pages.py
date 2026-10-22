@@ -134,6 +134,13 @@ RECENT_ARCHIVE_DAYS = 180     # archived mandates shown on the index snapshot
 HUB_ARCHIVE_LIMIT = 6         # archived mandates per hub page
 ITEM_LIST_CAP = 60            # ItemList entries per hub page
 
+# Hub streak gating (A2 duplicate-hub rule)
+HUB_STREAK_STATE_PATH = REPO_ROOT / "scripts" / "hub_streak_state.json"
+HUB_ON_THRESHOLD = 12         # minimum active roles to start counting streak_on
+HUB_ON_STREAK_N = 3           # consecutive runs at/above threshold to flip ON
+HUB_OFF_THRESHOLD = 8         # active roles below this to start counting streak_off
+HUB_OFF_STREAK_N = 7          # consecutive runs below threshold to flip OFF
+
 # A literal, crawlable separator between adjacent badge <span> elements. The
 # spaces matter: tag-stripping crawlers otherwise concatenate the badges into
 # one unreadable token.
@@ -284,6 +291,116 @@ def page_meta(file_name: str) -> Dict[str, Any]:
         return KEYWORD_MAP[file_name]
     except KeyError as exc:
         raise SystemExit(f"ERROR: missing keyword-map entry for {file_name}") from exc
+
+
+def ist_today() -> date:
+    return datetime.now(IST).date()
+
+
+# --------------------------------------------------------------------------
+# Hub streak gating (A2 duplicate-hub rule)
+# --------------------------------------------------------------------------
+HUB_STREAK_STATE_PATH = REPO_ROOT / "scripts" / "hub_streak_state.json"
+HUB_ON_THRESHOLD = 12         # minimum active roles to start counting streak_on
+HUB_ON_STREAK_N = 3           # consecutive runs at/above threshold to flip ON
+HUB_OFF_THRESHOLD = 8         # active roles below this to start counting streak_off
+HUB_OFF_STREAK_N = 7          # consecutive runs below threshold to flip OFF
+
+
+def load_hub_streak_state() -> Dict[str, Any]:
+    if HUB_STREAK_STATE_PATH.exists():
+        try:
+            return json.loads(HUB_STREAK_STATE_PATH.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("Could not read hub streak state %s: %s", HUB_STREAK_STATE_PATH, exc)
+    return {"hubs": {}, "last_run_date": None}
+
+
+def save_hub_streak_state(state: Dict[str, Any]) -> None:
+    HUB_STREAK_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) -> Dict[str, bool]:
+    """
+    Update streak counters for each hub and return {hub_file: is_indexable}.
+    Applies A2 duplicate-hub rule: a state hub is forced to noindex only when
+    its overlapping city hub is currently indexable (or flips ON in this run).
+    """
+    state = load_hub_streak_state()
+    hubs_state = state.setdefault("hubs", {})
+    today = ist_today().isoformat()
+
+    # Initialize hubs not yet tracked
+    for hub_file in hub_counts:
+        if hub_file not in hubs_state:
+            hubs_state[hub_file] = {
+                "streak_on": 0,
+                "streak_off": 0,
+                "indexable": False,
+                "last_flip": None,
+                "flip_log": [],
+            }
+
+    indexable: Dict[str, bool] = {}
+    for hub_file, count in hub_counts.items():
+        h = hubs_state[hub_file]
+        currently_indexable = h["indexable"]
+
+        if count >= HUB_ON_THRESHOLD:
+            h["streak_on"] += 1
+            h["streak_off"] = 0
+        else:
+            h["streak_on"] = 0
+            h["streak_off"] += 1
+
+        # Flip ON: 3 consecutive runs >= 12
+        if not currently_indexable and h["streak_on"] >= HUB_ON_STREAK_N:
+            h["indexable"] = True
+            h["last_flip"] = today
+            h["flip_log"].append(f"{today}: ON (count={count}, streak_on={h['streak_on']})")
+            log.info("HUB FLIP ON: %s (count=%d, streak_on=%d)", hub_file, count, h["streak_on"])
+
+        # Flip OFF: 7 consecutive runs < 8
+        if currently_indexable and h["streak_off"] >= HUB_OFF_STREAK_N:
+            h["indexable"] = False
+            h["last_flip"] = today
+            h["flip_log"].append(f"{today}: OFF (count={count}, streak_off={h['streak_off']})")
+            log.warning("HUB FLIP OFF: %s (count=%d, streak_off=%d)", hub_file, count, h["streak_off"])
+
+        indexable[hub_file] = h["indexable"]
+
+    # A2 duplicate-hub rule: state hub forced noindex only if city hub is indexable or flipping ON
+    DUPLICATE_PAIRS = [
+        ("esg-sustainability-jobs-karnataka.html", "esg-jobs-bangalore.html"),
+        ("esg-sustainability-jobs-maharashtra.html", "esg-jobs-mumbai.html"),
+    ]
+
+    for state_hub, city_hub in DUPLICATE_PAIRS:
+        if state_hub not in indexable or city_hub not in indexable:
+            continue
+        state_idx = indexable[state_hub]
+        city_idx = indexable[city_hub]
+        city_flipping_on = (not hubs_state[city_hub]["indexable"]) and hubs_state[city_hub]["streak_on"] >= HUB_ON_STREAK_N
+
+        if state_idx and (city_idx or city_flipping_on):
+            # State hub is indexable but city hub is (or will be) indexable -> force state to noindex
+            log.warning(
+                "DUPLICATE RULE: %s forced noindex (city hub %s indexable=%s, flipping=%s)",
+                state_hub, city_hub, city_idx, city_flipping_on
+            )
+            hubs_state[state_hub]["indexable"] = False
+            hubs_state[state_hub]["flip_log"].append(f"{today}: DUPLICATE RULE OFF (city={city_hub})")
+            indexable[state_hub] = False
+        elif state_idx and not city_idx and not city_flipping_on:
+            # State hub indexable, city hub scaffolded -> state hub allowed to stay indexable
+            log.info(
+                "DUPLICATE RULE: %s allowed (city hub %s scaffolded)",
+                state_hub, city_hub
+            )
+
+    state["last_run_date"] = today
+    save_hub_streak_state(state)
+    return indexable
 
 
 def ist_today() -> date:
@@ -607,6 +724,135 @@ def match_esg(job: Dict[str, Any]) -> bool:
     return job.get("category") == "ESG, Carbon Markets & Corporate Sustainability"
 
 
+# --------------------------------------------------------------------------
+# Additional hub matchers (sustainability, freshers, entry-level, remote, Delhi NCR, state/city)
+# --------------------------------------------------------------------------
+SUSTAINABILITY_CATEGORIES = {
+    "ESG, Carbon Markets & Corporate Sustainability",
+    "Climate Policy, Think-Tanks & Fellowships",
+    "Forestry, Wildlife & Afforestation",
+}
+
+
+def is_job_listing(job: Dict[str, Any]) -> bool:
+    """True for job/fellowship records, false for course and award portals."""
+    return str(job.get("entry_type") or "posting") != "award_portal"
+
+
+def is_entry_level(job: Dict[str, Any]) -> bool:
+    return "entry level" in plain(job.get("experience_level")).lower()
+
+
+def is_remote_job(job: Dict[str, Any]) -> bool:
+    location = " ".join(
+        plain(job.get(key)) for key in ("city", "state", "region", "country")
+    ).lower()
+    return "remote" in location
+
+
+def matching_text(job: Dict[str, Any]) -> str:
+    return " ".join(
+        [
+            searchable_text(job),
+            plain(job.get("category")),
+            plain(job.get("role_summary")),
+        ]
+    )
+
+
+# Deny list for irrelevant roles (B2)
+DENY_PATTERNS = re.compile(
+    r"\b(mechanical|civil|process|design|structural|electrical|software)\s*engineer\b|"
+    r"\bbuilding\s*automation\b|"
+    r"\bsupplier\s*compliance\b|"
+    r"\bai\s*training\b|\bdata\s*labelling\b|"
+    r"\beditorial\s*review\b|"
+    r"\bsales\b|\bbusiness\s*development\b|\bmarketing\b",
+    re.I,
+)
+
+
+def is_relevant_sustainability(job: Dict[str, Any]) -> bool:
+    """Check if job is plainly sustainability/climate/ESG/environment work."""
+    text = matching_text(job)
+    if DENY_PATTERNS.search(text):
+        return False
+    return plain(job.get("category")) in SUSTAINABILITY_CATEGORIES
+
+
+def match_sustainability(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    return is_relevant_sustainability(job)
+
+
+def match_esg_fresher(job: Dict[str, Any]) -> bool:
+    if not (is_job_listing(job) and is_entry_level(job)):
+        return False
+    if plain(job.get("position_type")) in ("PhD / Doctoral Fellowship", "Postdoctoral Fellowship"):
+        return False
+    return (
+        job.get("category") == "ESG, Carbon Markets & Corporate Sustainability"
+        or bool(ESG_FRESH_RE.search(matching_text(job)))
+    )
+
+
+def match_entry_environment(job: Dict[str, Any]) -> bool:
+    if not (is_job_listing(job) and is_entry_level(job)):
+        return False
+    if plain(job.get("position_type")) in ("PhD / Doctoral Fellowship", "Postdoctoral Fellowship"):
+        return False
+    return is_relevant_sustainability(job)
+
+
+def match_remote_environment(job: Dict[str, Any]) -> bool:
+    if not (is_job_listing(job) and is_remote_job(job)):
+        return False
+    return is_relevant_sustainability(job)
+
+
+def match_delhi_ncr(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    return "delhi" in state or "ncr" in state
+
+
+def match_karnataka(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    return "karnataka" in state
+
+
+def match_maharashtra(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    return "maharashtra" in state
+
+
+def match_bangalore(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "bengaluru" in city or "bangalore" in city
+
+
+def match_mumbai(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "mumbai" in city
+
+
+ESG_FRESH_RE = re.compile(
+    r"\besg\b|sustainab|carbon|brsr|climate finance|corporate social|"
+    r"climate policy|renewable|energy transition",
+    re.I,
+)
+
+
 HUBS: List[Dict[str, Any]] = [
     {
         "file": "jrf-srf-project-associate-jobs.html",
@@ -887,7 +1133,346 @@ HUBS: List[Dict[str, Any]] = [
             ),
         ],
     },
-]
+    {
+        "file": "sustainability-jobs-india.html",
+        "match": match_sustainability,
+        "kicker": "Sustainability & Climate Track",
+        "title": "Verified Sustainability Jobs in India 2026",
+        "h1": "Verified Sustainability Jobs in India 2026 — Forestry, Climate Policy & ESG",
+        "desc": (
+            "Verified sustainability, forestry, climate policy and ESG jobs across India — "
+            "from forest departments and research institutes to corporate ESG teams and climate consultancies."
+        ),
+        "hero_sub": (
+            "India's broadest sustainability job hub: forestry & conservation, climate policy & research, "
+            "corporate ESG & carbon — every listing links to the official source."
+        ),
+        "list_copy": (
+            "Sustainability jobs across the full spectrum: forest departments, research institutes, "
+            "climate think-tanks, corporate ESG teams, carbon consultancies and multilateral organisations. "
+            "Each listing links to the official application page."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "sustainability and climate",
+        "faqs": [
+            (
+                "What counts as a sustainability job?",
+                "Any role that advances environmental, climate or sustainability outcomes — "
+                "from forest rangers and conservation researchers to ESG analysts and carbon consultants."
+            ),
+            (
+                "How does this differ from the ESG hub?",
+                "The ESG hub covers corporate reporting, carbon markets and sustainability disclosure. "
+                "This hub is broader: it adds forestry, conservation, climate policy and research roles. "
+                "For purely corporate ESG roles, see the ESG hub."
+            ),
+            (
+                "Are government forestry jobs included?",
+                "Yes — forest guard, RFO, ACF and research roles from state forest departments, ICFRE and WII. "
+                "For a pure government/forestry view, see the Government & Forestry hub."
+            ),
+            (
+                "Can freshers find sustainability jobs here?",
+                "Yes — JRF, project associate and research intern roles appear here. "
+                "For a dedicated fresher view, see the ESG Jobs for Freshers hub."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-for-freshers.html",
+        "match": match_esg_fresher,
+        "kicker": "Early-Career ESG Track",
+        "title": "ESG Jobs for Freshers in India 2026",
+        "h1": "ESG Jobs for Freshers in India 2026 — Entry-Level Roles",
+        "desc": (
+            "Verified entry-level ESG, carbon and sustainability roles for fresh graduates — "
+            "analyst, reporting, research and associate positions with direct application links."
+        ),
+        "hero_sub": (
+            "ESG jobs for freshers: analyst, reporting, carbon and research roles — "
+            "no experience required, direct links to employer portals."
+        ),
+        "list_copy": (
+            "Entry-level ESG and sustainability roles: analyst, reporting associate, carbon analyst, "
+            "research intern. Each listing states the experience band and links to the official application page."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG fresher and entry-level",
+        "faqs": [
+            (
+                "Can freshers apply for ESG jobs?",
+                "Yes — many ESG analyst, reporting associate and carbon analyst roles accept fresh graduates. "
+                "Internships, research projects and relevant coursework help."
+            ),
+            (
+                "What skills do ESG freshers need?",
+                "Basic sustainability literacy, Excel/data skills, research ability and clear writing. "
+                "Coursework in environmental science, economics or engineering is a plus."
+            ),
+            (
+                "Where are fresher ESG jobs posted?",
+                "Corporate career pages, consultancy graduate programmes, think-tank internships "
+                "and the ESG hub's fresher filter."
+            ),
+            (
+                "How does this differ from the Entry-Level Environmental hub?",
+                "This hub is ESG-only (corporate reporting, carbon, sustainability disclosure). "
+                "The Entry-Level Environmental hub is broader: JRF, field research, GIS, forestry, etc."
+            ),
+        ],
+    },
+    {
+        "file": "entry-level-environmental-jobs.html",
+        "match": match_entry_environment,
+        "kicker": "Entry-Level Environmental Track",
+        "title": "Entry Level Environmental Jobs in India 2026",
+        "h1": "Entry Level Environmental Jobs in India 2026 — JRF, Field & Research",
+        "desc": (
+            "Verified entry-level environmental, forestry, GIS and research jobs across India — "
+            "JRF, project associate, field assistant, GIS intern roles with direct application links."
+        ),
+        "hero_sub": (
+            "Entry-level environmental jobs: JRF, project associate, field assistant, GIS intern — "
+            "zero to two years experience, direct links to official sources."
+        ),
+        "list_copy": (
+            "Zero-to-two-year environmental roles: JRF, project associate, field assistant, "
+            "GIS intern, research intern. Each listing links to the official application page."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "entry-level environmental",
+        "faqs": [
+            (
+                "What entry-level environmental jobs exist?",
+                "JRF, project associate, field assistant, GIS intern, research intern, "
+                "young professional and conservation trainee roles."
+            ),
+            (
+                "Do I need a Master's degree?",
+                "JRF typically requires M.Sc. + NET/GATE. Project associate and field roles "
+                "may accept B.Sc./B.Tech. Check each listing."
+            ),
+            (
+                "Where are the field jobs?",
+                "Forest departments, WII, SACON, ATREE, research institutes and NGOs "
+                "post field roles across India — filter by state in the live registry."
+            ),
+            (
+                "How does this differ from the ESG Freshers hub?",
+                "This hub covers JRF, field research, GIS, forestry, conservation. "
+                "The ESG Freshers hub is corporate-only: ESG analyst, carbon, reporting."
+            ),
+        ],
+    },
+    {
+        "file": "remote-environmental-jobs.html",
+        "match": match_remote_environment,
+        "kicker": "Remote & Hybrid Track",
+        "title": "Remote Environmental & Climate Jobs in India 2026",
+        "h1": "Remote Environmental & Climate Jobs in India 2026 — Work from Anywhere",
+        "desc": (
+            "Verified remote and hybrid environmental, climate, ESG and GIS jobs — "
+            "work from anywhere in India with direct application links."
+        ),
+        "hero_sub": (
+            "Remote environmental jobs: research, ESG, climate policy, GIS — "
+            "work from anywhere in India, direct links to employers."
+        ),
+        "list_copy": (
+            "Remote and hybrid roles: research, ESG reporting, climate policy, GIS, "
+            "carbon analysis — work from anywhere in India, direct employer links."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "remote environmental and climate",
+        "faqs": [
+            (
+                "Are remote environmental jobs common?",
+                "Yes — research, ESG reporting, climate policy and GIS roles often offer remote/hybrid. "
+                "Field and lab roles typically require on-site presence."
+            ),
+            (
+                "How do I verify a remote job?",
+                "Check the employer's official career page. The registry links directly to the source. "
+                "Beware of jobs asking for upfront fees — the registry never charges candidates."
+            ),
+            (
+                "Can freshers get remote roles?",
+                "Some research intern and ESG reporting roles offer remote options for freshers. "
+                "Filter by experience level in the live registry."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-delhi-ncr.html",
+        "match": match_delhi_ncr,
+        "kicker": "Delhi NCR ESG & Sustainability Track",
+        "title": "ESG & Sustainability Jobs in Delhi NCR 2026",
+        "h1": "ESG & Sustainability Jobs in Delhi NCR 2026 — Gurugram, Noida, Faridabad",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Delhi, Gurugram, Noida, "
+            "Faridabad and Ghaziabad — corporate, consulting, multilateral and government roles."
+        ),
+        "hero_sub": (
+            "Delhi NCR ESG jobs: Gurugram corporate hubs, Noida tech parks, "
+            "Delhi multilateral hubs — direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate finance, multilateral and government roles "
+            "across Delhi, Gurugram, Noida, Faridabad, Ghaziabad. Direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG and sustainability in Delhi NCR",
+        "faqs": [
+            (
+                "Which NCR cities have the most ESG jobs?",
+                "Gurugram leads (corporate HQs), followed by Noida (tech/consulting), "
+                "Delhi (multilaterals/government), Faridabad/Ghaziabad (industrial)."
+            ),
+            (
+                "Are there government ESG jobs in Delhi NCR?",
+                "Yes — MoEFCC, CPCB, CAMPA and state bodies post Young Professional and "
+                "consultant roles for climate finance and ESG."
+            ),
+            (
+                "How does this differ from the national ESG hub?",
+                "This hub is geography-filtered to Delhi NCR only. "
+                "For all-India ESG roles, see the ESG & Carbon hub."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-karnataka.html",
+        "match": match_karnataka,
+        "kicker": "Karnataka ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Karnataka 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Karnataka 2026 — Bengaluru & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Karnataka — "
+            "Bengaluru's corporate hub, research institutes and emerging districts."
+        ),
+        "hero_sub": (
+            "Karnataka ESG jobs: Bengaluru's corporate hub, IISc/IISc-adjacent research, "
+            "emerging districts — direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate researcher, carbon consultant "
+            "across Bengaluru and Karnataka — direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG and sustainability in Karnataka",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Karnataka reaches 12+ active roles "
+                "for 3 consecutive pipeline runs. Current count is below threshold."
+            ),
+            (
+                "How does this differ from the Bangalore city hub?",
+                "This hub covers the entire state (Bengaluru + other districts). "
+                "The Bangalore hub is city-specific."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-bangalore.html",
+        "match": match_bangalore,
+        "kicker": "Bengaluru ESG Track",
+        "title": "Verified ESG Jobs in Bengaluru 2026",
+        "h1": "Verified ESG Jobs in Bengaluru 2026 — India's ESG Capital",
+        "desc": (
+            "Verified ESG jobs in Bengaluru — India's deepest corporate ESG hub "
+            "with GCCs, climate tech startups and consultancies."
+        ),
+        "hero_sub": (
+            "Bengaluru ESG jobs: GCCs, climate tech, consultancies — "
+            "India's densest ESG market, direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, carbon analyst, climate tech roles "
+            "across Bengaluru's GCCs, startups and consultancies — direct official links."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Bengaluru",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Bengaluru reaches 12+ active ESG roles "
+                "for 3 consecutive pipeline runs. Current count is below threshold."
+            ),
+            (
+                "How does this differ from the Karnataka hub?",
+                "This hub is city-specific (Bengaluru only). "
+                "The Karnataka hub covers the entire state."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-maharashtra.html",
+        "match": match_maharashtra,
+        "kicker": "Maharashtra ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Maharashtra 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Maharashtra 2026 — Mumbai, Pune & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Maharashtra — "
+            "Mumbai's finance hub, Pune's research/tech, Thane's industrial corridor."
+        ),
+        "hero_sub": (
+            "Maharashtra ESG jobs: Mumbai finance, Pune research, Thane industry — "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate finance, carbon consultant "
+            "across Mumbai, Pune, Thane, Navi Mumbai — direct official links."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG and sustainability in Maharashtra",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Maharashtra reaches 12+ active roles "
+                "for 3 consecutive pipeline runs. Current count is below threshold."
+            ),
+            (
+                "How does this differ from the Mumbai city hub?",
+                "This hub covers the entire state (Mumbai + Pune + Thane + other districts). "
+                "The Mumbai hub is city-specific."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-mumbai.html",
+        "match": match_mumbai,
+        "kicker": "Mumbai ESG Track",
+        "title": "Verified ESG Jobs in Mumbai 2026",
+        "h1": "Verified ESG Jobs in Mumbai 2026 — Finance, Corporate & Climate",
+        "desc": (
+            "Verified ESG jobs in Mumbai — India's financial capital with "
+            "corporate HQs, consultancies and climate finance firms."
+        ),
+        "hero_sub": (
+            "Mumbai ESG jobs: finance HQs, Big 4, climate finance, corporate HQs — "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate finance, carbon consultant "
+            "across Mumbai — direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Mumbai",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Mumbai reaches 12+ active ESG roles "
+                "for 3 consecutive pipeline runs. Current count is below threshold."
+            ),
+            (
+                "How does this differ from the Maharashtra hub?",
+                "This hub is city-specific (Mumbai only). "
+                "The Maharashtra hub covers the entire state."
+            ),
+        ]
+    },
+    ]
 
 for _hub in HUBS:
     _meta = page_meta(_hub["file"])
@@ -1382,7 +1967,7 @@ def build_hub_page(
         f'          <li><a href="/{h["file"]}"><span class="hub-other-name">{esc(h["h1"])}</span>'
         f'<span class="hub-other-cnt">{all_hubs_counts.get(h["file"], 0)} active</span></a></li>'
         for h in HUBS
-        if h["file"] != hub["file"]
+        if h["file"] != hub["file"] and h.get("_indexable", True)
     )
 
     states = sorted({state_label(j) for j in matched_active})
@@ -1415,7 +2000,7 @@ def build_hub_page(
 
     <title>{esc(hub['title'])}</title>
     <meta name="description" content="{esc(hub['desc'])}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{'index, follow' if hub.get('_indexable', True) else 'noindex, follow'}">
     <link rel="canonical" href="{hub['canonical']}">
     <link rel="alternate" hreflang="en-IN" href="{hub['canonical']}">
     <link rel="alternate" hreflang="hi-IN" href="https://www.urbanforestpark.com/hindi-environment-forestry-jobs.html">
@@ -1979,6 +2564,49 @@ def sync_sitemap_jobs(
     path.write_text(text, encoding="utf-8")
 
 
+def sync_sitemap_hubs(
+    public: Path,
+    today: date,
+    hub_indexable: Dict[str, bool],
+) -> int:
+    """Ensure only indexable hubs are in the sitemap; remove non-indexable ones."""
+    path = public / "sitemap.xml"
+    if not path.exists():
+        return 0
+    text = path.read_text(encoding="utf-8")
+
+    removals = 0
+    for hub in HUBS:
+        if hub_indexable.get(hub["file"], True):
+            continue
+        loc = pretty_url(SITE + "/" + hub["file"])
+        pattern = rf"\s*<url>\s*<loc>{re.escape(loc)}</loc>.*?</url>"
+        text, count = re.subn(pattern, "", text, flags=re.S)
+        removals += count
+    if removals:
+        log.info("Removed %d non-indexable hub URL(s) from sitemap", removals)
+
+    # Add missing indexable hubs
+    seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
+    additions: List[str] = []
+    for hub in HUBS:
+        if not hub_indexable.get(hub["file"], False):
+            continue
+        loc = pretty_url(SITE + "/" + hub["file"])
+        if loc in seen:
+            continue
+        seen.add(loc)
+        additions.append(
+            f"  <url><loc>{loc}</loc><lastmod>{today.isoformat()}</lastmod>"
+            "<changefreq>weekly</changefreq><priority>0.9</priority></url>"
+        )
+    if additions or removals:
+        if additions:
+            text = text.replace("</urlset>", "\n".join(additions) + "\n</urlset>")
+        path.write_text(text, encoding="utf-8")
+    return len(additions)
+
+
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
@@ -2234,11 +2862,37 @@ def main(argv: Optional[List[str]] = None) -> int:
         matched = [j for j in active if hub["match"](j)]
         hub_counts[hub["file"]] = len(matched)
 
+    # Hub-to-city mapping for A2 duplicate-hub rule
+    HUB_TO_CITY: Dict[str, str] = {
+        "esg-sustainability-jobs-karnataka.html": "esg-jobs-bangalore.html",
+        "esg-sustainability-jobs-maharashtra.html": "esg-jobs-mumbai.html",
+    }
+
+    # Update streak counters and determine indexability
+    hub_indexable = update_hub_streaks(hub_counts, HUB_TO_CITY)
+
+    # Update keyword map with indexability
+    for hub_file, is_indexable in hub_indexable.items():
+        if hub_file in KEYWORD_MAP:
+            KEYWORD_MAP[hub_file]["indexable"] = is_indexable
+
+    # Save updated keyword map
+    KEYWORD_MAP_PATH.write_text(
+        json.dumps({"site": SITE, "pages": list(KEYWORD_MAP.values())}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (public / "seo_keyword_map.json").write_text(
+        json.dumps({"site": SITE, "pages": list(KEYWORD_MAP.values())}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     for hub in HUBS:
+        hub["_indexable"] = hub_indexable.get(hub["file"], False)
         page = build_hub_page(hub, active, archived, hub_counts, today)
         out_path = public / hub["file"]
         out_path.write_text(page, encoding="utf-8")
-        log.info("Wrote %s (%d active match(es))", hub["file"], hub_counts[hub["file"]])
+        status = "indexable" if hub["_indexable"] else "noindex (scaffolded)"
+        log.info("Wrote %s (%d active match(es)) [%s]", hub["file"], hub_counts[hub["file"]], status)
 
     # ---- multilingual & regional portals --------------------------------
     import seo_portals  # lazy import: reuses this module's helpers/constants
@@ -2318,6 +2972,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
 
     sync_sitemap_jobs(public, active, archived, global_active, global_archived, today)
+    hub_sitemap_additions = sync_sitemap_hubs(public, today, hub_indexable)
+    log.info("Added/removed %d hub URL(s) in sitemap", hub_sitemap_additions)
     sitemap_path = public / "sitemap.xml"
     if sitemap_path.exists():
         sitemap = sitemap_path.read_text(encoding="utf-8")
