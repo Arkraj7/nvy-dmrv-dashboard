@@ -2,7 +2,8 @@
  * POST /api/parse_flyer
  * ---------------------------------------------------------------------------
  * Cloudflare Pages Function. Accepts a flyer image or PDF from the unlocked
- * Syndication Desk, sends it to Gemini 2.5 Flash, and returns a validated
+ * Syndication Desk, sends it to Gemini 2.5 Flash (with current-model
+ * fallback), and returns a validated
  * draft job record for human review. Nothing is written to the registry here.
  *
  * Request (JSON):
@@ -22,9 +23,17 @@
 
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-2.5-flash";
-// 2.5 Flash is the requested production model, but Google retires models for
-// new API keys. Try the current Flash models before failing the desk.
-const FALLBACK_MODELS = ["gemini-3.8-flash", "gemini-flash-latest"];
+// 2.5 Flash is the requested production model, but Google now retires it for
+// new API keys and free-tier quotas are tracked per model. Try current Flash
+// models in quality order, then the lite aliases, before failing the desk.
+const FALLBACK_MODELS = [
+  "gemini-3.8-flash",
+  "gemini-3.6-flash",
+  "gemini-3.5-flash",
+  "gemini-3.1-flash-lite",
+  "gemini-flash-latest",
+  "gemini-flash-lite-latest",
+];
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const ALLOWED_MIME = new Set([
   "image/jpeg",

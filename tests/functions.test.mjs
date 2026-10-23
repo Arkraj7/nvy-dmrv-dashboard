@@ -301,6 +301,50 @@ test("flyer parse endpoint falls back when the primary Gemini model is retired",
   assert.match(calls[1].url, /gemini-3\.8-flash:generateContent/);
 });
 
+test("flyer parse endpoint skips a rate-limited fallback model", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    calls.push({ url: String(url), options });
+    if (calls.length === 1) {
+      return new Response(
+        JSON.stringify({ error: { code: 404, message: "model no longer available" } }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    if (calls.length === 2) {
+      return new Response(
+        JSON.stringify({ error: { code: 429, message: "quota exceeded" } }),
+        { status: 429, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    return new Response(
+      JSON.stringify({
+        candidates: [{ content: { parts: [{ text: JSON.stringify(EXTRACTED_JOB) }] } }],
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  };
+
+  const response = await parseFlyer(
+    context(
+      deskRequest("/api/parse_flyer", {
+        image: "iVBORw0KGgo=",
+        mimeType: "image/png",
+        jurisdiction: "global",
+      }),
+      { GEMINI_API_KEY: "test-key", SYNDICATION_PASSPHRASE_SHA256: DESK_HASH }
+    )
+  );
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.model, "gemini-3.6-flash");
+  assert.equal(calls.length, 3);
+  assert.match(calls[0].url, /gemini-2\.5-flash:generateContent/);
+  assert.match(calls[1].url, /gemini-3\.8-flash:generateContent/);
+  assert.match(calls[2].url, /gemini-3\.6-flash:generateContent/);
+});
+
 test("flyer parse endpoint fails closed when GEMINI_API_KEY is absent", async () => {
   let calls = 0;
   globalThis.fetch = async () => {
