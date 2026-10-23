@@ -511,7 +511,7 @@ async function handleUpdate(update, env) {
       "I extract the job facts and publish them directly to the registry. Duplicates are rejected automatically.",
   "",
   "Commands:",
-  "• #delete <url> — remove a record by its apply URL",
+  "• #delete <url> — remove a record by its apply URL or /jobs/{id} page URL",
   "• #update <url> + new details — replace an existing record",
   "• #force — publish even if a duplicate is detected",
   "• #global — target the global registry (add to any message)",
@@ -536,11 +536,12 @@ async function handleUpdate(update, env) {
   // #delete: remove a record by its application URL (no extraction needed)
   if (mode === "delete") {
     const url = extractUrl(text);
-    if (!url) {
-      await sendMessage(env, chatId, "Send <code>#delete</code> followed by the job's application URL.");
+    const input = url || text.replace(/#delete/gi, "").trim();
+    if (!input) {
+      await sendMessage(env, chatId, "Send <code>#delete</code> followed by the job's application URL or its <code>/jobs/{id}</code> page URL.");
       return { ok: false, error: "missing_url" };
     }
-    const result = await deleteJobRecord(url, env);
+    const result = await deleteJobRecord(input, env);
     if (result.ok) {
       await sendMessage(env, chatId, `🗑️ Deleted <b>${escapeHtml(result.id)}</b> from the ${result.registry} registry.${result.commit ? " Commit: " + escapeHtml(result.commit.slice(0, 7)) : ""}`);
     } else {

@@ -644,17 +644,25 @@ export async function deleteJobRecord(applyUrl, env) {
   const token = githubToken(runtimeEnv);
   if (!token) return { ok: false, status: 503, error: "github_not_configured" };
 
-  const url = safeHttpUrl(applyUrl);
-  if (!url) return { ok: false, status: 422, error: "invalid_application_url" };
-  const target = url.toLowerCase();
-
   const repo = repoName(runtimeEnv);
   const paths = ["public/jobs.json", "public/global_jobs.json"];
+
+  // Try to match by URL first, then by job ID (last path segment)
+  const url = safeHttpUrl(applyUrl);
+  const idMatch = String(applyUrl || "").match(/\/jobs\/([^/?#]+)/);
+
   for (const path of paths) {
     const registry = await readRegistry(repo, path, token);
     if (registry.error) continue;
     const existing = registry.list;
-    const index = existing.findIndex((item) => clean(item && item.apply_url).toLowerCase() === target);
+    let index = -1;
+    if (url) {
+      index = existing.findIndex((item) => clean(item && item.apply_url).toLowerCase() === url.toLowerCase());
+    }
+    if (index === -1 && idMatch) {
+      const targetId = decodeURIComponent(idMatch[1]);
+      index = existing.findIndex((item) => clean(item && item.id) === targetId);
+    }
     if (index === -1) continue;
 
     const removed = existing[index];
@@ -677,7 +685,7 @@ export async function deleteJobRecord(applyUrl, env) {
     };
   }
 
-  return { ok: false, status: 404, error: "not_found", detail: "No record with this application URL." };
+  return { ok: false, status: 404, error: "not_found", detail: "No record matched that URL or job ID. Use the apply_url exactly as stored, or the /jobs/{id} page URL." };
 }
 
 export async function onRequestPost(context) {
