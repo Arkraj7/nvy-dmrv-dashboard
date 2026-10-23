@@ -485,13 +485,10 @@ async function handleUpdate(update, env) {
   }
   const chatId = message.chat.id;
   const fromId = message.from && message.from.id != null ? message.from.id : chatId;
-  const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
-  if (admin && String(fromId) !== admin && String(chatId) !== admin) {
-    await sendMessage(env, chatId, "This intake bot is restricted to the registry editor.");
-    return { ok: false, error: "not_authorised" };
-  }
-
   const text = clean(message.text || message.caption || "");
+
+  // /start and /chatid are deliberately public so a new editor can discover
+  // the numeric chat id even before TELEGRAM_ADMIN_USER_ID is corrected.
   if (/^\/start(?:@\w+)?\b/i.test(text) || /^\/help(?:@\w+)?\b/i.test(text)) {
     const intro = [
       "<b>UFP Flyer Intake is online.</b>",
@@ -510,6 +507,12 @@ async function handleUpdate(update, env) {
   if (/^\/chatid(?:@\w+)?\b/i.test(text)) {
     await sendMessage(env, chatId, `Chat ID: <code>${escapeHtml(chatId)}</code>`);
     return { ok: true, command: "chatid" };
+  }
+
+  const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
+  if (admin && String(fromId) !== admin && String(chatId) !== admin) {
+    await sendMessage(env, chatId, "This intake bot is restricted to the registry editor.");
+    return { ok: false, error: "not_authorised" };
   }
 
   const jurisdiction = jurisdictionFrom(text);
