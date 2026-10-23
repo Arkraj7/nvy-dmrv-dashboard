@@ -521,9 +521,14 @@ export async function commitJobRecord(job, jurisdiction, env) {
   }
 
   const existing = registry.list;
+  const otherPath = registryName === "global"
+    ? "public/jobs.json"
+    : "public/global_jobs.json";
+  const otherRegistry = await readRegistry(repo, otherPath, token);
+  const allExisting = [...existing, ...(otherRegistry.list || [])];
   const applyUrl = record.apply_url.toLowerCase();
   const identity = roleIdentity(record);
-  for (const item of existing) {
+  for (const item of allExisting) {
     if (clean(item && item.apply_url).toLowerCase() === applyUrl) {
       return {
         ok: false,

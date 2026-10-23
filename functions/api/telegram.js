@@ -590,9 +590,12 @@ async function handleUpdate(update, env) {
   }
 
   const committed = await commitJobRecord(extracted.job, jurisdiction, env);
+  const jurisdictionHint = extracted.job.country && extracted.job.country !== "India" && jurisdiction === "india"
+    ? `\n\n⚠️ Extracted country is ${escapeHtml(extracted.job.country)} but no #global tag was used — added to the India registry. Resend with #global for international roles.`
+    : "";
   const published = committed.ok
-    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}): ${committed.job_url}`
-    : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.`;
+    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}): ${committed.job_url}` + jurisdictionHint
+    : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.` + jurisdictionHint;
 
   const sent = await sendMessage(env, chatId, formatJob(extracted.job) + published);
   return {
@@ -604,6 +607,7 @@ async function handleUpdate(update, env) {
     path: committed.path,
     job_url: committed.job_url,
     registry_url: committed.registry_url,
+    publish_error: committed.ok ? null : committed.error,
     delivered: sent.ok,
     delivery_error: sent.ok ? null : sent.error,
   };
