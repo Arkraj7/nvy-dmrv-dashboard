@@ -1,5 +1,55 @@
 [
   {
+    "clean_title": "Generation Hope Goals 2027: Action for the SDGs",
+    "organization": "ESCAP",
+    "city": "Bangkok",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "region": "",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Competition / Award",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "INTERN",
+    "deadline_or_window": "31 October 2026",
+    "valid_through": "2026-10-31",
+    "qualification_summary": "Groups of 3 to 5 members aged 14 to 24 years from the Asia-Pacific region.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "Generation Hope Goals 2027 invites youth groups from the Asia-Pacific region to showcase innovative climate action solutions. Selected groups will participate in the 14th Asia-Pacific Forum on Sustainable Development in February 2027. Applicants must demonstrate an active project or service that contributes to specific Sustainable Development Goals.",
+    "key_responsibilities": [
+      "Advance a climate action solution or service",
+      "Address SDGs 4, 10, 12, 15, or 17",
+      "Represent youth group at the 14th APFSD",
+      "Collaborate as a team of 3 to 5 members"
+    ],
+    "must_have_skills": [
+      "Climate Action",
+      "Sustainable Development Goals",
+      "Youth Leadership",
+      "Project Management",
+      "English Proficiency"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://www.unescap.org/events/2027/generation-hope-goals-2027-actions-sdgs",
+    "org_website": "https://www.unescap.org",
+    "org_domain": "unescap.org",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://www.unescap.org/events/2027/generation-hope-goals-2027-actions-sdgs"
+    },
+    "id": "generation-hope-goals-2027-action-for-the-sdgs-escap"
+  },
+  {
     "clean_title": "Microsoft Forms",
     "organization": "Microsoft",
     "city": "Remote",
