@@ -451,7 +451,7 @@
     "_deadline_is_default": false,
     "global": true,
     "evergreen": false,
-    "status": "active",
+    "status": "quarantined",
     "link_policy": {
       "policy_version": 2,
       "restored_at": "2026-10-20",
@@ -474,6 +474,13 @@
       "reason_code": "OK",
       "platform": "",
       "verifier": "verify_link_v2"
+    },
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "duplicate title shared with /jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
+      "date": "2026-10-23",
+      "source": "audit_and_sanitize.py"
     }
   },
   {

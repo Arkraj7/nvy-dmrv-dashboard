@@ -1395,7 +1395,7 @@
     "org_domain": "www2.fundsforngos.org",
     "source_portal": "Official Organization Website",
     "valid_through": "2026-11-18",
-    "status": "active",
+    "status": "quarantined",
     "opportunity_kind": "Fellowship",
     "deadline_or_window": "Rolling / Open",
     "link_policy": {
@@ -1407,7 +1407,14 @@
       "platform": ""
     },
     "entry_type": "posting",
-    "reverify_after": "2026-11-03"
+    "reverify_after": "2026-11-03",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "duplicate title shared with /jobs/mittal-family-climate-fellowship-program-fundsforngos",
+      "date": "2026-10-23",
+      "source": "audit_and_sanitize.py"
+    }
   },
   {
     "id": "chief-of-partnerships-unaccc-vadodara",
