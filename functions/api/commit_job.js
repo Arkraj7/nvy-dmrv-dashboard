@@ -685,7 +685,7 @@ export async function deleteJobRecord(applyUrl, env) {
     };
   }
 
-  return { ok: false, status: 404, error: "not_found", detail: "No record matched that URL or job ID. Use the apply_url exactly as stored, or the /jobs/{id} page URL." };
+  return { ok: false, status: 404, error: "not_found", detail: "No record matched. Use the exact apply_url from the registry, or the /jobs/{id} page URL (e.g. https://www.urbanforestpark.com/jobs/my-job-id)." };
 }
 
 export async function onRequestPost(context) {
