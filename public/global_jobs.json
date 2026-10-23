@@ -1,5 +1,46 @@
 [
   {
+    "clean_title": "Duplicate check - no write",
+    "organization": "Existing role check",
+    "city": "",
+    "state": "",
+    "country": "Global",
+    "region": "Global / Remote",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "1-3 Years",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "31 December 2026",
+    "valid_through": "2026-12-31",
+    "qualification_summary": "Test only",
+    "compensation_or_fellowship": "Not disclosed",
+    "role_summary": "Test only",
+    "key_responsibilities": [
+      "Test only"
+    ],
+    "must_have_skills": [],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://reliefweb.int/job/4233172/women-building-power-for-climate-justice-lead",
+    "org_website": "https://reliefweb.int",
+    "org_domain": "reliefweb.int",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-10-23",
+    "date_posted": "2026-10-23",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-23",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://reliefweb.int/job/4233172/women-building-power-for-climate-justice-lead"
+    },
+    "id": "duplicate-check-no-write-existing-role-check"
+  },
+  {
     "id": "women-building-power-for-climate-justice-lead-womin",
     "date_added": "2026-10-23",
     "date_posted": "Fri, 09 Oct 2026 07:53:18 +0000",
