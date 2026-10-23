@@ -47,7 +47,11 @@
 💰 *Fellowship/Pay:* Fully funded
 🕒 *Apply before:* 2026-11-22
 
+<<<<<<< Updated upstream
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham
+=======
+🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/fully-funded-phd-nottingham-university-of-nottingham
+>>>>>>> Stashed changes
 
 6. 📌 *PG Diploma in Wildlife*
 🏛️ *Organization:* Wildlife Institute of India (WII)

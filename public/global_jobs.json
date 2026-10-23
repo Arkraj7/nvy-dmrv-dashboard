@@ -13,6 +13,7 @@
     "deadline_or_window": "Rolling / Open",
     "region": "UN / Multilateral",
     "country": "Global",
+<<<<<<< Updated upstream
     "qualification_summary": "Enrolled graduate students or recent graduates in international relations, environmental studies, or related fields.",
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "role_summary": "The United Nations University Junior Fellows program provides graduate students with direct exposure to international policy research and academic administration. Fellows support senior researchers in addressing global challenges including sustainability, climate change, and international governance. This role is designed to bridge the gap between academic theory and practical application within the United Nations system.",
@@ -31,6 +32,26 @@
       "Data Collection"
     ],
     "application_tip": "Focus your application on how your specific academic research aligns with the current UNU research themes. Highlight any previous experience in drafting policy-oriented documents or working in multicultural environments.",
+=======
+    "qualification_summary": "Enrolled in or recently completed a graduate degree in social sciences, environmental studies, or international relations.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The United Nations University Junior Fellows program provides graduate students with hands-on experience in research and policy development within the UN system. Fellows work directly with senior staff to support ongoing projects related to sustainability and global governance. This opportunity is designed for individuals seeking to build a professional foundation in international environmental policy and academic research.",
+    "key_responsibilities": [
+      "Assist senior researchers with data collection and literature reviews",
+      "Support the organization of academic workshops and policy seminars",
+      "Draft reports and briefing notes for UNU project teams",
+      "Contribute to the development of sustainability-focused research publications"
+    ],
+    "must_have_skills": [
+      "Academic Writing",
+      "Policy Research",
+      "Data Analysis",
+      "International Relations",
+      "Sustainability Studies",
+      "Project Coordination"
+    ],
+    "application_tip": "Focus your application on how your specific academic research aligns with the current thematic priorities of the United Nations University. Ensure your CV clearly highlights any previous experience with international organizations or policy-oriented projects.",
+>>>>>>> Stashed changes
     "apply_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
     "org_website": "https://ias.unu.edu",
     "org_domain": "ias.unu.edu",
@@ -41,7 +62,11 @@
     "employer_id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
     "status": "active",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-10-23T06:33:44.082303+00:00",
+=======
+      "verified_at": "2026-10-23T06:55:18.467214+00:00",
+>>>>>>> Stashed changes
       "final_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
       "final_host": "opportunitydesk.org",
       "http_status": 403,
@@ -56,7 +81,11 @@
     "link_policy": {
       "policy_version": 2,
       "reason_code": "UNKNOWN_KEEP",
+<<<<<<< Updated upstream
       "checked_at": "2026-10-23T06:33:44.082303+00:00"
+=======
+      "checked_at": "2026-10-23T06:55:18.467214+00:00"
+>>>>>>> Stashed changes
     },
     "reverify_after": "2026-11-07",
     "valid_through": "2026-11-22"
@@ -75,6 +104,7 @@
     "deadline_or_window": "Rolling / Open",
     "region": "North America",
     "country": "United States",
+<<<<<<< Updated upstream
     "qualification_summary": "PhD in biology, genomics, bioinformatics, or a related field.",
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "role_summary": "The Smithsonian Institution invites early-career researchers to apply for this fellowship focused on advancing biodiversity genomics. Fellows will work with interdisciplinary teams to analyze genomic data and address critical questions in conservation biology. This program provides access to extensive biological collections and state-of-the-art laboratory facilities to support innovative research projects that contribute to our understanding of global biodiversity.",
@@ -94,6 +124,27 @@
       "Scientific Writing"
     ],
     "application_tip": "Ensure your research proposal aligns clearly with the current genomic collections and expertise available at the Smithsonian. Emphasize how your previous work demonstrates technical proficiency in bioinformatics.",
+=======
+    "qualification_summary": "PhD in genomics, evolutionary biology, biodiversity, or a closely related field.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Smithsonian Institution invites applications for a postdoctoral fellowship focused on biodiversity genomics. Fellows will conduct independent research using the institution's extensive biological collections and genomic facilities. This program supports scholars aiming to advance understanding of global biodiversity patterns through innovative genetic and molecular analysis techniques. Participants engage with leading experts across various Smithsonian research centers during their tenure.",
+    "key_responsibilities": [
+      "Conduct independent research on biodiversity genomics",
+      "Utilize Smithsonian biological collections for genetic analysis",
+      "Collaborate with Smithsonian scientists and research staff",
+      "Contribute to ongoing genomic data projects",
+      "Disseminate research findings through peer-reviewed publications"
+    ],
+    "must_have_skills": [
+      "Genomics",
+      "Evolutionary Biology",
+      "Bioinformatics",
+      "Biodiversity Research",
+      "Molecular Biology",
+      "Data Analysis"
+    ],
+    "application_tip": "Focus your research proposal on how your work specifically utilizes the unique biological collections held by the Smithsonian. Ensure your technical skills in bioinformatics align with the specific genomic tools available at the host laboratory.",
+>>>>>>> Stashed changes
     "apply_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
     "org_website": "https://www.si.edu",
     "org_domain": "si.edu",
@@ -103,7 +154,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-10-23T06:33:17.374077+00:00",
+=======
+      "verified_at": "2026-10-23T06:54:52.498861+00:00",
+>>>>>>> Stashed changes
       "final_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
       "final_host": "www2.fundsforngos.org",
       "http_status": 403,
@@ -118,6 +173,7 @@
     "link_policy": {
       "policy_version": 2,
       "reason_code": "UNKNOWN_KEEP",
+<<<<<<< Updated upstream
       "checked_at": "2026-10-23T06:33:17.374077+00:00"
     },
     "reverify_after": "2026-11-07",
@@ -174,6 +230,9 @@
       "policy_version": 2,
       "reason_code": "OK",
       "checked_at": "2026-10-23T06:33:05.966950+00:00"
+=======
+      "checked_at": "2026-10-23T06:54:52.498861+00:00"
+>>>>>>> Stashed changes
     },
     "reverify_after": "2026-11-07",
     "valid_through": "2026-11-22"
@@ -192,6 +251,7 @@
     "deadline_or_window": "Rolling / Open",
     "region": "Global / Remote",
     "country": "Global",
+<<<<<<< Updated upstream
     "qualification_summary": "Open to climate entrepreneurs and innovators with scalable sustainability solutions.",
     "compensation_or_fellowship": "See official call",
     "role_summary": "The Mittal Family Climate Fellowship supports innovators dedicated to addressing urgent climate challenges through scalable solutions. Fellows receive mentorship and resources to refine their projects and increase their environmental impact. This program is designed for individuals seeking to transition their climate-focused ideas into viable, long-term ventures that contribute to global sustainability and carbon reduction goals.",
@@ -200,16 +260,34 @@
       "Participate in mentorship and capacity-building sessions",
       "Engage with a global network of climate professionals",
       "Document and report on project progress and impact"
+=======
+    "qualification_summary": "Open to climate entrepreneurs and innovators worldwide with scalable solutions.",
+    "compensation_or_fellowship": "See official call",
+    "role_summary": "The Mittal Family Climate Fellowship supports innovators dedicated to addressing urgent climate challenges through scalable solutions. Fellows receive access to resources, mentorship, and networking opportunities to accelerate their impact on environmental sustainability. This program is designed for individuals seeking to refine their climate-focused ventures while connecting with a global community of peers and industry experts in the sustainability sector.",
+    "key_responsibilities": [
+      "Develop and scale innovative climate-focused solutions",
+      "Participate in mentorship and professional development sessions",
+      "Engage with a global network of climate innovators",
+      "Report on project milestones and environmental impact",
+      "Collaborate with stakeholders to advance sustainability goals"
+>>>>>>> Stashed changes
     ],
     "must_have_skills": [
       "Climate Entrepreneurship",
       "Sustainability Strategy",
       "Project Management",
       "Impact Assessment",
+<<<<<<< Updated upstream
       "Innovation Design",
       "Renewable Energy Systems"
     ],
     "application_tip": "Focus your application on the scalability and measurable environmental impact of your proposed climate solution. Ensure your project aligns clearly with the foundation's core mission of sustainable development.",
+=======
+      "Innovation Management",
+      "Strategic Networking"
+    ],
+    "application_tip": "Focus your application on the specific scalability of your climate solution and how this fellowship will help you overcome current growth barriers. Ensure your proposal clearly aligns with the foundation's core environmental mission.",
+>>>>>>> Stashed changes
     "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
     "org_website": "https://mittalfamilyfoundation.org",
     "org_domain": "mittalfamilyfoundation.org",
@@ -220,7 +298,11 @@
     "employer_id": "mittal-family-foundation",
     "status": "active",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-10-23T06:33:23.304773+00:00",
+=======
+      "verified_at": "2026-10-23T06:54:58.617461+00:00",
+>>>>>>> Stashed changes
       "final_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
       "final_host": "www2.fundsforngos.org",
       "http_status": 403,
@@ -235,13 +317,21 @@
     "link_policy": {
       "policy_version": 2,
       "reason_code": "UNKNOWN_KEEP",
+<<<<<<< Updated upstream
       "checked_at": "2026-10-23T06:33:23.304773+00:00"
+=======
+      "checked_at": "2026-10-23T06:54:58.617461+00:00"
+>>>>>>> Stashed changes
     },
     "reverify_after": "2026-11-07",
     "valid_through": "2026-11-22"
   },
   {
+<<<<<<< Updated upstream
     "id": "fully-funded-phd-community-challenges-nottingham",
+=======
+    "id": "fully-funded-phd-nottingham-university-of-nottingham",
+>>>>>>> Stashed changes
     "date_added": "2026-10-23",
     "clean_title": "Fully Funded PhD Opportunities in Community Challenges",
     "organization": "University of Nottingham",
@@ -256,6 +346,7 @@
     "country": "United Kingdom",
     "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
     "compensation_or_fellowship": "Fully funded",
+<<<<<<< Updated upstream
     "role_summary": "The University of Nottingham invites applications for its final round of fully funded PhD positions. These research roles focus on addressing specific community challenges through academic inquiry and practical engagement. Candidates will work alongside faculty to develop solutions that have a direct impact on local social and environmental sustainability within the Nottingham region.",
     "key_responsibilities": [
       "Conduct original research on designated community challenges",
@@ -265,6 +356,18 @@
     ],
     "must_have_skills": [],
     "application_tip": "Ensure your research proposal clearly aligns with the specific community challenges identified by the university. Highlight any previous experience working with local community groups or social impact projects.",
+=======
+    "role_summary": "The University of Nottingham is offering a final round of fully funded PhD positions focused on addressing pressing community challenges. These research opportunities encourage candidates to apply academic rigor to practical, real-world problems within the local area. Selected scholars will work closely with community stakeholders to develop sustainable solutions that improve social and environmental outcomes for residents.",
+    "key_responsibilities": [
+      "Conduct original doctoral research on community-based challenges",
+      "Engage with local stakeholders to identify key problem areas",
+      "Develop evidence-based solutions for social and environmental issues",
+      "Participate in university seminars and research dissemination activities",
+      "Produce high-quality academic publications and project reports"
+    ],
+    "must_have_skills": [],
+    "application_tip": "Focus your research proposal on how your specific academic background can directly address the identified community challenges. Ensure you clearly articulate the tangible impact your research will have on local residents.",
+>>>>>>> Stashed changes
     "apply_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
     "org_website": "https://www.nottingham.ac.uk",
     "org_domain": "nottingham.ac.uk",
@@ -274,11 +377,19 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-10-23T06:33:30.635543+00:00",
       "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
       "final_host": "www.nottingham.ac.uk",
       "http_status": 200,
       "content_hash": "78615b331dcd93f7119fb1c7f1c5a518",
+=======
+      "verified_at": "2026-10-23T06:55:05.553573+00:00",
+      "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
+      "final_host": "www.nottingham.ac.uk",
+      "http_status": 200,
+      "content_hash": "544a0a20bb942ab5eaa708894bfd7f62",
+>>>>>>> Stashed changes
       "evidence_snippet": "News - Nottingham’s universities invite local residents to apply for final round of fully funded PhD opportunities tackling real community challenges - University of Nottingham UK China Malaysia Main ",
       "entry_type": "posting",
       "host_class": "unknown_host",
@@ -289,7 +400,11 @@
     "link_policy": {
       "policy_version": 2,
       "reason_code": "OK",
+<<<<<<< Updated upstream
       "checked_at": "2026-10-23T06:33:30.635543+00:00"
+=======
+      "checked_at": "2026-10-23T06:55:05.553573+00:00"
+>>>>>>> Stashed changes
     },
     "reverify_after": "2026-11-07",
     "valid_through": "2026-11-22"

@@ -22,7 +22,11 @@ Today's verified picks (6):
 
 5. Fully Funded PhD Opportunities in Community Challenges — University of Nottingham
 📍 Nottingham, UK · Apply by 2026-11-22
+<<<<<<< Updated upstream
 🔗 https://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham
+=======
+🔗 https://www.urbanforestpark.com/jobs/fully-funded-phd-nottingham-university-of-nottingham
+>>>>>>> Stashed changes
 
 6. PG Diploma in Wildlife — Wildlife Institute of India (WII)
 📍 Dehradun, Uttarakhand · Apply by 2026-11-19
