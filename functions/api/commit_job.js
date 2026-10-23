@@ -484,7 +484,8 @@ async function writeRegistry(repo, path, list, sha, token, message) {
   return { payload: await response.json() };
 }
 
-export async function commitJobRecord(job, jurisdiction, env) {
+export async function commitJobRecord(job, jurisdiction, env, options) {
+  const force = !!(options && options.force);
   const runtimeEnv = env || {};
   const token = githubToken(runtimeEnv);
   if (!token) return { ok: false, status: 503, error: "github_not_configured" };
@@ -528,22 +529,24 @@ export async function commitJobRecord(job, jurisdiction, env) {
   const allExisting = [...existing, ...(otherRegistry.list || [])];
   const applyUrl = record.apply_url.toLowerCase();
   const identity = roleIdentity(record);
-  for (const item of allExisting) {
-    if (clean(item && item.apply_url).toLowerCase() === applyUrl) {
-      return {
-        ok: false,
-        status: 409,
-        error: "duplicate_application_url",
-        existing: clean(item.id),
-      };
-    }
-    if (identity && roleIdentity(item) === identity) {
-      return {
-        ok: false,
-        status: 409,
-        error: "duplicate_role",
-        existing: clean(item.id),
-      };
+  if (!force) {
+    for (const item of allExisting) {
+      if (clean(item && item.apply_url).toLowerCase() === applyUrl) {
+        return {
+          ok: false,
+          status: 409,
+          error: "duplicate_application_url",
+          existing: clean(item.id),
+        };
+      }
+      if (identity && roleIdentity(item) === identity) {
+        return {
+          ok: false,
+          status: 409,
+          error: "duplicate_role",
+          existing: clean(item.id),
+        };
+      }
     }
   }
 
@@ -582,6 +585,99 @@ export async function commitJobRecord(job, jurisdiction, env) {
       : `${SITE}/`,
     rebuild_required: true,
   };
+}
+
+export async function updateJobRecord(job, jurisdiction, env) {
+  const runtimeEnv = env || {};
+  const token = githubToken(runtimeEnv);
+  if (!token) return { ok: false, status: 503, error: "github_not_configured" };
+
+  const registryName = clean(jurisdiction).toLowerCase();
+  if (!["india", "global"].includes(registryName)) {
+    return { ok: false, status: 422, error: "invalid_jurisdiction", allowed: ["india", "global"] };
+  }
+  if (!job || typeof job !== "object" || Array.isArray(job)) {
+    return { ok: false, status: 422, error: "missing_job" };
+  }
+
+  const built = buildRecord(job, registryName);
+  if (built.error) return { ok: false, status: 422, error: built.error };
+  const newRecord = built.record;
+
+  const repo = repoName(runtimeEnv);
+  const path = registryName === "global" ? "public/global_jobs.json" : "public/jobs.json";
+  const registry = await readRegistry(repo, path, token);
+  if (registry.error) {
+    return { ok: false, status: 502, error: registry.error, upstream_status: registry.status };
+  }
+
+  const existing = registry.list;
+  const applyUrl = newRecord.apply_url.toLowerCase();
+  const index = existing.findIndex((item) => clean(item && item.apply_url).toLowerCase() === applyUrl);
+  if (index === -1) {
+    return { ok: false, status: 404, error: "not_found", detail: "No existing record with this application URL." };
+  }
+
+  const oldRecord = existing[index];
+  const updated = { ...oldRecord, ...newRecord, id: oldRecord.id, date_added: oldRecord.date_added };
+  existing[index] = updated;
+
+  const written = await writeRegistry(
+    repo, path, existing, registry.sha, token,
+    `fix(registry): update ${updated.clean_title} via Telegram intake`
+  );
+  if (written.error) {
+    return { ok: false, status: written.status === 409 ? 409 : 502, error: written.error, upstream_status: written.status, detail: written.detail };
+  }
+
+  return {
+    ok: true, status: 200, id: updated.id, path, registry: registryName,
+    commit: written.payload && written.payload.commit && written.payload.commit.sha,
+    job_url: `${SITE}/jobs/${encodeURIComponent(updated.id)}`,
+    registry_url: registryName === "global" ? `${SITE}/global-climate-sustainability-opportunities.html` : `${SITE}/`,
+    rebuild_required: true, updated: true,
+  };
+}
+
+export async function deleteJobRecord(applyUrl, env) {
+  const runtimeEnv = env || {};
+  const token = githubToken(runtimeEnv);
+  if (!token) return { ok: false, status: 503, error: "github_not_configured" };
+
+  const url = safeHttpUrl(applyUrl);
+  if (!url) return { ok: false, status: 422, error: "invalid_application_url" };
+  const target = url.toLowerCase();
+
+  const repo = repoName(runtimeEnv);
+  const paths = ["public/jobs.json", "public/global_jobs.json"];
+  for (const path of paths) {
+    const registry = await readRegistry(repo, path, token);
+    if (registry.error) continue;
+    const existing = registry.list;
+    const index = existing.findIndex((item) => clean(item && item.apply_url).toLowerCase() === target);
+    if (index === -1) continue;
+
+    const removed = existing[index];
+    existing.splice(index, 1);
+
+    const written = await writeRegistry(
+      repo, path, existing, registry.sha, token,
+      `chore(registry): delete ${removed.clean_title} via Telegram intake`
+    );
+    if (written.error) {
+      return { ok: false, status: written.status === 409 ? 409 : 502, error: written.error, upstream_status: written.status, detail: written.detail };
+    }
+
+    return {
+      ok: true, status: 200, id: removed.id, path,
+      registry: path === "public/global_jobs.json" ? "global" : "india",
+      commit: written.payload && written.payload.commit && written.payload.commit.sha,
+      job_url: `${SITE}/jobs/${encodeURIComponent(removed.id)}`,
+      rebuild_required: true, deleted: true,
+    };
+  }
+
+  return { ok: false, status: 404, error: "not_found", detail: "No record with this application URL." };
 }
 
 export async function onRequestPost(context) {

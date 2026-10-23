@@ -29,7 +29,7 @@ import {
   normalizeJob,
   parseModelJson,
 } from "./parse_flyer.js";
-import { commitJobRecord } from "./commit_job.js";
+import { commitJobRecord, updateJobRecord, deleteJobRecord } from "./commit_job.js";
 
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-2.5-flash";
@@ -202,6 +202,14 @@ function jurisdictionFrom(text) {
     return "global";
   }
   return "india";
+}
+
+function modeFrom(text) {
+  const haystack = String(text || "").toLowerCase();
+  if (/#delete\b/.test(haystack)) return "delete";
+  if (/#update\b/.test(haystack)) return "update";
+  if (/#force\b/.test(haystack)) return "force";
+  return "create";
 }
 
 function decodeEntities(text) {
@@ -501,6 +509,12 @@ async function handleUpdate(update, env) {
       "Add <code>#global</code> for an international role; otherwise I use India.",
       `Your chat ID: <code>${escapeHtml(chatId)}</code>`,
       "I extract the job facts and publish them directly to the registry. Duplicates are rejected automatically.",
+  "",
+  "Commands:",
+  "• #delete <url> — remove a record by its apply URL",
+  "• #update <url> + new details — replace an existing record",
+  "• #force — publish even if a duplicate is detected",
+  "• #global — target the global registry (add to any message)",
     ].join("\n");
     await sendMessage(env, chatId, intro);
     return { ok: true, command: "start" };
@@ -516,7 +530,25 @@ async function handleUpdate(update, env) {
     return { ok: false, error: "not_authorised" };
   }
 
+  const mode = modeFrom(text);
   const jurisdiction = jurisdictionFrom(text);
+
+  // #delete: remove a record by its application URL (no extraction needed)
+  if (mode === "delete") {
+    const url = extractUrl(text);
+    if (!url) {
+      await sendMessage(env, chatId, "Send <code>#delete</code> followed by the job's application URL.");
+      return { ok: false, error: "missing_url" };
+    }
+    const result = await deleteJobRecord(url, env);
+    if (result.ok) {
+      await sendMessage(env, chatId, `🗑️ Deleted <b>${escapeHtml(result.id)}</b> from the ${result.registry} registry.${result.commit ? " Commit: " + escapeHtml(result.commit.slice(0, 7)) : ""}`);
+    } else {
+      await sendMessage(env, chatId, `⚠️ Could not delete: ${result.error || "unknown error"}${result.detail ? " — " + escapeHtml(result.detail) : ""}`);
+    }
+    return { ok: result.ok, mode: "delete", deleted: result.ok, error: result.ok ? null : result.error };
+  }
+
   let media = null;
   let sourceUrl = extractUrl(text);
   let combinedText = text;
@@ -589,23 +621,32 @@ async function handleUpdate(update, env) {
     return { ok: false, error: extracted.error };
   }
 
-  const committed = await commitJobRecord(extracted.job, jurisdiction, env);
+  const force = mode === "force";
+  const isUpdate = mode === "update";
+
+  const committed = isUpdate
+    ? await updateJobRecord(extracted.job, jurisdiction, env)
+    : await commitJobRecord(extracted.job, jurisdiction, env, { force });
+
   const jurisdictionHint = extracted.job.country && extracted.job.country !== "India" && jurisdiction === "india"
     ? `\n\n⚠️ Extracted country is ${escapeHtml(extracted.job.country)} but no #global tag was used — added to the India registry. Resend with #global for international roles.`
     : "";
-  const published = committed.ok
-    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}).` +
-      (committed.job_url ? `\n🔗 Registry: ${committed.registry_url}` : "") +
-      jurisdictionHint +
-      "\n<i>The job page, badge counts, and hub listings refresh automatically within a few minutes.</i>"
-    : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.` + jurisdictionHint;
+  const statusLine = committed.ok
+    ? isUpdate
+      ? `\n\n🔄 Updated ${committed.id} in the ${committed.registry} registry.` + jurisdictionHint +
+        "\n<i>The job page, badge counts, and hub listings refresh automatically within a few minutes.</i>"
+      : `\n\n✅ Added to ${committed.registry} registry (${committed.id}).` + jurisdictionHint +
+        "\n<i>The job page, badge counts, and hub listings refresh automatically within a few minutes.</i>"
+    : `\n\n⚠️ Could not ${isUpdate ? "update" : "publish"}: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.` + jurisdictionHint;
 
-  const sent = await sendMessage(env, chatId, formatJob(extracted.job) + published);
+  const sent = await sendMessage(env, chatId, formatJob(extracted.job) + statusLine);
   return {
     ok: true,
     job: extracted.job,
     model: extracted.model,
     published: committed.ok,
+    updated: committed.ok && isUpdate,
+    mode,
     commit: committed.commit,
     path: committed.path,
     job_url: committed.job_url,
