@@ -1,5 +1,54 @@
 [
   {
+    "clean_title": "Women Building Power for Climate Justice Lead",
+    "organization": "WoMin",
+    "city": "Remote",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "region": "",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Senior",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "09 November 2026",
+    "valid_through": "2026-11-09",
+    "qualification_summary": "The role requires experience in climate justice and leadership within women-led movements.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Women Building Power for Climate Justice Lead will spearhead efforts to empower women within the climate justice movement. This position involves coordinating strategic advocacy and building capacity for women-led organizations globally. The successful candidate will work to ensure that gender perspectives are central to climate policy and community-based climate action initiatives.",
+    "key_responsibilities": [
+      "Lead initiatives focused on women building power for climate justice",
+      "Coordinate advocacy efforts and movement building",
+      "Manage project deliverables and stakeholder engagement"
+    ],
+    "must_have_skills": [
+      "Climate Justice",
+      "Leadership",
+      "Advocacy",
+      "Project Management",
+      "Gender Equality"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://reliefweb.int/job/4233172/women-building-power-climate-justice-lead",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://reliefweb.int/job/4233172/women-building-power-climate-justice-lead"
+    },
+    "id": "women-building-power-for-climate-justice-lead-womin"
+  },
+  {
     "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
     "date_added": "2026-10-22",
     "clean_title": "Programme Lead / Senior Programme Associate - Clean Energy",
