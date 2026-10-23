@@ -500,7 +500,7 @@ async function handleUpdate(update, env) {
       "",
       "Add <code>#global</code> for an international role; otherwise I use India.",
       `Your chat ID: <code>${escapeHtml(chatId)}</code>`,
-      "I extract the job facts and send them back for review. Nothing is published automatically.",
+      "I extract the job facts and publish them directly to the registry. Duplicates are rejected automatically.",
     ].join("\n");
     await sendMessage(env, chatId, intro);
     return { ok: true, command: "start" };
@@ -597,7 +597,7 @@ async function handleUpdate(update, env) {
     ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}).` +
       (committed.job_url ? `\n🔗 Registry: ${committed.registry_url}` : "") +
       jurisdictionHint +
-      "\n<i>The job page and badge counts update after the next pipeline run.</i>"
+      "\n<i>The job page, badge counts, and hub listings refresh automatically within a few minutes.</i>"
     : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.` + jurisdictionHint;
 
   const sent = await sendMessage(env, chatId, formatJob(extracted.job) + published);
