@@ -846,7 +846,7 @@ check('global hub headings render in the serif stack', await page.evaluate(() =>
 /* Drawer script + institutional email on hub, legal and dashboard surfaces. */
 for (const path of ['/esg-carbon-sustainability-jobs.html', '/privacy.html', '/dashboard.html']) {
   await page.goto(BASE + path, { waitUntil: 'domcontentloaded' });
-  check('syndication drawer loaded on ' + path, await page.locator('script[src="/js/syndication-drawer.js"]').count() === 1);
+  check('syndication drawer loaded on ' + path, await page.locator('script[src^="/js/syndication-drawer.js"]').count() === 1);
 }
 await page.goto(BASE + '/privacy.html', { waitUntil: 'domcontentloaded' });
 check('legal pages carry the institutional email', (await page.locator('body').innerText()).includes('urbanforestpark@gmail.com'));

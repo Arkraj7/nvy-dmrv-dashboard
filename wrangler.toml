@@ -9,4 +9,4 @@ pages_build_output_dir = "dist"
 GITHUB_REPO = "Arkraj7/nvy-dmrv-dashboard"
 # SHA-256 of the Syndication Desk passphrase. This is a server-side gate for
 # /api/parse_flyer and /api/commit_job; it is not the passphrase itself.
-SYNDICATION_PASSPHRASE_SHA256 = "358dc445f18f1c5a6f13af6aba6e7fdad57d541b14264c572978b27f862462e2"
+SYNDICATION_PASSPHRASE_SHA256 = "c7fb53fe0e4080c222faa7272b03ed6d53b888fa66c9645307c27267fe6068c5"

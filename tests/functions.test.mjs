@@ -10,7 +10,7 @@ import {
   onRequestPost as telegramWebhook,
 } from "../functions/api/telegram.js";
 
-const DESK_HASH = "358dc445f18f1c5a6f13af6aba6e7fdad57d541b14264c572978b27f862462e2";
+const DESK_HASH = "c7fb53fe0e4080c222faa7272b03ed6d53b888fa66c9645307c27267fe6068c5";
 
 function request(path, body) {
   return new Request(`https://www.urbanforestpark.com${path}`, {

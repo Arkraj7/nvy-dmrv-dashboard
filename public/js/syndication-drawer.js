@@ -26,7 +26,7 @@
   'use strict';
 
   /* SHA-256 of the desk passphrase (change both together if you rotate it). */
-  var PASS_SHA256 = '358dc445f18f1c5a6f13af6aba6e7fdad57d541b14264c572978b27f862462e2';
+  var PASS_SHA256 = 'c7fb53fe0e4080c222faa7272b03ed6d53b888fa66c9645307c27267fe6068c5';
   var UNLOCK_KEY = 'ufp_syndication_ok';
   var HASH_KEY = 'ufp_syndication_hash';
   var MAX_FLYER_BYTES = 8 * 1024 * 1024;

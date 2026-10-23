@@ -486,7 +486,7 @@ def _page_shell(
 {body}
   <script defer src="/js/consent.js"></script>
   <script defer src="/js/back-to-top.js"></script>
-  <script defer src="/js/syndication-drawer.js"></script>
+  <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
 </html>
 """

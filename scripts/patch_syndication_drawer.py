@@ -16,7 +16,7 @@ from __future__ import annotations
 import pathlib
 import sys
 
-TAG = '<script defer src="/js/syndication-drawer.js"></script>'
+TAG = '<script defer src="/js/syndication-drawer.js?v=20261023-1"></script>'
 MARKER = "/js/syndication-drawer.js"
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
