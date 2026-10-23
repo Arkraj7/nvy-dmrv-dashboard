@@ -1,57 +1,28 @@
 {
-<<<<<<< Updated upstream
-  "last_updated": "2026-10-23T12:03:56+05:30",
-  "last_updated_ist": "2026-10-23T12:03:56+05:30",
-=======
-  "last_updated": "2026-10-23T12:23:29+05:30",
-  "last_updated_ist": "2026-10-23T12:23:29+05:30",
->>>>>>> Stashed changes
+  "last_updated": "2026-10-23T14:01:07+05:30",
+  "last_updated_ist": "2026-10-23T14:01:07+05:30",
   "last_pipeline_run_date_ist": "2026-10-23",
-  "active_open_jobs": 82,
-  "opened_this_week": 72,
+  "active_open_jobs": 81,
+  "opened_this_week": 71,
   "passed_this_week": 2,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 88,
+  "total_historical_indexed": 87,
   "last_telegram_broadcast_date": "2026-10-23",
   "recent_telegram_job_ids": [
     "phd-research-sustainable-rurban-food-systems-atree",
-    "wildlife-trade-forensics-course-wii",
-    "wildlife-enthusiasts-course-wii",
-    "sustainable-finance-specialist-unep-india",
-    "senior-energy-researcher-and-policy-consultant-wsp-india",
-    "research-intern-sustainable-food-systems-ceew",
-    "research-associate-maharashtra-atree",
-    "regional-health-and-wash-coordinator-terre-des-hommes",
-    "program-manager-water-supply-planet-water-foundation",
-    "product-manager-sustainability-climate-ai-msci",
-    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
     "director-brahmaputra-programme-wwf-india",
     "programme-lead-senior-programme-associate-clean-energy-ifore",
     "project-associate-geospatial-modelling-urban-heat-island-nrsc",
-    "gund-institute-funded-phd-competition-university-of-vermont",
-    "biology-phd-programme-iiser",
+    "chevening-scholarships-masters",
+    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
     "head-director-national-conservation-programme-wwf-india",
     "manager-special-projects-sustainability-united-breweries",
-    "international-course-on-heritage-conservation-wii",
-    "junior-research-fellow-bsi",
-    "junior-research-fellow-gbu",
-    "assistant-manager-horticulture-adani-natural-resources",
-    "chief-of-partnerships-unaccc-vadodara",
-    "project-associate-geospatial-urban-green-infrastructure-atree",
-<<<<<<< Updated upstream
-    "fully-funded-phd-community-challenges-nottingham",
-=======
-    "fully-funded-phd-nottingham-university-of-nottingham",
->>>>>>> Stashed changes
-    "pg-diploma-in-wildlife-wii",
-    "satluj-river-basin-assessment-tnc",
-    "mittal-family-climate-fellowship-program",
-    "dean-anant-school-for-climate-action-ahmedabad",
-    "doctoral-student-iit-guwahati"
+    "biology-phd-programme-iiser",
+    "international-course-on-heritage-conservation-wii"
   ],
   "by_category": {
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 10,
+      "active": 9,
       "archived": 1
     },
     "Academic, JRF, SRF & PhD Positions": {
@@ -106,19 +77,15 @@
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "junior-research-fellow-gbu",
-    "assistant-manager-horticulture-adani-natural-resources",
-    "chief-of-partnerships-unaccc-vadodara",
-    "project-associate-geospatial-urban-green-infrastructure-atree",
-<<<<<<< Updated upstream
-    "fully-funded-phd-community-challenges-nottingham",
-=======
-    "fully-funded-phd-nottingham-university-of-nottingham",
->>>>>>> Stashed changes
-    "pg-diploma-in-wildlife-wii",
-    "satluj-river-basin-assessment-tnc",
-    "mittal-family-climate-fellowship-program",
-    "dean-anant-school-for-climate-action-ahmedabad",
-    "doctoral-student-iit-guwahati"
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "director-brahmaputra-programme-wwf-india",
+    "programme-lead-senior-programme-associate-clean-energy-ifore",
+    "project-associate-geospatial-modelling-urban-heat-island-nrsc",
+    "chevening-scholarships-masters",
+    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
+    "head-director-national-conservation-programme-wwf-india",
+    "manager-special-projects-sustainability-united-breweries",
+    "biology-phd-programme-iiser",
+    "international-course-on-heritage-conservation-wii"
   ]
 }

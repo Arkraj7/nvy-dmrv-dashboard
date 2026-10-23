@@ -1,604 +1,5 @@
 [
   {
-    "id": "unu-junior-fellows-internship-2027-united-nations-university",
-    "date_added": "2026-10-23",
-    "clean_title": "United Nations University (UNU) Junior Fellows Internship 2027",
-    "organization": "United Nations University",
-    "state": "",
-    "city": "Tokyo, Japan",
-    "category": "Internships & Student Traineeships",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "Fellowship / Internship",
-    "opportunity_kind": "Internship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "UN / Multilateral",
-    "country": "Global",
-<<<<<<< Updated upstream
-    "qualification_summary": "Enrolled graduate students or recent graduates in international relations, environmental studies, or related fields.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The United Nations University Junior Fellows program provides graduate students with direct exposure to international policy research and academic administration. Fellows support senior researchers in addressing global challenges including sustainability, climate change, and international governance. This role is designed to bridge the gap between academic theory and practical application within the United Nations system.",
-    "key_responsibilities": [
-      "Assist senior academic staff with ongoing research projects",
-      "Draft reports and policy briefs on global sustainability issues",
-      "Support the organization of international workshops and seminars",
-      "Conduct literature reviews and data collection for UNU publications"
-    ],
-    "must_have_skills": [
-      "International Relations",
-      "Policy Analysis",
-      "Academic Writing",
-      "Environmental Governance",
-      "Research Methodology",
-      "Data Collection"
-    ],
-    "application_tip": "Focus your application on how your specific academic research aligns with the current UNU research themes. Highlight any previous experience in drafting policy-oriented documents or working in multicultural environments.",
-=======
-    "qualification_summary": "Enrolled in or recently completed a graduate degree in social sciences, environmental studies, or international relations.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The United Nations University Junior Fellows program provides graduate students with hands-on experience in research and policy development within the UN system. Fellows work directly with senior staff to support ongoing projects related to sustainability and global governance. This opportunity is designed for individuals seeking to build a professional foundation in international environmental policy and academic research.",
-    "key_responsibilities": [
-      "Assist senior researchers with data collection and literature reviews",
-      "Support the organization of academic workshops and policy seminars",
-      "Draft reports and briefing notes for UNU project teams",
-      "Contribute to the development of sustainability-focused research publications"
-    ],
-    "must_have_skills": [
-      "Academic Writing",
-      "Policy Research",
-      "Data Analysis",
-      "International Relations",
-      "Sustainability Studies",
-      "Project Coordination"
-    ],
-    "application_tip": "Focus your application on how your specific academic research aligns with the current thematic priorities of the United Nations University. Ensure your CV clearly highlights any previous experience with international organizations or policy-oriented projects.",
->>>>>>> Stashed changes
-    "apply_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
-    "org_website": "https://ias.unu.edu",
-    "org_domain": "ias.unu.edu",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "posting",
-    "employer_id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
-    "status": "active",
-    "verification": {
-<<<<<<< Updated upstream
-      "verified_at": "2026-10-23T06:33:44.082303+00:00",
-=======
-      "verified_at": "2026-10-23T06:55:18.467214+00:00",
->>>>>>> Stashed changes
-      "final_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
-      "final_host": "opportunitydesk.org",
-      "http_status": 403,
-      "content_hash": "",
-      "evidence_snippet": "",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "UNKNOWN_KEEP",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "UNKNOWN_KEEP",
-<<<<<<< Updated upstream
-      "checked_at": "2026-10-23T06:33:44.082303+00:00"
-=======
-      "checked_at": "2026-10-23T06:55:18.467214+00:00"
->>>>>>> Stashed changes
-    },
-    "reverify_after": "2026-11-07",
-    "valid_through": "2026-11-22"
-  },
-  {
-    "id": "smithsonian-biodiversity-genomics-postdoctoral-fellowship",
-    "date_added": "2026-10-23",
-    "clean_title": "Smithsonian Biodiversity Genomics Postdoctoral Fellowship Program",
-    "organization": "Smithsonian Institution",
-    "state": "",
-    "city": "Washington, D.C.",
-    "category": "Fellowships & Leadership Programs",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "PhD / Doctoral Fellowship",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "North America",
-    "country": "United States",
-<<<<<<< Updated upstream
-    "qualification_summary": "PhD in biology, genomics, bioinformatics, or a related field.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The Smithsonian Institution invites early-career researchers to apply for this fellowship focused on advancing biodiversity genomics. Fellows will work with interdisciplinary teams to analyze genomic data and address critical questions in conservation biology. This program provides access to extensive biological collections and state-of-the-art laboratory facilities to support innovative research projects that contribute to our understanding of global biodiversity.",
-    "key_responsibilities": [
-      "Conduct independent research in biodiversity genomics",
-      "Collaborate with Smithsonian curators and scientists",
-      "Analyze large-scale genomic datasets",
-      "Publish research findings in peer-reviewed journals",
-      "Participate in institutional research seminars"
-    ],
-    "must_have_skills": [
-      "Genomics",
-      "Bioinformatics",
-      "Molecular Biology",
-      "Data Analysis",
-      "Conservation Science",
-      "Scientific Writing"
-    ],
-    "application_tip": "Ensure your research proposal aligns clearly with the current genomic collections and expertise available at the Smithsonian. Emphasize how your previous work demonstrates technical proficiency in bioinformatics.",
-=======
-    "qualification_summary": "PhD in genomics, evolutionary biology, biodiversity, or a closely related field.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The Smithsonian Institution invites applications for a postdoctoral fellowship focused on biodiversity genomics. Fellows will conduct independent research using the institution's extensive biological collections and genomic facilities. This program supports scholars aiming to advance understanding of global biodiversity patterns through innovative genetic and molecular analysis techniques. Participants engage with leading experts across various Smithsonian research centers during their tenure.",
-    "key_responsibilities": [
-      "Conduct independent research on biodiversity genomics",
-      "Utilize Smithsonian biological collections for genetic analysis",
-      "Collaborate with Smithsonian scientists and research staff",
-      "Contribute to ongoing genomic data projects",
-      "Disseminate research findings through peer-reviewed publications"
-    ],
-    "must_have_skills": [
-      "Genomics",
-      "Evolutionary Biology",
-      "Bioinformatics",
-      "Biodiversity Research",
-      "Molecular Biology",
-      "Data Analysis"
-    ],
-    "application_tip": "Focus your research proposal on how your work specifically utilizes the unique biological collections held by the Smithsonian. Ensure your technical skills in bioinformatics align with the specific genomic tools available at the host laboratory.",
->>>>>>> Stashed changes
-    "apply_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
-    "org_website": "https://www.si.edu",
-    "org_domain": "si.edu",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "posting",
-    "status": "active",
-    "verification": {
-<<<<<<< Updated upstream
-      "verified_at": "2026-10-23T06:33:17.374077+00:00",
-=======
-      "verified_at": "2026-10-23T06:54:52.498861+00:00",
->>>>>>> Stashed changes
-      "final_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
-      "final_host": "www2.fundsforngos.org",
-      "http_status": 403,
-      "content_hash": "",
-      "evidence_snippet": "",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "UNKNOWN_KEEP",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "UNKNOWN_KEEP",
-<<<<<<< Updated upstream
-      "checked_at": "2026-10-23T06:33:17.374077+00:00"
-    },
-    "reverify_after": "2026-11-07",
-    "valid_through": "2026-11-22"
-  },
-  {
-    "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
-    "date_added": "2026-10-23",
-    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
-    "organization": "Simons Foundation",
-    "state": "",
-    "city": "New York, USA",
-    "category": "Academic, JRF, SRF & PhD Positions",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "Faculty / Academic",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "Global / Remote",
-    "country": "United States",
-    "qualification_summary": "Ph.D. in the relevant discipline with teaching / research experience, as per UGC norms",
-    "compensation_or_fellowship": "As per institute norms",
-    "role_summary": "The Simons Foundation invites applications for postdoctoral fellowships focused on advancing research in plant biology. This program supports early-career scientists conducting innovative studies that address fundamental biological questions. Successful candidates will gain access to specialized resources and mentorship to further their academic research careers within the broader environmental and biological sciences community.",
-    "key_responsibilities": [
-      "Conduct independent research in plant biology",
-      "Develop and execute experimental study designs",
-      "Collaborate with senior faculty and research teams",
-      "Publish research findings in peer-reviewed journals"
-    ],
-    "must_have_skills": [],
-    "application_tip": "Ensure your research proposal aligns clearly with the foundation's focus on fundamental biological mechanisms. Emphasize how your previous work demonstrates high potential for independent academic inquiry.",
-    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-    "org_website": "https://www.simonsfoundation.org",
-    "org_domain": "simonsfoundation.org",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "award_portal",
-    "employer_id": "simons-foundation",
-    "status": "active",
-    "verification": {
-      "verified_at": "2026-10-23T06:33:05.966950+00:00",
-      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-      "final_host": "www.simonsfoundation.org",
-      "http_status": 200,
-      "content_hash": "626786dbf96dc1a165cacf9d693eba65",
-      "evidence_snippet": "Applications Open for Simons Postdoctoral Fellowships in Plant Biology – Simons Foundation Skip to content Simons Foundation T he Simons Foundation’s Life Sciences division is now accepting applicatio",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "OK",
-      "checked_at": "2026-10-23T06:33:05.966950+00:00"
-=======
-      "checked_at": "2026-10-23T06:54:52.498861+00:00"
->>>>>>> Stashed changes
-    },
-    "reverify_after": "2026-11-07",
-    "valid_through": "2026-11-22"
-  },
-  {
-    "id": "mittal-family-climate-fellowship-program-fundsforngos",
-    "date_added": "2026-10-23",
-    "clean_title": "Mittal Family Climate Fellowship Program",
-    "organization": "Mittal Family Foundation",
-    "state": "",
-    "city": "Remote (Global)",
-    "category": "Fellowships & Leadership Programs",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "Fellowship / Internship",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "Global / Remote",
-    "country": "Global",
-<<<<<<< Updated upstream
-    "qualification_summary": "Open to climate entrepreneurs and innovators with scalable sustainability solutions.",
-    "compensation_or_fellowship": "See official call",
-    "role_summary": "The Mittal Family Climate Fellowship supports innovators dedicated to addressing urgent climate challenges through scalable solutions. Fellows receive mentorship and resources to refine their projects and increase their environmental impact. This program is designed for individuals seeking to transition their climate-focused ideas into viable, long-term ventures that contribute to global sustainability and carbon reduction goals.",
-    "key_responsibilities": [
-      "Develop and scale climate-focused innovation projects",
-      "Participate in mentorship and capacity-building sessions",
-      "Engage with a global network of climate professionals",
-      "Document and report on project progress and impact"
-=======
-    "qualification_summary": "Open to climate entrepreneurs and innovators worldwide with scalable solutions.",
-    "compensation_or_fellowship": "See official call",
-    "role_summary": "The Mittal Family Climate Fellowship supports innovators dedicated to addressing urgent climate challenges through scalable solutions. Fellows receive access to resources, mentorship, and networking opportunities to accelerate their impact on environmental sustainability. This program is designed for individuals seeking to refine their climate-focused ventures while connecting with a global community of peers and industry experts in the sustainability sector.",
-    "key_responsibilities": [
-      "Develop and scale innovative climate-focused solutions",
-      "Participate in mentorship and professional development sessions",
-      "Engage with a global network of climate innovators",
-      "Report on project milestones and environmental impact",
-      "Collaborate with stakeholders to advance sustainability goals"
->>>>>>> Stashed changes
-    ],
-    "must_have_skills": [
-      "Climate Entrepreneurship",
-      "Sustainability Strategy",
-      "Project Management",
-      "Impact Assessment",
-<<<<<<< Updated upstream
-      "Innovation Design",
-      "Renewable Energy Systems"
-    ],
-    "application_tip": "Focus your application on the scalability and measurable environmental impact of your proposed climate solution. Ensure your project aligns clearly with the foundation's core mission of sustainable development.",
-=======
-      "Innovation Management",
-      "Strategic Networking"
-    ],
-    "application_tip": "Focus your application on the specific scalability of your climate solution and how this fellowship will help you overcome current growth barriers. Ensure your proposal clearly aligns with the foundation's core environmental mission.",
->>>>>>> Stashed changes
-    "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
-    "org_website": "https://mittalfamilyfoundation.org",
-    "org_domain": "mittalfamilyfoundation.org",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "posting",
-    "employer_id": "mittal-family-foundation",
-    "status": "active",
-    "verification": {
-<<<<<<< Updated upstream
-      "verified_at": "2026-10-23T06:33:23.304773+00:00",
-=======
-      "verified_at": "2026-10-23T06:54:58.617461+00:00",
->>>>>>> Stashed changes
-      "final_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
-      "final_host": "www2.fundsforngos.org",
-      "http_status": 403,
-      "content_hash": "",
-      "evidence_snippet": "",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "UNKNOWN_KEEP",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "UNKNOWN_KEEP",
-<<<<<<< Updated upstream
-      "checked_at": "2026-10-23T06:33:23.304773+00:00"
-=======
-      "checked_at": "2026-10-23T06:54:58.617461+00:00"
->>>>>>> Stashed changes
-    },
-    "reverify_after": "2026-11-07",
-    "valid_through": "2026-11-22"
-  },
-  {
-<<<<<<< Updated upstream
-    "id": "fully-funded-phd-community-challenges-nottingham",
-=======
-    "id": "fully-funded-phd-nottingham-university-of-nottingham",
->>>>>>> Stashed changes
-    "date_added": "2026-10-23",
-    "clean_title": "Fully Funded PhD Opportunities in Community Challenges",
-    "organization": "University of Nottingham",
-    "state": "",
-    "city": "Nottingham, UK",
-    "category": "Scholarships & Doctoral Support",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "PhD / Doctoral Fellowship",
-    "opportunity_kind": "Scholarship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "Europe",
-    "country": "United Kingdom",
-    "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
-    "compensation_or_fellowship": "Fully funded",
-<<<<<<< Updated upstream
-    "role_summary": "The University of Nottingham invites applications for its final round of fully funded PhD positions. These research roles focus on addressing specific community challenges through academic inquiry and practical engagement. Candidates will work alongside faculty to develop solutions that have a direct impact on local social and environmental sustainability within the Nottingham region.",
-    "key_responsibilities": [
-      "Conduct original research on designated community challenges",
-      "Collaborate with local stakeholders and faculty supervisors",
-      "Develop evidence-based solutions for social and environmental issues",
-      "Produce high-quality academic publications and project reports"
-    ],
-    "must_have_skills": [],
-    "application_tip": "Ensure your research proposal clearly aligns with the specific community challenges identified by the university. Highlight any previous experience working with local community groups or social impact projects.",
-=======
-    "role_summary": "The University of Nottingham is offering a final round of fully funded PhD positions focused on addressing pressing community challenges. These research opportunities encourage candidates to apply academic rigor to practical, real-world problems within the local area. Selected scholars will work closely with community stakeholders to develop sustainable solutions that improve social and environmental outcomes for residents.",
-    "key_responsibilities": [
-      "Conduct original doctoral research on community-based challenges",
-      "Engage with local stakeholders to identify key problem areas",
-      "Develop evidence-based solutions for social and environmental issues",
-      "Participate in university seminars and research dissemination activities",
-      "Produce high-quality academic publications and project reports"
-    ],
-    "must_have_skills": [],
-    "application_tip": "Focus your research proposal on how your specific academic background can directly address the identified community challenges. Ensure you clearly articulate the tangible impact your research will have on local residents.",
->>>>>>> Stashed changes
-    "apply_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
-    "org_website": "https://www.nottingham.ac.uk",
-    "org_domain": "nottingham.ac.uk",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "posting",
-    "status": "active",
-    "verification": {
-<<<<<<< Updated upstream
-      "verified_at": "2026-10-23T06:33:30.635543+00:00",
-      "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
-      "final_host": "www.nottingham.ac.uk",
-      "http_status": 200,
-      "content_hash": "78615b331dcd93f7119fb1c7f1c5a518",
-=======
-      "verified_at": "2026-10-23T06:55:05.553573+00:00",
-      "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
-      "final_host": "www.nottingham.ac.uk",
-      "http_status": 200,
-      "content_hash": "544a0a20bb942ab5eaa708894bfd7f62",
->>>>>>> Stashed changes
-      "evidence_snippet": "News - Nottingham’s universities invite local residents to apply for final round of fully funded PhD opportunities tackling real community challenges - University of Nottingham UK China Malaysia Main ",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "OK",
-<<<<<<< Updated upstream
-      "checked_at": "2026-10-23T06:33:30.635543+00:00"
-=======
-      "checked_at": "2026-10-23T06:55:05.553573+00:00"
->>>>>>> Stashed changes
-    },
-    "reverify_after": "2026-11-07",
-    "valid_through": "2026-11-22"
-  },
-  {
-    "id": "simons-postdoctoral-fellowships-plant-biology-simons-foundat",
-    "date_added": "2026-10-22",
-    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
-    "organization": "Simons Foundation",
-    "state": "",
-    "city": "New York, United States",
-    "category": "Fellowships & Leadership Programs",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "Fellowship / Internship",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "North America",
-    "country": "United States",
-    "qualification_summary": "Recent graduate / postgraduate in the relevant discipline, as per the fellowship norms",
-    "compensation_or_fellowship": "As per institute norms",
-    "role_summary": "This prestigious fellowship supports early-career postdoctoral scientists conducting rigorous research across plant biology, genetics, and botanical sciences. Selected fellows pursue experimental investigations into plant developmental processes, environmental adaptations, and fundamental organismal physiology. The funding program provides institutional support and salary stipends to cultivate emerging leaders in plant science globally.",
-    "key_responsibilities": [
-      "Design and execute innovative laboratory or field research projects in plant biology.",
-      "Investigate plant molecular mechanisms, physiological adaptations, or ecological interactions.",
-      "Publish peer-reviewed findings in top-tier biological and botanical journals.",
-      "Collaborate with faculty mentors and institutional colleagues at host research facilities.",
-      "Participate in scientific symposia and annual gatherings convened by the foundation."
-    ],
-    "must_have_skills": [],
-    "application_tip": "Carefully align your proposed research project with foundational questions in plant biology rather than purely applied agriculture. Ensure your chosen sponsor lab provides strong institutional commitment and mentoring capacity.",
-    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-    "org_website": "https://www.simonsfoundation.org",
-    "org_domain": "simonsfoundation.org",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "award_portal",
-    "employer_id": "simons-foundation",
-    "status": "quarantined",
-    "verification": {
-      "verified_at": "2026-10-22T07:53:31.580458+00:00",
-      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-      "final_host": "www.simonsfoundation.org",
-      "http_status": 200,
-      "content_hash": "0b73acc42c01554db8f57b3fa7553d0e",
-      "evidence_snippet": "Applications Open for Simons Postdoctoral Fellowships in Plant Biology – Simons Foundation Skip to content Simons Foundation T he Simons Foundation’s Life Sciences division is now accepting applicatio",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "OK",
-      "checked_at": "2026-10-22T07:53:31.580458+00:00"
-    },
-    "reverify_after": "2026-11-06",
-    "valid_through": "2026-11-21",
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason": "seo_job_page",
-      "detail": "duplicate title shared with /jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
-      "date": "2026-10-22",
-      "source": "audit_and_sanitize.py"
-    }
-  },
-  {
-    "id": "gund-institute-funded-phd-competition-university-of-vermont",
-    "date_added": "2026-10-22",
-    "clean_title": "Gund Institute Funded PhD Competition",
-    "organization": "University of Vermont",
-    "state": "",
-    "city": "Burlington, Vermont",
-    "category": "Scholarships & Doctoral Support",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "PhD / Doctoral Fellowship",
-    "opportunity_kind": "Scholarship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "North America",
-    "country": "USA",
-    "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
-    "compensation_or_fellowship": "As per institute norms",
-    "role_summary": "The Gund Institute for Environment at the University of Vermont invites applications for its fully funded PhD program. This opportunity focuses on interdisciplinary research addressing global environmental challenges through rigorous academic inquiry. Successful candidates will join a collaborative community dedicated to sustainability, climate change, and biodiversity conservation while working alongside leading faculty members on high-impact projects.",
-    "key_responsibilities": [
-      "Conduct original interdisciplinary research on environmental sustainability",
-      "Collaborate with faculty mentors on specific climate or conservation projects",
-      "Participate in academic seminars and departmental workshops",
-      "Contribute to the institute's research publications and dissemination efforts"
-    ],
-    "must_have_skills": [],
-    "application_tip": "Focus your research proposal on how your specific interests align with the Gund Institute's core themes of climate, health, and sustainable enterprise. Ensure your academic references can speak directly to your potential for independent research.",
-    "apply_url": "https://www.uvm.edu/gund/news/gund-institute-funded-phd-competition-now-open-0",
-    "org_website": "https://www.uvm.edu/gund",
-    "org_domain": "uvm.edu",
-    "source_portal": "Official Organisation Website",
-    "global": true,
-    "evergreen": false,
-    "entry_type": "award_portal",
-    "status": "active",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:04.879253+00:00",
-      "final_url": "https://www.uvm.edu/gund/news/gund-institute-funded-phd-competition-now-open-0",
-      "final_host": "www.uvm.edu",
-      "http_status": 200,
-      "content_hash": "dc40add6198ac7f7420b620b916bc636",
-      "entry_type": "award_portal",
-      "host_class": "government_notice",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "link_policy": {
-      "policy_version": 2,
-      "reason_code": "OK",
-      "checked_at": "2026-10-22T06:05:22.006377+00:00"
-    },
-    "reverify_after": "2026-11-06",
-    "valid_through": "2026-11-21"
-  },
-  {
-    "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
-    "date_added": "2026-10-20",
-    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
-    "organization": "Simons Foundation",
-    "state": "",
-    "city": "New York, USA",
-    "category": "Academic, JRF, SRF & PhD Positions",
-    "experience_level": "Entry Level / Fellowship",
-    "position_type": "PhD / Doctoral Fellowship",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "region": "North America",
-    "country": "USA",
-    "qualification_summary": "PhD in Plant Biology, Botany, or related life sciences required.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The Simons Foundation invites applications for postdoctoral fellowships focused on advancing research in plant biology. Selected fellows will conduct independent research projects that address fundamental questions in plant science and ecological resilience. This program supports early-career scientists aiming to transition into independent academic or research roles within the global scientific community.",
-    "key_responsibilities": [
-      "Conduct original research in plant biology",
-      "Collaborate with leading academic mentors",
-      "Publish findings in peer-reviewed journals",
-      "Participate in foundation-led scientific symposia"
-    ],
-    "must_have_skills": [
-      "Plant Biology",
-      "Molecular Botany",
-      "Genomics",
-      "Scientific Writing",
-      "Experimental Design",
-      "Data Analysis"
-    ],
-    "application_tip": "Highlight how your proposed research aligns with the foundation's specific interest in fundamental biological mechanisms. Ensure your publication record is clearly articulated in your CV.",
-    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-    "org_website": "https://www.simonsfoundation.org",
-    "org_domain": "simonsfoundation.org",
-    "source_portal": "Official Organization Website",
-    "_qualification_is_default": false,
-    "_compensation_is_default": false,
-    "_deadline_is_default": false,
-    "global": true,
-    "evergreen": false,
-    "status": "quarantined",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "FIELD_NOT_IN_SOURCE",
-      "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.982215+00:00",
-      "platform": ""
-    },
-    "entry_type": "award_portal",
-    "reverify_after": "2026-11-04",
-    "valid_through": "2026-11-19",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:05.283219+00:00",
-      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
-      "final_host": "www.simonsfoundation.org",
-      "http_status": 200,
-      "content_hash": "c2616364e1c5df165b1117e863bce326",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    },
-    "status_before_quarantine": "active",
-    "quarantine": {
-      "reason": "seo_job_page",
-      "detail": "duplicate title shared with /jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
-      "date": "2026-10-23",
-      "source": "audit_and_sanitize.py"
-    }
-  },
-  {
     "state": "",
     "global": true,
     "evergreen": true,
@@ -637,17 +38,8 @@
     "apply_url": "https://zayedsustainabilityprize.org/",
     "org_website": "https://zayedsustainabilityprize.org",
     "org_domain": "zayedsustainabilityprize.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "NEEDS_MANUAL_CHECK",
-      "reason_code": "NOT_DIRECT_LINK",
-      "checked_at": "2026-10-20T10:19:57.970016+00:00",
-      "platform": ""
-    },
-    "entry_type": "careers_portal"
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -688,20 +80,8 @@
     "apply_url": "https://www.wri.org/careers",
     "org_website": "https://wri-india.org",
     "org_domain": "wri-india.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "careers_portal",
-    "employer_id": "world-resources-institute-wri",
-    "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
-      "final_url": "https://www.wri.org/careers",
-      "final_host": "www.wri.org",
-      "http_status": 200,
-      "content_hash": "62c8e702da0a94b7263eacee9a6237d0",
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "verifier": "verify_link"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -742,29 +122,71 @@
     "apply_url": "https://www.worldbank.org/en/about/careers",
     "org_website": "https://www.worldbank.org",
     "org_domain": "worldbank.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "GENERIC_LANDING_PAGE",
-      "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.980214+00:00",
-      "platform": ""
-    },
-    "entry_type": "careers_portal",
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
+  },
+  {
+    "id": "unu-junior-fellows-internship-2027-united-nations-university",
+    "date_added": "2026-10-23",
+    "clean_title": "United Nations University (UNU) Junior Fellows Internship 2027",
+    "organization": "United Nations University",
+    "state": "",
+    "city": "Remote (Global)",
+    "category": "Internships & Student Traineeships",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Internship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "UN / Multilateral",
+    "country": "Global",
+    "qualification_summary": "Current graduate students or recent graduates in international relations, environmental studies, or related social sciences.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The United Nations University Junior Fellows program provides early-career individuals with exposure to global policy research and academic administration. Fellows contribute to ongoing projects related to sustainability, climate change, and international development. This position is designed for those seeking to build professional experience within the UN system while developing skills in research, policy analysis, and collaborative project management.",
+    "key_responsibilities": [
+      "Support research initiatives on sustainable development goals",
+      "Assist in the organization of academic workshops and seminars",
+      "Draft policy briefs and internal reports for UNU departments",
+      "Coordinate with international research teams on climate projects",
+      "Maintain databases for ongoing environmental policy studies"
+    ],
+    "must_have_skills": [
+      "Policy Research",
+      "Academic Writing",
+      "International Relations",
+      "Sustainability Analysis",
+      "Project Coordination",
+      "Data Analysis"
+    ],
+    "application_tip": "Highlight your specific academic research projects that align with UNU's current focus areas like climate change or sustainable development. Ensure your CV clearly demonstrates your ability to synthesize complex information into concise reports.",
+    "apply_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
+    "org_website": "https://ias.unu.edu",
+    "org_domain": "ias.unu.edu",
+    "source_portal": "Official Organisation Website",
+    "global": true,
+    "evergreen": false,
+    "entry_type": "posting",
+    "employer_id": "united-nations-university-institute-for-the-advanced-study-of-sustainability-unuias",
+    "status": "active",
     "verification": {
-      "verified_at": "2026-10-22T23:30:05.450913+00:00",
-      "final_url": "https://www.worldbank.org/ext/en/careers",
-      "final_host": "www.worldbank.org",
-      "http_status": 200,
-      "content_hash": "f313695e89074436e9573b59d9e152ae",
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
+      "verified_at": "2026-10-23T08:33:09.725183+00:00",
+      "final_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
+      "final_host": "opportunitydesk.org",
+      "http_status": 403,
+      "content_hash": "",
+      "evidence_snippet": "",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "UNKNOWN_KEEP",
       "platform": "",
       "verifier": "verify_link_v2"
-    }
+    },
+    "link_policy": {
+      "policy_version": 2,
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-23T08:33:09.725183+00:00"
+    },
+    "reverify_after": "2026-11-07",
+    "valid_through": "2026-11-22"
   },
   {
     "state": "",
@@ -805,29 +227,8 @@
     "apply_url": "https://unfccc.int/about-us/internships",
     "org_website": "https://unfccc.int",
     "org_domain": "unfccc.int",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "GENERIC_LANDING_PAGE",
-      "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.984213+00:00",
-      "platform": ""
-    },
-    "entry_type": "posting",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:09.158773+00:00",
-      "final_url": "https://unfccc.int/about-us/internships",
-      "final_host": "unfccc.int",
-      "http_status": 200,
-      "content_hash": "bf485aba9fead6610b68644a8c35960f",
-      "entry_type": "posting",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -868,20 +269,8 @@
     "apply_url": "https://sgp.undp.org/",
     "org_website": "https://www.thegef.org",
     "org_domain": "thegef.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "careers_portal",
-    "employer_id": "global-environment-facility-small-grants-programme-sgp-implemented-by-undp",
-    "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
-      "final_url": "https://sgp.undp.org/",
-      "final_host": "sgp.undp.org",
-      "http_status": 200,
-      "content_hash": "803ea9c331df31e54108920ac3475d5d",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "verifier": "verify_link"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -922,29 +311,188 @@
     "apply_url": "https://jobs.undp.org/cj_view_jobs.cfm",
     "org_website": "https://www.undp.org",
     "org_domain": "undp.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
+  },
+  {
+    "id": "smithsonian-biodiversity-genomics-postdoctoral-fellowship",
+    "date_added": "2026-10-23",
+    "clean_title": "Smithsonian Biodiversity Genomics Postdoctoral Fellowship Program",
+    "organization": "Smithsonian Institution",
+    "state": "",
+    "city": "Washington, D.C.",
+    "category": "Fellowships & Leadership Programs",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "North America",
+    "country": "United States",
+    "qualification_summary": "PhD in genomics, evolutionary biology, biodiversity, or a closely related field.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The Smithsonian Institution invites applications for a postdoctoral fellowship focused on biodiversity genomics. Fellows conduct independent research utilizing the vast biological collections and genomic facilities available at the Smithsonian. This program supports scholars aiming to advance the understanding of evolutionary biology and species conservation through advanced molecular techniques. Successful candidates will collaborate with leading experts in the field.",
+    "key_responsibilities": [
+      "Conduct independent research on biodiversity genomics",
+      "Utilize Smithsonian biological collections for data analysis",
+      "Collaborate with institutional scientists and curators",
+      "Publish research findings in peer-reviewed journals",
+      "Participate in institutional seminars and academic workshops"
+    ],
+    "must_have_skills": [
+      "Genomics",
+      "Evolutionary Biology",
+      "Bioinformatics",
+      "Biodiversity Conservation",
+      "Molecular Biology",
+      "Data Analysis"
+    ],
+    "application_tip": "Focus your proposal on how your specific research questions align with the unique biological collections held at the Smithsonian. Ensure your methodology clearly demonstrates the use of genomic tools to address pressing conservation challenges.",
+    "apply_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
+    "org_website": "https://www.si.edu",
+    "org_domain": "si.edu",
+    "source_portal": "Official Organisation Website",
+    "global": true,
+    "evergreen": false,
+    "entry_type": "posting",
+    "status": "active",
+    "verification": {
+      "verified_at": "2026-10-23T08:32:32.528766+00:00",
+      "final_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
+      "final_host": "www2.fundsforngos.org",
+      "http_status": 403,
+      "content_hash": "",
+      "evidence_snippet": "",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "UNKNOWN_KEEP",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
     "link_policy": {
       "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "GENERIC_LANDING_PAGE",
       "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.983232+00:00",
-      "platform": ""
+      "checked_at": "2026-10-23T08:32:32.528766+00:00"
     },
-    "entry_type": "careers_portal",
+    "reverify_after": "2026-11-07",
+    "valid_through": "2026-11-22"
+  },
+  {
+    "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
+    "date_added": "2026-10-23",
+    "clean_title": "Simons Postdoctoral Fellowships in Plant Biology",
+    "organization": "Simons Foundation",
+    "state": "",
+    "city": "Remote (Global)",
+    "category": "Academic, JRF, SRF & PhD Positions",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "Global / Remote",
+    "country": "Global",
+    "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
+    "compensation_or_fellowship": "As per institute norms",
+    "role_summary": "The Simons Foundation invites applications for postdoctoral fellowships focused on advancing research in plant biology. This program supports early-career scientists conducting innovative studies that address fundamental questions in plant systems and environmental adaptation. Fellows will have the opportunity to collaborate with leading experts while developing independent research projects that contribute to the broader understanding of plant life and sustainability.",
+    "key_responsibilities": [
+      "Conduct independent research in plant biology",
+      "Collaborate with international research teams",
+      "Publish findings in peer-reviewed scientific journals",
+      "Present research at academic conferences",
+      "Contribute to the foundation's scientific objectives"
+    ],
+    "must_have_skills": [],
+    "application_tip": "Ensure your research proposal highlights the potential impact of your work on plant resilience and environmental science. Tailor your application to demonstrate how your specific expertise aligns with the foundation's current scientific priorities.",
+    "apply_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+    "org_website": "https://www.simonsfoundation.org",
+    "org_domain": "simonsfoundation.org",
+    "source_portal": "Official Organisation Website",
+    "global": true,
+    "evergreen": false,
+    "entry_type": "award_portal",
+    "employer_id": "simons-foundation",
+    "status": "active",
     "verification": {
-      "verified_at": "2026-10-22T23:30:10.787483+00:00",
-      "final_url": "https://jobs.undp.org/cj_view_jobs.cfm",
-      "final_host": "jobs.undp.org",
+      "verified_at": "2026-10-23T08:32:25.965276+00:00",
+      "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
+      "final_host": "www.simonsfoundation.org",
       "http_status": 200,
-      "content_hash": "a34434877458d5fb83474e529964e95f",
-      "entry_type": "careers_portal",
+      "content_hash": "b49b3676056e9e4fff559e7b91687577",
+      "evidence_snippet": "Applications Open for Simons Postdoctoral Fellowships in Plant Biology – Simons Foundation Skip to content Simons Foundation T he Simons Foundation’s Life Sciences division is now accepting applicatio",
+      "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
       "platform": "",
       "verifier": "verify_link_v2"
-    }
+    },
+    "link_policy": {
+      "policy_version": 2,
+      "reason_code": "OK",
+      "checked_at": "2026-10-23T08:32:25.965276+00:00"
+    },
+    "reverify_after": "2026-11-07",
+    "valid_through": "2026-11-22"
+  },
+  {
+    "id": "mittal-family-climate-fellowship-program-fundsforngos",
+    "date_added": "2026-10-23",
+    "clean_title": "Mittal Family Climate Fellowship Program",
+    "organization": "Mittal Family Foundation",
+    "state": "",
+    "city": "Remote (Global)",
+    "category": "Fellowships & Leadership Programs",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Fellowship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "Global / Remote",
+    "country": "Global",
+    "qualification_summary": "Open to climate entrepreneurs and innovators worldwide with a focus on scalable solutions.",
+    "compensation_or_fellowship": "See official call",
+    "role_summary": "The Mittal Family Climate Fellowship supports innovators addressing urgent climate challenges through scalable business or non-profit models. Fellows receive access to mentorship, networking opportunities, and resources to accelerate their climate-focused ventures. This program is designed for individuals seeking to transition their early-stage concepts into impactful solutions that contribute to global sustainability and carbon reduction goals.",
+    "key_responsibilities": [
+      "Develop scalable climate-focused business or non-profit models",
+      "Engage with mentors to refine project strategy and impact",
+      "Participate in global networking sessions and workshops",
+      "Report on project milestones and sustainability outcomes"
+    ],
+    "must_have_skills": [
+      "Climate Entrepreneurship",
+      "Sustainability Strategy",
+      "Project Management",
+      "Impact Assessment",
+      "Innovation Management",
+      "Stakeholder Engagement"
+    ],
+    "application_tip": "Focus your application on the scalability of your climate solution and how the fellowship will specifically help you overcome current barriers to growth.",
+    "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
+    "org_website": "https://mittalfamilyfoundation.org",
+    "org_domain": "mittalfamilyfoundation.org",
+    "source_portal": "Official Organisation Website",
+    "global": true,
+    "evergreen": false,
+    "entry_type": "posting",
+    "employer_id": "mittal-family-foundation",
+    "status": "active",
+    "verification": {
+      "verified_at": "2026-10-23T08:32:38.597114+00:00",
+      "final_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
+      "final_host": "www2.fundsforngos.org",
+      "http_status": 403,
+      "content_hash": "",
+      "evidence_snippet": "",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "UNKNOWN_KEEP",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
+    "link_policy": {
+      "policy_version": 2,
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-10-23T08:32:38.597114+00:00"
+    },
+    "reverify_after": "2026-11-07",
+    "valid_through": "2026-11-22"
   },
   {
     "state": "",
@@ -985,29 +533,8 @@
     "apply_url": "https://www.iucn.org/regions/south-america",
     "org_website": "https://www.iucn.org/regions/south-america",
     "org_domain": "iucn.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "MissingSchema",
-      "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.984213+00:00",
-      "platform": ""
-    },
-    "entry_type": "posting",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:13.310607+00:00",
-      "final_url": "https://iucn.org/our-work/region/south-america",
-      "final_host": "iucn.org",
-      "http_status": 200,
-      "content_hash": "10972ea586bfc8f1625c85797ff5915b",
-      "entry_type": "posting",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -1048,22 +575,8 @@
     "apply_url": "https://www.greenclimate.fund/about/careers",
     "org_website": "https://www.greenclimate.fund",
     "org_domain": "greenclimate.fund",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "careers_portal",
-    "employer_id": "green-climate-fund-gcf",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:13.923478+00:00",
-      "final_url": "https://www.greenclimate.fund/about/careers",
-      "final_host": "www.greenclimate.fund",
-      "http_status": 200,
-      "content_hash": "3846af141949124bff3e603bc2e25dce",
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -1104,17 +617,62 @@
     "apply_url": "https://futureearth.org/opportunities/",
     "org_website": "https://futureearth.org",
     "org_domain": "futureearth.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
+  },
+  {
+    "id": "fully-funded-phd-community-challenges-nottingham",
+    "date_added": "2026-10-23",
+    "clean_title": "Fully Funded PhD Opportunities in Community Challenges",
+    "organization": "University of Nottingham",
+    "state": "",
+    "city": "Nottingham, UK",
+    "category": "Scholarships & Doctoral Support",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Scholarship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "Europe",
+    "country": "United Kingdom",
+    "qualification_summary": "Master's degree in the relevant discipline; doctoral registration as per institute / fellowship norms (UGC-NET / GATE preferred)",
+    "compensation_or_fellowship": "Fully funded",
+    "role_summary": "The University of Nottingham invites applications for a final round of fully funded PhD positions focused on addressing pressing community challenges. These research projects aim to bridge the gap between academic inquiry and practical local impact. Candidates will work closely with community partners to develop sustainable solutions that address social and environmental needs within the region.",
+    "key_responsibilities": [
+      "Conduct independent research on specific community-based challenges",
+      "Collaborate with local stakeholders to identify practical solutions",
+      "Produce high-quality academic outputs and research reports",
+      "Participate in university seminars and community engagement activities"
+    ],
+    "must_have_skills": [],
+    "application_tip": "Focus your research proposal on how your specific academic background directly addresses the practical needs of the Nottingham community. Ensure your personal statement highlights your experience in collaborative or community-based projects.",
+    "apply_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
+    "org_website": "https://www.nottingham.ac.uk",
+    "org_domain": "nottingham.ac.uk",
+    "source_portal": "Official Organisation Website",
+    "global": true,
+    "evergreen": false,
+    "entry_type": "posting",
+    "status": "active",
+    "verification": {
+      "verified_at": "2026-10-23T08:32:52.093667+00:00",
+      "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
+      "final_host": "www.nottingham.ac.uk",
+      "http_status": 200,
+      "content_hash": "75854eac479f4361f79656284f9a02d8",
+      "evidence_snippet": "News - Nottingham’s universities invite local residents to apply for final round of fully funded PhD opportunities tackling real community challenges - University of Nottingham UK China Malaysia Main ",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
     "link_policy": {
       "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "HTTP_404",
-      "reason_code": "NOT_DIRECT_LINK",
-      "checked_at": "2026-10-20T10:19:57.980214+00:00",
-      "platform": ""
+      "reason_code": "OK",
+      "checked_at": "2026-10-23T08:32:52.093667+00:00"
     },
-    "entry_type": "careers_portal"
+    "reverify_after": "2026-11-07",
+    "valid_through": "2026-11-22"
   },
   {
     "state": "",
@@ -1155,22 +713,8 @@
     "apply_url": "https://climate.esa.int/en/",
     "org_website": "https://www.esa.int",
     "org_domain": "esa.int",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "posting",
-    "employer_id": "european-space-agency-esa-climate-office",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:15.829687+00:00",
-      "final_url": "https://climate.esa.int/en/",
-      "final_host": "climate.esa.int",
-      "http_status": 200,
-      "content_hash": "b5e151a1d1261a188fc07d4f257ef459",
-      "entry_type": "posting",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -1211,29 +755,8 @@
     "apply_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
     "org_website": "https://www.eacea.ec.europa.eu",
     "org_domain": "eacea.ec.europa.eu",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "CONTENT_MISMATCH",
-      "reason_code": "UNKNOWN_KEEP",
-      "checked_at": "2026-10-20T10:19:57.995865+00:00",
-      "platform": ""
-    },
-    "entry_type": "award_portal",
-    "verification": {
-      "verified_at": "2026-10-22T23:30:16.003544+00:00",
-      "final_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-      "final_host": "www.eacea.ec.europa.eu",
-      "http_status": 200,
-      "content_hash": "6a60c6514a6634bd68048c513fd18429",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -1274,20 +797,8 @@
     "apply_url": "https://earthshotprize.org/",
     "org_website": "https://earthshotprize.org",
     "org_domain": "earthshotprize.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "careers_portal",
-    "employer_id": "the-earthshot-prize-royal-foundation",
-    "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
-      "final_url": "https://earthshotprize.org/",
-      "final_host": "earthshotprize.org",
-      "http_status": 200,
-      "content_hash": "dcb31cb4d09421b793f055fce9539238",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "verifier": "verify_link"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   },
   {
     "state": "",
@@ -1328,19 +839,7 @@
     "apply_url": "https://www.chevening.org/scholarships/",
     "org_website": "https://www.chevening.org",
     "org_domain": "chevening.org",
-    "date_added": "2026-10-19",
-    "valid_through": "2036-10-16",
-    "entry_type": "careers_portal",
-    "employer_id": "chevening-scholarships-uk-government-fcdo",
-    "verification": {
-      "verified_at": "2026-10-20T00:00:00Z",
-      "final_url": "https://www.chevening.org/scholarships/",
-      "final_host": "www.chevening.org",
-      "http_status": 200,
-      "content_hash": "2e4fcea7caf85fb03a3e7de9fe424e75",
-      "entry_type": "award_portal",
-      "host_class": "employer_primary",
-      "verifier": "verify_link"
-    }
+    "date_added": "2026-10-23",
+    "valid_through": "2036-10-20"
   }
 ]

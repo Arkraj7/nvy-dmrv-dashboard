@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
-  "generated_at": "2026-10-23T06:33:48",
-=======
-  "generated_at": "2026-10-23T06:55:22",
->>>>>>> Stashed changes
+  "generated_at": "2026-10-23T08:33:13",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -38,20 +34,12 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-<<<<<<< Updated upstream
-      "leads": 249,
-=======
-      "leads": 283,
->>>>>>> Stashed changes
+      "leads": 286,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-<<<<<<< Updated upstream
-      "leads": 143,
-=======
       "leads": 145,
->>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -71,16 +59,7 @@
       "active": 0
     },
     "indeed": {
-<<<<<<< Updated upstream
-      "leads": 8,
-      "passed": 0,
-      "active": 0
-    },
-    "google-news": {
-      "leads": 7,
-=======
       "leads": 10,
->>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -91,14 +70,11 @@
     },
     "reliefweb-rss": {
       "leads": 7,
-<<<<<<< Updated upstream
-=======
       "passed": 0,
       "active": 0
     },
     "google-news": {
       "leads": 6,
->>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -109,11 +85,7 @@
     }
   },
   "totals": {
-<<<<<<< Updated upstream
-    "leads": 508,
-=======
-    "leads": 545,
->>>>>>> Stashed changes
+    "leads": 548,
     "passed": 0,
     "active": 0
   }
