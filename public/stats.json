@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-23T12:03:56+05:30",
-  "last_updated_ist": "2026-10-23T12:03:56+05:30",
+  "last_updated": "2026-10-23T17:14:34+05:30",
+  "last_updated_ist": "2026-10-23T17:14:34+05:30",
   "last_pipeline_run_date_ist": "2026-10-23",
-  "active_open_jobs": 82,
-  "opened_this_week": 72,
+  "active_open_jobs": 81,
+  "opened_this_week": 71,
   "passed_this_week": 2,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 88,
+  "total_historical_indexed": 87,
   "last_telegram_broadcast_date": "2026-10-23",
   "recent_telegram_job_ids": [
     "phd-research-sustainable-rurban-food-systems-atree",
@@ -42,7 +42,7 @@
   ],
   "by_category": {
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 10,
+      "active": 9,
       "archived": 1
     },
     "Academic, JRF, SRF & PhD Positions": {
@@ -94,6 +94,26 @@
     "Madhya Pradesh": 1,
     "Odisha": 1,
     "Uttar Pradesh": 1
+  },
+  "active_global_jobs": 45,
+  "active_global_portals": 13,
+  "total_global_records": 58,
+  "total_archived_global_jobs": 2,
+  "global_jobs_by_region": {
+    "Global / Remote": 7,
+    "Africa & Middle East": 15,
+    "UN / Multilateral": 3,
+    "North America": 2,
+    "Asia-Pacific": 11,
+    "Latin America": 4,
+    "Europe": 3
+  },
+  "global_jobs_by_kind": {
+    "Job / Career": 39,
+    "Fellowship": 1,
+    "Internship": 2,
+    "Grant / Funding": 1,
+    "Scholarship": 2
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [

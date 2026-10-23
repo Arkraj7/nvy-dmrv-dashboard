@@ -28,6 +28,8 @@
   /* SHA-256 of the desk passphrase (change both together if you rotate it). */
   var PASS_SHA256 = '358dc445f18f1c5a6f13af6aba6e7fdad57d541b14264c572978b27f862462e2';
   var UNLOCK_KEY = 'ufp_syndication_ok';
+  var HASH_KEY = 'ufp_syndication_hash';
+  var MAX_FLYER_BYTES = 8 * 1024 * 1024;
   var SITE = 'https://www.urbanforestpark.com';
   var FACEBOOK_PAGE = 'https://www.facebook.com/share/1EwgtMnfcx/';
   var TRACK_QS = 'utm_source=syndication&utm_medium=outbound&utm_campaign=backlink_kit';
@@ -56,6 +58,40 @@
   var roundupPre = null;
   var lastFocus = null;
   var assetsLoaded = false;
+  var deskHash = '';
+  var flyerFile = null;
+  var flyerDataUrl = '';
+  var flyerMime = '';
+  var flyerPreviewUrl = '';
+  var flyerParsed = null;
+  var flyerBusy = false;
+
+  var FLYER_CATEGORIES = [
+    'Academic, JRF, SRF & PhD Positions',
+    'Research Associate & Project Staff (Contractual)',
+    'Forestry, Wildlife & Afforestation',
+    'GIS, Remote Sensing & Earth Observation',
+    'ESG, Carbon Markets & Corporate Sustainability',
+    'Climate Policy, Think-Tanks & Fellowships',
+    'Grants & Research Funding',
+    'Scholarships & Doctoral Support',
+    'Fellowships & Leadership Programs',
+    'Internships & Student Traineeships',
+    'Competitions, Hackathons & Awards'
+  ];
+  var FLYER_POSITIONS = [
+    'JRF / SRF',
+    'PhD / Doctoral Fellowship',
+    'Project Associate / Research Associate',
+    'Young Professional / Consultant (Contractual)',
+    'Faculty / Academic',
+    'Full-Time Corporate / NGO',
+    'Fellowship / Internship'
+  ];
+  var FLYER_KINDS = [
+    'Job / Career', 'Fellowship', 'Scholarship', 'Grant / Funding',
+    'Internship', 'Competition / Award'
+  ];
 
   /* ---------------------------------------------------------------- utils */
 
@@ -90,10 +126,21 @@
     catch (e) { return false; }
   }
 
-  function setUnlocked(value) {
+  function storedHash() {
+    try { return window.sessionStorage.getItem(HASH_KEY) || ''; }
+    catch (e) { return ''; }
+  }
+
+  function setUnlocked(value, hash) {
     try {
-      if (value) window.sessionStorage.setItem(UNLOCK_KEY, '1');
-      else window.sessionStorage.removeItem(UNLOCK_KEY);
+      if (value) {
+        window.sessionStorage.setItem(UNLOCK_KEY, '1');
+        if (hash) window.sessionStorage.setItem(HASH_KEY, hash);
+      } else {
+        window.sessionStorage.removeItem(UNLOCK_KEY);
+        window.sessionStorage.removeItem(HASH_KEY);
+        deskHash = '';
+      }
     } catch (e) { /* storage unavailable: gate re-prompts on reload */ }
   }
 
@@ -197,6 +244,32 @@
       '.synd-foot{margin-top:6px;padding-top:12px;border-top:1px solid var(--border,#E2E8F0);display:flex;align-items:center;justify-content:space-between;gap:10px;}' +
       '.synd-foot small{font-size:10.5px;color:var(--ink-4,#94A3B8);}' +
       '.synd-hint{margin:10px 0 0;font-size:10.5px;color:var(--ink-4,#94A3B8);}' +
+      '.synd-drop{display:flex;align-items:center;justify-content:center;min-height:96px;padding:14px;border:1.5px dashed var(--border-2,#CBD5E1);' +
+        'border-radius:10px;background:var(--bg-2,#F1F5F9);text-align:center;cursor:pointer;transition:border-color .15s,background .15s;}' +
+      '.synd-drop:hover,.synd-drop:focus-visible,.synd-drop.is-drag{border-color:var(--accent,#065F46);background:var(--accent-soft,#ECFDF5);outline:none;}' +
+      '.synd-drop strong{display:block;font-size:12.5px;font-weight:700;color:var(--ink,#0F172A);margin-bottom:3px;}' +
+      '.synd-drop span{display:block;font-size:10.5px;line-height:1.5;color:var(--ink-3,#64748B);}' +
+      '.synd-flyer-preview{width:100%;}' +
+      '.synd-flyer-preview img{display:block;max-width:100%;max-height:190px;margin:0 auto;border-radius:8px;object-fit:contain;}' +
+      '.synd-flyer-file{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--ink-2,#334155);word-break:break-word;}' +
+      '.synd-flyer-controls{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px;margin-top:10px;}' +
+      '.synd-flyer-field{display:flex;flex-direction:column;gap:3px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3,#64748B);}' +
+      '.synd-select{padding:7px 9px;border-radius:8px;border:1px solid var(--border-2,#CBD5E1);background:var(--card,#FFFFFF);color:var(--ink,#0F172A);font:inherit;font-size:12px;}' +
+      '.synd-flyer-status{min-height:17px;margin:9px 0 0;font-size:11.5px;font-weight:600;line-height:1.5;color:var(--ink-3,#64748B);}' +
+      '.synd-flyer-status.is-error{color:#B91C1C;}' +
+      '.synd-flyer-status.is-ok{color:var(--accent,#065F46);}' +
+      '.synd-flyer-form{margin-top:12px;padding-top:12px;border-top:1px solid var(--border,#E2E8F0);}' +
+      '.synd-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}' +
+      '.synd-form-field{display:flex;flex-direction:column;gap:3px;font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3,#64748B);}' +
+      '.synd-form-field input,.synd-form-field select,.synd-form-field textarea{width:100%;box-sizing:border-box;padding:7px 9px;border-radius:8px;' +
+        'border:1px solid var(--border-2,#CBD5E1);background:var(--card,#FFFFFF);color:var(--ink,#0F172A);font:inherit;font-size:12px;' +
+        'font-weight:500;letter-spacing:0;text-transform:none;}' +
+      '.synd-form-field input:focus,.synd-form-field select:focus,.synd-form-field textarea:focus{outline:2px solid var(--accent,#065F46);outline-offset:0;}' +
+      '.synd-form-field textarea{min-height:58px;resize:vertical;line-height:1.45;}' +
+      '.synd-form-full{grid-column:1/-1;}' +
+      '.synd-form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;}' +
+      '.synd-form-actions small{font-size:10px;line-height:1.45;color:var(--ink-4,#94A3B8);}' +
+      '.synd-flyer-result{margin:8px 0 0;font-size:11.5px;line-height:1.55;color:var(--ink-2,#334155);}' +
       'html.synd-open,html.synd-open body{overflow:hidden;}' +
       '@keyframes synd-fade{from{opacity:0;}}' +
       '@keyframes synd-slide{from{transform:translateX(26px);opacity:0;}}' +
@@ -214,6 +287,19 @@
       'html[data-theme="dark"] .synd-btn-primary:hover,html.dark .synd-btn-primary:hover{background:#10B981;border-color:#10B981;color:#052E1F;}' +
       'html[data-theme="dark"] .synd-x,html.dark .synd-x{border-color:#334155;color:#94A3B8;}' +
       'html[data-theme="dark"] .synd-input,html.dark .synd-input{background:#0B0F17;border-color:#334155;color:#F1F5F9;}' +
+      'html[data-theme="dark"] .synd-drop,html.dark .synd-drop{background:#0F1522;border-color:#334155;}' +
+      'html[data-theme="dark"] .synd-drop:hover,html[data-theme="dark"] .synd-drop:focus-visible,html[data-theme="dark"] .synd-drop.is-drag,' +
+        'html.dark .synd-drop:hover,html.dark .synd-drop:focus-visible,html.dark .synd-drop.is-drag{border-color:#34D399;background:#12251F;}' +
+      'html[data-theme="dark"] .synd-drop strong,html.dark .synd-drop strong{color:#F1F5F9;}' +
+      'html[data-theme="dark"] .synd-flyer-file,html.dark .synd-flyer-file{color:#CBD5E1;}' +
+      'html[data-theme="dark"] .synd-select,html[data-theme="dark"] .synd-form-field input,' +
+        'html[data-theme="dark"] .synd-form-field select,html[data-theme="dark"] .synd-form-field textarea,' +
+        'html.dark .synd-select,html.dark .synd-form-field input,html.dark .synd-form-field select,' +
+        'html.dark .synd-form-field textarea{background:#0B0F17;border-color:#334155;color:#F1F5F9;}' +
+      'html[data-theme="dark"] .synd-flyer-form,html.dark .synd-flyer-form{border-top-color:#1E293B;}' +
+      'html[data-theme="dark"] .synd-flyer-status.is-ok,html.dark .synd-flyer-status.is-ok{color:#34D399;}' +
+      'html[data-theme="dark"] .synd-flyer-status.is-error,html.dark .synd-flyer-status.is-error{color:#FCA5A5;}' +
+      'html[data-theme="dark"] .synd-flyer-result,html.dark .synd-flyer-result{color:#CBD5E1;}' +
       'html[data-theme="dark"] .synd-gate .synd-lock,html.dark .synd-gate .synd-lock{background:#0F1522;border-color:#334155;color:#94A3B8;}' +
       'html[data-theme="dark"] .synd-status,html.dark .synd-status{background:linear-gradient(180deg,transparent,#111827 45%);color:#94A3B8;}' +
       'html[data-theme="dark"] .synd-status.is-ok,html.dark .synd-status.is-ok{color:#34D399;}' +
@@ -243,6 +329,15 @@
           '<button type="button" class="synd-btn synd-btn-sm" data-copy-text="' + esc(tracked(l.url)) + '" data-copy-msg="Tracked link copied - ' + esc(l.label) + '">Tracked</button>' +
         '</div>';
     }).join('');
+
+    function options(values) {
+      return values.map(function (value) {
+        return '<option value="' + esc(value) + '">' + esc(value) + '</option>';
+      }).join('');
+    }
+    var categoryOptions = options(FLYER_CATEGORIES);
+    var positionOptions = options(FLYER_POSITIONS);
+    var kindOptions = options(FLYER_KINDS);
 
     root.innerHTML = '' +
       '<div class="synd-backdrop" data-synd-close></div>' +
@@ -290,6 +385,86 @@
               '<pre class="synd-pre" id="synd-roundup-pre">Loading&hellip;</pre>' +
               '<button type="button" class="synd-btn synd-btn-primary" id="synd-copy-roundup">Copy roundup text</button>' +
             '</section>' +
+            '<section class="synd-card" id="synd-flyer-card">' +
+              '<h3>Ingest Image / Flyer</h3>' +
+              '<p>Drop a hiring flyer, paste a screenshot with <strong>Ctrl / Cmd + V</strong>, or choose a PDF. Gemini Vision extracts the role; every field stays editable and nothing reaches the registry until you approve it.</p>' +
+              '<div class="synd-drop" id="synd-flyer-drop" role="button" tabindex="0" aria-label="Drop a job flyer image or PDF here, or press Enter to choose a file">' +
+                '<input id="synd-flyer-file" type="file" accept="image/*,.pdf" hidden>' +
+                '<div class="synd-drop-empty" id="synd-flyer-empty">' +
+                  '<strong>Drop flyer here</strong>' +
+                  '<span>or click to choose &middot; Ctrl / Cmd + V to paste a screenshot</span>' +
+                '</div>' +
+                '<div class="synd-flyer-preview" id="synd-flyer-preview" hidden></div>' +
+              '</div>' +
+              '<div class="synd-flyer-controls">' +
+                '<label class="synd-flyer-field" for="synd-flyer-jurisdiction">Registry' +
+                  '<select class="synd-select" id="synd-flyer-jurisdiction">' +
+                    '<option value="india">India</option>' +
+                    '<option value="global">Global</option>' +
+                  '</select>' +
+                '</label>' +
+                '<button type="button" class="synd-btn synd-btn-primary" id="synd-flyer-extract" disabled>Extract Job with Gemini Vision &nearr;</button>' +
+                '<button type="button" class="synd-btn synd-btn-sm" id="synd-flyer-clear" disabled>Clear</button>' +
+              '</div>' +
+              '<p class="synd-flyer-status" id="synd-flyer-status" role="status" aria-live="polite"></p>' +
+              '<form class="synd-flyer-form" id="synd-flyer-form" hidden novalidate>' +
+                '<div class="synd-form-grid">' +
+                  '<label class="synd-form-field synd-form-full">Role title *' +
+                    '<input data-field="clean_title" type="text" maxlength="180" required>' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Organisation *' +
+                    '<input data-field="organization" type="text" maxlength="160" required>' +
+                  '</label>' +
+                  '<label class="synd-form-field">City' +
+                    '<input data-field="city" type="text" maxlength="120">' +
+                  '</label>' +
+                  '<label class="synd-form-field">State (India)' +
+                    '<input data-field="state" type="text" maxlength="120">' +
+                  '</label>' +
+                  '<label class="synd-form-field">Country' +
+                    '<input data-field="country" type="text" maxlength="90">' +
+                  '</label>' +
+                  '<label class="synd-form-field">Opportunity kind' +
+                    '<select data-field="opportunity_kind">' + kindOptions + '</select>' +
+                  '</label>' +
+                  '<label class="synd-form-field">Category' +
+                    '<select data-field="category">' + categoryOptions + '</select>' +
+                  '</label>' +
+                  '<label class="synd-form-field">Position type' +
+                    '<select data-field="position_type">' + positionOptions + '</select>' +
+                  '</label>' +
+                  '<label class="synd-form-field">Stipend / salary' +
+                    '<input data-field="stipend_or_salary" type="text" maxlength="200">' +
+                  '</label>' +
+                  '<label class="synd-form-field">Deadline' +
+                    '<input data-field="application_deadline" type="text" maxlength="80" placeholder="27 October 2026 or Rolling / Open">' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Official application URL *' +
+                    '<input data-field="application_url" type="url" maxlength="600" required placeholder="https://...">' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Organisation website' +
+                    '<input data-field="org_website" type="url" maxlength="600">' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Eligibility summary' +
+                    '<textarea data-field="qualification_summary" maxlength="500"></textarea>' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Must-have skills (comma separated)' +
+                    '<input data-field="must_have_skills" type="text" maxlength="500">' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Role summary' +
+                    '<textarea data-field="role_summary" maxlength="700"></textarea>' +
+                  '</label>' +
+                  '<label class="synd-form-field synd-form-full">Key responsibilities (one per line)' +
+                    '<textarea data-field="key_responsibilities" maxlength="1000"></textarea>' +
+                  '</label>' +
+                '</div>' +
+                '<div class="synd-form-actions">' +
+                  '<button type="submit" class="synd-btn synd-btn-primary" id="synd-flyer-approve">Approve &amp; Add to Registry</button>' +
+                  '<small>Writes through the server-side GitHub token. The live card rebuilds on the next deploy.</small>' +
+                '</div>' +
+              '</form>' +
+              '<p class="synd-flyer-result" id="synd-flyer-result" hidden></p>' +
+            '</section>' +
             '<section class="synd-card">' +
               '<h3>Backlink &amp; syndication kit</h3>' +
               '<p>Canonical hub links and channel invites. &ldquo;Tracked&rdquo; appends the syndication UTM tag for outbound posts.</p>' +
@@ -321,6 +496,7 @@
     });
     document.getElementById('synd-lock-btn').addEventListener('click', function () {
       setUnlocked(false);
+      resetFlyerPreview();
       showGate();
     });
 
@@ -346,6 +522,8 @@
         copyText(btn.getAttribute('data-copy-text'), btn.getAttribute('data-copy-msg') || 'Copied', btn);
       }
     });
+
+    initFlyerUi();
 
     /* Focus trap + Escape (document-level so it survives focus moves when
        panels hide/show inside the drawer). */
@@ -373,7 +551,8 @@
     err.textContent = '';
     sha256hex(value).then(function (hash) {
       if (hash === PASS_SHA256) {
-        setUnlocked(true);
+        deskHash = hash;
+        setUnlocked(true, hash);
         input.value = '';
         showContent();
         loadAssets();
@@ -399,6 +578,390 @@
   function showContent() {
     gateEl.hidden = true;
     contentEl.hidden = false;
+    deskHash = deskHash || storedHash();
+  }
+
+  /* ------------------------------------------------------------ flyer intake */
+
+  function setFlyerStatus(message, kind) {
+    var el = document.getElementById('synd-flyer-status');
+    if (!el) return;
+    el.textContent = message || '';
+    el.classList.toggle('is-error', kind === 'error');
+    el.classList.toggle('is-ok', kind === 'ok');
+  }
+
+  function fileSizeLabel(bytes) {
+    if (!bytes && bytes !== 0) return '';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function readAsDataUrl(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(String(reader.result || '')); };
+      reader.onerror = function () { reject(new Error('read_failed')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function resetFlyerPreview() {
+    flyerFile = null;
+    flyerDataUrl = '';
+    flyerMime = '';
+    flyerParsed = null;
+    flyerBusy = false;
+    var input = document.getElementById('synd-flyer-file');
+    if (input) input.value = '';
+    var empty = document.getElementById('synd-flyer-empty');
+    var preview = document.getElementById('synd-flyer-preview');
+    var extract = document.getElementById('synd-flyer-extract');
+    var clear = document.getElementById('synd-flyer-clear');
+    var form = document.getElementById('synd-flyer-form');
+    var result = document.getElementById('synd-flyer-result');
+    if (empty) empty.hidden = false;
+    if (preview) { preview.hidden = true; preview.innerHTML = ''; }
+    if (extract) { extract.disabled = true; extract.textContent = 'Extract Job with Gemini Vision \u2197'; }
+    if (clear) clear.disabled = true;
+    if (form) form.hidden = true;
+    if (result) { result.hidden = true; result.innerHTML = ''; }
+    setFlyerStatus('', '');
+  }
+
+  function useFlyerFile(file) {
+    if (!file) return;
+    var name = String(file.name || '');
+    var mime = String(file.type || '').toLowerCase();
+    if (!mime && /\.pdf$/i.test(name)) mime = 'application/pdf';
+    if (mime === 'image/jpg') mime = 'image/jpeg';
+    if (!/^image\//.test(mime) && mime !== 'application/pdf') {
+      setFlyerStatus('Choose an image (PNG, JPG, WebP, GIF) or a PDF flyer.', 'error');
+      return;
+    }
+    if (file.size > MAX_FLYER_BYTES) {
+      setFlyerStatus('That file is ' + fileSizeLabel(file.size) + '. The limit is 8 MB.', 'error');
+      return;
+    }
+    resetFlyerPreview();
+    var preview = document.getElementById('synd-flyer-preview');
+    var empty = document.getElementById('synd-flyer-empty');
+    var extract = document.getElementById('synd-flyer-extract');
+    var clear = document.getElementById('synd-flyer-clear');
+    setFlyerStatus('Reading ' + (name || 'flyer') + '\u2026', '');
+    readAsDataUrl(file).then(function (dataUrl) {
+      flyerFile = file;
+      flyerDataUrl = dataUrl;
+      flyerMime = mime;
+      if (empty) empty.hidden = true;
+      if (preview) {
+        preview.hidden = false;
+        if (mime === 'application/pdf') {
+          preview.innerHTML = '<div class="synd-flyer-file">PDF &middot; ' + esc(name || 'flyer.pdf') +
+            ' &middot; ' + esc(fileSizeLabel(file.size)) + '</div>';
+        } else {
+          preview.innerHTML = '<img src="' + esc(dataUrl) + '" alt="Flyer preview: ' + esc(name || 'pasted image') + '">';
+        }
+      }
+      if (extract) extract.disabled = false;
+      if (clear) clear.disabled = false;
+      setFlyerStatus('Ready. Choose India or Global, then extract the role.', '');
+    }).catch(function () {
+      resetFlyerPreview();
+      setFlyerStatus('Could not read that file. Try another image or PDF.', 'error');
+    });
+  }
+
+  function setFormValue(name, value) {
+    var form = document.getElementById('synd-flyer-form');
+    if (!form) return;
+    var el = form.querySelector('[data-field="' + name + '"]');
+    if (!el) return;
+    if (el.tagName === 'SELECT') {
+      var text = String(value == null ? '' : value);
+      var found = false;
+      for (var i = 0; i < el.options.length; i += 1) {
+        if (el.options[i].value === text) { found = true; break; }
+      }
+      if (!found && text) {
+        var option = document.createElement('option');
+        option.value = text;
+        option.textContent = text;
+        el.appendChild(option);
+      }
+      el.value = text || (el.options[0] ? el.options[0].value : '');
+    } else {
+      el.value = value == null ? '' : String(value);
+    }
+  }
+
+  function fillFlyerForm(job) {
+    var form = document.getElementById('synd-flyer-form');
+    if (!form || !job) return;
+    setFormValue('clean_title', job.clean_title);
+    setFormValue('organization', job.organization);
+    setFormValue('city', job.city);
+    setFormValue('state', job.state);
+    setFormValue('country', job.country);
+    setFormValue('category', job.category);
+    setFormValue('position_type', job.position_type);
+    setFormValue('opportunity_kind', job.opportunity_kind);
+    setFormValue('stipend_or_salary', job.stipend_or_salary);
+    setFormValue('application_deadline', job.application_deadline);
+    setFormValue('application_url', job.application_url);
+    setFormValue('org_website', job.org_website);
+    setFormValue('qualification_summary', job.qualification_summary);
+    setFormValue('must_have_skills', (job.must_have_skills || []).join(', '));
+    setFormValue('role_summary', job.role_summary);
+    setFormValue('key_responsibilities', (job.key_responsibilities || []).join('\n'));
+    if (job.jurisdiction === 'global' || job.jurisdiction === 'india') {
+      var jurisdiction = document.getElementById('synd-flyer-jurisdiction');
+      if (jurisdiction) jurisdiction.value = job.jurisdiction;
+    }
+    form.hidden = false;
+    var result = document.getElementById('synd-flyer-result');
+    if (result) { result.hidden = true; result.innerHTML = ''; }
+  }
+
+  function collectFlyerForm() {
+    var form = document.getElementById('synd-flyer-form');
+    var job = {};
+    if (!form) return job;
+    var fields = form.querySelectorAll('[data-field]');
+    for (var i = 0; i < fields.length; i += 1) {
+      var el = fields[i];
+      var key = el.getAttribute('data-field');
+      if (!key) continue;
+      var value = String(el.value || '').trim();
+      if (key === 'must_have_skills') {
+        job[key] = value.split(/[,;\n]/).map(function (item) { return item.trim(); }).filter(Boolean);
+      } else if (key === 'key_responsibilities') {
+        job[key] = value.split(/\n+/).map(function (item) { return item.trim(); }).filter(Boolean);
+      } else {
+        job[key] = value;
+      }
+    }
+    return job;
+  }
+
+  function deskPost(path, payload) {
+    if (!deskHash) {
+      return Promise.reject(new Error('desk_locked'));
+    }
+    return fetch(path, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Desk-Passphrase-SHA256': deskHash
+      },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        return { response: response, data: data || {} };
+      });
+    });
+  }
+
+  function handleDeskAuthError(response) {
+    if (response.status !== 401) return false;
+    setUnlocked(false);
+    showGate();
+    var err = document.getElementById('synd-err');
+    if (err) err.textContent = 'Session expired. Re-enter the desk passphrase.';
+    return true;
+  }
+
+  function initFlyerUi() {
+    var drop = document.getElementById('synd-flyer-drop');
+    var input = document.getElementById('synd-flyer-file');
+    var extract = document.getElementById('synd-flyer-extract');
+    var clear = document.getElementById('synd-flyer-clear');
+    var form = document.getElementById('synd-flyer-form');
+    if (!drop || !input || !extract || !clear || !form) return;
+
+    drop.addEventListener('click', function (event) {
+      if (event.target && event.target.closest && event.target.closest('#synd-flyer-file')) return;
+      input.click();
+    });
+    drop.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        input.click();
+      }
+    });
+    input.addEventListener('change', function () {
+      if (input.files && input.files[0]) useFlyerFile(input.files[0]);
+    });
+    ['dragenter', 'dragover'].forEach(function (name) {
+      drop.addEventListener(name, function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        drop.classList.add('is-drag');
+      });
+    });
+    ['dragleave', 'dragend'].forEach(function (name) {
+      drop.addEventListener(name, function (event) {
+        event.preventDefault();
+        drop.classList.remove('is-drag');
+      });
+    });
+    drop.addEventListener('drop', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      drop.classList.remove('is-drag');
+      var files = event.dataTransfer && event.dataTransfer.files;
+      if (files && files[0]) useFlyerFile(files[0]);
+    });
+
+    document.addEventListener('paste', function (event) {
+      if (!root || !root.classList.contains('is-open') || contentEl.hidden) return;
+      var items = event.clipboardData && event.clipboardData.items;
+      if (!items) return;
+      for (var i = 0; i < items.length; i += 1) {
+        if (items[i].type && items[i].type.indexOf('image/') === 0) {
+          var file = items[i].getAsFile();
+          if (file) {
+            event.preventDefault();
+            useFlyerFile(file);
+          }
+          return;
+        }
+      }
+    });
+
+    clear.addEventListener('click', function () {
+      resetFlyerPreview();
+    });
+
+    extract.addEventListener('click', function () {
+      if (flyerBusy || !flyerDataUrl || !flyerMime) return;
+      if (!deskHash) {
+        showGate();
+        var err = document.getElementById('synd-err');
+        if (err) err.textContent = 'Re-enter the desk passphrase to use Gemini Vision.';
+        return;
+      }
+      var jurisdiction = document.getElementById('synd-flyer-jurisdiction');
+      var scope = jurisdiction ? jurisdiction.value : 'india';
+      var base64 = flyerDataUrl.indexOf(',') >= 0 ? flyerDataUrl.split(',')[1] : flyerDataUrl;
+      flyerBusy = true;
+      extract.disabled = true;
+      extract.textContent = 'Reading flyer with Gemini\u2026';
+      setFlyerStatus('Gemini Vision is extracting the role and checking the flyer text\u2026', '');
+      deskPost('/api/parse_flyer', {
+        image: base64,
+        mimeType: flyerMime,
+        jurisdiction: scope
+      }).then(function (result) {
+        var response = result.response;
+        var data = result.data;
+        if (handleDeskAuthError(response)) return;
+        if (!response.ok || !data.ok) {
+          var message = data.error || ('HTTP ' + response.status);
+          if (message === 'gemini_not_configured') {
+            message = 'GEMINI_API_KEY is not configured on this deployment.';
+          } else if (message === 'desk_gate_not_configured') {
+            message = 'SYNDICATION_PASSPHRASE_SHA256 is not configured on this deployment.';
+          } else if (message === 'incomplete_extraction') {
+            message = data.detail || 'The flyer did not yield a title and organisation.';
+          } else if (message === 'gemini_rate_limited') {
+            message = 'Gemini is rate-limited right now. Wait a minute and try again.';
+          }
+          setFlyerStatus('Extraction failed: ' + message, 'error');
+          return;
+        }
+        flyerParsed = data.job || {};
+        fillFlyerForm(flyerParsed);
+        setFlyerStatus(
+          'Extracted with ' + (data.model || 'Gemini 2.5 Flash') +
+          '. Review every field, add the official application URL if it is blank, then approve.',
+          'ok'
+        );
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }).catch(function (error) {
+        setFlyerStatus(
+          error && error.message === 'desk_locked'
+            ? 'Re-enter the desk passphrase to use Gemini Vision.'
+            : 'Could not reach the extraction endpoint. Check the deployment and try again.',
+          'error'
+        );
+      }).then(function () {
+        flyerBusy = false;
+        extract.disabled = !flyerDataUrl;
+        extract.textContent = 'Extract Job with Gemini Vision \u2197';
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (flyerBusy) return;
+      var job = collectFlyerForm();
+      if (!job.clean_title || !job.organization) {
+        setFlyerStatus('Role title and organisation are required before approval.', 'error');
+        return;
+      }
+      var applyUrl = String(job.application_url || '');
+      if (!/^https?:\/\/[^\s.]+\.[^\s]+$/i.test(applyUrl)) {
+        setFlyerStatus('Add the official application URL (https://\u2026) before approval.', 'error');
+        var urlField = form.querySelector('[data-field="application_url"]');
+        if (urlField) urlField.focus();
+        return;
+      }
+      var jurisdiction = document.getElementById('synd-flyer-jurisdiction');
+      var scope = jurisdiction ? jurisdiction.value : 'india';
+      var approve = document.getElementById('synd-flyer-approve');
+      var resultEl = document.getElementById('synd-flyer-result');
+      flyerBusy = true;
+      if (approve) { approve.disabled = true; approve.textContent = 'Adding to registry\u2026'; }
+      setFlyerStatus('Committing the reviewed role to GitHub\u2026', '');
+      deskPost('/api/commit_job', { job: job, jurisdiction: scope }).then(function (result) {
+        var response = result.response;
+        var data = result.data;
+        if (handleDeskAuthError(response)) return;
+        if (!response.ok || !data.ok) {
+          var message = data.error || ('HTTP ' + response.status);
+          if (message === 'duplicate_application_url') {
+            message = 'That application URL is already in the registry' +
+              (data.existing ? ' (id: ' + data.existing + ')' : '') + '.';
+          } else if (message === 'duplicate_role') {
+            message = 'A role with the same title and organisation already exists' +
+              (data.existing ? ' (id: ' + data.existing + ')' : '') + '.';
+          } else if (message === 'github_not_configured') {
+            message = 'GITHUB_PAT is not configured on this deployment.';
+          } else if (message === 'write_conflict') {
+            message = 'The registry changed while you were reviewing. Try approving again.';
+          } else if (message === 'invalid_application_url') {
+            message = 'The official application URL must be a full http(s) link.';
+          }
+          setFlyerStatus('Could not add the role: ' + message, 'error');
+          return;
+        }
+        if (resultEl) {
+          resultEl.hidden = false;
+          resultEl.innerHTML = 'Added <strong>' + esc(job.clean_title) + '</strong> to the ' +
+            (scope === 'global' ? 'global' : 'India') + ' registry as <code>' + esc(data.id || '') + '</code>. ' +
+            '<a href="' + esc(data.registry_url || '/') + '" target="_blank" rel="noopener noreferrer">Open registry &nearr;</a>' +
+            '<br><span>The GitHub commit is live; the public card rebuilds on the next deploy.</span>';
+        }
+        setFlyerStatus('Approved and committed. The live registry card rebuilds on the next deploy.', 'ok');
+        if (approve) { approve.textContent = 'Added to registry'; approve.disabled = true; }
+        form.hidden = true;
+      }).catch(function () {
+        setFlyerStatus('Could not reach the commit endpoint. Check the deployment and try again.', 'error');
+        if (approve) { approve.disabled = false; approve.textContent = 'Approve & Add to Registry'; }
+      }).then(function () {
+        flyerBusy = false;
+        if (approve && !approve.textContent.match(/Added/)) {
+          approve.disabled = false;
+          approve.textContent = 'Approve & Add to Registry';
+        }
+        if (approve && approve.textContent.match(/Adding/)) {
+          approve.disabled = false;
+          approve.textContent = 'Approve & Add to Registry';
+        }
+      });
+    });
   }
 
   /* --------------------------------------------------------------- assets */
@@ -689,12 +1252,14 @@
     root.classList.add('is-open');
     root.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('synd-open');
-    if (unlockKey()) {
+    deskHash = storedHash();
+    if (unlockKey() && deskHash) {
       showContent();
       loadAssets();
       var first = contentEl.querySelector('button');
       if (first) first.focus();
     } else {
+      if (unlockKey() && !deskHash) setUnlocked(false);
       showGate();
       var input = document.getElementById('synd-pass');
       if (input) input.focus();

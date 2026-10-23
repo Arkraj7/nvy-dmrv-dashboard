@@ -484,3 +484,137 @@ html[data-theme="dark"] .about-copy a { color: #cbd5e1; }
   .site-matrix-inner { padding: 30px 16px 34px; }
 }
 /* end ufp-seo-institutional */
+
+/* ==========================================================================
+   Global opportunities hub - verified cards grouped by region.
+   ========================================================================== */
+.global-region-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.global-region {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.global-region:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.global-region-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.global-region-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 4px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.global-region .region-total {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.global-region-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.global-region-link:hover { text-decoration: underline; }
+.global-card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.global-card {
+  border-left: 3px solid var(--accent);
+}
+.global-card-loc {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.badge-deadline {
+  color: var(--amber-ink);
+  background: var(--amber-bg);
+  border-color: var(--amber-border);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+.global-card .hub-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+.global-card .hub-card-foot a[target="_blank"] {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.global-card .hub-card-foot a[target="_blank"]:hover { color: var(--accent); }
+@media (max-width: 640px) {
+  .global-region-head { align-items: flex-start; }
+  .global-region-head h2 { font-size: 19px; }
+  .global-card-grid { grid-template-columns: 1fr; }
+}
+
+/* Global sections retain the .region-card hook for QA/crawlability but use
+   flat separators so the opportunity cards themselves are the visual units. */
+.global-region.region-card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  padding: 24px 0 0;
+}
+.global-region.region-card:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.global-region-quick-links {
+  gap: 3px 14px;
+  margin: 2px 0 14px;
+}
+.global-region-quick-links a {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.global-region-quick-links a:hover { color: var(--accent); }
+html[data-theme="dark"] .global-region-quick-links a { color: #94A3B8; }
+html[data-theme="dark"] .global-region-quick-links a:hover { color: #34D399; }
+
+html[data-theme="dark"] .global-region.region-card {
+  background: transparent;
+  border-color: #1E293B;
+}
+html[data-theme="dark"] .global-region.region-card:first-child {
+  border-top-color: transparent;
+}
+
+.global-card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+.global-card .badge {
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.35;
+}
+@media (max-width: 640px) {
+  .global-card-grid { grid-template-columns: 1fr; }
+}

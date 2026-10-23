@@ -33,7 +33,7 @@ import re
 import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 # --------------------------------------------------------------------------
 # Shared constants and normalisation helpers are imported from the pipeline
@@ -462,12 +462,19 @@ def ist_today() -> date:
     return datetime.now(IST).date()
 
 
-def touch_stats_ist(public: Path) -> None:
-    """Stamp stats.json with the current IST date on every SEO rebuild.
+def touch_stats_ist(
+    public: Path,
+    active: Optional[List[Dict[str, Any]]] = None,
+    archived: Optional[List[Dict[str, Any]]] = None,
+    global_active: Optional[List[Dict[str, Any]]] = None,
+    global_archived: Optional[List[Dict[str, Any]]] = None,
+) -> None:
+    """Stamp stats.json and synchronise counts with the registry files.
 
-    The pipeline already writes these fields, but a maintenance-only build or
-    a zero-new-jobs morning must still move the visible "last updated" date.
-    Existing telemetry and broadcast rotation history are preserved verbatim.
+    The pipeline already writes these fields, but a flyer approval can add a
+    record between pipeline runs. The next SEO rebuild must therefore refresh
+    the counts as well as the visible date, otherwise the client-side badge
+    would hydrate a stale number from stats.json.
     """
     path = public / "stats.json"
     if not path.exists():
@@ -478,6 +485,40 @@ def touch_stats_ist(public: Path) -> None:
         return
     if not isinstance(stats, dict):
         return
+
+    if active is not None:
+        published = [job for job in active if job.get("status") == "active"]
+        stats["active_open_jobs"] = len(published)
+        archived_count = (
+            sum(1 for job in archived if job.get("status") == "archived")
+            if archived is not None else 0
+        )
+        stats["total_archived_jobs"] = archived_count
+        stats["total_historical_indexed"] = len(published) + archived_count
+    if global_active is not None:
+        global_published = [
+            job for job in global_active if job.get("status") == "active"
+        ]
+        opportunities = [
+            job for job in global_published if not job.get("evergreen")
+        ]
+        stats["total_global_records"] = len(global_published)
+        stats["active_global_jobs"] = len(opportunities)
+        stats["active_global_portals"] = len(global_published) - len(opportunities)
+        if global_archived is not None:
+            stats["total_archived_global_jobs"] = sum(
+                1 for job in global_archived if job.get("status") == "archived"
+            )
+        by_kind: Dict[str, int] = {}
+        by_region: Dict[str, int] = {}
+        for job in opportunities:
+            kind = str(job.get("opportunity_kind") or "Job / Career")
+            region = str(job.get("region") or "Global / Remote")
+            by_kind[kind] = by_kind.get(kind, 0) + 1
+            by_region[region] = by_region.get(region, 0) + 1
+        stats["global_jobs_by_kind"] = by_kind
+        stats["global_jobs_by_region"] = by_region
+
     now_ist = datetime.now(IST)
     stats["last_updated"] = now_ist.isoformat(timespec="seconds")
     stats["last_updated_ist"] = now_ist.isoformat(timespec="seconds")
@@ -492,6 +533,64 @@ def touch_stats_ist(public: Path) -> None:
 
 def long_date(value: date) -> str:
     return value.strftime("%d %B %Y")
+
+
+def registry_refresh_badge_html(
+    today: date,
+    india_count: int,
+    global_count: int,
+) -> str:
+    """Pre-rendered freshness badge shared by the homepage and every hub.
+
+    The counts and IST date are real data rendered at build time; jobs.js and
+    hub.js re-hydrate the same node from stats.json after page load.
+    """
+    india_count = max(0, int(india_count))
+    global_count = max(0, int(global_count))
+    global_label = "Global Opportunity" if global_count == 1 else "Global Opportunities"
+    return (
+        '<div class="registry-refresh-badge" id="registry-refresh-pill" '
+        f'data-refresh-date="{today.isoformat()}" '
+        f'data-india-count="{india_count}" data-global-count="{global_count}" '
+        'role="status" aria-live="polite" '
+        'aria-label="Registry refresh status">\n'
+        '  <span class="registry-refresh-dot" aria-hidden="true"></span>\n'
+        '  <span id="registry-refresh-text">Registry verified &amp; refreshed: '
+        f'<strong>{esc(long_date(today))} IST</strong></span>\n'
+        '  <span class="registry-stats-summary">'
+        f'{india_count} Active India &middot; {global_count} {global_label}</span>\n'
+        '</div>'
+    )
+
+
+REGISTRY_BADGE_START = "<!-- REGISTRY_REFRESH_BADGE_START -->"
+REGISTRY_BADGE_END = "<!-- REGISTRY_REFRESH_BADGE_END -->"
+REGISTRY_BADGE_RE = re.compile(
+    re.escape(REGISTRY_BADGE_START) + r".*?" + re.escape(REGISTRY_BADGE_END),
+    re.S,
+)
+
+
+def inject_registry_refresh_badge(index_path: Path, badge_html: str) -> int:
+    """Replace the marker block in index.html with fresh counts/date."""
+    text = index_path.read_text(encoding="utf-8")
+    if not REGISTRY_BADGE_RE.search(text):
+        log.warning(
+            "Registry badge markers missing from %s; homepage badge not refreshed",
+            index_path,
+        )
+        return 0
+    updated = REGISTRY_BADGE_RE.sub(
+        lambda _m: (
+            REGISTRY_BADGE_START + "\n" + badge_html + "\n" + REGISTRY_BADGE_END
+        ),
+        text,
+        count=1,
+    )
+    if updated == text:
+        return 0
+    index_path.write_text(updated, encoding="utf-8")
+    return 1
 
 
 def cat_class(category: Any) -> str:
@@ -1606,6 +1705,46 @@ for _hub in HUBS:
 # --------------------------------------------------------------------------
 # Data loading
 # --------------------------------------------------------------------------
+QUARANTINE_FILES = (
+    "jobs.json",
+    "archive.json",
+    "global_jobs.json",
+    "global_archive.json",
+)
+
+
+def remove_quarantined_job_pages(public: Path) -> List[str]:
+    """Delete stale detail pages for records that are no longer publishable."""
+    slugs: Set[str] = set()
+    for filename in QUARANTINE_FILES:
+        path = public / filename
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if isinstance(data, dict):
+            data = data.get("jobs", [])
+        if not isinstance(data, list):
+            continue
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+            if entry.get("status") == "quarantined" and entry.get("id"):
+                slugs.add(str(entry["id"]))
+    removed: List[str] = []
+    jobs_dir = public / "jobs"
+    for slug in sorted(slugs):
+        page = jobs_dir / f"{slug}.html"
+        if page.exists():
+            page.unlink()
+            removed.append(slug)
+    if removed:
+        log.info("Removed %d quarantined job page(s)", len(removed))
+    return removed
+
+
 def load_records(public: Path, filename: str) -> List[Dict[str, Any]]:
     path = public / filename
     if not path.exists():
@@ -1799,7 +1938,7 @@ def build_index_block(
       <div class="seo-pr-inner">
         <p class="eyebrow">Career Pathway Hubs</p>
         <h2 id="seo-pr-title">Browse Green Jobs by Career Pathway</h2>
-        <p class="seo-pr-intro">Registry last refreshed on {updated} IST. New verified roles are added every morning at 7 AM IST.</p>
+        <p class="seo-pr-intro">Five crawlable career-pathway hubs.</p>
         <ul class="hub-summary-grid">
 {hub_items}
         </ul>
@@ -2077,7 +2216,11 @@ def build_hub_page(
     archived_jobs: List[Dict[str, Any]],
     all_hubs_counts: Dict[str, int],
     today: date,
+    global_count: int = 0,
 ) -> str:
+    badge_html = registry_refresh_badge_html(
+        today, len(active_jobs), global_count
+    )
     matched_active = sort_recent_first([j for j in active_jobs if hub["match"](j)])
     matched_archived = recent_archive(
         [j for j in archived_jobs if hub["match"](j)], today, RECENT_ARCHIVE_DAYS
@@ -2185,6 +2328,7 @@ def build_hub_page(
         </nav>
         <p class="eyebrow">{esc(hub['kicker'])}</p>
         <h1>{esc(hub['h1'])}</h1>
+        {badge_html}
         <p class="hub-hero-sub">{esc(hub['hero_sub'])}</p>
         <div class="hub-hero-actions">
           <a class="btn btn-primary" href="{hub['cta_href']}">Open in the live registry &rarr;</a>
@@ -2272,19 +2416,45 @@ def job_page_title(job: Dict[str, Any]) -> str:
 
 
 def job_page_description(job: Dict[str, Any]) -> str:
+    """Unique 120-170 character meta description for a job dossier.
+
+    Official-source harvests often reuse an organisation-level intro across
+    several vacancies. Prefixing the role, employer and location keeps every
+    description distinct while preserving the source summary.
+    """
+    title = plain(job.get("clean_title")) or "Environmental role"
+    org = plain(job.get("organization"))
+    location = _job_location_text(job)
     summary = plain(job.get("role_summary")) or plain(job.get("summary")) or ""
-    if not summary:
-        bits = [
-            plain(job.get("clean_title")),
-            "at",
-            plain(job.get("organization")),
-            "in",
-            state_label(job),
-            ".",
-            "Eligibility, stipend, deadline and official application link.",
+
+    lead = f"{title} at {org}" if org else title
+    if location and location not in ("India", "Global / Remote"):
+        lead = f"{lead} ({location})"
+    elif location == "Global / Remote":
+        lead = f"{lead} (global or remote)"
+
+    if summary:
+        text = f"{lead}: {summary}"
+    else:
+        category = plain(job.get("category")) or "environmental"
+        kind = plain(job.get("opportunity_kind")) or "role"
+        text = (
+            f"{lead}. Verified {kind.lower()} in {category.lower()}; "
+            "eligibility, pay, deadline and the official application link."
+        )
+
+    if len(text) < 120:
+        extras = [
+            f"Category: {plain(job.get('category'))}." if plain(job.get("category")) else "",
+            f"Deadline: {plain(job.get('deadline_or_window'))}."
+            if plain(job.get("deadline_or_window"))
+            else "",
+            "Review the official notification for full eligibility and application details.",
         ]
-        summary = " ".join(bit for bit in bits if bit)
-    return trim(summary, 158)
+        for extra in extras:
+            if extra and len(text) < 120:
+                text = f"{text} {extra}"
+    return trim(text, 158)
 
 
 def _bullets(values: Any) -> str:
@@ -2984,11 +3154,27 @@ def main(argv: Optional[List[str]] = None) -> int:
     archived = load_records(public, "archive.json")
     global_active = load_records(public, "global_jobs.json")
     global_archived = load_records(public, "global_archive.json")
+    # Career-portal seeds are useful links but are not open opportunities;
+    # badge counts therefore exclude them.
+    global_opportunity_count = sum(
+        1 for job in global_active if not job.get("evergreen")
+    )
     log.info(
         "Loaded %d active + %d archived India record(s); %d + %d global record(s)",
         len(active), len(archived), len(global_active), len(global_archived),
     )
-    touch_stats_ist(public)
+    remove_quarantined_job_pages(public)
+    touch_stats_ist(public, active, archived, global_active, global_archived)
+
+    # ---- registry freshness badge (homepage) ----------------------------
+    badge_html = registry_refresh_badge_html(
+        today, len(active), global_opportunity_count
+    )
+    if inject_registry_refresh_badge(index_path, badge_html):
+        log.info(
+            "Refreshed homepage badge: %d active India, %d global opportunities",
+            len(active), global_opportunity_count,
+        )
 
     # ---- index snapshot + crawlable first-screen cards ------------------
     block = build_index_block(active, archived, today)
@@ -3028,7 +3214,9 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     for hub in HUBS:
         hub["_indexable"] = hub_indexable.get(hub["file"], False)
-        page = build_hub_page(hub, active, archived, hub_counts, today)
+        page = build_hub_page(
+            hub, active, archived, hub_counts, today, global_opportunity_count
+        )
         out_path = public / hub["file"]
         out_path.write_text(page, encoding="utf-8")
         status = "indexable" if hub["_indexable"] else "noindex (scaffolded)"
@@ -3037,18 +3225,24 @@ def main(argv: Optional[List[str]] = None) -> int:
     # ---- multilingual & regional portals --------------------------------
     import seo_portals  # lazy import: reuses this module's helpers/constants
 
-    hindi_page = seo_portals.build_hindi_hub_page(active, archived, hub_counts, today)
+    hindi_page = seo_portals.build_hindi_hub_page(
+        active, archived, hub_counts, today, global_opportunity_count
+    )
     (public / seo_portals.HINDI_HUB_FILE).write_text(hindi_page, encoding="utf-8")
     log.info("Wrote %s", seo_portals.HINDI_HUB_FILE)
 
-    regional_page = seo_portals.build_regional_hub_page(active, today)
+    regional_page = seo_portals.build_regional_hub_page(
+        active, today, global_opportunity_count
+    )
     (public / seo_portals.REGIONAL_HUB_FILE).write_text(regional_page, encoding="utf-8")
     log.info("Wrote %s", seo_portals.REGIONAL_HUB_FILE)
 
     # ---- global opportunities hub (strictly separate registry) -----------
     if not global_active:
         log.warning("global_jobs.json missing or empty - global hub built with placeholder content")
-    global_page = seo_portals.build_global_hub_page(global_active, today)
+    global_page = seo_portals.build_global_hub_page(
+        global_active, today, len(active), len(global_archived)
+    )
     (public / seo_portals.GLOBAL_HUB_FILE).write_text(global_page, encoding="utf-8")
     log.info(
         "Wrote %s (%d global listing(s))",

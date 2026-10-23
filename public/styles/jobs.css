@@ -28,6 +28,9 @@
 
   --border: #E2E8F0;
   --border-2: #CBD5E1;
+  /* Semantic aliases used by the registry freshness badge. */
+  --border-color: var(--border);
+  --card-bg: var(--card);
 
   --accent: #065F46;
   --accent-2: #044637;
@@ -3456,3 +3459,65 @@ body.saved-open { overflow: hidden; }
 }
 .related-card strong a:hover { text-decoration: underline; }
 .hub-card-foot span { color: var(--ink-4); font-size: 11.5px; font-weight: 600; }
+
+/* ==========================================================================
+   Registry freshness badge - homepage and every static hub.
+   Date and counts are pre-rendered at build time, then hydrated from
+   stats.json by jobs.js / hub.js.
+   ========================================================================== */
+.registry-refresh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  background: var(--card-bg);
+  color: var(--ink-3);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  box-shadow: var(--shadow-card);
+}
+.registry-refresh-badge strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+.registry-refresh-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 16%, transparent);
+}
+.registry-stats-summary {
+  padding-left: 10px;
+  border-left: 1px solid var(--border-color);
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.registry-stats-summary .registry-count-number {
+  font-variant-numeric: tabular-nums;
+}
+html[data-theme="dark"] .registry-refresh-badge {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+html[data-theme="dark"] .registry-refresh-dot {
+  background: #34D399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+}
+@media (max-width: 640px) {
+  .registry-refresh-badge {
+    align-items: flex-start;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+  .registry-stats-summary {
+    flex-basis: 100%;
+    padding-left: 18px;
+    border-left: 0;
+  }
+}

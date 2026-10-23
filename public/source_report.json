@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T06:33:48",
+  "generated_at": "2026-10-23T16:33:49",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +34,12 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 249,
+      "leads": 329,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 143,
-      "passed": 0,
-      "active": 0
-    },
-    "naukri": {
-      "leads": 50,
+      "leads": 147,
       "passed": 0,
       "active": 0
     },
@@ -59,12 +54,7 @@
       "active": 0
     },
     "indeed": {
-      "leads": 8,
-      "passed": 0,
-      "active": 0
-    },
-    "google-news": {
-      "leads": 7,
+      "leads": 10,
       "passed": 0,
       "active": 0
     },
@@ -78,6 +68,11 @@
       "passed": 0,
       "active": 0
     },
+    "google-news": {
+      "leads": 5,
+      "passed": 0,
+      "active": 0
+    },
     "portal:wri-india": {
       "leads": 2,
       "passed": 0,
@@ -85,7 +80,7 @@
     }
   },
   "totals": {
-    "leads": 508,
+    "leads": 542,
     "passed": 0,
     "active": 0
   }

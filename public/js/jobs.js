@@ -1256,6 +1256,50 @@
     };
   }
 
+  function formatBadgeDate(value) {
+    var raw = String(value || '').slice(0, 10);
+    if (!raw) return '';
+    var d = new Date(raw + 'T12:00:00+05:30');
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'Asia/Kolkata'
+    });
+  }
+
+  function updateRegistryRefreshBadge() {
+    var pill = document.getElementById('registry-refresh-pill');
+    if (!pill) return;
+    var stats = state.stats || {};
+    var india = typeof stats.active_open_jobs === 'number'
+      ? stats.active_open_jobs
+      : (state.jobs || []).length;
+    var global = typeof stats.active_global_jobs === 'number'
+      ? stats.active_global_jobs
+      : (state.globalJobs || []).filter(function (job) {
+          return !job.evergreen;
+        }).length;
+    var dateValue = stats.last_pipeline_run_date_ist ||
+      (stats.last_updated_ist ? String(stats.last_updated_ist).slice(0, 10) : '') ||
+      pill.getAttribute('data-refresh-date') || '';
+    var dateText = formatBadgeDate(dateValue) || '23 October 2026';
+    var textEl = document.getElementById('registry-refresh-text');
+    if (textEl) {
+      textEl.innerHTML = 'Registry verified &amp; refreshed: <strong>' +
+        escapeHtml(dateText) + ' IST</strong>';
+    }
+    var summary = pill.querySelector('.registry-stats-summary');
+    if (summary) {
+      summary.textContent = india + ' Active India \u00b7 ' + global +
+        (global === 1 ? ' Global Opportunity' : ' Global Opportunities');
+    }
+    if (dateValue) pill.setAttribute('data-refresh-date', dateValue);
+    pill.setAttribute('data-india-count', String(india));
+    pill.setAttribute('data-global-count', String(global));
+  }
+
   function renderTelemetry() {
     var statsData = statsWindow();
     setText('tel-active', String(statsData.active_open_jobs));
@@ -1263,6 +1307,7 @@
     setText('tel-passed', String(statsData.passed_this_week));
     setText('tel-archive', String(statsData.total_historical_indexed));
     setText('tel-updated', statsData.last_updated ? formatLongDate(String(statsData.last_updated).slice(0, 10)) : t('tel.local', 'local sync'));
+    updateRegistryRefreshBadge();
   }
 
   /* ------------------------------------------------------------------ */

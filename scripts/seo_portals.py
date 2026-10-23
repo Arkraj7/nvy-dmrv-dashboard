@@ -294,7 +294,11 @@ def build_hindi_hub_page(
     archived_jobs: List[Dict[str, Any]],
     hub_counts: Dict[str, int],
     today: date,
+    global_count: int = 0,
 ) -> str:
+    badge_html = bsp.registry_refresh_badge_html(
+        today, len(active_jobs), global_count
+    )
     jobs = _sort_recent_first(active_jobs)
     cards = "\n".join(hindi_card_html(j) for j in jobs) or (
         '        <p class="hub-empty">इस समय कोई सक्रिय भर्ती उपलब्ध नहीं — नई भर्तियाँ प्रतिदिन जोड़ी जाती हैं। '
@@ -422,6 +426,7 @@ def build_hindi_hub_page(
         </nav>
         <p class="eyebrow">हिंदी ग्रीन करियर पोर्टल</p>
         <h1>{esc(h1)}</h1>
+        {badge_html}
         <p class="hub-hero-sub">
           वन विभागों, विश्वविद्यालयों एवं शोध संस्थानों (JRF / SRF / PhD / प्रोजेक्ट स्टाफ), सस्टेनेबिलिटी टीमों
           तथा जलवायु संगठनों की सक्रिय भर्तियों का निरंतर निगरानी किया जाने वाला सूचकांक।
@@ -514,7 +519,14 @@ REGIONAL_FAQS: List[Tuple[str, str]] = [
 ]
 
 
-def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> str:
+def build_regional_hub_page(
+    active_jobs: List[Dict[str, Any]],
+    today: date,
+    global_count: int = 0,
+) -> str:
+    badge_html = bsp.registry_refresh_badge_html(
+        today, len(active_jobs), global_count
+    )
     counts: Dict[str, int] = {}
     for job in active_jobs:
         st = state_label(job)
@@ -691,6 +703,7 @@ def build_regional_hub_page(active_jobs: List[Dict[str, Any]], today: date) -> s
         </nav>
         <p class="eyebrow">Bharat Regional &amp; Multilingual Portal</p>
         <h1>{esc(h1)}</h1>
+        {badge_html}
         <p class="hub-hero-sub">
           State-wise environment, forestry, wildlife, climate, ESG and geospatial jobs —
           हिंदी, मराठी, தமிழ், తెలుగు, ಕನ್ನಡ, বাংলা एवं ગુજરાતી क्षेत्रों हेतु क्षेत्रीय प्रवेश द्वार।
@@ -809,8 +822,95 @@ GLOBAL_FAQS: List[Tuple[str, str]] = [
 ]
 
 
-def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> str:
+def global_location_label(job: Dict[str, Any]) -> str:
+    city = plain(job.get("city"))
+    country = plain(job.get("country"))
+    region = plain(job.get("region"))
+    if city and country and country not in ("Global", "Global / Remote"):
+        return f"{city}, {country}"
+    if country and country != "Global":
+        return country
+    if city:
+        return f"{city} (Global)"
+    return region or "Global / Remote"
+
+
+def global_card_html(job: Dict[str, Any]) -> str:
+    """Pre-rendered card for an international job or opportunity."""
+    cat = plain(job.get("category")) or "Climate Policy, Think-Tanks & Fellowships"
+    pt = position_type_of(job)
+    kind = plain(job.get("opportunity_kind")) or "Job / Career"
+    org = plain(job.get("organization")) or "International organisation"
+    title = plain(job.get("clean_title")) or org
+    location = global_location_label(job)
+    deadline = plain(job.get("deadline_or_window")) or "Rolling / Open"
+    badges = [
+        f'<span class="badge {bsp.cat_class(cat)}">{esc(cat)}</span>',
+        f'<span class="badge badge-type">{esc(pt)}</span>',
+        f'<span class="badge badge-state">{bsp.PIN_SVG}{esc(location)}</span>',
+    ]
+    if kind != "Job / Career":
+        badges.append(f'<span class="badge badge-exp">{esc(kind)}</span>')
+    if deadline and deadline.lower() != "rolling / open":
+        badges.append(f'<span class="badge badge-deadline">Deadline {esc(deadline)}</span>')
+
+    skills = [
+        plain(item) for item in (job.get("must_have_skills") or []) if plain(item)
+    ][:3]
+    quals = plain(job.get("qualification_summary"))
+    comp = plain(job.get("compensation_or_fellowship"))
+    elig_bits: List[str] = []
+    if bsp.is_specific_qualification(quals):
+        elig_bits.append(
+            f"<span><strong>Eligibility:</strong> {esc(bsp.sentence(quals, 150))}</span>"
+        )
+    elif skills:
+        elig_bits.append(f"<span><strong>Focus:</strong> {esc(', '.join(skills))}</span>")
+    if bsp.is_specific_compensation(comp):
+        elig_bits.append(
+            f"<span><strong>Funding:</strong> {esc(bsp.sentence(comp, 120))}</span>"
+        )
+    elig_html = (
+        '<p class="hub-card-elig">' + " ".join(elig_bits) + "</p>"
+        if elig_bits
+        else ""
+    )
+    summary = bsp.excerpt(job.get("role_summary"), 230)
+    summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
+    apply_url = plain(job.get("apply_url"))
+    # Anchor text must stay unique on a 50+ card hub. Generic "View details"
+    # or "Official application" labels trip the duplicate-anchor audit.
+    short_title = bsp.anchor_text(title, 40)
+    official = (
+        f'<a href="{esc(apply_url)}" target="_blank" rel="noopener noreferrer">'
+        f'Official application: {esc(short_title)} <span aria-hidden="true">&nearr;</span></a>'
+        if apply_url
+        else ""
+    )
+    return f"""        <article class="hub-card global-card">
+          <div class="hub-card-top">
+            {bsp.BADGE_SEP.join(badges)}{bsp.CARD_STOP}
+          </div>
+          <h3 class="hub-card-title"><a href="{bsp.job_url(job)}" title="{esc(title)}">{esc(bsp.anchor_text(title))}</a>{bsp.CARD_STOP}</h3>
+          <p class="hub-card-org">{esc(org)} <span class="global-card-loc">&middot; {esc(location)}</span></p>
+          {elig_html}
+          {summary_html}
+          <p class="hub-card-foot"><a href="{bsp.job_url(job)}">View details: {esc(short_title)} <span aria-hidden="true">&rarr;</span></a>{(' ' + official) if official else ''}</p>
+        </article>"""
+
+
+def build_global_hub_page(
+    global_active: List[Dict[str, Any]],
+    today: date,
+    india_count: int = 0,
+    global_archive_count: int = 0,
+) -> str:
     """Static hub for the strictly separated Global opportunities registry."""
+    badge_html = bsp.registry_refresh_badge_html(
+        today,
+        india_count,
+        sum(1 for job in global_active if not job.get("evergreen")),
+    )
     region_counts: Dict[str, int] = {}
     kind_counts: Dict[str, int] = {}
     for job in global_active:
@@ -827,36 +927,47 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
             ordered_regions.append(region)
 
     for region in ordered_regions:
-        matched = [j for j in global_active if (plain(j.get("region")) or "Global / Remote") == region]
-        matched.sort(key=lambda j: str(j.get("date_added") or ""), reverse=True)
-        links = []
-        for job in matched[:14]:
-            job_id = plain(job.get("id"))
-            title = plain(job.get("clean_title")) or "Untitled opportunity"
-            org = plain(job.get("organization"))
-            kind = plain(job.get("opportunity_kind")) or "Job / Career"
-            deadline = plain(job.get("deadline_or_window"))
-            label = f"{title} \u2014 {org}" if org else title
-            if kind != "Job / Career":
-                label += f" \u00b7 {kind}"
-            if deadline and deadline.lower() != "rolling / open":
-                label += f" \u00b7 {deadline}"
-            links.append(
-                f'            <li><a href="/jobs/{quote(job_id)}" title="{esc(label)}">'
-                f'{esc(bsp.anchor_text(label))}</a></li>'
-            )
-        if not links:
-            links.append('            <li class="region-empty">Listings coming soon.</li>')
-        region_sections.append(
-            f"""      <article class="region-card" id="gregion-{quote(region)}">
-        <h2>{esc(region)} <span class="region-cnt">{region_counts[region]}</span></h2>
-        <p class="region-total"><strong>{region_counts[region]}</strong> verified global opportunity(ies) in this region</p>
-        <ul class="region-states">
-{chr(10).join(links)}
-        </ul>
-      </article>"""
+        matched = [
+            j
+            for j in global_active
+            if (plain(j.get("region")) or "Global / Remote") == region
+        ]
+        matched.sort(
+            key=lambda j: (
+                str(j.get("date_added") or ""),
+                str(j.get("id") or ""),
+            ),
+            reverse=True,
         )
-        for job in matched[:6]:
+        cards_html = "\n".join(global_card_html(job) for job in matched)
+        if not cards_html:
+            cards_html = (
+                '        <p class="hub-empty">New verified opportunities for this region '
+                'are being checked against official sources.</p>'
+            )
+        quick_links = "\n".join(
+            f'            <li><a href="{bsp.job_url(job)}" title="{esc(plain(job.get("clean_title")))}">'
+            f'Browse {esc(region)}: {esc(bsp.anchor_text(plain(job.get("clean_title")), 38))}</a></li>'
+            for job in matched[:2]
+        )
+        region_sections.append(
+            f"""      <section class="global-region region-card" id="gregion-{bsp.state_slug(region)}">
+        <div class="global-region-head">
+          <div>
+            <h2>{esc(region)} <span class="region-cnt">{region_counts[region]}</span></h2>
+            <p class="region-total"><strong>{region_counts[region]}</strong> verified global record(s) currently open, including career portals</p>
+          </div>
+          <a class="global-region-link" href="/?region=global&amp;gregion={quote(region)}" rel="nofollow">Open {esc(region)} roles &rarr;</a>
+        </div>
+        <ul class="region-states global-region-quick-links">
+{quick_links}
+        </ul>
+        <div class="hub-list global-card-grid">
+{cards_html}
+        </div>
+      </section>"""
+        )
+        for job in matched:
             item_entries.append(
                 {
                     "@type": "ListItem",
@@ -867,8 +978,11 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
             )
 
     regions_html = "\n\n".join(region_sections) or (
-        '      <article class="region-card"><h2>Global / Remote</h2>'
-        '<p class="region-total">Listings are being verified \u2014 check back shortly.</p></article>'
+        '      <section class="global-region"><h2>Global / Remote</h2>'
+        '<p class="region-total">Listings are being verified \u2014 check back shortly.</p></section>'
+    )
+    jobposting_blocks = "\n".join(
+        bsp.job_posting_jsonld(job, today) for job in global_active
     )
 
     kind_links = "\n".join(
@@ -971,6 +1085,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
 {item_list}
 {breadcrumb}
 {faq_ld}
+{jobposting_blocks}
 
     <script defer src="/js/hub.js"></script>
 </head>
@@ -988,6 +1103,7 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
         </nav>
         <p class="eyebrow">\U0001F30D Global Opportunities Registry \u2014 International</p>
         <h1>{esc(h1)}</h1>
+        {badge_html}
         <p class="hub-hero-sub">
           A strictly separate registry of verified international opportunities \u2014 jobs, grants,
           scholarships, fellowships, internships and competitions from the UNFCCC, Green Climate
@@ -1011,11 +1127,12 @@ def build_global_hub_page(global_active: List[Dict[str, Any]], today: date) -> s
       <div class="hub-main-inner">
         <div class="hub-main-head">
           <h2>Browse global opportunities by region</h2>
-          <p>Counts refresh with every pipeline run; each region card lists the latest verified
-          opportunities. India jobs remain in their own registry \u2014 the two datasets are never
-          mixed.</p>
+          <p>Every card links to its verified dossier and the organisation\u2019s official
+          application page. Counts refresh with each pipeline run; closed roles move to the
+          global archive ({global_archive_count} archived). India jobs remain in their own
+          registry \u2014 the two datasets are never mixed.</p>
         </div>
-        <div class="region-grid">
+        <div class="global-region-list">
 {regions_html}
         </div>
 

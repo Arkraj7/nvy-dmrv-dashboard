@@ -128,6 +128,7 @@ from source_expansion import (
     fetch_official_pages,
     write_source_report,
 )
+from global_sources import classify_category, fetch_official_global_candidates
 
 # ---------------------------------------------------------------------------
 # Optional third-party dependencies.
@@ -3850,6 +3851,366 @@ def apply_global_lifecycle(
     return active, archive_out, newly_archived
 
 
+GLOBAL_OFFICIAL_MAX_NEW_PER_RUN = 60
+
+# Aggregator domains that are never allowed to supply a global application
+# URL.  ReliefWeb is deliberately absent: it is a UN OCHA official
+# humanitarian job service, and the Phase 1 brief explicitly names it.
+GLOBAL_AGGREGATOR_HOSTS = (
+    "opportunitydesk.org",
+    "fundsforngos.org",
+    "unjobs.org",
+    "linkedin.com",
+    "indeed.com",
+    "naukri.com",
+    "glassdoor.com",
+    "scholarshiproar.com",
+    "opportunitiesforall.com",
+    "opportunitiesforafricans.com",
+    "scholars4dev.com",
+    "devnetjobs.org",
+    "impactpool.org",
+    "jobstreet.com",
+    "seek.com",
+)
+
+
+def _host_is_aggregator(url: str) -> bool:
+    host = (urlparse(str(url or "")).netloc or "").lower().split("@")[-1].split(":")[0]
+    return any(host == item or host.endswith("." + item) for item in GLOBAL_AGGREGATOR_HOSTS)
+
+
+def _experience_for(position_type: str, title: str) -> str:
+    text = f"{position_type} {title}".lower()
+    if any(word in text for word in ("intern", "fellowship", "trainee", "assistant")):
+        return "Entry Level / Fellowship"
+    if any(word in text for word in ("director", "head", "senior", "lead", "chief")):
+        return "Senior"
+    if any(word in text for word in ("manager", "advisor", "adviser", "specialist", "officer")):
+        return "Mid-Senior (3-6 Years)"
+    return "1-3 Years"
+
+
+def _employment_type_for(position_type: str, kind: str) -> str:
+    if kind == "Internship" or "intern" in position_type.lower():
+        return "INTERN"
+    if kind in ("Fellowship", "Scholarship"):
+        return "OTHER"
+    if kind in ("Grant / Funding", "Competition / Award"):
+        return "CONTRACTOR"
+    if "consultant" in position_type.lower() or "contract" in position_type.lower():
+        return "CONTRACTOR"
+    return "FULL_TIME"
+
+
+BAD_OFFICIAL_CONTENT_MARKERS = (
+    "main navigation",
+    "skip to content",
+    "footer menu",
+    "click to see more",
+    "back to work with us",
+    "share this page",
+    "learn more world resources",
+)
+
+
+def _looks_like_site_chrome(value: Any) -> bool:
+    text = squash(value).lower()
+    if not text:
+        return True
+    if any(marker in text for marker in BAD_OFFICIAL_CONTENT_MARKERS):
+        return True
+    # Navigation blocks repeat these labels and contain no sentence-level copy.
+    navigation_hits = sum(
+        1
+        for label in (" research ", " data ", " initiatives ", " insights ", " donate ")
+        if label in f" {text} "
+    )
+    return navigation_hits >= 3 and not re.search(r"[.!?]\s", text)
+
+
+def _official_location_label(job: Dict[str, Any]) -> str:
+    city = squash(job.get("city"))
+    country = squash(job.get("country"))
+    if not city or city.lower() in ("remote", "global"):
+        return "a global or remote location"
+    if country == "Global":
+        return f"{city} (global or remote)"
+    parts: List[str] = []
+    for part in (city, country):
+        if part and part not in parts:
+            parts.append(part)
+    return ", ".join(parts) or "a location stated in the official listing"
+
+
+def official_role_summary(job: Dict[str, Any]) -> str:
+    """Safe factual summary used when an official page exposes only site chrome."""
+    title = squash(job.get("clean_title")) or "This role"
+    org = squash(job.get("organization")) or "the hiring organisation"
+    kind = squash(job.get("opportunity_kind")) or "role"
+    category = squash(job.get("category")) or "climate and environment"
+    deadline = squash(job.get("deadline_or_window"))
+    closing = (
+        "Applications are reviewed on a rolling basis."
+        if not deadline or deadline.lower() == "rolling / open"
+        else f"Applications close {deadline}."
+    )
+    return (
+        f"{title} at {org} is a verified {kind} opportunity in {category}, "
+        f"based in {_official_location_label(job)}. {closing} See the official "
+        "listing for responsibilities, eligibility and how to apply."
+    )
+
+
+def official_skills_for_title(title: str) -> List[str]:
+    """Conservative skill tags when a career page hides its role description."""
+    text = squash(title).lower()
+    skills: List[str] = []
+    if any(word in text for word in ("restoration", "forest", "landscape")):
+        skills.append("Forest and landscape restoration")
+    if any(word in text for word in ("food loss", "food waste", "waste")):
+        skills.append("Food loss and waste")
+    if "critical mineral" in text:
+        skills.append("Critical minerals")
+    if any(word in text for word in ("data", "analyst", "analysis")):
+        skills.append("Data analysis")
+    if any(word in text for word in ("finance", "financiamento", "investment")):
+        skills.append("Sustainable finance")
+    if any(word in text for word in ("impact", "impacto", "strategy", "estrat")):
+        skills.append("Impact measurement and management")
+    if any(word in text for word in ("communication", "communications")):
+        skills.append("Strategic communications")
+    if any(word in text for word in ("project", "projetos", "programme", "program")):
+        skills.append("Project management")
+    for fallback in ("Research and analysis", "Stakeholder engagement", "Report writing"):
+        if fallback not in skills:
+            skills.append(fallback)
+        if len(skills) >= 5:
+            break
+    return skills[:5]
+
+
+def repair_official_content(job: Dict[str, Any]) -> Dict[str, Any]:
+    """Replace scraped navigation chrome on official-harvest records only."""
+    if (job.get("verification") or {}).get("method") != "official-source-harvest":
+        return job
+    # WRI's job board serves a navigation shell, so the first harvest tagged
+    # every WRI role as forestry from the menu labels. Reclassify from titles
+    # before rebuilding a generated summary around the corrected category.
+    host = (urlparse(squash(job.get("apply_url"))).netloc or "").lower()
+    if host.endswith("wri.org"):
+        job["category"] = classify_category(squash(job.get("clean_title")))
+        job["must_have_skills"] = official_skills_for_title(
+            squash(job.get("clean_title"))
+        )
+
+    title = squash(job.get("clean_title"))
+    org = squash(job.get("organization"))
+    summary = squash(job.get("role_summary"))
+    generated = bool(
+        title
+        and org
+        and summary.startswith(f"{title} at {org} is a verified ")
+        and "See the official listing" in summary
+    )
+    if generated or _looks_like_site_chrome(summary):
+        job["role_summary"] = official_role_summary(job)
+    if _looks_like_site_chrome(job.get("qualification_summary")):
+        job["qualification_summary"] = (
+            "See the official vacancy notice for the full eligibility requirements."
+        )
+    return job
+
+
+def official_candidate_to_record(
+    candidate: Dict[str, Any],
+    today: str,
+    taken_ids: Set[str],
+) -> Optional[Dict[str, Any]]:
+    """Convert an official-source candidate into a publishable global record."""
+    title = squash(candidate.get("title"))
+    organization = squash(candidate.get("organization"))
+    apply_url = squash(candidate.get("apply_url"))
+    if not title or not organization or not is_valid_apply_url(apply_url):
+        return None
+    if _host_is_aggregator(apply_url):
+        return None
+    category = squash(candidate.get("category"))
+    if category not in CATEGORIES:
+        category = "Climate Policy, Think-Tanks & Fellowships"
+    position_type = squash(candidate.get("position_type"))
+    if position_type not in POSITION_TYPES:
+        position_type = "Full-Time Corporate / NGO"
+    kind = squash(candidate.get("opportunity_kind"))
+    if kind not in OPPORTUNITY_KINDS:
+        kind = "Job / Career"
+    region = squash(candidate.get("region"))
+    if region not in GLOBAL_REGIONS:
+        region = "Global / Remote"
+    deadline = squash(candidate.get("deadline_or_window")) or "Rolling / Open"
+    parsed_deadline = deadline_date({"deadline_or_window": deadline})
+    today_value = parse_iso_date(today) or ist_today()
+    if parsed_deadline and parsed_deadline < today_value:
+        return None
+    valid_through = (
+        parsed_deadline.isoformat()
+        if parsed_deadline
+        else (today_value + timedelta(days=30)).isoformat()
+    )
+    org_website = squash(candidate.get("org_website"))
+    org_domain = ""
+    if org_website:
+        org_domain = (urlparse(org_website).netloc or "").lower().removeprefix("www.")
+    record: Dict[str, Any] = {
+        "id": unique_id(f"{title}-{organization}", taken_ids),
+        "date_added": today,
+        "date_posted": squash(candidate.get("date_posted")) or today,
+        "clean_title": title,
+        "organization": organization,
+        "city": squash(candidate.get("city")),
+        "state": "",
+        "country": squash(candidate.get("country")) or "Global",
+        "region": region,
+        "category": category,
+        "position_type": position_type,
+        "opportunity_kind": kind,
+        "experience_level": _experience_for(position_type, title),
+        "employment_type": _employment_type_for(position_type, kind),
+        "deadline_or_window": deadline,
+        "valid_through": valid_through,
+        "qualification_summary": squash(candidate.get("qualification_summary")),
+        "compensation_or_fellowship": squash(candidate.get("compensation_or_fellowship")),
+        "role_summary": squash(candidate.get("role_summary")),
+        "title_hi": "",
+        "summary_hi": "",
+        "key_responsibilities": candidate.get("key_responsibilities") or [],
+        "must_have_skills": candidate.get("must_have_skills") or [],
+        "application_tip": squash(candidate.get("application_tip")),
+        "apply_url": apply_url,
+        "org_website": org_website,
+        "org_domain": org_domain,
+        "source_portal": squash(candidate.get("source_portal")) or "Official Organization Website",
+        "entry_type": "posting",
+        "status": "active",
+        "global": True,
+        "evergreen": False,
+        "verification": {
+            "verified_at": today,
+            "method": "official-source-harvest",
+            "source": squash(candidate.get("source")),
+        },
+    }
+    return normalize_global_record(repair_official_content(record))
+
+
+def purge_global_aggregators(
+    existing: List[Dict[str, Any]],
+    archive: List[Dict[str, Any]],
+    today: str,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Move aggregator-sourced global records out of the public registry."""
+    keep: List[Dict[str, Any]] = []
+    removed: List[Dict[str, Any]] = []
+    archived_ids = {str(job.get("id") or "") for job in archive}
+    for job in existing:
+        if not _host_is_aggregator(job.get("apply_url")):
+            keep.append(job)
+            continue
+        record = dict(job)
+        record["status"] = "archived"
+        record["date_archived"] = today
+        record["archive_reason"] = (
+            "Removed: aggregator application URL replaced by verified official sources"
+        )
+        removed.append(
+            {
+                "id": str(record.get("id") or ""),
+                "title": squash(record.get("clean_title")),
+                "apply_url": squash(record.get("apply_url")),
+                "reason": record["archive_reason"],
+            }
+        )
+        if str(record.get("id") or "") not in archived_ids:
+            archive.append(record)
+            archived_ids.add(str(record.get("id") or ""))
+    return keep, archive, removed
+
+
+def dedupe_global_records(
+    existing: List[Dict[str, Any]],
+    archive: List[Dict[str, Any]],
+    today: str,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Collapse duplicate title/employer pairs, preferring official hosts."""
+    ordered = sorted(
+        existing,
+        key=lambda job: (
+            0 if _host_is_aggregator(job.get("apply_url")) else 1,
+            str(job.get("date_added") or ""),
+            str(job.get("id") or ""),
+        ),
+        reverse=True,
+    )
+    keep: List[Dict[str, Any]] = []
+    seen: Dict[str, str] = {}
+    duplicates: List[Dict[str, Any]] = []
+    archived_ids = {str(job.get("id") or "") for job in archive}
+    for job in ordered:
+        identity = role_identity(job) or apply_url_identity(job.get("apply_url"))
+        if not identity:
+            keep.append(job)
+            continue
+        if identity in seen:
+            record = dict(job)
+            record["status"] = "archived"
+            record["date_archived"] = today
+            record["archive_reason"] = f"Removed: duplicate of {seen[identity]}"
+            duplicates.append(
+                {
+                    "id": str(record.get("id") or ""),
+                    "kept": seen[identity],
+                    "title": squash(record.get("clean_title")),
+                }
+            )
+            if str(record.get("id") or "") not in archived_ids:
+                archive.append(record)
+                archived_ids.add(str(record.get("id") or ""))
+            continue
+        seen[identity] = str(job.get("id") or "")
+        keep.append(job)
+    return keep, archive, duplicates
+
+
+def apply_global_stats(
+    stats: Dict[str, Any],
+    jobs_path: Path,
+    archive_path: Path,
+) -> Dict[str, Any]:
+    """Add data-derived global counts to stats.json for the front-end badge."""
+    active = published_records(
+        [normalize_global_record(job) for job in load_jobs(jobs_path)]
+    )
+    archive = published_records(
+        [normalize_global_record(job) for job in load_jobs(archive_path)]
+    )
+    opportunities = [job for job in active if not job.get("evergreen")]
+    portals = [job for job in active if job.get("evergreen")]
+    by_region: Dict[str, int] = {}
+    by_kind: Dict[str, int] = {}
+    for job in opportunities:
+        region = squash(job.get("region")) or "Global / Remote"
+        by_region[region] = by_region.get(region, 0) + 1
+        kind = squash(job.get("opportunity_kind")) or "Job / Career"
+        by_kind[kind] = by_kind.get(kind, 0) + 1
+    stats["active_global_jobs"] = len(opportunities)
+    stats["active_global_portals"] = len(portals)
+    stats["total_global_records"] = len(active)
+    stats["total_archived_global_jobs"] = len(archive)
+    stats["global_jobs_by_region"] = dict(sorted(by_region.items()))
+    stats["global_jobs_by_kind"] = dict(sorted(by_kind.items()))
+    return stats
+
+
 def run_global_stage(
     jobs_path: Path,
     archive_path: Path,
@@ -3864,7 +4225,10 @@ def run_global_stage(
     harvest a handful of fresh international opportunities and humanize them
     through the dedicated global prompt. Returns (active_count, new_count).
     """
-    existing = [normalize_global_record(job) for job in load_jobs(jobs_path)]
+    existing = [
+        repair_official_content(normalize_global_record(job))
+        for job in load_jobs(jobs_path)
+    ]
     archive = [normalize_global_record(job) for job in load_jobs(archive_path)]
     # The India and global registries are disjoint by contract. A record that
     # already exists in India must never be harvested into global as well.
@@ -3913,13 +4277,102 @@ def run_global_stage(
         "Global registry: %d active, %d archived before this run",
         len(existing), len(archive),
     )
+    existing, archive, aggregator_removed = purge_global_aggregators(
+        existing, archive, today
+    )
+    existing, archive, duplicate_removed = dedupe_global_records(
+        existing, archive, today
+    )
+    if aggregator_removed or duplicate_removed:
+        report_path = jobs_path.parent.parent / "data" / "global_source_cleanup_report.json"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            json.dumps(
+                {
+                    "generated_at": datetime.now().isoformat(timespec="seconds"),
+                    "reason": (
+                        "Aggregator URLs are not accepted as global application "
+                        "links; duplicate title/employer records are collapsed."
+                    ),
+                    "aggregator_records_removed": aggregator_removed,
+                    "duplicate_records_removed": duplicate_removed,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        log.warning(
+            "Global registry: removed %d aggregator and %d duplicate record(s)",
+            len(aggregator_removed), len(duplicate_removed),
+        )
     ensure_global_seed(existing, today, archive)
 
     accepted: List[Dict[str, Any]] = []
     quarantined: List[Dict[str, Any]] = []
-    if api_key and GreenJob is not None:
+
+    # Phase 1 deterministic harvest: official organisation pages and the
+    # ReliefWeb Climate Change & Environment feed. These do not need Gemini:
+    # the source text is already authoritative, so no facts are invented.
+    official_accepted: List[Dict[str, Any]] = []
+    if os.environ.get("UFP_SKIP_OFFICIAL_GLOBAL") != "1":
+        try:
+            official_candidates = fetch_official_global_candidates()
+        except Exception as exc:  # noqa: BLE001
+            official_candidates = []
+            log.warning("Official global harvest failed: %s | %s", type(exc).__name__, exc)
+        taken_ids = {
+            str(job.get("id") or "")
+            for job in existing + archive + accepted + quarantined
+            if job.get("id")
+        } | india_ids
+        seen_urls = {
+            apply_url_identity(job.get("apply_url"))
+            for job in existing + archive
+            if apply_url_identity(job.get("apply_url"))
+        }
+        seen_roles = {
+            role_identity(job)
+            for job in existing + archive
+            if role_identity(job)
+        }
+        for candidate in official_candidates[:GLOBAL_OFFICIAL_MAX_NEW_PER_RUN]:
+            url_identity = apply_url_identity(candidate.get("apply_url"))
+            identity = role_identity(
+                {
+                    "clean_title": candidate.get("title"),
+                    "organization": candidate.get("organization"),
+                }
+            )
+            if (url_identity and url_identity in seen_urls) or (
+                identity and identity in seen_roles
+            ):
+                continue
+            record = official_candidate_to_record(candidate, today, taken_ids)
+            if record is None:
+                continue
+            official_accepted.append(record)
+            if url_identity:
+                seen_urls.add(url_identity)
+            if identity:
+                seen_roles.add(identity)
+        accepted.extend(official_accepted)
+        log.info(
+            "Global registry: %d verified official record(s) added without Gemini",
+            len(official_accepted),
+        )
+    # Global roles are sourced only from official employer pages and the
+    # ReliefWeb climate feed. The legacy Google News path stays available for
+    # an explicit experiment but never runs in production: aggregator
+    # headlines are not verified official application pages.
+    if (
+        os.environ.get("UFP_ENABLE_GEMINI_GLOBAL") == "1"
+        and api_key
+        and GreenJob is not None
+    ):
         candidates = fetch_global_opportunities()
-        seen = existing_keys(existing + archive)
+        seen = existing_keys(existing + archive + accepted)
         fresh: List[Dict[str, Any]] = []
         for candidate in candidates:
             if not (candidate.get("title") and candidate.get("apply_url")):
@@ -3941,7 +4394,7 @@ def run_global_stage(
             humanizer = GeminiHumanizer(api_key, today, mode="global")
             taken_ids = {
                 str(job.get("id") or "")
-                for job in existing + archive
+                for job in existing + archive + accepted
                 if job.get("id")
             } | india_ids
             rate_limited = False
@@ -5957,17 +6410,18 @@ def main(argv: Optional[List[str]] = None) -> int:
         # refresh the weekly telemetry and rewrite every published data file.
         # No scraping and no Gemini calls, so it works without an API key.
         active, archive, newly_archived = apply_job_lifecycle(existing, archive, today)
-        stats = compute_stats(
-            published_records(active), published_records(archive), today
-        )
         write_jobs(active, jobs_path)
         write_archive(archive, archive_path)
-        write_stats(stats, stats_path)
         write_sitemap(active, archive, sitemap_path)
         write_digests(active, [], today, digest_json_path, whatsapp_digest_path)
         # The strictly separated global registry is maintained in the same
-        # run (seeds + lifecycle only; no scraping and no API key needed).
+        # run (official harvest + seed + lifecycle; no Gemini key needed).
         run_global_stage(global_jobs_path, global_archive_path, today, api_key=None)
+        stats = compute_stats(
+            published_records(active), published_records(archive), today
+        )
+        apply_global_stats(stats, global_jobs_path, global_archive_path)
+        write_stats(stats, stats_path)
         log.info(
             "Sync complete: %d active, %d archived (%d newly archived this run).",
             len(active), len(archive), newly_archived,
@@ -6236,18 +6690,25 @@ def main(argv: Optional[List[str]] = None) -> int:
     # whose entry type is unknown (hidden by placement policy) are excluded.
     published = published_records(active)
     published_archive = published_records(archive)
-    stats = compute_stats(published, published_archive, today)
 
+    # Write the India registry first so the strictly separate global stage
+    # cannot re-harvest an India record that is already live.
     write_jobs(active, jobs_path)
     write_archive(archive, archive_path)
+
+    # 5. Global opportunities registry - strictly separate files
+    #    (global_jobs.json / global_archive.json): verified official harvest,
+    #    evergreen seed and lifecycle.
+    run_global_stage(global_jobs_path, global_archive_path, today, api_key=api_key)
+
+    # Telemetry is computed after both registries are written so the badge's
+    # India and Global counts are always from the same refresh.
+    stats = compute_stats(published, published_archive, today)
+    apply_global_stats(stats, global_jobs_path, global_archive_path)
     write_stats(stats, stats_path)
 
-    # 5. Regenerate the sitemap for Google Jobs indexing.
+    # 5b. Regenerate the sitemap for Google Jobs indexing.
     write_sitemap(active, archive, sitemap_path)
-
-    # 5b. Global opportunities registry - strictly separate files
-    #     (global_jobs.json / global_archive.json), seed + fresh harvest.
-    run_global_stage(global_jobs_path, global_archive_path, today, api_key=api_key)
 
     # 6. Per-source yield report (leads -> passed -> active).
     write_source_report(
