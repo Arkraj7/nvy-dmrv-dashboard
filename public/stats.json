@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-22T13:25:08+05:30",
-  "last_updated_ist": "2026-10-22T13:25:08+05:30",
-  "last_pipeline_run_date_ist": "2026-10-22",
+  "last_updated": "2026-10-23T12:01:51+05:30",
+  "last_updated_ist": "2026-10-23T12:01:51+05:30",
+  "last_pipeline_run_date_ist": "2026-10-23",
   "active_open_jobs": 82,
-  "opened_this_week": 73,
-  "passed_this_week": 3,
+  "opened_this_week": 72,
+  "passed_this_week": 2,
   "total_archived_jobs": 6,
   "total_historical_indexed": 88,
-  "last_telegram_broadcast_date": "2026-10-22",
+  "last_telegram_broadcast_date": "2026-10-23",
   "recent_telegram_job_ids": [
     "phd-research-sustainable-rurban-food-systems-atree",
     "wildlife-trade-forensics-course-wii",
@@ -28,7 +28,17 @@
     "head-director-national-conservation-programme-wwf-india",
     "manager-special-projects-sustainability-united-breweries",
     "international-course-on-heritage-conservation-wii",
-    "junior-research-fellow-bsi"
+    "junior-research-fellow-bsi",
+    "junior-research-fellow-gbu",
+    "assistant-manager-horticulture-adani-natural-resources",
+    "chief-of-partnerships-unaccc-vadodara",
+    "project-associate-geospatial-urban-green-infrastructure-atree",
+    "fully-funded-phd-community-challenges-nottingham",
+    "pg-diploma-in-wildlife-wii",
+    "satluj-river-basin-assessment-tnc",
+    "mittal-family-climate-fellowship-program",
+    "dean-anant-school-for-climate-action-ahmedabad",
+    "doctoral-student-iit-guwahati"
   ],
   "by_category": {
     "Climate Policy, Think-Tanks & Fellowships": {
@@ -85,17 +95,17 @@
     "Odisha": 1,
     "Uttar Pradesh": 1
   },
+  "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
-    "director-brahmaputra-programme-wwf-india",
-    "programme-lead-senior-programme-associate-clean-energy-ifore",
-    "project-associate-geospatial-modelling-urban-heat-island-nrsc",
-    "gund-institute-funded-phd-competition-university-of-vermont",
-    "biology-phd-programme-iiser",
-    "head-director-national-conservation-programme-wwf-india",
-    "manager-special-projects-sustainability-united-breweries",
-    "international-course-on-heritage-conservation-wii",
-    "junior-research-fellow-bsi"
-  ],
-  "telegram_last_status": "delivered"
+    "junior-research-fellow-gbu",
+    "assistant-manager-horticulture-adani-natural-resources",
+    "chief-of-partnerships-unaccc-vadodara",
+    "project-associate-geospatial-urban-green-infrastructure-atree",
+    "fully-funded-phd-community-challenges-nottingham",
+    "pg-diploma-in-wildlife-wii",
+    "satluj-river-basin-assessment-tnc",
+    "mittal-family-climate-fellowship-program",
+    "dean-anant-school-for-climate-action-ahmedabad",
+    "doctoral-student-iit-guwahati"
+  ]
 }
