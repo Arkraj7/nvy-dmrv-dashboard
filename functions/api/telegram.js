@@ -594,7 +594,10 @@ async function handleUpdate(update, env) {
     ? `\n\n⚠️ Extracted country is ${escapeHtml(extracted.job.country)} but no #global tag was used — added to the India registry. Resend with #global for international roles.`
     : "";
   const published = committed.ok
-    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}): ${committed.job_url}` + jurisdictionHint
+    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}).` +
+      (committed.job_url ? `\n🔗 Registry: ${committed.registry_url}` : "") +
+      jurisdictionHint +
+      "\n<i>The job page and badge counts update after the next pipeline run.</i>"
     : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.` + jurisdictionHint;
 
   const sent = await sendMessage(env, chatId, formatJob(extracted.job) + published);
