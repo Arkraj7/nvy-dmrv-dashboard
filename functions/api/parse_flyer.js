@@ -501,3 +501,15 @@ export async function onRequestOptions() {
     },
   });
 }
+
+// Reused by the Telegram intake webhook so both entry points share the same
+// schema, normalisation rules and model-fallback list.
+export {
+  CATEGORIES,
+  POSITION_TYPES,
+  OPPORTUNITY_KINDS,
+  RESPONSE_SCHEMA,
+  FALLBACK_MODELS,
+  normalizeJob,
+  parseModelJson,
+};

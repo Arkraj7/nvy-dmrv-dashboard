@@ -5,6 +5,10 @@ import { onRequest as middleware } from "../functions/_middleware.js";
 import { onRequestPost } from "../functions/api/subscribe.js";
 import { onRequestPost as parseFlyer } from "../functions/api/parse_flyer.js";
 import { onRequestPost as commitJob } from "../functions/api/commit_job.js";
+import {
+  onRequestGet as telegramSetup,
+  onRequestPost as telegramWebhook,
+} from "../functions/api/telegram.js";
 
 const DESK_HASH = "358dc445f18f1c5a6f13af6aba6e7fdad57d541b14264c572978b27f862462e2";
 
@@ -210,6 +214,248 @@ const EXTRACTED_JOB = {
   role_summary: "Analyse forest carbon projects and support verification.",
   key_responsibilities: ["Review project data", "Prepare verification notes"],
 };
+
+function telegramRequest(update, extraHeaders) {
+  return new Request("https://www.urbanforestpark.com/api/telegram", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Telegram-Bot-Api-Secret-Token": "hook-secret",
+      ...(extraHeaders || {}),
+    },
+    body: JSON.stringify(update),
+  });
+}
+
+test("Telegram webhook rejects updates without the configured secret header", async () => {
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls += 1;
+    return new Response("{}", { status: 200 });
+  };
+  const response = await telegramWebhook(
+    context(
+      new Request("https://www.urbanforestpark.com/api/telegram", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ update_id: 1 }),
+      }),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+      }
+    )
+  );
+  assert.equal(response.status, 401);
+  assert.equal((await response.json()).error, "unauthorized");
+  assert.equal(calls, 0);
+});
+
+test("Telegram webhook handles /start and returns the chat id", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    calls.push({ url: String(url), options });
+    return new Response(JSON.stringify({ ok: true, result: { message_id: 9 } }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  const update = {
+    update_id: 2,
+    message: {
+      message_id: 2,
+      date: 1760000000,
+      chat: { id: 999, type: "private" },
+      from: { id: 999, is_bot: false, first_name: "Tester" },
+      text: "/start",
+    },
+  };
+  const response = await telegramWebhook(
+    context(
+      telegramRequest(update, { "X-UFP-Test-Secret": "setup-secret" }),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+        TELEGRAM_SETUP_SECRET: "setup-secret",
+        TELEGRAM_ADMIN_USER_ID: "123",
+      }
+    )
+  );
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.command, "start");
+  assert.match(calls[0].url, /sendMessage/);
+  assert.equal(JSON.parse(calls[0].options.body).chat_id, 123);
+});
+
+test("Telegram webhook converts a pasted job email into structured job info", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.includes("generativelanguage.googleapis.com")) {
+      return new Response(
+        JSON.stringify({
+          candidates: [{ content: { parts: [{ text: JSON.stringify(EXTRACTED_JOB) }] } }],
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    return new Response(JSON.stringify({ ok: true, result: { message_id: 10 } }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  const update = {
+    update_id: 3,
+    message: {
+      message_id: 3,
+      date: 1760000000,
+      chat: { id: 999, type: "private" },
+      from: { id: 999, is_bot: false, first_name: "Tester" },
+      text: "Subject: Junior Forest Carbon Analyst at Example Climate Institute. Location: Nairobi, Kenya. Deadline: 27 October 2026. Apply: https://example.org/careers/forest-carbon-analyst",
+    },
+  };
+  const response = await telegramWebhook(
+    context(
+      telegramRequest(update, { "X-UFP-Test-Secret": "setup-secret" }),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+        TELEGRAM_SETUP_SECRET: "setup-secret",
+        TELEGRAM_ADMIN_USER_ID: "123",
+        GEMINI_API_KEY: "test-key",
+      }
+    )
+  );
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.job.clean_title, EXTRACTED_JOB.clean_title);
+  assert.equal(payload.job.organization, EXTRACTED_JOB.organization);
+  assert.equal(payload.delivered, true);
+  const gemini = calls.find((call) => call.target.includes("generativelanguage.googleapis.com"));
+  assert.ok(gemini);
+  assert.match(gemini.options.body, /Junior Forest Carbon Analyst/);
+  const send = calls.find((call) => call.target.includes("/sendMessage"));
+  assert.ok(send);
+  assert.match(JSON.parse(send.options.body).text, /Junior Forest Carbon Analyst/);
+});
+
+test("Telegram webhook reads a job link before extracting it", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.startsWith("https://example.org/job/123")) {
+      return new Response(
+        "<html><body><h1>Wetland Restoration Officer</h1><p>Example Conservation Trust, Pune. Apply by 30 November 2026 at https://example.org/apply/wetland.</p></body></html>",
+        { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } }
+      );
+    }
+    if (target.includes("generativelanguage.googleapis.com")) {
+      return new Response(
+        JSON.stringify({
+          candidates: [{
+            content: {
+              parts: [{
+                text: JSON.stringify({
+                  ...EXTRACTED_JOB,
+                  clean_title: "Wetland Restoration Officer",
+                  organization: "Example Conservation Trust",
+                  city: "Pune",
+                  country: "India",
+                  application_url: "https://example.org/apply/wetland",
+                }),
+              }],
+            },
+          }],
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    return new Response(JSON.stringify({ ok: true, result: { message_id: 11 } }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  const update = {
+    update_id: 4,
+    message: {
+      message_id: 4,
+      date: 1760000000,
+      chat: { id: 999, type: "private" },
+      from: { id: 999, is_bot: false, first_name: "Tester" },
+      text: "https://example.org/job/123",
+    },
+  };
+  const response = await telegramWebhook(
+    context(
+      telegramRequest(update, { "X-UFP-Test-Secret": "setup-secret" }),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+        TELEGRAM_SETUP_SECRET: "setup-secret",
+        TELEGRAM_ADMIN_USER_ID: "123",
+        GEMINI_API_KEY: "test-key",
+      }
+    )
+  );
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.job.clean_title, "Wetland Restoration Officer");
+  assert.ok(calls.some((call) => call.target === "https://example.org/job/123"));
+});
+
+test("Telegram setup registers the webhook through the Pages secret", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.endsWith("/getMe")) {
+      return new Response(JSON.stringify({ ok: true, result: { id: 42, username: "ufp_test_bot" } }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    if (target.endsWith("/setWebhook")) {
+      return new Response(JSON.stringify({ ok: true, result: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    if (target.endsWith("/getWebhookInfo")) {
+      return new Response(JSON.stringify({
+        ok: true,
+        result: { url: "https://www.urbanforestpark.com/api/telegram", pending_update_count: 0 },
+      }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    return new Response("{}", { status: 200 });
+  };
+  const response = await telegramSetup(
+    context(
+      new Request("https://www.urbanforestpark.com/api/telegram?setup=setup-secret"),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+        TELEGRAM_SETUP_SECRET: "setup-secret",
+      }
+    )
+  );
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.bot.username, "ufp_test_bot");
+  assert.equal(payload.webhook.url, "https://www.urbanforestpark.com/api/telegram");
+  const setWebhook = calls.find((call) => call.target.endsWith("/setWebhook"));
+  const body = JSON.parse(setWebhook.options.body);
+  assert.equal(body.secret_token, "hook-secret");
+});
 
 test("flyer parse endpoint rejects an unlocked browser without the desk hash", async () => {
   let calls = 0;
