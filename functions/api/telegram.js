@@ -29,6 +29,7 @@ import {
   normalizeJob,
   parseModelJson,
 } from "./parse_flyer.js";
+import { commitJobRecord } from "./commit_job.js";
 
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-2.5-flash";
@@ -473,8 +474,8 @@ function formatJob(job) {
   } else {
     rows.push("\n🔗 No application URL was printed. Add it in the desk.");
   }
-  rows.push(`\n<a href="${SITE}/#syndication">Review &amp; add in the Syndication Desk</a>`);
-  rows.push("<i>Nothing was published automatically.</i>");
+  rows.push(`\n<a href="${SITE}/#syndication">Registry entry</a>`);
+  rows.push("<i>Published directly to the registry. No Syndication Desk review.</i>");
   return rows.join("\n").slice(0, 3900);
 }
 
@@ -588,11 +589,21 @@ async function handleUpdate(update, env) {
     return { ok: false, error: extracted.error };
   }
 
-  const sent = await sendMessage(env, chatId, formatJob(extracted.job));
+  const committed = await commitJobRecord(extracted.job, jurisdiction, env);
+  const published = committed.ok
+    ? `\n\n✅ Added to ${committed.registry} registry (${committed.id}): ${committed.job_url}`
+    : `\n\n⚠️ Could not auto-publish: ${committed.error || "unknown error"}. Copy the details above into the Syndication Desk.`;
+
+  const sent = await sendMessage(env, chatId, formatJob(extracted.job) + published);
   return {
     ok: true,
     job: extracted.job,
     model: extracted.model,
+    published: committed.ok,
+    commit: committed.commit,
+    path: committed.path,
+    job_url: committed.job_url,
+    registry_url: committed.registry_url,
     delivered: sent.ok,
     delivery_error: sent.ok ? null : sent.error,
   };

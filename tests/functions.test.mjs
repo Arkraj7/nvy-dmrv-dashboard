@@ -4,7 +4,7 @@ import test from "node:test";
 import { onRequest as middleware } from "../functions/_middleware.js";
 import { onRequestPost } from "../functions/api/subscribe.js";
 import { onRequestPost as parseFlyer } from "../functions/api/parse_flyer.js";
-import { onRequestPost as commitJob } from "../functions/api/commit_job.js";
+import { onRequestPost as commitJob, commitJobRecord } from "../functions/api/commit_job.js";
 import {
   onRequestGet as telegramSetup,
   onRequestPost as telegramWebhook,
@@ -711,4 +711,149 @@ test("commit_job fails closed when the server-side GitHub token is absent", asyn
   assert.equal(response.status, 503);
   assert.equal((await response.json()).error, "github_not_configured");
   assert.equal(calls, 0);
+});
+
+test("commitJobRecord appends a role directly without the desk gate", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.includes("/contents/public/global_jobs.json") && options.method !== "PUT") {
+      return new Response(
+        JSON.stringify({
+          sha: "old-sha",
+          content: Buffer.from(JSON.stringify([])).toString("base64"),
+        }),
+        { status: 200 }
+      );
+    }
+    if (target.includes("/contents/public/global_jobs.json") && options.method === "PUT") {
+      return new Response(JSON.stringify({ commit: { sha: "direct-commit" } }), { status: 200 });
+    }
+    return new Response("{}", { status: 404 });
+  };
+
+  const result = await commitJobRecord(EXTRACTED_JOB, "global", {
+    GITHUB_PAT: "test-token",
+    GITHUB_REPO: "owner/repo",
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.status, 200);
+  assert.equal(result.registry, "global");
+  assert.equal(result.path, "public/global_jobs.json");
+  assert.equal(result.commit, "direct-commit");
+  assert.ok(result.id);
+  assert.ok(result.job_url);
+
+  const put = calls.find((call) => call.options.method === "PUT");
+  assert.ok(put, "expected a GitHub contents PUT");
+  const stored = JSON.parse(
+    Buffer.from(JSON.parse(put.options.body).content, "base64").toString("utf8")
+  );
+  assert.equal(stored.length, 1);
+  assert.equal(stored[0].clean_title, "Junior Forest Carbon Analyst");
+  assert.equal(stored[0].global, true);
+  assert.equal(stored[0].status, "active");
+});
+
+test("commitJobRecord rejects a duplicate application URL directly", async () => {
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    const target = String(url);
+    calls.push({ target });
+    return new Response(
+      JSON.stringify({
+        sha: "old-sha",
+        content: Buffer.from(
+          JSON.stringify([{ id: "existing", apply_url: EXTRACTED_JOB.application_url }])
+        ).toString("base64"),
+      }),
+      { status: 200 }
+    );
+  };
+
+  const result = await commitJobRecord(EXTRACTED_JOB, "global", {
+    GITHUB_PAT: "test-token",
+    GITHUB_REPO: "owner/repo",
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.status, 409);
+  assert.equal(result.error, "duplicate_application_url");
+  assert.ok(calls.some((call) => call.target.includes("/contents/public/global_jobs.json")));
+});
+
+test("Telegram webhook auto-publishes an extracted email to the registry", async () => {
+  const calls = [];
+  globalThis.fetch = async (url, options = {}) => {
+    const target = String(url);
+    calls.push({ target, options });
+    if (target.includes("generativelanguage.googleapis.com")) {
+      return new Response(
+        JSON.stringify({
+          candidates: [{ content: { parts: [{ text: JSON.stringify(EXTRACTED_JOB) }] } }],
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    if (target.includes("api.github.com")) {
+      if (options.method === "PUT") {
+        return new Response(JSON.stringify({ commit: { sha: "gh-commit" } }), { status: 200 });
+      }
+      return new Response(
+        JSON.stringify({
+          sha: "old",
+          content: Buffer.from(JSON.stringify([])).toString("base64"),
+        }),
+        { status: 200 }
+      );
+    }
+    return new Response(
+      JSON.stringify({ ok: true, result: { message_id: 1 } }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  };
+
+  const response = await telegramWebhook(
+    context(
+      telegramRequest(
+        {
+          update_id: 6,
+          message: {
+            message_id: 6,
+            date: 1760000000,
+            chat: { id: 9, type: "private" },
+            from: { id: 9, is_bot: false, first_name: "Intake test" },
+            text: "Subject: Junior Forest Carbon Analyst at Example Climate Institute. Location: Nairobi, Kenya. Deadline: 27 October 2026. Apply: https://example.org/careers/forest-carbon-analyst",
+          },
+        },
+        { "X-UFP-Test-Secret": "setup-secret" }
+      ),
+      {
+        TELEGRAM_INBOX_BOT_TOKEN: "test-token",
+        TELEGRAM_WEBHOOK_SECRET: "hook-secret",
+        TELEGRAM_SETUP_SECRET: "setup-secret",
+        TELEGRAM_ADMIN_USER_ID: "123",
+        GEMINI_API_KEY: "test-key",
+        GITHUB_PAT: "test-token",
+        GITHUB_REPO: "owner/repo",
+      }
+    )
+  );
+
+  const payload = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(payload.ok, true);
+  assert.equal(payload.published, true);
+  assert.equal(payload.commit, "gh-commit");
+  assert.ok(payload.path);
+  assert.ok(payload.job_url);
+  assert.ok(payload.job_url.startsWith("https://www.urbanforestpark.com/jobs/"));
+  assert.equal(payload.delivered, true);
+
+  const put = calls.find((call) => call.options.method === "PUT");
+  assert.ok(put, "expected a GitHub contents PUT for auto-publish");
+  const body = JSON.parse(put.options.body);
+  assert.ok(put.target.includes("/contents/public/jobs.json"));
 });

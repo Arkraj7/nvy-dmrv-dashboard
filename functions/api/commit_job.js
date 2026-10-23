@@ -484,70 +484,65 @@ async function writeRegistry(repo, path, list, sha, token, message) {
   return { payload: await response.json() };
 }
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
+export async function commitJobRecord(job, jurisdiction, env) {
   const runtimeEnv = env || {};
-  const gate = deskAuthorised(request, runtimeEnv);
-  if (!gate.ok) return json({ ok: false, error: gate.error }, gate.status);
-
   const token = githubToken(runtimeEnv);
-  if (!token) return json({ ok: false, error: "github_not_configured" }, 503);
+  if (!token) return { ok: false, status: 503, error: "github_not_configured" };
 
-  let body;
-  try {
-    body = await request.json();
-  } catch (error) {
-    return json({ ok: false, error: "invalid_json" }, 400);
+  const registryName = clean(jurisdiction).toLowerCase();
+  if (!["india", "global"].includes(registryName)) {
+    return {
+      ok: false,
+      status: 422,
+      error: "invalid_jurisdiction",
+      allowed: ["india", "global"],
+    };
   }
-  if (!body || typeof body !== "object" || Array.isArray(body)) {
-    return json({ ok: false, error: "invalid_payload" }, 400);
-  }
-  const jurisdiction = clean(body.jurisdiction).toLowerCase();
-  if (!["india", "global"].includes(jurisdiction)) {
-    return json(
-      { ok: false, error: "invalid_jurisdiction", allowed: ["india", "global"] },
-      422
-    );
-  }
-  if (!body.job || typeof body.job !== "object" || Array.isArray(body.job)) {
-    return json({ ok: false, error: "missing_job" }, 422);
+  if (!job || typeof job !== "object" || Array.isArray(job)) {
+    return { ok: false, status: 422, error: "missing_job" };
   }
 
-  const built = buildRecord(body.job, jurisdiction);
-  if (built.error) return json({ ok: false, error: built.error }, 422);
+  const built = buildRecord(job, registryName);
+  if (built.error) return { ok: false, status: 422, error: built.error };
   const record = built.record;
 
   const repo = repoName(runtimeEnv);
-  const path = jurisdiction === "global"
+  const path = registryName === "global"
     ? "public/global_jobs.json"
     : "public/jobs.json";
   const registry = await readRegistry(repo, path, token);
   if (registry.error) {
-    return json(
-      { ok: false, error: registry.error, status: registry.status },
-      502
-    );
+    return {
+      ok: false,
+      status: 502,
+      error: registry.error,
+      upstream_status: registry.status,
+    };
   }
 
   const existing = registry.list;
   const applyUrl = record.apply_url.toLowerCase();
   const identity = roleIdentity(record);
-  for (const job of existing) {
-    if (clean(job && job.apply_url).toLowerCase() === applyUrl) {
-      return json(
-        { ok: false, error: "duplicate_application_url", existing: clean(job.id) },
-        409
-      );
+  for (const item of existing) {
+    if (clean(item && item.apply_url).toLowerCase() === applyUrl) {
+      return {
+        ok: false,
+        status: 409,
+        error: "duplicate_application_url",
+        existing: clean(item.id),
+      };
     }
-    if (identity && roleIdentity(job) === identity) {
-      return json(
-        { ok: false, error: "duplicate_role", existing: clean(job.id) },
-        409
-      );
+    if (identity && roleIdentity(item) === identity) {
+      return {
+        ok: false,
+        status: 409,
+        error: "duplicate_role",
+        existing: clean(item.id),
+      };
     }
   }
 
-  const taken = new Set(existing.map((job) => clean(job && job.id)).filter(Boolean));
+  const taken = new Set(existing.map((item) => clean(item && item.id)).filter(Boolean));
   record.id = uniqueId(`${record.clean_title}-${record.organization}`, taken);
   existing.unshift(record);
 
@@ -560,24 +555,51 @@ export async function onRequestPost(context) {
     `feat(registry): add ${record.clean_title} via flyer intake`
   );
   if (written.error) {
-    return json(
-      { ok: false, error: written.error, status: written.status, detail: written.detail },
-      written.status === 409 ? 409 : 502
-    );
+    return {
+      ok: false,
+      status: written.status === 409 ? 409 : 502,
+      error: written.error,
+      upstream_status: written.status,
+      detail: written.detail,
+    };
   }
 
-  return json({
+  return {
     ok: true,
+    status: 200,
     id: record.id,
     path,
-    registry: jurisdiction,
+    registry: registryName,
     commit: written.payload && written.payload.commit && written.payload.commit.sha,
     job_url: `${SITE}/jobs/${encodeURIComponent(record.id)}`,
-    registry_url: jurisdiction === "global"
+    registry_url: registryName === "global"
       ? `${SITE}/global-climate-sustainability-opportunities.html`
       : `${SITE}/`,
     rebuild_required: true,
-  });
+  };
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  const runtimeEnv = env || {};
+  const gate = deskAuthorised(request, runtimeEnv);
+  if (!gate.ok) return json({ ok: false, error: gate.error }, gate.status);
+
+  let body;
+  try {
+    body = await request.json();
+  } catch (error) {
+    return json({ ok: false, error: "invalid_json" }, 400);
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return json({ ok: false, error: "invalid_payload" }, 400);
+  }
+
+  const result = await commitJobRecord(body.job, body.jurisdiction, runtimeEnv);
+  const status = result.status || (result.ok ? 200 : 500);
+  const payload = { ...result };
+  delete payload.status;
+  return json(payload, status);
 }
 
 export async function onRequestOptions() {
