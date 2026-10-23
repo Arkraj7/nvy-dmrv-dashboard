@@ -1,33 +1,21 @@
 {
-  "generated_at": "2026-10-23T12:03:53+05:30",
+  "generated_at": "2026-10-23T12:25:27+05:30",
   "week_of": "2026-10-23",
   "window_days": 7,
   "india_window": "last 7 day(s)",
-  "global_window": "last 7 day(s)",
+  "global_window": "most recent verified listings (quiet window)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
-  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (10 India), verified with direct application links:",
   "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
-    "india": 7,
-    "global": 3
+    "india": 10,
+    "global": 0
   },
   "items": [
     {
       "position": 1,
-      "registry": "global",
-      "id": "fully-funded-phd-community-challenges-nottingham",
-      "title": "Fully Funded PhD Opportunities in Community Challenges",
-      "organization": "University of Nottingham",
-      "location": "Nottingham, UK",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Scholarship",
-      "score": 50.0,
-      "url": "https://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham"
-    },
-    {
-      "position": 2,
       "registry": "india",
       "id": "phd-research-sustainable-rurban-food-systems-atree",
       "title": "PhD Research on Sustainable Rurban Food Systems",
@@ -39,7 +27,7 @@
       "url": "https://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree"
     },
     {
-      "position": 3,
+      "position": 2,
       "registry": "india",
       "id": "pg-diploma-in-wildlife-wii",
       "title": "PG Diploma in Wildlife",
@@ -51,19 +39,7 @@
       "url": "https://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii"
     },
     {
-      "position": 4,
-      "registry": "global",
-      "id": "smithsonian-biodiversity-genomics-postdoctoral-fellowship",
-      "title": "Smithsonian Biodiversity Genomics Postdoctoral Fellowship Program",
-      "organization": "Smithsonian Institution",
-      "location": "Washington, D.C.",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Fellowship",
-      "score": 41.0,
-      "url": "https://www.urbanforestpark.com/jobs/smithsonian-biodiversity-genomics-postdoctoral-fellowship"
-    },
-    {
-      "position": 5,
+      "position": 3,
       "registry": "india",
       "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
       "title": "Programme Lead / Senior Programme Associate - Clean Energy",
@@ -75,19 +51,7 @@
       "url": "https://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore"
     },
     {
-      "position": 6,
-      "registry": "global",
-      "id": "future-earth-global-opportunities",
-      "title": "Global Sustainability Opportunities - Future Earth Network",
-      "organization": "Future Earth",
-      "location": "Remote (Global) / Stockholm Secretariat",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/future-earth-global-opportunities"
-    },
-    {
-      "position": 7,
+      "position": 4,
       "registry": "india",
       "id": "wildlife-trade-forensics-course-wii",
       "title": "Course in Wildlife Trade & Forensics for Revenue Officers",
@@ -99,7 +63,7 @@
       "url": "https://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii"
     },
     {
-      "position": 8,
+      "position": 5,
       "registry": "india",
       "id": "international-course-on-heritage-conservation-wii",
       "title": "International Course on Heritage Conservation",
@@ -111,7 +75,7 @@
       "url": "https://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii"
     },
     {
-      "position": 9,
+      "position": 6,
       "registry": "india",
       "id": "wildlife-enthusiasts-course-wii",
       "title": "Wildlife Enthusiasts Course",
@@ -123,7 +87,7 @@
       "url": "https://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii"
     },
     {
-      "position": 10,
+      "position": 7,
       "registry": "india",
       "id": "jrf-air-quality-atmospheric-chemistry-iit-delhi",
       "title": "Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry",
@@ -133,7 +97,43 @@
       "opportunity_kind": "Fellowship",
       "score": 37.0,
       "url": "https://www.urbanforestpark.com/jobs/jrf-air-quality-atmospheric-chemistry-iit-delhi"
+    },
+    {
+      "position": 8,
+      "registry": "india",
+      "id": "research-associate-maharashtra-atree",
+      "title": "Research Associate - TGI",
+      "organization": "ATREE",
+      "location": "Maharashtra, Maharashtra",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 36.0,
+      "url": "https://www.urbanforestpark.com/jobs/research-associate-maharashtra-atree"
+    },
+    {
+      "position": 9,
+      "registry": "india",
+      "id": "junior-research-fellow-gbu",
+      "title": "Junior Research Fellow",
+      "organization": "Gautam Buddha University",
+      "location": "Greater Noida, Uttar Pradesh",
+      "position_type": "JRF / SRF",
+      "opportunity_kind": "Job / Career",
+      "score": 36.0,
+      "url": "https://www.urbanforestpark.com/jobs/junior-research-fellow-gbu"
+    },
+    {
+      "position": 10,
+      "registry": "india",
+      "id": "head-director-national-conservation-programme-wwf-india",
+      "title": "Head/Director – National Conservation Programme",
+      "organization": "WWF-India",
+      "location": "Delhi, Delhi NCR",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 36.0,
+      "url": "https://www.urbanforestpark.com/jobs/head-director-national-conservation-programme-wwf-india"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Fully Funded PhD Opportunities in Community Challenges — University of Nottingham (Nottingham, UK | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham\n\n2. [INDIA] PhD Research on Sustainable Rurban Food Systems — ATREE (Remote (India), Multiple States / Remote | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree\n\n3. [INDIA] PG Diploma in Wildlife — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii\n\n4. [GLOBAL] Smithsonian Biodiversity Genomics Postdoctoral Fellowship Program — Smithsonian Institution (Washington, D.C. | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/smithsonian-biodiversity-genomics-postdoctoral-fellowship\n\n5. [INDIA] Programme Lead / Senior Programme Associate - Clean Energy — International Forum for Environment, Sustainability & Technology (iFOREST) (Noida, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore\n\n6. [GLOBAL] Global Sustainability Opportunities - Future Earth Network — Future Earth (Remote (Global) / Stockholm Secretariat | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/future-earth-global-opportunities\n\n7. [INDIA] Course in Wildlife Trade & Forensics for Revenue Officers — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii\n\n8. [INDIA] International Course on Heritage Conservation — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii\n\n9. [INDIA] Wildlife Enthusiasts Course — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii\n\n10. [INDIA] Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry — Indian Institute of Technology Delhi (IIT Delhi) (New Delhi, Delhi NCR | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/jrf-air-quality-atmospheric-chemistry-iit-delhi\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (10 India), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] PhD Research on Sustainable Rurban Food Systems — ATREE (Remote (India), Multiple States / Remote | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree\n\n2. [INDIA] PG Diploma in Wildlife — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii\n\n3. [INDIA] Programme Lead / Senior Programme Associate - Clean Energy — International Forum for Environment, Sustainability & Technology (iFOREST) (Noida, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore\n\n4. [INDIA] Course in Wildlife Trade & Forensics for Revenue Officers — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii\n\n5. [INDIA] International Course on Heritage Conservation — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii\n\n6. [INDIA] Wildlife Enthusiasts Course — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii\n\n7. [INDIA] Junior Research Fellow (JRF) - Air Quality & Atmospheric Chemistry — Indian Institute of Technology Delhi (IIT Delhi) (New Delhi, Delhi NCR | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/jrf-air-quality-atmospheric-chemistry-iit-delhi\n\n8. [INDIA] Research Associate - TGI — ATREE (Maharashtra, Maharashtra | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-associate-maharashtra-atree\n\n9. [INDIA] Junior Research Fellow — Gautam Buddha University (Greater Noida, Uttar Pradesh | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/junior-research-fellow-gbu\n\n10. [INDIA] Head/Director – National Conservation Programme — WWF-India (Delhi, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/head-director-national-conservation-programme-wwf-india\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
