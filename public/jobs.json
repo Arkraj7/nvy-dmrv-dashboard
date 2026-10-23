@@ -1,5 +1,58 @@
 [
   {
+    "clean_title": "Data Analytics & Statistical Modelling Expert (Contractual)",
+    "organization": "Indian Institute of Forest Management (IIFM)",
+    "city": "Bhopal",
+    "state": "Madhya Pradesh",
+    "country": "India",
+    "region": "",
+    "category": "Research Associate & Project Staff (Contractual)",
+    "position_type": "Project Associate / Research Associate",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "1-3 Years",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "25 October 2026",
+    "valid_through": "2026-10-25",
+    "qualification_summary": "Master's degree in Statistics, Economics, Data Science, Mathematics, Environmental Science, Agriculture, Forestry, Social Sciences, or related fields with at least 1 year of relevant experience.",
+    "compensation_or_fellowship": "₹75,000/month (Consolidated)",
+    "role_summary": "The Indian Institute of Forest Management is hiring a Data Analytics & Statistical Modelling Expert for the TEEBAgriFood project in Assam. The role involves managing large datasets, performing research analytics, and developing frameworks to support sustainability projects. The position is contractual for one year, with responsibilities including technical reporting and policy contribution.",
+    "key_responsibilities": [
+      "Support statistical analysis and quantitative data management",
+      "Develop analytical frameworks and research models",
+      "Create dashboards and data visualizations",
+      "Prepare technical reports and research outputs",
+      "Contribute to evidence-based decision-making for natural resource management"
+    ],
+    "must_have_skills": [
+      "Data Analytics",
+      "Statistical Modelling",
+      "R",
+      "Python",
+      "SPSS",
+      "STATA",
+      "Excel"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://iifm.ac.in/uploads/files/ADVTDAME.pdf",
+    "org_website": "https://www.iifm.ac.in",
+    "org_domain": "iifm.ac.in",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://iifm.ac.in/uploads/files/ADVTDAME.pdf"
+    },
+    "id": "data-analytics-statistical-modelling-expert-contractual-indi"
+  },
+  {
     "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
     "date_added": "2026-10-22",
     "clean_title": "Programme Lead / Senior Programme Associate - Clean Energy",
