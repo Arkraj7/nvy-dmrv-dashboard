@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T16:33:49",
+  "generated_at": "2026-10-24T01:22:30",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,12 +34,17 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 329,
+      "leads": 230,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 147,
+      "leads": 160,
+      "passed": 0,
+      "active": 0
+    },
+    "naukri": {
+      "leads": 58,
       "passed": 0,
       "active": 0
     },
@@ -49,17 +54,12 @@
       "active": 0
     },
     "portal:ceew": {
-      "leads": 15,
+      "leads": 16,
       "passed": 0,
       "active": 0
     },
     "indeed": {
-      "leads": 10,
-      "passed": 0,
-      "active": 0
-    },
-    "portal:atree": {
-      "leads": 7,
+      "leads": 9,
       "passed": 0,
       "active": 0
     },
@@ -69,7 +69,12 @@
       "active": 0
     },
     "google-news": {
-      "leads": 5,
+      "leads": 6,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:atree": {
+      "leads": 6,
       "passed": 0,
       "active": 0
     },
@@ -80,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 542,
+    "leads": 514,
     "passed": 0,
     "active": 0
   }
