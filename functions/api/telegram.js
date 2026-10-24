@@ -459,8 +459,19 @@ async function extractJob({ env, text, media, sourceUrl, jurisdiction }) {
   if (!job.application_url && sourceUrl && safeHttpUrl(sourceUrl) && !isBlockedHost(new URL(sourceUrl).hostname)) {
     job.application_url = sourceUrl;
   }
+  // Email-only applications: construct a mailto: link if no URL was found
+  if (!job.application_url) {
+    const emails = Array.from(new Set(
+      String(text || "").match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || []
+    ));
+    if (emails.length > 0) {
+      job.application_url = "mailto:" + emails.join(",");
+    }
+  }
   return { job, model };
 }
+
+// Email-only application URL support v2
 
 function formatJob(job) {
   const rows = [];

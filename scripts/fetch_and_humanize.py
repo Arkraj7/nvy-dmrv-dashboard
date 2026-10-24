@@ -1471,11 +1471,15 @@ def is_valid_apply_url(url: Optional[str]) -> bool:
     """Reject empty, malformed or placeholder apply URLs.
 
     A listing must always link to a real, clickable posting: anything with an
-    empty URL, a non-http(s) scheme, a host without a dot or a reserved
+    empty URL, a non-http(s)/mailto scheme, a host without a dot or a reserved
     placeholder host (example.com/.org/.net) is refused before it can ever
-    reach jobs.json or sitemap.xml.
+    reach jobs.json or sitemap.xml.  mailto: links are accepted for
+    email-only applications.
     """
     raw = str(url or "").strip()
+    if raw.lower().startswith("mailto:"):
+        email_part = raw[7:].split("?")[0].strip()
+        return bool(__import__("re").match(r"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$", email_part))
     if not raw.lower().startswith(("http://", "https://")):
         return False
     try:

@@ -137,6 +137,16 @@ function safeHttpUrl(value) {
   }
 }
 
+function safeApplyUrl(value) {
+  const text = clean(value, 600);
+  if (/^mailto:/i.test(text)) {
+    const emailPart = text.replace(/^mailto:/i, "").split("?")[0].trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailPart)) return text;
+    return "";
+  }
+  return safeHttpUrl(text);
+}
+
 function expectedDeskHash(env) {
   return clean(env && env.SYNDICATION_PASSPHRASE_SHA256).toLowerCase();
 }
@@ -362,7 +372,7 @@ function buildRecord(input, jurisdiction) {
   const today = todayIst();
   const title = clean(input.clean_title, MAX_TITLE);
   const organization = clean(input.organization, MAX_ORG);
-  const applyUrl = safeHttpUrl(input.application_url);
+  const applyUrl = safeApplyUrl(input.application_url);
   if (!title || !organization) {
     return { error: "missing_title_or_organization" };
   }
@@ -648,7 +658,7 @@ export async function deleteJobRecord(applyUrl, env) {
   const paths = ["public/jobs.json", "public/global_jobs.json"];
 
   // Try to match by URL first, then by job ID (last path segment)
-  const url = safeHttpUrl(applyUrl);
+  const url = safeApplyUrl(applyUrl);
   const idMatch = String(applyUrl || "").match(/\/jobs\/([^/?#]+)/);
 
   for (const path of paths) {
