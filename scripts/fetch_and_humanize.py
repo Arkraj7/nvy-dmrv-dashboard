@@ -4773,6 +4773,15 @@ def filter_valid_jobs(jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         if job.get("status") == "quarantined":
             valid.append(job)
             continue
+        # Manually verified records (Syndication Desk or Telegram intake)
+        # bypass the automated URL/org filters: the human (or admin bot)
+        # already confirmed the link and employer.
+        if isinstance(job.get("verification"), dict) and job["verification"].get("method"):
+            if not squash(job.get("clean_title") or job.get("title")):
+                missing_title += 1
+                continue
+            valid.append(job)
+            continue
         if has_blocked_organization(job):
             blocked += 1
             continue
