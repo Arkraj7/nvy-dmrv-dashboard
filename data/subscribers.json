@@ -58,9 +58,10 @@
     "active": true,
     "source": "urbanforestpark.com",
     "subscribed_at": "2026-10-24T03:19:40.980Z",
-    "updated_at": "2026-10-24T03:19:40.980Z",
+    "updated_at": "2026-10-24T03:19:50+00:00",
     "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
-    "welcome_sent": false,
-    "welcome_queued": false
+    "welcome_sent": true,
+    "welcome_queued": false,
+    "welcome_sent_at": "2026-10-24T03:19:51+00:00"
   }
 ]
