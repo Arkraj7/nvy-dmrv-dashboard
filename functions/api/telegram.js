@@ -471,8 +471,6 @@ async function extractJob({ env, text, media, sourceUrl, jurisdiction }) {
   return { job, model };
 }
 
-// Email-only application URL support v2
-
 function formatJob(job) {
   const rows = [];
   rows.push(`<b>${escapeHtml(job.clean_title)}</b>`);
