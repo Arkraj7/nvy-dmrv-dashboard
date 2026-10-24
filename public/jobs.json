@@ -1,5 +1,55 @@
 [
   {
+    "clean_title": "GIS Expert",
+    "organization": "EY",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "country": "India",
+    "region": "",
+    "category": "GIS, Remote Sensing & Earth Observation",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "1-3 Years",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-23",
+    "qualification_summary": "Master's degree in Geomatics, Geoinformatics, GIS & Remote Sensing, or Geography, or degree in Planning with 3–6 years of relevant experience.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "EY is seeking a GIS Expert to join its team in Jaipur, Rajasthan. The selected professional will focus on GIS, urban planning, and spatial data analysis for property tax, revenue, and government projects. The position requires three to six years of relevant technical and domain experience.",
+    "key_responsibilities": [
+      "Manage spatial data and carry out spatial analysis and thematic mapping using ArcGIS or QGIS.",
+      "Support domain projects involving property tax, revenue generation, and urban planning.",
+      "Contribute to government initiatives, such as e-Governance, Smart City projects, climate analysis, or IT solutions."
+    ],
+    "must_have_skills": [
+      "GIS",
+      "ArcGIS",
+      "QGIS",
+      "Spatial Data Analysis",
+      "Thematic Mapping",
+      "Urban Planning"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "mailto:nisha.pramanik@in.ey.com",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "mailto:nisha.pramanik@in.ey.com"
+    },
+    "id": "gis-expert-ey"
+  },
+  {
     "clean_title": "GIS Operator",
     "organization": "Pan India Consultants Pvt. Ltd.",
     "city": "Hyderabad",
