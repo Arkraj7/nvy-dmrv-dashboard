@@ -1,5 +1,57 @@
 [
   {
+    "clean_title": "DPhil in Biology",
+    "organization": "University of Oxford",
+    "city": "Oxford",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "region": "",
+    "category": "Academic, JRF, SRF & PhD Positions",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Scholarship",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-23",
+    "qualification_summary": "Applicants should hold or be predicted to achieve a first-class or strong upper second-class undergraduate degree with honours in appropriate subjects.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "The DPhil in Biology offers advanced training and the opportunity to conduct independent research within the Department of Biology. Students work under the guidance of academic supervisors on original projects involving fieldwork, laboratory experiments, or computational analysis. The program prepares graduates for careers in academia or research-focused sectors through a rigorous, supportive educational environment.",
+    "key_responsibilities": [
+      "Develop an original research project under academic supervision",
+      "Conduct independent self-directed research",
+      "Participate in departmental seminars and workshops",
+      "Prepare and defend a substantial thesis",
+      "Engage in professional skills development"
+    ],
+    "must_have_skills": [
+      "Independent Research",
+      "Scientific Writing",
+      "Data Analysis",
+      "Fieldwork",
+      "Laboratory Techniques",
+      "Academic Presentation"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://www.biology.ox.ac.uk/dphil#tab-5820131",
+    "org_website": "https://www.biology.ox.ac.uk/",
+    "org_domain": "biology.ox.ac.uk",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://www.biology.ox.ac.uk/dphil#tab-5820131"
+    },
+    "id": "dphil-in-biology-university-of-oxford"
+  },
+  {
     "clean_title": "Research Analyst / Programme Associate - Tech & Finance, Sustainable Food Systems",
     "organization": "Council on Energy, Environment and Water (CEEW)",
     "city": "New Delhi",
