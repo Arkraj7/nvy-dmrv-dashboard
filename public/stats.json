@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-24T06:52:42+05:30",
-  "last_updated_ist": "2026-10-24T06:52:42+05:30",
+  "last_updated": "2026-10-24T09:06:11+05:30",
+  "last_updated_ist": "2026-10-24T09:06:11+05:30",
   "last_pipeline_run_date_ist": "2026-10-24",
-  "active_open_jobs": 81,
+  "active_open_jobs": 87,
   "opened_this_week": 76,
   "passed_this_week": 1,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 87,
+  "total_historical_indexed": 93,
   "last_telegram_broadcast_date": "2026-10-24",
   "recent_telegram_job_ids": [
     "phd-research-sustainable-rurban-food-systems-atree",
@@ -51,20 +51,20 @@
     "analista-de-projetos-pleno-world-resources-institute-wri"
   ],
   "by_category": {
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 11,
-      "archived": 1
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 6,
+      "archived": 0
     },
     "Scholarships & Doctoral Support": {
       "active": 2,
       "archived": 0
     },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 11,
+      "archived": 1
+    },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 12,
-      "archived": 0
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 6,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
