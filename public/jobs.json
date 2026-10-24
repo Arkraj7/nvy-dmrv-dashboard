@@ -1,6 +1,54 @@
 [
   {
     "clean_title": "Research Assistant",
+    "organization": "TestOrg",
+    "city": "Not disclosed",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "region": "",
+    "category": "Research Associate & Project Staff (Contractual)",
+    "position_type": "Project Associate / Research Associate",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-23",
+    "qualification_summary": "The role requires a CV submission for consideration.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "TestOrg is seeking a Research Assistant to join their team. Interested candidates are invited to apply by submitting their CV to the provided email address for further consideration regarding this research-focused position.",
+    "key_responsibilities": [
+      "Conduct research activities as assigned",
+      "Support project documentation",
+      "Assist with data collection and analysis"
+    ],
+    "must_have_skills": [
+      "Research",
+      "Data Analysis",
+      "Documentation",
+      "Project Support"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "mailto:unique_test_12345@example.com",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "mailto:unique_test_12345@example.com"
+    },
+    "id": "research-assistant-testorg"
+  },
+  {
+    "clean_title": "Research Assistant",
     "organization": "CIMP",
     "city": "Not disclosed",
     "state": "Not disclosed",
