@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-24T06:52:30+05:30",
-  "last_updated_ist": "2026-10-24T06:52:30+05:30",
+  "last_updated": "2026-10-24T06:52:42+05:30",
+  "last_updated_ist": "2026-10-24T06:52:42+05:30",
   "last_pipeline_run_date_ist": "2026-10-24",
-  "active_open_jobs": 87,
+  "active_open_jobs": 81,
   "opened_this_week": 76,
   "passed_this_week": 1,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 93,
+  "total_historical_indexed": 87,
   "last_telegram_broadcast_date": "2026-10-24",
   "recent_telegram_job_ids": [
     "phd-research-sustainable-rurban-food-systems-atree",
@@ -110,19 +110,19 @@
   "total_global_records": 59,
   "total_archived_global_jobs": 3,
   "global_jobs_by_region": {
-    "Africa & Middle East": 14,
-    "Asia-Pacific": 11,
+    "UN / Multilateral": 4,
     "Europe": 4,
     "Global / Remote": 7,
-    "Latin America": 4,
+    "Africa & Middle East": 14,
     "North America": 2,
-    "UN / Multilateral": 4
+    "Asia-Pacific": 11,
+    "Latin America": 4
   },
   "global_jobs_by_kind": {
-    "Fellowship": 1,
-    "Grant / Funding": 1,
-    "Internship": 2,
     "Job / Career": 40,
+    "Fellowship": 1,
+    "Internship": 2,
+    "Grant / Funding": 1,
     "Scholarship": 2
   },
   "telegram_last_status": "delivered",
