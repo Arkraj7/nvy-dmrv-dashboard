@@ -1,24 +1,14 @@
 {
-  "last_updated": "2026-10-24T16:32:37+05:30",
-  "last_updated_ist": "2026-10-24T16:32:37+05:30",
-  "last_pipeline_run_date_ist": "2026-10-24",
-  "active_open_jobs": 90,
-  "opened_this_week": 76,
-  "passed_this_week": 1,
+  "last_updated": "2026-10-25T07:10:07+05:30",
+  "last_updated_ist": "2026-10-25T07:10:07+05:30",
+  "last_pipeline_run_date_ist": "2026-10-25",
+  "active_open_jobs": 97,
+  "opened_this_week": 85,
+  "passed_this_week": 0,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 96,
-  "last_telegram_broadcast_date": "2026-10-24",
+  "total_historical_indexed": 103,
+  "last_telegram_broadcast_date": "2026-10-25",
   "recent_telegram_job_ids": [
-    "phd-research-sustainable-rurban-food-systems-atree",
-    "wildlife-trade-forensics-course-wii",
-    "wildlife-enthusiasts-course-wii",
-    "sustainable-finance-specialist-unep-india",
-    "senior-energy-researcher-and-policy-consultant-wsp-india",
-    "research-intern-sustainable-food-systems-ceew",
-    "research-associate-maharashtra-atree",
-    "regional-health-and-wash-coordinator-terre-des-hommes",
-    "program-manager-water-supply-planet-water-foundation",
-    "product-manager-sustainability-climate-ai-msci",
     "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
     "director-brahmaputra-programme-wwf-india",
     "programme-lead-senior-programme-associate-clean-energy-ifore",
@@ -48,24 +38,42 @@
     "research-analyst-project-based-centre-for-public-policy-rese",
     "junior-research-fellow-kscste-centre-for-water-resources-dev",
     "phd-admissions-regular-january-2027-indian-institute-of-tech",
-    "analista-de-projetos-pleno-world-resources-institute-wri"
+    "analista-de-projetos-pleno-world-resources-institute-wri",
+    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
+    "young-professional-forest-policy-climate-finance-iifm-bhopal",
+    "climate-data-specialist-sustainability-consultant-nytp-corp",
+    "gis-expert-ey",
+    "communications-manager-folu-world-resources-institute-wri",
+    "dphil-in-biology-university-of-oxford",
+    "young-professional-climate-change-campa-moefcc",
+    "ghg-footprint-and-lca-assessor-globetrend-climate-impact",
+    "ph-d-admission-2026-27-central-university-of-south-bihar",
+    "phd-students-kotak-school-of-sustainability-iit-kanpur"
   ],
   "by_category": {
     "Research Associate & Project Staff (Contractual)": {
-      "active": 6,
-      "archived": 0
-    },
-    "Scholarships & Doctoral Support": {
-      "active": 2,
+      "active": 9,
       "archived": 0
     },
     "Climate Policy, Think-Tanks & Fellowships": {
       "active": 11,
       "archived": 1
     },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 12,
+    "Scholarships & Doctoral Support": {
+      "active": 4,
       "archived": 0
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 13,
+      "archived": 0
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 4,
+      "archived": 1
+    },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 44,
+      "archived": 3
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 9,
@@ -75,67 +83,62 @@
       "active": 2,
       "archived": 0
     },
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 42,
-      "archived": 3
-    },
     "Fellowships & Leadership Programs": {
       "active": 1,
       "archived": 0
-    },
-    "GIS, Remote Sensing & Earth Observation": {
-      "active": 2,
-      "archived": 1
     }
   },
   "by_state": {
     "Delhi NCR": 16,
     "Maharashtra": 13,
     "Karnataka": 11,
+    "Gujarat": 5,
     "Tamil Nadu": 5,
+    "Telangana": 5,
     "Uttarakhand": 5,
-    "Gujarat": 4,
-    "Telangana": 4,
     "Assam": 3,
+    "Bihar": 3,
     "Kerala": 3,
     "Madhya Pradesh": 3,
     "Punjab": 2,
+    "Uttar Pradesh": 2,
     "West Bengal": 2,
-    "Bihar": 1,
+    "Delhi": 1,
+    "Haryana": 1,
     "Odisha": 1,
-    "Uttar Pradesh": 1
+    "Rajasthan": 1
   },
   "active_global_jobs": 47,
   "active_global_portals": 13,
   "total_global_records": 60,
   "total_archived_global_jobs": 3,
   "global_jobs_by_region": {
-    "North America": 3,
-    "UN / Multilateral": 4,
-    "Europe": 4,
-    "Global / Remote": 7,
     "Africa & Middle East": 14,
     "Asia-Pacific": 11,
-    "Latin America": 4
+    "Europe": 4,
+    "Global / Remote": 7,
+    "Latin America": 4,
+    "North America": 3,
+    "UN / Multilateral": 4
   },
   "global_jobs_by_kind": {
-    "Job / Career": 41,
     "Fellowship": 1,
-    "Internship": 2,
     "Grant / Funding": 1,
+    "Internship": 2,
+    "Job / Career": 41,
     "Scholarship": 2
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "agroforestry-expert-contractual-indian-institute-of-forest-m",
-    "coordinator-tea-wwf-india",
-    "generation-hope-goals-2027-action-for-the-sdgs-escap",
-    "agriculture-market-systems-and-climate-finance-senior-adviso",
-    "data-analytics-statistical-modelling-expert-contractual-indi",
-    "project-lead-access-development-services",
-    "research-analyst-project-based-centre-for-public-policy-rese",
-    "junior-research-fellow-kscste-centre-for-water-resources-dev",
-    "phd-admissions-regular-january-2027-indian-institute-of-tech",
-    "analista-de-projetos-pleno-world-resources-institute-wri"
+    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
+    "young-professional-forest-policy-climate-finance-iifm-bhopal",
+    "climate-data-specialist-sustainability-consultant-nytp-corp",
+    "gis-expert-ey",
+    "communications-manager-folu-world-resources-institute-wri",
+    "dphil-in-biology-university-of-oxford",
+    "young-professional-climate-change-campa-moefcc",
+    "ghg-footprint-and-lca-assessor-globetrend-climate-impact",
+    "ph-d-admission-2026-27-central-university-of-south-bihar",
+    "phd-students-kotak-school-of-sustainability-iit-kanpur"
   ]
 }
