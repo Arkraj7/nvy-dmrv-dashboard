@@ -77,7 +77,10 @@
     'Scholarships & Doctoral Support',
     'Fellowships & Leadership Programs',
     'Internships & Student Traineeships',
-    'Competitions, Hackathons & Awards'
+    'Competitions, Hackathons & Awards',
+    'Workshops, Training & Capacity Building',
+    'Conferences, Summits & Events',
+    'Visiting Fellowships & Short-Term Research'
   ];
   var FLYER_POSITIONS = [
     'JRF / SRF',
@@ -86,11 +89,16 @@
     'Young Professional / Consultant (Contractual)',
     'Faculty / Academic',
     'Full-Time Corporate / NGO',
-    'Fellowship / Internship'
+    'Fellowship / Internship',
+    'Workshop / Training Participant',
+    'Conference Delegate',
+    'Visiting Researcher'
   ];
   var FLYER_KINDS = [
     'Job / Career', 'Fellowship', 'Scholarship', 'Grant / Funding',
-    'Internship', 'Competition / Award'
+    'Internship', 'Competition / Award',
+    'Workshop / Training', 'Conference / Summit',
+    'Visiting Fellowship', 'Webinar / Online Course'
   ];
 
   /* ---------------------------------------------------------------- utils */

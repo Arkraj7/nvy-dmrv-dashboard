@@ -1243,6 +1243,30 @@ def match_coimbatore(job: Dict[str, Any]) -> bool:
     return "coimbatore" in city
 
 
+def match_workshop(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "workshop" in kind or "training" in kind or "workshop" in category or "training" in category
+
+
+def match_conference(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "conference" in kind or "summit" in kind or "conference" in category or "summit" in category or "event" in category
+
+
+def match_visiting_fellowship(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "visiting" in kind or "visiting" in category
+
+
 def _match_city_env(job: Dict[str, Any], city_name: str) -> bool:
     if not is_job_listing(job):
         return False
@@ -2802,6 +2826,60 @@ HUBS: List[Dict[str, Any]] = [
             (
                 "Is this hub currently live?",
                 "This hub is scaffolded and will publish when Gurugram reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "workshops-training-capacity-building.html",
+        "match": match_workshop,
+        "kicker": "Workshops & Training Track",
+        "title": "Climate & Environment Workshops & Training 2026",
+        "h1": "Verified Climate & Environment Workshops & Training 2026",
+        "desc": "Verified workshops, training programmes and capacity-building events in climate, environment, forestry and sustainability across India and globally.",
+        "hero_sub": "Climate and environment workshops, training programmes and capacity-building events with direct registration links.",
+        "list_copy": "Workshops, training programmes, capacity-building events and short courses in climate, environment, forestry, GIS and ESG with direct registration links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "climate and environment workshops and training",
+        "faqs": [
+            (
+                "What kinds of workshops are listed?",
+                "Climate adaptation workshops, GIS training, forestry field courses, ESG reporting workshops, capacity-building programmes and short courses from universities, research institutes and international organisations."
+            ),
+        ],
+    },
+    {
+        "file": "conferences-summits-events.html",
+        "match": match_conference,
+        "kicker": "Conferences & Summits Track",
+        "title": "Climate & Environment Conferences & Summits 2026",
+        "h1": "Verified Climate & Environment Conferences & Summits 2026",
+        "desc": "Verified conferences, summits, symposia and events in climate, environment, forestry and sustainability across India and globally with registration links.",
+        "hero_sub": "Climate and environment conferences, summits and symposia with direct registration and submission links.",
+        "list_copy": "Conferences, summits, symposia and events in climate change, environment, forestry, GIS and ESG with direct registration and submission links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "climate and environment conferences and summits",
+        "faqs": [
+            (
+                "What kinds of conferences are listed?",
+                "Climate summits, forestry conferences, ESG forums, GIS symposia, sustainability workshops and academic conferences with open calls for papers or registration."
+            ),
+        ],
+    },
+    {
+        "file": "visiting-fellowships-short-term-research.html",
+        "match": match_visiting_fellowship,
+        "kicker": "Visiting Fellowships Track",
+        "title": "Verified Visiting Fellowships & Short-Term Research 2026",
+        "h1": "Verified Visiting Fellowships & Short-Term Research 2026",
+        "desc": "Verified visiting fellowships, short-term research positions and visiting researcher opportunities in climate, environment and sustainability.",
+        "hero_sub": "Visiting fellowships, short-term research and visiting researcher positions with direct application links.",
+        "list_copy": "Visiting fellowships, short-term research positions, visiting researcher and visiting scholar opportunities in climate, environment, forestry and ESG.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "visiting fellowships and short-term research",
+        "faqs": [
+            (
+                "What kinds of visiting fellowships are listed?",
+                "Short-term research visits, visiting researcher positions, visiting scholar programmes and exchange fellowships at research institutes, universities and international organisations."
             ),
         ],
     },

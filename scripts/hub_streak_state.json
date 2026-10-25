@@ -374,6 +374,27 @@
       "indexable": false,
       "last_flip": null,
       "flip_log": []
+    },
+    "workshops-training-capacity-building.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "conferences-summits-events.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "visiting-fellowships-short-term-research.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
     }
   },
   "last_run_date": "2026-10-25"

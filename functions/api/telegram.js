@@ -67,7 +67,10 @@ Rules:
 - category and position_type: choose exactly one allowed value supplied by the
   caller. If none fits, use the closest career-track value.
 - opportunity_kind: Job / Career, Fellowship, Scholarship, Grant / Funding,
-  Internship, or Competition / Award.
+  Internship, Competition / Award, Workshop / Training, Conference / Summit,
+  Visiting Fellowship, or Webinar / Online Course.
+- For workshops, conferences, and visiting fellowships: extract the event title,
+  host organisation, location, dates, eligibility, and application/registration URL.
 - stipend_or_salary: only the printed amount/currency/period; otherwise
   "Not disclosed - see official portal".
 - qualification_summary: one short sentence with the printed degree/experience.
@@ -514,6 +517,7 @@ async function handleUpdate(update, env) {
       "• a job URL",
       "• a pasted job email or description",
       "• a flyer image or PDF",
+      "• a workshop, conference, or visiting fellowship notice",
       "",
       "Add <code>#global</code> for an international role; otherwise I use India.",
       `Your chat ID: <code>${escapeHtml(chatId)}</code>`,

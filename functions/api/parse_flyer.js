@@ -56,6 +56,9 @@ const CATEGORIES = [
   "Fellowships & Leadership Programs",
   "Internships & Student Traineeships",
   "Competitions, Hackathons & Awards",
+  "Workshops, Training & Capacity Building",
+  "Conferences, Summits & Events",
+  "Visiting Fellowships & Short-Term Research",
 ];
 const POSITION_TYPES = [
   "JRF / SRF",
@@ -65,6 +68,9 @@ const POSITION_TYPES = [
   "Faculty / Academic",
   "Full-Time Corporate / NGO",
   "Fellowship / Internship",
+  "Workshop / Training Participant",
+  "Conference Delegate",
+  "Visiting Researcher",
 ];
 const OPPORTUNITY_KINDS = [
   "Job / Career",
@@ -73,6 +79,10 @@ const OPPORTUNITY_KINDS = [
   "Grant / Funding",
   "Internship",
   "Competition / Award",
+  "Workshop / Training",
+  "Conference / Summit",
+  "Visiting Fellowship",
+  "Webinar / Online Course",
 ];
 
 const RESPONSE_SCHEMA = {
@@ -207,6 +217,15 @@ function normalizeCategory(value, title, kind) {
   if (/esg|carbon|sustainability|climate finance|green finance|net zero/.test(haystack)) {
     return "ESG, Carbon Markets & Corporate Sustainability";
   }
+  if (/workshop|training|capacity building/.test(haystack)) {
+    return "Workshops, Training & Capacity Building";
+  }
+  if (/conference|summit|symposium|event/.test(haystack)) {
+    return "Conferences, Summits & Events";
+  }
+  if (/visiting (fellow|researcher|scholar)/.test(haystack)) {
+    return "Visiting Fellowships & Short-Term Research";
+  }
   return "Climate Policy, Think-Tanks & Fellowships";
 }
 
@@ -224,6 +243,9 @@ function normalizePositionType(value, title) {
   }
   if (/professor|faculty|lecturer/.test(haystack)) return "Faculty / Academic";
   if (/fellow|intern|trainee/.test(haystack)) return "Fellowship / Internship";
+  if (/workshop|training/.test(haystack)) return "Workshop / Training Participant";
+  if (/conference|summit|delegate/.test(haystack)) return "Conference Delegate";
+  if (/visiting (researcher|fellow|scholar)/.test(haystack)) return "Visiting Researcher";
   return "Full-Time Corporate / NGO";
 }
 
@@ -231,6 +253,10 @@ function normalizeKind(value, title) {
   const text = clean(value);
   if (OPPORTUNITY_KINDS.includes(text)) return text;
   const haystack = `${text} ${title}`.toLowerCase();
+  if (/workshop|training|capacity building/.test(haystack)) return "Workshop / Training";
+  if (/conference|summit|symposium/.test(haystack)) return "Conference / Summit";
+  if (/visiting (fellow|researcher|scholar)/.test(haystack)) return "Visiting Fellowship";
+  if (/webinar|online course|masterclass/.test(haystack)) return "Webinar / Online Course";
   if (/grant|funding|call for proposal/.test(haystack)) return "Grant / Funding";
   if (/scholarship|studentship/.test(haystack)) return "Scholarship";
   if (/fellowship|fellow|postdoc|post-doc/.test(haystack)) return "Fellowship";
