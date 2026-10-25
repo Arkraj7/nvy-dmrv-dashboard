@@ -1,5 +1,54 @@
 [
   {
+    "clean_title": "Ashoka-EDF Climate Corps India Fellowship (Phase 1)",
+    "organization": "Ashoka University x Environmental Defense Fund (EDF)",
+    "city": "Multiple States / Remote",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "category": "Fellowships & Leadership Programs",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Fellowship",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "01 November 2026",
+    "valid_through": "2026-11-01",
+    "qualification_summary": "Postgraduate students or early-career professionals (graduated after July 2022) with at least 2 years of relevant experience in business, engineering, sustainability, environmental management, public policy, finance, law, or related fields.",
+    "compensation_or_fellowship": "Rs 50,000 per month + relocation allowance up to Rs 30,000",
+    "role_summary": "Ashoka-EDF Climate Corps India Fellowship places postgraduate students and early-career professionals with host organizations across private and public sectors to work on climate and sustainability projects for 3 or 6 months between April and September 2027.",
+    "key_responsibilities": [
+      "Work with host organization on climate/sustainability project",
+      "Perform quantitative analyses",
+      "Manage projects and facilitate organizational change",
+      "Deliver practical solutions for net-zero and sustainability goals"
+    ],
+    "must_have_skills": [
+      "Climate Action",
+      "Sustainability",
+      "Project Management",
+      "Quantitative Analysis",
+      "Communication"
+    ],
+    "application_tip": "Phase 1 (postgrad students): apply by 01 Nov 2026. Phase 2 (early-career professionals): apply by 03 Jan 2027.",
+    "apply_url": "mailto:climatecorpsindia@ashoka.edu.in",
+    "org_website": "https://business.edf.org/insights/program-details-india-fellowship/",
+    "org_domain": "edf.org",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-25",
+    "date_posted": "2026-10-25",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-25",
+      "method": "flyer-intake-gemini-vision",
+      "source": "mailto:climatecorpsindia@ashoka.edu.in"
+    },
+    "id": "ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni"
+  },
+  {
     "clean_title": "Climate Data Specialist / Sustainability Consultant",
     "organization": "NYTP Corp",
     "city": "Remote",

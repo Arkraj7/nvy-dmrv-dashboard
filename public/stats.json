@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-25T12:25:42+05:30",
-  "last_updated_ist": "2026-10-25T12:25:42+05:30",
+  "last_updated": "2026-10-25T12:47:18+05:30",
+  "last_updated_ist": "2026-10-25T12:47:18+05:30",
   "last_pipeline_run_date_ist": "2026-10-25",
-  "active_open_jobs": 97,
+  "active_open_jobs": 98,
   "opened_this_week": 85,
   "passed_this_week": 0,
   "total_archived_jobs": 6,
-  "total_historical_indexed": 103,
+  "total_historical_indexed": 104,
   "last_telegram_broadcast_date": "2026-10-25",
   "recent_telegram_job_ids": [
     "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
@@ -108,22 +108,22 @@
     "Odisha": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 46,
+  "active_global_jobs": 50,
   "active_global_portals": 13,
-  "total_global_records": 59,
+  "total_global_records": 63,
   "total_archived_global_jobs": 3,
   "global_jobs_by_region": {
-    "UN / Multilateral": 4,
-    "Europe": 4,
+    "UN / Multilateral": 5,
+    "North America": 3,
+    "Europe": 5,
+    "Asia-Pacific": 12,
     "Global / Remote": 7,
     "Africa & Middle East": 14,
-    "North America": 2,
-    "Asia-Pacific": 11,
     "Latin America": 4
   },
   "global_jobs_by_kind": {
+    "Fellowship": 5,
     "Job / Career": 40,
-    "Fellowship": 1,
     "Internship": 2,
     "Grant / Funding": 1,
     "Scholarship": 2
