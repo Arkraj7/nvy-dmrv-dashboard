@@ -1243,6 +1243,30 @@ def match_coimbatore(job: Dict[str, Any]) -> bool:
     return "coimbatore" in city
 
 
+def _match_city_env(job: Dict[str, Any], city_name: str) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return city_name in city
+
+def match_env_kolkata(job): return _match_city_env(job, "kolkata") or _match_city_env(job, "calcutta")
+def match_env_chennai(job): return _match_city_env(job, "chennai") or _match_city_env(job, "madras")
+def match_env_hyderabad(job): return _match_city_env(job, "hyderabad")
+def match_env_pune(job): return _match_city_env(job, "pune")
+def match_env_ahmedabad(job): return _match_city_env(job, "ahmedabad")
+def match_env_dehradun(job): return _match_city_env(job, "dehradun")
+def match_env_noida(job): return _match_city_env(job, "noida")
+def match_env_bengaluru(job): return _match_city_env(job, "bengaluru") or _match_city_env(job, "bangalore")
+def match_env_mumbai(job): return _match_city_env(job, "mumbai")
+def match_env_delhi(job): return _match_city_env(job, "new delhi") or _match_city_env(job, "delhi")
+def match_env_bhopal(job): return _match_city_env(job, "bhopal")
+def match_env_kochi(job): return _match_city_env(job, "kochi") or _match_city_env(job, "cochin")
+def match_env_patna(job): return _match_city_env(job, "patna")
+def match_env_jaipur(job): return _match_city_env(job, "jaipur")
+def match_env_coimbatore(job): return _match_city_env(job, "coimbatore")
+def match_env_gurugram(job): return _match_city_env(job, "gurugram") or _match_city_env(job, "gurgaon")
+
+
 ESG_FRESH_RE = re.compile(
     r"\besg\b|sustainab|carbon|brsr|climate finance|corporate social|"
     r"climate policy|renewable|energy transition",
@@ -2490,6 +2514,294 @@ HUBS: List[Dict[str, Any]] = [
                 "Is this hub currently live?",
                 "This hub is scaffolded and will publish when Coimbatore reaches 12+ active "
                 "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-kolkata.html",
+        "match": match_env_kolkata,
+        "kicker": "Kolkata Environmental Track",
+        "title": "Environmental Jobs in Kolkata 2026",
+        "h1": "Environmental & Climate Jobs in Kolkata 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Kolkata with direct links to official application sources. Updated daily.",
+        "hero_sub": "Kolkata environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Kolkata with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Kolkata",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Kolkata reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-chennai.html",
+        "match": match_env_chennai,
+        "kicker": "Chennai Environmental Track",
+        "title": "Environmental Jobs in Chennai 2026",
+        "h1": "Environmental & Climate Jobs in Chennai 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Chennai with direct links to official application sources. Updated daily.",
+        "hero_sub": "Chennai environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Chennai with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Chennai",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Chennai reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-hyderabad.html",
+        "match": match_env_hyderabad,
+        "kicker": "Hyderabad Environmental Track",
+        "title": "Environmental Jobs in Hyderabad 2026",
+        "h1": "Environmental & Climate Jobs in Hyderabad 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Hyderabad with direct links to official application sources. Updated daily.",
+        "hero_sub": "Hyderabad environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Hyderabad with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Hyderabad",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Hyderabad reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-pune.html",
+        "match": match_env_pune,
+        "kicker": "Pune Environmental Track",
+        "title": "Environmental Jobs in Pune 2026",
+        "h1": "Environmental & Climate Jobs in Pune 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Pune with direct links to official application sources. Updated daily.",
+        "hero_sub": "Pune environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Pune with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Pune",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Pune reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-ahmedabad.html",
+        "match": match_env_ahmedabad,
+        "kicker": "Ahmedabad Environmental Track",
+        "title": "Environmental Jobs in Ahmedabad 2026",
+        "h1": "Environmental & Climate Jobs in Ahmedabad 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Ahmedabad with direct links to official application sources. Updated daily.",
+        "hero_sub": "Ahmedabad environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Ahmedabad with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Ahmedabad",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Ahmedabad reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-dehradun.html",
+        "match": match_env_dehradun,
+        "kicker": "Dehradun Environmental Track",
+        "title": "Environmental Jobs in Dehradun 2026",
+        "h1": "Environmental & Climate Jobs in Dehradun 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Dehradun with direct links to official application sources. Updated daily.",
+        "hero_sub": "Dehradun environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Dehradun with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Dehradun",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Dehradun reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-noida.html",
+        "match": match_env_noida,
+        "kicker": "Noida Environmental Track",
+        "title": "Environmental Jobs in Noida 2026",
+        "h1": "Environmental & Climate Jobs in Noida 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Noida with direct links to official application sources. Updated daily.",
+        "hero_sub": "Noida environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Noida with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Noida",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Noida reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-bengaluru.html",
+        "match": match_env_bengaluru,
+        "kicker": "Bengaluru Environmental Track",
+        "title": "Environmental Jobs in Bengaluru 2026",
+        "h1": "Environmental & Climate Jobs in Bengaluru 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Bengaluru with direct links to official application sources. Updated daily.",
+        "hero_sub": "Bengaluru environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Bengaluru with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Bengaluru",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Bengaluru reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-mumbai.html",
+        "match": match_env_mumbai,
+        "kicker": "Mumbai Environmental Track",
+        "title": "Environmental Jobs in Mumbai 2026",
+        "h1": "Environmental & Climate Jobs in Mumbai 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Mumbai with direct links to official application sources. Updated daily.",
+        "hero_sub": "Mumbai environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Mumbai with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Mumbai",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Mumbai reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-delhi.html",
+        "match": match_env_delhi,
+        "kicker": "New Delhi Environmental Track",
+        "title": "Environmental Jobs in New Delhi 2026",
+        "h1": "Environmental & Climate Jobs in New Delhi 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in New Delhi with direct links to official application sources. Updated daily.",
+        "hero_sub": "New Delhi environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across New Delhi with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in New Delhi",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when New Delhi reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-bhopal.html",
+        "match": match_env_bhopal,
+        "kicker": "Bhopal Environmental Track",
+        "title": "Environmental Jobs in Bhopal 2026",
+        "h1": "Environmental & Climate Jobs in Bhopal 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Bhopal with direct links to official application sources. Updated daily.",
+        "hero_sub": "Bhopal environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Bhopal with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Bhopal",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Bhopal reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-kochi.html",
+        "match": match_env_kochi,
+        "kicker": "Kochi Environmental Track",
+        "title": "Environmental Jobs in Kochi 2026",
+        "h1": "Environmental & Climate Jobs in Kochi 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Kochi with direct links to official application sources. Updated daily.",
+        "hero_sub": "Kochi environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Kochi with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Kochi",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Kochi reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-patna.html",
+        "match": match_env_patna,
+        "kicker": "Patna Environmental Track",
+        "title": "Environmental Jobs in Patna 2026",
+        "h1": "Environmental & Climate Jobs in Patna 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Patna with direct links to official application sources. Updated daily.",
+        "hero_sub": "Patna environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Patna with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Patna",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Patna reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-jaipur.html",
+        "match": match_env_jaipur,
+        "kicker": "Jaipur Environmental Track",
+        "title": "Environmental Jobs in Jaipur 2026",
+        "h1": "Environmental & Climate Jobs in Jaipur 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Jaipur with direct links to official application sources. Updated daily.",
+        "hero_sub": "Jaipur environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Jaipur with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Jaipur",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Jaipur reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-coimbatore.html",
+        "match": match_env_coimbatore,
+        "kicker": "Coimbatore Environmental Track",
+        "title": "Environmental Jobs in Coimbatore 2026",
+        "h1": "Environmental & Climate Jobs in Coimbatore 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Coimbatore with direct links to official application sources. Updated daily.",
+        "hero_sub": "Coimbatore environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Coimbatore with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Coimbatore",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Coimbatore reaches enough active roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "environmental-jobs-gurugram.html",
+        "match": match_env_gurugram,
+        "kicker": "Gurugram Environmental Track",
+        "title": "Environmental Jobs in Gurugram 2026",
+        "h1": "Environmental & Climate Jobs in Gurugram 2026",
+        "desc": "Verified environmental, climate, forestry and sustainability jobs in Gurugram with direct links to official application sources. Updated daily.",
+        "hero_sub": "Gurugram environmental and climate jobs with direct links to official sources.",
+        "list_copy": "Environmental, climate, forestry, GIS, ESG and sustainability roles across Gurugram with direct official links.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "environmental and climate jobs in Gurugram",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Gurugram reaches enough active roles for 3 consecutive pipeline runs."
             ),
         ],
     },
