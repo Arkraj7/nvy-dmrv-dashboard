@@ -337,10 +337,26 @@ validate_keyword_map(KEYWORD_MAP)
 
 
 def page_meta(file_name: str) -> Dict[str, Any]:
-    try:
+    if file_name in KEYWORD_MAP:
         return KEYWORD_MAP[file_name]
-    except KeyError as exc:
-        raise SystemExit(f"ERROR: missing keyword-map entry for {file_name}") from exc
+    # Auto-generate metadata for hub pages not in the keyword map
+    stem = file_name.replace(".html", "").replace("-", " ").title()
+    return {
+        "path": "/" + file_name.replace(".html", ""),
+        "file": file_name,
+        "canonical": SITE + "/" + file_name,
+        "title": (stem + " 2026 | Urban Forest Park")[:60],
+        "description": (
+            "Verified ESG, sustainability and climate jobs in "
+            + stem.lower()
+            + " with direct links to official application sources. Updated daily."
+        )[:160],
+        "primary_keyword": stem,
+        "secondary_keywords": [],
+        "search_intent": "transactional",
+        "h1": stem + " 2026",
+        "indexable": False,
+    }
 
 
 def ist_today() -> date:
@@ -428,6 +444,15 @@ def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) 
     DUPLICATE_PAIRS = [
         ("esg-sustainability-jobs-karnataka.html", "esg-jobs-bangalore.html"),
         ("esg-sustainability-jobs-maharashtra.html", "esg-jobs-mumbai.html"),
+        ("esg-sustainability-jobs-west-bengal.html", "esg-jobs-kolkata.html"),
+        ("esg-sustainability-jobs-tamil-nadu.html", "esg-jobs-chennai.html"),
+        ("esg-sustainability-jobs-telangana.html", "esg-jobs-hyderabad.html"),
+        ("esg-sustainability-jobs-gujarat.html", "esg-jobs-ahmedabad.html"),
+        ("esg-sustainability-jobs-uttarakhand.html", "esg-jobs-dehradun.html"),
+        ("esg-sustainability-jobs-madhya-pradesh.html", "esg-jobs-bhopal.html"),
+        ("esg-sustainability-jobs-kerala.html", "esg-jobs-kochi.html"),
+        ("esg-sustainability-jobs-rajasthan.html", "esg-jobs-jaipur.html"),
+        ("esg-sustainability-jobs-bihar.html", "esg-jobs-patna.html"),
     ]
 
     for state_hub, city_hub in DUPLICATE_PAIRS:
@@ -1028,6 +1053,194 @@ def match_mumbai(job: Dict[str, Any]) -> bool:
         return False
     city = plain(job.get("city")).lower()
     return "mumbai" in city
+
+
+def match_west_bengal(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "west bengal" in state or "kolkata" in city
+
+
+def match_kolkata(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "kolkata" in city or "calcutta" in city
+
+
+def match_tamil_nadu(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "tamil nadu" in state or "chennai" in city
+
+
+def match_chennai(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "chennai" in city or "madras" in city
+
+
+def match_telangana(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "telangana" in state or "hyderabad" in city
+
+
+def match_hyderabad(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "hyderabad" in city
+
+
+def match_gujarat(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "gujarat" in state or "ahmedabad" in city or "gandhinagar" in city or "surat" in city or "vadodara" in city
+
+
+def match_ahmedabad(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "ahmedabad" in city
+
+
+def match_uttarakhand(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "uttarakhand" in state or "dehradun" in city
+
+
+def match_dehradun(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "dehradun" in city
+
+
+def match_madhya_pradesh(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "madhya pradesh" in state or "bhopal" in city or "indore" in city
+
+
+def match_bhopal(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "bhopal" in city
+
+
+def match_kerala(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "kerala" in state or "kochi" in city or "thiruvananthapuram" in city
+
+
+def match_kochi(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "kochi" in city or "cochin" in city
+
+
+def match_rajasthan(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "rajasthan" in state or "jaipur" in city
+
+
+def match_jaipur(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "jaipur" in city
+
+
+def match_bihar(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "bihar" in state or "patna" in city
+
+
+def match_patna(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "patna" in city
+
+
+def match_pune(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "pune" in city
+
+
+def match_noida(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "noida" in city
+
+
+def match_assam(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "assam" in state or "guwahati" in city
+
+
+def match_punjab(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "punjab" in state or "chandigarh" in city
+
+
+def match_odisha(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "odisha" in state or "bhubaneswar" in city
+
+
+def match_haryana(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    state = plain(job.get("state")).lower()
+    city = plain(job.get("city")).lower()
+    return "haryana" in state or "gurugram" in city or "gurgaon" in city
+
+
+def match_coimbatore(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    city = plain(job.get("city")).lower()
+    return "coimbatore" in city
 
 
 ESG_FRESH_RE = re.compile(
@@ -1689,9 +1902,598 @@ HUBS: List[Dict[str, Any]] = [
                 "This hub is city-specific (Mumbai only). "
                 "The Maharashtra hub covers the entire state."
             ),
-        ]
+        ],
+
     },
-    ]
+    {
+        "file": "esg-sustainability-jobs-west-bengal.html",
+        "match": match_west_bengal,
+        "kicker": "West Bengal ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in West Bengal 2026",
+        "h1": "Verified ESG & Sustainability Jobs in West Bengal 2026 - Kolkata & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across West Bengal - "
+            "Kolkata's research institutes, NGOs and corporate sustainability teams."
+        ),
+        "hero_sub": (
+            "West Bengal ESG jobs: Kolkata research institutes, NGOs, corporate teams - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across West Bengal - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in West Bengal",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when West Bengal reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-kolkata.html",
+        "match": match_kolkata,
+        "kicker": "Kolkata ESG Track",
+        "title": "Verified ESG Jobs in Kolkata 2026",
+        "h1": "Verified ESG Jobs in Kolkata 2026 - Climate & Sustainability Careers",
+        "desc": (
+            "Verified ESG jobs in Kolkata - research institutes, NGOs, corporate "
+            "sustainability teams and climate organisations."
+        ),
+        "hero_sub": (
+            "Kolkata ESG jobs: research institutes, NGOs, corporate teams - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Kolkata - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Kolkata",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Kolkata reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-tamil-nadu.html",
+        "match": match_tamil_nadu,
+        "kicker": "Tamil Nadu ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Tamil Nadu 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Tamil Nadu 2026 - Chennai & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Tamil Nadu - "
+            "Chennai's IT corridor, Coimbatore's manufacturing, and research institutes."
+        ),
+        "hero_sub": (
+            "Tamil Nadu ESG jobs: Chennai IT corridor, Coimbatore industry, research institutes - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Tamil Nadu - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Tamil Nadu",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Tamil Nadu reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-chennai.html",
+        "match": match_chennai,
+        "kicker": "Chennai ESG Track",
+        "title": "Verified ESG Jobs in Chennai 2026",
+        "h1": "Verified ESG Jobs in Chennai 2026 - IT, Manufacturing & Climate",
+        "desc": (
+            "Verified ESG jobs in Chennai - IT corridor, manufacturing, consultancies "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Chennai ESG jobs: IT corridor, manufacturing, consultancies - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Chennai - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Chennai",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Chennai reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-telangana.html",
+        "match": match_telangana,
+        "kicker": "Telangana ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Telangana 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Telangana 2026 - Hyderabad & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Telangana - "
+            "Hyderabad's IT hub, research institutes and climate organisations."
+        ),
+        "hero_sub": (
+            "Telangana ESG jobs: Hyderabad IT hub, research institutes, climate orgs - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Telangana - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Telangana",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Telangana reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-hyderabad.html",
+        "match": match_hyderabad,
+        "kicker": "Hyderabad ESG Track",
+        "title": "Verified ESG Jobs in Hyderabad 2026",
+        "h1": "Verified ESG Jobs in Hyderabad 2026 - IT, Pharma & Climate",
+        "desc": (
+            "Verified ESG jobs in Hyderabad - IT hub, pharma, research institutes "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Hyderabad ESG jobs: IT hub, pharma, research institutes - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Hyderabad - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Hyderabad",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Hyderabad reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-gujarat.html",
+        "match": match_gujarat,
+        "kicker": "Gujarat ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Gujarat 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Gujarat 2026 - Ahmedabad & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Gujarat - "
+            "Ahmedabad's corporate hub, renewable energy and industrial corridor."
+        ),
+        "hero_sub": (
+            "Gujarat ESG jobs: Ahmedabad corporate, renewable energy, industry - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Gujarat - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Gujarat",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Gujarat reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-ahmedabad.html",
+        "match": match_ahmedabad,
+        "kicker": "Ahmedabad ESG Track",
+        "title": "Verified ESG Jobs in Ahmedabad 2026",
+        "h1": "Verified ESG Jobs in Ahmedabad 2026 - Renewable Energy & Corporate",
+        "desc": (
+            "Verified ESG jobs in Ahmedabad - renewable energy hub, corporate "
+            "sustainability teams and climate organisations."
+        ),
+        "hero_sub": (
+            "Ahmedabad ESG jobs: renewable energy, corporate sustainability - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Ahmedabad - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Ahmedabad",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Ahmedabad reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-uttarakhand.html",
+        "match": match_uttarakhand,
+        "kicker": "Uttarakhand ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Uttarakhand 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Uttarakhand 2026 - Dehradun & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Uttarakhand - "
+            "Dehradun's research institutes, wildlife and forestry organisations."
+        ),
+        "hero_sub": (
+            "Uttarakhand ESG jobs: Dehradun research institutes, wildlife, forestry - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Uttarakhand - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Uttarakhand",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Uttarakhand reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-dehradun.html",
+        "match": match_dehradun,
+        "kicker": "Dehradun ESG Track",
+        "title": "Verified ESG Jobs in Dehradun 2026",
+        "h1": "Verified ESG Jobs in Dehradun 2026 - Research & Forestry",
+        "desc": (
+            "Verified ESG jobs in Dehradun - research institutes, forestry, "
+            "wildlife and climate organisations."
+        ),
+        "hero_sub": (
+            "Dehradun ESG jobs: research institutes, forestry, wildlife - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Dehradun - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Dehradun",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Dehradun reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-madhya-pradesh.html",
+        "match": match_madhya_pradesh,
+        "kicker": "Madhya Pradesh ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Madhya Pradesh 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Madhya Pradesh 2026 - Bhopal & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Madhya Pradesh - "
+            "Bhopal's research institutes and industrial corridor."
+        ),
+        "hero_sub": (
+            "Madhya Pradesh ESG jobs: Bhopal research institutes, industry - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Madhya Pradesh - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Madhya Pradesh",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Madhya Pradesh reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-bhopal.html",
+        "match": match_bhopal,
+        "kicker": "Bhopal ESG Track",
+        "title": "Verified ESG Jobs in Bhopal 2026",
+        "h1": "Verified ESG Jobs in Bhopal 2026 - Research & Industry",
+        "desc": (
+            "Verified ESG jobs in Bhopal - research institutes, IIFM, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Bhopal ESG jobs: research institutes, IIFM, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Bhopal - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Bhopal",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Bhopal reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-kerala.html",
+        "match": match_kerala,
+        "kicker": "Kerala ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Kerala 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Kerala 2026 - Kochi & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Kerala - "
+            "Kochi's research institutes, NGOs and climate organisations."
+        ),
+        "hero_sub": (
+            "Kerala ESG jobs: Kochi research institutes, NGOs, climate orgs - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Kerala - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Kerala",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Kerala reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-kochi.html",
+        "match": match_kochi,
+        "kicker": "Kochi ESG Track",
+        "title": "Verified ESG Jobs in Kochi 2026",
+        "h1": "Verified ESG Jobs in Kochi 2026 - Research & Climate",
+        "desc": (
+            "Verified ESG jobs in Kochi - research institutes, NGOs, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Kochi ESG jobs: research institutes, NGOs, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Kochi - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Kochi",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Kochi reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-rajasthan.html",
+        "match": match_rajasthan,
+        "kicker": "Rajasthan ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Rajasthan 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Rajasthan 2026 - Jaipur & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Rajasthan - "
+            "Jaipur's research institutes and renewable energy sector."
+        ),
+        "hero_sub": (
+            "Rajasthan ESG jobs: Jaipur research institutes, renewable energy - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Rajasthan - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Rajasthan",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Rajasthan reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-jaipur.html",
+        "match": match_jaipur,
+        "kicker": "Jaipur ESG Track",
+        "title": "Verified ESG Jobs in Jaipur 2026",
+        "h1": "Verified ESG Jobs in Jaipur 2026 - Research & Renewable Energy",
+        "desc": (
+            "Verified ESG jobs in Jaipur - research institutes, renewable energy, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Jaipur ESG jobs: research institutes, renewable energy - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Jaipur - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Jaipur",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Jaipur reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-sustainability-jobs-bihar.html",
+        "match": match_bihar,
+        "kicker": "Bihar ESG & Sustainability Track",
+        "title": "Verified ESG & Sustainability Jobs in Bihar 2026",
+        "h1": "Verified ESG & Sustainability Jobs in Bihar 2026 - Patna & Beyond",
+        "desc": (
+            "Verified ESG, sustainability and climate jobs across Bihar - "
+            "Patna's research institutes and climate organisations."
+        ),
+        "hero_sub": (
+            "Bihar ESG jobs: Patna research institutes, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Bihar - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG & sustainability jobs in Bihar",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Bihar reaches 12+ active "
+                "ESG/sustainability roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-patna.html",
+        "match": match_patna,
+        "kicker": "Patna ESG Track",
+        "title": "Verified ESG Jobs in Patna 2026",
+        "h1": "Verified ESG Jobs in Patna 2026 - Research & Climate",
+        "desc": (
+            "Verified ESG jobs in Patna - research institutes, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Patna ESG jobs: research institutes, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Patna - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Patna",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Patna reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-pune.html",
+        "match": match_pune,
+        "kicker": "Pune ESG Track",
+        "title": "Verified ESG Jobs in Pune 2026",
+        "h1": "Verified ESG Jobs in Pune 2026 - Research & Industry",
+        "desc": (
+            "Verified ESG jobs in Pune - research institutes, IT corridor, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Pune ESG jobs: research institutes, IT corridor, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Pune - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Pune",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Pune reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-noida.html",
+        "match": match_noida,
+        "kicker": "Noida ESG Track",
+        "title": "Verified ESG Jobs in Noida 2026",
+        "h1": "Verified ESG Jobs in Noida 2026 - IT & Corporate",
+        "desc": (
+            "Verified ESG jobs in Noida - IT corridor, corporate sustainability, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Noida ESG jobs: IT corridor, corporate sustainability - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Noida - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Noida",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Noida reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+    {
+        "file": "esg-jobs-coimbatore.html",
+        "match": match_coimbatore,
+        "kicker": "Coimbatore ESG Track",
+        "title": "Verified ESG Jobs in Coimbatore 2026",
+        "h1": "Verified ESG Jobs in Coimbatore 2026 - Industry & Climate",
+        "desc": (
+            "Verified ESG jobs in Coimbatore - manufacturing, textiles, "
+            "and climate organisations."
+        ),
+        "hero_sub": (
+            "Coimbatore ESG jobs: manufacturing, textiles, climate organisations - "
+            "direct links to official sources."
+        ),
+        "list_copy": (
+            "ESG analyst, sustainability manager, climate and environment roles "
+            "across Coimbatore - direct links to official sources."
+        ),
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ESG jobs in Coimbatore",
+        "faqs": [
+            (
+                "Is this hub currently live?",
+                "This hub is scaffolded and will publish when Coimbatore reaches 12+ active "
+                "ESG roles for 3 consecutive pipeline runs."
+            ),
+        ],
+    },
+]
 
 for _hub in HUBS:
     _meta = page_meta(_hub["file"])
