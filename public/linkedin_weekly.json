@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-24T06:52:41+05:30",
-  "week_of": "2026-10-24",
+  "generated_at": "2026-10-25T07:10:19+05:30",
+  "week_of": "2026-10-25",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -40,18 +40,6 @@
     },
     {
       "position": 3,
-      "registry": "india",
-      "id": "pg-diploma-in-wildlife-wii",
-      "title": "PG Diploma in Wildlife",
-      "organization": "Wildlife Institute of India (WII)",
-      "location": "Dehradun, Uttarakhand",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Scholarship",
-      "score": 42.0,
-      "url": "https://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii"
-    },
-    {
-      "position": 4,
       "registry": "global",
       "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
       "title": "Simons Postdoctoral Fellowships in Plant Biology",
@@ -63,55 +51,19 @@
       "url": "https://www.urbanforestpark.com/jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2"
     },
     {
-      "position": 5,
+      "position": 4,
       "registry": "india",
-      "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
-      "title": "Programme Lead / Senior Programme Associate - Clean Energy",
-      "organization": "International Forum for Environment, Sustainability & Technology (iFOREST)",
-      "location": "Noida, Delhi NCR",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore"
-    },
-    {
-      "position": 6,
-      "registry": "india",
-      "id": "wildlife-trade-forensics-course-wii",
-      "title": "Course in Wildlife Trade & Forensics for Revenue Officers",
-      "organization": "Wildlife Institute of India (WII)",
-      "location": "Remote (India), Multiple States / Remote",
+      "id": "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
+      "title": "Lead Poisoning Surveillance Coordinator",
+      "organization": "Vital Strategies",
+      "location": "Gandhinagar, Gujarat",
       "position_type": "Young Professional / Consultant (Contractual)",
       "opportunity_kind": "Job / Career",
       "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii"
+      "url": "https://www.urbanforestpark.com/jobs/lead-poisoning-surveillance-coordinator-gujarat-vital-strate"
     },
     {
-      "position": 7,
-      "registry": "india",
-      "id": "international-course-on-heritage-conservation-wii",
-      "title": "International Course on Heritage Conservation",
-      "organization": "Wildlife Institute of India (WII)",
-      "location": "Dehradun, Uttarakhand",
-      "position_type": "Faculty / Academic",
-      "opportunity_kind": "Job / Career",
-      "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii"
-    },
-    {
-      "position": 8,
-      "registry": "india",
-      "id": "wildlife-enthusiasts-course-wii",
-      "title": "Wildlife Enthusiasts Course",
-      "organization": "Wildlife Institute of India (WII)",
-      "location": "Remote (India), Multiple States / Remote",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 39.0,
-      "url": "https://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii"
-    },
-    {
-      "position": 9,
+      "position": 5,
       "registry": "india",
       "id": "phd-research-sustainable-rurban-food-systems-atree",
       "title": "PhD Research on Sustainable Rurban Food Systems",
@@ -123,17 +75,65 @@
       "url": "https://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree"
     },
     {
+      "position": 6,
+      "registry": "india",
+      "id": "pg-diploma-in-wildlife-wii",
+      "title": "PG Diploma in Wildlife",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 34.0,
+      "url": "https://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii"
+    },
+    {
+      "position": 7,
+      "registry": "india",
+      "id": "doctoral-student-iit-guwahati",
+      "title": "Doctoral Student (Energy and Sustainability)",
+      "organization": "Indian Institute of Technology, Guwahati",
+      "location": "Guwahati, Assam",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Fellowship",
+      "score": 33.0,
+      "url": "https://www.urbanforestpark.com/jobs/doctoral-student-iit-guwahati"
+    },
+    {
+      "position": 8,
+      "registry": "india",
+      "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
+      "title": "Programme Lead / Senior Programme Associate - Clean Energy",
+      "organization": "International Forum for Environment, Sustainability & Technology (iFOREST)",
+      "location": "Noida, Delhi NCR",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 32.0,
+      "url": "https://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore"
+    },
+    {
+      "position": 9,
+      "registry": "india",
+      "id": "wildlife-trade-forensics-course-wii",
+      "title": "Course in Wildlife Trade & Forensics for Revenue Officers",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Young Professional / Consultant (Contractual)",
+      "opportunity_kind": "Job / Career",
+      "score": 32.0,
+      "url": "https://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii"
+    },
+    {
       "position": 10,
       "registry": "india",
-      "id": "sustainable-finance-specialist-unep-india",
-      "title": "Sustainable Finance Specialist - Integrated Watershed Management",
-      "organization": "UNEP India",
-      "location": "New Delhi, Delhi NCR",
-      "position_type": "Young Professional / Consultant (Contractual)",
-      "opportunity_kind": "Fellowship",
-      "score": 35.0,
-      "url": "https://www.urbanforestpark.com/jobs/sustainable-finance-specialist-unep-india"
+      "id": "wildlife-enthusiasts-course-wii",
+      "title": "Wildlife Enthusiasts Course",
+      "organization": "Wildlife Institute of India (WII)",
+      "location": "Remote (India), Multiple States / Remote",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 31.0,
+      "url": "https://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Portfolio Officer, ESARO, (GEF and GCF)- Nairobi — International Union for Conservation of Nature (IUCN) (Eastern and Southern Africa Regional Office Nairobi Kenya | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/portfolio-officer-esaro-gef-and-gcf-nairobi-international-un\n\n2. [GLOBAL] Fully Funded PhD Opportunities in Community Challenges — University of Nottingham (Nottingham, UK | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham\n\n3. [INDIA] PG Diploma in Wildlife — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii\n\n4. [GLOBAL] Simons Postdoctoral Fellowships in Plant Biology — Simons Foundation (New York, USA | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2\n\n5. [INDIA] Programme Lead / Senior Programme Associate - Clean Energy — International Forum for Environment, Sustainability & Technology (iFOREST) (Noida, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore\n\n6. [INDIA] Course in Wildlife Trade & Forensics for Revenue Officers — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii\n\n7. [INDIA] International Course on Heritage Conservation — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/international-course-on-heritage-conservation-wii\n\n8. [INDIA] Wildlife Enthusiasts Course — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii\n\n9. [INDIA] PhD Research on Sustainable Rurban Food Systems — ATREE (Remote (India), Multiple States / Remote | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree\n\n10. [INDIA] Sustainable Finance Specialist - Integrated Watershed Management — UNEP India (New Delhi, Delhi NCR | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/sustainable-finance-specialist-unep-india\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Portfolio Officer, ESARO, (GEF and GCF)- Nairobi — International Union for Conservation of Nature (IUCN) (Eastern and Southern Africa Regional Office Nairobi Kenya | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/portfolio-officer-esaro-gef-and-gcf-nairobi-international-un\n\n2. [GLOBAL] Fully Funded PhD Opportunities in Community Challenges — University of Nottingham (Nottingham, UK | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham\n\n3. [GLOBAL] Simons Postdoctoral Fellowships in Plant Biology — Simons Foundation (New York, USA | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2\n\n4. [INDIA] Lead Poisoning Surveillance Coordinator — Vital Strategies (Gandhinagar, Gujarat | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/lead-poisoning-surveillance-coordinator-gujarat-vital-strate\n\n5. [INDIA] PhD Research on Sustainable Rurban Food Systems — ATREE (Remote (India), Multiple States / Remote | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-research-sustainable-rurban-food-systems-atree\n\n6. [INDIA] PG Diploma in Wildlife — Wildlife Institute of India (WII) (Dehradun, Uttarakhand | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/pg-diploma-in-wildlife-wii\n\n7. [INDIA] Doctoral Student (Energy and Sustainability) — Indian Institute of Technology, Guwahati (Guwahati, Assam | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/doctoral-student-iit-guwahati\n\n8. [INDIA] Programme Lead / Senior Programme Associate - Clean Energy — International Forum for Environment, Sustainability & Technology (iFOREST) (Noida, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-lead-senior-programme-associate-clean-energy-ifore\n\n9. [INDIA] Course in Wildlife Trade & Forensics for Revenue Officers — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/wildlife-trade-forensics-course-wii\n\n10. [INDIA] Wildlife Enthusiasts Course — Wildlife Institute of India (WII) (Remote (India), Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wildlife-enthusiasts-course-wii\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
