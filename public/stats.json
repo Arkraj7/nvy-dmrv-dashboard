@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-26T07:59:37+05:30",
-  "last_updated_ist": "2026-10-26T07:59:37+05:30",
+  "last_updated": "2026-10-26T08:00:26+05:30",
+  "last_updated_ist": "2026-10-26T08:00:26+05:30",
   "last_pipeline_run_date_ist": "2026-10-26",
-  "active_open_jobs": 97,
+  "active_open_jobs": 82,
   "opened_this_week": 41,
   "passed_this_week": 1,
-  "total_archived_jobs": 7,
-  "total_historical_indexed": 104,
+  "total_archived_jobs": 6,
+  "total_historical_indexed": 88,
   "last_telegram_broadcast_date": "2026-10-26",
   "recent_telegram_job_ids": [
     "junior-research-fellow-gbu",
@@ -108,24 +108,24 @@
     "Odisha": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 47,
+  "active_global_jobs": 45,
   "active_global_portals": 13,
-  "total_global_records": 60,
+  "total_global_records": 58,
   "total_archived_global_jobs": 6,
   "global_jobs_by_region": {
-    "Africa & Middle East": 14,
-    "Asia-Pacific": 9,
     "Europe": 5,
-    "Global / Remote": 7,
-    "Latin America": 4,
     "North America": 3,
-    "UN / Multilateral": 5
+    "UN / Multilateral": 4,
+    "Global / Remote": 7,
+    "Africa & Middle East": 14,
+    "Asia-Pacific": 8,
+    "Latin America": 4
   },
   "global_jobs_by_kind": {
-    "Fellowship": 5,
-    "Grant / Funding": 1,
-    "Internship": 2,
+    "Fellowship": 3,
     "Job / Career": 37,
+    "Internship": 2,
+    "Grant / Funding": 1,
     "Scholarship": 2
   },
   "telegram_last_status": "delivered",
