@@ -1,5 +1,54 @@
 [
   {
+    "clean_title": "Research Assistant",
+    "organization": "TestOrg",
+    "city": "Delhi",
+    "state": "Delhi",
+    "country": "India",
+    "region": "",
+    "category": "Research Associate & Project Staff (Contractual)",
+    "position_type": "Project Associate / Research Associate",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-25",
+    "qualification_summary": "No specific educational qualification or experience requirements are stated in the job notice.",
+    "compensation_or_fellowship": "Rs 30,000/month",
+    "role_summary": "TestOrg is inviting applications for the position of Research Assistant based in Delhi, India. This opportunity carries a salary of Rs 30,000 per month. Candidates interested in this role can submit their applications through the designated official online link provided in the notice.",
+    "key_responsibilities": [
+      "Assist with research duties and project requirements at TestOrg.",
+      "Support organizational objectives and daily tasks based in Delhi."
+    ],
+    "must_have_skills": [
+      "Research",
+      "Research Assistance",
+      "Project Support",
+      "Data Collection"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://test@example.org/jobs/123",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-26",
+    "date_posted": "2026-10-26",
+    "title_hi": "",
+    "summary_hi": "",
+    "submitted_by": "",
+    "submitter_emoji": "",
+    "verification": {
+      "verified_at": "2026-10-26",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://test@example.org/jobs/123"
+    },
+    "id": "research-assistant-testorg"
+  },
+  {
     "clean_title": "Junior Research Fellow",
     "organization": "KSCSTE-Centre for Water Resources Development and Management",
     "city": "Kunnamangalam",
