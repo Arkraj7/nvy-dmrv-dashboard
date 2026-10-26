@@ -653,6 +653,7 @@ async function handleUpdate(update, env) {
   const chatId = message.chat.id;
   const fromId = message.from && message.from.id != null ? message.from.id : chatId;
   const text = clean(message.text || message.caption || "");
+  const mode = modeFrom(text);
   const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
   const isAdmin = !admin || String(fromId) === admin || String(chatId) === admin;
 
@@ -774,9 +775,6 @@ async function handleUpdate(update, env) {
     return { ok: true, command: "cancel" };
   }
 
-  const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
-  const isAdmin = !admin || String(fromId) === admin || String(chatId) === admin;
-
   // Admin-only commands
   if (mode === "delete" || mode === "update" || mode === "force") {
     if (!isAdmin) {
@@ -785,7 +783,6 @@ async function handleUpdate(update, env) {
     }
   }
 
-  const mode = modeFrom(text);
   const jurisdiction = jurisdictionFrom(text);
 
   // #delete: remove a record by its application URL (no extraction needed)
