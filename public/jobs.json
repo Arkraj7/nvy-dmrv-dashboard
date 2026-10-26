@@ -1,5 +1,53 @@
 [
   {
+    "clean_title": "Climate Leadership Programme 2026 (Indian Youth)",
+    "organization": "The ClimAct Initiative",
+    "city": "Remote",
+    "state": "Multiple States / Remote",
+    "country": "India",
+    "category": "Ambassador & Fellowship Programs",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Ambassador Application",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-12-31",
+    "qualification_summary": "Open to all backgrounds. No prior experience needed. Indian youth interested in climate action.",
+    "compensation_or_fellowship": "Need-based scholarships available; certificate upon completion",
+    "role_summary": "The ClimAct Initiative's Climate Leadership Programme is a meaningful programme for Indian youth. Participants learn from industry experts and world leaders, work on mentorship and hands-on projects tackling real climate challenges, and receive a certificate upon completion.",
+    "key_responsibilities": [
+      "Attend workshops, live sessions, and in-person meetups",
+      "Work on hands-on climate projects",
+      "Learn from industry experts and world leaders",
+      "Receive mentorship"
+    ],
+    "must_have_skills": [
+      "Climate Action",
+      "Leadership",
+      "Communication",
+      "Teamwork"
+    ],
+    "application_tip": "Open to all backgrounds. Need-based scholarships available. Apply via Instagram or website.",
+    "apply_url": "https://www.instagram.com/thecimactinitiative",
+    "org_website": "https://www.instagram.com/thecimactinitiative",
+    "org_domain": "instagram.com",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-26",
+    "date_posted": "2026-10-26",
+    "title_hi": "",
+    "summary_hi": "",
+    "verification": {
+      "verified_at": "2026-10-26",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://www.instagram.com/thecimactinitiative"
+    },
+    "id": "climate-leadership-programme-2026-indian-youth-the-climact-i"
+  },
+  {
     "clean_title": "Research Assistant",
     "organization": "TestOrg",
     "city": "Delhi",
