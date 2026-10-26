@@ -1,24 +1,14 @@
 {
-  "last_updated": "2026-10-25T12:47:18+05:30",
-  "last_updated_ist": "2026-10-25T12:47:18+05:30",
-  "last_pipeline_run_date_ist": "2026-10-25",
-  "active_open_jobs": 98,
-  "opened_this_week": 85,
-  "passed_this_week": 0,
-  "total_archived_jobs": 6,
+  "last_updated": "2026-10-26T07:59:37+05:30",
+  "last_updated_ist": "2026-10-26T07:59:37+05:30",
+  "last_pipeline_run_date_ist": "2026-10-26",
+  "active_open_jobs": 97,
+  "opened_this_week": 41,
+  "passed_this_week": 1,
+  "total_archived_jobs": 7,
   "total_historical_indexed": 104,
-  "last_telegram_broadcast_date": "2026-10-25",
+  "last_telegram_broadcast_date": "2026-10-26",
   "recent_telegram_job_ids": [
-    "atlas-france-southeast-asia-postdoctoral-mobility-fellowship",
-    "director-brahmaputra-programme-wwf-india",
-    "programme-lead-senior-programme-associate-clean-energy-ifore",
-    "project-associate-geospatial-modelling-urban-heat-island-nrsc",
-    "gund-institute-funded-phd-competition-university-of-vermont",
-    "biology-phd-programme-iiser",
-    "head-director-national-conservation-programme-wwf-india",
-    "manager-special-projects-sustainability-united-breweries",
-    "international-course-on-heritage-conservation-wii",
-    "junior-research-fellow-bsi",
     "junior-research-fellow-gbu",
     "assistant-manager-horticulture-adani-natural-resources",
     "chief-of-partnerships-unaccc-vadodara",
@@ -48,12 +38,34 @@
     "young-professional-climate-change-campa-moefcc",
     "ghg-footprint-and-lca-assessor-globetrend-climate-impact",
     "ph-d-admission-2026-27-central-university-of-south-bihar",
-    "phd-students-kotak-school-of-sustainability-iit-kanpur"
+    "phd-students-kotak-school-of-sustainability-iit-kanpur",
+    "research-analyst---programme-associate---tech-and-finance-su",
+    "program-manager-water-supply-planet-water-foundation",
+    "product-manager-sustainability-climate-ai-msci",
+    "gis-operator-pan-india-consultants-pvt-ltd",
+    "ceew-global-south-fellowship-council-on-energy-environment-a",
+    "research-assistant-urban-biodiversity-governance-chandragupt",
+    "wildlife-enthusiasts-course-wii",
+    "regional-health-and-wash-coordinator-terre-des-hommes",
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "research-associate-maharashtra-atree"
   ],
   "by_category": {
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 44,
-      "archived": 3
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 8,
+      "archived": 1
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 2,
+      "archived": 0
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 11,
+      "archived": 1
+    },
+    "Scholarships & Doctoral Support": {
+      "active": 4,
+      "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 13,
@@ -63,17 +75,9 @@
       "active": 4,
       "archived": 1
     },
-    "Scholarships & Doctoral Support": {
-      "active": 4,
-      "archived": 0
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 9,
-      "archived": 0
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 11,
-      "archived": 1
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 44,
+      "archived": 3
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 9,
@@ -81,10 +85,6 @@
     },
     "Internships & Student Traineeships": {
       "active": 2,
-      "archived": 0
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 1,
       "archived": 0
     }
   },
@@ -99,7 +99,7 @@
     "Assam": 3,
     "Bihar": 3,
     "Kerala": 3,
-    "Madhya Pradesh": 3,
+    "Madhya Pradesh": 2,
     "Punjab": 2,
     "Uttar Pradesh": 2,
     "West Bengal": 2,
@@ -108,37 +108,37 @@
     "Odisha": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 50,
+  "active_global_jobs": 47,
   "active_global_portals": 13,
-  "total_global_records": 63,
-  "total_archived_global_jobs": 3,
+  "total_global_records": 60,
+  "total_archived_global_jobs": 6,
   "global_jobs_by_region": {
-    "UN / Multilateral": 5,
-    "North America": 3,
-    "Europe": 5,
-    "Asia-Pacific": 12,
-    "Global / Remote": 7,
     "Africa & Middle East": 14,
-    "Latin America": 4
+    "Asia-Pacific": 9,
+    "Europe": 5,
+    "Global / Remote": 7,
+    "Latin America": 4,
+    "North America": 3,
+    "UN / Multilateral": 5
   },
   "global_jobs_by_kind": {
     "Fellowship": 5,
-    "Job / Career": 40,
-    "Internship": 2,
     "Grant / Funding": 1,
+    "Internship": 2,
+    "Job / Career": 37,
     "Scholarship": 2
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
-    "young-professional-forest-policy-climate-finance-iifm-bhopal",
-    "climate-data-specialist-sustainability-consultant-nytp-corp",
-    "gis-expert-ey",
-    "communications-manager-folu-world-resources-institute-wri",
-    "dphil-in-biology-university-of-oxford",
-    "young-professional-climate-change-campa-moefcc",
-    "ghg-footprint-and-lca-assessor-globetrend-climate-impact",
-    "ph-d-admission-2026-27-central-university-of-south-bihar",
-    "phd-students-kotak-school-of-sustainability-iit-kanpur"
+    "research-analyst---programme-associate---tech-and-finance-su",
+    "program-manager-water-supply-planet-water-foundation",
+    "product-manager-sustainability-climate-ai-msci",
+    "gis-operator-pan-india-consultants-pvt-ltd",
+    "ceew-global-south-fellowship-council-on-energy-environment-a",
+    "research-assistant-urban-biodiversity-governance-chandragupt",
+    "wildlife-enthusiasts-course-wii",
+    "regional-health-and-wash-coordinator-terre-des-hommes",
+    "phd-research-sustainable-rurban-food-systems-atree",
+    "research-associate-maharashtra-atree"
   ]
 }
