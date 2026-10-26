@@ -3322,12 +3322,20 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     summary_html = f'<p class="hub-card-sum">{esc(summary)}</p>' if summary else ""
     title = plain(job.get("clean_title")) or org
 
+    submitter = plain(job.get("submitted_by"))
+    emoji = plain(job.get("submitter_emoji"))
+    submitter_html = ""
+    if submitter:
+        display = (emoji + " " if emoji else "") + submitter
+        submitter_html = f'<p class="hub-card-submitter"><small>Submitted by {esc(display)}</small></p>'
+
     return f"""        <article class="hub-card{' hub-card-archived' if archived else ''}">
           <div class="hub-card-top">
             {BADGE_SEP.join(badges)}{CARD_STOP}
           </div>
           <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</h3>
           <p class="hub-card-org">{esc(org_line)}</p>
+          {submitter_html}
           {elig_html}
           {summary_html}
           <p class="hub-card-foot"><span>View details. <span aria-hidden="true">&nearr;</span></span></p>

@@ -455,6 +455,8 @@ function buildRecord(input, jurisdiction) {
       date_posted: today,
       title_hi: "",
       summary_hi: "",
+      submitted_by: clean(input.submitted_by, 80) || "",
+      submitter_emoji: clean(input.submitter_emoji, 10) || "",
       verification: {
         verified_at: today,
         method: "flyer-intake-gemini-vision",

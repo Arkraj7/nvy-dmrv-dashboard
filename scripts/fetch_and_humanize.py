@@ -6339,6 +6339,115 @@ def augment_academic_record(
             )
 
 
+def process_pending_submissions(
+    jobs_path: Path, today: str
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Process community-submitted jobs from the Telegram intake bot.
+
+    Reads data/pending_submissions.json, verifies each submission using the
+    same validation as the pipeline, and returns (published_jobs, updated_submissions).
+    Published jobs are added to the registry with submitter attribution.
+    """
+    pending_path = jobs_path.parent.parent / "data" / "pending_submissions.json"
+    if not pending_path.exists():
+        return [], []
+    try:
+        submissions = json.loads(pending_path.read_text(encoding="utf-8"))
+    except Exception:
+        return [], []
+    if not isinstance(submissions, list):
+        return [], []
+
+    published: List[Dict[str, Any]] = []
+    updated: List[Dict[str, Any]] = []
+
+    for sub in submissions:
+        if not isinstance(sub, dict):
+            updated.append(sub)
+            continue
+        if str(sub.get("status") or "") != "pending":
+            updated.append(sub)
+            continue
+
+        job_data = sub.get("job")
+        if not isinstance(job_data, dict):
+            sub["status"] = "rejected"
+            sub["reason"] = "invalid job data"
+            updated.append(sub)
+            continue
+
+        jurisdiction = str(sub.get("jurisdiction") or "india").lower()
+        if jurisdiction not in ("india", "global"):
+            jurisdiction = "india"
+
+        # Normalize the job
+        try:
+            record = normalize_job_fields(dict(job_data))
+        except Exception:
+            record = None
+
+        if record is None:
+            sub["status"] = "rejected"
+            sub["reason"] = "normalization failed"
+            updated.append(sub)
+            continue
+
+        # Ensure required fields
+        if not squash(record.get("clean_title")) or not squash(record.get("organization")):
+            sub["status"] = "rejected"
+            sub["reason"] = "missing title or organization"
+            updated.append(sub)
+            continue
+
+        apply_url = squash(record.get("apply_url"))
+        if not is_valid_apply_url(apply_url) and not apply_url.lower().startswith("mailto:"):
+            sub["status"] = "rejected"
+            sub["reason"] = "invalid apply_url"
+            updated.append(sub)
+            continue
+
+        # Add submitter attribution
+        submitter = squash(sub.get("submitter_name") or "")
+        emoji = squash(sub.get("submitter_emoji") or "")
+        if submitter:
+            record["submitted_by"] = submitter
+            record["submitter_emoji"] = emoji
+        else:
+            record["submitted_by"] = ""
+            record["submitter_emoji"] = ""
+
+        # Set entry_type and source_portal
+        record["source_portal"] = "Community submission (verified)"
+        record["entry_type"] = "posting"
+        record["status"] = "active"
+        record["date_added"] = today
+        record["date_posted"] = today
+        record["global"] = jurisdiction == "global"
+
+        # Verification block
+        record["verification"] = {
+            "verified_at": today,
+            "method": "community-submission-verified",
+            "source": apply_url,
+        }
+
+        published.append(record)
+        sub["status"] = "published"
+        sub["published_at"] = today
+        updated.append(sub)
+        log.info("Community submission published: %s - %s", record.get("id"), record.get("clean_title"))
+
+    # Write updated pending file
+    try:
+        pending_path.write_text(
+            json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+    except Exception as exc:
+        log.warning("Could not write pending_submissions.json: %s", exc)
+
+    return published, updated
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     args = parse_args(argv)
     logging.basicConfig(
@@ -6378,8 +6487,17 @@ def main(argv: Optional[List[str]] = None) -> int:
         else resolve_default(DEFAULT_GLOBAL_ARCHIVE_PATH)
     )
 
+    # Process community submissions from the Telegram intake bot before the
+    # main scrape, so they are included in this run's registry and SEO surface.
+    pending_published, _ = process_pending_submissions(jobs_path, today)
+    if pending_published:
+        log.info("Published %d community submission(s) from Telegram intake.", len(pending_published))
+
     existing = [normalize_job_fields(job) for job in load_jobs(jobs_path)]
     archive = [normalize_job_fields(job) for job in load_jobs(archive_path)]
+    # Merge community submissions into the existing list
+    if pending_published:
+        existing = pending_published + existing
     log.info(
         "Loaded %d active listing(s) from %s and %d archived listing(s) from %s",
         len(existing), jobs_path, len(archive), archive_path,

@@ -31,6 +31,11 @@ import {
 } from "./parse_flyer.js";
 import { commitJobRecord, updateJobRecord, deleteJobRecord } from "./commit_job.js";
 
+const GITHUB_API = "https://api.github.com";
+const GITHUB_BRANCH = "main";
+const PENDING_PATH = "data/pending_submissions.json";
+const STATE_PATH = "data/telegram_state.json";
+
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-2.5-flash";
 const TELEGRAM_API = "https://api.telegram.org/bot";
@@ -151,6 +156,147 @@ async function sendMessage(env, chatId, html, extra) {
     disable_web_page_preview: true,
     ...(extra || {}),
   });
+}
+
+// ---------------------------------------------------------------------------
+// GitHub helpers for public submission state + pending queue
+// ---------------------------------------------------------------------------
+function githubToken(env) {
+  return clean(env && (env.GITHUB_PAT || env.GITHUB_TOKEN));
+}
+
+function githubRepo(env) {
+  return clean(env && env.GITHUB_REPO) || "Arkraj7/nvy-dmrv-dashboard";
+}
+
+function githubHeaders(token) {
+  return {
+    Authorization: "Bearer " + token,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "urbanforestpark-telegram-intake",
+  };
+}
+
+function encodeBase64(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (let index = 0; index < bytes.length; index += 1) {
+    binary += String.fromCharCode(bytes[index]);
+  }
+  return btoa(binary);
+}
+
+function decodeBase64(value) {
+  const binary = atob(String(value || "").replace(/\\s+/g, ""));
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+async function readGitHubJson(env, path) {
+  const token = githubToken(env);
+  if (!token) return { list: [], sha: null, error: "no_token" };
+  const repo = githubRepo(env);
+  const response = await fetch(
+    `${GITHUB_API}/repos/${repo}/contents/${path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+    { headers: githubHeaders(token) }
+  );
+  if (response.status === 404) return { list: [], sha: null };
+  if (!response.ok) return { list: [], sha: null, error: "read_failed" };
+  const payload = await response.json();
+  let list = [];
+  let data = null;
+  try {
+    const parsed = JSON.parse(decodeBase64(payload.content));
+    data = parsed;
+    list = Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    list = [];
+    data = null;
+  }
+  return { list, data, sha: payload.sha || null };
+}
+
+async function writeGitHubJson(env, path, list, sha, message) {
+  const token = githubToken(env);
+  if (!token) return { ok: false, error: "no_token" };
+  const repo = githubRepo(env);
+  const body = {
+    message,
+    content: encodeBase64(JSON.stringify(list, null, 2) + "\\n"),
+    branch: GITHUB_BRANCH,
+  };
+  if (sha) body.sha = sha;
+  const response = await fetch(
+    `${GITHUB_API}/repos/${repo}/contents/${path}`,
+    {
+      method: "PUT",
+      headers: githubHeaders(token),
+      body: JSON.stringify(body),
+    }
+  );
+  if (!response.ok) {
+    return { ok: false, error: "write_failed", status: response.status };
+  }
+  const payload = await response.json();
+  return { ok: true, commit: payload.commit && payload.commit.sha };
+}
+
+// ---------------------------------------------------------------------------
+// Public submission state + pending queue helpers
+// ---------------------------------------------------------------------------
+async function readTelegramState(env) {
+  const result = await readGitHubJson(env, STATE_PATH);
+  if (result.data && typeof result.data === "object" && !Array.isArray(result.data)) {
+    return result.data;
+  }
+  return {};
+}
+
+async function writeTelegramState(env, state) {
+  // State is an object; read current sha
+  const token = githubToken(env);
+  if (!token) return { ok: false, error: "no_token" };
+  const repo = githubRepo(env);
+  const response = await fetch(
+    `${GITHUB_API}/repos/${repo}/contents/${STATE_PATH}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+    { headers: githubHeaders(token) }
+  );
+  let sha = null;
+  if (response.ok) {
+    const payload = await response.json();
+    sha = payload.sha || null;
+  }
+  const body = {
+    message: "chore(telegram): update conversation state",
+    content: encodeBase64(JSON.stringify(state, null, 2) + "\\n"),
+    branch: GITHUB_BRANCH,
+  };
+  if (sha) body.sha = sha;
+  const putResponse = await fetch(
+    `${GITHUB_API}/repos/${repo}/contents/${STATE_PATH}`,
+    {
+      method: "PUT",
+      headers: githubHeaders(token),
+      body: JSON.stringify(body),
+    }
+  );
+  if (!putResponse.ok) return { ok: false, error: "write_failed" };
+  return { ok: true };
+}
+
+async function readPendingSubmissions(env) {
+  const result = await readGitHubJson(env, PENDING_PATH);
+  return Array.isArray(result.list) ? result.list : [];
+}
+
+async function writePendingSubmissions(env, list) {
+  const result = await readGitHubJson(env, PENDING_PATH);
+  return writeGitHubJson(env, PENDING_PATH, list, result.sha, "chore(telegram): update pending submissions");
 }
 
 function safeHttpUrl(value) {
@@ -507,6 +653,85 @@ async function handleUpdate(update, env) {
   const chatId = message.chat.id;
   const fromId = message.from && message.from.id != null ? message.from.id : chatId;
   const text = clean(message.text || message.caption || "");
+  const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
+  const isAdmin = !admin || String(fromId) === admin || String(chatId) === admin;
+
+  // Public submission flow: track multi-step conversation state
+  const state = await readTelegramState(env);
+  const chatState = state[String(chatId)];
+
+  // Handle stateful replies (name / emoji steps)
+  if (chatState && chatState.step === "name") {
+    const name = clean(text, 80);
+    if (!name || name.startsWith("/")) {
+      await sendMessage(env, chatId, "Please reply with your name (or /cancel to abort).");
+      return { ok: false, error: "invalid_name" };
+    }
+    chatState.submitter_name = name;
+    chatState.step = "emoji";
+    state[String(chatId)] = chatState;
+    await writeTelegramState(env, state);
+    await sendMessage(env, chatId,
+      "Nice to meet you, <b>" + escapeHtml(name) + "</b>! 🎉\\n\\n" +
+      "Would you like an emoji next to your name on the website?\\n" +
+      "Reply with any emoji (e.g. 🌍 🌱 🌳 🌿) or type <code>none</code> for no emoji.\\n\\n" +
+      "Or type <code>/cancel</code> to abort."
+    );
+    return { ok: true, step: "emoji_prompt" };
+  }
+
+  if (chatState && chatState.step === "emoji") {
+    const emojiInput = clean(text, 10);
+    if (text.toLowerCase() === "/cancel") {
+      delete state[String(chatId)];
+      await writeTelegramState(env, state);
+      await sendMessage(env, chatId, "Submission cancelled. Send a new job anytime.");
+      return { ok: true, step: "cancelled" };
+    }
+    const emoji = emojiInput.toLowerCase() === "none" ? "" : emojiInput;
+    const job = chatState.job;
+    const jurisdiction = chatState.jurisdiction || "india";
+    const submitterName = chatState.submitter_name || "Anonymous";
+    const submitterEmoji = emoji;
+
+    // Store pending submission
+    const pending = await readPendingSubmissions(env);
+    const submission = {
+      id: "sub-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
+      job,
+      jurisdiction,
+      submitter_name: submitterName,
+      submitter_emoji: submitterEmoji,
+      submitted_at: new Date().toISOString(),
+      status: "pending",
+      source_chat_id: chatId,
+    };
+    pending.push(submission);
+    await writePendingSubmissions(env, pending);
+
+    // Clear state
+    delete state[String(chatId)];
+    await writeTelegramState(env, state);
+
+    const emojiDisplay = submitterEmoji ? submitterEmoji + " " : "";
+    const confirmMsg = [
+      "✅ <b>Submitted for verification!</b>",
+      "",
+      "<b>" + escapeHtml(job.clean_title) + "</b>",
+      escapeHtml(job.organization),
+      job.city ? "📍 " + escapeHtml([job.city, job.state, job.country].filter(Boolean).join(", ")) : "",
+      job.application_deadline ? "🗓 " + escapeHtml(job.application_deadline) : "",
+      job.application_url ? "🔗 " + escapeHtml(job.application_url) : "",
+      "",
+      "👤 Submitted by: " + emojiDisplay + escapeHtml(submitterName),
+      "",
+      "⏳ Your submission will be reviewed and verified by our team before it appears on the registry.",
+      "You'll receive a notification once it's live. Thank you for contributing! 🙏",
+    ].filter(Boolean).join("\\n");
+
+    await sendMessage(env, chatId, confirmMsg);
+    return { ok: true, step: "submitted", submission_id: submission.id };
+  }
 
   // /start and /chatid are deliberately public so a new editor can discover
   // the numeric chat id even before TELEGRAM_ADMIN_USER_ID is corrected.
@@ -520,6 +745,9 @@ async function handleUpdate(update, env) {
       "• a workshop, conference, or visiting fellowship notice",
       "",
       "Add <code>#global</code> for an international role; otherwise I use India.",
+      "",
+      "Anyone can submit a job — I'll ask for your name and an optional emoji.",
+      "Submissions go through verification before appearing on the site.",
       `Your chat ID: <code>${escapeHtml(chatId)}</code>`,
       "I extract the job facts and publish them directly to the registry. Duplicates are rejected automatically.",
   "",
@@ -536,11 +764,25 @@ async function handleUpdate(update, env) {
     await sendMessage(env, chatId, `Chat ID: <code>${escapeHtml(chatId)}</code>`);
     return { ok: true, command: "chatid" };
   }
+  if (/^\/cancel(?:@\w+)?\b/i.test(text)) {
+    const state = await readTelegramState(env);
+    if (state[String(chatId)]) {
+      delete state[String(chatId)];
+      await writeTelegramState(env, state);
+    }
+    await sendMessage(env, chatId, "Submission cancelled. Send a new job anytime.");
+    return { ok: true, command: "cancel" };
+  }
 
   const admin = clean(env && env.TELEGRAM_ADMIN_USER_ID);
-  if (admin && String(fromId) !== admin && String(chatId) !== admin) {
-    await sendMessage(env, chatId, "This intake bot is restricted to the registry editor.");
-    return { ok: false, error: "not_authorised" };
+  const isAdmin = !admin || String(fromId) === admin || String(chatId) === admin;
+
+  // Admin-only commands
+  if (mode === "delete" || mode === "update" || mode === "force") {
+    if (!isAdmin) {
+      await sendMessage(env, chatId, "This command is restricted to the registry editor.");
+      return { ok: false, error: "not_authorised" };
+    }
   }
 
   const mode = modeFrom(text);
@@ -635,6 +877,30 @@ async function handleUpdate(update, env) {
     return { ok: false, error: extracted.error };
   }
 
+  // Public submission flow: store as pending, ask for name
+  if (!isAdmin) {
+    const state = await readTelegramState(env);
+    state[String(chatId)] = {
+      step: "name",
+      job: extracted.job,
+      jurisdiction,
+      sourceUrl,
+      extractedAt: new Date().toISOString(),
+    };
+    await writeTelegramState(env, state);
+
+    const preview = formatJob(extracted.job);
+    await sendMessage(env, chatId,
+      preview + "\\n\\n" +
+      "📋 <b>Job extracted!</b> Review the details above.\\n\\n" +
+      "To submit this for verification and publishing, reply with <b>your name</b> " +
+      "(this will be displayed as the submitter on the registry).\\n\\n" +
+      "Or type <code>/cancel</code> to abort."
+    );
+    return { ok: true, step: "name_prompt", job: extracted.job, model: extracted.model };
+  }
+
+  // Admin flow: auto-publish directly
   const force = mode === "force";
   const isUpdate = mode === "update";
 
