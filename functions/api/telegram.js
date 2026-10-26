@@ -211,7 +211,8 @@ async function readGitHubJson(env, path) {
   let list = [];
   let data = null;
   try {
-    const parsed = JSON.parse(decodeBase64(payload.content));
+    const decoded = decodeBase64(payload.content).trim();
+    const parsed = JSON.parse(decoded);
     data = parsed;
     list = Array.isArray(parsed) ? parsed : [];
   } catch (error) {
@@ -250,9 +251,23 @@ async function writeGitHubJson(env, path, list, sha, message) {
 // Public submission state + pending queue helpers
 // ---------------------------------------------------------------------------
 async function readTelegramState(env) {
-  const result = await readGitHubJson(env, STATE_PATH);
-  if (result.data && typeof result.data === "object" && !Array.isArray(result.data)) {
-    return result.data;
+  try {
+    const token = githubToken(env);
+    const repo = githubRepo(env);
+    const resp = await fetch(
+      `${GITHUB_API}/repos/${repo}/contents/${STATE_PATH}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+      { headers: githubHeaders(token) }
+    );
+    if (resp.ok) {
+      const payload = await resp.json();
+      const decoded = atob(String(payload.content || "").replace(/\\s+/g, "")).trim();
+      const parsed = JSON.parse(decoded);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    // ignore
   }
   return {};
 }
@@ -271,9 +286,10 @@ async function writeTelegramState(env, state) {
     const payload = await response.json();
     sha = payload.sha || null;
   }
+  const raw = JSON.stringify(state, null, 2) + "\n";
   const body = {
     message: "chore(telegram): update conversation state",
-    content: encodeBase64(JSON.stringify(state, null, 2) + "\\n"),
+    content: btoa(raw),
     branch: GITHUB_BRANCH,
   };
   if (sha) body.sha = sha;
@@ -1014,6 +1030,9 @@ export async function onRequestGet(context) {
     webhook_error: info.ok ? null : info.error,
   });
 }
+
+// Exported for testing only
+export { handleUpdate };
 
 export async function onRequestPost(context) {
   const { request, env } = context;

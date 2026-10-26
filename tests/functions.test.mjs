@@ -285,8 +285,10 @@ test("Telegram webhook handles /start and returns the chat id", async () => {
   assert.equal(response.status, 200);
   assert.equal(payload.ok, true);
   assert.equal(payload.command, "start");
-  assert.match(calls[0].url, /sendMessage/);
-  assert.equal(JSON.parse(calls[0].options.body).chat_id, 123);
+  const sendCall = calls.find((call) => call.url.includes("/sendMessage"));
+  assert.ok(sendCall, "expected a sendMessage call");
+  assert.match(sendCall.url, /sendMessage/);
+  assert.equal(JSON.parse(sendCall.options.body).chat_id, 123);
 });
 
 test("Telegram webhook converts a pasted job email into structured job info", async () => {
