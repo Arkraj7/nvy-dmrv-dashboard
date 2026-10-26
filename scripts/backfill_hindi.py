@@ -417,7 +417,11 @@ def backfill_file(path: Path, force: bool, limit: Optional[int], use_ai: bool) -
             title_hi = deterministic_title(job)
             summary_hi = deterministic_summary(job)
             det_hits += 1
-        record = _insert_after(job, "clean_title", "title_hi", title_hi)
+        # Insert title_hi right after clean_title and summary_hi right after
+        # role_summary, preserving field order.  Do NOT use job.clear() +
+        # job.update(record) because _insert_after may return the same object
+        # reference, which would wipe the record.
+        record = _insert_after(dict(job), "clean_title", "title_hi", title_hi)
         record = _insert_after(record, "role_summary", "summary_hi", summary_hi)
         job.clear()
         job.update(record)
