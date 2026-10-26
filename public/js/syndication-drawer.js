@@ -80,7 +80,10 @@
     'Competitions, Hackathons & Awards',
     'Workshops, Training & Capacity Building',
     'Conferences, Summits & Events',
-    'Visiting Fellowships & Short-Term Research'
+    'Visiting Fellowships & Short-Term Research',
+    'Ambassador & Fellowship Programs',
+    'Memberships & Community Programs',
+    'Webinars & Live Events'
   ];
   var FLYER_POSITIONS = [
     'JRF / SRF',
@@ -98,7 +101,9 @@
     'Job / Career', 'Fellowship', 'Scholarship', 'Grant / Funding',
     'Internship', 'Competition / Award',
     'Workshop / Training', 'Conference / Summit',
-    'Visiting Fellowship', 'Webinar / Online Course'
+    'Visiting Fellowship', 'Webinar / Online Course',
+    'Ambassador Application', 'Membership Application',
+    'Live Event / Get-Together'
   ];
 
   /* ---------------------------------------------------------------- utils */

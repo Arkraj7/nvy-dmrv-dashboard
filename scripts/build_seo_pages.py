@@ -1267,6 +1267,30 @@ def match_visiting_fellowship(job: Dict[str, Any]) -> bool:
     return "visiting" in kind or "visiting" in category
 
 
+def match_ambassador(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "ambassador" in kind or "ambassador" in category
+
+
+def match_membership(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "membership" in kind or "membership" in category or "community" in category
+
+
+def match_live_event(job: Dict[str, Any]) -> bool:
+    if not is_job_listing(job):
+        return False
+    kind = plain(job.get("opportunity_kind")).lower()
+    category = plain(job.get("category")).lower()
+    return "live event" in kind or "get-together" in kind or "webinar" in kind or "webinar" in category or "live event" in category or "get-together" in category
+
+
 def _match_city_env(job: Dict[str, Any], city_name: str) -> bool:
     if not is_job_listing(job):
         return False
@@ -2880,6 +2904,60 @@ HUBS: List[Dict[str, Any]] = [
             (
                 "What kinds of visiting fellowships are listed?",
                 "Short-term research visits, visiting researcher positions, visiting scholar programmes and exchange fellowships at research institutes, universities and international organisations."
+            ),
+        ],
+    },
+    {
+        "file": "ambassador-fellowship-programs.html",
+        "match": match_ambassador,
+        "kicker": "Ambassador Programs Track",
+        "title": "Verified Ambassador & Fellowship Programs 2026",
+        "h1": "Verified Ambassador & Fellowship Programs 2026",
+        "desc": "Verified ambassador programs, fellowship applications and community leadership opportunities in climate, environment and sustainability.",
+        "hero_sub": "Ambassador programs, fellowship applications and community leadership roles with direct application links.",
+        "list_copy": "Ambassador programs, fellowship applications, community leadership and advocacy roles in climate, environment and sustainability.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "ambassador and fellowship programs",
+        "faqs": [
+            (
+                "What kinds of ambassador programs are listed?",
+                "Climate ambassador programs, sustainability fellowships, youth ambassador roles, advocacy fellowships and community leadership programs from NGOs, international organisations and corporate ESG teams."
+            ),
+        ],
+    },
+    {
+        "file": "memberships-community-programs.html",
+        "match": match_membership,
+        "kicker": "Memberships & Community Track",
+        "title": "Verified Memberships & Community Programs 2026",
+        "h1": "Verified Memberships & Community Programs 2026",
+        "desc": "Verified membership programs, community initiatives and network applications in climate, environment and sustainability.",
+        "hero_sub": "Membership programs, community initiatives and network applications with direct registration links.",
+        "list_copy": "Membership programs, community initiatives, network applications and professional body memberships in climate, environment and sustainability.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "memberships and community programs",
+        "faqs": [
+            (
+                "What kinds of membership programs are listed?",
+                "Professional body memberships, community network registrations, sustainability community programs, climate action networks and environmental organisation memberships."
+            ),
+        ],
+    },
+    {
+        "file": "webinars-live-events.html",
+        "match": match_live_event,
+        "kicker": "Webinars & Live Events Track",
+        "title": "Verified Webinars & Live Events 2026",
+        "h1": "Verified Climate & Environment Webinars & Live Events 2026",
+        "desc": "Verified webinars, live events, get-togethers and online sessions in climate, environment, forestry and sustainability.",
+        "hero_sub": "Climate and environment webinars, live events and online sessions with direct registration links.",
+        "list_copy": "Webinars, live events, get-togethers, online sessions and virtual conferences in climate, environment, forestry and ESG.",
+        "cta_href": "/#filter-bar",
+        "matched_noun": "webinars and live events",
+        "faqs": [
+            (
+                "What kinds of events are listed?",
+                "Climate webinars, sustainability live events, virtual get-togethers, online training sessions, panel discussions and community gatherings in the environment and climate space."
             ),
         ],
     },

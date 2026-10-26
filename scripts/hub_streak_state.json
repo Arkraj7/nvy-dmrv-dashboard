@@ -395,6 +395,27 @@
       "indexable": false,
       "last_flip": null,
       "flip_log": []
+    },
+    "ambassador-fellowship-programs.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "memberships-community-programs.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
+    },
+    "webinars-live-events.html": {
+      "streak_on": 0,
+      "streak_off": 0,
+      "indexable": false,
+      "last_flip": null,
+      "flip_log": []
     }
   },
   "last_run_date": "2026-10-26"

@@ -317,6 +317,15 @@ function normalizeCategory(value, title, kind) {
   if (/visiting (fellow|researcher|scholar)/.test(haystack)) {
     return "Visiting Fellowships & Short-Term Research";
   }
+  if (/ambassador/.test(haystack)) {
+    return "Ambassador & Fellowship Programs";
+  }
+  if (/membership|community program/.test(haystack)) {
+    return "Memberships & Community Programs";
+  }
+  if (/webinar|live event|get.together/.test(haystack)) {
+    return "Webinars & Live Events";
+  }
   return "Climate Policy, Think-Tanks & Fellowships";
 }
 
@@ -337,6 +346,8 @@ function normalizePositionType(value, title) {
   if (/workshop|training/.test(haystack)) return "Workshop / Training Participant";
   if (/conference|summit|delegate/.test(haystack)) return "Conference Delegate";
   if (/visiting (researcher|fellow|scholar)/.test(haystack)) return "Visiting Researcher";
+  if (/ambassador/.test(haystack)) return "Fellowship / Internship";
+  if (/membership/.test(haystack)) return "Fellowship / Internship";
   return "Full-Time Corporate / NGO";
 }
 
@@ -347,7 +358,9 @@ function normalizeKind(value, title) {
   if (/workshop|training|capacity building/.test(haystack)) return "Workshop / Training";
   if (/conference|summit|symposium/.test(haystack)) return "Conference / Summit";
   if (/visiting (fellow|researcher|scholar)/.test(haystack)) return "Visiting Fellowship";
-  if (/webinar|online course|masterclass/.test(haystack)) return "Webinar / Online Course";
+  if (/webinar|online course|masterclass|live event|get.together/.test(haystack)) return "Webinar / Online Course";
+  if (/ambassador/.test(haystack)) return "Ambassador Application";
+  if (/membership/.test(haystack)) return "Membership Application";
   if (/grant|funding|call for proposal/.test(haystack)) return "Grant / Funding";
   if (/scholarship|studentship/.test(haystack)) return "Scholarship";
   if (/fellowship|fellow|postdoc|post-doc/.test(haystack)) return "Fellowship";

@@ -73,9 +73,11 @@ Rules:
   caller. If none fits, use the closest career-track value.
 - opportunity_kind: Job / Career, Fellowship, Scholarship, Grant / Funding,
   Internship, Competition / Award, Workshop / Training, Conference / Summit,
-  Visiting Fellowship, or Webinar / Online Course.
-- For workshops, conferences, and visiting fellowships: extract the event title,
-  host organisation, location, dates, eligibility, and application/registration URL.
+  Visiting Fellowship, Webinar / Online Course, Ambassador Application,
+  Membership Application, or Live Event / Get-Together.
+- For workshops, conferences, visiting fellowships, ambassador programs,
+  memberships, and live events: extract the event/program title, host organisation,
+  location, dates, eligibility, and application/registration URL.
 - stipend_or_salary: only the printed amount/currency/period; otherwise
   "Not disclosed - see official portal".
 - qualification_summary: one short sentence with the printed degree/experience.
