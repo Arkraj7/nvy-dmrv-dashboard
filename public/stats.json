@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-26T20:29:10+05:30",
-  "last_updated_ist": "2026-10-26T20:29:10+05:30",
+  "last_updated": "2026-10-26T20:44:20+05:30",
+  "last_updated_ist": "2026-10-26T20:44:20+05:30",
   "last_pipeline_run_date_ist": "2026-10-26",
   "active_open_jobs": 104,
   "opened_this_week": 48,
@@ -109,23 +109,23 @@
     "Odisha": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 47,
+  "active_global_jobs": 50,
   "active_global_portals": 13,
-  "total_global_records": 60,
+  "total_global_records": 63,
   "total_archived_global_jobs": 6,
   "global_jobs_by_region": {
     "Global / Remote": 8,
     "Africa & Middle East": 15,
     "Europe": 5,
-    "North America": 3,
-    "UN / Multilateral": 4,
-    "Asia-Pacific": 8,
+    "North America": 4,
+    "UN / Multilateral": 5,
+    "Asia-Pacific": 9,
     "Latin America": 4
   },
   "global_jobs_by_kind": {
-    "Job / Career": 38,
+    "Job / Career": 39,
     "Grant / Funding": 2,
-    "Fellowship": 3,
+    "Fellowship": 5,
     "Internship": 2,
     "Scholarship": 2
   },

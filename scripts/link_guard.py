@@ -86,7 +86,7 @@ def data_guard() -> list[str]:
             continue
         rid = record.get("id") or "(no id)"
         apply_url = str(record.get("apply_url") or "")
-        if not apply_url.lower().startswith("http"):
+        if not apply_url.lower().startswith(("http", "mailto:")):
             violations.append(f"{path.name}:{rid}: missing apply_url")
             continue
         if is_wrapper(apply_url):
