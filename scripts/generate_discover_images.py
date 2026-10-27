@@ -200,11 +200,88 @@ def build(name: str) -> Path:
     return out
 
 
+HOME_W, HOME_H = 1200, 630
+
+
+def build_home() -> Path:
+    """Homepage social card: 1200x630, the standard Open Graph ratio."""
+    src = (
+        Image.open(SOURCE)
+        .convert("RGB")
+        .crop((0, 500, 5000, 3125))
+        .resize((HOME_W, HOME_H), Image.LANCZOS)
+    )
+    src = src.filter(ImageFilter.GaussianBlur(1.2))
+    tint = Image.new("RGB", (HOME_W, HOME_H), (18, 74, 58))
+    src = Image.blend(src, tint, 0.16)
+
+    canvas = src.convert("RGBA")
+    dark = Image.new("RGBA", (HOME_W, HOME_H), DEEP + (0,))
+    dark.putalpha(horizontal_gradient(HOME_W, HOME_H, 238, 52))
+    canvas = Image.alpha_composite(canvas, dark)
+    bottom = Image.new("RGBA", (HOME_W, HOME_H), (4, 22, 18, 0))
+    bottom.putalpha(vertical_gradient(HOME_W, HOME_H, 0, 140))
+    canvas = Image.alpha_composite(canvas, bottom)
+
+    draw = ImageDraw.Draw(canvas)
+
+    badge = (80, 74, 176, 170)
+    draw.rounded_rectangle(
+        badge, radius=24, fill=(9, 48, 38), outline=(110, 231, 183), width=2
+    )
+    draw_icon(draw, "tree", (106, 100, 150, 144))
+
+    draw.text(
+        (200, 100),
+        "URBAN FOREST PARK  ·  INDIA",
+        font=font(FONT_SEMI, 24),
+        fill=ACCENT,
+    )
+    draw.rounded_rectangle([80, 204, 200, 210], radius=3, fill=ACCENT)
+
+    title_font = font(FONT_BOLD, 64)
+    draw.text((80, 240), "Verified Green Jobs", font=title_font, fill=INK)
+    draw.text((80, 316), "Across India", font=title_font, fill=INK)
+
+    draw.text(
+        (80, 420),
+        "Forestry · Climate · ESG · GIS · Research",
+        font=font(FONT_REG, 27),
+        fill=MUTED,
+    )
+    draw.text(
+        (80, 466),
+        "Updated daily at 7 AM IST",
+        font=font(FONT_SEMI, 24),
+        fill=ACCENT,
+    )
+
+    domain_font = font(FONT_SEMI, 24)
+    domain = "urbanforestpark.com"
+    dw = draw.textlength(domain, font=domain_font)
+    draw.text(
+        (HOME_W - 80 - dw, HOME_H - 72),
+        domain,
+        font=domain_font,
+        fill=(235, 245, 240),
+    )
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / "home.jpg"
+    canvas.convert("RGB").save(
+        out, "JPEG", quality=84, optimize=True, progressive=True
+    )
+    return out
+
+
 def main() -> None:
     for name in CATEGORIES:
         out = build(name)
         size_kb = os.path.getsize(out) / 1024
         print(f"{out.relative_to(ROOT)}  {size_kb:.1f} KB")
+    out = build_home()
+    size_kb = os.path.getsize(out) / 1024
+    print(f"{out.relative_to(ROOT)}  {size_kb:.1f} KB  (1200x630)")
 
 
 if __name__ == "__main__":

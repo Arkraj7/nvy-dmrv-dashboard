@@ -87,28 +87,36 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
         for code, url in cluster
     )
     locale = "hi_IN" if file_name == "hindi-environment-forestry-jobs.html" else "en_IN"
-    image_alt = _esc(bsp.BRAND_ALT)
     slug_hint = file_name.removesuffix(".html").casefold()
-    if any(
-        hint in slug_hint
-        for hint in (
-            "jobs",
-            "opportunities",
-            "fellowships",
-            "workshops",
-            "conferences",
-            "webinars",
-            "programs",
-            "memberships",
-            "careers",
+    if file_name == "index.html":
+        image_alt = _esc(
+            "Urban Forest Park — verified environmental, forestry, ESG and GIS "
+            "jobs in India"
         )
-    ):
-        og_image = bsp.discover_image_for_hub(
-            {"canonical": canonical, "title": title, "h1": ""}
-        )
-        og_width, og_height = bsp.DISCOVER_IMAGE_WIDTH, bsp.DISCOVER_IMAGE_HEIGHT
+        og_image = bsp.DISCOVER_IMAGE_DIR + "/home.jpg"
+        og_width, og_height = 1200, 630
     else:
-        og_image, og_width, og_height = bsp.LOGO_URL, 512, 512
+        image_alt = _esc(bsp.BRAND_ALT)
+        if any(
+            hint in slug_hint
+            for hint in (
+                "jobs",
+                "opportunities",
+                "fellowships",
+                "workshops",
+                "conferences",
+                "webinars",
+                "programs",
+                "memberships",
+                "careers",
+            )
+        ):
+            og_image = bsp.discover_image_for_hub(
+                {"canonical": canonical, "title": title, "h1": ""}
+            )
+            og_width, og_height = bsp.DISCOVER_IMAGE_WIDTH, bsp.DISCOVER_IMAGE_HEIGHT
+        else:
+            og_image, og_width, og_height = bsp.LOGO_URL, 512, 512
     return f"""    <title>{title}</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="{robots}">
