@@ -6487,6 +6487,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         else resolve_default(DEFAULT_GLOBAL_ARCHIVE_PATH)
     )
 
+    today = ist_today().isoformat()
+
     # Process community submissions from the Telegram intake bot before the
     # main scrape, so they are included in this run's registry and SEO surface.
     pending_published, _ = process_pending_submissions(jobs_path, today)
@@ -6525,8 +6527,6 @@ def main(argv: Optional[List[str]] = None) -> int:
             len(purged_roles),
             ", ".join(item["id"] for item in purged_roles[:8]),
         )
-
-    today = ist_today().isoformat()
 
     if args.sitemap_only:
         write_sitemap(existing, archive, sitemap_path)
