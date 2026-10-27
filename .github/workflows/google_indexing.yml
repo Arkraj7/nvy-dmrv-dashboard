@@ -1,0 +1,96 @@
+name: Google Indexing (sitemap + job pages)
+
+# Manual one-click submission. Google has no public API for the Search Console
+# "Request indexing" button, so this workflow uses the two supported routes:
+#
+#   * Search Console API -> sitemaps.submit
+#     Tells Google to re-read the sitemap, which covers every hub and job URL.
+#   * Indexing API -> urlNotifications.publish
+#     Only for /jobs/<id> pages with JobPosting structured data. Never for hubs.
+#
+# Setup (one time):
+#   1. Google Cloud project -> enable "Indexing API" and
+#      "Google Search Console API".
+#   2. Create a service account -> JSON key.
+#   3. Search Console -> Settings -> Users and permissions -> add the service
+#      account email as Owner.
+#   4. Repository secrets:
+#        GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON = entire JSON key
+#        GSC_PROPERTY = https://www.urbanforestpark.com/
+#          (or sc-domain:urbanforestpark.com for a Domain property)
+#
+# Run with dry_run=true first to see the URL count without calling Google.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to submit"
+        type: choice
+        options: [all, sitemap, jobs]
+        default: all
+      dry_run:
+        description: "Print actions without calling Google"
+        type: boolean
+        default: false
+      force:
+        description: "Ignore saved state and submit every active job"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: google-indexing
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Submit to Google
+        env:
+          GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON }}
+          GSC_PROPERTY: ${{ secrets.GSC_PROPERTY }}
+        run: |
+          ARGS="--${{ inputs.mode }}"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          python scripts/google_indexing.py $ARGS
+
+      - name: Persist indexing state
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          if [ -f scripts/google_indexing_state.json ]; then
+            git add scripts/google_indexing_state.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No indexing state changes."
+            exit 0
+          fi
+          git commit -m "chore(seo): persist Google indexing state"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push attempt ${attempt} rejected; rebasing"
+            git pull --rebase --autostash
+          done
+          exit 1

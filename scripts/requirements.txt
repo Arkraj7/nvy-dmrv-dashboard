@@ -11,6 +11,8 @@
 python-jobspy>=1.1.82     # LinkedIn / Indeed / Naukri scraping
 pydantic>=2.5             # structured Gemini output validation
 google-genai>=1.0.0       # Gemini Flash humanizer (model order lives in scripts/fetch_and_humanize.py; GEMINI_MODEL overrides)
+google-auth>=2.30         # Search Console + Indexing API service-account auth
+google-api-python-client>=2.100  # sitemaps.submit + urlNotifications.publish
 requests>=2.31.0          # ReliefWeb v2 API + public India RSS fetch
 feedparser>=6.0.11        # ReliefWeb public India jobs RSS parsing
 beautifulsoup4>=4.12      # direct careers-page parsing (WRI India, CEEW, ATREE, WWF-India)

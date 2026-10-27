@@ -330,6 +330,35 @@ jobs:
         continue-on-error: true
         run: python scripts/ping_search_engines.py
 
+      - name: Submit sitemap + job pages to Google
+        if: steps.watchdog.outputs.skip != 'true'
+        continue-on-error: true
+        env:
+          GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON }}
+          GSC_PROPERTY: ${{ secrets.GSC_PROPERTY }}
+        run: python scripts/google_indexing.py --all
+
+      - name: Persist Google indexing state
+        if: steps.watchdog.outputs.skip != 'true'
+        continue-on-error: true
+        run: |
+          git config user.name "urbanforestpark-bot"
+          git config user.email "urbanforestpark-bot@users.noreply.github.com"
+          if [ -f scripts/google_indexing_state.json ]; then
+            git add scripts/google_indexing_state.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No Google indexing state changes."
+            exit 0
+          fi
+          git commit -m "[CF-Pages-Skip] chore(seo): persist Google indexing state"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            echo "state push attempt ${attempt} rejected; rebasing"
+            git pull --rebase origin main || true
+          done
+          exit 1
+
       - name: Alert Telegram on pipeline failure
         if: failure()
         env:
