@@ -1,36 +1,13 @@
 {
-  "generated_at": "2026-10-23T14:40:55",
+  "generated_at": "2026-10-27T10:08:21",
   "reason": "Aggregator URLs are not accepted as global application links; duplicate title/employer records are collapsed.",
   "aggregator_records_removed": [
     {
-      "id": "unu-junior-fellows-internship-2027-united-nations-university",
-      "title": "United Nations University (UNU) Junior Fellows Internship 2027",
-      "apply_url": "https://opportunitydesk.org/2026/10/16/unu-junior-fellows-internship-2027/",
-      "reason": "Removed: aggregator application URL replaced by verified official sources"
-    },
-    {
-      "id": "smithsonian-biodiversity-genomics-postdoctoral-fellowship",
-      "title": "Smithsonian Biodiversity Genomics Postdoctoral Fellowship Program",
-      "apply_url": "https://www2.fundsforngos.org/individuals/smithsonian-biodiversity-genomics-postdoctoral-fellowship-program/",
-      "reason": "Removed: aggregator application URL replaced by verified official sources"
-    },
-    {
-      "id": "mittal-family-climate-fellowship-program-fundsforngos",
-      "title": "Mittal Family Climate Fellowship Program",
-      "apply_url": "https://www2.fundsforngos.org/innovation/rfas-mittal-family-climate-fellowship-program/",
+      "id": "glf-social-media-ambassadors-program-2027-global-landscapes",
+      "title": "GLF Social Media Ambassadors Program 2027",
+      "apply_url": "https://www2.fundsforngos.org/individuals/glf-social-media-ambassadors-program-2027-empowering-young-digital",
       "reason": "Removed: aggregator application URL replaced by verified official sources"
     }
   ],
-  "duplicate_records_removed": [
-    {
-      "id": "simons-postdoctoral-fellowships-plant-biology-simons-foundat",
-      "kept": "simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
-      "title": "Simons Postdoctoral Fellowships in Plant Biology"
-    },
-    {
-      "id": "simons-postdoctoral-fellowships-in-plant-biology-simons-foun",
-      "kept": "simons-postdoctoral-fellowships-in-plant-biology-simons-fo-2",
-      "title": "Simons Postdoctoral Fellowships in Plant Biology"
-    }
-  ]
+  "duplicate_records_removed": []
 }
