@@ -3867,6 +3867,53 @@ REMOVED_JOB_REDIRECTS: Dict[str, str] = {
     "microsoft-forms-microsoft": "/",
     "research-assistant-cimp": "/jrf-srf-project-associate-jobs",
     "research-assistant-testorg": "/jrf-srf-project-associate-jobs",
+    # Purged before the current registries existed. Listed in the Search Console
+    # 404 drilldown (2026-10-27); send each to the closest live hub or the
+    # surviving canonical detail page.
+    "partnerships-outreach-manager-liter-of-light-mumbai": (
+        "/environmental-jobs-mumbai"
+    ),
+    "business-head-textile-circularity-hospitality": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "business-head-textile-circularity-hospitality-2": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "analyst-sustainable-sourcing-avantor-2": (
+        "/jobs/analyst-sustainable-sourcing-avantor"
+    ),
+    "assistant-manager-csr-social-innovation": "/esg-carbon-sustainability-jobs",
+    "analyst-civil-design-desri-hyderabad": "/environmental-jobs-hyderabad",
+    "associate-analyst-supplier-compliance-colgate-palmolive": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "asst-manager-manager-operations-tuv-sud-gurugram-2": (
+        "/jobs/asst-manager-manager-operations-tuv-sud-gurugram"
+    ),
+    "building-automation-engineer-cundall-chennai": "/environmental-jobs-chennai",
+    "co-founder-dhartiamrit-ecoservices": "/sustainability-jobs-india",
+    "process-engineer-electrification-quest-global": (
+        "/global-climate-sustainability-opportunities"
+    ),
+    "sales-consultant-quantum-sustainability-consulting": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "team-member-green-steel-jsw-steel-chennai": "/environmental-jobs-chennai",
+    "mechanical-design-engineer-saltech-design-labs": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "sales-manager-sustainability-intertek-india": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "associate-team-lead-supplier-compliance-colgate-palmolive": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "business-development-marketing-associate-flora-carbon-ai": (
+        "/esg-carbon-sustainability-jobs"
+    ),
+    "area-sales-manager-loom-solar": "/sustainability-jobs-india",
+    "sales-analyst-nextpower": "/sustainability-jobs-india",
+    "senior-leadership-energy-transition-new-delhi": "/environmental-jobs-delhi",
 }
 
 
