@@ -1,24 +1,19 @@
 {
+<<<<<<< Updated upstream
   "last_updated": "2026-10-27T11:06:27+05:30",
   "last_updated_ist": "2026-10-27T11:06:27+05:30",
+=======
+  "last_updated": "2026-10-27T11:20:10+05:30",
+  "last_updated_ist": "2026-10-27T11:20:10+05:30",
+>>>>>>> Stashed changes
   "last_pipeline_run_date_ist": "2026-10-27",
   "active_open_jobs": 111,
-  "opened_this_week": 51,
+  "opened_this_week": 50,
   "passed_this_week": 3,
   "total_archived_jobs": 9,
   "total_historical_indexed": 120,
-  "last_telegram_broadcast_date": "2026-10-26",
+  "last_telegram_broadcast_date": "2026-10-27",
   "recent_telegram_job_ids": [
-    "junior-research-fellow-gbu",
-    "assistant-manager-horticulture-adani-natural-resources",
-    "chief-of-partnerships-unaccc-vadodara",
-    "project-associate-geospatial-urban-green-infrastructure-atree",
-    "fully-funded-phd-community-challenges-nottingham",
-    "pg-diploma-in-wildlife-wii",
-    "satluj-river-basin-assessment-tnc",
-    "mittal-family-climate-fellowship-program",
-    "dean-anant-school-for-climate-action-ahmedabad",
-    "doctoral-student-iit-guwahati",
     "agroforestry-expert-contractual-indian-institute-of-forest-m",
     "coordinator-tea-wwf-india",
     "generation-hope-goals-2027-action-for-the-sdgs-escap",
@@ -48,10 +43,24 @@
     "wildlife-enthusiasts-course-wii",
     "regional-health-and-wash-coordinator-terre-des-hommes",
     "phd-research-sustainable-rurban-food-systems-atree",
-    "research-associate-maharashtra-atree"
+    "research-associate-maharashtra-atree",
+    "fellow---senior-research-associate---research-associate---tr",
+    "director-brahmaputra-programme-wwf-india",
+    "climate-fresk-facilitator-training-climate-fresk",
+    "gis-expert---meghalaya-world-bank-project-orion-infra-consul",
+    "loss-and-damage-adviser-re-advertised-dt-global",
+    "research-assistant-and-founder-s-office-associate-backyard-b",
+    "head-director-national-conservation-programme-wwf-india",
+    "climate-fresk-workshop-climate-fresk-various-hosts",
+    "research-associate---centre-for-urban-studies-wateraid-india",
+    "research-professionals-yp-i-yp-ii-project-associate-ii-proje"
   ],
   "by_category": {
     "Conferences, Summits & Events": {
+      "active": 3,
+      "archived": 0
+    },
+    "Internships & Student Traineeships": {
       "active": 3,
       "archived": 0
     },
@@ -59,16 +68,24 @@
       "active": 5,
       "archived": 0
     },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 10,
+      "archived": 3
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 5,
+      "archived": 1
+    },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 45,
+      "archived": 3
+    },
     "Ambassador & Fellowship Programs": {
       "active": 1,
       "archived": 0
     },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 11,
-      "archived": 3
-    },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 13,
+    "Fellowships & Leadership Programs": {
+      "active": 2,
       "archived": 0
     },
     "Climate Policy, Think-Tanks & Fellowships": {
@@ -79,20 +96,8 @@
       "active": 4,
       "archived": 0
     },
-    "GIS, Remote Sensing & Earth Observation": {
-      "active": 5,
-      "archived": 1
-    },
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 45,
-      "archived": 3
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 2,
-      "archived": 0
-    },
-    "Internships & Student Traineeships": {
-      "active": 3,
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 13,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
@@ -104,7 +109,7 @@
     "Delhi NCR": 16,
     "Maharashtra": 13,
     "Karnataka": 11,
-    "Delhi": 6,
+    "Delhi": 5,
     "Gujarat": 5,
     "Tamil Nadu": 5,
     "Telangana": 5,
@@ -127,32 +132,32 @@
   "total_global_records": 72,
   "total_archived_global_jobs": 8,
   "global_jobs_by_region": {
-    "Global / Remote": 14,
-    "Europe": 8,
-    "North America": 5,
     "Africa & Middle East": 15,
-    "UN / Multilateral": 5,
     "Asia-Pacific": 9,
-    "Latin America": 3
+    "Europe": 8,
+    "Global / Remote": 14,
+    "Latin America": 3,
+    "North America": 5,
+    "UN / Multilateral": 5
   },
   "global_jobs_by_kind": {
-    "Job / Career": 49,
-    "Grant / Funding": 2,
     "Fellowship": 5,
+    "Grant / Funding": 2,
     "Internship": 1,
+    "Job / Career": 49,
     "Scholarship": 2
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "research-analyst---programme-associate---tech-and-finance-su",
-    "program-manager-water-supply-planet-water-foundation",
-    "product-manager-sustainability-climate-ai-msci",
-    "gis-operator-pan-india-consultants-pvt-ltd",
-    "ceew-global-south-fellowship-council-on-energy-environment-a",
-    "research-assistant-urban-biodiversity-governance-chandragupt",
-    "wildlife-enthusiasts-course-wii",
-    "regional-health-and-wash-coordinator-terre-des-hommes",
-    "phd-research-sustainable-rurban-food-systems-atree",
-    "research-associate-maharashtra-atree"
+    "fellow---senior-research-associate---research-associate---tr",
+    "director-brahmaputra-programme-wwf-india",
+    "climate-fresk-facilitator-training-climate-fresk",
+    "gis-expert---meghalaya-world-bank-project-orion-infra-consul",
+    "loss-and-damage-adviser-re-advertised-dt-global",
+    "research-assistant-and-founder-s-office-associate-backyard-b",
+    "head-director-national-conservation-programme-wwf-india",
+    "climate-fresk-workshop-climate-fresk-various-hosts",
+    "research-associate---centre-for-urban-studies-wateraid-india",
+    "research-professionals-yp-i-yp-ii-project-associate-ii-proje"
   ]
 }
