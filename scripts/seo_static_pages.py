@@ -93,8 +93,8 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
             "Urban Forest Park — verified environmental, forestry, ESG and GIS "
             "jobs in India"
         )
-        og_image = bsp.DISCOVER_IMAGE_DIR + "/home.jpg"
-        og_width, og_height = 1200, 630
+        og_image = bsp.DISCOVER_IMAGE_DIR + "/home.jpg?v=20261027"
+        og_width, og_height = 1200, 675
     else:
         image_alt = _esc(bsp.BRAND_ALT)
         if any(

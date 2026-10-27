@@ -200,15 +200,20 @@ def build(name: str) -> Path:
     return out
 
 
-HOME_W, HOME_H = 1200, 630
+HOME_W, HOME_H = 1200, 675
 
 
 def build_home() -> Path:
-    """Homepage social card: 1200x630, the standard Open Graph ratio."""
+    """Homepage social card: 1200x675 (16:9).
+
+    Google Discover recommends a 16:9 or 4:3 image for mobile cards. The older
+    1.91:1 ratio is cropped on phones, so the homepage uses the same 16:9
+    canvas as the category banners.
+    """
     src = (
         Image.open(SOURCE)
         .convert("RGB")
-        .crop((0, 500, 5000, 3125))
+        .crop((0, 500, 5000, 3312))
         .resize((HOME_W, HOME_H), Image.LANCZOS)
     )
     src = src.filter(ImageFilter.GaussianBlur(1.2))
@@ -225,34 +230,34 @@ def build_home() -> Path:
 
     draw = ImageDraw.Draw(canvas)
 
-    badge = (80, 74, 176, 170)
+    badge = (80, 80, 176, 176)
     draw.rounded_rectangle(
         badge, radius=24, fill=(9, 48, 38), outline=(110, 231, 183), width=2
     )
-    draw_icon(draw, "tree", (106, 100, 150, 144))
+    draw_icon(draw, "tree", (106, 106, 150, 150))
 
     draw.text(
-        (200, 100),
+        (200, 106),
         "URBAN FOREST PARK  ·  INDIA",
         font=font(FONT_SEMI, 24),
         fill=ACCENT,
     )
-    draw.rounded_rectangle([80, 204, 200, 210], radius=3, fill=ACCENT)
+    draw.rounded_rectangle([80, 214, 200, 220], radius=3, fill=ACCENT)
 
-    title_font = font(FONT_BOLD, 64)
-    draw.text((80, 240), "Verified Green Jobs", font=title_font, fill=INK)
-    draw.text((80, 316), "Across India", font=title_font, fill=INK)
+    title_font = font(FONT_BOLD, 70)
+    draw.text((80, 250), "Verified Green Jobs", font=title_font, fill=INK)
+    draw.text((80, 336), "Across India", font=title_font, fill=INK)
 
     draw.text(
-        (80, 420),
+        (80, 456),
         "Forestry · Climate · ESG · GIS · Research",
-        font=font(FONT_REG, 27),
+        font=font(FONT_REG, 28),
         fill=MUTED,
     )
     draw.text(
-        (80, 466),
+        (80, 506),
         "Updated daily at 7 AM IST",
-        font=font(FONT_SEMI, 24),
+        font=font(FONT_SEMI, 26),
         fill=ACCENT,
     )
 
@@ -281,7 +286,7 @@ def main() -> None:
         print(f"{out.relative_to(ROOT)}  {size_kb:.1f} KB")
     out = build_home()
     size_kb = os.path.getsize(out) / 1024
-    print(f"{out.relative_to(ROOT)}  {size_kb:.1f} KB  (1200x630)")
+    print(f"{out.relative_to(ROOT)}  {size_kb:.1f} KB  (1200x675)")
 
 
 if __name__ == "__main__":
