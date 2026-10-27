@@ -454,5 +454,58 @@
       "checked_at": "2026-10-20T10:19:57.982215+00:00",
       "platform": ""
     }
+  },
+  {
+    "clean_title": "Research Analyst (Project-Based)",
+    "organization": "Centre for Public Policy Research (CPPR)",
+    "city": "Kochi",
+    "state": "Kerala",
+    "country": "India",
+    "region": "",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "1-3 Years",
+    "employment_type": "CONTRACTOR",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-23",
+    "qualification_summary": "Master's degree or higher in Public Policy, Economics, Political Science, Development Studies, Law, Statistics, or a related field with 3-5 years of experience.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "CPPR is seeking experienced Research Analysts and Policy Professionals to collaborate on a project basis across diverse public policy domains. This role involves conducting independent, evidence-based research and translating complex findings into actionable policy insights. Candidates should be self-driven professionals passionate about improving governance and contributing to impactful policymaking.",
+    "key_responsibilities": [
+      "Conduct quantitative and qualitative policy research",
+      "Analyze datasets, surveys, interviews, and case studies",
+      "Develop policy papers, research reports, and evidence-based recommendations",
+      "Support governance, public policy, and institutional research projects",
+      "Contribute to research proposal development and project design"
+    ],
+    "must_have_skills": [
+      "Quantitative research",
+      "Qualitative research",
+      "Policy analysis",
+      "Research writing",
+      "Data analysis"
+    ],
+    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
+    "apply_url": "https://www.cppr.in/careers",
+    "org_website": "https://www.cppr.in/",
+    "org_domain": "cppr.in",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "archived",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-24",
+    "date_posted": "2026-10-24",
+    "title_hi": "अनुसंधान विश्लेषक (Project-Based) — Centre for Public Policy Research (CPPR)",
+    "summary_hi": "यह यंग प्रोफेशनल / परामर्शदाता (संविदा) Centre for Public Policy Research (CPPR) (Kerala) हेतु उपलब्ध है। आवश्यक योग्यता: Master's degree or higher in Public Policy, Economics, Political Science, Development Studies, Law, Statistics, or a related field with 3-5 years of experience.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "verification": {
+      "verified_at": "2026-10-24",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://www.cppr.in/"
+    },
+    "id": "research-analyst-project-based-centre-for-public-policy-rese",
+    "reverify_after": "2026-11-08",
+    "date_archived": "2026-10-27"
   }
 ]
