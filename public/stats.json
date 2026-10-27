@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-27T13:52:08+05:30",
-  "last_updated_ist": "2026-10-27T13:52:08+05:30",
+  "last_updated": "2026-10-27T18:20:04+05:30",
+  "last_updated_ist": "2026-10-27T18:20:04+05:30",
   "last_pipeline_run_date_ist": "2026-10-27",
-  "active_open_jobs": 111,
+  "active_open_jobs": 122,
   "opened_this_week": 50,
   "passed_this_week": 3,
   "total_archived_jobs": 9,
-  "total_historical_indexed": 120,
+  "total_historical_indexed": 131,
   "last_telegram_broadcast_date": "2026-10-27",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
@@ -92,25 +92,25 @@
     "Odisha": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 60,
+  "active_global_jobs": 69,
   "active_global_portals": 13,
-  "total_global_records": 73,
+  "total_global_records": 82,
   "total_archived_global_jobs": 8,
   "global_jobs_by_region": {
     "Global / Remote": 14,
     "Asia-Pacific": 10,
-    "Europe": 8,
-    "North America": 5,
-    "Africa & Middle East": 15,
-    "UN / Multilateral": 5,
+    "Europe": 13,
+    "North America": 7,
+    "Africa & Middle East": 16,
+    "UN / Multilateral": 6,
     "Latin America": 3
   },
   "global_jobs_by_kind": {
-    "Job / Career": 50,
+    "Job / Career": 54,
     "Grant / Funding": 2,
-    "Fellowship": 5,
+    "Fellowship": 7,
     "Internship": 1,
-    "Scholarship": 2
+    "Scholarship": 5
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
