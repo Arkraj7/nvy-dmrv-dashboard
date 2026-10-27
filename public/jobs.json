@@ -45,7 +45,13 @@
       "source": "https://www.teriin.org/wsd"
     },
     "id": "world-sustainable-development-summit-wsds-2026-teri-the-ener",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:37Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 404,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Sustainability Intern (Remote)",
@@ -97,7 +103,13 @@
       "source": "mailto:sustainclinedsynergy@gmail.com"
     },
     "id": "sustainability-intern-remote-sustainclined-synergy",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:37Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Sustainability & Mission LiFE Conclave 2026",
@@ -141,9 +153,16 @@
     "title_hi": "स्थिरता & Mission LiFE Conclave 2026 — IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences) (Goa) हेतु उपलब्ध है। आवश्यक योग्यता: Open to industry, MSMEs, faculty, researchers, and students.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://iitgoa.ac.in/mlc/sustainabilityconclave2026/index.php"
+      "verified_at": "2026-10-27T23:53:44.387163+00:00",
+      "final_url": "https://iitgoa.ac.in/mlc/sustainabilityconclave2026/index.php",
+      "final_host": "iitgoa.ac.in",
+      "http_status": 200,
+      "content_hash": "8931afe155096645118e9239d2b35f76",
+      "entry_type": "posting",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "sustainability-and-mission-life-conclave-2026-iit-goa-missio"
   },
@@ -188,9 +207,16 @@
     "title_hi": "State Workshop: Powering Uttar Pradesh's Clean ऊर्जा Future — CSE x UPNEDA",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद CSE x UPNEDA (Uttar Pradesh) हेतु उपलब्ध है। आवश्यक योग्यता: Open to policymakers, researchers, and clean energy practitioners.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.cseindia.org/workshops"
+      "verified_at": "2026-10-27T23:53:45.631933+00:00",
+      "final_url": "https://www.cseindia.org/workshops",
+      "final_host": "www.cseindia.org",
+      "http_status": 200,
+      "content_hash": "b9344ead9503f42ea53a73b98f7b6d11",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "state-workshop--powering-uttar-pradesh-s-clean-energy-future",
     "reverify_after": "2026-11-10"
@@ -243,7 +269,13 @@
       "method": "flyer-intake-gemini-vision",
       "source": "mailto:env.sci.recruitment@gmail.com"
     },
-    "id": "research-professionals-yp-i-yp-ii-project-associate-ii-proje"
+    "id": "research-professionals-yp-i-yp-ii-project-associate-ii-proje",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:45Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Research Associate - Centre for Urban Studies (WaterAid India)",
@@ -294,7 +326,13 @@
       "method": "flyer-intake-gemini-vision",
       "source": "mailto:hr@cimp.ac.in"
     },
-    "id": "research-associate---centre-for-urban-studies-wateraid-india"
+    "id": "research-associate---centre-for-urban-studies-wateraid-india",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:45Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Research Assistant & Founder's Office Associate",
@@ -346,7 +384,13 @@
       "source": "mailto:admin@backyardbotanist.in"
     },
     "id": "research-assistant-and-founder-s-office-associate-backyard-b",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:45Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Marine Marshals Programme 2026",
@@ -389,9 +433,16 @@
     "title_hi": "Marine Marshals Programme 2026 — Centre for Science and Environment (CSE)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Centre for Science and Environment (CSE) (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to students and young professionals interested in marine conservation.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.cseindia.org/workshops"
+      "verified_at": "2026-10-27T23:53:47.031360+00:00",
+      "final_url": "https://www.cseindia.org/workshops",
+      "final_host": "www.cseindia.org",
+      "http_status": 200,
+      "content_hash": "b9344ead9503f42ea53a73b98f7b6d11",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "marine-marshals-programme-2026-centre-for-science-and-enviro",
     "reverify_after": "2026-11-10"
@@ -445,7 +496,13 @@
       "source": "mailto:hr@orioninfraconsulting.com"
     },
     "id": "gis-expert---meghalaya-world-bank-project-orion-infra-consul",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:47Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Fellow / Senior Research Associate / Research Associate - TREADS Initiative",
@@ -496,7 +553,13 @@
       "source": "mailto:treads@cprindia.org"
     },
     "id": "fellow---senior-research-associate---research-associate---tr",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:47Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Environmental Policy & Climate Action Training",
@@ -530,7 +593,7 @@
     "org_website": "https://www.impriindia.com",
     "org_domain": "impriindia.com",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -539,9 +602,16 @@
     "title_hi": "पर्यावरणीय नीति & जलवायु Action Training — IMPRI (Impact and Policy Research Institute)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद IMPRI (Impact and Policy Research Institute) (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to students, researchers, and professionals interested in environmental policy.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.impriindia.com"
+      "verified_at": "2026-10-27T23:53:47.290588+00:00",
+      "final_url": "https://www.impriindia.com/event/environmental-policy-and-climate-action/",
+      "final_host": "www.impriindia.com",
+      "http_status": 200,
+      "content_hash": "4d90d27a2d4dfb214dab1e58480785f2",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "environmental-policy-and-climate-action-training-impri-impac",
     "reverify_after": "2026-11-10"
@@ -597,7 +667,13 @@
       "source": "mailto:hr@orioninfraconsulting.com"
     },
     "id": "environment-health-and-safety-specialist---meghalaya-world-b",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:47Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Conflict & Commons: Community-Centred Land Governance for Renewable Energy",
@@ -641,9 +717,16 @@
     "title_hi": "Conflict & Commons: Community-Centred Land शासन for नवीकरणीय ऊर्जा — Centre for Science and Environment (CSE)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Centre for Science and Environment (CSE) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Open to researchers, practitioners, policymakers, and community leaders.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.cseindia.org/workshops"
+      "verified_at": "2026-10-27T23:53:48.629291+00:00",
+      "final_url": "https://www.cseindia.org/workshops",
+      "final_host": "www.cseindia.org",
+      "http_status": 200,
+      "content_hash": "b9344ead9503f42ea53a73b98f7b6d11",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "conflict-and-commons-community-centred-land-governance-for",
     "reverify_after": "2026-11-10"
@@ -690,9 +773,16 @@
     "title_hi": "जलवायु Leadership Programme 2026 (Indian Youth) — The ClimAct Initiative",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप The ClimAct Initiative (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to all backgrounds. No prior experience needed. Indian youth interested in climate action.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.instagram.com/thecimactinitiative"
+      "verified_at": "2026-10-27T23:53:49.112586+00:00",
+      "final_url": "https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Fthecimactinitiative&is_from_rle",
+      "final_host": "www.instagram.com",
+      "http_status": 200,
+      "content_hash": "a622bdd5c74dc01a71f9dbc47d0132f3",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "climate-leadership-programme-2026-indian-youth-the-climact-i",
     "reverify_after": "2026-11-10"
@@ -737,9 +827,16 @@
     "title_hi": "जलवायु Fresk Workshop — Climate Fresk (various hosts)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Climate Fresk (various hosts) (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to all. No prior knowledge required.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.climateaction.live/carbon-dating"
+      "verified_at": "2026-10-27T23:53:49.625628+00:00",
+      "final_url": "https://www.climateaction.live/carbon-dating",
+      "final_host": "www.climateaction.live",
+      "http_status": 200,
+      "content_hash": "df5e524727f1939d109385ebf148e399",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "climate-fresk-workshop-climate-fresk-various-hosts",
     "reverify_after": "2026-11-10"
@@ -785,9 +882,16 @@
     "title_hi": "जलवायु Fresk Facilitator Training",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Climate Fresk (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to all. No prior facilitation experience required.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.climateaction.live/carbon-dating"
+      "verified_at": "2026-10-27T23:53:49.757824+00:00",
+      "final_url": "https://www.climateaction.live/carbon-dating",
+      "final_host": "www.climateaction.live",
+      "http_status": 200,
+      "content_hash": "8f4a16313d2aff5206f8ea0df4ce137f",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "climate-fresk-facilitator-training-climate-fresk",
     "reverify_after": "2026-11-10"
@@ -827,12 +931,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-25T01:36:12.724841+00:00",
+      "verified_at": "2026-10-27T23:53:51.207167+00:00",
       "final_url": "https://sams.co.in/jobs/job-description/lead-poisoning-surveillance-coordinator/552",
       "final_host": "sams.co.in",
       "http_status": 200,
       "content_hash": "ddc26b1e254045387b1f3ccaf7400921",
-      "evidence_snippet": "Lead Poisoning Surveillance Coordinator, Gujarat Lead Poisoning Surveillance Coordinator Client: Vital Strategies India Services Private Limited location Created with Sketch Beta. Location: Gujarat Le",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -894,7 +997,13 @@
       "method": "flyer-intake-gemini-vision",
       "source": "mailto:climatecorpsindia@ashoka.edu.in"
     },
-    "id": "ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni"
+    "id": "ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:51Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Research Analyst / Programme Associate - Tech & Finance, Sustainable Food Systems",
@@ -944,7 +1053,13 @@
       "source": "mailto:recruitment@ceew.in"
     },
     "id": "research-analyst---programme-associate---tech-and-finance-su",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:51Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "PhD Programme - Kotak School of Sustainability, IIT Kanpur",
@@ -981,7 +1096,7 @@
     "org_website": "https://iitk.ac.in/kss/",
     "org_domain": "iitk.ac.in",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "careers_portal",
+    "entry_type": "posting",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -990,10 +1105,16 @@
     "title_hi": "PhD Students — Kotak School of Sustainability, IIT Kanpur",
     "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप Kotak School of Sustainability, IIT Kanpur (Uttar Pradesh) हेतु उपलब्ध है। आवश्यक योग्यता: Candidates must meet the eligibility criteria specified in the PhD brochure.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-portal",
-      "source": "https://www.iitk.ac.in/doaa/pgadmission.htm",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:53:52.630380+00:00",
+      "final_url": "https://www.iitk.ac.in/doaa/pgadmission.htm",
+      "final_host": "www.iitk.ac.in",
+      "http_status": 200,
+      "content_hash": "c5bcb32cc05c2eb53dc40050657010fa",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "phd-students-kotak-school-of-sustainability-iit-kanpur",
     "reverify_after": "2026-11-02"
@@ -1033,7 +1154,7 @@
     "org_website": "https://iith.ac.in/",
     "org_domain": "iith.ac.in",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1042,9 +1163,16 @@
     "title_hi": "PhD प्रवेश (नियमित - जनवरी 2027)",
     "summary_hi": "IIT Hyderabad जनवरी 2027 सत्र के लिए अपने पूर्णकालिक PhD कार्यक्रम हेतु आवेदन आमंत्रित करता है। यह कार्यक्रम क्लाइमेट चेंज, सस्टेनेबिलिटी, आर्टिफिशियल इंटेलिजेंस और इंजीनियरिंग जैसे विविध विषयों को कवर करता है।",
     "verification": {
-      "verified_at": "2026-10-24",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://iith.ac.in/phdadmissions/"
+      "verified_at": "2026-10-27T23:53:54.290122+00:00",
+      "final_url": "https://iith.ac.in/phdadmissions/",
+      "final_host": "iith.ac.in",
+      "http_status": 200,
+      "content_hash": "9ef8cd4d597644d7815c917c105aa360",
+      "entry_type": "award_portal",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "phd-admissions-regular-january-2027-indian-institute-of-tech",
     "reverify_after": "2026-11-08"
@@ -1141,9 +1269,16 @@
     "title_hi": "जूनियर रिसर्च फेलो — KSCSTE-Centre for Water Resources Development and Management",
     "summary_hi": "यह जूनियर/सीनियर रिसर्च फेलोशिप (JRF / SRF) KSCSTE-Centre for Water Resources Development and Management (Kerala) हेतु उपलब्ध है। आवश्यक योग्यता: First Class Post Graduation degree in Agriculture with specialisation in Agronomy/Environmental Science/Botany/Plant Sciences or allied discipline with CSIR-UGC-ASRB-NET/GATE qualified.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-24",
-      "method": "flyer-intake-gemini-vision",
-      "source": "http://www.cwrdm.kerala.gov.in"
+      "verified_at": "2026-10-27T23:54:17.168262+00:00",
+      "final_url": "https://cwrdm.kerala.gov.in/walk-interview-post-junior-research-fellow",
+      "final_host": "cwrdm.kerala.gov.in",
+      "http_status": 200,
+      "content_hash": "e52c8b7d3fbdf20aad0f7b07133747eb",
+      "entry_type": "posting",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "junior-research-fellow-kscste-centre-for-water-resources-dev",
     "reverify_after": "2026-11-08"
@@ -1197,7 +1332,13 @@
       "source": "mailto:hitesh@panindiagroup.com"
     },
     "id": "gis-operator-pan-india-consultants-pvt-ltd",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:54:17Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "GIS Expert",
@@ -1248,7 +1389,13 @@
       "source": "mailto:nisha.pramanik@in.ey.com"
     },
     "id": "gis-expert-ey",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:54:17Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "GHG Footprint & LCA Assessor",
@@ -1300,7 +1447,13 @@
       "source": "mailto:support@climate-change.in"
     },
     "id": "ghg-footprint-and-lca-assessor-globetrend-climate-impact",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:54:17Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Generation Hope Goals 2027: Action for the SDGs",
@@ -1398,9 +1551,16 @@
     "title_hi": "DPhil in Biology — University of Oxford",
     "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप University of Oxford (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Applicants should hold or be predicted to achieve a first-class or strong upper second-class undergraduate degree with honours in appropriate subjects.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-10-24",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.biology.ox.ac.uk/dphil#tab-5820131"
+      "verified_at": "2026-10-27T23:54:18.533985+00:00",
+      "final_url": "https://www.biology.ox.ac.uk/dphil#tab-5820131",
+      "final_host": "www.biology.ox.ac.uk",
+      "http_status": 200,
+      "content_hash": "44c3105509fddbaf4e9dbd0adf7db472",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "dphil-in-biology-university-of-oxford",
     "reverify_after": "2026-11-08"
@@ -1455,7 +1615,13 @@
       "source": "mailto:Aniket@nytpcorp.com"
     },
     "id": "climate-data-specialist-sustainability-consultant-nytp-corp",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:54:18Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "id": "programme-lead-senior-programme-associate-clean-energy-ifore",
@@ -1556,11 +1722,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:19.423446+00:00",
+      "verified_at": "2026-10-27T23:54:20.454670+00:00",
       "final_url": "https://www.atree.org/career/ffwlf/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "2b044945bd23498c72e74af60f7f2440",
+      "content_hash": "322c0965ff8d2f6f369bb678a463e303",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1610,11 +1776,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:25.510889+00:00",
+      "verified_at": "2026-10-27T23:54:32.827742+00:00",
       "final_url": "https://wii.gov.in/course-in-wildlife-trade-&-forensics-for-revenue-officers",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "76022192418554b6a5c7efd613731c04",
+      "content_hash": "440e10598249c1a0ef1d5caa016fa994",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1664,11 +1830,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:37.950814+00:00",
+      "verified_at": "2026-10-27T23:54:44.947984+00:00",
       "final_url": "https://wii.gov.in/wildlife-enthusiasts-course",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "366b87253882e06794e4cd2a65604460",
+      "content_hash": "9fe30fe2e4c7b38b3849d13c5ba08c0a",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1842,11 +2008,11 @@
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:38.676600+00:00",
+      "verified_at": "2026-10-27T23:54:45.392825+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-sustainable-food-systems-0",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "940f002c1131290a11dbc1a0850da7c2",
+      "content_hash": "df188c5b3e59071764cb83b4975d5f70",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1896,11 +2062,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:40.559231+00:00",
+      "verified_at": "2026-10-27T23:54:47.214620+00:00",
       "final_url": "https://www.atree.org/career/research-associate-maharastratgi/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "d2f4e5fa1fc004a12c77ae9f59dd9efe",
+      "content_hash": "7855b9e785234a040a9beeffb2d6b30b",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1957,11 +2123,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:40.782830+00:00",
+      "verified_at": "2026-10-27T23:54:47.386822+00:00",
       "final_url": "https://reliefweb.int/job/4232853/regional-health-and-wash-coordinator-asia-hub",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "571e961ca9aa26f09daaf1ead5f10862",
+      "content_hash": "9d38647c52bcb034cd11d4caea5cadc9",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2137,11 +2303,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:42.963215+00:00",
+      "verified_at": "2026-10-27T23:54:49.303756+00:00",
       "final_url": "https://wii.gov.in/pg-diploma-in-wildlife",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "810f37f5cfa509ba53eece0ad41b31f3",
+      "content_hash": "4179f217fbbb099ff99a389e34590833",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2323,7 +2489,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:45.714668+00:00",
+      "verified_at": "2026-10-27T23:54:51.762759+00:00",
       "final_url": "https://bsi.gov.in/uploads/documents/whatsnew/hindi/BSI-ADDITIONAL_LIST_OF_4_CANDIDATES_FOR_JRF_2026.pdf",
       "final_host": "bsi.gov.in",
       "http_status": 200,
@@ -2377,11 +2543,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:18:48.046720+00:00",
+      "verified_at": "2026-10-27T23:55:03.951812+00:00",
       "final_url": "https://wii.gov.in/international-course-on-heritage-conservation",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "6f09554b4a62628ce8bf80962ea22d49",
+      "content_hash": "28b7a3c27b4a520f8891815f8c9d8b40",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2696,11 +2862,11 @@
     "entry_type": "posting",
     "reverify_after": "2026-11-03",
     "verification": {
-      "verified_at": "2026-10-23T23:18:48.976192+00:00",
+      "verified_at": "2026-10-27T23:55:04.663732+00:00",
       "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
       "final_host": "www.indiawaterportal.org",
       "http_status": 200,
-      "content_hash": "683fb489372a825ef9f3842d3c32eda7",
+      "content_hash": "5596743ae4cad20dedc8a49c3e6c67e2",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -2750,11 +2916,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-23T23:18:49.612592+00:00",
+      "verified_at": "2026-10-27T23:55:12.793437+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-technology-futures-2",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "53b63f92a2fa1608478d2246f7aabe1d",
+      "content_hash": "f2c03be0caea0b66090bcdfdeb2f060c",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2805,11 +2971,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-23T23:18:50.033213+00:00",
+      "verified_at": "2026-10-27T23:55:13.267382+00:00",
       "final_url": "https://www.ceew.in/careers/programme-associate-%E2%80%93-energy-transitions",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "1b7bdb2b9fd6981a5e65b9f60a98b1b0",
+      "content_hash": "09f49189d957bb55718b00b4e26f0785",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3266,11 +3432,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-10-23T23:18:50.440415+00:00",
+      "verified_at": "2026-10-27T23:55:21.368655+00:00",
       "final_url": "https://www.ceew.in/careers/research-analyst-programme-associate-technology-futures",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "a4da1b6c00a9a44202a22fedbef8311a",
+      "content_hash": "0a7876fb4474722de57f4b5f164aff4d",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -5290,7 +5456,7 @@
     "entry_type": "posting",
     "reverify_after": "2026-10-31",
     "verification": {
-      "verified_at": "2026-10-23T23:18:53.006775+00:00",
+      "verified_at": "2026-10-27T23:55:23.432541+00:00",
       "final_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
       "final_host": "home.iitd.ac.in",
       "http_status": 200,
@@ -5645,11 +5811,11 @@
     "entry_type": "posting",
     "reverify_after": "2026-10-23",
     "verification": {
-      "verified_at": "2026-10-23T23:18:56.012876+00:00",
+      "verified_at": "2026-10-27T23:55:30.434311+00:00",
       "final_url": "https://moef.gov.in/vacancy-circulars",
       "final_host": "moef.gov.in",
       "http_status": 200,
-      "content_hash": "765a5d56749f36ebdad0435cd7394c5f",
+      "content_hash": "905b5f040b7ac3d13c4d18fda6803d85",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -5706,11 +5872,11 @@
     "entry_type": "posting",
     "reverify_after": "2026-10-22",
     "verification": {
-      "verified_at": "2026-10-23T23:18:57.114611+00:00",
+      "verified_at": "2026-10-27T23:55:31.102960+00:00",
       "final_url": "https://www.nrsc.gov.in/nrscnew/Career_ApplyOnline.php",
       "final_host": "www.nrsc.gov.in",
       "http_status": 200,
-      "content_hash": "7b7bda82f656cdba22beb26b1b2ef0a8",
+      "content_hash": "cd63fe2bce86758be8fc58fdf75bf397",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -5767,7 +5933,7 @@
     "entry_type": "award_portal",
     "reverify_after": "2026-10-21",
     "verification": {
-      "verified_at": "2026-10-23T23:18:59.425756+00:00",
+      "verified_at": "2026-10-27T23:55:33.266521+00:00",
       "final_url": "https://gbpihed.gov.in/vacancy.html",
       "final_host": "gbpihed.gov.in",
       "http_status": 200,
@@ -5876,7 +6042,13 @@
       "source": "mailto:dipti.a@thecelestialearth.org"
     },
     "id": "celestial-earth-gis-analyst-2026",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Junior Social Expert",
@@ -5925,7 +6097,13 @@
       "source": "mailto:socio@enkayenviro.com"
     },
     "id": "enkay-enviro-junior-social-expert-2026",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Urban Flood Forecasting & Climate Resilience - 4 Project Positions",
@@ -5975,7 +6153,13 @@
       "source": "mailto:rajarshidb@iisc.ac.in"
     },
     "id": "iisc-urban-flood-forecasting-4-positions-2026",
-    "reverify_after": "2026-11-07"
+    "reverify_after": "2026-11-07",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Research Analyst - Sustainability",
@@ -6024,7 +6208,13 @@
       "source": "mailto:talent@churchgatepartners.com"
     },
     "id": "churchgate-partners-research-analyst-sustainability-2026",
-    "reverify_after": "2026-10-29"
+    "reverify_after": "2026-10-29",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Research Associate - Transport Modelling & Emissions Accounting",
@@ -6073,7 +6263,13 @@
       "source": "mailto:tripti.patra@teri.res.in"
     },
     "id": "teri-transport-modelling-emissions-accounting-ra-2026",
-    "reverify_after": "2026-11-07"
+    "reverify_after": "2026-11-07",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Program Manager / Executive - Finance / Research Assistant and Other Roles (5 Positions)",
@@ -6122,7 +6318,13 @@
       "source": "mailto:info@reeds.in"
     },
     "id": "reeds-program-manager-finance-research-assistant-2026",
-    "reverify_after": "2026-11-14"
+    "reverify_after": "2026-11-14",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Water Resource Engineer / Business Consultant / Disaster Management Expert / Office Coordinator (Multiple Positions)",
@@ -6221,7 +6423,13 @@
       "source": "mailto:internships@ioraecological.com"
     },
     "id": "iora-biodiversity-data-intern-2026",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:33Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Teaching Program Coordinator",
@@ -6365,10 +6573,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-portal",
-      "source": "https://precisiondev.org/about-us/careers/",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:33.692043+00:00",
+      "final_url": "https://precisiondev.org/about-us/careers/",
+      "final_host": "precisiondev.org",
+      "http_status": 200,
+      "content_hash": "3dcf3f2119fe2015c7b269fdd40c41e9",
+      "entry_type": "careers_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "pxd-heat-forecast-program-manager-research-associate-2026",
     "reverify_after": "2026-11-09"

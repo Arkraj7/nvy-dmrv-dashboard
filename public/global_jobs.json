@@ -45,9 +45,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "official-source-harvest",
-      "source": "ReliefWeb"
+      "verified_at": "2026-10-27T23:55:33.732915+00:00",
+      "final_url": "https://reliefweb.int/job/4235682/loss-and-damage-adviser-re-advertised",
+      "final_host": "reliefweb.int",
+      "http_status": 202,
+      "content_hash": "f3a065cce0372cfd81538949a4a3a59d",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "ReliefWeb",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -95,9 +102,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "official-source-harvest",
-      "source": "ReliefWeb"
+      "verified_at": "2026-10-27T23:55:33.766145+00:00",
+      "final_url": "https://reliefweb.int/job/4235697/climate-and-business-continuity-planning-adviser-sta",
+      "final_host": "reliefweb.int",
+      "http_status": 202,
+      "content_hash": "ba720f80158d307d75a93242371c931f",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "ReliefWeb",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -133,7 +147,7 @@
     "org_website": "https://southernsustainability.co.uk",
     "org_domain": "southernsustainability.co.uk",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -142,9 +156,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.sustainabilityexpo.co.uk"
+      "verified_at": "2026-10-27T23:55:34.210384+00:00",
+      "final_url": "https://southernsustainability.co.uk/expo/",
+      "final_host": "southernsustainability.co.uk",
+      "http_status": 200,
+      "content_hash": "da39a24cf2f28dd8894bdaf8660b9ef2",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "the-big-sustainability-expo-2026-southern-sustainability-par"
   },
@@ -182,7 +203,7 @@
     "org_website": "https://theclimateinitiative.org",
     "org_domain": "theclimateinitiative.org",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -191,9 +212,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://theclimateinitiative.org/ambassadors"
+      "verified_at": "2026-10-27T23:55:36.589960+00:00",
+      "final_url": "https://theclimateinitiative.org/ambassadors/",
+      "final_host": "theclimateinitiative.org",
+      "http_status": 200,
+      "content_hash": "4c01e8a44ac66c21203b4c7f17f2457d",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "tci-ambassador-program-climate-leaders-the-climate-initiativ",
     "reverify_after": "2026-11-10"
@@ -231,7 +259,7 @@
     "org_website": "https://eri.iu.edu",
     "org_domain": "iu.edu",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -240,9 +268,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://eri.iu.edu/news-and-events/events/indiana-sustainability-and-resilience-conference.html"
+      "verified_at": "2026-10-27T23:55:36.883094+00:00",
+      "final_url": "https://eri.iu.edu/news-and-events/events/indiana-sustainability-and-resilience-conference.html",
+      "final_host": "eri.iu.edu",
+      "http_status": 200,
+      "content_hash": "56517212fa32d244d9c29aaad7e61389",
+      "entry_type": "award_portal",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "indiana-sustainability-and-resilience-conference-2027-indian"
   },
@@ -289,9 +324,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://climateandhealthalliance.org/get-involved/organisations-become-a-member"
+      "verified_at": "2026-10-27T23:55:39.496276+00:00",
+      "final_url": "https://climateandhealthalliance.org/get-involved/organisations-become-a-member/",
+      "final_host": "climateandhealthalliance.org",
+      "http_status": 200,
+      "content_hash": "8c425901a71d29f37720961de66b5196",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "global-climate-and-health-alliance-gcha-membership-global-cl",
     "reverify_after": "2026-11-10"
@@ -340,9 +382,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.geaf.foundation/ambassador"
+      "verified_at": "2026-10-27T23:55:40.472332+00:00",
+      "final_url": "https://www.geaf.foundation/ambassador",
+      "final_host": "www.geaf.foundation",
+      "http_status": 200,
+      "content_hash": "090ff1e66b55e6b1c74feb3dd6e263e7",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "geaf-ambassador-programme-2027-green-earth-action-foundation"
   },
@@ -390,9 +439,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://climate-pact.europa.eu/get-involved/become-pact-ambassador_en"
+      "verified_at": "2026-10-27T23:55:40.977635+00:00",
+      "final_url": "https://climate-pact.europa.eu/get-involved/become-pact-ambassador_en",
+      "final_host": "climate-pact.europa.eu",
+      "http_status": 200,
+      "content_hash": "ca6d294edce7f3ee4c51378079254ef5",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "european-climate-pact-ambassador-european-climate-pact-europ"
   },
@@ -439,9 +495,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.climateinteractive.org/become-an-ambassador"
+      "verified_at": "2026-10-27T23:55:41.323971+00:00",
+      "final_url": "https://www.climateinteractive.org/become-an-ambassador/",
+      "final_host": "www.climateinteractive.org",
+      "http_status": 200,
+      "content_hash": "862c899bd483f475d4d2f02be1d7bf33",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "en-roads-climate-ambassador-self-paced-climate-interactive",
     "reverify_after": "2026-11-10"
@@ -492,9 +555,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "official-source-harvest",
-      "source": "ReliefWeb"
+      "verified_at": "2026-10-27T23:55:41.354613+00:00",
+      "final_url": "https://reliefweb.int/job/4235553/climate-resilience-senior-adviser",
+      "final_host": "reliefweb.int",
+      "http_status": 202,
+      "content_hash": "d26bbfbae486bfe5245e36643ac88d6c",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "ReliefWeb",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -541,9 +611,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.peoplepowered.org/climate-democracy-accelerator"
+      "verified_at": "2026-10-27T23:55:41.535772+00:00",
+      "final_url": "https://www.peoplepowered.org/climate-democracy-accelerator",
+      "final_host": "www.peoplepowered.org",
+      "http_status": 200,
+      "content_hash": "a8010f188e6dc7ec2f4a7afc6449b2fa",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "climate-democracy-accelerator-2027-people-powered"
   },
@@ -592,9 +669,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-26",
-      "method": "official-source-harvest",
-      "source": "ReliefWeb"
+      "verified_at": "2026-10-27T23:55:41.569109+00:00",
+      "final_url": "https://reliefweb.int/job/4235315/chief-party-programs-nigeria",
+      "final_host": "reliefweb.int",
+      "http_status": 202,
+      "content_hash": "a6cf93f3eb14cb1b1548989cbabda139",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "ReliefWeb",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -691,7 +775,13 @@
       "method": "flyer-intake-gemini-vision",
       "source": "https://campusfrance.smapply.io/prog/mopga-2026/"
     },
-    "id": "mopga-2027-visiting-fellowship-make-our-planet-great-again-c"
+    "id": "mopga-2027-visiting-fellowship-make-our-planet-great-again-c",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:41Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 404,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Mittal Family Climate Fellowship (Academic Year 2027-28)",
@@ -790,7 +880,13 @@
       "source": "mailto:GCERF@nas.edu"
     },
     "id": "global-climate-and-environmental-research-fellowship-gcerf-n",
-    "reverify_after": "2026-11-09"
+    "reverify_after": "2026-11-09",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:42Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "CEEW Global South Fellowship",
@@ -841,7 +937,13 @@
       "source": "mailto:reman.singh@ceew.in,anjali.tewari@ceew.in"
     },
     "id": "ceew-global-south-fellowship-council-on-energy-environment-a",
-    "reverify_after": "2026-11-09"
+    "reverify_after": "2026-11-09",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:42Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "clean_title": "Senior Specialist, Building Science & Analysis",
@@ -892,7 +994,13 @@
       "source": "mailto:jobs@imt.org"
     },
     "id": "senior-specialist-building-science-and-analysis-institute-fo",
-    "reverify_after": "2026-11-08"
+    "reverify_after": "2026-11-08",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:55:42Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    }
   },
   {
     "id": "national-consultant-local-expert-for-mtr-biodiversity-govern",
@@ -939,9 +1047,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-24",
-      "method": "official-source-harvest",
-      "source": "ReliefWeb"
+      "verified_at": "2026-10-27T23:55:42.118991+00:00",
+      "final_url": "https://reliefweb.int/job/4235205/national-consultantlocal-expert-mtr-biodiversity-governance-project-cv",
+      "final_host": "reliefweb.int",
+      "http_status": 202,
+      "content_hash": "eb28b9ae59e82fc9758d9d4c88995e26",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "OK",
+      "platform": "ReliefWeb",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -988,9 +1103,16 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-24",
-      "method": "official-source-harvest",
-      "source": "WRI"
+      "verified_at": "2026-10-27T23:55:42.434020+00:00",
+      "final_url": "https://www.wri.org/careers/jobs/communications-manager-folu-2026-jr100532",
+      "final_host": "www.wri.org",
+      "http_status": 200,
+      "content_hash": "69bde7ad80c05d06cc4dee11c0dcea5a",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -1040,11 +1162,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:18:59.625253+00:00",
+      "verified_at": "2026-10-27T23:55:42.466989+00:00",
       "final_url": "https://reliefweb.int/job/4233172/women-building-power-climate-justice-lead",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "2c8b79b747d59ebe59db285e89729002",
+      "content_hash": "8184ab8b386c87826fa8bc554ee260b1",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1098,11 +1220,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:18:59.792416+00:00",
+      "verified_at": "2026-10-27T23:55:42.498395+00:00",
       "final_url": "https://reliefweb.int/job/4233575/technical-advisor-ii-climate-change-landscape-restoration",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "8493dcf76ba84ab6224ad4d258ddbf3a",
+      "content_hash": "5920f2aa8fb40bb303ac6880fa31675d",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1196,11 +1318,11 @@
     "employer_id": "simons-foundation",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:19:00.474716+00:00",
+      "verified_at": "2026-10-27T23:55:43.674576+00:00",
       "final_url": "https://www.simonsfoundation.org/news/applications-open-for-simons-postdoctoral-fellowships-in-plant-biology/",
       "final_host": "www.simonsfoundation.org",
       "http_status": 200,
-      "content_hash": "56b5d029dc0d63e1bd60f42fe31567f8",
+      "content_hash": "eef2b4918a6bca5d83e51e0748b3feb5",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1263,7 +1385,7 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:01.686542+00:00",
+      "verified_at": "2026-10-27T23:55:44.208344+00:00",
       "final_url": "https://hrms.iucn.org/iresy/index.cfm?event=vac.show&vacId=11813&lang=en",
       "final_host": "hrms.iucn.org",
       "http_status": 200,
@@ -1321,11 +1443,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:01.855310+00:00",
+      "verified_at": "2026-10-27T23:55:44.240597+00:00",
       "final_url": "https://reliefweb.int/job/4233774/senior-marine-ecology-officer-southeast-asia",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "a6a8f239a33913b37ae5f709003b3572",
+      "content_hash": "f449d032114e586e10cdeff7dfe12778",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1381,7 +1503,7 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:02.963036+00:00",
+      "verified_at": "2026-10-27T23:55:44.733371+00:00",
       "final_url": "https://hrms.iucn.org/iresy/index.cfm?event=vac.show&vacId=11804&lang=en",
       "final_host": "hrms.iucn.org",
       "http_status": 200,
@@ -1438,11 +1560,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:04.358612+00:00",
+      "verified_at": "2026-10-27T23:55:44.766279+00:00",
       "final_url": "https://reliefweb.int/job/4234809/responsable-environnement-et-energies-renouvelables",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "6fa60c2e96f38eddc6599506fbbb2ccd",
+      "content_hash": "bf395b7aac94f7b727daf6c4a7bd3dd9",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1494,11 +1616,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:04.547127+00:00",
+      "verified_at": "2026-10-27T23:55:44.798136+00:00",
       "final_url": "https://reliefweb.int/job/4234444/regional-specialist-market-systems-and-climate-resilience",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "878f7262d78a44755e2e3dcbb7554a62",
+      "content_hash": "f0dcf93c90473a322ccbab98e1945c8b",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1602,11 +1724,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:07.899478+00:00",
+      "verified_at": "2026-10-27T23:55:45.604261+00:00",
       "final_url": "https://www.wri.org/careers/jobs/project-intern-2026-jr100506",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "98b12457980993637b5b8cec2cc7aef4",
+      "content_hash": "a014afb34de16d05e4ed0361d1affb07",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -1661,11 +1783,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:08.067999+00:00",
+      "verified_at": "2026-10-27T23:55:45.636140+00:00",
       "final_url": "https://reliefweb.int/job/4234599/program-manager-technical-panel",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "92e5215a240e8694be4cca0e3b4ec9fa",
+      "content_hash": "f38ac67252b0f9e40e83989dd5f6cce0",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1720,11 +1842,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:08.261588+00:00",
+      "verified_at": "2026-10-27T23:55:45.669624+00:00",
       "final_url": "https://reliefweb.int/job/4234143/prf33834-request-proposals-conduct-baseline-evaluation-strengthening-gender-and-disability-inclusive-climate-action-bungoma-countyphase-ii",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "301bd7ab4b283b8bc3411f5a59afcfbc",
+      "content_hash": "03282a5b76c6af85f9cadda9a2613058",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1778,7 +1900,7 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:08.970088+00:00",
+      "verified_at": "2026-10-27T23:55:46.274795+00:00",
       "final_url": "https://hrms.iucn.org/iresy/index.cfm?event=vac.show&vacId=11809&lang=en",
       "final_host": "hrms.iucn.org",
       "http_status": 200,
@@ -1838,7 +1960,7 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:09.697793+00:00",
+      "verified_at": "2026-10-27T23:55:47.084775+00:00",
       "final_url": "https://hrms.iucn.org/iresy/index.cfm?event=vac.show&vacId=11810&lang=en",
       "final_host": "hrms.iucn.org",
       "http_status": 200,
@@ -1898,11 +2020,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:09.880062+00:00",
+      "verified_at": "2026-10-27T23:55:47.116927+00:00",
       "final_url": "https://reliefweb.int/job/4234759/monitoring-evaluation-learning-mel-coordinator",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "2d7797b08ded7e929a4ff2aed56c72fe",
+      "content_hash": "37b3a907a66ec0f533325a292feb1263",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -1957,11 +2079,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:10.049239+00:00",
+      "verified_at": "2026-10-27T23:55:47.150967+00:00",
       "final_url": "https://reliefweb.int/job/4232725/implementation-advisor-eu-fsm-seam-project",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "61661a080213197996709d651326ef5c",
+      "content_hash": "7b815a17eb90df850a01a2b4b8618fd4",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2015,7 +2137,7 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:10.759582+00:00",
+      "verified_at": "2026-10-27T23:55:47.640260+00:00",
       "final_url": "https://hrms.iucn.org/iresy/index.cfm?event=vac.show&vacId=11814&lang=en",
       "final_host": "hrms.iucn.org",
       "http_status": 200,
@@ -2073,11 +2195,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:10.949982+00:00",
+      "verified_at": "2026-10-27T23:55:47.764039+00:00",
       "final_url": "https://reliefweb.int/job/4235005/gcf-project-manager-national-damascus",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "0246116da0f2d2844ab7995d4cc29674",
+      "content_hash": "bb6eb3101aa3111609e53e130b9795b7",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2119,11 +2241,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:19:12.356882+00:00",
+      "verified_at": "2026-10-27T23:55:49.232075+00:00",
       "final_url": "https://www.nottingham.ac.uk/news/collaboratory-final-round",
       "final_host": "www.nottingham.ac.uk",
       "http_status": 200,
-      "content_hash": "39fc5e77706e27351039c8f5da69e478",
+      "content_hash": "66e3a32cf0cc33158634861590528b4b",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -2181,11 +2303,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:12.937564+00:00",
+      "verified_at": "2026-10-27T23:55:49.412020+00:00",
       "final_url": "https://www.wri.org/careers/jobs/food-loss-and-waste-associate-2026-jr100494",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "baae6048b62ac0a63ca3aa17590a500f",
+      "content_hash": "f97746862ca9c04e7ec8dd16c7100173",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2288,11 +2410,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:13.751596+00:00",
+      "verified_at": "2026-10-27T23:55:49.616597+00:00",
       "final_url": "https://www.wri.org/careers/jobs/estagio-em-financiamento-e-economia-urbana-2026-jr100514",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "c419b7526157aedf464e0d6b73b4cc09",
+      "content_hash": "c5e59af5b1be02e4eb77edba02f7a2be",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2344,11 +2466,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:14.303363+00:00",
+      "verified_at": "2026-10-27T23:55:49.771159+00:00",
       "final_url": "https://www.wri.org/careers/jobs/especialista-em-estrategia-e-gestao-de-impacto-2026-jr100342",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "396e2e8ba3996c2ae2ddd0130aeee070",
+      "content_hash": "e926920227041ac4c1d04b5a5c4a999e",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2402,11 +2524,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:14.470808+00:00",
+      "verified_at": "2026-10-27T23:55:49.803818+00:00",
       "final_url": "https://reliefweb.int/job/4233326/eoi-maritime-portfolio-delivery-panel-sea-mt-002-p4i-03",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "a171490fb485ae2b18a9e02b1a7a5cf2",
+      "content_hash": "428cbeb5c5c7bc9f98ca18d8acc834a4",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2462,11 +2584,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:14.664325+00:00",
+      "verified_at": "2026-10-27T23:55:49.837816+00:00",
       "final_url": "https://reliefweb.int/job/4231872/drc-rotational-senior-associate-manager-fixed-term",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "8d650309061d755693a18e147afe9e24",
+      "content_hash": "430ecaac813913c77d02756b86e4ee31",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2572,11 +2694,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:14.872453+00:00",
+      "verified_at": "2026-10-27T23:55:50.071907+00:00",
       "final_url": "https://www.wri.org/careers/jobs/data-science-associate-ethiopia-restore-local-2026-jr100504",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "efdeefa23523054dc75c7e17681c0406",
+      "content_hash": "76bfb2d531c48d4d5114e0066fa59849",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2629,11 +2751,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:15.518184+00:00",
+      "verified_at": "2026-10-27T23:55:50.248559+00:00",
       "final_url": "https://www.wri.org/careers/jobs/critical-mineral-analyst-2026-jr100522",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "3364693b96986eece0b3424d6eae6cc4",
+      "content_hash": "f2b574f5acbc46e1bf680eeae7f57b57",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -2687,11 +2809,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:15.687814+00:00",
+      "verified_at": "2026-10-27T23:55:50.282577+00:00",
       "final_url": "https://reliefweb.int/job/4233007/coordinator-united-nations-university-unu-hub-fixed-term-project-position",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "8690b70587d58fa582d1814ffc8a6e6f",
+      "content_hash": "2ba309d39c461caa226631ed611629ae",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2747,11 +2869,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:15.881996+00:00",
+      "verified_at": "2026-10-27T23:55:50.315791+00:00",
       "final_url": "https://reliefweb.int/job/4232896/coordinator-and-legal-institutional-representant-programme-brazil",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "d1de9c4fec3067b08319b08c2ecf285e",
+      "content_hash": "95df7fc4af51c468849dd8ad525ea289",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -2963,11 +3085,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:16.432585+00:00",
+      "verified_at": "2026-10-27T23:55:50.445102+00:00",
       "final_url": "https://reliefweb.int/job/4234699/conservation-pilot-okapi-wildlife-reserve",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "9fea3e433f74f1edbe7f186cf1d01a0b",
+      "content_hash": "fd450b2753a9410426e4fa18a58ded0f",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -3023,11 +3145,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:16.600946+00:00",
+      "verified_at": "2026-10-27T23:55:50.478138+00:00",
       "final_url": "https://reliefweb.int/job/4232796/community-conservation-coordinator-gabon",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "44974a4294703da225802c418528b669",
+      "content_hash": "16b0df78a213f1c46c3dd4965f8a431a",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -3081,11 +3203,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:16.789674+00:00",
+      "verified_at": "2026-10-27T23:55:50.511665+00:00",
       "final_url": "https://reliefweb.int/job/4234804/climate-environment-health-coordinator",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "ea2449f5c5c445c27f0470a6c0a25d9b",
+      "content_hash": "5a1dd2f7072c80880c0d172035af94c1",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -3137,11 +3259,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:17.593487+00:00",
+      "verified_at": "2026-10-27T23:55:50.699704+00:00",
       "final_url": "https://www.wri.org/careers/jobs/analista-de-projetos-pleno-2026-jr100375",
       "final_host": "www.wri.org",
       "http_status": 200,
-      "content_hash": "dfb7ec282128614e57b4bfe4a5ccd806",
+      "content_hash": "741c527122b3a2c420fa46eb8801b892",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3197,11 +3319,11 @@
     "global": true,
     "evergreen": false,
     "verification": {
-      "verified_at": "2026-10-23T23:19:17.787327+00:00",
+      "verified_at": "2026-10-27T23:55:50.733393+00:00",
       "final_url": "https://reliefweb.int/job/4231913/agriculture-market-systems-and-climate-finance-senior-advisor-visionfund-international",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "f46096898d47d831f458a34831ed47be",
+      "content_hash": "3432b7972eb82fc604ff375465853b39",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -3243,11 +3365,11 @@
     "entry_type": "award_portal",
     "status": "active",
     "verification": {
-      "verified_at": "2026-10-23T23:19:18.283903+00:00",
+      "verified_at": "2026-10-27T23:55:51.386324+00:00",
       "final_url": "https://www.uvm.edu/gund/news/gund-institute-funded-phd-competition-now-open-0",
       "final_host": "www.uvm.edu",
       "http_status": 200,
-      "content_hash": "cf1409dd194c12fb75e4fc9e75ee706e",
+      "content_hash": "da063f316f27ba774b6f3c53fa10311c",
       "entry_type": "award_portal",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -3418,7 +3540,7 @@
     },
     "entry_type": "careers_portal",
     "verification": {
-      "verified_at": "2026-10-23T23:19:18.739898+00:00",
+      "verified_at": "2026-10-27T23:55:51.604323+00:00",
       "final_url": "https://www.worldbank.org/ext/en/careers",
       "final_host": "www.worldbank.org",
       "http_status": 200,
@@ -3481,11 +3603,11 @@
     },
     "entry_type": "posting",
     "verification": {
-      "verified_at": "2026-10-23T23:19:19.487740+00:00",
+      "verified_at": "2026-10-27T23:55:52.050846+00:00",
       "final_url": "https://unfccc.int/about-us/internships",
       "final_host": "unfccc.int",
       "http_status": 200,
-      "content_hash": "7332fe7ee0271601ac6d4e8915652676",
+      "content_hash": "0b5af66eadf62d7bc8a4fced4b4a2842",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3598,11 +3720,11 @@
     },
     "entry_type": "careers_portal",
     "verification": {
-      "verified_at": "2026-10-23T23:19:20.781569+00:00",
+      "verified_at": "2026-10-27T23:55:52.912003+00:00",
       "final_url": "https://jobs.undp.org/cj_view_jobs.cfm",
       "final_host": "jobs.undp.org",
       "http_status": 200,
-      "content_hash": "408aadc766696527d302e2ff170560dd",
+      "content_hash": "c7e6012c0f6fd6eb207add2858198f21",
       "entry_type": "careers_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3661,11 +3783,11 @@
     },
     "entry_type": "posting",
     "verification": {
-      "verified_at": "2026-10-23T23:19:21.747537+00:00",
+      "verified_at": "2026-10-27T23:55:53.811717+00:00",
       "final_url": "https://iucn.org/our-work/region/south-america",
       "final_host": "iucn.org",
       "http_status": 200,
-      "content_hash": "083a840ab4a1ebbc225b9982109fe09d",
+      "content_hash": "114a445b05b5ba36e85c4477a18d961b",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3717,11 +3839,11 @@
     "entry_type": "careers_portal",
     "employer_id": "green-climate-fund-gcf",
     "verification": {
-      "verified_at": "2026-10-23T23:19:22.745092+00:00",
+      "verified_at": "2026-10-27T23:55:54.405438+00:00",
       "final_url": "https://www.greenclimate.fund/about/careers",
       "final_host": "www.greenclimate.fund",
       "http_status": 200,
-      "content_hash": "501ac83b4a4c530f5b203cc2e4a6ac6c",
+      "content_hash": "56cec0cc5c189b3b87c8256299eca997",
       "entry_type": "careers_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3824,11 +3946,11 @@
     "entry_type": "posting",
     "employer_id": "european-space-agency-esa-climate-office",
     "verification": {
-      "verified_at": "2026-10-23T23:19:24.754408+00:00",
+      "verified_at": "2026-10-27T23:55:55.831902+00:00",
       "final_url": "https://climate.esa.int/en/",
       "final_host": "climate.esa.int",
       "http_status": 200,
-      "content_hash": "b5e151a1d1261a188fc07d4f257ef459",
+      "content_hash": "292715b8bb94d5ee2015d0c8b937dda3",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -3887,11 +4009,11 @@
     },
     "entry_type": "award_portal",
     "verification": {
-      "verified_at": "2026-10-23T23:19:25.541455+00:00",
+      "verified_at": "2026-10-27T23:55:56.403448+00:00",
       "final_url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
       "final_host": "www.eacea.ec.europa.eu",
       "http_status": 200,
-      "content_hash": "c267fef5e252470d1a835848416b1fdf",
+      "content_hash": "036cbbbfc9518eb70e42e94ea8d1651e",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -4100,10 +4222,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-page",
-      "source": "https://unu.edu/ehs/learning/msc-geography-environmental-risks-and-human-security",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:56.658285+00:00",
+      "final_url": "https://unu.edu/ehs/learning/msc-geography-environmental-risks-and-human-security",
+      "final_host": "unu.edu",
+      "http_status": 200,
+      "content_hash": "bc6214bf7b4abff88d0aa0f080fc7e25",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "unu-ehs-joint-msc-geography-environmental-risks-2027",
     "region": "Europe",
@@ -4151,10 +4279,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-page",
-      "source": "https://jobnet.dk/find-job/a50753a3-48bb-4a5a-8c31-a04968ef86ce",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:57.592598+00:00",
+      "final_url": "https://jobnet.dk/find-job/a50753a3-48bb-4a5a-8c31-a04968ef86ce",
+      "final_host": "jobnet.dk",
+      "http_status": 200,
+      "content_hash": "8610c75a1da3038a8a33fc526e7b11bc",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "geus-greenland-ice-sheet-hydrology-phd-2027",
     "region": "Europe",
@@ -4296,7 +4430,7 @@
     "org_website": "https://www.interfaith.cam.ac.uk",
     "org_domain": "cam.ac.uk",
     "source_portal": "LinkedIn batch - official programme page verified",
-    "entry_type": "posting",
+    "entry_type": "award_portal",
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -4305,10 +4439,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-page",
-      "source": "https://www.interfaith.cam.ac.uk/news/funding-opportunity-peace-conflict-and-religion",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:59.063996+00:00",
+      "final_url": "https://www.interfaith.cam.ac.uk/news/funding-opportunity-peace-conflict-and-religion",
+      "final_host": "www.interfaith.cam.ac.uk",
+      "http_status": 200,
+      "content_hash": "a98398c788c6e38649803d28e5b525f4",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "cambridge-interfaith-leverhulme-ecf-2027",
     "region": "Europe",
@@ -4356,10 +4496,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-page",
-      "source": "https://www.carboun.com/careers/head-of-research",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:59.346708+00:00",
+      "final_url": "https://www.carboun.com/careers/head-of-research",
+      "final_host": "www.carboun.com",
+      "http_status": 200,
+      "content_hash": "7c682221aef56df4eda2a12515b15e0d",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "carboun-institute-head-of-research-2026",
     "region": "Africa & Middle East",
@@ -4407,10 +4553,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-portal",
-      "source": "https://careers.un.org/ypp/home",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:55:59.681083+00:00",
+      "final_url": "https://careers.un.org/ypp/home",
+      "final_host": "careers.un.org",
+      "http_status": 200,
+      "content_hash": "ba6cd17fa20ea91c97b2ed8d97ff8700",
+      "entry_type": "careers_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "un-ypp-2026",
     "region": "UN / Multilateral",
@@ -4458,10 +4610,16 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-page",
-      "source": "https://www.ub.edu/school-economics/apply-now-phd/",
-      "http_status": 200
+      "verified_at": "2026-10-27T23:56:00.392038+00:00",
+      "final_url": "https://www.ub.edu/school-economics/apply-now-phd/",
+      "final_host": "www.ub.edu",
+      "http_status": 200,
+      "content_hash": "0254f88f63bbb45830691141721fd57d",
+      "entry_type": "posting",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     },
     "id": "university-barcelona-phd-energy-climate-economics-2027",
     "region": "Europe",
