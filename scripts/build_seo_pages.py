@@ -193,6 +193,23 @@ GA_SCRIPT = """    <!-- Google tag (gtag.js) -->
       gtag('config', 'G-4E7BLPFWP7');
     </script>"""
 
+# Google News Showcase / Subscribe with Google (SWG) Basic Subscriptions
+# NOTE: Replace "CAowvJXIDA:openaccess" with your own product ID from
+# Google Publisher Center (https://publishercenter.google.com) after
+# registering your publication.
+SWG_SCRIPT = """    <script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+    <script>
+      (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+        basicSubscriptions.init({
+          type: "NewsArticle",
+          isPartOfType: ["Product"],
+          isPartOfProductId: "CAowvJXIDA:openaccess",
+          clientOptions: { theme: "light", lang: "en-GB" },
+        });
+      });
+    </script>"""
+
 THEME_BOOTSTRAP = """    <!-- Theme bootstrap: applied before stylesheets to prevent flicker. -->
     <script>
       (function () {
@@ -3590,6 +3607,8 @@ def build_hub_page(
 <head>
     {GA_SCRIPT}
 
+    {SWG_SCRIPT}
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -3993,6 +4012,8 @@ def build_job_page(
 <html lang="en-IN">
 <head>
     {GA_SCRIPT}
+
+    {SWG_SCRIPT}
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

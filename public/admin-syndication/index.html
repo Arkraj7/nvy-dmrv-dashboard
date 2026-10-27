@@ -34,6 +34,18 @@
     .synd-page-card p:last-of-type { margin-bottom: 20px; }
     .synd-page-meta { margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--border-2); font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); }
   </style>
+    <script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+    <script>
+      (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+        basicSubscriptions.init({
+          type: "NewsArticle",
+          isPartOfType: ["Product"],
+          isPartOfProductId: "CAowvJXIDA:openaccess",
+          clientOptions: { theme: "light", lang: "en-GB" },
+        });
+      });
+    </script>
 </head>
 
 <body class="synd-page" data-syndication-open="1">
