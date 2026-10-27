@@ -41,6 +41,7 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 # --------------------------------------------------------------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fetch_and_humanize as fh  # noqa: E402
+import hub_editorial  # noqa: E402
 
 log = logging.getLogger("ufp-seo")
 
@@ -407,11 +408,19 @@ def save_hub_streak_state(state: Dict[str, Any]) -> None:
     HUB_STREAK_STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) -> Dict[str, bool]:
+def update_hub_streaks(
+    hub_counts: Dict[str, int],
+    hub_to_city: Dict[str, str],
+    editorial_ready: Optional[Dict[str, bool]] = None,
+) -> Dict[str, bool]:
     """
     Update streak counters for each hub and return {hub_file: is_indexable}.
     Applies A2 duplicate-hub rule: a state hub is forced to noindex only when
     its overlapping city hub is currently indexable (or flips ON in this run).
+
+    Hubs with a substantial editorial block (local context + data-driven FAQs)
+    can be indexed immediately instead of waiting for the job-count streak. The
+    editorial flag also prevents a later low-listing run from flipping them off.
     """
     state = load_hub_streak_state()
     hubs_state = state.setdefault("hubs", {})
@@ -436,6 +445,7 @@ def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) 
     for hub_file, count in hub_counts.items():
         h = hubs_state[hub_file]
         currently_indexable = h["indexable"]
+        is_editorial = bool(editorial_ready and editorial_ready.get(hub_file))
 
         if not already_ran_today:
             if count >= HUB_ON_THRESHOLD:
@@ -452,12 +462,21 @@ def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) 
             h["flip_log"].append(f"{today}: ON (count={count}, streak_on={h['streak_on']})")
             log.info("HUB FLIP ON: %s (count=%d, streak_on=%d)", hub_file, count, h["streak_on"])
 
-        # Flip OFF: 7 consecutive runs < 8
-        if currently_indexable and h["streak_off"] >= HUB_OFF_STREAK_N:
+        # Flip OFF: 7 consecutive runs < 8. Editorial hubs stay on: they are
+        # useful landing pages even when the live list is temporarily short.
+        if currently_indexable and h["streak_off"] >= HUB_OFF_STREAK_N and not is_editorial:
             h["indexable"] = False
             h["last_flip"] = today
             h["flip_log"].append(f"{today}: OFF (count={count}, streak_off={h['streak_off']})")
             log.warning("HUB FLIP OFF: %s (count=%d, streak_off=%d)", hub_file, count, h["streak_off"])
+
+        # Editorial override: local context + data-driven FAQs make a hub
+        # worth indexing without waiting for the job-count streak.
+        if is_editorial and not h["indexable"]:
+            h["indexable"] = True
+            h["last_flip"] = today
+            h["flip_log"].append(f"{today}: ON (editorial)")
+            log.info("HUB EDITORIAL ON: %s", hub_file)
 
         indexable[hub_file] = h["indexable"]
 
@@ -482,8 +501,9 @@ def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) 
         state_idx = indexable[state_hub]
         city_idx = indexable[city_hub]
         city_flipping_on = (not hubs_state[city_hub]["indexable"]) and hubs_state[city_hub]["streak_on"] >= HUB_ON_STREAK_N
+        state_editorial = bool(editorial_ready and editorial_ready.get(state_hub))
 
-        if state_idx and (city_idx or city_flipping_on):
+        if state_idx and (city_idx or city_flipping_on) and not state_editorial:
             # State hub is indexable but city hub is (or will be) indexable -> force state to noindex
             log.warning(
                 "DUPLICATE RULE: %s forced noindex (city hub %s indexable=%s, flipping=%s)",
@@ -492,6 +512,13 @@ def update_hub_streaks(hub_counts: Dict[str, int], hub_to_city: Dict[str, str]) 
             hubs_state[state_hub]["indexable"] = False
             hubs_state[state_hub]["flip_log"].append(f"{today}: DUPLICATE RULE OFF (city={city_hub})")
             indexable[state_hub] = False
+        elif state_idx and state_editorial:
+            # Both pages now carry distinct editorial content, so they are not
+            # near-duplicates and can both be indexed.
+            log.info(
+                "DUPLICATE RULE: %s kept (editorial block, city hub %s)",
+                state_hub, city_hub
+            )
         elif state_idx and not city_idx and not city_flipping_on:
             # State hub indexable, city hub scaffolded -> state hub allowed to stay indexable
             log.info(
@@ -3638,6 +3665,8 @@ def build_hub_page(
     matched_archived = recent_archive(
         [j for j in archived_jobs if hub["match"](j)], today, RECENT_ARCHIVE_DAYS
     )[:HUB_ARCHIVE_LIMIT]
+    editorial = hub_editorial.editorial_for(hub, matched_active, today)
+    faqs = editorial["faqs"] or list(hub.get("faqs") or [])
 
     cards = "\n".join(hub_card_html(j) for j in matched_active) or (
         '        <p class="hub-empty">No jobs in this pathway right now \u2014 new openings '
@@ -3676,7 +3705,7 @@ def build_hub_page(
             collection_jsonld(hub, today),
             item_list_jsonld(hub, matched_active),
             breadcrumb_jsonld(hub["h1"], hub["canonical"]),
-            faq_jsonld(hub["faqs"]),
+            faq_jsonld(faqs),
         ]
     )
 
@@ -3774,7 +3803,9 @@ def build_hub_page(
 
 {archive_block}
 
-{faq_section_html(hub['faqs'])}
+{editorial['html']}
+
+{faq_section_html(faqs)}
 
         <section class="hub-cta" aria-label="Open the live registry">
           <div>
@@ -4625,8 +4656,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         "esg-sustainability-jobs-maharashtra.html": "esg-jobs-mumbai.html",
     }
 
+    editorial_ready = {
+        hub["file"]: hub_editorial.is_editorial_ready(hub["file"]) for hub in HUBS
+    }
     # Update streak counters and determine indexability
-    hub_indexable = update_hub_streaks(hub_counts, HUB_TO_CITY)
+    hub_indexable = update_hub_streaks(hub_counts, HUB_TO_CITY, editorial_ready)
 
     # Update keyword map with indexability
     for hub_file, is_indexable in hub_indexable.items():

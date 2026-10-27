@@ -130,6 +130,46 @@
 .hub-archive h2 { margin: 0 0 6px; font-size: 18px; font-weight: 800; color: var(--ink); }
 .hub-archive-sub { margin: 0 0 18px; font-size: 13px; color: var(--ink-3); }
 
+/* ---------- Editorial / hiring snapshot ---------- */
+.hub-editorial { margin-top: 40px; max-width: 880px; }
+.hub-editorial h2 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hub-editorial h3 {
+  margin: 26px 0 8px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.hub-editorial p {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink-3);
+}
+.hub-snapshot {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 18px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+.hub-snapshot li {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-2);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.hub-snapshot strong { color: var(--ink); }
+
 /* ---------- FAQ ---------- */
 .hub-faq { margin-top: 46px; max-width: 880px; }
 .hub-faq h2 {

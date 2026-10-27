@@ -60,7 +60,7 @@
       ],
       "search_intent": "informational",
       "h1": "Verified PhD Climate & Ecology Fellowships in India 2026",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/forestry-wildlife-government-jobs",
@@ -105,7 +105,7 @@
       ],
       "search_intent": "transactional",
       "h1": "GIS, Remote Sensing & Earth Observation Jobs in India 2026",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/esg-carbon-sustainability-jobs",
@@ -526,7 +526,7 @@
       ],
       "search_intent": "transactional",
       "h1": "ESG Jobs for Freshers India 2026 | Entry-Level Roles",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/entry-level-environmental-jobs",
@@ -544,7 +544,7 @@
       ],
       "search_intent": "transactional",
       "h1": "Entry Level Environmental Jobs India 2026 | JRF & Field",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/remote-environmental-jobs",
@@ -562,7 +562,7 @@
       ],
       "search_intent": "transactional",
       "h1": "Remote Environmental Jobs India 2026 | Hybrid & Climate",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/esg-sustainability-jobs-delhi-ncr",
@@ -599,7 +599,7 @@
       ],
       "search_intent": "transactional",
       "h1": "ESG & Sustainability Jobs Karnataka 2026 | Bengaluru",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/esg-jobs-bangalore",
@@ -617,7 +617,7 @@
       ],
       "search_intent": "transactional",
       "h1": "ESG Jobs Bangalore (Bengaluru) 2026 | Corporate Climate Tech",
-      "indexable": false
+      "indexable": true
     },
     {
       "path": "/esg-sustainability-jobs-maharashtra",
@@ -651,7 +651,7 @@
       ],
       "search_intent": "transactional",
       "h1": "ESG Jobs Mumbai 2026 | Finance Corporate Climate",
-      "indexable": false
+      "indexable": true
     }
   ]
 }
