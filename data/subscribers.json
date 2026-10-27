@@ -89,5 +89,17 @@
     "welcome_sent": true,
     "welcome_queued": false,
     "welcome_sent_at": "2026-10-25T23:21:51+00:00"
+  },
+  {
+    "email": "anjalisinghupsc58@gmail.com",
+    "frequency": "3-days",
+    "sector": "all",
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-10-27T03:20:45.043Z",
+    "updated_at": "2026-10-27T03:20:45.043Z",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "welcome_sent": false,
+    "welcome_queued": false
   }
 ]
