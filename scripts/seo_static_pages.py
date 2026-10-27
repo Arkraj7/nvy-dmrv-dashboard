@@ -88,6 +88,27 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
     )
     locale = "hi_IN" if file_name == "hindi-environment-forestry-jobs.html" else "en_IN"
     image_alt = _esc(bsp.BRAND_ALT)
+    slug_hint = file_name.removesuffix(".html").casefold()
+    if any(
+        hint in slug_hint
+        for hint in (
+            "jobs",
+            "opportunities",
+            "fellowships",
+            "workshops",
+            "conferences",
+            "webinars",
+            "programs",
+            "memberships",
+            "careers",
+        )
+    ):
+        og_image = bsp.discover_image_for_hub(
+            {"canonical": canonical, "title": title, "h1": ""}
+        )
+        og_width, og_height = bsp.DISCOVER_IMAGE_WIDTH, bsp.DISCOVER_IMAGE_HEIGHT
+    else:
+        og_image, og_width, og_height = bsp.LOGO_URL, 512, 512
     return f"""    <title>{title}</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="{robots}">
@@ -99,14 +120,14 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{desc}">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:image" content="{_esc(bsp.LOGO_URL)}">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
+    <meta property="og:image" content="{_esc(og_image)}">
+    <meta property="og:image:width" content="{og_width}">
+    <meta property="og:image:height" content="{og_height}">
     <meta property="og:image:alt" content="{image_alt}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{title}">
     <meta name="twitter:description" content="{desc}">
-    <meta name="twitter:image" content="{_esc(bsp.LOGO_URL)}">
+    <meta name="twitter:image" content="{_esc(og_image)}">
     <meta name="theme-color" content="#F8FAFC">
 {bsp.FAVICONS}"""
 

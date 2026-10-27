@@ -49,7 +49,10 @@ DEFAULT_PUBLIC = REPO_ROOT / "public"
 
 SITE = "https://www.urbanforestpark.com"
 LOGO_URL = SITE + "/assets/images/Logo_UFF.png"
-DISCOVER_IMAGE_URL = SITE + "/assets/images/Nagar_Van_Logo.png"  # 2000x2000, 147KB - meets Google Discover 1200px+ requirement
+DISCOVER_IMAGE_DIR = SITE + "/assets/images/discover"
+DISCOVER_IMAGE_WIDTH = 1200
+DISCOVER_IMAGE_HEIGHT = 675
+DISCOVER_IMAGE_URL = DISCOVER_IMAGE_DIR + "/default.jpg"
 LOGO_PATH = "assets/images/Logo_UFF.png"
 BRAND_ALT = "Urban Forest Park — India Climate, Forestry, ESG & Research Jobs Registry Logo"
 BRAND_ALT_HTML = html.escape(BRAND_ALT, quote=True)
@@ -689,7 +692,81 @@ def jsonld_script(payload: Any) -> str:
     body = json.dumps(payload, ensure_ascii=False, indent=2).replace("</", "<\\/")
     return '<script type="application/ld+json">\n' + body + "\n</script>"
 
-def article_jsonld(title: str, desc: str, canonical: str, today: date) -> str:
+_DISCOVER_CATEGORY_KEYS = (
+    ("gis", ("gis", "remote sensing", "earth observation", "geospatial", "satellite")),
+    ("forestry", ("forestry", "wildlife", "afforestation", "forest ")),
+    ("esg", ("esg", "carbon", "corporate sustainability", "sustainability reporting")),
+    (
+        "research",
+        (
+            "academic",
+            "jrf",
+            "srf",
+            "phd",
+            "doctoral",
+            "research",
+            "project staff",
+            "postdoc",
+        ),
+    ),
+    (
+        "events",
+        (
+            "workshop",
+            "training",
+            "capacity building",
+            "conference",
+            "summit",
+            "event",
+            "webinar",
+            "internship",
+            "ambassador",
+            "competition",
+            "award",
+        ),
+    ),
+    ("policy", ("policy", "think-tank", "think tank", "fellowship", "scholarship", "leadership")),
+)
+
+
+def _discover_name(text: str) -> str:
+    haystack = text.casefold()
+    for name, needles in _DISCOVER_CATEGORY_KEYS:
+        if any(needle in haystack for needle in needles):
+            return name
+    return "default"
+
+
+def discover_image_for(job: Dict[str, Any]) -> str:
+    """Pick the 16:9 category banner that best matches a listing."""
+    category_text = " ".join(
+        plain(job.get(key)) for key in ("category", "opportunity_kind", "position_type")
+    )
+    name = _discover_name(category_text)
+    if name == "default":
+        name = _discover_name(plain(job.get("clean_title")))
+    return DISCOVER_IMAGE_DIR + "/" + name + ".jpg"
+
+
+def discover_image_for_hub(hub: Dict[str, Any]) -> str:
+    # The URL slug is the most reliable signal; prose titles often mention
+    # "forestry" even on workshop or conference hubs.
+    name = _discover_name(plain(hub.get("canonical")))
+    if name == "default":
+        name = _discover_name(
+            " ".join(plain(hub.get(key)) for key in ("title", "h1"))
+        )
+    return DISCOVER_IMAGE_DIR + "/" + name + ".jpg"
+
+
+def article_jsonld(
+    title: str,
+    desc: str,
+    canonical: str,
+    today: date,
+    image_url: Optional[str] = None,
+) -> str:
+    image_url = image_url or DISCOVER_IMAGE_URL
     body = json.dumps(
         {
             "@context": "https://schema.org",
@@ -698,9 +775,9 @@ def article_jsonld(title: str, desc: str, canonical: str, today: date) -> str:
             "description": desc,
             "image": {
                 "@type": "ImageObject",
-                "url": DISCOVER_IMAGE_URL,
-                "width": 2000,
-                "height": 2000,
+                "url": image_url,
+                "width": DISCOVER_IMAGE_WIDTH,
+                "height": DISCOVER_IMAGE_HEIGHT,
             },
             "datePublished": today.isoformat(),
             "dateModified": today.isoformat(),
@@ -714,9 +791,9 @@ def article_jsonld(title: str, desc: str, canonical: str, today: date) -> str:
                 "name": "Urban Forest Park",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": DISCOVER_IMAGE_URL,
-                    "width": 2000,
-                    "height": 2000,
+                    "url": LOGO_URL,
+                    "width": 512,
+                    "height": 512,
                 },
             },
             "mainEntityOfPage": {
@@ -3556,6 +3633,7 @@ def build_hub_page(
     badge_html = registry_refresh_badge_html(
         today, len(active_jobs), global_count
     )
+    discover_image = discover_image_for_hub(hub)
     matched_active = sort_recent_first([j for j in active_jobs if hub["match"](j)])
     matched_archived = recent_archive(
         [j for j in archived_jobs if hub["match"](j)], today, RECENT_ARCHIVE_DAYS
@@ -3629,16 +3707,16 @@ def build_hub_page(
     <meta property="og:title" content="{esc(hub['title'])}">
     <meta property="og:description" content="{esc(hub['desc'])}">
     <meta property="og:url" content="{hub['canonical']}">
-    <meta property="og:image" content="{DISCOVER_IMAGE_URL}">
-    <meta property="og:image:width" content="2000">
-    <meta property="og:image:height" content="2000">
+    <meta property="og:image" content="{discover_image}">
+    <meta property="og:image:width" content="{DISCOVER_IMAGE_WIDTH}">
+    <meta property="og:image:height" content="{DISCOVER_IMAGE_HEIGHT}">
     <meta property="og:image:alt" content="{esc(hub['title'])}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(hub['title'])}">
     <meta name="twitter:description" content="{esc(hub['desc'])}">
-    <meta name="twitter:image" content="{DISCOVER_IMAGE_URL}">
+    <meta name="twitter:image" content="{discover_image}">
 
-    {article_jsonld(hub['title'], hub['desc'], hub['canonical'], today)}
+    {article_jsonld(hub['title'], hub['desc'], hub['canonical'], today, discover_image)}
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
@@ -3861,6 +3939,7 @@ def job_posting_jsonld(job: Dict[str, Any], today: date) -> str:
         },
         "jobLocation": location,
         "url": url,
+        "image": discover_image_for(job),
         "directApply": False,
         "identifier": {
             "@type": "PropertyValue",
@@ -3941,6 +4020,7 @@ def build_job_page(
 ) -> str:
     slug = job_slug(job)
     canonical = job_url(job, absolute=True)
+    discover_image = discover_image_for(job)
     is_archived = bool(job.get("date_archived")) or str(job.get("status")) == "archived"
     title = job_page_title(job)
     desc = job_page_description(job)
@@ -4032,16 +4112,16 @@ def build_job_page(
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:image" content="{DISCOVER_IMAGE_URL}">
-    <meta property="og:image:width" content="2000">
-    <meta property="og:image:height" content="2000">
+    <meta property="og:image" content="{discover_image}">
+    <meta property="og:image:width" content="{DISCOVER_IMAGE_WIDTH}">
+    <meta property="og:image:height" content="{DISCOVER_IMAGE_HEIGHT}">
     <meta property="og:image:alt" content="{esc(title)}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
-    <meta name="twitter:image" content="{DISCOVER_IMAGE_URL}">
+    <meta name="twitter:image" content="{discover_image}">
 
-    {article_jsonld(title, desc, canonical, today)}
+    {article_jsonld(title, desc, canonical, today, discover_image)}
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
 {FAVICONS}
@@ -4078,6 +4158,7 @@ def build_job_page(
           <span class="badge">{esc(plain(job.get("experience_level")) or "Experience stated in notice")}</span>
         </div>
 {apply_block}
+        <img class="job-page-hero-img" src="{discover_image}" width="{DISCOVER_IMAGE_WIDTH}" height="{DISCOVER_IMAGE_HEIGHT}" alt="{esc(job_title)} at {esc(org)}" loading="eager" fetchpriority="high" decoding="async">
       </div>
     </section>
 

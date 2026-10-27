@@ -24,6 +24,9 @@ import build_seo_pages as bsp
 
 SITE = bsp.SITE
 LOGO_URL = bsp.LOGO_URL
+HINDI_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/forestry.jpg"
+REGIONAL_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/default.jpg"
+GLOBAL_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/default.jpg"
 esc = bsp.esc
 plain = bsp.plain
 trim = bsp.trim
@@ -383,13 +386,15 @@ def build_hindi_hub_page(
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{HINDI_HUB_URL}">
-    <meta property="og:image" content="{LOGO_URL}">
+    <meta property="og:image" content="{HINDI_IMAGE_URL}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
     <meta property="og:locale" content="hi_IN">
     <meta property="og:locale:alternate" content="en_IN">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
-    <meta name="twitter:image" content="{LOGO_URL}">
+    <meta name="twitter:image" content="{HINDI_IMAGE_URL}">
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
@@ -660,13 +665,15 @@ def build_regional_hub_page(
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{REGIONAL_HUB_URL}">
-    <meta property="og:image" content="{LOGO_URL}">
+    <meta property="og:image" content="{REGIONAL_IMAGE_URL}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
     <meta property="og:locale" content="en_IN">
     <meta property="og:locale:alternate" content="hi_IN">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
-    <meta name="twitter:image" content="{LOGO_URL}">
+    <meta name="twitter:image" content="{REGIONAL_IMAGE_URL}">
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
@@ -1061,12 +1068,14 @@ def build_global_hub_page(
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{GLOBAL_HUB_URL}">
-    <meta property="og:image" content="{LOGO_URL}">
+    <meta property="og:image" content="{GLOBAL_IMAGE_URL}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
     <meta property="og:locale" content="en">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
-    <meta name="twitter:image" content="{LOGO_URL}">
+    <meta name="twitter:image" content="{GLOBAL_IMAGE_URL}">
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->

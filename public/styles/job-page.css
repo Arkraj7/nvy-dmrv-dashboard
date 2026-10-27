@@ -185,6 +185,18 @@
   line-height: 1.45;
 }
 
+.job-page-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-top: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 14px 34px rgba(4, 22, 18, 0.22);
+}
+
 @media (max-width: 1040px) {
   .job-page-layout { grid-template-columns: minmax(0, 1fr); }
   .job-page-side { position: static; order: -1; }
