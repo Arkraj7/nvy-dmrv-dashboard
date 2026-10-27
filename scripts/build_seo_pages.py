@@ -3854,6 +3854,95 @@ def category_hub_path(category: Any) -> str:
     return CATEGORY_HUB_PATHS.get(plain(category), "/")
 
 
+REDIRECTS_START = "# BEGIN generated job redirects"
+REDIRECTS_END = "# END generated job redirects"
+
+# Job URLs purged before the current registries existed. They cannot be
+# recovered from archive.json, so keep explicit 301s to a matching hub.
+REMOVED_JOB_REDIRECTS: Dict[str, str] = {
+    "conflict-and-commons--community-centred-land-governance-for": (
+        "/forestry-wildlife-government-jobs"
+    ),
+    "job": "/",
+    "microsoft-forms-microsoft": "/",
+    "research-assistant-cimp": "/jrf-srf-project-associate-jobs",
+    "research-assistant-testorg": "/jrf-srf-project-associate-jobs",
+}
+
+
+def sync_job_redirects(public: Path) -> int:
+    """Write 301s for job URLs that no longer have a detail page.
+
+    Cloudflare Pages returns 404 for a removed job page. Old links from search
+    results, newsletters and social posts should land on a live hub instead, so
+    every quarantined or archived record without a page gets a permanent
+    redirect. The block is regenerated on every build and kept separate from
+    hand-written rules in ``_redirects``.
+    """
+    rules: Dict[str, str] = dict(REMOVED_JOB_REDIRECTS)
+    for filename in QUARANTINE_FILES:
+        path = public / filename
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if isinstance(data, dict):
+            data = data.get("jobs", [])
+        if not isinstance(data, list):
+            continue
+        is_archive = filename.endswith("archive.json")
+        is_global = filename.startswith("global_")
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+            job_id = str(entry.get("id") or "").strip()
+            if not job_id:
+                continue
+            if (public / JOBS_DIRNAME / f"{job_id}.html").exists():
+                continue
+            if entry.get("status") != "quarantined" and not is_archive:
+                continue
+            rules[job_id] = (
+                "/global-climate-sustainability-opportunities"
+                if is_global
+                else category_hub_path(entry.get("category"))
+            )
+
+    redirects_path = public / "_redirects"
+    existing = (
+        redirects_path.read_text(encoding="utf-8")
+        if redirects_path.exists()
+        else ""
+    )
+    existing = re.sub(
+        rf"\n?{re.escape(REDIRECTS_START)}.*?{re.escape(REDIRECTS_END)}\n?",
+        "\n",
+        existing,
+        flags=re.S,
+    )
+    # Drop hand-written rules for the same slugs so the generated block is the
+    # single source of truth and duplicates cannot drift.
+    for slug in rules:
+        existing = re.sub(
+            rf"(?m)^/jobs/{re.escape(slug)}\s+\S+\s+30[128]\s*$\n?",
+            "",
+            existing,
+        )
+    block = [REDIRECTS_START]
+    block.extend(
+        f"/jobs/{slug} {target} 301" for slug, target in sorted(rules.items())
+    )
+    block.append(REDIRECTS_END)
+    updated = existing.rstrip() + "\n\n" + "\n".join(block) + "\n"
+    redirects_path.write_text(updated, encoding="utf-8")
+    log.info(
+        "Wrote %d generated job redirect(s) to %s", len(rules), redirects_path
+    )
+    return len(rules)
+
+
 def job_page_title(job: Dict[str, Any]) -> str:
     title = plain(job.get("clean_title")) or "Environmental Job"
     org = plain(job.get("organization"))
@@ -4720,6 +4809,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         public, active, archived, global_active, global_archived, today
     )
     log.info("Wrote %d static job detail page(s) under /jobs/", job_pages)
+    sync_job_redirects(public)
 
     # ---- institutional pages + keyword-map metadata -----------------------
     import seo_static_pages  # lazy import: reuses this module's helpers
