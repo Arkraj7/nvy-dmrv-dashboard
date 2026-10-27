@@ -49,6 +49,7 @@ DEFAULT_PUBLIC = REPO_ROOT / "public"
 
 SITE = "https://www.urbanforestpark.com"
 LOGO_URL = SITE + "/assets/images/Logo_UFF.png"
+DISCOVER_IMAGE_URL = SITE + "/assets/images/Nagar_Van_Logo.png"  # 2000x2000, 147KB - meets Google Discover 1200px+ requirement
 LOGO_PATH = "assets/images/Logo_UFF.png"
 BRAND_ALT = "Urban Forest Park — India Climate, Forestry, ESG & Research Jobs Registry Logo"
 BRAND_ALT_HTML = html.escape(BRAND_ALT, quote=True)
@@ -669,6 +670,45 @@ def searchable_text(job: Dict[str, Any]) -> str:
 
 def jsonld_script(payload: Any) -> str:
     body = json.dumps(payload, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return '<script type="application/ld+json">\n' + body + "\n</script>"
+
+def article_jsonld(title: str, desc: str, canonical: str, today: date) -> str:
+    body = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": title,
+            "description": desc,
+            "image": {
+                "@type": "ImageObject",
+                "url": DISCOVER_IMAGE_URL,
+                "width": 2000,
+                "height": 2000,
+            },
+            "datePublished": today.isoformat(),
+            "dateModified": today.isoformat(),
+            "author": {
+                "@type": "Organization",
+                "name": "Urban Forest Park",
+                "url": SITE,
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Urban Forest Park",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": DISCOVER_IMAGE_URL,
+                    "width": 2000,
+                    "height": 2000,
+                },
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": canonical,
+            },
+        },
+        ensure_ascii=False,
+    )
     return '<script type="application/ld+json">\n' + body + "\n</script>"
 
 
@@ -3570,11 +3610,16 @@ def build_hub_page(
     <meta property="og:title" content="{esc(hub['title'])}">
     <meta property="og:description" content="{esc(hub['desc'])}">
     <meta property="og:url" content="{hub['canonical']}">
-    <meta property="og:image" content="{LOGO_URL}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{DISCOVER_IMAGE_URL}">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="2000">
+    <meta property="og:image:alt" content="{esc(hub['title'])}">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(hub['title'])}">
     <meta name="twitter:description" content="{esc(hub['desc'])}">
-    <meta name="twitter:image" content="{LOGO_URL}">
+    <meta name="twitter:image" content="{DISCOVER_IMAGE_URL}">
+
+    {article_jsonld(hub['title'], hub['desc'], hub['canonical'], today)}
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
     <!-- Favicons -->
@@ -3962,14 +4007,20 @@ def build_job_page(
     <link rel="alternate" hreflang="x-default" href="{canonical}">
 
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Urban Forest Park — India Career Registry">
+    <meta property="og:site_name" content="Urban Forest Park - India Career Registry">
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:image" content="{LOGO_URL}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{DISCOVER_IMAGE_URL}">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="2000">
+    <meta property="og:image:alt" content="{esc(title)}">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
+    <meta name="twitter:image" content="{DISCOVER_IMAGE_URL}">
+
+    {article_jsonld(title, desc, canonical, today)}
     <meta name="theme-color" id="meta-theme-color" content="#F8FAFC">
 
 {FAVICONS}
