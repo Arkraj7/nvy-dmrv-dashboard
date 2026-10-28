@@ -490,7 +490,7 @@ def build_hindi_hub_page(
 
 {footer_html_hi()}
 
-  <script defer src="/js/consent.js"></script>
+  <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
@@ -759,7 +759,7 @@ def build_regional_hub_page(
 
 {footer_html(None)}
 
-  <script defer src="/js/consent.js"></script>
+  <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
@@ -1170,7 +1170,7 @@ def build_global_hub_page(
 
 {footer_html(None)}
 
-  <script defer src="/js/consent.js"></script>
+  <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>

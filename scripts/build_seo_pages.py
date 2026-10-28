@@ -3846,7 +3846,7 @@ def build_hub_page(
 
 {footer_html(hub['file'])}
 
-  <script defer src="/js/consent.js"></script>
+  <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
@@ -4687,7 +4687,7 @@ def build_job_page(
 
 {footer_html('jobs/' + slug + '.html')}
 
-  <script defer src="/js/consent.js"></script>
+  <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
