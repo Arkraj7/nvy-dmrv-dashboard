@@ -568,6 +568,28 @@ def touch_stats_ist(
         )
         stats["total_archived_jobs"] = archived_count
         stats["total_historical_indexed"] = len(published) + archived_count
+
+        by_category: Dict[str, Dict[str, int]] = {}
+        for job in published:
+            category = str(job.get("category") or "Uncategorised")
+            by_category.setdefault(category, {"active": 0, "archived": 0})
+            by_category[category]["active"] += 1
+        for job in archived or []:
+            if job.get("status") != "archived":
+                continue
+            category = str(job.get("category") or "Uncategorised")
+            by_category.setdefault(category, {"active": 0, "archived": 0})
+            by_category[category]["archived"] += 1
+        stats["by_category"] = by_category
+
+        by_state: Dict[str, int] = {}
+        for job in published:
+            state = str(job.get("state") or "").strip()
+            if state and state != "Multiple States / Remote":
+                by_state[state] = by_state.get(state, 0) + 1
+        stats["by_state"] = dict(
+            sorted(by_state.items(), key=lambda item: (-item[1], item[0]))
+        )
     if global_active is not None:
         global_published = [
             job for job in global_active if job.get("status") == "active"

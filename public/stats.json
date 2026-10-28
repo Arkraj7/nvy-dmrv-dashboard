@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-28T07:19:50+05:30",
-  "last_updated_ist": "2026-10-28T07:19:50+05:30",
+  "last_updated": "2026-10-28T15:23:24+05:30",
+  "last_updated_ist": "2026-10-28T15:23:24+05:30",
   "last_pipeline_run_date_ist": "2026-10-28",
-  "active_open_jobs": 121,
+  "active_open_jobs": 129,
   "opened_this_week": 42,
   "passed_this_week": 4,
   "total_archived_jobs": 10,
-  "total_historical_indexed": 131,
+  "total_historical_indexed": 139,
   "last_telegram_broadcast_date": "2026-10-28",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
@@ -36,11 +36,11 @@
       "archived": 3
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 12,
+      "active": 13,
       "archived": 2
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 8,
+      "active": 10,
       "archived": 1
     },
     "Internships & Student Traineeships": {
@@ -48,11 +48,11 @@
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 14,
+      "active": 16,
       "archived": 0
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 47,
+      "active": 48,
       "archived": 3
     },
     "Conferences, Summits & Events": {
@@ -60,7 +60,7 @@
       "archived": 0
     },
     "Workshops, Training & Capacity Building": {
-      "active": 5,
+      "active": 7,
       "archived": 0
     },
     "Ambassador & Fellowship Programs": {
@@ -83,10 +83,10 @@
   "by_state": {
     "Delhi NCR": 16,
     "Maharashtra": 14,
-    "Karnataka": 12,
-    "Delhi": 8,
-    "Tamil Nadu": 6,
-    "Telangana": 6,
+    "Karnataka": 13,
+    "Delhi": 9,
+    "Tamil Nadu": 7,
+    "Telangana": 7,
     "Gujarat": 5,
     "Uttarakhand": 5,
     "Assam": 3,
@@ -94,6 +94,7 @@
     "Uttar Pradesh": 3,
     "West Bengal": 3,
     "Haryana": 2,
+    "Himachal Pradesh": 2,
     "Kerala": 2,
     "Meghalaya": 2,
     "Punjab": 2,
@@ -104,24 +105,25 @@
     "Madhya Pradesh": 1,
     "Odisha": 1
   },
-  "active_global_jobs": 68,
+  "active_global_jobs": 78,
   "active_global_portals": 13,
-  "total_global_records": 81,
+  "total_global_records": 91,
   "total_archived_global_jobs": 11,
   "global_jobs_by_region": {
-    "Europe": 14,
-    "Africa & Middle East": 17,
+    "Europe": 19,
+    "Africa & Middle East": 19,
     "UN / Multilateral": 6,
-    "Global / Remote": 13,
-    "North America": 7,
+    "Global / Remote": 15,
+    "North America": 8,
     "Asia-Pacific": 10,
     "Latin America": 1
   },
   "global_jobs_by_kind": {
-    "Job / Career": 54,
-    "Scholarship": 5,
-    "Fellowship": 7,
-    "Grant / Funding": 2
+    "Job / Career": 56,
+    "Scholarship": 10,
+    "Fellowship": 8,
+    "Grant / Funding": 3,
+    "Competition / Award": 1
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
