@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-10-28T18:50:22+05:30",
-  "last_updated_ist": "2026-10-28T18:50:22+05:30",
+  "last_updated": "2026-10-28T19:21:01+05:30",
+  "last_updated_ist": "2026-10-28T19:21:01+05:30",
   "last_pipeline_run_date_ist": "2026-10-28",
-  "active_open_jobs": 128,
+  "active_open_jobs": 139,
   "opened_this_week": 42,
   "passed_this_week": 4,
   "total_archived_jobs": 11,
-  "total_historical_indexed": 139,
+  "total_historical_indexed": 150,
   "last_telegram_broadcast_date": "2026-10-28",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
@@ -52,7 +52,7 @@
       "archived": 0
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 48,
+      "active": 58,
       "archived": 3
     },
     "Conferences, Summits & Events": {
@@ -76,24 +76,24 @@
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 9,
+      "active": 10,
       "archived": 1
     }
   },
   "by_state": {
+    "Karnataka": 17,
     "Delhi NCR": 16,
-    "Maharashtra": 14,
-    "Karnataka": 13,
-    "Delhi": 8,
+    "Maharashtra": 15,
+    "Delhi": 9,
     "Tamil Nadu": 7,
     "Telangana": 7,
     "Gujarat": 5,
     "Uttarakhand": 5,
     "Assam": 3,
     "Bihar": 3,
+    "Haryana": 3,
     "Uttar Pradesh": 3,
     "West Bengal": 3,
-    "Haryana": 2,
     "Himachal Pradesh": 2,
     "Kerala": 2,
     "Meghalaya": 2,
