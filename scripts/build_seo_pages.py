@@ -4788,6 +4788,32 @@ def write_job_pages(
     return written
 
 
+def sync_sitemap_guides(public: Path, today: date) -> int:
+    """Add any static guide pages under /guides/ to the sitemap."""
+    guides_dir = public / "guides"
+    if not guides_dir.exists():
+        return 0
+    path = public / "sitemap.xml"
+    if not path.exists():
+        return 0
+    text = path.read_text(encoding="utf-8")
+    seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
+    additions: List[str] = []
+    for guide in sorted(guides_dir.glob("*.html")):
+        loc = SITE + "/guides/" + guide.stem
+        if loc in seen:
+            continue
+        seen.add(loc)
+        additions.append(
+            f"  <url><loc>{loc}</loc><lastmod>{today.isoformat()}</lastmod>"
+            "<changefreq>monthly</changefreq><priority>0.7</priority></url>"
+        )
+    if additions:
+        text = text.replace("</urlset>", "\n".join(additions) + "\n</urlset>")
+        path.write_text(text, encoding="utf-8")
+    return len(additions)
+
+
 def sync_sitemap_jobs(
     public: Path,
     active: List[Dict[str, Any]],
@@ -5270,6 +5296,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
 
     sync_sitemap_jobs(public, active, archived, global_active, global_archived, today)
+    sync_sitemap_guides(public, today)
     hub_sitemap_additions = sync_sitemap_hubs(public, today, hub_indexable)
     log.info("Added/removed %d hub URL(s) in sitemap", hub_sitemap_additions)
     sitemap_path = public / "sitemap.xml"
