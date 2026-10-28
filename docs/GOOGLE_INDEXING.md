@@ -16,6 +16,13 @@ Do **not** send hub pages through the Indexing API. Google accepts that API only
 for `JobPosting` and `BroadcastEvent` pages. The sitemap is the supported route
 for hubs.
 
+The builder and the indexing job share `scripts/job_schema.py`. A page is
+submitted only when it has `entry_type: "posting"`, a job, fellowship or
+internship kind, a category that is not an event, workshop, webinar,
+scholarship, grant, competition, membership or ambassador programme, and a
+`validThrough` before 2030. Portals, programmes and archived records remain in
+the sitemap but are not sent to the Indexing API.
+
 IndexNow (Bing/Yandex) is already handled by `scripts/ping_search_engines.py`.
 Google does not use IndexNow.
 
