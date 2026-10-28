@@ -5297,6 +5297,9 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     sync_sitemap_jobs(public, active, archived, global_active, global_archived, today)
     sync_sitemap_guides(public, today)
+    employer_pages = write_employer_pages(public, active, today)
+    log.info('Wrote %d employer profile page(s) under /employers/', employer_pages)
+    sync_sitemap_employers(public, today)
     hub_sitemap_additions = sync_sitemap_hubs(public, today, hub_indexable)
     log.info("Added/removed %d hub URL(s) in sitemap", hub_sitemap_additions)
     sitemap_path = public / "sitemap.xml"
@@ -5317,6 +5320,131 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     return 0
 
+
+# This will be appended to build_seo_pages.py
+# Add after sync_sitemap_guides function
+
+def _employer_slug(org: str) -> str:
+    raw = plain(org).lower()
+    slug = re.sub(r"[^a-z0-9-]+", "-", raw).strip("-")
+    return slug or "employer"
+
+
+def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> str:
+    """Build a static employer profile page."""
+    title = f"{org} — Green Jobs & Sustainability Careers | Urban Forest Park"
+    desc = f"Verified open positions at {org} in climate, forestry, ESG and sustainability. {len(jobs)} active role(s) with direct application links."
+    canonical = SITE + "/employers/" + _employer_slug(org)
+    job_cards = []
+    for job in jobs:
+        job_cards.append(
+            f'<li><a href="/jobs/{job_slug(job)}">{esc(plain(job.get("clean_title")))}</a>'
+            f' <span style="color:var(--ink-3,#475569);font-size:12px;">— {esc(plain(job.get("city")) or "India")}</span></li>'
+        )
+    job_list = "\n".join(job_cards) if job_cards else "<li>No open positions currently.</li>"
+    return f"""<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(desc)}">
+  <link rel="canonical" href="{canonical}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="stylesheet" href="/styles/jobs.css">
+  <link rel="stylesheet" href="/styles/hub.css">
+  <script src="/js/consent-tags.js?v=20261028"></script>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{esc(org)}",
+    "url": "{esc(canonical)}",
+    "description": "{esc(desc)}"
+  }}
+  </script>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {{"@type": "ListItem", "position": 1, "name": "Career Registry", "item": "{SITE}/"}},
+      {{"@type": "ListItem", "position": 2, "name": "Employers", "item": "{SITE}/employers/"}},
+      {{"@type": "ListItem", "position": 3, "name": "{esc(org)}", "item": "{canonical}"}}
+    ]
+  }}
+  </script>
+</head>
+<body>
+  <main class="detail-wrap" style="max-width:900px;margin:0 auto;padding:24px 16px;">
+    <nav class="job-crumbs" aria-label="Breadcrumb">
+      <a href="/">Career Registry</a> <span aria-hidden="true">/</span>
+      <span>Employers</span> <span aria-hidden="true">/</span>
+      <span aria-current="page">{esc(org)}</span>
+    </nav>
+    <h1>{esc(org)}</h1>
+    <p style="color:var(--ink-3,#475569);font-size:14px;margin-bottom:20px;">{len(jobs)} verified open position(s) in climate, forestry, ESG and sustainability.</p>
+    <h2>Open roles</h2>
+    <ul style="padding-left:18px;line-height:1.8;">
+{job_list}
+    </ul>
+    <div style="margin-top:24px;padding:16px;border:1px solid var(--border,#E2E8F0);border-radius:12px;background:var(--bg-2,#F8FAFC);">
+      <p style="margin:0 0 8px;font-weight:700;">Explore more</p>
+      <ul style="margin:0;padding-left:18px;">
+        <li><a href="/esg-carbon-sustainability-jobs">ESG &amp; Carbon Sustainability Jobs</a></li>
+        <li><a href="/sustainability-jobs-india">All Sustainability Jobs in India</a></li>
+        <li><a href="/global-climate-sustainability-opportunities">Global Opportunities</a></li>
+      </ul>
+    </div>
+  </main>
+  <script defer src="/js/consent.js?v=20261028b"></script>
+</body>
+</html>
+"""
+
+
+def write_employer_pages(public: Path, active: List[Dict[str, Any]], today: date) -> int:
+    from collections import Counter, defaultdict
+    org_jobs: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for job in active:
+        org = plain(job.get("organization"))
+        if org:
+            org_jobs[org].append(job)
+    top_orgs = [org for org, _ in Counter({o: len(v) for o, v in org_jobs.items()}).most_common(20)]
+    out_dir = public / "employers"
+    out_dir.mkdir(exist_ok=True)
+    count = 0
+    for org in top_orgs:
+        jobs = org_jobs[org]
+        slug = _employer_slug(org)
+        (out_dir / f"{slug}.html").write_text(build_employer_page(org, jobs, today), encoding="utf-8")
+        count += 1
+    return count
+
+
+def sync_sitemap_employers(public: Path, today: date) -> int:
+    emp_dir = public / "employers"
+    if not emp_dir.exists():
+        return 0
+    path = public / "sitemap.xml"
+    if not path.exists():
+        return 0
+    text = path.read_text(encoding="utf-8")
+    seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
+    additions: List[str] = []
+    for page in sorted(emp_dir.glob("*.html")):
+        loc = SITE + "/employers/" + page.stem
+        if loc in seen:
+            continue
+        seen.add(loc)
+        additions.append(
+            f"  <url><loc>{loc}</loc><lastmod>{today.isoformat()}</lastmod>"
+            "<changefreq>weekly</changefreq><priority>0.6</priority></url>"
+        )
+    if additions:
+        text = text.replace("</urlset>", "\n".join(additions) + "\n</urlset>")
+        path.write_text(text, encoding="utf-8")
+    return len(additions)
 
 if __name__ == "__main__":
     sys.exit(main())
