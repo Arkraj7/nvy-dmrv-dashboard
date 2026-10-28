@@ -5410,7 +5410,7 @@ def write_employer_pages(public: Path, active: List[Dict[str, Any]], today: date
         org = plain(job.get("organization"))
         if org:
             org_jobs[org].append(job)
-    top_orgs = [org for org, _ in Counter({o: len(v) for o, v in org_jobs.items()}).most_common(20)]
+    top_orgs = [org for org, _ in Counter({o: len(v) for o, v in org_jobs.items()}).most_common()]
     out_dir = public / "employers"
     out_dir.mkdir(exist_ok=True)
     count = 0
