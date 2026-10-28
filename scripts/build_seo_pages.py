@@ -4901,8 +4901,8 @@ JRF_ALTERNATE = (
 )
 RSS_FOOTER = (
     '<div class="footer-rss" style="margin-top:10px;font-size:12px;">'
-    '<a href="/feed.xml">RSS: all jobs</a> &middot; '
-    '<a href="/jrf-feed.xml">RSS: JRF, SRF &amp; fellowships</a></div>'
+    '<a href="/feed.xml" style="color:#9FB6AB;">RSS: all jobs</a> &middot; '
+    '<a href="/jrf-feed.xml" style="color:#9FB6AB;">RSS: JRF, SRF &amp; fellowships</a></div>'
 )
 
 
