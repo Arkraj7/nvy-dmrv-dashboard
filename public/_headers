@@ -88,3 +88,6 @@
 
 /newsletter_latest
   X-Robots-Tag: noindex, follow
+
+/cdn-cgi/*
+  X-Robots-Tag: noindex
