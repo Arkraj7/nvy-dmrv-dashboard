@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-27T12:26:07+05:30",
-  "week_of": "2026-10-27",
+  "generated_at": "2026-10-28T07:19:49+05:30",
+  "week_of": "2026-10-28",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -17,6 +17,42 @@
     {
       "position": 1,
       "registry": "india",
+      "id": "iit-madras-teaching-program-coordinator-2026",
+      "title": "Teaching Program Coordinator",
+      "organization": "Indian Institute of Technology Madras (IIT Madras)",
+      "location": "Chennai, Tamil Nadu",
+      "position_type": "Faculty / Academic",
+      "opportunity_kind": "Job / Career",
+      "score": 58.0,
+      "url": "https://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026"
+    },
+    {
+      "position": 2,
+      "registry": "india",
+      "id": "iisc-urban-flood-forecasting-4-positions-2026",
+      "title": "Urban Flood Forecasting & Climate Resilience - 4 Project Positions",
+      "organization": "Indian Institute of Science (IISc), Bengaluru",
+      "location": "Bengaluru, Karnataka",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 56.0,
+      "url": "https://www.urbanforestpark.com/jobs/iisc-urban-flood-forecasting-4-positions-2026"
+    },
+    {
+      "position": 3,
+      "registry": "global",
+      "id": "unu-ehs-joint-msc-geography-environmental-risks-2027",
+      "title": "Joint MSc in Geography of Environmental Risks and Human Security",
+      "organization": "United Nations University - Institute for Environment and Human Security (UNU-EHS)",
+      "location": "Bonn",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Scholarship",
+      "score": 52.0,
+      "url": "https://www.urbanforestpark.com/jobs/unu-ehs-joint-msc-geography-environmental-risks-2027"
+    },
+    {
+      "position": 4,
+      "registry": "india",
       "id": "sustainability-and-mission-life-conclave-2026-iit-goa-missio",
       "title": "Sustainability & Mission LiFE Conclave 2026",
       "organization": "IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences)",
@@ -27,19 +63,43 @@
       "url": "https://www.urbanforestpark.com/jobs/sustainability-and-mission-life-conclave-2026-iit-goa-missio"
     },
     {
-      "position": 2,
-      "registry": "india",
-      "id": "research-associate---centre-for-urban-studies-wateraid-india",
-      "title": "Research Associate - Centre for Urban Studies (WaterAid India)",
-      "organization": "Chandragupt Institute of Management Patna (CIMP) x WaterAid India",
-      "location": "Patna, Bihar",
-      "position_type": "Project Associate / Research Associate",
+      "position": 5,
+      "registry": "global",
+      "id": "champ-advisor-world-resources-institute-wri",
+      "title": "CHAMP Advisor",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Addis Ababa",
+      "position_type": "Young Professional / Consultant (Contractual)",
       "opportunity_kind": "Job / Career",
-      "score": 52.0,
-      "url": "https://www.urbanforestpark.com/jobs/research-associate---centre-for-urban-studies-wateraid-india"
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/champ-advisor-world-resources-institute-wri"
     },
     {
-      "position": 3,
+      "position": 6,
+      "registry": "global",
+      "id": "harvard-environmental-fellows-2027",
+      "title": "Environmental Fellows Program 2027",
+      "organization": "Harvard University Center for the Environment",
+      "location": "Cambridge",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Fellowship",
+      "score": 47.0,
+      "url": "https://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027"
+    },
+    {
+      "position": 7,
+      "registry": "india",
+      "id": "phd-students-kotak-school-of-sustainability-iit-kanpur",
+      "title": "PhD Programme - Kotak School of Sustainability, IIT Kanpur",
+      "organization": "Kotak School of Sustainability, IIT Kanpur",
+      "location": "Kanpur, Uttar Pradesh",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/jobs/phd-students-kotak-school-of-sustainability-iit-kanpur"
+    },
+    {
+      "position": 8,
       "registry": "india",
       "id": "ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni",
       "title": "Ashoka-EDF Climate Corps India Fellowship (Phase 1)",
@@ -47,80 +107,20 @@
       "location": "Multiple States / Remote, Multiple States / Remote",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Fellowship",
-      "score": 51.0,
+      "score": 43.0,
       "url": "https://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni"
-    },
-    {
-      "position": 4,
-      "registry": "india",
-      "id": "research-professionals-yp-i-yp-ii-project-associate-ii-proje",
-      "title": "Research Professionals (YP-I, YP-II, Project Associate-II, Project Assistant) - ICAR-IARI",
-      "organization": "ICAR - Indian Agricultural Research Institute (IARI), Pusa",
-      "location": "New Delhi, Delhi",
-      "position_type": "Project Associate / Research Associate",
-      "opportunity_kind": "Job / Career",
-      "score": 50.0,
-      "url": "https://www.urbanforestpark.com/jobs/research-professionals-yp-i-yp-ii-project-associate-ii-proje"
-    },
-    {
-      "position": 5,
-      "registry": "global",
-      "id": "portfolio-officer-esaro-gef-and-gcf-nairobi-international-un",
-      "title": "Portfolio Officer, ESARO, (GEF and GCF)- Nairobi",
-      "organization": "International Union for Conservation of Nature (IUCN)",
-      "location": "Eastern and Southern Africa Regional Office Nairobi Kenya",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/portfolio-officer-esaro-gef-and-gcf-nairobi-international-un"
-    },
-    {
-      "position": 6,
-      "registry": "global",
-      "id": "ceew-global-south-fellowship-council-on-energy-environment-a",
-      "title": "CEEW Global South Fellowship",
-      "organization": "Council on Energy, Environment and Water (CEEW)",
-      "location": "New Delhi",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 45.0,
-      "url": "https://www.urbanforestpark.com/jobs/ceew-global-south-fellowship-council-on-energy-environment-a"
-    },
-    {
-      "position": 7,
-      "registry": "india",
-      "id": "ph-d-admission-2026-27-central-university-of-south-bihar",
-      "title": "Ph.D. Admission 2026–27",
-      "organization": "Central University of South Bihar",
-      "location": "Gaya, Bihar",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Scholarship",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/ph-d-admission-2026-27-central-university-of-south-bihar"
-    },
-    {
-      "position": 8,
-      "registry": "global",
-      "id": "fully-funded-phd-community-challenges-nottingham",
-      "title": "Fully Funded PhD Opportunities in Community Challenges",
-      "organization": "University of Nottingham",
-      "location": "Nottingham, UK",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Scholarship",
-      "score": 42.0,
-      "url": "https://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham"
     },
     {
       "position": 9,
       "registry": "india",
-      "id": "sustainability-intern-remote-sustainclined-synergy",
-      "title": "Sustainability Intern (Remote)",
-      "organization": "Sustainclined Synergy",
-      "location": "Remote, Multiple States / Remote",
+      "id": "iora-biodiversity-data-intern-2026",
+      "title": "Biodiversity Data Intern",
+      "organization": "Iora Ecological Solutions",
+      "location": "New Delhi, Delhi",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Internship",
       "score": 39.0,
-      "url": "https://www.urbanforestpark.com/jobs/sustainability-intern-remote-sustainclined-synergy"
+      "url": "https://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026"
     },
     {
       "position": 10,
@@ -135,5 +135,5 @@
       "url": "https://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Sustainability & Mission LiFE Conclave 2026 — IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences) (Ponda, Goa | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/sustainability-and-mission-life-conclave-2026-iit-goa-missio\n\n2. [INDIA] Research Associate - Centre for Urban Studies (WaterAid India) — Chandragupt Institute of Management Patna (CIMP) x WaterAid India (Patna, Bihar | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-associate---centre-for-urban-studies-wateraid-india\n\n3. [INDIA] Ashoka-EDF Climate Corps India Fellowship (Phase 1) — Ashoka University x Environmental Defense Fund (EDF) (Multiple States / Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni\n\n4. [INDIA] Research Professionals (YP-I, YP-II, Project Associate-II, Project Assistant) - ICAR-IARI — ICAR - Indian Agricultural Research Institute (IARI), Pusa (New Delhi, Delhi | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-professionals-yp-i-yp-ii-project-associate-ii-proje\n\n5. [GLOBAL] Portfolio Officer, ESARO, (GEF and GCF)- Nairobi — International Union for Conservation of Nature (IUCN) (Eastern and Southern Africa Regional Office Nairobi Kenya | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/portfolio-officer-esaro-gef-and-gcf-nairobi-international-un\n\n6. [GLOBAL] CEEW Global South Fellowship — Council on Energy, Environment and Water (CEEW) (New Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ceew-global-south-fellowship-council-on-energy-environment-a\n\n7. [INDIA] Ph.D. Admission 2026–27 — Central University of South Bihar (Gaya, Bihar | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/ph-d-admission-2026-27-central-university-of-south-bihar\n\n8. [GLOBAL] Fully Funded PhD Opportunities in Community Challenges — University of Nottingham (Nottingham, UK | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/fully-funded-phd-community-challenges-nottingham\n\n9. [INDIA] Sustainability Intern (Remote) — Sustainclined Synergy (Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/sustainability-intern-remote-sustainclined-synergy\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Teaching Program Coordinator — Indian Institute of Technology Madras (IIT Madras) (Chennai, Tamil Nadu | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026\n\n2. [INDIA] Urban Flood Forecasting & Climate Resilience - 4 Project Positions — Indian Institute of Science (IISc), Bengaluru (Bengaluru, Karnataka | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/iisc-urban-flood-forecasting-4-positions-2026\n\n3. [GLOBAL] Joint MSc in Geography of Environmental Risks and Human Security — United Nations University - Institute for Environment and Human Security (UNU-EHS) (Bonn | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/unu-ehs-joint-msc-geography-environmental-risks-2027\n\n4. [INDIA] Sustainability & Mission LiFE Conclave 2026 — IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences) (Ponda, Goa | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/sustainability-and-mission-life-conclave-2026-iit-goa-missio\n\n5. [GLOBAL] CHAMP Advisor — World Resources Institute (WRI) (Addis Ababa | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/champ-advisor-world-resources-institute-wri\n\n6. [GLOBAL] Environmental Fellows Program 2027 — Harvard University Center for the Environment (Cambridge | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027\n\n7. [INDIA] PhD Programme - Kotak School of Sustainability, IIT Kanpur — Kotak School of Sustainability, IIT Kanpur (Kanpur, Uttar Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-students-kotak-school-of-sustainability-iit-kanpur\n\n8. [INDIA] Ashoka-EDF Climate Corps India Fellowship (Phase 1) — Ashoka University x Environmental Defense Fund (EDF) (Multiple States / Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni\n\n9. [INDIA] Biodiversity Data Intern — Iora Ecological Solutions (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
