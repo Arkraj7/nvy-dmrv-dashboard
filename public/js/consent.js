@@ -56,7 +56,7 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '.ufp-cc{position:fixed;left:0;right:0;bottom:0;z-index:9999;',
+      '.ufp-cc{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;',
       'background:var(--card,#ffffff);color:var(--ink,#0f172a);',
       'border-top:1px solid var(--border,#e2e8f0);',
       'box-shadow:0 -14px 40px -22px rgba(15,23,42,.35);',
