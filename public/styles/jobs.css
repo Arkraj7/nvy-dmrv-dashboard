@@ -23,8 +23,8 @@
 
   --ink: #0F172A;
   --ink-2: #334155;
-  --ink-3: #64748B;
-  --ink-4: #94A3B8;
+  --ink-3: #475569;
+  --ink-4: #475569;
 
   --border: #E2E8F0;
   --border-2: #CBD5E1;
@@ -1894,12 +1894,12 @@ body.view-detail .telemetry-band { display: none; }
 .cc-btn:hover { transform: translateY(-1px); border-color: var(--accent); color: var(--accent); }
 .cc-wa { background: #25D366; border-color: #1FB959; color: #073B1E; }
 .cc-wa:hover { background: #1FC65C; border-color: #178A44; color: #073B1E; }
-.cc-tg { background: #229ED9; border-color: #1B8ABF; color: #FFFFFF; }
-.cc-tg:hover { background: #1E92C9; border-color: #166E9B; color: #FFFFFF; }
+.cc-tg { background: #1a85c4; border-color: #166e9b; color: #FFFFFF; }
+.cc-tg:hover { background: #1775a8; border-color: #1460a0; color: #FFFFFF; }
 .cc-li { background: #0A66C2; border-color: #084F96; color: #FFFFFF; }
 .cc-li:hover { background: #084F96; border-color: #063D74; color: #FFFFFF; }
-.cc-fb { background: #1877F2; border-color: #1266D6; color: #FFFFFF; }
-.cc-fb:hover { background: #1266D6; border-color: #0E51AB; color: #FFFFFF; }
+.cc-fb { background: #166fe5; border-color: #1460c4; color: #FFFFFF; }
+.cc-fb:hover { background: #1460c4; border-color: #1250a0; color: #FFFFFF; }
 
 /* ---------- 15e. Official Verification & Application Portal card ---------- */
 .verify-card {
@@ -2023,12 +2023,12 @@ body.view-detail .telemetry-band { display: none; }
 .cs-btn svg { flex: none; }
 .cs-wa { background: #25D366; color: #073B1E; }
 .cs-wa:hover { background: #1FC65C; color: #073B1E; }
-.cs-tg { background: #229ED9; color: #FFFFFF; }
-.cs-tg:hover { background: #1E92C9; color: #FFFFFF; }
+.cs-tg { background: #1a85c4; color: #FFFFFF; }
+.cs-tg:hover { background: #1775a8; color: #FFFFFF; }
 .cs-li { background: #0A66C2; color: #FFFFFF; }
 .cs-li:hover { background: #084F96; color: #FFFFFF; }
-.cs-fb { background: #1877F2; color: #FFFFFF; }
-.cs-fb:hover { background: #1266D6; color: #FFFFFF; }
+.cs-fb { background: #166fe5; color: #FFFFFF; }
+.cs-fb:hover { background: #1460c4; color: #FFFFFF; }
 
 /* ---------- 15h. (footer broadcast copy row removed — moved to the
    discreet internal Syndication Desk drawer, js/syndication-drawer.js) ---------- */
@@ -2386,7 +2386,7 @@ html[data-lang="hi"] textarea {
   margin: 2px 0 0;
   font-size: 12.5px;
   font-weight: 500;
-  color: #64748b;
+  color: #475569;
 }
 html[data-theme="dark"] .detail-title-en,
 html[data-theme="dark"] .jc-title-en {
@@ -3211,8 +3211,8 @@ html[data-theme="dark"] .job-crumbs span[aria-current="page"] { color: #e2e8f0; 
 .jc-save.is-saved,
 .share-save.is-saved,
 .mab-save.is-saved { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-.jc-wa { color: #128c7e; }
-.jc-wa:hover { color: #0b6b5f; border-color: #128c7e; }
+.jc-wa { color: #0f766e; }
+.jc-wa:hover { color: #0b6b5f; border-color: #0f766e; }
 
 .jc-academic-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
 .jc-academic-badge {
