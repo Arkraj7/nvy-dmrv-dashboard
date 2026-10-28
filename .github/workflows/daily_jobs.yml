@@ -239,6 +239,7 @@ jobs:
                   public/source_report.json \
                   public/linkedin_weekly_post.txt public/linkedin_weekly.json \
                   public/index.html public/feed.xml public/jrf-feed.xml \
+                  public/job_redirects.json \
                   public/jobs public/styles/job-page.css \
                   public/a9f3c2d7e8b14f60a2c5e9d3b7f14c68.txt \
                   public/jrf-srf-project-associate-jobs.html \

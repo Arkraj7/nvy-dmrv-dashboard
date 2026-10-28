@@ -339,6 +339,7 @@
     renderSavedDrawer();
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
+    drawer.removeAttribute('inert');
     if (backdrop) { backdrop.hidden = false; backdrop.classList.add('open'); }
     document.body.classList.add('saved-open');
     var header = document.getElementById('saved-header-btn');
@@ -353,6 +354,7 @@
     if (!drawer) return;
     drawer.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true');
+    drawer.setAttribute('inert', '');
     if (backdrop) { backdrop.classList.remove('open'); backdrop.hidden = true; }
     document.body.classList.remove('saved-open');
     var header = document.getElementById('saved-header-btn');

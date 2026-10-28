@@ -3934,6 +3934,65 @@ REMOVED_JOB_REDIRECTS: Dict[str, str] = {
 }
 
 
+def write_job_redirect_map(public: Path) -> int:
+    """Write a JSON map used by the Cloudflare Pages Function for ``?job=`` links.
+
+    ``_redirects`` cannot match a query string, so the Pages Function reads this
+    map at request time and issues a 301 to the canonical dossier URL. The map
+    covers every current, archived and quarantined record plus the legacy slug
+    redirects already written to ``_redirects``.
+    """
+    redirect_map: Dict[str, str] = {}
+
+    for filename in ("jobs.json", "global_jobs.json", "archive.json", "global_archive.json"):
+        path = public / filename
+        if not path.exists():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            continue
+        if isinstance(data, dict):
+            data = data.get("jobs", [])
+        if not isinstance(data, list):
+            continue
+        is_global = filename.startswith("global_")
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+            job_id = str(entry.get("id") or "").strip()
+            if not job_id:
+                continue
+            slug = job_slug(entry)
+            page = public / JOBS_DIRNAME / f"{slug}.html"
+            if page.exists():
+                redirect_map[job_id] = f"/jobs/{slug}"
+            else:
+                redirect_map[job_id] = (
+                    "/global-climate-sustainability-opportunities"
+                    if is_global
+                    else category_hub_path(entry.get("category"))
+                )
+
+    redirects_path = public / "_redirects"
+    if redirects_path.exists():
+        for line in redirects_path.read_text(encoding="utf-8").splitlines():
+            parts = line.split()
+            if len(parts) >= 2 and parts[0].startswith("/jobs/"):
+                old_slug = parts[0].removeprefix("/jobs/")
+                target = parts[1]
+                if old_slug and old_slug not in redirect_map:
+                    redirect_map[old_slug] = target
+
+    out = public / "job_redirects.json"
+    out.write_text(
+        json.dumps(redirect_map, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    log.info("Wrote %d job redirect map entries to %s", len(redirect_map), out)
+    return len(redirect_map)
+
+
 def sync_job_redirects(public: Path) -> int:
     """Write 301s for job URLs that no longer have a detail page.
 
@@ -5159,6 +5218,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     log.info("Wrote %d static job detail page(s) under /jobs/", job_pages)
     sync_job_redirects(public)
+    write_job_redirect_map(public)
 
     # ---- institutional pages + keyword-map metadata -----------------------
     import seo_static_pages  # lazy import: reuses this module's helpers
