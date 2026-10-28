@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-27T21:00:39+05:30",
-  "last_updated_ist": "2026-10-27T21:00:39+05:30",
-  "last_pipeline_run_date_ist": "2026-10-27",
+  "last_updated": "2026-10-28T07:18:22+05:30",
+  "last_updated_ist": "2026-10-28T07:18:22+05:30",
+  "last_pipeline_run_date_ist": "2026-10-28",
   "active_open_jobs": 121,
-  "opened_this_week": 50,
-  "passed_this_week": 3,
+  "opened_this_week": 42,
+  "passed_this_week": 4,
   "total_archived_jobs": 10,
   "total_historical_indexed": 131,
-  "last_telegram_broadcast_date": "2026-10-27",
+  "last_telegram_broadcast_date": "2026-10-28",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
     "director-brahmaputra-programme-wwf-india",
@@ -18,32 +18,50 @@
     "head-director-national-conservation-programme-wwf-india",
     "climate-fresk-workshop-climate-fresk-various-hosts",
     "research-associate---centre-for-urban-studies-wateraid-india",
-    "research-professionals-yp-i-yp-ii-project-associate-ii-proje"
+    "research-professionals-yp-i-yp-ii-project-associate-ii-proje",
+    "iisc-urban-flood-forecasting-4-positions-2026",
+    "iora-biodiversity-data-intern-2026",
+    "churchgate-partners-research-analyst-sustainability-2026",
+    "ag-horizon-water-resources-multiple-positions-2026",
+    "champ-advisor-world-resources-institute-wri",
+    "iit-madras-teaching-program-coordinator-2026",
+    "program-manager-water-supply-planet-water-foundation",
+    "enkay-enviro-junior-social-expert-2026",
+    "pxd-heat-forecast-program-manager-research-associate-2026",
+    "reeds-program-manager-finance-research-assistant-2026"
   ],
   "by_category": {
-    "Conferences, Summits & Events": {
-      "active": 3,
-      "archived": 0
-    },
-    "Internships & Student Traineeships": {
-      "active": 4,
-      "archived": 0
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 5,
-      "archived": 0
-    },
     "Research Associate & Project Staff (Contractual)": {
       "active": 12,
       "archived": 3
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 12,
+      "archived": 2
     },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 8,
       "archived": 1
     },
+    "Internships & Student Traineeships": {
+      "active": 4,
+      "archived": 0
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 14,
+      "archived": 0
+    },
     "ESG, Carbon Markets & Corporate Sustainability": {
       "active": 47,
       "archived": 3
+    },
+    "Conferences, Summits & Events": {
+      "active": 3,
+      "archived": 0
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 5,
+      "archived": 0
     },
     "Ambassador & Fellowship Programs": {
       "active": 1,
@@ -53,16 +71,8 @@
       "active": 2,
       "archived": 0
     },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 13,
-      "archived": 1
-    },
     "Scholarships & Doctoral Support": {
       "active": 4,
-      "archived": 0
-    },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 14,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
@@ -72,57 +82,58 @@
   },
   "by_state": {
     "Delhi NCR": 16,
-    "Maharashtra": 13,
-    "Karnataka": 11,
-    "Delhi": 5,
+    "Maharashtra": 14,
+    "Karnataka": 12,
+    "Delhi": 8,
+    "Tamil Nadu": 6,
+    "Telangana": 6,
     "Gujarat": 5,
-    "Tamil Nadu": 5,
-    "Telangana": 5,
     "Uttarakhand": 5,
     "Assam": 3,
     "Bihar": 3,
-    "Kerala": 3,
     "Uttar Pradesh": 3,
     "West Bengal": 3,
+    "Haryana": 2,
+    "Kerala": 2,
     "Meghalaya": 2,
     "Punjab": 2,
+    "Rajasthan": 2,
+    "Assam / Haryana": 1,
     "Goa": 1,
-    "Haryana": 1,
+    "Jharkhand": 1,
     "Madhya Pradesh": 1,
-    "Odisha": 1,
-    "Rajasthan": 1
+    "Odisha": 1
   },
-  "active_global_jobs": 69,
+  "active_global_jobs": 68,
   "active_global_portals": 13,
-  "total_global_records": 82,
-  "total_archived_global_jobs": 8,
+  "total_global_records": 81,
+  "total_archived_global_jobs": 11,
   "global_jobs_by_region": {
-    "Global / Remote": 14,
+    "Africa & Middle East": 17,
     "Asia-Pacific": 10,
-    "Europe": 13,
+    "Europe": 14,
+    "Global / Remote": 13,
+    "Latin America": 1,
     "North America": 7,
-    "Africa & Middle East": 16,
-    "UN / Multilateral": 6,
-    "Latin America": 3
+    "UN / Multilateral": 6
   },
   "global_jobs_by_kind": {
-    "Job / Career": 54,
-    "Grant / Funding": 2,
     "Fellowship": 7,
-    "Internship": 1,
+    "Grant / Funding": 2,
+    "Job / Career": 54,
     "Scholarship": 5
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "fellow---senior-research-associate---research-associate---tr",
-    "director-brahmaputra-programme-wwf-india",
-    "climate-fresk-facilitator-training-climate-fresk",
-    "gis-expert---meghalaya-world-bank-project-orion-infra-consul",
-    "climate-and-business-continuity-planning-adviser-sta-dt-glob",
-    "research-assistant-and-founder-s-office-associate-backyard-b",
-    "head-director-national-conservation-programme-wwf-india",
-    "climate-fresk-workshop-climate-fresk-various-hosts",
-    "research-associate---centre-for-urban-studies-wateraid-india",
-    "research-professionals-yp-i-yp-ii-project-associate-ii-proje"
+    "iisc-urban-flood-forecasting-4-positions-2026",
+    "iora-biodiversity-data-intern-2026",
+    "churchgate-partners-research-analyst-sustainability-2026",
+    "ag-horizon-water-resources-multiple-positions-2026",
+    "champ-advisor-world-resources-institute-wri",
+    "iit-madras-teaching-program-coordinator-2026",
+    "program-manager-water-supply-planet-water-foundation",
+    "enkay-enviro-junior-social-expert-2026",
+    "pxd-heat-forecast-program-manager-research-associate-2026",
+    "reeds-program-manager-finance-research-assistant-2026"
   ]
 }
