@@ -42,6 +42,7 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fetch_and_humanize as fh  # noqa: E402
 import hub_editorial  # noqa: E402
+import job_schema  # noqa: E402
 
 log = logging.getLogger("ufp-seo")
 
@@ -188,14 +189,8 @@ def anchor_text(value: Any, limit: int = 68) -> str:
     """Keep visible anchor text short; the full title stays in aria/title."""
     return trim(value, limit)
 
-GA_SCRIPT = """    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E7BLPFWP7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4E7BLPFWP7');
-    </script>"""
+GA_SCRIPT = """    <!-- Consent-gated Google tags: nothing loads until the visitor accepts. -->
+    <script src="/js/consent-tags.js?v=20261028"></script>"""
 
 # Google News Showcase / Subscribe with Google (SWG) Basic Subscriptions
 # NOTE: Replace "CAowvJXIDA:openaccess" with your own product ID from
@@ -4078,6 +4073,277 @@ def _bullets(values: Any) -> str:
     return "<ul>" + "".join(f"<li>{esc(item)}</li>" for item in items) + "</ul>"
 
 
+# ISO-3166-1 alpha-2 codes for registry country names plus common aliases.
+# Google expects a two-letter code in ``addressCountry``.
+COUNTRY_ISO = {
+    "afghanistan": "AF",
+    "albania": "AL",
+    "algeria": "DZ",
+    "angola": "AO",
+    "argentina": "AR",
+    "armenia": "AM",
+    "australia": "AU",
+    "austria": "AT",
+    "azerbaijan": "AZ",
+    "bahamas": "BS",
+    "bahrain": "BH",
+    "bangladesh": "BD",
+    "barbados": "BB",
+    "belarus": "BY",
+    "belgium": "BE",
+    "belize": "BZ",
+    "benin": "BJ",
+    "bhutan": "BT",
+    "bolivia": "BO",
+    "bosniaandherzegovina": "BA",
+    "botswana": "BW",
+    "brazil": "BR",
+    "bulgaria": "BG",
+    "burkinafaso": "BF",
+    "burundi": "BI",
+    "caboverde": "CV",
+    "cambodia": "KH",
+    "cameroon": "CM",
+    "canada": "CA",
+    "capeverde": "CV",
+    "centralafricanrepublic": "CF",
+    "chad": "TD",
+    "chile": "CL",
+    "china": "CN",
+    "colombia": "CO",
+    "comoros": "KM",
+    "congo": "CG",
+    "congobrazzaville": "CG",
+    "costarica": "CR",
+    "cotedivoire": "CI",
+    "ctedivoire": "CI",
+    "croatia": "HR",
+    "cuba": "CU",
+    "cyprus": "CY",
+    "czechia": "CZ",
+    "czechrepublic": "CZ",
+    "democraticrepublicofthecongo": "CD",
+    "drc": "CD",
+    "denmark": "DK",
+    "djibouti": "DJ",
+    "dominicanrepublic": "DO",
+    "ecuador": "EC",
+    "egypt": "EG",
+    "elsalvador": "SV",
+    "equatorialguinea": "GQ",
+    "eritrea": "ER",
+    "estonia": "EE",
+    "eswatini": "SZ",
+    "ethiopia": "ET",
+    "fiji": "FJ",
+    "finland": "FI",
+    "france": "FR",
+    "gabon": "GA",
+    "gambia": "GM",
+    "georgia": "GE",
+    "germany": "DE",
+    "ghana": "GH",
+    "greece": "GR",
+    "guatemala": "GT",
+    "guinea": "GN",
+    "guineabissau": "GW",
+    "guyana": "GY",
+    "haiti": "HT",
+    "honduras": "HN",
+    "hungary": "HU",
+    "iceland": "IS",
+    "india": "IN",
+    "indonesia": "ID",
+    "iran": "IR",
+    "iraq": "IQ",
+    "ireland": "IE",
+    "israel": "IL",
+    "italy": "IT",
+    "ivorycoast": "CI",
+    "jamaica": "JM",
+    "japan": "JP",
+    "jordan": "JO",
+    "kazakhstan": "KZ",
+    "kenya": "KE",
+    "kiribati": "KI",
+    "kosovo": "XK",
+    "kuwait": "KW",
+    "kyrgyzstan": "KG",
+    "laos": "LA",
+    "latvia": "LV",
+    "lebanon": "LB",
+    "lesotho": "LS",
+    "liberia": "LR",
+    "libya": "LY",
+    "lithuania": "LT",
+    "luxembourg": "LU",
+    "madagascar": "MG",
+    "malawi": "MW",
+    "malaysia": "MY",
+    "maldives": "MV",
+    "mali": "ML",
+    "malta": "MT",
+    "marshallislands": "MH",
+    "mauritania": "MR",
+    "mauritius": "MU",
+    "mexico": "MX",
+    "micronesia": "FM",
+    "federatedstatesofmicronesia": "FM",
+    "moldova": "MD",
+    "mongolia": "MN",
+    "montenegro": "ME",
+    "morocco": "MA",
+    "mozambique": "MZ",
+    "myanmar": "MM",
+    "namibia": "NA",
+    "nauru": "NR",
+    "nepal": "NP",
+    "netherlands": "NL",
+    "newzealand": "NZ",
+    "nicaragua": "NI",
+    "niger": "NE",
+    "nigeria": "NG",
+    "northmacedonia": "MK",
+    "norway": "NO",
+    "oman": "OM",
+    "pakistan": "PK",
+    "palau": "PW",
+    "panama": "PA",
+    "papuanewguinea": "PG",
+    "paraguay": "PY",
+    "peru": "PE",
+    "philippines": "PH",
+    "poland": "PL",
+    "portugal": "PT",
+    "qatar": "QA",
+    "republicofthecongo": "CG",
+    "republicofkorea": "KR",
+    "romania": "RO",
+    "russia": "RU",
+    "rwanda": "RW",
+    "saintlucia": "LC",
+    "samoa": "WS",
+    "saotomeandprincipe": "ST",
+    "saudiarabia": "SA",
+    "senegal": "SN",
+    "serbia": "RS",
+    "seychelles": "SC",
+    "sierraleone": "SL",
+    "singapore": "SG",
+    "slovakia": "SK",
+    "slovenia": "SI",
+    "solomonislands": "SB",
+    "somalia": "SO",
+    "southafrica": "ZA",
+    "southkorea": "KR",
+    "southsudan": "SS",
+    "spain": "ES",
+    "srilanka": "LK",
+    "sudan": "SD",
+    "suriname": "SR",
+    "sweden": "SE",
+    "switzerland": "CH",
+    "syria": "SY",
+    "syrianarabrepublic": "SY",
+    "tajikistan": "TJ",
+    "tanzania": "TZ",
+    "unitedrepublicoftanzania": "TZ",
+    "thailand": "TH",
+    "timorleste": "TL",
+    "togo": "TG",
+    "tonga": "TO",
+    "trinidadandtobago": "TT",
+    "tunisia": "TN",
+    "turkey": "TR",
+    "turkiye": "TR",
+    "turkmenistan": "TM",
+    "tuvalu": "TV",
+    "uganda": "UG",
+    "ukraine": "UA",
+    "unitedarabemirates": "AE",
+    "unitedkingdom": "GB",
+    "greatbritain": "GB",
+    "england": "GB",
+    "scotland": "GB",
+    "wales": "GB",
+    "northernireland": "GB",
+    "unitedstates": "US",
+    "unitedstatesofamerica": "US",
+    "usa": "US",
+    "uruguay": "UY",
+    "uzbekistan": "UZ",
+    "vanuatu": "VU",
+    "venezuela": "VE",
+    "vietnam": "VN",
+    "yemen": "YE",
+    "zambia": "ZM",
+    "zimbabwe": "ZW",
+}
+
+_REMOTE_COUNTRY_KEYS = frozenset({"global", "worldwide", "europe", "europeanunion"})
+
+
+def _country_key(value: str) -> str:
+    return re.sub(r"[^a-z]", "", plain(value).casefold())
+
+
+def _country_code(value: str) -> str:
+    raw = plain(value).strip()
+    if not raw:
+        return ""
+    upper = raw.upper()
+    if len(upper) == 2 and upper.isalpha():
+        return upper
+    return COUNTRY_ISO.get(_country_key(raw), "")
+
+
+def _city_country_code(city: str) -> str:
+    """Return a country code when the city field names a country itself.
+
+    Some global records use ``country="Global"`` while the real duty station is
+    a country name in ``city`` (for example "Kiribati"). Treat those as a
+    physical location instead of falling back to worldwide remote.
+    """
+    raw = plain(city).strip()
+    if not raw:
+        return ""
+    candidates = [raw] + [part.strip() for part in re.split(r"[,/]", raw) if part.strip()]
+    for candidate in candidates:
+        if len(candidate) <= 2:
+            continue
+        code = _country_code(candidate)
+        if code:
+            return code
+    return ""
+
+
+def _is_remote_location(job: Dict[str, Any]) -> bool:
+    city = plain(job.get("city")).casefold()
+    state = plain(job.get("state")).casefold()
+    region = plain(job.get("region")).casefold()
+    country = _country_key(plain(job.get("country")))
+    if any(token in city for token in ("remote", "online", "virtual")):
+        return True
+    if not city and any(token in state for token in ("remote", "online", "virtual")):
+        return True
+    if country in _REMOTE_COUNTRY_KEYS:
+        return True
+    if job.get("global") and any(token in region for token in ("global", "remote", "worldwide")):
+        return True
+    return False
+
+
+def _applicant_location(country_name: str, country_code: str) -> Dict[str, Any]:
+    if country_code:
+        name = (
+            country_name
+            if len(country_name) > 2 and _country_key(country_name) not in _REMOTE_COUNTRY_KEYS
+            else country_code
+        )
+        return {"@type": "Country", "name": name}
+    return {"@type": "AdministrativeArea", "name": "Worldwide"}
+
+
 def _job_location_text(job: Dict[str, Any]) -> str:
     parts = [plain(job.get("city")), plain(job.get("state")), plain(job.get("country"))]
     return ", ".join(part for part in parts if part) or plain(job.get("region")) or "India"
@@ -4101,18 +4367,22 @@ def job_posting_jsonld(job: Dict[str, Any], today: date) -> str:
     if not description_html:
         description_html = f"<p>{esc(title)} at {esc(org)}. See the official notification for full details.</p>"
 
-    country = plain(job.get("country"))
+    country_name = plain(job.get("country"))
     region = plain(job.get("region"))
-    address_country = country if len(country) == 2 else ("IN" if not job.get("global") else country or "Global")
-    location: Dict[str, Any] = {
-        "@type": "Place",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": plain(job.get("city")) or region or "India",
-            "addressRegion": plain(job.get("state")),
-            "addressCountry": address_country,
-        },
-    }
+    city = plain(job.get("city"))
+    country_code = _country_code(country_name)
+    city_country = _city_country_code(city)
+    if city_country and (
+        not country_code or _country_key(country_name) in _REMOTE_COUNTRY_KEYS
+    ):
+        country_code = city_country
+        country_name = city
+    if not country_code and not job.get("global"):
+        country_code = "IN"
+    remote = (_is_remote_location(job) and not city_country) or not country_code
+    state = plain(job.get("state"))
+    if any(token in state.casefold() for token in ("remote", "multiple", "online", "virtual")):
+        state = ""
     data: Dict[str, Any] = {
         "@context": "https://schema.org",
         "@type": "JobPosting",
@@ -4120,13 +4390,12 @@ def job_posting_jsonld(job: Dict[str, Any], today: date) -> str:
         "description": description_html,
         "datePosted": plain(job.get("date_added")) or today.isoformat(),
         "validThrough": _valid_through(job),
-        "employmentType": plain(job.get("employment_type")) or "FULL_TIME",
+        "employmentType": plain(job.get("employment_type")) or "OTHER",
         "hiringOrganization": {
             "@type": "Organization",
             "name": org,
             "sameAs": plain(job.get("org_website")) or None,
         },
-        "jobLocation": location,
         "url": url,
         "image": discover_image_for(job),
         "directApply": False,
@@ -4137,11 +4406,19 @@ def job_posting_jsonld(job: Dict[str, Any], today: date) -> str:
         },
         "inLanguage": "en-IN",
     }
-    if job.get("global") and ("remote" in region.lower() or "global" in region.lower()):
+    if remote:
         data["jobLocationType"] = "TELECOMMUTE"
-        data["applicantLocationRequirements"] = {
-            "@type": "Country",
-            "name": country or "Worldwide",
+        data["applicantLocationRequirements"] = _applicant_location(country_name, country_code)
+    else:
+        address = {
+            "@type": "PostalAddress",
+            "addressLocality": city or region or ("India" if not job.get("global") else ""),
+            "addressRegion": state,
+            "addressCountry": country_code,
+        }
+        data["jobLocation"] = {
+            "@type": "Place",
+            "address": {key: value for key, value in address.items() if value},
         }
     if job.get("deadline_or_window"):
         data["jobBenefits"] = plain(job.get("compensation_or_fellowship")) or None
@@ -4253,18 +4530,21 @@ def build_job_page(
             f'<span class="skill-chip">{esc(skill)}</span>' for skill in skills
         ) + CARD_STOP + "</div>"
 
-    schema = job_posting_jsonld(job, today) if not is_archived else jsonld_script(
-        {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": title,
-            "description": desc,
-            "url": canonical,
-            "inLanguage": "en-IN",
-            "isPartOf": {"@id": SITE + "/#website"},
-            "breadcrumb": {"@id": canonical + "#breadcrumb"},
-        }
-    )
+    if not is_archived and job_schema.is_job_posting_eligible(job):
+        schema = job_posting_jsonld(job, today)
+    else:
+        schema = jsonld_script(
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": title,
+                "description": desc,
+                "url": canonical,
+                "inLanguage": "en-IN",
+                "isPartOf": {"@id": SITE + "/#website"},
+                "breadcrumb": {"@id": canonical + "#breadcrumb"},
+            }
+        )
     breadcrumb = jsonld_script(
         {
             "@context": "https://schema.org",

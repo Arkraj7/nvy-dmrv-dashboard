@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-10-28T15:23:24+05:30",
-  "last_updated_ist": "2026-10-28T15:23:24+05:30",
+  "last_updated": "2026-10-28T16:15:23+05:30",
+  "last_updated_ist": "2026-10-28T16:15:23+05:30",
   "last_pipeline_run_date_ist": "2026-10-28",
-  "active_open_jobs": 129,
+  "active_open_jobs": 128,
   "opened_this_week": 42,
   "passed_this_week": 4,
-  "total_archived_jobs": 10,
+  "total_archived_jobs": 11,
   "total_historical_indexed": 139,
   "last_telegram_broadcast_date": "2026-10-28",
   "recent_telegram_job_ids": [
@@ -56,8 +56,8 @@
       "archived": 3
     },
     "Conferences, Summits & Events": {
-      "active": 3,
-      "archived": 0
+      "active": 2,
+      "archived": 1
     },
     "Workshops, Training & Capacity Building": {
       "active": 7,
@@ -84,7 +84,7 @@
     "Delhi NCR": 16,
     "Maharashtra": 14,
     "Karnataka": 13,
-    "Delhi": 9,
+    "Delhi": 8,
     "Tamil Nadu": 7,
     "Telangana": 7,
     "Gujarat": 5,

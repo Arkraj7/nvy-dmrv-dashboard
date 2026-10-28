@@ -586,60 +586,6 @@
     "reverify_after": "2026-11-11"
   },
   {
-    "clean_title": "World Sustainable Development Summit (WSDS) 2026",
-    "organization": "TERI (The Energy and Resources Institute)",
-    "city": "New Delhi",
-    "state": "Delhi",
-    "country": "India",
-    "category": "Conferences, Summits & Events",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "OTHER",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-11-25",
-    "qualification_summary": "Open to sustainability professionals, researchers, policymakers, and students.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "WSDS is TERI's annual flagship multistakeholder convening on sustainable development and the environment. As the only independently convened international summit on sustainable development based in the Global South, it assembles global leaders and thinkers on a single platform.",
-    "key_responsibilities": [
-      "Attend sessions on sustainable development",
-      "Network with global sustainability leaders",
-      "Participate in multistakeholder discussions"
-    ],
-    "must_have_skills": [
-      "Sustainability",
-      "Climate Policy",
-      "Sustainable Development",
-      "ESG"
-    ],
-    "application_tip": "Register on TERI website. Upcoming dates TBA.",
-    "apply_url": "https://www.teriin.org/wsd",
-    "org_website": "https://www.teriin.org",
-    "org_domain": "teriin.org",
-    "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-10-26",
-    "date_posted": "2026-10-26",
-    "title_hi": "World संधारणीय विकास Summit (WSDS) 2026 — TERI (The Energy and Resources Institute)",
-    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद TERI (The Energy and Resources Institute) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Open to sustainability professionals, researchers, policymakers, and students.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.teriin.org/wsd"
-    },
-    "id": "world-sustainable-development-summit-wsds-2026-teri-the-ener",
-    "reverify_after": "2026-11-10",
-    "last_link_check": {
-      "checked_at": "2026-10-27T23:53:37Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 404,
-      "consecutive_failures": 1
-    }
-  },
-  {
     "clean_title": "Sustainability Intern (Remote)",
     "organization": "Sustainclined Synergy",
     "city": "Remote",
@@ -784,7 +730,7 @@
     "org_website": "https://www.cseindia.org",
     "org_domain": "cseindia.org",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -805,7 +751,13 @@
       "verifier": "verify_link_v2"
     },
     "id": "state-workshop--powering-uttar-pradesh-s-clean-energy-future",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "link_policy": {
+      "status": "listing",
+      "entry_type": "careers_portal",
+      "checked": "2026-10-28",
+      "note": "Official workshop/event listing page. No single-vacancy URL is exposed, so the record is tagged as a portal under policy v2."
+    }
   },
   {
     "clean_title": "Research Professionals (YP-I, YP-II, Project Associate-II, Project Assistant) - ICAR-IARI",
@@ -1010,7 +962,7 @@
     "org_website": "https://www.cseindia.org",
     "org_domain": "cseindia.org",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1031,7 +983,13 @@
       "verifier": "verify_link_v2"
     },
     "id": "marine-marshals-programme-2026-centre-for-science-and-enviro",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "link_policy": {
+      "status": "listing",
+      "entry_type": "careers_portal",
+      "checked": "2026-10-28",
+      "note": "Official workshop/event listing page. No single-vacancy URL is exposed, so the record is tagged as a portal under policy v2."
+    }
   },
   {
     "clean_title": "GIS Expert - Meghalaya World Bank Project",
@@ -1294,7 +1252,7 @@
     "org_website": "https://www.cseindia.org",
     "org_domain": "cseindia.org",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1315,7 +1273,13 @@
       "verifier": "verify_link_v2"
     },
     "id": "conflict-and-commons-community-centred-land-governance-for",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "link_policy": {
+      "status": "listing",
+      "entry_type": "careers_portal",
+      "checked": "2026-10-28",
+      "note": "Official workshop/event listing page. No single-vacancy URL is exposed, so the record is tagged as a portal under policy v2."
+    }
   },
   {
     "clean_title": "Climate Leadership Programme 2026 (Indian Youth)",
@@ -1404,7 +1368,7 @@
     "org_website": "https://www.climateaction.live",
     "org_domain": "climateaction.live",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1425,7 +1389,13 @@
       "verifier": "verify_link_v2"
     },
     "id": "climate-fresk-workshop-climate-fresk-various-hosts",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "link_policy": {
+      "status": "listing",
+      "entry_type": "careers_portal",
+      "checked": "2026-10-28",
+      "note": "Official workshop/event listing page. No single-vacancy URL is exposed, so the record is tagged as a portal under policy v2."
+    }
   },
   {
     "clean_title": "Climate Fresk Facilitator Training",
@@ -1459,7 +1429,7 @@
     "org_website": "https://www.climateaction.live",
     "org_domain": "climateaction.live",
     "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1480,7 +1450,13 @@
       "verifier": "verify_link_v2"
     },
     "id": "climate-fresk-facilitator-training-climate-fresk",
-    "reverify_after": "2026-11-10"
+    "reverify_after": "2026-11-10",
+    "link_policy": {
+      "status": "listing",
+      "entry_type": "careers_portal",
+      "checked": "2026-10-28",
+      "note": "Official workshop/event listing page. No single-vacancy URL is exposed, so the record is tagged as a portal under policy v2."
+    }
   },
   {
     "id": "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",

@@ -40,6 +40,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.parse import quote
 
+from job_schema import is_job_posting_eligible
+
 try:
     from google.oauth2 import service_account
     from googleapiclient.discovery import build
@@ -69,12 +71,15 @@ FINGERPRINT_FIELDS = (
     "country",
     "category",
     "position_type",
+    "opportunity_kind",
     "entry_type",
     "status",
+    "employment_type",
     "deadline_or_window",
     "valid_through",
     "apply_url",
     "date_added",
+    "date_archived",
 )
 
 
@@ -104,16 +109,15 @@ def record_fingerprint(record: Dict[str, Any]) -> str:
 def collect_job_urls(public: Path = PUBLIC, site: str = SITE) -> Dict[str, str]:
     """Return ``{url: fingerprint}`` for every publishable active job posting.
 
-    Portal/award/course records stay in the sitemap but are not sent to the
-    Indexing API, which is reserved for JobPosting and BroadcastEvent pages.
+    Portal/award/course/event/scholarship records stay in the sitemap but are
+    not sent to the Indexing API, which is reserved for JobPosting and
+    BroadcastEvent pages. The eligibility rule is shared with the page builder.
     """
     current: Dict[str, str] = {}
     base = site.rstrip("/")
     for filename in ("jobs.json", "global_jobs.json"):
         for record in load_records(public, filename):
-            if record.get("status") == "quarantined":
-                continue
-            if (record.get("entry_type") or "posting") != "posting":
+            if not is_job_posting_eligible(record):
                 continue
             job_id = str(record.get("id") or "").strip()
             if not job_id:

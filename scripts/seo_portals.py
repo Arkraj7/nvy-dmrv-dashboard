@@ -988,10 +988,6 @@ def build_global_hub_page(
         '      <section class="global-region"><h2>Global / Remote</h2>'
         '<p class="region-total">Listings are being verified \u2014 check back shortly.</p></section>'
     )
-    jobposting_blocks = "\n".join(
-        bsp.job_posting_jsonld(job, today) for job in global_active
-    )
-
     kind_links = "\n".join(
         f'            <li><a href="/?region=global&amp;kind={quote(kind)}" rel="nofollow">'
         f'{esc(kind)} <span class="region-cnt">{kind_counts.get(kind, 0)}</span></a></li>'
@@ -1094,7 +1090,6 @@ def build_global_hub_page(
 {item_list}
 {breadcrumb}
 {faq_ld}
-{jobposting_blocks}
 
     <script defer src="/js/hub.js"></script>
 </head>

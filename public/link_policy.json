@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-20",
+  "updated": "2026-10-28",
   "description": "Editable direct-link policy. Any employer domain is allowed. Platforms below are allow-listed; add or remove entries without code changes.",
   "tracking_params": [
     "utm_source",
@@ -251,7 +251,15 @@
     "/categories",
     "/listing",
     "/listings",
-    "/results"
+    "/results",
+    "/workshops",
+    "/events",
+    "/webinars",
+    "/conferences",
+    "/summits",
+    "/courses",
+    "/training",
+    "/carbon-dating"
   ],
   "not_direct_query_markers": [
     "q=",
