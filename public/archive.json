@@ -1,5 +1,61 @@
 [
   {
+    "clean_title": "World Sustainable Development Summit (WSDS) 2026",
+    "organization": "TERI (The Energy and Resources Institute)",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "country": "India",
+    "category": "Conferences, Summits & Events",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-11-25",
+    "qualification_summary": "Open to sustainability professionals, researchers, policymakers, and students.",
+    "compensation_or_fellowship": "Not disclosed - see official notification",
+    "role_summary": "WSDS is TERI's annual flagship multistakeholder convening on sustainable development and the environment. As the only independently convened international summit on sustainable development based in the Global South, it assembles global leaders and thinkers on a single platform.",
+    "key_responsibilities": [
+      "Attend sessions on sustainable development",
+      "Network with global sustainability leaders",
+      "Participate in multistakeholder discussions"
+    ],
+    "must_have_skills": [
+      "Sustainability",
+      "Climate Policy",
+      "Sustainable Development",
+      "ESG"
+    ],
+    "application_tip": "Register on TERI website. Upcoming dates TBA.",
+    "apply_url": "https://www.teriin.org/wsd",
+    "org_website": "https://www.teriin.org",
+    "org_domain": "teriin.org",
+    "source_portal": "Flyer intake (Gemini Vision)",
+    "entry_type": "posting",
+    "status": "archived",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-10-26",
+    "date_posted": "2026-10-26",
+    "title_hi": "World संधारणीय विकास Summit (WSDS) 2026 — TERI (The Energy and Resources Institute)",
+    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद TERI (The Energy and Resources Institute) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Open to sustainability professionals, researchers, policymakers, and students.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "verification": {
+      "verified_at": "2026-10-26",
+      "method": "flyer-intake-gemini-vision",
+      "source": "https://www.teriin.org/wsd"
+    },
+    "id": "world-sustainable-development-summit-wsds-2026-teri-the-ener",
+    "reverify_after": "2026-11-10",
+    "last_link_check": {
+      "checked_at": "2026-10-27T23:53:37Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 404,
+      "consecutive_failures": 1
+    },
+    "date_archived": "2026-10-28",
+    "archive_reason": "Official WSDS 2026 page returned 404; the event has concluded. Preserved for reference only."
+  },
+  {
     "clean_title": "Research Assistant (Urban Biodiversity Governance)",
     "organization": "Chandragupt Institute of Management Patna (CIMP)",
     "city": "Patna",
@@ -507,61 +563,5 @@
       "checked_at": "2026-10-20T10:19:57.982215+00:00",
       "platform": ""
     }
-  },
-  {
-    "clean_title": "World Sustainable Development Summit (WSDS) 2026",
-    "organization": "TERI (The Energy and Resources Institute)",
-    "city": "New Delhi",
-    "state": "Delhi",
-    "country": "India",
-    "category": "Conferences, Summits & Events",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "OTHER",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-11-25",
-    "qualification_summary": "Open to sustainability professionals, researchers, policymakers, and students.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "WSDS is TERI's annual flagship multistakeholder convening on sustainable development and the environment. As the only independently convened international summit on sustainable development based in the Global South, it assembles global leaders and thinkers on a single platform.",
-    "key_responsibilities": [
-      "Attend sessions on sustainable development",
-      "Network with global sustainability leaders",
-      "Participate in multistakeholder discussions"
-    ],
-    "must_have_skills": [
-      "Sustainability",
-      "Climate Policy",
-      "Sustainable Development",
-      "ESG"
-    ],
-    "application_tip": "Register on TERI website. Upcoming dates TBA.",
-    "apply_url": "https://www.teriin.org/wsd",
-    "org_website": "https://www.teriin.org",
-    "org_domain": "teriin.org",
-    "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
-    "status": "archived",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-10-26",
-    "date_posted": "2026-10-26",
-    "title_hi": "World संधारणीय विकास Summit (WSDS) 2026 — TERI (The Energy and Resources Institute)",
-    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद TERI (The Energy and Resources Institute) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Open to sustainability professionals, researchers, policymakers, and students.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "verification": {
-      "verified_at": "2026-10-26",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://www.teriin.org/wsd"
-    },
-    "id": "world-sustainable-development-summit-wsds-2026-teri-the-ener",
-    "reverify_after": "2026-11-10",
-    "last_link_check": {
-      "checked_at": "2026-10-27T23:53:37Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 404,
-      "consecutive_failures": 1
-    },
-    "date_archived": "2026-10-28",
-    "archive_reason": "Official WSDS 2026 page returned 404; the event has concluded. Preserved for reference only."
   }
 ]
