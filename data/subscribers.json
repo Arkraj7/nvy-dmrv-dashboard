@@ -114,5 +114,22 @@
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
     "welcome_sent": false,
     "welcome_queued": false
+  },
+  {
+    "email": "nicolekharjana73@gmail.com",
+    "frequency": "3-days",
+    "sector": "forestry-gis",
+    "channels": [
+      "email"
+    ],
+    "saved_search": null,
+    "whatsapp_number": null,
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-10-29T17:39:19.423Z",
+    "updated_at": "2026-10-29T17:39:19.423Z",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.7.5 Safari/605.1.15",
+    "welcome_sent": false,
+    "welcome_queued": false
   }
 ]
