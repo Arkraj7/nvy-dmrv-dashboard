@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-10-29T02:17:20",
+=======
+  "generated_at": "2026-10-29T02:39:53",
+>>>>>>> Stashed changes
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,7 +38,11 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
+<<<<<<< Updated upstream
       "leads": 292,
+=======
+      "leads": 250,
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -74,7 +82,7 @@
       "active": 0
     },
     "google-news": {
-      "leads": 3,
+      "leads": 4,
       "passed": 0,
       "active": 0
     },
@@ -90,7 +98,11 @@
     }
   },
   "totals": {
+<<<<<<< Updated upstream
     "leads": 574,
+=======
+    "leads": 533,
+>>>>>>> Stashed changes
     "passed": 0,
     "active": 0
   }
