@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-28T07:19:49+05:30",
-  "week_of": "2026-10-28",
+  "generated_at": "2026-10-29T07:47:37+05:30",
+  "week_of": "2026-10-29",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -17,6 +17,18 @@
     {
       "position": 1,
       "registry": "india",
+      "id": "iica-advanced-programme-csr-esg-sustainability-2026",
+      "title": "Advanced Programme on CSR, ESG and Sustainability (Practical Track)",
+      "organization": "Indian Institute of Corporate Affairs (IICA), Ministry of Corporate Affairs",
+      "location": "Online",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 58.0,
+      "url": "https://www.urbanforestpark.com/jobs/iica-advanced-programme-csr-esg-sustainability-2026"
+    },
+    {
+      "position": 2,
+      "registry": "india",
       "id": "iit-madras-teaching-program-coordinator-2026",
       "title": "Teaching Program Coordinator",
       "organization": "Indian Institute of Technology Madras (IIT Madras)",
@@ -27,7 +39,7 @@
       "url": "https://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026"
     },
     {
-      "position": 2,
+      "position": 3,
       "registry": "india",
       "id": "iisc-urban-flood-forecasting-4-positions-2026",
       "title": "Urban Flood Forecasting & Climate Resilience - 4 Project Positions",
@@ -39,43 +51,43 @@
       "url": "https://www.urbanforestpark.com/jobs/iisc-urban-flood-forecasting-4-positions-2026"
     },
     {
-      "position": 3,
-      "registry": "global",
-      "id": "unu-ehs-joint-msc-geography-environmental-risks-2027",
-      "title": "Joint MSc in Geography of Environmental Risks and Human Security",
-      "organization": "United Nations University - Institute for Environment and Human Security (UNU-EHS)",
-      "location": "Bonn",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Scholarship",
-      "score": 52.0,
-      "url": "https://www.urbanforestpark.com/jobs/unu-ehs-joint-msc-geography-environmental-risks-2027"
-    },
-    {
       "position": 4,
       "registry": "india",
-      "id": "sustainability-and-mission-life-conclave-2026-iit-goa-missio",
-      "title": "Sustainability & Mission LiFE Conclave 2026",
-      "organization": "IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences)",
-      "location": "Ponda, Goa",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 52.0,
-      "url": "https://www.urbanforestpark.com/jobs/sustainability-and-mission-life-conclave-2026-iit-goa-missio"
+      "id": "iit-mandi-c3dar-phd-jan-2027",
+      "title": "PhD / M.Tech (Research) Admissions - Centre for Climate Change and Disaster Management",
+      "organization": "IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR)",
+      "location": "Mandi, Himachal Pradesh",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 54.0,
+      "url": "https://www.urbanforestpark.com/jobs/iit-mandi-c3dar-phd-jan-2027"
     },
     {
       "position": 5,
       "registry": "global",
-      "id": "champ-advisor-world-resources-institute-wri",
-      "title": "CHAMP Advisor",
-      "organization": "World Resources Institute (WRI)",
-      "location": "Addis Ababa",
-      "position_type": "Young Professional / Consultant (Contractual)",
-      "opportunity_kind": "Job / Career",
-      "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/champ-advisor-world-resources-institute-wri"
+      "id": "leiden-phd-entangled-seaweed-2027",
+      "title": "PhD Candidate - 'Entangled with Seaweed' (South Africa Case Studies)",
+      "organization": "Leiden University - Institute of Cultural Anthropology and Development Sociology",
+      "location": "Leiden",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 54.0,
+      "url": "https://www.urbanforestpark.com/jobs/leiden-phd-entangled-seaweed-2027"
     },
     {
       "position": 6,
+      "registry": "global",
+      "id": "senior-ai-engineer-world-resources-institute-wri",
+      "title": "Senior AI Engineer",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Jakarta",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/senior-ai-engineer-world-resources-institute-wri"
+    },
+    {
+      "position": 7,
       "registry": "global",
       "id": "harvard-environmental-fellows-2027",
       "title": "Environmental Fellows Program 2027",
@@ -85,18 +97,6 @@
       "opportunity_kind": "Fellowship",
       "score": 47.0,
       "url": "https://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027"
-    },
-    {
-      "position": 7,
-      "registry": "india",
-      "id": "phd-students-kotak-school-of-sustainability-iit-kanpur",
-      "title": "PhD Programme - Kotak School of Sustainability, IIT Kanpur",
-      "organization": "Kotak School of Sustainability, IIT Kanpur",
-      "location": "Kanpur, Uttar Pradesh",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Scholarship",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/phd-students-kotak-school-of-sustainability-iit-kanpur"
     },
     {
       "position": 8,
@@ -131,9 +131,9 @@
       "location": "Bangkok, Multiple States / Remote",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Competition / Award",
-      "score": 38.0,
+      "score": 30.0,
       "url": "https://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Teaching Program Coordinator — Indian Institute of Technology Madras (IIT Madras) (Chennai, Tamil Nadu | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026\n\n2. [INDIA] Urban Flood Forecasting & Climate Resilience - 4 Project Positions — Indian Institute of Science (IISc), Bengaluru (Bengaluru, Karnataka | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/iisc-urban-flood-forecasting-4-positions-2026\n\n3. [GLOBAL] Joint MSc in Geography of Environmental Risks and Human Security — United Nations University - Institute for Environment and Human Security (UNU-EHS) (Bonn | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/unu-ehs-joint-msc-geography-environmental-risks-2027\n\n4. [INDIA] Sustainability & Mission LiFE Conclave 2026 — IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences) (Ponda, Goa | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/sustainability-and-mission-life-conclave-2026-iit-goa-missio\n\n5. [GLOBAL] CHAMP Advisor — World Resources Institute (WRI) (Addis Ababa | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/champ-advisor-world-resources-institute-wri\n\n6. [GLOBAL] Environmental Fellows Program 2027 — Harvard University Center for the Environment (Cambridge | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027\n\n7. [INDIA] PhD Programme - Kotak School of Sustainability, IIT Kanpur — Kotak School of Sustainability, IIT Kanpur (Kanpur, Uttar Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-students-kotak-school-of-sustainability-iit-kanpur\n\n8. [INDIA] Ashoka-EDF Climate Corps India Fellowship (Phase 1) — Ashoka University x Environmental Defense Fund (EDF) (Multiple States / Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni\n\n9. [INDIA] Biodiversity Data Intern — Iora Ecological Solutions (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Advanced Programme on CSR, ESG and Sustainability (Practical Track) — Indian Institute of Corporate Affairs (IICA), Ministry of Corporate Affairs (Online | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/iica-advanced-programme-csr-esg-sustainability-2026\n\n2. [INDIA] Teaching Program Coordinator — Indian Institute of Technology Madras (IIT Madras) (Chennai, Tamil Nadu | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026\n\n3. [INDIA] Urban Flood Forecasting & Climate Resilience - 4 Project Positions — Indian Institute of Science (IISc), Bengaluru (Bengaluru, Karnataka | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/iisc-urban-flood-forecasting-4-positions-2026\n\n4. [INDIA] PhD / M.Tech (Research) Admissions - Centre for Climate Change and Disaster Management — IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR) (Mandi, Himachal Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/iit-mandi-c3dar-phd-jan-2027\n\n5. [GLOBAL] PhD Candidate - 'Entangled with Seaweed' (South Africa Case Studies) — Leiden University - Institute of Cultural Anthropology and Development Sociology (Leiden | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/leiden-phd-entangled-seaweed-2027\n\n6. [GLOBAL] Senior AI Engineer — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-ai-engineer-world-resources-institute-wri\n\n7. [GLOBAL] Environmental Fellows Program 2027 — Harvard University Center for the Environment (Cambridge | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027\n\n8. [INDIA] Ashoka-EDF Climate Corps India Fellowship (Phase 1) — Ashoka University x Environmental Defense Fund (EDF) (Multiple States / Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni\n\n9. [INDIA] Biodiversity Data Intern — Iora Ecological Solutions (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
