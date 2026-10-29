@@ -16,7 +16,7 @@
 
 /* Bump this cache name whenever the shell CSS/JS changes, so installed
    clients replace the old interface instead of serving it cache-first. */
-var CACHE_NAME = 'ufp-shell-v2';
+var CACHE_NAME = 'ufp-shell-v3';
 var DATA_FILES = ['/jobs.json', '/global_jobs.json', '/archive.json', '/global_archive.json', '/stats.json', '/daily_digest.json'];
 var PRECACHE = [
   '/',
@@ -149,20 +149,71 @@ function newestJob() {
   });
 }
 
+function lastSeenCache() { return caches.open(CACHE_NAME); }
+
+function readLastSeenJob() {
+  return lastSeenCache().then(function (cache) {
+    return cache.match('/__ufp_last_seen_job').then(function (response) {
+      return response ? response.text() : null;
+    });
+  }).catch(function () { return null; });
+}
+
+function writeLastSeenJob(id) {
+  return lastSeenCache().then(function (cache) {
+    return cache.put('/__ufp_last_seen_job', new Response(String(id || ''), { headers: { 'Content-Type': 'text/plain' } }));
+  }).catch(function () { /* ignored */ });
+}
+
+function cacheUrls(urls) {
+  if (!Array.isArray(urls)) return Promise.resolve();
+  return caches.open(CACHE_NAME).then(function (cache) {
+    return Promise.all(urls.map(function (url) {
+      if (!url) return null;
+      return fetch(url, { cache: 'no-store' }).then(function (response) {
+        if (response && response.ok) return cache.put(url, response.clone());
+        return null;
+      }).catch(function () { return null; });
+    }));
+  }).catch(function () { return null; });
+}
+
 self.addEventListener('message', function (event) {
   var data = event.data || {};
   if (data.type === 'UFP_CHECK_JOBS') {
     event.waitUntil(
       newestJob().then(function (job) {
-        if (!job) return;
-        return self.clients.matchAll({ type: 'window', includeUncontrolled: true })
-          .then(function (clients) {
+        if (!job || !job.id) return;
+        return readLastSeenJob().then(function (lastSeen) {
+          var isNew = !lastSeen || String(lastSeen) !== String(job.id);
+          var tasks = [];
+          tasks.push(writeLastSeenJob(job.id));
+          if (isNew) {
+            // Show a notification directly from the worker so alerts work
+            // even when the page is backgrounded.
+            tasks.push((self.registration.showNotification
+              ? self.registration.showNotification('New on UrbanForestPark: ' + (job.clean_title || 'New opportunity'), {
+                  body: (job.organization ? job.organization + ' \u00b7 ' : '') +
+                    (job.city || job.state || 'India') + ' \u2014 tap to view and apply',
+                  icon: '/web-app-manifest-192x192.png',
+                  badge: '/favicon-96x96.png',
+                  tag: 'ufp-job-alert',
+                  data: { url: '/jobs/' + encodeURIComponent(String(job.id)) }
+                }).catch(function () { /* permission may be blocked */ })
+              : Promise.resolve()));
+          }
+          tasks.push(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clients) {
             clients.forEach(function (client) {
-              client.postMessage({ type: 'UFP_JOBS_UPDATED', job: job });
+              client.postMessage({ type: 'UFP_JOBS_UPDATED', job: job, is_new: isNew });
             });
-          });
+          }));
+          return Promise.all(tasks);
+        });
       })
     );
+  }
+  if (data.type === 'UFP_CACHE_URLS') {
+    event.waitUntil(cacheUrls(data.urls || []));
   }
 });
 

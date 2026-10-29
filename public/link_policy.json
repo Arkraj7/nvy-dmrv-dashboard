@@ -40,7 +40,6 @@
     "bit.ly",
     "tinyurl.com",
     "t.co",
-    "lnkd.in",
     "goo.gl",
     "ow.ly",
     "is.gd",
@@ -65,10 +64,12 @@
       "name": "LinkedIn",
       "hosts": [
         "linkedin.com",
-        "in.linkedin.com"
+        "in.linkedin.com",
+        "lnkd.in"
       ],
       "direct_patterns": [
-        "/jobs/view/\\d+"
+        "/jobs/view/\\d+",
+        "^/[A-Za-z0-9_-]+$"
       ],
       "bot_blocked": true
     },

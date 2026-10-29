@@ -61,6 +61,7 @@ const FREQUENCY_ALIASES = new Map([
   ["weekly", "weekly"],
 ]);
 const SECTORS = new Set(["all", "academic", "forestry-gis", "corporate-esg"]);
+const CHANNELS = new Set(["email", "whatsapp", "telegram"]);
 const DEFAULT_REPO = "Arkraj7/nvy-dmrv-dashboard";
 const SUBSCRIBERS_PATH = "data/subscribers.json";
 const BRANCH = "main";
@@ -87,6 +88,29 @@ function normalizeFrequency(value) {
 function normalizeSector(value) {
   const sector = clean(value).toLowerCase();
   return SECTORS.has(sector) ? sector : null;
+}
+
+function normalizeChannels(value) {
+  const raw = Array.isArray(value)
+    ? value
+    : String(value || "").split(/[,;]/);
+  const out = [];
+  for (const item of raw) {
+    const channel = clean(item).toLowerCase();
+    if (CHANNELS.has(channel) && out.indexOf(channel) === -1) out.push(channel);
+  }
+  return out.length ? out : ["email"];
+}
+
+function normalizeSavedSearch(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const out = {};
+  const fields = ["query", "category", "state", "city", "position_type", "experience_level", "role"];
+  for (const field of fields) {
+    const text = clean(value[field], 120);
+    if (text) out[field] = text;
+  }
+  return Object.keys(out).length ? out : null;
 }
 
 function githubToken(env) {
@@ -422,11 +446,18 @@ export async function onRequestPost(context) {
     );
   }
 
+  const channels = normalizeChannels(payload.channels);
+  const savedSearch = normalizeSavedSearch(payload.saved_search || payload.savedSearch);
+  const whatsappNumber = clean(payload.whatsapp_number || payload.whatsappNumber, 40);
+
   const now = new Date().toISOString();
   const record = {
     email,
     frequency,
     sector,
+    channels,
+    saved_search: savedSearch,
+    whatsapp_number: whatsappNumber || null,
     active: true,
     source: "urbanforestpark.com",
     subscribed_at: now,
@@ -479,6 +510,8 @@ export async function onRequestPost(context) {
     storage: persistence ? persistence.storage : "none",
     welcome: welcome.status,
     welcome_via: welcome.via || null,
+    channels,
+    saved_search: savedSearch,
   });
 }
 

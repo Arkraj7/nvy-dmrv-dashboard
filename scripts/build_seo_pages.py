@@ -209,6 +209,19 @@ SWG_SCRIPT = """    <script async type="application/javascript"
       });
     </script>"""
 
+GTM_SCRIPT = """<!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TWFHGXN7');</script>
+    <!-- End Google Tag Manager -->"""
+
+GTM_NOSCRIPT = """<!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TWFHGXN7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->"""
+
 THEME_BOOTSTRAP = """    <!-- Theme bootstrap: applied before stylesheets to prevent flicker. -->
     <script>
       (function () {
@@ -3729,6 +3742,8 @@ def build_hub_page(
     return f"""<!DOCTYPE html>
 <html lang="en-IN">
 <head>
+    {GTM_SCRIPT}
+
     {GA_SCRIPT}
 
     {SWG_SCRIPT}
@@ -3782,6 +3797,7 @@ def build_hub_page(
 </head>
 
 <body>
+    {GTM_NOSCRIPT}
   <a class="skip-link" href="#hub-list">Skip to listings</a>
 
 {header_html('registry')}
@@ -3849,6 +3865,18 @@ def build_hub_page(
   <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
+<script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+<script>
+  (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {{
+    basicSubscriptions.init({{
+      type: "NewsArticle",
+      isPartOfType: ["Product"],
+      isPartOfProductId: "CAowvJXIDA:openaccess",
+      clientOptions: {{ theme: "light", lang: "en-GB" }},
+    }});
+  }});
+</script>
 </body>
 </html>
 """
@@ -4619,6 +4647,8 @@ def build_job_page(
     return f"""<!DOCTYPE html>
 <html lang="en-IN">
 <head>
+    {GTM_SCRIPT}
+
     {GA_SCRIPT}
 
     {SWG_SCRIPT}
@@ -4667,6 +4697,7 @@ def build_job_page(
 </head>
 
 <body>
+    {GTM_NOSCRIPT}
   <a class="skip-link" href="#job-content">Skip to job details</a>
 
 {header_html('registry')}
@@ -4749,6 +4780,18 @@ def build_job_page(
   <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
+<script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+<script>
+  (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {{
+    basicSubscriptions.init({{
+      type: "NewsArticle",
+      isPartOfType: ["Product"],
+      isPartOfProductId: "CAowvJXIDA:openaccess",
+      clientOptions: {{ theme: "light", lang: "en-GB" }},
+    }});
+  }});
+</script>
 </body>
 </html>
 """
@@ -5335,6 +5378,23 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
     title = f"{org} — Green Jobs & Sustainability Careers | Urban Forest Park"
     desc = f"Verified open positions at {org} in climate, forestry, ESG and sustainability. {len(jobs)} active role(s) with direct application links."
     canonical = SITE + "/employers/" + _employer_slug(org)
+    # Optional verified employer note from the employer registry.
+    verified_note = ""
+    verified_badge = ""
+    try:
+        reg_path = REPO_ROOT / "public" / "employers.json"
+        if reg_path.exists():
+            reg = json.loads(reg_path.read_text(encoding="utf-8"))
+            for entry in reg.get("employers", []):
+                if str(entry.get("name", "")).strip().lower() == str(org).strip().lower():
+                    if entry.get("approved"):
+                        verified_badge = '<span class="badge badge-verified">Verified employer</span>'
+                    if entry.get("verified_note"):
+                        verified_note = str(entry.get("verified_note"))
+                    break
+    except Exception:
+        verified_note = ""
+        verified_badge = ""
     job_cards = []
     for job in jobs:
         job_cards.append(
@@ -5376,14 +5436,16 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
   </script>
 </head>
 <body>
+    {GTM_NOSCRIPT}
   <main class="detail-wrap" style="max-width:900px;margin:0 auto;padding:24px 16px;">
     <nav class="job-crumbs" aria-label="Breadcrumb">
       <a href="/">Career Registry</a> <span aria-hidden="true">/</span>
       <span>Employers</span> <span aria-hidden="true">/</span>
       <span aria-current="page">{esc(org)}</span>
     </nav>
-    <h1>{esc(org)}</h1>
+    <h1>{esc(org)} {verified_badge}</h1>
     <p style="color:var(--ink-3,#475569);font-size:14px;margin-bottom:20px;">{len(jobs)} verified open position(s) in climate, forestry, ESG and sustainability.</p>
+    {('<div class="employer-verified-note" style="margin:12px 0 20px;padding:12px 14px;border-left:3px solid #16a34a;background:#f0fdf4;border-radius:8px;font-size:14px;line-height:1.6;">' + esc(verified_note) + '</div>') if verified_note else ''}
     <h2>Open roles</h2>
     <ul style="padding-left:18px;line-height:1.8;">
 {job_list}
@@ -5398,6 +5460,18 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
     </div>
   </main>
   <script defer src="/js/consent.js?v=20261028b"></script>
+<script async type="application/javascript"
+        src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+<script>
+  (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {{
+    basicSubscriptions.init({{
+      type: "NewsArticle",
+      isPartOfType: ["Product"],
+      isPartOfProductId: "CAowvJXIDA:openaccess",
+      clientOptions: {{ theme: "light", lang: "en-GB" }},
+    }});
+  }});
+</script>
 </body>
 </html>
 """

@@ -1,18 +1,13 @@
 {
-<<<<<<< Updated upstream
-  "last_updated": "2026-10-29T07:47:38+05:30",
-  "last_updated_ist": "2026-10-29T07:47:38+05:30",
-=======
-  "last_updated": "2026-10-29T08:09:52+05:30",
-  "last_updated_ist": "2026-10-29T08:09:52+05:30",
->>>>>>> Stashed changes
+  "last_updated": "2026-10-29T19:15:30+05:30",
+  "last_updated_ist": "2026-10-29T19:15:30+05:30",
   "last_pipeline_run_date_ist": "2026-10-29",
-  "active_open_jobs": 139,
-  "opened_this_week": 59,
-  "passed_this_week": 5,
+  "active_open_jobs": 153,
+  "opened_this_week": 42,
+  "passed_this_week": 4,
   "total_archived_jobs": 11,
-  "total_historical_indexed": 150,
-  "last_telegram_broadcast_date": "2026-10-29",
+  "total_historical_indexed": 164,
+  "last_telegram_broadcast_date": "2026-10-28",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
     "director-brahmaputra-programme-wwf-india",
@@ -33,65 +28,63 @@
     "program-manager-water-supply-planet-water-foundation",
     "enkay-enviro-junior-social-expert-2026",
     "pxd-heat-forecast-program-manager-research-associate-2026",
-    "reeds-program-manager-finance-research-assistant-2026",
-    "iit-mandi-c3dar-phd-jan-2027",
-    "erm-consultant-biodiversity",
-    "bcg-sustainability-data-analytics-senior-manager",
-    "ccdc-gis-specialist-charm-india-2026",
-    "environment-energy-officer-nakivale-refugee-settlement-heks",
-    "iit-mandi-scene-phd-jan-2027",
-    "wildlife-enthusiasts-course-wii",
-    "blackrock-sustainability-data-process-reporting-associate",
-    "teri-transport-modelling-emissions-accounting-ra-2026",
-    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate"
+    "reeds-program-manager-finance-research-assistant-2026"
   ],
   "by_category": {
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 58,
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 12,
       "archived": 3
     },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 16,
+      "archived": 2
+    },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 10,
+      "active": 11,
+      "archived": 1
+    },
+    "Internships & Student Traineeships": {
+      "active": 4,
+      "archived": 0
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 19,
+      "archived": 0
+    },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 60,
+      "archived": 3
+    },
+    "Conferences, Summits & Events": {
+      "active": 3,
       "archived": 1
     },
     "Workshops, Training & Capacity Building": {
       "active": 7,
       "archived": 0
     },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 16,
+    "Ambassador & Fellowship Programs": {
+      "active": 1,
+      "archived": 0
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 4,
+      "archived": 0
+    },
+    "Scholarships & Doctoral Support": {
+      "active": 4,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 10,
       "archived": 1
     },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 13,
-      "archived": 2
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 12,
-      "archived": 3
-    },
-    "Internships & Student Traineeships": {
-      "active": 4,
-      "archived": 0
-    },
-    "Conferences, Summits & Events": {
-      "active": 2,
-      "archived": 1
-    },
-    "Ambassador & Fellowship Programs": {
+    "Competitions, Hackathons & Awards": {
       "active": 1,
       "archived": 0
     },
-    "Fellowships & Leadership Programs": {
-      "active": 2,
-      "archived": 0
-    },
-    "Scholarships & Doctoral Support": {
-      "active": 4,
+    "Grants & Research Funding": {
+      "active": 1,
       "archived": 0
     }
   },
@@ -102,30 +95,30 @@
     "Delhi": 9,
     "Tamil Nadu": 7,
     "Telangana": 7,
+    "Uttarakhand": 7,
     "Gujarat": 5,
-    "Uttarakhand": 5,
     "Assam": 3,
     "Bihar": 3,
     "Haryana": 3,
+    "Punjab": 3,
     "Uttar Pradesh": 3,
     "West Bengal": 3,
     "Himachal Pradesh": 2,
     "Kerala": 2,
     "Meghalaya": 2,
-    "Punjab": 2,
+    "Odisha": 2,
     "Rajasthan": 2,
+    "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Goa": 1,
     "Jharkhand": 1,
-    "Madhya Pradesh": 1,
-    "Odisha": 1
+    "Madhya Pradesh": 1
   },
   "active_global_jobs": 80,
   "active_global_portals": 13,
   "total_global_records": 93,
   "total_archived_global_jobs": 13,
   "global_jobs_by_region": {
-<<<<<<< Updated upstream
     "Europe": 20,
     "Asia-Pacific": 11,
     "Global / Remote": 16,
@@ -140,34 +133,18 @@
     "Competition / Award": 1,
     "Grant / Funding": 2,
     "Fellowship": 8
-=======
-    "Africa & Middle East": 18,
-    "Asia-Pacific": 11,
-    "Europe": 20,
-    "Global / Remote": 16,
-    "Latin America": 1,
-    "North America": 8,
-    "UN / Multilateral": 6
-  },
-  "global_jobs_by_kind": {
-    "Competition / Award": 1,
-    "Fellowship": 8,
-    "Grant / Funding": 2,
-    "Job / Career": 59,
-    "Scholarship": 10
->>>>>>> Stashed changes
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "iit-mandi-c3dar-phd-jan-2027",
-    "erm-consultant-biodiversity",
-    "bcg-sustainability-data-analytics-senior-manager",
-    "ccdc-gis-specialist-charm-india-2026",
-    "environment-energy-officer-nakivale-refugee-settlement-heks",
-    "iit-mandi-scene-phd-jan-2027",
-    "wildlife-enthusiasts-course-wii",
-    "blackrock-sustainability-data-process-reporting-associate",
-    "teri-transport-modelling-emissions-accounting-ra-2026",
-    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate"
+    "iisc-urban-flood-forecasting-4-positions-2026",
+    "iora-biodiversity-data-intern-2026",
+    "churchgate-partners-research-analyst-sustainability-2026",
+    "ag-horizon-water-resources-multiple-positions-2026",
+    "champ-advisor-world-resources-institute-wri",
+    "iit-madras-teaching-program-coordinator-2026",
+    "program-manager-water-supply-planet-water-foundation",
+    "enkay-enviro-junior-social-expert-2026",
+    "pxd-heat-forecast-program-manager-research-associate-2026",
+    "reeds-program-manager-finance-research-assistant-2026"
   ]
 }

@@ -28,7 +28,9 @@
       "website": "https://www.ceew.in",
       "approved": true,
       "approved_at": "2026-10-20T00:00:00Z",
-      "approved_by": "seed"
+      "approved_by": "seed",
+      "verified_note": "CEEW hires 4-6 research associates annually across its climate, energy and sustainability programmes. Applications are reviewed on a rolling basis; shortlisted candidates are interviewed by the project lead.",
+      "verified": true
     },
     {
       "id": "mittal-family-foundation",
@@ -908,7 +910,9 @@
       "website": "https://www.teriin.org",
       "approved": true,
       "approved_at": "2026-10-20T00:00:00Z",
-      "approved_by": "seed"
+      "approved_by": "seed",
+      "verified_note": "TERI recruits project associates and research fellows year-round for its sustainability and policy programmes. Most roles are contract-based with renewal subject to project funding.",
+      "verified": true
     },
     {
       "id": "indian-institute-of-forest-management-iifm",

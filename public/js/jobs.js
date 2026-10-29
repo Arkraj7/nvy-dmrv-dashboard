@@ -200,7 +200,8 @@
     quick: 'all',
     savedOnly: false,
     detailId: null,
-    loaded: false
+    loaded: false,
+    employers: []
   };
 
   var SAVED_KEY = 'ufp_saved_jobs';
@@ -269,6 +270,41 @@
 
   function isSaved(id) { return savedSet()[String(id)] === true; }
 
+  var APPLIED_KEY = 'ufp_applied_jobs';
+  function appliedSet() {
+    try {
+      var parsed = JSON.parse(window.localStorage.getItem(APPLIED_KEY) || '{}');
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+    } catch (e) { return {}; }
+  }
+  function markApplied(id) {
+    if (!id) return;
+    var set = appliedSet();
+    set[String(id)] = new Date().toISOString();
+    try { window.localStorage.setItem(APPLIED_KEY, JSON.stringify(set)); } catch (e) { /* private mode */ }
+    var job = findJobById(id);
+    fetch('/api/apply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        job_id: id,
+        title: job ? (job.clean_title || job.title) : '',
+        organization: job ? job.organization : '',
+        location: job ? (job.city || job.state || '') : '',
+        url: job ? job.apply_url : ''
+      })
+    }).catch(function () { /* offline: local state is enough */ });
+    toast('Marked as applied — tracked in your funnel');
+  }
+  function isApplied(id) { return !!appliedSet()[String(id)]; }
+  function findJobById(id) {
+    var all = (state.jobs || []).concat(state.globalJobs || []).concat(state.archived || []).concat(state.globalArchive || []);
+    for (var i = 0; i < all.length; i += 1) {
+      if (String(all[i].id) === String(id)) return all[i];
+    }
+    return null;
+  }
+
   function toggleSaved(id) {
     id = String(id);
     var ids = savedList();
@@ -276,6 +312,9 @@
     if (index >= 0) ids.splice(index, 1);
     else ids.unshift(id);
     storeSaved(ids);
+    if (index < 0 && navigator.serviceWorker && navigator.serviceWorker.controller) {
+      try { navigator.serviceWorker.controller.postMessage({ type: 'UFP_CACHE_URLS', urls: [jobPath(id)] }); } catch (e) { /* ignored */ }
+    }
     toast(index >= 0 ? 'Removed from saved jobs' : 'Saved — find it under ★ Saved');
     if (state.savedOnly) applyFilters();
     return index < 0;
@@ -742,6 +781,9 @@
             '" target="_blank" rel="noopener noreferrer">' +
             '<span class="vb-label">' + escapeHtml(applyLabel) + ' ' + iconSvg('external') + '</span>' +
             '<span class="vb-sub">' + escapeHtml(applyHost || 'direct link') + '</span></a>' +
+          '<button class="verify-btn verify-btn-applied" type="button" data-action="applied" data-job-id="' + escapeHtml(job.id) + '">' +
+            '<span class="vb-label">' + t('verify.applied', 'I applied') + '</span>' +
+            '<span class="vb-sub">' + t('verify.applied.sub', 'Track in your funnel') + '</span></button>' +
           secondary +
         '</div>' +
         '<p class="verify-trust">' + t('verify.trust', 'Link checked on') + ' ' +
@@ -972,6 +1014,9 @@
       state.stats = (results[2] && typeof results[2] === 'object') ? results[2] : null;
       state.globalJobs = sortByDateDesc(publicOnly(results[3]), 'date_added');
       state.globalArchive = sortByDateDesc(publicOnly(results[4]), 'date_archived');
+      fetchJson('/employers.json', false).then(function (data) {
+        state.employers = (data && Array.isArray(data.employers)) ? data.employers : [];
+      }).catch(function () { state.employers = []; });
       state.loaded = true;
 
       DEFAULT_HERO_HTML = els.heroHeading ? els.heroHeading.innerHTML : '';
@@ -1944,7 +1989,8 @@
     var applyBlock = verifyCardHtml(job, isArchived);
     var saved = isSaved(job.id);
 
-    var suggestions = isArchived ? suggestionsHtml(job) : '';
+    recordViewedJob(job.id);
+    var suggestions = (isArchived ? suggestionsHtml(job) : '') + similarJobsHtml(job) + peopleAlsoViewedHtml(job);
 
     els.detail.innerHTML = '' +
       detailBreadcrumbHtml(job, isArchived) +
@@ -1978,6 +2024,15 @@
             '<h1>' + escapeHtml(displayTitle(job)) + '</h1>' +
             (isHindi() && job.title_hi ? '<p class="detail-title-en">' + escapeHtml(job.clean_title) + '</p>' : '') +
             '<p class="detail-org">' + escapeHtml(job.organization) + '</p>' +
+            (function () {
+              var emp = null;
+              (state.employers || []).forEach(function (e) { if (String(e.name || '').toLowerCase() === String(job.organization || '').toLowerCase()) emp = e; });
+              if (!emp || !emp.verified_note) return '';
+              return '<div class="employer-verified-note" style="margin:8px 0 16px;padding:10px 12px;border-left:3px solid #16a34a;background:#f0fdf4;border-radius:8px;font-size:13px;line-height:1.6;">' +
+                escapeHtml(emp.verified_note) +
+                (emp.approved ? ' <span class="badge badge-verified" style="margin-left:6px;">Verified employer</span>' : '') +
+                '</div>';
+            })() +
             '<div class="detail-meta">' +
               dateLine +
               '<span>' + t('detail.ref', 'Ref: ') + escapeHtml(String(job.id).slice(0, 24)) + '</span>' +
@@ -2062,6 +2117,84 @@
   function hideMobileActionBar() {
     var bar = document.getElementById('mobile-action-bar');
     if (bar) bar.hidden = true;
+  }
+
+  function recordViewedJob(id) {
+    if (!id) return;
+    try {
+      var raw = JSON.parse(window.localStorage.getItem('ufp_viewed_jobs') || '[]');
+      var list = Array.isArray(raw) ? raw : [];
+      var key = String(id);
+      var out = [key];
+      list.forEach(function (x) { if (String(x) !== key && out.length < 20) out.push(String(x)); });
+      window.localStorage.setItem('ufp_viewed_jobs', JSON.stringify(out));
+    } catch (e) { /* private mode */ }
+  }
+
+  function similarJobsHtml(job) {
+    var skills = (job.must_have_skills || []).map(function (s) { return String(s).toLowerCase(); });
+    var city = String(job.city || '').toLowerCase();
+    var org = String(job.organization || '').toLowerCase();
+    var state = String(job.state || '').toLowerCase();
+    var cat = String(job.category || '');
+    var pt = positionTypeOf(job);
+    var candidates = allRecords().map(function (rec) {
+      var j = rec.job;
+      if (String(j.id) === String(job.id)) return null;
+      var score = 0;
+      if (String(j.organization || '').toLowerCase() === org && org) score += 6;
+      if (String(j.city || '').toLowerCase() === city && city) score += 5;
+      if (String(j.state || '').toLowerCase() === state && state) score += 3;
+      if (String(j.category || '') === cat) score += 4;
+      if (positionTypeOf(j) === pt) score += 2;
+      var js = (j.must_have_skills || []).map(function (s) { return String(s).toLowerCase(); });
+      skills.forEach(function (s) { if (js.indexOf(s) !== -1) score += 2; });
+      if (rec.archived) score -= 1;
+      return score > 0 ? { rec: rec, score: score } : null;
+    }).filter(Boolean);
+    candidates.sort(function (a, b) { return b.score - a.score; });
+    var matches = candidates.slice(0, 6).map(function (x) { return x.rec.job; });
+    if (!matches.length) return '';
+    var cards = matches.map(function (j) {
+      return '' +
+        '<article class="suggest-card" data-job-id="' + escapeHtml(j.id) + '" tabindex="0" role="link" ' +
+          'aria-label="View position: ' + escapeHtml(displayTitle(j)) + ' at ' + escapeHtml(j.organization) + '">' +
+          '<span class="sc-title">' + escapeHtml(displayTitle(j)) + '</span>' +
+          '<span class="sc-org">' + escapeHtml(j.organization) + ' · ' + escapeHtml(stateLabel(j)) + '</span>' +
+          '<span class="sc-meta"><span>' + escapeHtml(j.category) + '</span></span>' +
+        '</article>';
+    }).join('');
+    return '' +
+      '<div class="suggest-block">' +
+        '<h3>Similar jobs (same skills, city or employer)</h3>' +
+        '<div class="suggest-grid">' + cards + '</div>' +
+      '</div>';
+  }
+
+  function peopleAlsoViewedHtml(job) {
+    var viewed = [];
+    try { viewed = JSON.parse(window.localStorage.getItem('ufp_viewed_jobs') || '[]'); } catch (e) { viewed = []; }
+    if (!Array.isArray(viewed)) return '';
+    var ids = viewed.filter(function (x) { return String(x) !== String(job.id); }).slice(0, 6);
+    if (!ids.length) return '';
+    var jobs = ids.map(function (id) {
+      var all = (state.jobs || []).concat(state.globalJobs || []).concat(state.archived || []).concat(state.globalArchive || []);
+      for (var i = 0; i < all.length; i += 1) if (String(all[i].id) === String(id)) return all[i];
+      return null;
+    }).filter(Boolean);
+    if (!jobs.length) return '';
+    var cards = jobs.map(function (j) {
+      return '' +
+        '<article class="suggest-card" data-job-id="' + escapeHtml(j.id) + '" tabindex="0" role="link">' +
+          '<span class="sc-title">' + escapeHtml(displayTitle(j)) + '</span>' +
+          '<span class="sc-org">' + escapeHtml(j.organization) + ' · ' + escapeHtml(stateLabel(j)) + '</span>' +
+        '</article>';
+    }).join('');
+    return '' +
+      '<div class="suggest-block">' +
+        '<h3>People also viewed</h3>' +
+        '<div class="suggest-grid">' + cards + '</div>' +
+      '</div>';
   }
 
   /* Up to 3 currently active mandates in the same sector or state. */
@@ -3240,6 +3373,9 @@
           } else if (name === 'share-card') {
             e.preventDefault();
             shareJob(state.detailId, 'copy');
+          } else if (name === 'applied') {
+            e.preventDefault();
+            markApplied(state.detailId);
           }
           return;
         }
@@ -3573,6 +3709,74 @@
     syncPendingNewsletter();
   }
 
+  function openAlertModal() {
+    var modal = document.getElementById('alert-modal');
+    if (modal) modal.classList.remove('hidden');
+  }
+  function closeAlertModal() {
+    var modal = document.getElementById('alert-modal');
+    if (modal) modal.classList.add('hidden');
+  }
+  function currentSavedSearch() {
+    var q = (document.getElementById('jobs-search') && document.getElementById('jobs-search').value) || '';
+    return {
+      query: String(q).trim(),
+      category: state.category || 'all',
+      state: state.state || 'all',
+      experience_level: (document.getElementById('experience-filter') && document.getElementById('experience-filter').value) || 'all',
+      kind: (document.getElementById('kind-filter') && document.getElementById('kind-filter').value) || 'all'
+    };
+  }
+  function initAlerts() {
+    var btn = document.getElementById('alert-subscribe-btn');
+    if (btn) btn.addEventListener('click', function (e) { e.preventDefault(); openAlertModal(); });
+    var close = document.getElementById('alert-modal-close');
+    if (close) close.addEventListener('click', closeAlertModal);
+    var modal = document.getElementById('alert-modal');
+    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) closeAlertModal(); });
+    var form = document.getElementById('alert-form');
+    if (form) form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = (document.getElementById('alert-email').value || '').trim();
+      var frequency = (document.getElementById('alert-frequency').value || '3-days');
+      var sector = (document.getElementById('alert-sector').value || 'all');
+      var channels = Array.prototype.slice.call(form.querySelectorAll('input[name="channel"]:checked')).map(function (c) { return c.value; });
+      if (!channels.length) channels = ['email'];
+      var whatsappNumber = (document.getElementById('alert-whatsapp').value || '').trim();
+      var savedSearch = currentSavedSearch();
+      var status = document.getElementById('alert-status');
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          frequency: frequency,
+          sector: sector,
+          channels: channels,
+          saved_search: savedSearch,
+          whatsapp_number: whatsappNumber
+        })
+      }).then(function (response) {
+        return response.json().catch(function () { return {}; }).then(function (data) {
+          if (data && data.ok) {
+            try {
+              var list = JSON.parse(window.localStorage.getItem('ufp_saved_searches') || '[]');
+              if (!Array.isArray(list)) list = [];
+              list.unshift({ id: Date.now(), email: email, frequency: frequency, sector: sector, channels: channels, saved_search: savedSearch, created_at: new Date().toISOString() });
+              window.localStorage.setItem('ufp_saved_searches', JSON.stringify(list.slice(0, 20)));
+            } catch (e) { /* private mode */ }
+            if (status) status.textContent = 'Saved. You will receive alerts for matching new roles.';
+            toast('Job alert saved');
+          } else {
+            if (status) status.textContent = 'Could not save alert. Please try again.';
+          }
+        });
+      }).catch(function () {
+        if (status) status.textContent = 'Network error. Alert saved on this device only.';
+      });
+    });
+  }
+
   /* ------------------------------------------------------------------ */
   /* Boot                                                                */
   /* ------------------------------------------------------------------ */
@@ -3601,6 +3805,7 @@
     bindEvents();
     bindCommunityEvents();
     initNewsletter();
+    initAlerts();
     initTheme();
     if (window.UFPAppWidget && typeof window.UFPAppWidget.init === 'function') {
       window.UFPAppWidget.init();
