@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-29T19:15:30+05:30",
-  "last_updated_ist": "2026-10-29T19:15:30+05:30",
+  "last_updated": "2026-10-29T22:02:05+05:30",
+  "last_updated_ist": "2026-10-29T22:02:05+05:30",
   "last_pipeline_run_date_ist": "2026-10-29",
   "active_open_jobs": 153,
-  "opened_this_week": 42,
-  "passed_this_week": 4,
+  "opened_this_week": 73,
+  "passed_this_week": 5,
   "total_archived_jobs": 11,
   "total_historical_indexed": 164,
-  "last_telegram_broadcast_date": "2026-10-28",
+  "last_telegram_broadcast_date": "2026-10-29",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
     "director-brahmaputra-programme-wwf-india",
@@ -28,42 +28,28 @@
     "program-manager-water-supply-planet-water-foundation",
     "enkay-enviro-junior-social-expert-2026",
     "pxd-heat-forecast-program-manager-research-associate-2026",
-    "reeds-program-manager-finance-research-assistant-2026"
+    "reeds-program-manager-finance-research-assistant-2026",
+    "envirocatalysts-project-associate-punjab",
+    "atree-policy-lead-analyst-himalayan-region",
+    "fao-environment-climate-change-specialist",
+    "ccdc-gis-specialist-charm-india-2026",
+    "afs-sir-cyril-taylor-young-african-leaders-2027",
+    "iit-bhubaneswar-jrf-environmental-engineering",
+    "erm-consultant-biodiversity",
+    "bcg-sustainability-data-analytics-senior-manager",
+    "iit-roorkee-jrf-landscape-ecology-terai",
+    "rgu-research-associate-field-investigator"
   ],
   "by_category": {
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 12,
-      "archived": 3
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 16,
-      "archived": 2
-    },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 11,
       "archived": 1
-    },
-    "Internships & Student Traineeships": {
-      "active": 4,
-      "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 19,
       "archived": 0
     },
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 60,
-      "archived": 3
-    },
-    "Conferences, Summits & Events": {
-      "active": 3,
-      "archived": 1
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 7,
-      "archived": 0
-    },
-    "Ambassador & Fellowship Programs": {
+    "Competitions, Hackathons & Awards": {
       "active": 1,
       "archived": 0
     },
@@ -71,20 +57,44 @@
       "active": 4,
       "archived": 0
     },
-    "Scholarships & Doctoral Support": {
-      "active": 4,
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 16,
+      "archived": 2
+    },
+    "Conferences, Summits & Events": {
+      "active": 3,
+      "archived": 1
+    },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 60,
+      "archived": 3
+    },
+    "Grants & Research Funding": {
+      "active": 1,
+      "archived": 0
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 7,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 10,
       "archived": 1
     },
-    "Competitions, Hackathons & Awards": {
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 12,
+      "archived": 3
+    },
+    "Internships & Student Traineeships": {
+      "active": 4,
+      "archived": 0
+    },
+    "Ambassador & Fellowship Programs": {
       "active": 1,
       "archived": 0
     },
-    "Grants & Research Funding": {
-      "active": 1,
+    "Scholarships & Doctoral Support": {
+      "active": 4,
       "archived": 0
     }
   },
@@ -114,37 +124,37 @@
     "Jharkhand": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 80,
+  "active_global_jobs": 84,
   "active_global_portals": 13,
-  "total_global_records": 93,
+  "total_global_records": 97,
   "total_archived_global_jobs": 13,
   "global_jobs_by_region": {
-    "Europe": 20,
-    "Asia-Pacific": 11,
-    "Global / Remote": 16,
     "Africa & Middle East": 18,
+    "Asia-Pacific": 14,
+    "Europe": 21,
+    "Global / Remote": 16,
+    "Latin America": 1,
     "North America": 8,
-    "UN / Multilateral": 6,
-    "Latin America": 1
+    "UN / Multilateral": 6
   },
   "global_jobs_by_kind": {
-    "Job / Career": 59,
-    "Scholarship": 10,
     "Competition / Award": 1,
+    "Fellowship": 8,
     "Grant / Funding": 2,
-    "Fellowship": 8
+    "Job / Career": 63,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "iisc-urban-flood-forecasting-4-positions-2026",
-    "iora-biodiversity-data-intern-2026",
-    "churchgate-partners-research-analyst-sustainability-2026",
-    "ag-horizon-water-resources-multiple-positions-2026",
-    "champ-advisor-world-resources-institute-wri",
-    "iit-madras-teaching-program-coordinator-2026",
-    "program-manager-water-supply-planet-water-foundation",
-    "enkay-enviro-junior-social-expert-2026",
-    "pxd-heat-forecast-program-manager-research-associate-2026",
-    "reeds-program-manager-finance-research-assistant-2026"
+    "envirocatalysts-project-associate-punjab",
+    "atree-policy-lead-analyst-himalayan-region",
+    "fao-environment-climate-change-specialist",
+    "ccdc-gis-specialist-charm-india-2026",
+    "afs-sir-cyril-taylor-young-african-leaders-2027",
+    "iit-bhubaneswar-jrf-environmental-engineering",
+    "erm-consultant-biodiversity",
+    "bcg-sustainability-data-analytics-senior-manager",
+    "iit-roorkee-jrf-landscape-ecology-terai",
+    "rgu-research-associate-field-investigator"
   ]
 }

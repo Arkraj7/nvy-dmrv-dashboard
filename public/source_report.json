@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
-  "generated_at": "2026-10-29T02:17:20",
-=======
-  "generated_at": "2026-10-29T02:39:53",
->>>>>>> Stashed changes
+  "generated_at": "2026-10-29T16:32:05",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -38,16 +34,12 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-<<<<<<< Updated upstream
-      "leads": 292,
-=======
-      "leads": 250,
->>>>>>> Stashed changes
+      "leads": 287,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 157,
+      "leads": 156,
       "passed": 0,
       "active": 0
     },
@@ -61,13 +53,13 @@
       "passed": 0,
       "active": 0
     },
-    "indeed": {
-      "leads": 17,
+    "portal:ceew": {
+      "leads": 16,
       "passed": 0,
       "active": 0
     },
-    "portal:ceew": {
-      "leads": 16,
+    "indeed": {
+      "leads": 15,
       "passed": 0,
       "active": 0
     },
@@ -82,7 +74,12 @@
       "active": 0
     },
     "google-news": {
-      "leads": 4,
+      "leads": 6,
+      "passed": 0,
+      "active": 0
+    },
+    "freejobalert": {
+      "leads": 2,
       "passed": 0,
       "active": 0
     },
@@ -90,19 +87,10 @@
       "leads": 2,
       "passed": 0,
       "active": 0
-    },
-    "freejobalert": {
-      "leads": 1,
-      "passed": 0,
-      "active": 0
     }
   },
   "totals": {
-<<<<<<< Updated upstream
-    "leads": 574,
-=======
-    "leads": 533,
->>>>>>> Stashed changes
+    "leads": 570,
     "passed": 0,
     "active": 0
   }
