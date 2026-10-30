@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T16:32:05",
+  "generated_at": "2026-10-30T01:26:14",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,7 +34,7 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 287,
+      "leads": 297,
       "passed": 0,
       "active": 0
     },
@@ -53,13 +53,13 @@
       "passed": 0,
       "active": 0
     },
-    "portal:ceew": {
+    "indeed": {
       "leads": 16,
       "passed": 0,
       "active": 0
     },
-    "indeed": {
-      "leads": 15,
+    "portal:ceew": {
+      "leads": 16,
       "passed": 0,
       "active": 0
     },
@@ -90,7 +90,7 @@
     }
   },
   "totals": {
-    "leads": 570,
+    "leads": 581,
     "passed": 0,
     "active": 0
   }

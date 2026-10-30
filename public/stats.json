@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-10-29T22:02:59+05:30",
-  "last_updated_ist": "2026-10-29T22:02:59+05:30",
-  "last_pipeline_run_date_ist": "2026-10-29",
-  "active_open_jobs": 153,
-  "opened_this_week": 73,
-  "passed_this_week": 5,
-  "total_archived_jobs": 11,
+  "last_updated": "2026-10-30T06:56:14+05:30",
+  "last_updated_ist": "2026-10-30T06:56:14+05:30",
+  "last_pipeline_run_date_ist": "2026-10-30",
+  "active_open_jobs": 132,
+  "opened_this_week": 51,
+  "passed_this_week": 26,
+  "total_archived_jobs": 32,
   "total_historical_indexed": 164,
-  "last_telegram_broadcast_date": "2026-10-29",
+  "last_telegram_broadcast_date": "2026-10-30",
   "recent_telegram_job_ids": [
     "fellow---senior-research-associate---research-associate---tr",
     "director-brahmaputra-programme-wwf-india",
@@ -38,36 +38,46 @@
     "erm-consultant-biodiversity",
     "bcg-sustainability-data-analytics-senior-manager",
     "iit-roorkee-jrf-landscape-ecology-terai",
-    "rgu-research-associate-field-investigator"
+    "rgu-research-associate-field-investigator",
+    "iit-mandi-c3dar-phd-jan-2027",
+    "wildlife-enthusiasts-course-wii",
+    "giga-young-leaders-summer-academy-2027",
+    "adel-pan-african-consultant-roster",
+    "development-associate-folu-world-resources-institute-wri",
+    "iit-mandi-scene-phd-jan-2027",
+    "wildlife-trade-forensics-course-wii",
+    "iica-corporate-climate-leadership-programme",
+    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
+    "dphil-in-biology-university-of-oxford"
   ],
   "by_category": {
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 11,
-      "archived": 1
+      "active": 7,
+      "archived": 5
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 19,
-      "archived": 0
+      "active": 18,
+      "archived": 1
     },
     "Competitions, Hackathons & Awards": {
       "active": 1,
       "archived": 0
     },
     "Fellowships & Leadership Programs": {
-      "active": 4,
-      "archived": 0
+      "active": 3,
+      "archived": 1
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 16,
-      "archived": 2
+      "active": 15,
+      "archived": 3
     },
     "Conferences, Summits & Events": {
       "active": 3,
       "archived": 1
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 60,
-      "archived": 3
+      "active": 55,
+      "archived": 8
     },
     "Grants & Research Funding": {
       "active": 1,
@@ -81,80 +91,78 @@
       "active": 10,
       "archived": 1
     },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 12,
-      "archived": 3
-    },
-    "Internships & Student Traineeships": {
-      "active": 4,
-      "archived": 0
-    },
     "Ambassador & Fellowship Programs": {
       "active": 1,
       "archived": 0
     },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 5,
+      "archived": 10
+    },
     "Scholarships & Doctoral Support": {
       "active": 4,
       "archived": 0
+    },
+    "Internships & Student Traineeships": {
+      "active": 2,
+      "archived": 2
     }
   },
   "by_state": {
-    "Karnataka": 17,
     "Delhi NCR": 16,
-    "Maharashtra": 15,
-    "Delhi": 9,
-    "Tamil Nadu": 7,
-    "Telangana": 7,
+    "Karnataka": 16,
+    "Maharashtra": 14,
     "Uttarakhand": 7,
+    "Tamil Nadu": 6,
     "Gujarat": 5,
+    "Telangana": 5,
+    "Delhi": 4,
     "Assam": 3,
-    "Bihar": 3,
-    "Haryana": 3,
     "Punjab": 3,
     "Uttar Pradesh": 3,
-    "West Bengal": 3,
+    "Bihar": 2,
     "Himachal Pradesh": 2,
     "Kerala": 2,
-    "Meghalaya": 2,
     "Odisha": 2,
-    "Rajasthan": 2,
+    "West Bengal": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Goa": 1,
+    "Haryana": 1,
     "Jharkhand": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 84,
+  "active_global_jobs": 79,
   "active_global_portals": 13,
-  "total_global_records": 97,
-  "total_archived_global_jobs": 13,
+  "total_global_records": 92,
+  "total_archived_global_jobs": 18,
   "global_jobs_by_region": {
-    "Asia-Pacific": 14,
-    "Europe": 21,
-    "Global / Remote": 16,
     "Africa & Middle East": 18,
-    "North America": 8,
-    "UN / Multilateral": 6,
-    "Latin America": 1
+    "Asia-Pacific": 12,
+    "Europe": 20,
+    "Global / Remote": 16,
+    "Latin America": 1,
+    "North America": 7,
+    "UN / Multilateral": 5
   },
   "global_jobs_by_kind": {
-    "Job / Career": 63,
-    "Scholarship": 10,
     "Competition / Award": 1,
+    "Fellowship": 6,
     "Grant / Funding": 2,
-    "Fellowship": 8
+    "Job / Career": 60,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "envirocatalysts-project-associate-punjab",
-    "atree-policy-lead-analyst-himalayan-region",
-    "fao-environment-climate-change-specialist",
-    "ccdc-gis-specialist-charm-india-2026",
-    "afs-sir-cyril-taylor-young-african-leaders-2027",
-    "iit-bhubaneswar-jrf-environmental-engineering",
-    "erm-consultant-biodiversity",
-    "bcg-sustainability-data-analytics-senior-manager",
-    "iit-roorkee-jrf-landscape-ecology-terai",
-    "rgu-research-associate-field-investigator"
+    "iit-mandi-c3dar-phd-jan-2027",
+    "wildlife-enthusiasts-course-wii",
+    "giga-young-leaders-summer-academy-2027",
+    "adel-pan-african-consultant-roster",
+    "development-associate-folu-world-resources-institute-wri",
+    "iit-mandi-scene-phd-jan-2027",
+    "wildlife-trade-forensics-course-wii",
+    "iica-corporate-climate-leadership-programme",
+    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
+    "dphil-in-biology-university-of-oxford"
   ]
 }
