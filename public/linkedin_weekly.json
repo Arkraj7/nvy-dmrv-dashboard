@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-29T22:02:59+05:30",
-  "week_of": "2026-10-29",
+  "generated_at": "2026-10-30T06:56:18+05:30",
+  "week_of": "2026-10-30",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -17,6 +17,18 @@
     {
       "position": 1,
       "registry": "india",
+      "id": "iit-bhubaneswar-jrf-environmental-engineering",
+      "title": "Junior Research Fellow – Environmental Engineering",
+      "organization": "Indian Institute of Technology Bhubaneswar (IIT Bhubaneswar)",
+      "location": "Bhubaneswar, Odisha",
+      "position_type": "JRF / SRF",
+      "opportunity_kind": "Job / Career",
+      "score": 58.0,
+      "url": "https://www.urbanforestpark.com/jobs/iit-bhubaneswar-jrf-environmental-engineering"
+    },
+    {
+      "position": 2,
+      "registry": "india",
       "id": "iica-advanced-programme-csr-esg-sustainability-2026",
       "title": "Advanced Programme on CSR, ESG and Sustainability (Practical Track)",
       "organization": "Indian Institute of Corporate Affairs (IICA), Ministry of Corporate Affairs",
@@ -25,18 +37,6 @@
       "opportunity_kind": "Job / Career",
       "score": 58.0,
       "url": "https://www.urbanforestpark.com/jobs/iica-advanced-programme-csr-esg-sustainability-2026"
-    },
-    {
-      "position": 2,
-      "registry": "india",
-      "id": "iit-madras-teaching-program-coordinator-2026",
-      "title": "Teaching Program Coordinator",
-      "organization": "Indian Institute of Technology Madras (IIT Madras)",
-      "location": "Chennai, Tamil Nadu",
-      "position_type": "Faculty / Academic",
-      "opportunity_kind": "Job / Career",
-      "score": 58.0,
-      "url": "https://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026"
     },
     {
       "position": 3,
@@ -65,17 +65,41 @@
     {
       "position": 5,
       "registry": "global",
-      "id": "leiden-phd-entangled-seaweed-2027",
-      "title": "PhD Candidate - 'Entangled with Seaweed' (South Africa Case Studies)",
-      "organization": "Leiden University - Institute of Cultural Anthropology and Development Sociology",
+      "id": "leiden-phd-pfas-free-membranes-2027",
+      "title": "PhD Position - PFAS-Free Membranes for Use in Electrolysers",
+      "organization": "Leiden University - Leiden Institute of Chemistry",
       "location": "Leiden",
       "position_type": "PhD / Doctoral Fellowship",
       "opportunity_kind": "Scholarship",
       "score": 54.0,
-      "url": "https://www.urbanforestpark.com/jobs/leiden-phd-entangled-seaweed-2027"
+      "url": "https://www.urbanforestpark.com/jobs/leiden-phd-pfas-free-membranes-2027"
     },
     {
       "position": 6,
+      "registry": "india",
+      "id": "iit-mandi-scene-phd-jan-2027",
+      "title": "PhD / M.Tech (Research) Admissions - School of Civil and Environmental Engineering",
+      "organization": "IIT Mandi - School of Civil and Environmental Engineering (SCENE)",
+      "location": "Mandi, Himachal Pradesh",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 52.0,
+      "url": "https://www.urbanforestpark.com/jobs/iit-mandi-scene-phd-jan-2027"
+    },
+    {
+      "position": 7,
+      "registry": "india",
+      "id": "rgu-research-associate-field-investigator",
+      "title": "Research Associate & Field Investigator (ICSSR Project)",
+      "organization": "Rajiv Gandhi University (RGU)",
+      "location": "Doimukh, Arunachal Pradesh",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 50.0,
+      "url": "https://www.urbanforestpark.com/jobs/rgu-research-associate-field-investigator"
+    },
+    {
+      "position": 8,
       "registry": "global",
       "id": "senior-ai-engineer-world-resources-institute-wri",
       "title": "Senior AI Engineer",
@@ -87,40 +111,16 @@
       "url": "https://www.urbanforestpark.com/jobs/senior-ai-engineer-world-resources-institute-wri"
     },
     {
-      "position": 7,
-      "registry": "global",
-      "id": "harvard-environmental-fellows-2027",
-      "title": "Environmental Fellows Program 2027",
-      "organization": "Harvard University Center for the Environment",
-      "location": "Cambridge",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 47.0,
-      "url": "https://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027"
-    },
-    {
-      "position": 8,
-      "registry": "india",
-      "id": "ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni",
-      "title": "Ashoka-EDF Climate Corps India Fellowship (Phase 1)",
-      "organization": "Ashoka University x Environmental Defense Fund (EDF)",
-      "location": "Multiple States / Remote, Multiple States / Remote",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 43.0,
-      "url": "https://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni"
-    },
-    {
       "position": 9,
-      "registry": "india",
-      "id": "iora-biodiversity-data-intern-2026",
-      "title": "Biodiversity Data Intern",
-      "organization": "Iora Ecological Solutions",
-      "location": "New Delhi, Delhi",
+      "registry": "global",
+      "id": "afs-sir-cyril-taylor-young-african-leaders-2027",
+      "title": "Sir Cyril Taylor Young African Leaders Program 2027",
+      "organization": "AFS Youth Assembly - Sir Cyril Taylor Charitable Foundation",
+      "location": "Sub-Saharan Africa",
       "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 39.0,
-      "url": "https://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026"
+      "opportunity_kind": "Fellowship",
+      "score": 45.0,
+      "url": "https://www.urbanforestpark.com/jobs/afs-sir-cyril-taylor-young-african-leaders-2027"
     },
     {
       "position": 10,
@@ -135,5 +135,5 @@
       "url": "https://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Advanced Programme on CSR, ESG and Sustainability (Practical Track) — Indian Institute of Corporate Affairs (IICA), Ministry of Corporate Affairs (Online | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/iica-advanced-programme-csr-esg-sustainability-2026\n\n2. [INDIA] Teaching Program Coordinator — Indian Institute of Technology Madras (IIT Madras) (Chennai, Tamil Nadu | Faculty / Academic)\nhttps://www.urbanforestpark.com/jobs/iit-madras-teaching-program-coordinator-2026\n\n3. [INDIA] Junior Research Fellow – Landscape Ecology (Terai Ecoregion) — Indian Institute of Technology Roorkee (IIT Roorkee) (Roorkee, Uttarakhand | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/iit-roorkee-jrf-landscape-ecology-terai\n\n4. [INDIA] PhD / M.Tech (Research) Admissions - Centre for Climate Change and Disaster Management — IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR) (Mandi, Himachal Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/iit-mandi-c3dar-phd-jan-2027\n\n5. [GLOBAL] PhD Candidate - 'Entangled with Seaweed' (South Africa Case Studies) — Leiden University - Institute of Cultural Anthropology and Development Sociology (Leiden | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/leiden-phd-entangled-seaweed-2027\n\n6. [GLOBAL] Senior AI Engineer — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-ai-engineer-world-resources-institute-wri\n\n7. [GLOBAL] Environmental Fellows Program 2027 — Harvard University Center for the Environment (Cambridge | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/harvard-environmental-fellows-2027\n\n8. [INDIA] Ashoka-EDF Climate Corps India Fellowship (Phase 1) — Ashoka University x Environmental Defense Fund (EDF) (Multiple States / Remote, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/ashoka-edf-climate-corps-india-fellowship-phase-1-ashoka-uni\n\n9. [INDIA] Biodiversity Data Intern — Iora Ecological Solutions (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/iora-biodiversity-data-intern-2026\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [INDIA] Junior Research Fellow – Environmental Engineering — Indian Institute of Technology Bhubaneswar (IIT Bhubaneswar) (Bhubaneswar, Odisha | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/iit-bhubaneswar-jrf-environmental-engineering\n\n2. [INDIA] Advanced Programme on CSR, ESG and Sustainability (Practical Track) — Indian Institute of Corporate Affairs (IICA), Ministry of Corporate Affairs (Online | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/iica-advanced-programme-csr-esg-sustainability-2026\n\n3. [INDIA] Junior Research Fellow – Landscape Ecology (Terai Ecoregion) — Indian Institute of Technology Roorkee (IIT Roorkee) (Roorkee, Uttarakhand | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/iit-roorkee-jrf-landscape-ecology-terai\n\n4. [INDIA] PhD / M.Tech (Research) Admissions - Centre for Climate Change and Disaster Management — IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR) (Mandi, Himachal Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/iit-mandi-c3dar-phd-jan-2027\n\n5. [GLOBAL] PhD Position - PFAS-Free Membranes for Use in Electrolysers — Leiden University - Leiden Institute of Chemistry (Leiden | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/leiden-phd-pfas-free-membranes-2027\n\n6. [INDIA] PhD / M.Tech (Research) Admissions - School of Civil and Environmental Engineering — IIT Mandi - School of Civil and Environmental Engineering (SCENE) (Mandi, Himachal Pradesh | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/iit-mandi-scene-phd-jan-2027\n\n7. [INDIA] Research Associate & Field Investigator (ICSSR Project) — Rajiv Gandhi University (RGU) (Doimukh, Arunachal Pradesh | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/rgu-research-associate-field-investigator\n\n8. [GLOBAL] Senior AI Engineer — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-ai-engineer-world-resources-institute-wri\n\n9. [GLOBAL] Sir Cyril Taylor Young African Leaders Program 2027 — AFS Youth Assembly - Sir Cyril Taylor Charitable Foundation (Sub-Saharan Africa | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/afs-sir-cyril-taylor-young-african-leaders-2027\n\n10. [INDIA] Generation Hope Goals 2027: Action for the SDGs — ESCAP (Bangkok, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/generation-hope-goals-2027-action-for-the-sdgs-escap\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
