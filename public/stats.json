@@ -1,24 +1,14 @@
 {
-  "last_updated": "2026-10-30T06:56:19+05:30",
-  "last_updated_ist": "2026-10-30T06:56:19+05:30",
-  "last_pipeline_run_date_ist": "2026-10-30",
-  "active_open_jobs": 132,
-  "opened_this_week": 51,
-  "passed_this_week": 26,
-  "total_archived_jobs": 32,
+  "last_updated": "2026-10-31T07:17:38+05:30",
+  "last_updated_ist": "2026-10-31T07:17:38+05:30",
+  "last_pipeline_run_date_ist": "2026-10-31",
+  "active_open_jobs": 127,
+  "opened_this_week": 46,
+  "passed_this_week": 31,
+  "total_archived_jobs": 37,
   "total_historical_indexed": 164,
-  "last_telegram_broadcast_date": "2026-10-30",
+  "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
-    "fellow---senior-research-associate---research-associate---tr",
-    "director-brahmaputra-programme-wwf-india",
-    "climate-fresk-facilitator-training-climate-fresk",
-    "gis-expert---meghalaya-world-bank-project-orion-infra-consul",
-    "climate-and-business-continuity-planning-adviser-sta-dt-glob",
-    "research-assistant-and-founder-s-office-associate-backyard-b",
-    "head-director-national-conservation-programme-wwf-india",
-    "climate-fresk-workshop-climate-fresk-various-hosts",
-    "research-associate---centre-for-urban-studies-wateraid-india",
-    "research-professionals-yp-i-yp-ii-project-associate-ii-proje",
     "iisc-urban-flood-forecasting-4-positions-2026",
     "iora-biodiversity-data-intern-2026",
     "churchgate-partners-research-analyst-sustainability-2026",
@@ -48,12 +38,22 @@
     "wildlife-trade-forensics-course-wii",
     "iica-corporate-climate-leadership-programme",
     "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
-    "dphil-in-biology-university-of-oxford"
+    "dphil-in-biology-university-of-oxford",
+    "junior-research-fellow-kscste-centre-for-water-resources-dev",
+    "assistant-manager-horticulture-adani-natural-resources",
+    "blackrock-sustainability-data-process-reporting-associate",
+    "udd-uttarakhand-gis-positions-2026",
+    "communications-and-stakeholder-engagement-intern-lpa-interna",
+    "phd-admissions-regular-january-2027-indian-institute-of-tech",
+    "satluj-river-basin-assessment-tnc",
+    "corning-supply-chain-data-carbon-accounting-specialist",
+    "phd-students-kotak-school-of-sustainability-iit-kanpur",
+    "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 7,
-      "archived": 5
+      "active": 6,
+      "archived": 6
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
@@ -68,16 +68,16 @@
       "archived": 1
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 15,
-      "archived": 3
+      "active": 14,
+      "archived": 4
     },
     "Conferences, Summits & Events": {
       "active": 3,
       "archived": 1
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 55,
-      "archived": 8
+      "active": 53,
+      "archived": 10
     },
     "Grants & Research Funding": {
       "active": 1,
@@ -100,8 +100,8 @@
       "archived": 10
     },
     "Scholarships & Doctoral Support": {
-      "active": 4,
-      "archived": 0
+      "active": 3,
+      "archived": 1
     },
     "Internships & Student Traineeships": {
       "active": 2,
@@ -110,59 +110,60 @@
   },
   "by_state": {
     "Delhi NCR": 16,
-    "Karnataka": 16,
+    "Karnataka": 14,
     "Maharashtra": 14,
     "Uttarakhand": 7,
-    "Tamil Nadu": 6,
     "Gujarat": 5,
+    "Tamil Nadu": 5,
     "Telangana": 5,
     "Delhi": 4,
     "Assam": 3,
     "Punjab": 3,
     "Uttar Pradesh": 3,
-    "Bihar": 2,
     "Himachal Pradesh": 2,
     "Kerala": 2,
     "Odisha": 2,
     "West Bengal": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
+    "Bihar": 1,
     "Goa": 1,
     "Haryana": 1,
     "Jharkhand": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 79,
+  "active_global_jobs": 80,
   "active_global_portals": 13,
-  "total_global_records": 92,
-  "total_archived_global_jobs": 18,
+  "total_global_records": 93,
+  "total_archived_global_jobs": 20,
   "global_jobs_by_region": {
-    "Asia-Pacific": 12,
+    "Africa & Middle East": 16,
+    "Asia-Pacific": 15,
     "Europe": 20,
     "Global / Remote": 16,
-    "Africa & Middle East": 18,
+    "Latin America": 1,
     "North America": 7,
-    "UN / Multilateral": 5,
-    "Latin America": 1
+    "UN / Multilateral": 5
   },
   "global_jobs_by_kind": {
-    "Job / Career": 60,
-    "Scholarship": 10,
     "Competition / Award": 1,
+    "Fellowship": 6,
     "Grant / Funding": 2,
-    "Fellowship": 6
+    "Internship": 1,
+    "Job / Career": 60,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
-    "iit-mandi-c3dar-phd-jan-2027",
-    "wildlife-enthusiasts-course-wii",
-    "giga-young-leaders-summer-academy-2027",
-    "adel-pan-african-consultant-roster",
-    "development-associate-folu-world-resources-institute-wri",
-    "iit-mandi-scene-phd-jan-2027",
-    "wildlife-trade-forensics-course-wii",
-    "iica-corporate-climate-leadership-programme",
-    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
-    "dphil-in-biology-university-of-oxford"
+    "junior-research-fellow-kscste-centre-for-water-resources-dev",
+    "assistant-manager-horticulture-adani-natural-resources",
+    "blackrock-sustainability-data-process-reporting-associate",
+    "udd-uttarakhand-gis-positions-2026",
+    "communications-and-stakeholder-engagement-intern-lpa-interna",
+    "phd-admissions-regular-january-2027-indian-institute-of-tech",
+    "satluj-river-basin-assessment-tnc",
+    "corning-supply-chain-data-carbon-accounting-specialist",
+    "phd-students-kotak-school-of-sustainability-iit-kanpur",
+    "phd-research-sustainable-rurban-food-systems-atree"
   ]
 }

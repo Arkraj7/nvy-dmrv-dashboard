@@ -2139,53 +2139,6 @@
     "reverify_after": "2026-11-08"
   },
   {
-    "clean_title": "Ph.D. Admission 2026–27",
-    "organization": "Central University of South Bihar",
-    "city": "Gaya",
-    "state": "Bihar",
-    "country": "India",
-    "region": "",
-    "category": "Scholarships & Doctoral Support",
-    "position_type": "PhD / Doctoral Fellowship",
-    "opportunity_kind": "Scholarship",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "OTHER",
-    "deadline_or_window": "30 October 2026",
-    "valid_through": "2026-10-30",
-    "qualification_summary": "Eligible candidates can apply for Ph.D. programmes across various disciplines.",
-    "compensation_or_fellowship": "Not disclosed - see official portal",
-    "role_summary": "The Central University of South Bihar has opened applications for its Ph.D. programmes for the 2026–27 academic session. Interested and eligible candidates are invited to apply online through the official Samarth portal. The application process is currently open, with a submission deadline of 30 October 2026.",
-    "key_responsibilities": [
-      "Submit application through the Samarth portal",
-      "Pursue doctoral research in chosen discipline"
-    ],
-    "must_have_skills": [
-      "Academic Research",
-      "Higher Education",
-      "Disciplinary Expertise",
-      "Postgraduate Study"
-    ],
-    "application_tip": "Confirm the eligibility and closing date on the official application page before applying.",
-    "apply_url": "https://www.cusb.ac.in/images/2026/admission_26/phd/phd_2026.pdf",
-    "org_website": "https://www.cusb.ac.in/",
-    "org_domain": "cusb.ac.in",
-    "source_portal": "Flyer intake (Gemini Vision)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-10-24",
-    "date_posted": "2026-10-24",
-    "title_hi": "Ph.D. प्रवेश 2026–27",
-    "summary_hi": "Central University of South Bihar ने शैक्षणिक सत्र 2026–27 के लिए अपने Ph.D. कार्यक्रमों हेतु आवेदन प्रक्रिया शुरू कर दी है। इच्छुक और पात्र उम्मीदवार आधिकारिक समर्थ पोर्टल के माध्यम से 30 अक्टूबर 2026 तक ऑनलाइन आवेदन कर सकते हैं।",
-    "verification": {
-      "verified_at": "2026-10-24",
-      "method": "flyer-intake-gemini-vision",
-      "source": "https://cusb.samarth.edu.in/"
-    },
-    "id": "ph-d-admission-2026-27-central-university-of-south-bihar"
-  },
-  {
     "clean_title": "Junior Research Fellow",
     "organization": "KSCSTE-Centre for Water Resources Development and Management",
     "city": "Kunnamangalam",

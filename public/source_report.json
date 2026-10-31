@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T01:26:14",
+  "generated_at": "2026-10-31T01:47:38",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -39,7 +39,7 @@
       "active": 0
     },
     "official-page": {
-      "leads": 156,
+      "leads": 143,
       "passed": 0,
       "active": 0
     },
@@ -54,7 +54,7 @@
       "active": 0
     },
     "indeed": {
-      "leads": 16,
+      "leads": 17,
       "passed": 0,
       "active": 0
     },
@@ -69,17 +69,12 @@
       "active": 0
     },
     "reliefweb-rss": {
-      "leads": 8,
+      "leads": 7,
       "passed": 0,
       "active": 0
     },
     "google-news": {
       "leads": 6,
-      "passed": 0,
-      "active": 0
-    },
-    "freejobalert": {
-      "leads": 2,
       "passed": 0,
       "active": 0
     },
@@ -90,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 581,
+    "leads": 566,
     "passed": 0,
     "active": 0
   }
