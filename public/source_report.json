@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-10-31T01:47:38",
+=======
+  "generated_at": "2026-10-31T02:08:39",
+>>>>>>> Stashed changes
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,12 +38,16 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 297,
+      "leads": 296,
       "passed": 0,
       "active": 0
     },
     "official-page": {
+<<<<<<< Updated upstream
       "leads": 143,
+=======
+      "leads": 157,
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -85,7 +93,11 @@
     }
   },
   "totals": {
+<<<<<<< Updated upstream
     "leads": 566,
+=======
+    "leads": 579,
+>>>>>>> Stashed changes
     "passed": 0,
     "active": 0
   }

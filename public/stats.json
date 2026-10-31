@@ -1,6 +1,11 @@
 {
+<<<<<<< Updated upstream
   "last_updated": "2026-10-31T07:17:45+05:30",
   "last_updated_ist": "2026-10-31T07:17:45+05:30",
+=======
+  "last_updated": "2026-10-31T07:38:39+05:30",
+  "last_updated_ist": "2026-10-31T07:38:39+05:30",
+>>>>>>> Stashed changes
   "last_pipeline_run_date_ist": "2026-10-31",
   "active_open_jobs": 127,
   "opened_this_week": 46,
@@ -137,21 +142,34 @@
   "total_global_records": 93,
   "total_archived_global_jobs": 20,
   "global_jobs_by_region": {
+<<<<<<< Updated upstream
     "Asia-Pacific": 15,
     "Europe": 20,
     "Global / Remote": 16,
     "Africa & Middle East": 16,
+=======
+    "Africa & Middle East": 16,
+    "Asia-Pacific": 15,
+    "Europe": 20,
+    "Global / Remote": 16,
+    "Latin America": 1,
+>>>>>>> Stashed changes
     "North America": 7,
-    "UN / Multilateral": 5,
-    "Latin America": 1
+    "UN / Multilateral": 5
   },
   "global_jobs_by_kind": {
+<<<<<<< Updated upstream
     "Job / Career": 60,
     "Internship": 1,
     "Scholarship": 10,
+=======
+>>>>>>> Stashed changes
     "Competition / Award": 1,
+    "Fellowship": 6,
     "Grant / Funding": 2,
-    "Fellowship": 6
+    "Internship": 1,
+    "Job / Career": 60,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
