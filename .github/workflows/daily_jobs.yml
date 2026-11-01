@@ -100,7 +100,7 @@ jobs:
               stats = {}
           run_done = str(stats.get("last_pipeline_run_date_ist") or "") == today
           broadcast_done = str(stats.get("last_telegram_broadcast_date") or "") == today
-          print("true" if (run_done and broadcast_done) else "false")
+          print("true" if (run_done) else "false")
           print(
               f"watchdog: IST={today} pipeline={run_done} broadcast={broadcast_done}",
               file=sys.stderr,
@@ -142,8 +142,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LOOKBACK_HOURS: "72"
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # Telegram broadcast disabled by owner request (2026-11-01).
+          # Re-enable by restoring TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID below.
           WHATSAPP_WEBHOOK_URL: ${{ secrets.WHATSAPP_WEBHOOK_URL }}
           WHATSAPP_GROUP_URL: ${{ secrets.WHATSAPP_GROUP_URL }}
           # A manual force run bypasses only the once-per-day guard; the
@@ -324,7 +324,7 @@ jobs:
         if: steps.watchdog.outputs.skip != 'true'
         # Fails loudly after deploy if stats.json is stale, the Telegram
         # marker did not persist, or the rotation history is empty.
-        run: python scripts/verify_live_update.py --attempts 8 --sleep 15
+        run: python scripts/verify_live_update.py --attempts 8 --sleep 15 --allow-missing-broadcast
 
       - name: Submit updated URLs to IndexNow
         if: steps.watchdog.outputs.skip != 'true'
