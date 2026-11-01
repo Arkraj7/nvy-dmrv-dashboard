@@ -955,6 +955,8 @@ textarea, .share-btn, .btn {
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-card);
   cursor: pointer;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 260px;
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease,
               background-color 0.22s ease, color 0.22s ease;
 }
