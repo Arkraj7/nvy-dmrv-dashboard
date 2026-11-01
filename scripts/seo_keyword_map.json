@@ -544,7 +544,7 @@
       ],
       "search_intent": "transactional",
       "h1": "Entry Level Environmental Jobs India 2026 | JRF & Field",
-      "indexable": true
+      "indexable": false
     },
     {
       "path": "/remote-environmental-jobs",
@@ -651,7 +651,7 @@
       ],
       "search_intent": "transactional",
       "h1": "ESG Jobs Mumbai 2026 | Finance Corporate Climate",
-      "indexable": true
+      "indexable": false
     }
   ]
 }

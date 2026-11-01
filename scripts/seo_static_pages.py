@@ -41,8 +41,6 @@ NO_COMPACT_MATRIX = GENERATED_PAGES | {"index.html", "about.html", "404.html", "
 FULL_CLUSTER_PAGES = {
     "index.html": ("en-IN", bsp.SITE + "/"),
     "hindi-environment-forestry-jobs.html": ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs.html"),
-    "bharat-regional-green-jobs.html": ("en-IN", bsp.SITE + "/bharat-regional-green-jobs.html"),
-    "global-climate-sustainability-opportunities.html": ("en", bsp.SITE + "/global-climate-sustainability-opportunities.html"),
 }
 
 SITE_MATRIX_START = "<!-- SITE_MATRIX_START -->"
@@ -77,7 +75,6 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
         cluster = [
             ("en-IN", bsp.SITE + "/"),
             ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs.html"),
-            ("en", bsp.SITE + "/global-climate-sustainability-opportunities.html"),
             ("x-default", bsp.SITE + "/"),
         ]
     else:
@@ -117,11 +114,15 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
             og_width, og_height = bsp.DISCOVER_IMAGE_WIDTH, bsp.DISCOVER_IMAGE_HEIGHT
         else:
             og_image, og_width, og_height = bsp.LOGO_URL, 512, 512
+    logo_preload = (
+        '    <link rel="preload" as="image" href="/assets/images/Logo_UFF.png" fetchpriority="high">\n'
+        if file_name == "index.html" else ""
+    )
     return f"""    <title>{title}</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="{robots}">
     <link rel="canonical" href="{canonical}">
-{alternates}
+{logo_preload}{alternates}
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Urban Forest Park">
     <meta property="og:locale" content="{locale}">

@@ -377,7 +377,6 @@ def build_hindi_hub_page(
     <link rel="canonical" href="{HINDI_HUB_URL}">
     <link rel="alternate" hreflang="en-IN" href="{SITE}/">
     <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
-    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities.html">
     <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
@@ -654,10 +653,8 @@ def build_regional_hub_page(
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{REGIONAL_HUB_URL}">
-    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
-    <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
-    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities.html">
-    <link rel="alternate" hreflang="x-default" href="{SITE}/">
+    <link rel="alternate" hreflang="en-IN" href="{REGIONAL_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{REGIONAL_HUB_URL}">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
@@ -1053,10 +1050,8 @@ def build_global_hub_page(
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{GLOBAL_HUB_URL}">
-    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
-    <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
-    <link rel="alternate" hreflang="en" href="{GLOBAL_HUB_URL}">
-    <link rel="alternate" hreflang="x-default" href="{SITE}/">
+    <link rel="alternate" hreflang="en-IN" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{GLOBAL_HUB_URL}">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">

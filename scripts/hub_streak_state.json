@@ -1,7 +1,7 @@
 {
   "hubs": {
     "jrf-srf-project-associate-jobs.html": {
-      "streak_on": 28,
+      "streak_on": 26,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -10,7 +10,7 @@
       ]
     },
     "phd-fellowships-climate-sustainability.html": {
-      "streak_on": 6,
+      "streak_on": 4,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
@@ -19,7 +19,7 @@
       ]
     },
     "forestry-wildlife-government-jobs.html": {
-      "streak_on": 28,
+      "streak_on": 26,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -28,7 +28,7 @@
       ]
     },
     "gis-remote-sensing-climate-jobs.html": {
-      "streak_on": 6,
+      "streak_on": 4,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
@@ -37,7 +37,7 @@
       ]
     },
     "esg-carbon-sustainability-jobs.html": {
-      "streak_on": 28,
+      "streak_on": 26,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -46,7 +46,7 @@
       ]
     },
     "sustainability-jobs-india.html": {
-      "streak_on": 28,
+      "streak_on": 26,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -55,8 +55,8 @@
       ]
     },
     "esg-jobs-for-freshers.html": {
-      "streak_on": 0,
-      "streak_off": 3,
+      "streak_on": 4,
+      "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
       "flip_log": [
@@ -65,18 +65,19 @@
     },
     "entry-level-environmental-jobs.html": {
       "streak_on": 0,
-      "streak_off": 20,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 18,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
         "2026-10-21: ON (count=18, streak_on=3)",
         "2026-10-21: OFF (count=4, streak_off=7)",
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=7 < 8)"
       ]
     },
     "remote-environmental-jobs.html": {
       "streak_on": 0,
-      "streak_off": 20,
+      "streak_off": 18,
       "indexable": true,
       "last_flip": "2026-10-27",
       "flip_log": [
@@ -86,7 +87,7 @@
       ]
     },
     "esg-sustainability-jobs-delhi-ncr.html": {
-      "streak_on": 28,
+      "streak_on": 26,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -95,7 +96,7 @@
       ]
     },
     "esg-sustainability-jobs-karnataka.html": {
-      "streak_on": 5,
+      "streak_on": 3,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
@@ -104,7 +105,7 @@
       ]
     },
     "esg-sustainability-jobs-maharashtra.html": {
-      "streak_on": 20,
+      "streak_on": 18,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-21",
@@ -113,7 +114,7 @@
       ]
     },
     "esg-jobs-bangalore.html": {
-      "streak_on": 4,
+      "streak_on": 2,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
@@ -123,267 +124,296 @@
     },
     "esg-jobs-mumbai.html": {
       "streak_on": 0,
-      "streak_off": 25,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 23,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=7 < 8)"
       ]
     },
     "esg-sustainability-jobs-west-bengal.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=4 < 8)"
       ]
     },
     "esg-jobs-kolkata.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-sustainability-jobs-tamil-nadu.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "esg-jobs-chennai.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=4 < 8)"
       ]
     },
     "esg-sustainability-jobs-telangana.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "esg-jobs-hyderabad.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "esg-sustainability-jobs-gujarat.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=5 < 8)"
       ]
     },
     "esg-jobs-ahmedabad.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=3 < 8)"
       ]
     },
     "esg-sustainability-jobs-uttarakhand.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "esg-jobs-dehradun.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=4 < 8)"
       ]
     },
     "esg-sustainability-jobs-madhya-pradesh.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=3 < 8)"
       ]
     },
     "esg-jobs-bhopal.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-sustainability-jobs-kerala.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-jobs-kochi.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=1 < 8)"
       ]
     },
     "esg-sustainability-jobs-rajasthan.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-jobs-jaipur.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-sustainability-jobs-bihar.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-jobs-patna.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "esg-jobs-pune.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=5 < 8)"
       ]
     },
     "esg-jobs-noida.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "esg-jobs-coimbatore.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-kolkata.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-chennai.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=4 < 8)"
       ]
     },
     "environmental-jobs-hyderabad.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "environmental-jobs-pune.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=5 < 8)"
       ]
     },
     "environmental-jobs-ahmedabad.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=3 < 8)"
       ]
     },
     "environmental-jobs-dehradun.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=4 < 8)"
       ]
     },
     "environmental-jobs-noida.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "environmental-jobs-bengaluru.html": {
-      "streak_on": 4,
+      "streak_on": 2,
       "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
@@ -393,16 +423,17 @@
     },
     "environmental-jobs-mumbai.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=7 < 8)"
       ]
     },
     "environmental-jobs-delhi.html": {
-      "streak_on": 0,
-      "streak_off": 1,
+      "streak_on": 4,
+      "streak_off": 0,
       "indexable": true,
       "last_flip": "2026-10-27",
       "flip_log": [
@@ -411,112 +442,124 @@
     },
     "environmental-jobs-bhopal.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-kochi.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=1 < 8)"
       ]
     },
     "environmental-jobs-patna.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-jaipur.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-coimbatore.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=2 < 8)"
       ]
     },
     "environmental-jobs-gurugram.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "workshops-training-capacity-building.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=6 < 8)"
       ]
     },
     "conferences-summits-events.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=3 < 8)"
       ]
     },
     "visiting-fellowships-short-term-research.html": {
       "streak_on": 0,
-      "streak_off": 7,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 5,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=0 < 8)"
       ]
     },
     "ambassador-fellowship-programs.html": {
       "streak_on": 0,
-      "streak_off": 6,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 4,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=1 < 8)"
       ]
     },
     "memberships-community-programs.html": {
       "streak_on": 0,
-      "streak_off": 6,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 4,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=0 < 8)"
       ]
     },
     "webinars-live-events.html": {
       "streak_on": 0,
-      "streak_off": 6,
-      "indexable": true,
-      "last_flip": "2026-10-27",
+      "streak_off": 4,
+      "indexable": false,
+      "last_flip": "2026-10-31",
       "flip_log": [
-        "2026-10-27: ON (editorial)"
+        "2026-10-27: ON (editorial)",
+        "2026-10-31: OFF (hard floor: count=0 < 8)"
       ]
     }
   },
-  "last_run_date": "2026-11-01"
+  "last_run_date": "2026-10-31"
 }

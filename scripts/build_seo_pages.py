@@ -153,6 +153,7 @@ HUB_ON_THRESHOLD = 12         # minimum active roles to start counting streak_on
 HUB_ON_STREAK_N = 3           # consecutive runs at/above threshold to flip ON
 HUB_OFF_THRESHOLD = 8         # active roles below this to start counting streak_off
 HUB_OFF_STREAK_N = 7          # consecutive runs below threshold to flip OFF
+HUB_HARD_MIN_INDEXABLE = 8    # hard floor: below this, noindex regardless of copy
 
 # A literal, crawlable separator between adjacent badge <span> elements. The
 # spaces matter: tag-stripping crawlers otherwise concatenate the badges into
@@ -401,6 +402,7 @@ HUB_ON_THRESHOLD = 12         # minimum active roles to start counting streak_on
 HUB_ON_STREAK_N = 3           # consecutive runs at/above threshold to flip ON
 HUB_OFF_THRESHOLD = 8         # active roles below this to start counting streak_off
 HUB_OFF_STREAK_N = 7          # consecutive runs below threshold to flip OFF
+HUB_HARD_MIN_INDEXABLE = 8    # hard floor: below this, noindex regardless of copy
 
 
 def load_hub_streak_state() -> Dict[str, Any]:
@@ -428,7 +430,9 @@ def update_hub_streaks(
 
     Hubs with a substantial editorial block (local context + data-driven FAQs)
     can be indexed immediately instead of waiting for the job-count streak. The
-    editorial flag also prevents a later low-listing run from flipping them off.
+    editorial flag also prevents a later low-listing run from flipping them off,
+    but it cannot override HUB_HARD_MIN_INDEXABLE: fewer than that many live
+    listings is always treated as a thin page.
     """
     state = load_hub_streak_state()
     hubs_state = state.setdefault("hubs", {})
@@ -479,12 +483,29 @@ def update_hub_streaks(
             log.warning("HUB FLIP OFF: %s (count=%d, streak_off=%d)", hub_file, count, h["streak_off"])
 
         # Editorial override: local context + data-driven FAQs make a hub
-        # worth indexing without waiting for the job-count streak.
-        if is_editorial and not h["indexable"]:
+        # worth indexing without waiting for the job-count streak. Thin hubs
+        # below the hard inventory floor are handled separately below.
+        if is_editorial and not h["indexable"] and count >= HUB_HARD_MIN_INDEXABLE:
             h["indexable"] = True
             h["last_flip"] = today
             h["flip_log"].append(f"{today}: ON (editorial)")
             log.info("HUB EDITORIAL ON: %s", hub_file)
+
+        # Hard inventory floor: a hub with fewer than HUB_HARD_MIN_INDEXABLE
+        # live listings is a thin landing page regardless of editorial copy.
+        # Force it out of the index until the registry supplies enough real
+        # vacancies. The streak counters were already updated above, so this
+        # block must not increment them again.
+        if count < HUB_HARD_MIN_INDEXABLE and h["indexable"]:
+            h["indexable"] = False
+            h["last_flip"] = today
+            h["flip_log"].append(
+                f"{today}: OFF (hard floor: count={count} < {HUB_HARD_MIN_INDEXABLE})"
+            )
+            log.warning(
+                "HUB THIN OFF: %s (count=%d < %d)",
+                hub_file, count, HUB_HARD_MIN_INDEXABLE,
+            )
 
         indexable[hub_file] = h["indexable"]
 
@@ -3317,6 +3338,8 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/#pathway-title">Career pathway hubs</a></li>
           <li><a href="/?view=archive" rel="nofollow">Archived jobs</a></li>
           <li><a href="/global-climate-sustainability-opportunities">International opportunities</a></li>
+          <li><a href="/salary-guide">Salary guide</a></li>
+          <li><a href="/employers">Employer profiles</a></li>
         </ul>
       </div>
 
@@ -3758,8 +3781,6 @@ def build_hub_page(
     <meta name="robots" content="{'index, follow' if hub.get('_indexable', True) else 'noindex, follow'}">
     <link rel="canonical" href="{hub['canonical']}">
     <link rel="alternate" hreflang="en-IN" href="{hub['canonical']}">
-    <link rel="alternate" hreflang="hi-IN" href="https://www.urbanforestpark.com/hindi-environment-forestry-jobs.html">
-    <link rel="alternate" hreflang="en" href="https://www.urbanforestpark.com/global-climate-sustainability-opportunities.html">
     <link rel="alternate" hreflang="x-default" href="{hub['canonical']}">
 
     <!-- Open Graph / social -->
@@ -3959,6 +3980,12 @@ REMOVED_JOB_REDIRECTS: Dict[str, str] = {
     "area-sales-manager-loom-solar": "/sustainability-jobs-india",
     "sales-analyst-nextpower": "/sustainability-jobs-india",
     "senior-leadership-energy-transition-new-delhi": "/environmental-jobs-delhi",
+    # Duplicate FAO listing: the India record pointed at a LinkedIn shortener.
+    # The global record carries the official FAO portal and richer fields, so the
+    # duplicate is retired in favour of that canonical detail page.
+    "fao-environment-climate-change-specialist": (
+        "/jobs/fao-environment-climate-change-specialist-2026"
+    ),
 }
 
 
@@ -4101,9 +4128,9 @@ def job_page_title(job: Dict[str, Any]) -> str:
     suffix = f" | {state} Job" if state and state not in ("India", "Global / Remote") else " | India Job"
     base = f"{title} at {org}" if org else title
     candidate = base + suffix
-    if len(candidate) <= 70:
+    if len(candidate) <= 65:
         return candidate
-    return trim(base, 60)
+    return trim(base, 64)
 
 
 def job_page_description(job: Dict[str, Any]) -> str:
@@ -4588,7 +4615,12 @@ def build_job_page(
     qualification = plain(job.get("qualification_summary")) or "See official notification"
     summary = plain(job.get("role_summary")) or plain(job.get("summary")) or desc
     skills = [plain(item) for item in (job.get("must_have_skills") or []) if plain(item)]
-    apply_label = f"Apply on {_hostname(apply_url)}" if apply_url else "Official application page"
+    if apply_url.lower().startswith("mailto:"):
+        apply_label = "Apply now"
+    elif apply_url:
+        apply_label = f"Apply on {_hostname(apply_url)}"
+    else:
+        apply_label = "Official application page"
 
     if is_archived:
         apply_block = f"""        <div class="job-page-archive-note">
@@ -4605,6 +4637,10 @@ def build_job_page(
     if not is_archived:
         apply_block += """
         </div>"""
+
+    employer_link = esc(org)
+    if not is_archived and org:
+        employer_link = f'<a href="/employers/{_employer_slug(org)}">{esc(org)}</a>'
 
     related_pool = [j for j in active if job_slug(j) != slug]
     if is_archived:
@@ -4660,7 +4696,7 @@ def build_job_page(
 
     <title>{esc(title)}</title>
     <meta name="description" content="{esc(desc)}">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="robots" content="{'noindex, follow' if is_archived else 'index, follow, max-snippet:-1, max-image-preview:large'}">
     <link rel="canonical" href="{canonical}">
     <link rel="alternate" hreflang="en-IN" href="{canonical}">
     <link rel="alternate" hreflang="x-default" href="{canonical}">
@@ -4744,6 +4780,8 @@ def build_job_page(
           <h2>How to apply</h2>
           <p>{'This job is closed. The original portal is retained for reference only.' if is_archived else 'Applications are submitted directly through the official employer portal. Urban Forest Park does not charge any fee and does not act as a recruitment intermediary.'}</p>
           <p><strong>Application deadline / window:</strong> {esc(deadline)}</p>
+          {('<p><a class="btn btn-primary" href="' + esc(apply_url) + '" target="_blank" rel="noopener noreferrer">Apply now &nearr;</a></p>') if (not is_archived and apply_url) else ''}
+          {('<p class="job-page-note"><strong>How to apply:</strong> ' + esc(plain(job.get("application_tip")) or "Email your CV and a short cover letter to the address above. Include the job title in the subject line.") + '</p>') if (not is_archived and apply_url.lower().startswith("mailto:")) else ''}
           {('<p><a class="btn btn-outline" href="' + esc(website) + '" target="_blank" rel="noopener noreferrer">Open official employer website &nearr;</a></p>') if website else ''}
         </section>
       </article>
@@ -4751,7 +4789,7 @@ def build_job_page(
       <aside class="job-page-side" aria-label="Job snapshot">
         <h2>Job snapshot</h2>
         <dl class="job-facts">
-          <div><dt>Employer</dt><dd>{esc(org)}</dd></div>
+          <div><dt>Employer</dt><dd>{employer_link}</dd></div>
           <div><dt>Location</dt><dd>{esc(location)}</dd></div>
           <div><dt>Position type</dt><dd>{esc(position_type_of(job))}</dd></div>
           <div><dt>Experience</dt><dd>{esc(plain(job.get("experience_level")) or "See notification")}</dd></div>
@@ -4886,16 +4924,8 @@ def sync_sitemap_jobs(
             f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod>"
             "<changefreq>daily</changefreq><priority>0.8</priority></url>"
         )
-    for job in archived + global_archived:
-        loc = job_url(job, absolute=True)
-        if loc in seen:
-            continue
-        seen.add(loc)
-        lastmod = plain(job.get("date_archived")) or plain(job.get("date_added")) or today.isoformat()
-        additions.append(
-            f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod>"
-            "<changefreq>monthly</changefreq><priority>0.5</priority></url>"
-        )
+    # Archived detail pages stay live for reference but are excluded from the
+    # sitemap (and marked noindex) so closed roles do not compete in search.
     if additions:
         text = text.replace("</urlset>", "\n".join(additions) + "\n</urlset>")
     path.write_text(text, encoding="utf-8")
@@ -5340,7 +5370,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     sync_sitemap_jobs(public, active, archived, global_active, global_archived, today)
     sync_sitemap_guides(public, today)
-    employer_pages = write_employer_pages(public, active, today)
+    employer_pages = write_employer_pages(public, active + global_active, today)
     log.info('Wrote %d employer profile page(s) under /employers/', employer_pages)
     sync_sitemap_employers(public, today)
     hub_sitemap_additions = sync_sitemap_hubs(public, today, hub_indexable)
@@ -5375,8 +5405,8 @@ def _employer_slug(org: str) -> str:
 
 def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> str:
     """Build a static employer profile page."""
-    title = f"{org} — Green Jobs & Sustainability Careers | Urban Forest Park"
-    desc = f"Verified open positions at {org} in climate, forestry, ESG and sustainability. {len(jobs)} active role(s) with direct application links."
+    title = trim(f"{org} — Green Jobs & Sustainability Careers | Urban Forest Park", 63)
+    desc = trim(f"Verified open positions at {org} in climate, forestry, ESG and sustainability. {len(jobs)} active role(s) with direct application links.", 158)
     canonical = SITE + "/employers/" + _employer_slug(org)
     # Optional verified employer note from the employer registry.
     verified_note = ""
@@ -5411,6 +5441,14 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
   <meta name="description" content="{esc(desc)}">
   <link rel="canonical" href="{canonical}">
   <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#F8FAFC">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(desc)}">
+  <meta property="og:url" content="{canonical}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(desc)}">
   <link rel="stylesheet" href="/styles/jobs.css">
   <link rel="stylesheet" href="/styles/hub.css">
   <script src="/js/consent-tags.js?v=20261028"></script>
@@ -5437,15 +5475,28 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
 </head>
 <body>
     {GTM_NOSCRIPT}
-  <main class="detail-wrap" style="max-width:900px;margin:0 auto;padding:24px 16px;">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main class="detail-wrap" id="main-content" style="max-width:900px;margin:0 auto;padding:24px 16px;">
     <nav class="job-crumbs" aria-label="Breadcrumb">
       <a href="/">Career Registry</a> <span aria-hidden="true">/</span>
-      <span>Employers</span> <span aria-hidden="true">/</span>
+      <a href="/employers">Employers</a> <span aria-hidden="true">/</span>
       <span aria-current="page">{esc(org)}</span>
     </nav>
     <h1>{esc(org)} {verified_badge}</h1>
     <p style="color:var(--ink-3,#475569);font-size:14px;margin-bottom:20px;">{len(jobs)} verified open position(s) in climate, forestry, ESG and sustainability.</p>
     {('<div class="employer-verified-note" style="margin:12px 0 20px;padding:12px 14px;border-left:3px solid #16a34a;background:#f0fdf4;border-radius:8px;font-size:14px;line-height:1.6;">' + esc(verified_note) + '</div>') if verified_note else ''}
+    <p style="line-height:1.7;margin-bottom:16px;">{esc(org)} is a verified employer in the Urban Forest Park green-jobs registry, currently listing {len(jobs)} open position(s) in climate, forestry, ESG, sustainability and environmental research. Every role links directly to the official {esc(org)} application portal &mdash; no intermediaries, no fees. Use the list below to review eligibility, compensation and deadlines, then apply on the employer's own career page.</p>
+    <h3>How to apply at {esc(org)}</h3>
+    <ol style="line-height:1.8;margin-bottom:16px;">
+      <li>Open the role you are interested in and read the eligibility, qualification and deadline.</li>
+      <li>Click <strong>Apply on &lt;host&gt; &nearr;</strong> to reach the official {esc(org)} application page.</li>
+      <li>Prepare your CV, cover letter and any required documents (transcripts, portfolio, writing samples).</li>
+      <li>Submit before the stated deadline and keep a copy of the confirmation.</li>
+    </ol>
+    <h3>Frequently asked questions</h3>
+    <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-weight:600;">Does {esc(org)} charge an application fee?</summary><p style="margin-top:6px;line-height:1.6;">No. Urban Forest Park never charges candidates and is not a recruitment intermediary. All applications go through the official {esc(org)} portal.</p></details>
+    <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-weight:600;">How often are {esc(org)} roles updated?</summary><p style="margin-top:6px;line-height:1.6;">The registry is refreshed daily; new {esc(org)} vacancies are added as soon as they are verified, and closed roles move to the archive.</p></details>
+    <details style="margin-bottom:16px;"><summary style="cursor:pointer;font-weight:600;">Can I get alerts for new {esc(org)} openings?</summary><p style="margin-top:6px;line-height:1.6;">Yes &mdash; subscribe to the 72-hour email briefing or the Telegram/WhatsApp channels from the homepage to receive verified new listings.</p></details>
     <h2>Open roles</h2>
     <ul style="padding-left:18px;line-height:1.8;">
 {job_list}
@@ -5456,6 +5507,8 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
         <li><a href="/esg-carbon-sustainability-jobs">ESG &amp; Carbon Sustainability Jobs</a></li>
         <li><a href="/sustainability-jobs-india">All Sustainability Jobs in India</a></li>
         <li><a href="/global-climate-sustainability-opportunities">Global Opportunities</a></li>
+        <li><a href="/salary-guide">Salary guide by role and city</a></li>
+        <li><a href="/employers">All employer profiles</a></li>
       </ul>
     </div>
   </main>
@@ -5477,22 +5530,124 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
 """
 
 
+def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
+    """Build the A-Z employer directory that links every profile page."""
+    canonical = SITE + "/employers/"
+    title = "Green Employers Directory | Urban Forest Park"
+    desc = (
+        f"Browse {len(entries)} verified employers hiring in climate, forestry, "
+        "ESG, GIS and environmental research across India and worldwide."
+    )
+    rows = []
+    for letter in sorted({org[0].upper() for org, _ in entries if org}):
+        group = [(org, n) for org, n in entries if org and org[0].upper() == letter]
+        links = "".join(
+            f'<li><a href="/employers/{_employer_slug(org)}">{esc(org)}</a>'
+            f' <span style="color:var(--ink-3,#475569);font-size:13px;">({n} role{"s" if n != 1 else ""})</span></li>'
+            for org, n in group
+        )
+        rows.append(f'<h2 id="letter-{letter}">{letter}</h2><ul class="employer-index-list">{links}</ul>')
+
+    item_list = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": title,
+        "description": desc,
+        "url": canonical,
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": len(entries),
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": i + 1,
+                    "name": org,
+                    "url": SITE + "/employers/" + _employer_slug(org),
+                }
+                for i, (org, _) in enumerate(entries)
+            ],
+        },
+    }
+    return f"""<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    {GTM_SCRIPT}
+    {SWG_SCRIPT}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{esc(title)}</title>
+    <meta name="description" content="{esc(desc)}">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#F8FAFC">
+    <link rel="canonical" href="{canonical}">
+    <link rel="alternate" hreflang="en-IN" href="{canonical}">
+    <link rel="alternate" hreflang="x-default" href="{canonical}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{esc(title)}">
+    <meta property="og:description" content="{esc(desc)}">
+    <meta property="og:url" content="{canonical}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/hub.css">
+    <script type="application/ld+json">
+    {json.dumps(item_list, ensure_ascii=False)}
+    </script>
+</head>
+<body>
+    {GTM_NOSCRIPT}
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main class="detail-wrap" id="main-content" style="max-width:900px;margin:0 auto;padding:24px 16px;">
+    <nav class="job-crumbs" aria-label="Breadcrumb">
+      <a href="/">Career Registry</a> <span aria-hidden="true">/</span>
+      <span aria-current="page">Employers</span>
+    </nav>
+    <h1>Green Employers Directory</h1>
+    <p>{len(entries)} organisations with verified open roles in climate, forestry, ESG,
+    environmental research and sustainability. Every profile links to the current vacancies
+    and the official application page.</p>
+    {''.join(rows)}
+    <div style="margin-top:24px;padding:16px;border:1px solid var(--border,#E2E8F0);border-radius:12px;background:var(--bg-2,#F8FAFC);">
+      <p style="margin:0 0 8px;font-weight:700;">Explore more</p>
+      <ul style="margin:0;padding-left:18px;">
+        <li><a href="/sustainability-jobs-india">All sustainability jobs in India</a></li>
+        <li><a href="/global-climate-sustainability-opportunities">Global opportunities</a></li>
+        <li><a href="/salary-guide">Salary guide by role and city</a></li>
+      </ul>
+    </div>
+  </main>
+  <script defer src="/js/consent.js?v=20261028b"></script>
+</body>
+</html>
+"""
+
+
 def write_employer_pages(public: Path, active: List[Dict[str, Any]], today: date) -> int:
-    from collections import Counter, defaultdict
+    from collections import defaultdict
     org_jobs: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for job in active:
         org = plain(job.get("organization"))
         if org:
             org_jobs[org].append(job)
-    top_orgs = [org for org, _ in Counter({o: len(v) for o, v in org_jobs.items()}).most_common()]
+    # Alphabetical order keeps the A-Z directory and sitemap stable between
+    # builds even when counts shift.
+    top_orgs = sorted(org_jobs, key=lambda o: o.lower())
     out_dir = public / "employers"
     out_dir.mkdir(exist_ok=True)
     count = 0
+    keep = set()
     for org in top_orgs:
         jobs = org_jobs[org]
         slug = _employer_slug(org)
+        keep.add(f"{slug}.html")
         (out_dir / f"{slug}.html").write_text(build_employer_page(org, jobs, today), encoding="utf-8")
         count += 1
+    entries = [(org, len(org_jobs[org])) for org in top_orgs]
+    (out_dir / "index.html").write_text(
+        build_employer_index(entries, today), encoding="utf-8"
+    )
+    for path in out_dir.glob("*.html"):
+        if path.name not in keep and path.name != "index.html":
+            path.unlink()
     return count
 
 
@@ -5504,10 +5659,20 @@ def sync_sitemap_employers(public: Path, today: date) -> int:
     if not path.exists():
         return 0
     text = path.read_text(encoding="utf-8")
+    valid = set()
+    for page in sorted(emp_dir.glob("*.html")):
+        loc = SITE + "/employers/" if page.stem == "index" else SITE + "/employers/" + page.stem
+        valid.add(loc)
+    # Drop employer profiles that no longer exist.
+    text = re.sub(
+        r"\s*<url>\s*<loc>https://www\.urbanforestpark\.com/employers/[^<]*</loc>.*?</url>",
+        "",
+        text,
+        flags=re.S,
+    )
     seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
     additions: List[str] = []
-    for page in sorted(emp_dir.glob("*.html")):
-        loc = SITE + "/employers/" + page.stem
+    for loc in sorted(valid):
         if loc in seen:
             continue
         seen.add(loc)
