@@ -4593,6 +4593,43 @@ def related_jobs_html(related: List[Dict[str, Any]]) -> str:
     return "\n".join(cards)
 
 
+
+CATEGORY_CONTEXT = {
+    "Forestry, Wildlife & Afforestation": (
+        "Forestry and wildlife roles in India are driven by state forest departments, CAMPA-funded afforestation, "
+        "NGOs and research institutes. Candidates with field experience in forest inventory, wildlife monitoring, "
+        "GIS and community mobilisation are in high demand."
+    ),
+    "GIS, Remote Sensing & Earth Observation": (
+        "GIS and remote-sensing roles support climate adaptation, urban planning, disaster risk and land-use "
+        "monitoring. Proficiency in QGIS, ArcGIS, Google Earth Engine and Python is typically expected."
+    ),
+    "ESG, Carbon Markets & Corporate Sustainability": (
+        "ESG and carbon-market roles are growing rapidly as Indian corporates adopt BRSR reporting, net-zero "
+        "targets and carbon accounting. Skills in GHG Protocol, life-cycle assessment and sustainability "
+        "reporting are highly valued."
+    ),
+    "Climate Policy, Think-Tanks & Fellowships": (
+        "Climate-policy and fellowship roles sit at the intersection of research, advocacy and government "
+        "advisory. They suit candidates with strong writing, policy analysis and stakeholder-engagement skills."
+    ),
+    "Academic, JRF, SRF & PhD Positions": (
+        "Academic and research positions (JRF/SRF/PhD) are the backbone of India's climate research capacity. "
+        "They require a strong academic record, a clear research proposal and, often, a qualifying exam score."
+    ),
+    "Research Associate & Project Staff (Contractual)": (
+        "Project-staff roles are contract-based positions on funded research projects. They offer hands-on "
+        "research experience and are a common entry point into climate and environmental careers."
+    ),
+}
+
+def _category_context(job):
+    cat = plain(job.get("category"))
+    return CATEGORY_CONTEXT.get(cat, (
+        "Environmental and sustainability roles are expanding across India as organisations respond to "
+        "climate commitments, regulatory requirements and conservation priorities."
+    ))
+
 def build_job_page(
     job: Dict[str, Any],
     active: List[Dict[str, Any]],
@@ -4776,6 +4813,11 @@ def build_job_page(
         <section>
           <h2>Compensation / fellowship</h2>
           <p>{esc(compensation)}</p>
+        </section>
+        <section>
+          <h2>About this opportunity</h2>
+          <p>{esc(_category_context(job))}</p>
+          <p>{esc(plain(job.get("role_summary")) or desc)}</p>
         </section>
         <section>
           <h2>How to apply</h2>
