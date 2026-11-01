@@ -1,6 +1,9 @@
 # Quarantined records removed from the registry. Keep old inbound links out of
 # the index and send readers to the verified global hub instead of a stale page.
 
+/salaries/ /salary-guide 301
+/salaries/index.html /salary-guide 301
+
 # BEGIN generated job redirects
 /jobs/analyst-civil-design-desri-hyderabad /environmental-jobs-hyderabad 301
 /jobs/analyst-sustainable-sourcing-avantor-2 /jobs/analyst-sustainable-sourcing-avantor 301
