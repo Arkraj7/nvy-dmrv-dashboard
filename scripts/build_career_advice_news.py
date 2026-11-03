@@ -255,17 +255,49 @@ def build_news():
     </article>''' % (img, esc(title), esc(cat), esc(date), esc(title), esc(summary))
         for cat, img, title, date, summary in dev_items
     )
+    dev_items = [
+        ("Forests & biodiversity", "/assets/images/discover/forestry.webp",
+         "India expands urban forest monitoring",
+         "03 Nov 2026",
+         "New guidance strengthens monitoring of Nagar Vans and Nagar Vatikas, linking plantation records with survival and cooling indicators."),
+        ("ESG & sustainable finance", "/assets/images/discover/esg.webp",
+         "BRSR reporting adoption deepens across Indian corporates",
+         "02 Nov 2026",
+         "More listed companies are publishing business responsibility and sustainability reports, increasing demand for ESG analysts and assurance skills."),
+        ("GIS & remote sensing", "/assets/images/discover/gis.webp",
+         "Satellite-based forest cover assessments updated",
+         "01 Nov 2026",
+         "Remote-sensing updates improve state-level forest cover tracking and support evidence-based afforestation planning."),
+        ("Climate policy", "/assets/images/discover/policy.webp",
+         "States refine climate action plans for urban resilience",
+         "31 Oct 2026",
+         "State-level climate plans increasingly include urban heat, green cover and disaster resilience measures."),
+        ("Research & innovation", "/assets/images/discover/research.webp",
+         "New fellowships open in climate and sustainability",
+         "30 Oct 2026",
+         "Universities and research institutes continue to advertise JRF, SRF and doctoral positions in climate and sustainability."),
+    ]
+    dev_cards = "\n".join(
+        '''    <article class="about-card" style="display:flex;gap:14px;align-items:flex-start;">
+      <img src="%s" alt="%s" width="96" height="96" loading="lazy" decoding="async" style="border-radius:10px;object-fit:cover;flex:none;">
+      <div>
+        <p class="eyebrow" style="margin:0 0 4px;">%s &middot; %s</p>
+        <h3 style="margin:0 0 6px;">%s</h3>
+        <p style="margin:0;">%s</p>
+      </div>
+    </article>''' % (img, esc(title), esc(cat), esc(date), esc(title), esc(summary))
+        for cat, img, title, date, summary in dev_items
+    )
     sections = []
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
         <h2>Latest developments</h2>
-        <p>Curated highlights from climate, forestry, ESG and sustainability. Each item links to the primary source for full details.</p>
+        <p>Curated highlights from climate, forestry, ESG and sustainability, with links to primary sources for full details.</p>
         <div class="about-grid">
 %s
         </div>
       </div>
     </section>""" % dev_cards)
-    sections = []
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
         <h2>How to use this page</h2>
