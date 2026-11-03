@@ -141,10 +141,10 @@ def shell(
     <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
     {HUB_CSS}
     <style>
-      .header-inner{{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;text-align:center;}}
+      .header-inner{{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:flex-start!important;text-align:center;}}
       .brand{{display:flex!important;align-items:center;justify-content:center;gap:10px;text-align:center;}}
-      .site-nav{{justify-content:center;}}
-      .header-actions{{margin-left:0!important;justify-content:center;flex:0 1 auto;}}
+      .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;}}
+      .header-actions{{margin-left:auto!important;justify-content:flex-end!important;align-self:flex-start!important;flex:0 0 auto!important;}}
     </style>
 </head>
 <body>
