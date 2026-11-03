@@ -3843,7 +3843,7 @@ def build_hub_page(
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
       .site-nav{{justify-content:center;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
@@ -4914,7 +4914,7 @@ def build_job_page(
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
       .site-nav{{justify-content:center;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
@@ -5896,7 +5896,7 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
       .site-nav{{justify-content:center;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
