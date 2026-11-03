@@ -18,6 +18,13 @@ def source_list(items):
     return "\n".join(lines)
 
 
+def card(title, body, link=None):
+    inner = "<p>%s</p>" % body
+    if link:
+        inner += '<p style="margin-top:8px;"><a href="%s">%s &rarr;</a></p>' % (link[0], esc(link[1]))
+    return '    <section class="hub-main">\n      <div class="hub-main-inner">\n        <h2>%s</h2>\n        %s\n      </div>\n    </section>' % (esc(title), inner)
+
+
 def build_career_advice():
     faqs = [
         ("Is a science degree required for green jobs?",
@@ -28,6 +35,8 @@ def build_career_advice():
          "GRI, SASB, TCFD, GHG Protocol, LEED, IGBC and ISO 14064 are widely recognised. Choose one that matches the roles you are targeting rather than collecting many."),
         ("Where should I apply first?",
          "Start with the verified registry, then add direct employer portals, university project positions and government notifications. Avoid paid application channels."),
+        ("How important is a portfolio?",
+         "Very. A short analysis, map, plantation monitoring note or BRSR commentary demonstrates applied skill far better than coursework alone."),
     ]
     related = [
         ("/green-careers", "Green career pathways"),
@@ -38,87 +47,98 @@ def build_career_advice():
         ("/glossary", "Glossary of green terms"),
         ("/green-internships", "Internships and entry-level roles"),
         ("/fellowship-deadlines", "Fellowship deadlines"),
+        ("/government-environment-jobs", "Recruitment tracker"),
     ]
     hero_html = beh.hero(
         "Career advice",
         "Career Advice for Climate, Forestry, ESG & Sustainability",
-        "Practical, evidence-based guidance for entering and growing in green careers in India - from first internship to senior ESG and forestry leadership roles.",
+        "A practical playbook for entering, transitioning into and growing within green careers in India - from first internship to senior ESG, forestry and climate leadership roles.",
         [
             ("Focus", "India + Global"),
-            ("Topics", "Skills, CV, interviews"),
+            ("Topics", "Skills, CV, interviews, networking"),
             ("Updated", TODAY.strftime("%d %b %Y")),
         ],
     )
     sections = []
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Start with a pathway, not a job title</h2>
+        <h2>1. Choose a pathway before a job title</h2>
         <p>The green sector is wide. Pick one pathway, learn its vocabulary and build proof of work before applying broadly.</p>
         <ul class="check-list">
           <li><a href="/green-careers">Green career pathways</a> &mdash; research, forestry, ESG, GIS, climate policy and internships.</li>
           <li><a href="/guides">How-to guides</a> &mdash; step-by-step entry routes, including JRF applications and BRSR reporting.</li>
           <li><a href="/salary-guide">Salary guide</a> &mdash; realistic pay bands by role and experience.</li>
           <li><a href="/compare">Career comparisons</a> &mdash; JRF vs SRF, ESG vs CSR, GIS vs remote sensing and more.</li>
+          <li><a href="/government-environment-jobs">Recruitment tracker</a> &mdash; public bodies and notification cycles.</li>
         </ul>
       </div>
     </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Skills employers actually ask for</h2>
+        <h2>2. Skills employers actually ask for</h2>
         <ul class="check-list">
           <li><strong>Domain foundations:</strong> ecology, forestry, climate science, environmental law, ESG frameworks and sustainability reporting.</li>
           <li><strong>Data skills:</strong> GIS, remote sensing, R or Python, Excel, dashboards and basic statistics.</li>
           <li><strong>Reporting and compliance:</strong> GRI, SASB, TCFD, BRSR, GHG Protocol and ISO 14064.</li>
           <li><strong>Field and project skills:</strong> sampling, survey design, community engagement and monitoring.</li>
           <li><strong>Communication:</strong> technical writing, policy briefs, presentations and stakeholder management.</li>
+          <li><strong>Digital presence:</strong> a readable CV, a short portfolio and a consistent LinkedIn profile.</li>
         </ul>
       </div>
     </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Resume, CV and interview preparation</h2>
+        <h2>3. Resume, CV and interview preparation</h2>
         <p>Use the registry's guides to structure applications and avoid the common errors that screeners reject.</p>
         <ul class="check-list">
           <li><a href="/guides/jrf-cv-format">JRF CV format</a> and <a href="/guides/jrf-interview-prep">JRF interview preparation</a>.</li>
           <li><a href="/guides/esg-interview-questions">ESG interview questions</a> and <a href="/guides/gis-interview-questions">GIS interview questions</a>.</li>
           <li><a href="/guides/esg-analyst-resume-template">ESG analyst resume template</a>.</li>
           <li><a href="/guides/interview-preparation">General interview preparation</a>.</li>
+          <li><a href="/guides/forest-guard-exam-prep">Forest guard exam preparation</a>.</li>
         </ul>
       </div>
     </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Networking and professional visibility</h2>
+        <h2>4. Networking and professional visibility</h2>
         <ul class="check-list">
           <li>Join the <a href="https://t.me/urbanforestpark" target="_blank" rel="noopener noreferrer">Urban Forest Park Telegram community</a> for verified openings.</li>
           <li>Participate in the <a href="https://www.linkedin.com/groups/40965341/" target="_blank" rel="noopener noreferrer">LinkedIn group</a> and share short case notes or field observations.</li>
           <li>Attend <a href="/webinars-live-events">webinars and live events</a> and <a href="/conferences-summits-events">conferences and summits</a>.</li>
           <li>Build a small public portfolio: a short analysis, a map, a plantation monitoring note or a BRSR commentary.</li>
+          <li>Ask for informational interviews, not jobs, when reaching out to professionals.</li>
         </ul>
       </div>
     </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Certifications and courses</h2>
+        <h2>5. Certifications and courses</h2>
         <p>Certifications signal commitment, but projects and evidence of work matter more. Browse the <a href="/courses">course directory</a> for GRI, SASB, TCFD, GHG Protocol, LEED, IGBC, ISO 14064 and related programmes.</p>
+        <ul class="check-list">
+          <li>Pick one certification that matches the roles you are targeting.</li>
+          <li>Pair it with a small applied project or case study.</li>
+          <li>Avoid collecting many certificates without evidence of work.</li>
+        </ul>
       </div>
     </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Common mistakes to avoid</h2>
+        <h2>6. Common mistakes to avoid</h2>
         <ul class="check-list">
           <li>Applying with a generic CV instead of tailoring to the role.</li>
           <li>Ignoring deadlines, eligibility and required documents.</li>
           <li>Paying for placement or application services.</li>
           <li>Listing coursework without evidence of applied work.</li>
           <li>Networking only when you need a job.</li>
+          <li>Ignoring government and public-sector recruitment cycles.</li>
         </ul>
       </div>
     </section>""")
     related_html = "".join('<li><a href="%s">%s</a></li>' % (href, esc(label)) for href, label in related)
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
-        <h2>Related pages</h2>
+        <h2>7. Related pages</h2>
         <ul class="check-list">
           %s
         </ul>
@@ -149,6 +169,8 @@ def build_news():
          "We prioritise ministry, regulator, multilateral and research-institution sources, alongside established climate and environment publications."),
         ("Does Urban Forest Park publish original journalism?",
          "No. We are a career and research registry; this page points to reporting and primary sources for context."),
+        ("How should I use these sources?",
+         "Start with the institution or regulator most relevant to your sector, then follow its notifications, reports and press releases."),
     ]
     india_sources = [
         ("Ministry of Environment, Forest and Climate Change", "https://moef.gov.in", "Policy, programmes and notifications."),
@@ -157,6 +179,7 @@ def build_news():
         ("NITI Aayog", "https://www.niti.gov.in", "Strategy and sustainability initiatives."),
         ("Down To Earth", "https://www.downtoearth.org.in", "Environment and development reporting."),
         ("Mongabay India", "https://india.mongabay.com", "Conservation and biodiversity reporting."),
+        ("The Hindu - Environment", "https://www.thehindu.com/sci-tech/energy-and-environment/", "National environment reporting."),
     ]
     global_sources = [
         ("UNEP", "https://www.unep.org", "Global environment programme updates."),
@@ -165,6 +188,7 @@ def build_news():
         ("UNFCCC", "https://unfccc.int", "Climate negotiations and NDCs."),
         ("Carbon Brief", "https://www.carbonbrief.org", "Climate science and policy analysis."),
         ("IUCN", "https://www.iucn.org", "Conservation and nature-based solutions."),
+        ("FAO", "https://www.fao.org", "Food, agriculture and forestry."),
     ]
     esg_sources = [
         ("SEBI", "https://www.sebi.gov.in", "BRSR and ESG disclosure regulation in India."),
@@ -172,18 +196,21 @@ def build_news():
         ("GRI", "https://www.globalreporting.org", "Sustainability reporting standards."),
         ("TCFD", "https://www.fsb-tcfd.org", "Climate-related financial disclosures."),
         ("SASB", "https://sasb.org", "Industry-specific sustainability standards."),
+        ("CDP", "https://www.cdp.net", "Corporate climate disclosure."),
     ]
     forest_sources = [
         ("FAO Forestry", "https://www.fao.org/forestry", "Global forest resources and policy."),
         ("Global Forest Watch", "https://www.globalforestwatch.org", "Forest monitoring and alerts."),
         ("ICFRE", "https://icfre.gov.in", "Forestry research and education in India."),
         ("WII", "https://wii.gov.in", "Wildlife research and training."),
+        ("FSI", "https://fsi.nic.in", "Forest cover and assessment."),
     ]
     research_sources = [
         ("CSIR", "https://www.csir.res.in", "Scientific research and vacancies."),
         ("ICAR", "https://icar.org.in", "Agricultural and environmental research."),
         ("Nature Climate Change", "https://www.nature.com/nclimate", "Peer-reviewed climate research."),
         ("Science", "https://www.science.org", "Scientific developments."),
+        ("arXiv", "https://arxiv.org", "Preprints in climate and earth science."),
     ]
     hero_html = beh.hero(
         "News & developments",
@@ -191,7 +218,7 @@ def build_news():
         "A curated orientation to current developments in climate, forestry, ESG and sustainability, with links to the primary sources and publications we track.",
         [
             ("Scope", "India + Global"),
-            ("Themes", "Policy, markets, forests"),
+            ("Themes", "Policy, markets, forests, research"),
             ("Updated", TODAY.strftime("%d %b %Y")),
         ],
     )
@@ -257,6 +284,7 @@ def build_news():
           <li><a href="/guides">How-to guides</a></li>
           <li><a href="/glossary">Glossary</a></li>
           <li><a href="/courses">Certification courses</a></li>
+          <li><a href="/green-sectors">Green sectors</a></li>
         </ul>
       </div>
     </section>""")
@@ -280,20 +308,6 @@ def build_news():
 def main():
     build_career_advice()
     build_news()
-    # update sitemap
-    sitemap = beh.SITEMAP
-    text = sitemap.read_text(encoding="utf-8")
-    added = 0
-    for path in ("/career-advice", "/news"):
-        loc = SITE + path
-        if "<loc>%s</loc>" % loc in text:
-            continue
-        entry = "  <url><loc>%s</loc><lastmod>%s</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>" % (loc, TODAY.isoformat())
-        text = text.replace("</urlset>", entry + "\n</urlset>")
-        added += 1
-    if added:
-        sitemap.write_text(text, encoding="utf-8")
-    print("sitemap +%d" % added)
 
 
 if __name__ == "__main__":
