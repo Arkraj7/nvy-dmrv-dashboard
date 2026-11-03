@@ -25,7 +25,7 @@ import build_seo_pages as bsp
 SITE = bsp.SITE
 LOGO_URL = bsp.LOGO_URL
 HINDI_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/forestry.jpg"
-REGIONAL_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/default.jpg"
+REGIONAL_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/default.webp"
 GLOBAL_IMAGE_URL = bsp.DISCOVER_IMAGE_DIR + "/default.jpg"
 esc = bsp.esc
 plain = bsp.plain

@@ -553,7 +553,7 @@ def build_about_page(today: date) -> str:
             "name": "Arkraj Biswas",
             "jobTitle": "Founder & Editorial Lead",
             "worksFor": {"@id": bsp.SITE + "/#organization"},
-            "image": bsp.SITE + "/assets/images/arkraj-biswas-portrait.jpg",
+            "image": bsp.SITE + "/assets/images/arkraj-biswas-portrait.webp",
             "description": (
                 "Environmental and sustainable development professional leading the "
                 "editorial verification and institutional governance of Urban Forest Park."
@@ -655,7 +655,7 @@ def build_about_page(today: date) -> str:
 
         <h2>Founder &amp; editorial lead</h2>
         <div class="about-person">
-          <img src="/assets/images/arkraj-biswas-portrait.jpg"
+          <img src="/assets/images/arkraj-biswas-portrait.webp"
                alt="Portrait of Arkraj Biswas, founder and editorial lead of Urban Forest Park"
                title="Arkraj Biswas, Founder and Editorial Lead"
                width="586" height="626" loading="lazy" decoding="async">

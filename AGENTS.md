@@ -41,6 +41,11 @@ py scripts/fetch_and_humanize.py --no-broadcast   # daily pipeline, hold message
 py scripts/recheck_live_links.py                  # nightly link recheck
 ```
 
+`build_seo_pages.py` also rebuilds the expansion hubs, exam guides and role
+profiles through subprocess, so the single command above is enough. To rebuild
+only those pages: `py scripts/build_expansion_hubs.py` then
+`py scripts/build_exam_role_pages.py`.
+
 `pip` needs `REQUESTS_CA_BUNDLE` pointing at certifi on this machine:
 
 ```powershell

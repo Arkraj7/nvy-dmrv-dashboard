@@ -1,0 +1,197 @@
+/* ============================================================
+   Urban Forest Park - expansion hubs (Nov 2026)
+   Loaded AFTER styles/jobs.css and styles/hub.css. Adds only the
+   long-form components these five pages use: section blocks,
+   data tables and checklists. Tokens come from jobs.css.
+   ============================================================ */
+
+/* ---------- Long-form section ---------- */
+.hub-section {
+  padding: 30px 0 10px;
+  border-top: 1px solid var(--border);
+}
+.hub-section h2 {
+  max-width: var(--maxw);
+  margin: 0 auto 8px;
+  padding: 0 20px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hub-section > p {
+  max-width: var(--maxw);
+  margin: 0 auto 18px;
+  padding: 0 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-3);
+}
+.hub-section > ul,
+.hub-section > ol,
+.hub-section > p + ul,
+.hub-section > .table-wrap {
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Data tables ---------- */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  -webkit-overflow-scrolling: touch;
+}
+.data-table {
+  width: 100%;
+  min-width: 660px;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+}
+.data-table thead th {
+  position: sticky;
+  top: 0;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.data-table tbody td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--ink-2);
+}
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table tbody tr:hover { background: var(--bg-2); }
+.data-table strong { color: var(--ink); font-weight: 700; }
+.data-table a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.data-table a:hover { text-decoration: underline; }
+.data-table tr.urgent td { background: rgba(220, 38, 38, 0.05); }
+.data-table tr.urgent td:first-child { box-shadow: inset 3px 0 0 #dc2626; }
+
+/* ---------- Checklist ---------- */
+.check-list {
+  display: grid;
+  gap: 10px;
+  margin: 0 auto 26px;
+  padding: 0 20px;
+  list-style: none;
+}
+.check-list li {
+  position: relative;
+  padding: 11px 14px 11px 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--card);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.check-list li::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+.check-list strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- Utility ---------- */
+.muted {
+  font-size: 11.5px;
+  color: var(--ink-4);
+  font-weight: 500;
+}
+
+/* The shared FAQ block assumes it sits inside a padded container; these pages
+   place it directly in <main>, so give it the same page gutter. */
+main > .hub-faq {
+  max-width: var(--maxw);
+  margin: 40px auto 44px;
+  padding: 0 20px;
+}
+
+/* Checklists and tables already sit inside a padded container on the exam and
+   role pages, so drop the extra section gutter there. */
+.hub-main-inner .check-list { padding: 0; }
+.hub-main-inner .hub-faq { padding: 0; }
+
+/* Skill chips on role profiles */
+.skill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 22px;
+}
+
+@media (max-width: 640px) {
+  .hub-section h2 { font-size: 18px; }
+  .data-table { font-size: 12.5px; }
+  .data-table thead th,
+  .data-table tbody td { padding: 11px 12px; }
+}
+
+/* ---------- Table of contents + reading time ---------- */
+.reading-time {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.toc {
+  max-width: var(--maxw);
+  margin: 24px auto 8px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--bg-2);
+}
+
+.toc-title {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.toc li { font-size: 13px; line-height: 1.5; }
+.toc a { color: var(--ink-3); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .toc ul { flex-direction: column; gap: 4px; }
+}

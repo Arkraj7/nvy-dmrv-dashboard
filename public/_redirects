@@ -1,6 +1,7 @@
 # Quarantined records removed from the registry. Keep old inbound links out of
 # the index and send readers to the verified global hub instead of a stale page.
 
+
 /salaries/ /salary-guide 301
 /salaries/index.html /salary-guide 301
 
@@ -18,6 +19,7 @@
 /jobs/business-head-textile-circularity-hospitality-2 /esg-carbon-sustainability-jobs 301
 /jobs/co-founder-dhartiamrit-ecoservices /sustainability-jobs-india 301
 /jobs/conflict-and-commons--community-centred-land-governance-for /forestry-wildlife-government-jobs 301
+/jobs/fao-environment-climate-change-specialist /jobs/fao-environment-climate-change-specialist-2026 301
 /jobs/job / 301
 /jobs/mechanical-design-engineer-saltech-design-labs /esg-carbon-sustainability-jobs 301
 /jobs/microsoft-forms-microsoft / 301

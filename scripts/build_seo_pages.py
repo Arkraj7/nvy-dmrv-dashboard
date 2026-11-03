@@ -30,6 +30,8 @@ import html
 import json
 import logging
 import re
+import urllib.parse
+import subprocess
 import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -54,7 +56,7 @@ LOGO_URL = SITE + "/assets/images/Logo_UFF.png"
 DISCOVER_IMAGE_DIR = SITE + "/assets/images/discover"
 DISCOVER_IMAGE_WIDTH = 1200
 DISCOVER_IMAGE_HEIGHT = 675
-DISCOVER_IMAGE_URL = DISCOVER_IMAGE_DIR + "/default.jpg"
+DISCOVER_IMAGE_URL = DISCOVER_IMAGE_DIR + "/default.webp"
 LOGO_PATH = "assets/images/Logo_UFF.png"
 BRAND_ALT = "Urban Forest Park — India Climate, Forestry, ESG & Research Jobs Registry Logo"
 BRAND_ALT_HTML = html.escape(BRAND_ALT, quote=True)
@@ -824,7 +826,7 @@ def discover_image_for(job: Dict[str, Any]) -> str:
     name = _discover_name(category_text)
     if name == "default":
         name = _discover_name(plain(job.get("clean_title")))
-    return DISCOVER_IMAGE_DIR + "/" + name + ".jpg"
+    return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
 
 
 def discover_image_for_hub(hub: Dict[str, Any]) -> str:
@@ -835,7 +837,7 @@ def discover_image_for_hub(hub: Dict[str, Any]) -> str:
         name = _discover_name(
             " ".join(plain(hub.get(key)) for key in ("title", "h1"))
         )
-    return DISCOVER_IMAGE_DIR + "/" + name + ".jpg"
+    return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
 
 
 def article_jsonld(
@@ -970,7 +972,13 @@ SITE_MATRIX_LINKS: List[Tuple[str, str]] = [
     ("ESG, BRSR, Carbon Credits & Sustainability Jobs", "/esg-carbon-sustainability-jobs.html"),
     ("Hindi Environment, Forestry & Climate Jobs Portal", "/hindi-environment-forestry-jobs.html"),
     ("State-Wise Environmental & Research Jobs in India", "/bharat-regional-green-jobs.html"),
+    ("Green Job Sectors: Renewable, EV, Waste, Water & Building", "/green-sectors.html"),
+    ("Government Environment, Forestry & Wildlife Recruitment Tracker", "/government-environment-jobs.html"),
+    ("Green Internships & Entry-Level Environmental Jobs", "/green-internships.html"),
+    ("Fellowship, Scholarship & Grant Deadlines", "/fellowship-deadlines.html"),
+    ("Green Careers: Pathways, Roles & Salary Guide", "/green-careers.html"),
     ("Nagar Van Yojana dMRV Dashboard & Green Calculator", "/dashboard.html"),
+    ("Nagar Van dMRV, Green Calculator & Urban Forest Data", "/dmrv.html"),
     ("Live Nagar Van dMRV Site Insights Dashboard", "/explore-dashboard.html"),
     ("Urban Forest Green Calculator", "/green-calculator.html"),
     ("Green Calculator Web App", "/green-calculator-app.html"),
@@ -3287,6 +3295,8 @@ def header_html(active: Optional[str] = None) -> str:
       </a>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
         <a class="{cls('registry')}" href="/">Career Registry</a>
+        <a class="{cls('career-advice')}" href="/career-advice">Career Advice</a>
+        <a class="{cls('news')}" href="/news">News</a>
         <a class="{cls('archive')}" href="/?view=archive" rel="nofollow">Historical Archive</a>
         <a class="{cls('global')}" href="/global-climate-sustainability-opportunities">Global Opportunities</a>
       </nav>
@@ -3336,11 +3346,24 @@ def footer_html(current_hub: Optional[str] = None) -> str:
         <h3>Registry</h3>
         <ul>
           <li><a href="/">All active opportunities</a></li>
+          <li><a href="/search">Search jobs</a></li>
           <li><a href="/#pathway-title">Career pathway hubs</a></li>
           <li><a href="/?view=archive" rel="nofollow">Archived jobs</a></li>
           <li><a href="/global-climate-sustainability-opportunities">International opportunities</a></li>
           <li><a href="/salary-guide">Salary guide</a></li>
           <li><a href="/employers">Employer profiles</a></li>
+          <li><a href="/glossary">Glossary</a></li>
+          <li><a href="/green-sectors">Green sectors</a></li>
+          <li><a href="/feeds">RSS feeds</a></li>
+          <li><a href="/guides">How-to guides</a></li>
+          <li><a href="/compare">Career comparisons</a></li>
+          <li><a href="/green-jobs-this-week">New this week</a></li>
+          <li><a href="/government-environment-jobs">Recruitment tracker</a></li>
+          <li><a href="/green-internships">Internships</a></li>
+          <li><a href="/fellowship-deadlines">Fellowship deadlines</a></li>
+          <li><a href="/green-careers">Career pathways</a></li>
+          <li><a href="/career-advice">Career advice</a></li>
+          <li><a href="/news">Climate & ESG news</a></li>
         </ul>
       </div>
 
@@ -3348,6 +3371,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
         <h3>Institutional Tools</h3>
         <ul>
           <li><a href="/dashboard">Live dMRV dashboard</a></li>
+          <li><a href="/dmrv">dMRV overview</a></li>
           <li><a href="/green-calculator">Green Calculator</a></li>
           <li><a href="/nagar-van-finder">Nagar Van Finder</a></li>
           <li><a href="/green-calculator-app">Calculator app</a></li>
@@ -3721,6 +3745,12 @@ def build_hub_page(
     )[:HUB_ARCHIVE_LIMIT]
     editorial = hub_editorial.editorial_for(hub, matched_active, today)
     faqs = editorial["faqs"] or list(hub.get("faqs") or [])
+    extra_faqs = [
+        ("How often is this hub updated?", "The registry refreshes daily and this page is rebuilt on every build from the latest verified listings."),
+        ("Are these jobs verified?", "Every listing links to the official application page and is checked against the employer's notice before publishing."),
+        ("Can I apply for more than one role?", "Yes. Apply through each official page; the registry does not charge candidates or act as an intermediary."),
+    ]
+    faqs = list(faqs) + extra_faqs
 
     cards = "\n".join(hub_card_html(j) for j in matched_active) or (
         '        <p class="hub-empty">No jobs in this pathway right now \u2014 new openings '
@@ -3884,6 +3914,7 @@ def build_hub_page(
 
 {footer_html(hub['file'])}
 
+  <script defer src="/js/toc2.js"></script>
   <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
@@ -4576,6 +4607,78 @@ def related_jobs_for(
     return [item[2] for item in scored[:limit]]
 
 
+def related_guides_for(job: Dict[str, Any]) -> List[Tuple[str, str]]:
+    """Return (label, url) pairs for guides relevant to this listing."""
+
+    guides: List[Tuple[str, str]] = []
+    seen: set[str] = set()
+
+    def add(label: str, url: str) -> None:
+        if url not in seen:
+            seen.add(url)
+            guides.append((label, url))
+
+    org = plain(job.get("organization")).lower()
+    title = plain(job.get("clean_title")).lower()
+    category = plain(job.get("category"))
+
+    # Exam guides keyed on the recruiting body.
+    exam_map = (
+        ("upsc", "/exams/indian-forest-service", "IFS exam guide"),
+        ("csir", "/exams/csir-jrf", "CSIR JRF guide"),
+        ("icar", "/exams/icar-jrf-srf", "ICAR recruitment guide"),
+        ("wildlife institute", "/exams/wii-pg-diploma", "WII diploma guide"),
+        ("forest survey", "/exams/forest-survey-of-india", "FSI recruitment guide"),
+        ("central pollution control", "/exams/cpcb-scientist-engineer", "CPCB recruitment guide"),
+        ("pollution control board", "/exams/state-pollution-control-board", "State pollution board guide"),
+    )
+    for token, url, label in exam_map:
+        if token in org:
+            add(label, url)
+
+    # Role salary profiles keyed on the title.
+    role_map = (
+        (r"\besg\b", "/roles/esg-analyst", "ESG analyst profile"),
+        (r"sustainab.*manager|sustainab.*lead|sustainab.*head", "/roles/sustainability-manager", "Sustainability manager profile"),
+        (r"carbon|decarbon", "/roles/carbon-analyst", "Carbon analyst profile"),
+        (r"climate|policy", "/roles/climate-policy-analyst", "Climate policy profile"),
+        (r"\bgis\b|remote sensing|geospatial", "/roles/gis-analyst", "GIS analyst profile"),
+        (r"junior research fellow|senior research fellow|\bjrf\b|\bsrf\b", "/roles/junior-research-fellow", "JRF/SRF profile"),
+        (r"project associate|research associate|project assistant", "/roles/project-associate", "Project associate profile"),
+        (r"wildlife|ecolog|conservation", "/roles/wildlife-conservation", "Wildlife biologist profile"),
+        (r"environmental engineer|environment engineer|pollution|compliance", "/roles/environmental-engineer", "Environmental engineer profile"),
+        (r"forest guard|\bforester\b|\branger\b", "/roles/forest-guard", "Forest guard profile"),
+        (r"renewable|solar|wind|clean energy", "/roles/renewable-energy-engineer", "Renewable energy engineer profile"),
+        (r"consultant", "/roles/sustainability-consulting", "Sustainability consultant profile"),
+        (r"carbon market|carbon trad", "/roles/carbon-market-analyst", "Carbon market analyst profile"),
+        (r"climate risk", "/roles/climate-risk-analyst", "Climate risk analyst profile"),
+        (r"waste|circul|recycl", "/roles/waste-circular-economy", "Waste and circular economy profile"),
+        (r"water|wash|hydro|sanitation", "/roles/water-wash-specialist", "Water and WASH specialist profile"),
+        (r"biodivers|natural capital", "/roles/biodiversity-analyst", "Biodiversity analyst profile"),
+        (r"reporting|brsr|disclosure", "/roles/sustainability-reporting", "Sustainability reporting profile"),
+        (r"green building|leed|griha", "/roles/green-building", "Green building specialist profile"),
+        (r"\bcsr\b|corporate social", "/roles/csr-manager", "CSR manager profile"),
+    )
+    for pattern, url, label in role_map:
+        if re.search(pattern, title):
+            add(label, url)
+
+    # Glossary terms keyed on category.
+    glossary_map = {
+        "ESG, Carbon Markets & Corporate Sustainability": [("/glossary/esg", "ESG"), ("/glossary/brsr", "BRSR")],
+        "Forestry, Wildlife & Afforestation": [("/glossary/campa", "CAMPA"), ("/glossary/nagar-van", "Nagar Van")],
+        "Academic, JRF, SRF & PhD Positions": [("/glossary/jrf", "JRF"), ("/glossary/srf", "SRF")],
+        "GIS, Remote Sensing & Earth Observation": [("/glossary/dmrv", "dMRV")],
+        "Climate Policy, Think-Tanks & Fellowships": [("/glossary/net-zero", "Net zero")],
+    }
+    for url, label in glossary_map.get(category, []):
+        add(label, url)
+
+    add("Salary guide", "/salary-guide")
+    add("Green career pathways", "/green-careers")
+    return guides[:8]
+
+
 def related_jobs_html(related: List[Dict[str, Any]]) -> str:
     if not related:
         return '<p class="job-page-note">No related listings at present. <a href="/">Browse the full registry</a>.</p>'
@@ -4591,6 +4694,16 @@ def related_jobs_html(related: List[Dict[str, Any]]) -> str:
             <span class="related-meta">{esc(related_meta)}</span>
           </article>""")
     return "\n".join(cards)
+
+
+def related_guides_html(guides: List[Tuple[str, str]]) -> str:
+    if not guides:
+        return '<li><a href="/green-careers">Green career pathways</a></li>'
+    return "\n".join(
+        f"          <li><a href=\"{url}\">{esc(label)}</a></li>" for label, url in guides
+    )
+
+
 
 
 
@@ -4629,6 +4742,28 @@ def _category_context(job):
         "Environmental and sustainability roles are expanding across India as organisations respond to "
         "climate commitments, regulatory requirements and conservation priorities."
     ))
+
+def _role_detail(job: Dict[str, Any]) -> str:
+    """Build a richer overview from existing record fields (no fabrication)."""
+
+    parts: List[str] = []
+    summary = plain(job.get("role_summary")) or plain(job.get("summary"))
+    if summary and summary != plain(job.get("role_summary")):
+        pass
+    quals = plain(job.get("qualification_summary"))
+    exp = plain(job.get("experience_level"))
+    resp = [plain(x) for x in (job.get("key_responsibilities") or []) if plain(x)]
+
+    html_parts: List[str] = []
+    if exp and exp not in ("Not disclosed", "Varies by post"):
+        html_parts.append(f"<p><strong>Experience level:</strong> {esc(exp)}</p>")
+    if quals and quals not in ("See official notification",):
+        html_parts.append(f"<p><strong>Qualification:</strong> {esc(quals)}</p>")
+    if resp:
+        html_parts.append("<p><strong>Key responsibilities include:</strong></p>")
+        html_parts.append("<ul>" + "".join(f"<li>{esc(r)}</li>" for r in resp[:5]) + "</ul>")
+    return "\n".join(html_parts) if html_parts else ""
+
 
 def build_job_page(
     job: Dict[str, Any],
@@ -4674,6 +4809,15 @@ def build_job_page(
           <a class="btn btn-outline" href="{esc(website)}" target="_blank" rel="noopener noreferrer">Official website &nearr;</a>"""
     if not is_archived:
         apply_block += """
+        </div>"""
+
+    share_text = f"{job_title} at {org} - {location}"
+    share_url = canonical
+    share_block = f"""        <div class="job-page-share">
+          <span class="job-page-share-label">Share:</span>
+          <a class="job-page-share-btn" href="https://wa.me/?text={urllib.parse.quote(share_text + ' ' + share_url)}" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">WhatsApp</a>
+          <a class="job-page-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={urllib.parse.quote(share_url)}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">LinkedIn</a>
+          <a class="job-page-share-btn" href="https://twitter.com/intent/tweet?text={urllib.parse.quote(share_text)}&url={urllib.parse.quote(share_url)}" target="_blank" rel="noopener noreferrer" aria-label="Share on X (Twitter)">X</a>
         </div>"""
 
     employer_link = esc(org)
@@ -4791,6 +4935,7 @@ def build_job_page(
           <span class="badge">{esc(plain(job.get("experience_level")) or "Experience stated in notice")}</span>
         </div>
 {apply_block}
+{share_block}
         <img class="job-page-hero-img" src="{discover_image}" width="{DISCOVER_IMAGE_WIDTH}" height="{DISCOVER_IMAGE_HEIGHT}" alt="{esc(job_title)} at {esc(org)}" loading="eager" fetchpriority="high" decoding="async">
       </div>
     </section>
@@ -4800,6 +4945,7 @@ def build_job_page(
         <section>
           <h2>Role overview</h2>
           <p>{esc(summary)}</p>
+          {_role_detail(job)}
         </section>
         <section>
           <h2>Key responsibilities</h2>
@@ -4844,6 +4990,15 @@ def build_job_page(
       </aside>
     </div>
 
+    <section class="job-page-guides" aria-labelledby="guides-title">
+      <div class="job-page-inner">
+        <h2 id="guides-title">Related guides</h2>
+        <ul class="job-page-guide-list">
+{related_guides_html(related_guides_for(job))}
+        </ul>
+      </div>
+    </section>
+
     <section class="job-page-related" aria-labelledby="related-title">
       <div class="job-page-inner">
         <h2 id="related-title">Five related jobs &amp; fellowships</h2>
@@ -4858,6 +5013,7 @@ def build_job_page(
 
 {footer_html('jobs/' + slug + '.html')}
 
+  <script defer src="/js/toc2.js"></script>
   <script defer src="/js/consent.js?v=20261028b"></script>
 <script defer src="/js/back-to-top.js"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
@@ -5236,6 +5392,99 @@ def strip_trailing_whitespace(public: Path) -> int:
     return changed
 
 
+def rebuild_downstream_pages() -> None:
+    """Rebuild the pages that depend on this one, in dependency order.
+
+    ``build_expansion_hubs`` writes the five pathway hubs and leaves markers
+    that ``build_exam_role_pages`` fills with the exam-guide and role-profile
+    blocks. Running them here keeps the GitHub Actions entry point
+    (``python scripts/build_seo_pages.py``) sufficient on its own.
+    """
+
+    for script in ("build_expansion_hubs.py", "build_exam_role_pages.py"):
+        path = Path(__file__).resolve().parent / script
+        if not path.exists():
+            log.warning("Downstream builder missing: %s", path)
+            continue
+        log.info("Running downstream builder %s", script)
+        subprocess.run([sys.executable, str(path)], check=True, cwd=str(REPO_ROOT))
+
+    comparison = Path(__file__).resolve().parent / "build_comparison_pages.py"
+    if comparison.exists():
+        log.info("Running downstream builder build_comparison_pages.py")
+        subprocess.run([sys.executable, str(comparison)], check=True, cwd=str(REPO_ROOT))
+
+    skill_roundup = Path(__file__).resolve().parent / "build_skill_roundup_pages.py"
+    if skill_roundup.exists():
+        log.info("Running downstream builder build_skill_roundup_pages.py")
+        subprocess.run([sys.executable, str(skill_roundup)], check=True, cwd=str(REPO_ROOT))
+
+    feeds = Path(__file__).resolve().parent / "build_category_feeds.py"
+    if feeds.exists():
+        log.info("Running downstream builder build_category_feeds.py")
+        subprocess.run([sys.executable, str(feeds)], check=True, cwd=str(REPO_ROOT))
+
+    csv_builder = Path(__file__).resolve().parent / "build_salary_csv.py"
+    if csv_builder.exists():
+        log.info("Running downstream builder build_salary_csv.py")
+        subprocess.run([sys.executable, str(csv_builder)], check=True, cwd=str(REPO_ROOT))
+
+    feeds_idx = Path(__file__).resolve().parent / "build_feeds_index.py"
+    if feeds_idx.exists():
+        log.info("Running downstream builder build_feeds_index.py")
+        subprocess.run([sys.executable, str(feeds_idx)], check=True, cwd=str(REPO_ROOT))
+
+    sectors = Path(__file__).resolve().parent / "build_sector_hubs.py"
+    if sectors.exists():
+        log.info("Running downstream builder build_sector_hubs.py")
+        subprocess.run([sys.executable, str(sectors)], check=True, cwd=str(REPO_ROOT))
+
+    career = Path(__file__).resolve().parent / "build_career_guides.py"
+    if career.exists():
+        log.info("Running downstream builder build_career_guides.py")
+        subprocess.run([sys.executable, str(career)], check=True, cwd=str(REPO_ROOT))
+
+    career_advice_news = Path(__file__).resolve().parent / "build_career_advice_news.py"
+    if career_advice_news.exists():
+        log.info("Running downstream builder build_career_advice_news.py")
+        subprocess.run([sys.executable, str(career_advice_news)], check=True, cwd=str(REPO_ROOT))
+
+    state_rec = Path(__file__).resolve().parent / "build_state_recruitment.py"
+    if state_rec.exists():
+        log.info("Running downstream builder build_state_recruitment.py")
+        subprocess.run([sys.executable, str(state_rec)], check=True, cwd=str(REPO_ROOT))
+
+    counselor = Path(__file__).resolve().parent / "build_counselor_toolkit.py"
+    if counselor.exists():
+        log.info("Running downstream builder build_counselor_toolkit.py")
+        subprocess.run([sys.executable, str(counselor)], check=True, cwd=str(REPO_ROOT))
+
+    howto = Path(__file__).resolve().parent / "build_howto_guides.py"
+    if howto.exists():
+        log.info("Running downstream builder build_howto_guides.py")
+        subprocess.run([sys.executable, str(howto)], check=True, cwd=str(REPO_ROOT))
+
+    howto = Path(__file__).resolve().parent / "build_howto_guides.py"
+    if howto.exists():
+        log.info("Running downstream builder build_howto_guides.py")
+        subprocess.run([sys.executable, str(howto)], check=True, cwd=str(REPO_ROOT))
+
+    courses = Path(__file__).resolve().parent / "build_course_directory.py"
+    if courses.exists():
+        log.info("Running downstream builder build_course_directory.py")
+        subprocess.run([sys.executable, str(courses)], check=True, cwd=str(REPO_ROOT))
+
+    hindi = Path(__file__).resolve().parent / "build_hindi_pages.py"
+    if hindi.exists():
+        log.info("Running downstream builder build_hindi_pages.py")
+        subprocess.run([sys.executable, str(hindi)], check=True, cwd=str(REPO_ROOT))
+
+    glossary = Path(__file__).resolve().parent / "build_glossary.py"
+    if glossary.exists():
+        log.info("Running downstream builder build_glossary.py")
+        subprocess.run([sys.executable, str(glossary)], check=True, cwd=str(REPO_ROOT))
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     logging.basicConfig(
         level=logging.INFO,
@@ -5434,6 +5683,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "SEO surface rebuilt: 1 snapshot + %d hub page(s) + 2 multilingual portal(s) + 1 global hub + 3 institutional pages",
         len(HUBS),
     )
+    rebuild_downstream_pages()
     return 0
 
 

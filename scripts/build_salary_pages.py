@@ -209,6 +209,7 @@ def build_salary_guide():
         <details style="margin-bottom:8px;"><summary style="cursor:pointer;font-weight:600;">How often is this page updated?</summary><p style="margin-top:6px;line-height:1.6;">The registry refreshes daily; this page is rebuilt on every build from the latest verified listings.</p></details>
         <details style="margin-bottom:16px;"><summary style="cursor:pointer;font-weight:600;">Where can I find open {role} roles?</summary><p style="margin-top:6px;line-height:1.6;">See the <a href="/sustainability-jobs-india">sustainability jobs hub</a> and the <a href="/employers">employer profiles</a> for current vacancies.</p></details>
         <p style="margin-top:16px;"><a href="/salary-guide">Back to salary guide</a></p>
+        <p style="margin-top:16px;"><a class="btn btn-primary" href="/data/green-jobs-salary.csv" download>Download the full salary dataset (CSV) &darr;</a></p>
         """
         html=page_shell(_fit(f"{role} Salary | Urban Forest Park", 65), _fit(f"Compensation ranges for {role} roles across {len(js)} verified listings.", 160), SITE+"/salaries/"+slugify(role), body)
         (PUBLIC/"salaries"/f"{slugify(role)}.html").write_text(html, encoding="utf-8")
