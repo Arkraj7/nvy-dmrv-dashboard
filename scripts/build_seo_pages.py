@@ -3844,7 +3844,7 @@ def build_hub_page(
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
       .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 260px)!important;}}
+      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 360px)!important;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
 
@@ -4915,7 +4915,7 @@ def build_job_page(
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
       .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 260px)!important;}}
+      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 360px)!important;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
     <link rel="stylesheet" href="/styles/job-page.css">
@@ -5897,7 +5897,7 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <style>
       .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
       .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 260px)!important;}}
+      .site-nav{{flex:0 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;max-width:calc(100% - 360px)!important;}}
       .header-actions{{margin-left:0;justify-content:center;}}
     </style>
     <script type="application/ld+json">
