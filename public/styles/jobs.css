@@ -240,7 +240,7 @@ textarea, .share-btn, .btn {
   align-items: center;
   gap: 10px;
 }
-.brand { text-align: center; }
+.brand { display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center; }
 .site-nav {
   display: flex;
   align-items: center;

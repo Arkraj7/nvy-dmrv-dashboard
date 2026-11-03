@@ -138,8 +138,14 @@ def shell(
 
 {bsp.FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
     {HUB_CSS}
+    <style>
+      .header-inner{{flex-direction:column!important;align-items:center!important;text-align:center;}}
+      .brand{{display:flex!important;align-items:center;justify-content:center;gap:10px;text-align:center;}}
+      .site-nav{{justify-content:center;}}
+      .header-actions{{margin-left:0!important;justify-content:center;}}
+    </style>
 </head>
 <body>
     {bsp.GTM_NOSCRIPT}

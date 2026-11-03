@@ -3839,8 +3839,14 @@ def build_hub_page(
 {FONTS}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
     <link rel="stylesheet" href="/styles/hub.css">
+    <style>
+      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .site-nav{{justify-content:center;}}
+      .header-actions{{margin-left:0;justify-content:center;}}
+    </style>
 
     <!-- Structured data -->
 {jsonld_blocks}
@@ -4904,8 +4910,14 @@ def build_job_page(
 
 {FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
     <link rel="stylesheet" href="/styles/hub.css">
+    <style>
+      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .site-nav{{justify-content:center;}}
+      .header-actions{{margin-left:0;justify-content:center;}}
+    </style>
     <link rel="stylesheet" href="/styles/job-page.css">
 
 {schema}
@@ -5880,8 +5892,14 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
     <link rel="stylesheet" href="/styles/hub.css">
+    <style>
+      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+      .brand{{text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+      .site-nav{{justify-content:center;}}
+      .header-actions{{margin-left:0;justify-content:center;}}
+    </style>
     <script type="application/ld+json">
     {json.dumps(item_list, ensure_ascii=False)}
     </script>
