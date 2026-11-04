@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-04T14:42:22+05:30",
-  "last_updated_ist": "2026-11-04T14:42:22+05:30",
+  "last_updated": "2026-11-04T20:00:04+05:30",
+  "last_updated_ist": "2026-11-04T20:00:04+05:30",
   "last_pipeline_run_date_ist": "2026-11-04",
-  "active_open_jobs": 146,
+  "active_open_jobs": 147,
   "opened_this_week": 43,
   "passed_this_week": 36,
   "total_archived_jobs": 46,
-  "total_historical_indexed": 192,
+  "total_historical_indexed": 193,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -72,7 +72,7 @@
       "archived": 2
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 9,
+      "active": 10,
       "archived": 6
     },
     "Climate Policy, Think-Tanks & Fellowships": {
@@ -113,7 +113,7 @@
     }
   },
   "by_state": {
-    "Maharashtra": 19,
+    "Maharashtra": 20,
     "Delhi NCR": 16,
     "Karnataka": 16,
     "Delhi": 8,
