@@ -1,23 +1,12 @@
 {
-<<<<<<< Updated upstream
-  "last_updated": "2026-11-04T08:05:30+05:30",
-  "last_updated_ist": "2026-11-04T08:05:30+05:30",
+  "last_updated": "2026-11-04T11:06:29+05:30",
+  "last_updated_ist": "2026-11-04T11:06:29+05:30",
   "last_pipeline_run_date_ist": "2026-11-04",
-  "active_open_jobs": 138,
+  "active_open_jobs": 146,
   "opened_this_week": 43,
   "passed_this_week": 36,
   "total_archived_jobs": 46,
-  "total_historical_indexed": 184,
-=======
-  "last_updated": "2026-11-04T08:25:03+05:30",
-  "last_updated_ist": "2026-11-04T08:25:03+05:30",
-  "last_pipeline_run_date_ist": "2026-11-04",
-  "active_open_jobs": 137,
-  "opened_this_week": 42,
-  "passed_this_week": 36,
-  "total_archived_jobs": 46,
-  "total_historical_indexed": 183,
->>>>>>> Stashed changes
+  "total_historical_indexed": 192,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -62,32 +51,16 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
-<<<<<<< Updated upstream
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
       "archived": 2
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 11,
+      "active": 12,
       "archived": 2
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 55,
-      "archived": 11
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 3,
-      "archived": 2
-    },
-    "Internships & Student Traineeships": {
-      "active": 6,
-=======
-    "Forestry, Wildlife & Afforestation": {
-      "active": 11,
-      "archived": 2
-    },
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 55,
+      "active": 57,
       "archived": 11
     },
     "Fellowships & Leadership Programs": {
@@ -99,7 +72,7 @@
       "archived": 2
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 8,
+      "active": 9,
       "archived": 6
     },
     "Climate Policy, Think-Tanks & Fellowships": {
@@ -111,48 +84,11 @@
       "archived": 11
     },
     "Workshops, Training & Capacity Building": {
-      "active": 7,
-      "archived": 1
-    },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 17,
-      "archived": 2
-    },
-    "Conferences, Summits & Events": {
-      "active": 3,
-      "archived": 1
-    },
-    "Grants & Research Funding": {
-      "active": 1,
-      "archived": 0
-    },
-    "Ambassador & Fellowship Programs": {
-      "active": 1,
-      "archived": 0
-    },
-    "Scholarships & Doctoral Support": {
-      "active": 2,
->>>>>>> Stashed changes
-      "archived": 2
-    },
-    "GIS, Remote Sensing & Earth Observation": {
       "active": 8,
-      "archived": 6
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 17,
-      "archived": 5
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 6,
-      "archived": 11
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 7,
       "archived": 1
     },
     "Conferences, Summits & Events": {
-      "active": 3,
+      "active": 5,
       "archived": 1
     },
     "Grants & Research Funding": {
@@ -166,6 +102,10 @@
     "Scholarships & Doctoral Support": {
       "active": 2,
       "archived": 2
+    },
+    "Memberships & Community Programs": {
+      "active": 1,
+      "archived": 0
     },
     "Competitions, Hackathons & Awards": {
       "active": 0,
@@ -173,23 +113,23 @@
     }
   },
   "by_state": {
+    "Maharashtra": 19,
     "Delhi NCR": 16,
-    "Maharashtra": 16,
-    "Karnataka": 14,
-    "Delhi": 7,
+    "Karnataka": 16,
+    "Delhi": 8,
     "Gujarat": 7,
+    "Tamil Nadu": 7,
     "Global / Remote": 6,
-    "Tamil Nadu": 6,
     "Uttarakhand": 6,
     "Telangana": 5,
     "Assam": 3,
     "Punjab": 3,
     "Uttar Pradesh": 3,
+    "West Bengal": 3,
     "Haryana": 2,
     "Himachal Pradesh": 2,
     "Kerala": 2,
     "Odisha": 2,
-    "West Bengal": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Bihar": 1,
@@ -199,44 +139,29 @@
     "Madhya Pradesh": 1,
     "Remote (India)": 1
   },
-  "active_global_jobs": 80,
+  "active_global_jobs": 89,
   "active_global_portals": 12,
-  "total_global_records": 92,
+  "total_global_records": 101,
   "total_archived_global_jobs": 35,
   "global_jobs_by_region": {
-<<<<<<< Updated upstream
     "North America": 10,
     "Asia-Pacific": 15,
     "UN / Multilateral": 6,
     "Latin America": 1,
     "Global / Remote": 16,
-    "Europe": 17,
-    "Africa & Middle East": 15
-  },
-  "global_jobs_by_kind": {
-    "Job / Career": 57,
-    "Scholarship": 10,
-    "Fellowship": 8,
-    "Grant / Funding": 3,
-    "Internship": 1,
-    "Competition / Award": 1
-=======
+    "Europe": 18,
     "Africa & Middle East": 15,
-    "Asia-Pacific": 15,
-    "Europe": 17,
-    "Global / Remote": 16,
-    "Latin America": 1,
-    "North America": 10,
-    "UN / Multilateral": 6
+    "Global": 6,
+    "Middle East & Africa": 1,
+    "Africa": 1
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 1,
-    "Fellowship": 8,
+    "Job / Career": 62,
+    "Scholarship": 10,
+    "Fellowship": 10,
     "Grant / Funding": 3,
-    "Internship": 1,
-    "Job / Career": 57,
-    "Scholarship": 10
->>>>>>> Stashed changes
+    "Internship": 2,
+    "Competition / Award": 2
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
