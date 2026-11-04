@@ -99,5 +99,15 @@
       });
   }
 
+  /* Sync the "Saved" counter in the (shared) header from localStorage. */
+  try {
+    var saved = JSON.parse(window.localStorage.getItem('ufp_saved_jobs') || '[]');
+    var count = Array.isArray(saved) ? saved.length : 0;
+    var el = document.getElementById('saved-count');
+    if (el) el.textContent = String(count);
+    var btn = document.getElementById('saved-header-btn');
+    if (btn) btn.setAttribute('aria-label', 'Open saved jobs (' + count + ')');
+  } catch (e) { /* ignore */ }
+
   hydrateRegistryBadge();
 })();
