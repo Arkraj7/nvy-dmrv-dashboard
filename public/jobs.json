@@ -7742,21 +7742,25 @@
     "deadline_or_window": "Walk-in 3-7 November 2026",
     "region": "India",
     "country": "India",
-    "qualification_summary": "Third-year B.A. (TYBA) students and graduates; interns and freshers welcome.",
-    "compensation_or_fellowship": "Stipend Rs. 12,000-15,000 per month",
-    "role_summary": "Axiom is hiring 100+ GIS Trainees for a 6-month, day-shift engagement in Navi Mumbai. Walk-in interviews run 3-7 November 2026. An entry point into GIS, mapping and geospatial technology.",
+    "qualification_summary": "Third-year B.A. (TYBA) students and graduates; interns and freshers welcome. Basic familiarity with GIS concepts is an advantage; training is provided on the job.",
+    "compensation_or_fellowship": "Stipend Rs. 12,000-15,000 per month for the 6-month engagement",
+    "role_summary": "Axiom is hiring 100+ GIS Trainees for a 6-month, day-shift engagement in Navi Mumbai. Walk-in interviews run 3-7 November 2026 at Rupa Solitaire, Mahape, Ghansoli. An entry point into GIS, mapping and geospatial technology for students and freshers, with on-the-job training and a monthly stipend.",
     "key_responsibilities": [
       "GIS digitisation, mapping and attribute data entry",
       "Geospatial data cleaning, QA and basic analysis",
-      "Support to mapping and survey projects under senior GIS staff"
+      "Support to mapping and survey projects under senior GIS staff",
+      "Working with QGIS/ArcGIS for map production and updates",
+      "Maintaining spatial databases and project records"
     ],
     "must_have_skills": [
-      "GIS",
+      "GIS basics",
       "Mapping",
-      "QGIS or ArcGIS basics",
-      "Attention to detail"
+      "QGIS or ArcGIS",
+      "MS Excel",
+      "Attention to detail",
+      "Willingness to learn"
     ],
-    "application_tip": "Walk in between 3-7 November 2026 at Rupa Solitaire, Mahape, Ghansoli, Navi Mumbai. Alternatively email your resume to Recruitment@axiomgroup.in or call 8655659575.",
+    "application_tip": "Walk in between 3-7 November 2026 at Rupa Solitaire, Mahape, Ghansoli, Navi Mumbai, carrying an updated resume and ID proof. Alternatively email your resume to Recruitment@axiomgroup.in or call 8655659575. Arrive early; walk-ins are on a first-come basis.",
     "apply_url": "mailto:Recruitment@axiomgroup.in",
     "org_website": "",
     "org_domain": "",
