@@ -37,6 +37,12 @@ def build_career_advice():
          "Start with the verified registry, then add direct employer portals, university project positions and government notifications. Avoid paid application channels."),
         ("How important is a portfolio?",
          "Very. A short analysis, map, plantation monitoring note or BRSR commentary demonstrates applied skill far better than coursework alone."),
+        ("What salary can a fresher expect in green jobs in India?",
+         "Entry-level roles (JRF, project associate, GIS intern) typically range from Rs. 15,000 to Rs. 35,000 per month. ESG analyst and sustainability consultant roles for graduates start around Rs. 4-7 lakh per annum. Pay rises sharply with two to four years of specialised experience."),
+        ("Are government green jobs worth pursuing?",
+         "Yes. Forest departments, pollution control boards, CAMPA, FSI and state climate cells offer stable careers with defined progression. Recruitment cycles are slower, so apply early and track notifications."),
+        ("How do I move from a non-green role into sustainability?",
+         "Map your transferable skills, take one targeted certification, build a small portfolio piece in the target domain, and apply for adjacent roles (for example, a data analyst moving into ESG data)."),
     ]
     related = [
         ("/green-careers", "Green career pathways"),
@@ -135,6 +141,48 @@ def build_career_advice():
         </ul>
       </div>
     </section>""")
+    sections.append("""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>8. Salary expectations by pathway</h2>
+        <p>Pay varies sharply by pathway, city and employer type. Use the <a href="/salary-guide">salary guide</a> for role-level bands; the broad ranges below are indicative.</p>
+        <ul class="check-list">
+          <li><strong>JRF / SRF / project associate:</strong> Rs. 15,000-35,000 per month, plus HRA where applicable.</li>
+          <li><strong>GIS / remote sensing analyst:</strong> Rs. 3-6 lakh per annum at entry, rising to Rs. 8-15 lakh with three to five years of experience.</li>
+          <li><strong>ESG / sustainability analyst:</strong> Rs. 4-8 lakh per annum at entry, with consulting roles paying a premium.</li>
+          <li><strong>Forestry / wildlife field roles:</strong> Rs. 2.5-5 lakh per annum, with government scales higher and more stable.</li>
+          <li><strong>Climate policy / think-tank roles:</strong> Rs. 6-12 lakh per annum at mid level, with senior roles significantly higher.</li>
+          <li><strong>Corporate sustainability leadership:</strong> Rs. 15 lakh per annum and above, depending on firm size and scope.</li>
+        </ul>
+      </div>
+    </section>""")
+    sections.append("""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>9. How to write a strong application</h2>
+        <p>Screeners reject most applications for avoidable reasons. A strong application is specific, evidence-based and easy to scan.</p>
+        <ul class="check-list">
+          <li>Read the notification fully and note every eligibility condition and document.</li>
+          <li>Tailor the CV to the role; lead with relevant projects, tools and outcomes.</li>
+          <li>Quantify results: area mapped, samples collected, reports submitted, stakeholders engaged.</li>
+          <li>Write a one-page cover letter that names the role, the organisation and one concrete reason you fit.</li>
+          <li>Attach documents in the requested format and naming convention.</li>
+          <li>Submit before the deadline and keep a copy of the acknowledgement.</li>
+          <li>Follow up politely after the stated review period if no response.</li>
+        </ul>
+      </div>
+    </section>""")
+    sections.append("""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>10. Resources for women and underrepresented groups</h2>
+        <p>Several fellowships, grants and networks specifically support women and underrepresented researchers in climate and environment.</p>
+        <ul class="check-list">
+          <li><a href="/scholarships-doctoral-support">Scholarships and doctoral support</a> &mdash; funded PhD and postdoc opportunities.</li>
+          <li><a href="/fellowship-deadlines">Fellowship deadlines</a> &mdash; curated deadlines with direct links.</li>
+          <li><a href="/grants-research-funding">Grants and research funding</a> &mdash; small grants and seed funding.</li>
+          <li><a href="/ambassador-fellowship-programs">Ambassador and fellowship programmes</a> &mdash; leadership and youth programmes.</li>
+          <li>Look for diversity-focused fellowships from WISER, OWSD, L'Oreal-UNESCO and national science academies.</li>
+        </ul>
+      </div>
+    </section>""")
     related_html = "".join('<li><a href="%s">%s</a></li>' % (href, esc(label)) for href, label in related)
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
@@ -171,6 +219,10 @@ def build_news():
          "No. We are a career and research registry; this page points to reporting and primary sources for context."),
         ("How should I use these sources?",
          "Start with the institution or regulator most relevant to your sector, then follow its notifications, reports and press releases."),
+        ("Can I suggest a source to add?",
+         "Yes. Email urbanforestpark@gmail.com with the source name and URL; we review and add relevant ones."),
+        ("Are the developments verified?",
+         "We link only to primary sources and established publications. We do not verify the underlying claims; readers should read the original."),
     ]
     india_sources = [
         ("Ministry of Environment, Forest and Climate Change", "https://moef.gov.in", "Policy, programmes and notifications."),
@@ -298,6 +350,25 @@ def build_news():
         </div>
       </div>
     </section>""" % dev_cards)
+    sections.append("""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>Why these developments matter for careers</h2>
+        <p>Policy and market shifts translate directly into hiring. When states refine climate action plans, agencies hire GIS analysts, planners and monitoring staff. When corporates deepen BRSR reporting, demand rises for ESG analysts, assurance associates and sustainability managers. When forest monitoring improves, field and remote-sensing roles multiply. Tracking these signals early helps you position your skills before the vacancy appears.</p>
+        <p>Use the <a href="/">career registry</a> to find the roles that follow each development, and the <a href="/career-advice">career advice</a> page to plan the transition.</p>
+      </div>
+    </section>""")
+    sections.append("""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>How to stay updated</h2>
+        <ul class="check-list">
+          <li>Subscribe to the <a href="/feeds">RSS feeds</a> for daily verified vacancies.</li>
+          <li>Join the <a href="https://t.me/urbanforestpark" target="_blank" rel="noopener noreferrer">Telegram channel</a> for instant alerts.</li>
+          <li>Follow the official sources listed below for primary announcements.</li>
+          <li>Set Google Alerts for "green jobs India", "JRF forestry" and "ESG jobs India".</li>
+          <li>Check the <a href="/green-jobs-this-week">weekly digest</a> every Monday.</li>
+        </ul>
+      </div>
+    </section>""")
     sections.append("""    <section class="hub-main">
       <div class="hub-main-inner">
         <h2>How to use this page</h2>

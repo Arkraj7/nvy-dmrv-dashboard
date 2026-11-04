@@ -4955,6 +4955,7 @@ def build_job_page(
         <p class="eyebrow">{esc(plain(job.get("category")) or "Environmental Job")}</p>
         <h1>{esc(job_title)}</h1>
         <p class="job-page-org"><strong>{esc(org)}</strong> &middot; {esc(location)}</p>
+        <p class="job-page-byline" style="font-size:12.5px;color:var(--ink-3);margin:4px 0 0;">Verified and published by the Urban Forest Park editorial team &middot; Last checked {today.strftime('%d %b %Y')}</p>
         <div class="job-page-badges">
           <span class="badge badge-type">{esc(position_type_of(job))}</span>
           <span class="badge badge-state">{PIN_SVG}{esc(state_label(job))}</span>
