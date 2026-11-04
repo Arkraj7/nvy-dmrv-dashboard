@@ -160,8 +160,7 @@ def shell(
   </main>
 
 {bsp.footer_html()}
-  <script defer src="/js/i18n.js"></script>
-  <script defer src="/js/hub.js"></script>
+    <script defer src="/js/hub.js"></script>
 </body>
 </html>
 """
