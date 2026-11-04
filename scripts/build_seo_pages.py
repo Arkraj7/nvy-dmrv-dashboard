@@ -3839,13 +3839,15 @@ def build_hub_page(
 {FONTS}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
-      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-      .header-actions{{margin-left:0;justify-content:center;}}
+      @media (min-width: 1280px) {{
+        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+        .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
+        .header-actions{{margin-left:0;justify-content:center;}}
+      }}
     </style>
 
     <!-- Structured data -->
@@ -4910,13 +4912,17 @@ def build_job_page(
 
 {FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
-      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-      .header-actions{{margin-left:0;justify-content:center;}}
+      /* Centered two-row header on wide screens only; mobile/tablet keep the
+         compact header rules from jobs.css. */
+      @media (min-width: 1280px) {{
+        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+        .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
+        .header-actions{{margin-left:0;justify-content:center;}}
+      }}
     </style>
     <link rel="stylesheet" href="/styles/job-page.css">
 
@@ -5892,13 +5898,15 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
-      .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
-      .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
-      .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-      .header-actions{{margin-left:0;justify-content:center;}}
+      @media (min-width: 1280px) {{
+        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
+        .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
+        .header-actions{{margin-left:0;justify-content:center;}}
+      }}
     </style>
     <script type="application/ld+json">
     {json.dumps(item_list, ensure_ascii=False)}

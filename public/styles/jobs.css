@@ -2887,11 +2887,24 @@ html, body { overflow-x: hidden; }
     margin-left: 0;
     gap: 6px;
     justify-content: flex-end;
+    flex-wrap: wrap;
   }
-  .lang-btn { padding: 5px 9px; font-size: 11.5px; }
-  .theme-toggle { padding: 6px 10px; font-size: 11px; gap: 5px; }
+  .lang-toggle { display: inline-flex; gap: 0; }
+  .lang-btn { min-height: 36px; padding: 7px 10px; font-size: 12px; }
+  .theme-toggle { min-height: 36px; padding: 7px 11px; font-size: 11px; gap: 5px; }
+  .saved-header-btn { min-height: 36px; }
   .nav-cta { display: none; }
-  .nav-toggle { position: absolute; top: 8px; right: 12px; padding: 7px; }
+  .nav-toggle {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    z-index: 2;
+  }
+  .site-nav.open { max-height: calc(100vh - 60px); overflow-y: auto; }
+  .site-nav .nav-link { min-height: 44px; display: flex; align-items: center; }
 
   /* ---------- 24b. 2x2 telemetry ribbon ---------- */
   .telemetry-inner { padding: 10px 12px 12px; }
@@ -3088,6 +3101,10 @@ html, body { overflow-x: hidden; }
 
   html.ufp-consent-open .ufp-app-widget,
   html.ufp-consent-open .ufp-app-pill { bottom: 126px; }
+  /* The consent sheet owns the bottom of small screens; defer the install
+     pill until consent is resolved so it never covers page content. */
+  html.ufp-consent-open .ufp-app-pill { display: none; }
+  .uaw-close { width: 34px; height: 34px; }
 }
 /* end ufp-mobile-optimisation */
 /* Position dossier breadcrumbs (matches hub breadcrumbs) */

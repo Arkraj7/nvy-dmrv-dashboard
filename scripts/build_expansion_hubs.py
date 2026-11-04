@@ -138,13 +138,15 @@ def shell(
 
 {bsp.FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
     {HUB_CSS}
     <style>
+      @media (min-width: 1280px) {{
       .header-inner{{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-items:flex-start!important;text-align:center;position:relative!important;}}
       .brand{{flex-basis:100%!important;display:flex!important;align-items:center;justify-content:center;gap:10px;text-align:center;}}
       .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
       .header-actions{{position:absolute!important;right:20px!important;top:62px!important;justify-content:flex-end!important;flex:0 0 auto!important;}}
+      }}
     </style>
 </head>
 <body>
@@ -158,6 +160,7 @@ def shell(
   </main>
 
 {bsp.footer_html()}
+  <script defer src="/js/hub.js"></script>
 </body>
 </html>
 """

@@ -52,13 +52,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&display=swap">
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
-      .header-inner{flex-direction:column;align-items:center;text-align:center;}
-      .brand{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
-      .site-nav{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}
-      .header-actions{margin-left:0;justify-content:center;}
+      @media (min-width: 1280px) {
+        .header-inner{flex-direction:column;align-items:center;text-align:center;}
+        .brand{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
+        .site-nav{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}
+        .header-actions{margin-left:0;justify-content:center;}
+      }
     </style>
 
     <!-- Structured data -->
