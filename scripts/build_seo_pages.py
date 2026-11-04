@@ -4487,15 +4487,18 @@ def _is_remote_location(job: Dict[str, Any]) -> bool:
     return False
 
 
-def _applicant_location(country_name: str, country_code: str) -> Dict[str, Any]:
-    if country_code:
-        name = (
-            country_name
-            if len(country_name) > 2 and _country_key(country_name) not in _REMOTE_COUNTRY_KEYS
-            else country_code
-        )
-        return {"@type": "Country", "name": name}
-    return {"@type": "AdministrativeArea", "name": "Worldwide"}
+def _applicant_location(country_name: str, country_code: str) -> Optional[Dict[str, Any]]:
+    # Google's JobPosting spec only accepts Country here. When the posting is
+    # open worldwide there is no meaningful country requirement, so omit the
+    # field entirely instead of emitting an invalid AdministrativeArea.
+    if not country_code:
+        return None
+    name = (
+        country_name
+        if len(country_name) > 2 and _country_key(country_name) not in _REMOTE_COUNTRY_KEYS
+        else country_code
+    )
+    return {"@type": "Country", "name": name}
 
 
 def _job_location_text(job: Dict[str, Any]) -> str:
