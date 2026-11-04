@@ -5098,6 +5098,23 @@ def sync_sitemap_guides(public: Path, today: date) -> int:
     if not path.exists():
         return 0
     text = path.read_text(encoding="utf-8")
+    # Remove stale guide entries whose backing file no longer exists.
+    valid_stems = {p.stem for p in guides_dir.glob("*.html")}
+    removed = {"n": 0}
+
+    def _drop_stale(m):
+        loc = m.group(1)
+        if "/guides/" not in loc:
+            return m.group(0)
+        stem = loc.rsplit("/", 1)[-1]
+        if stem in valid_stems:
+            return m.group(0)
+        removed["n"] += 1
+        return ""
+
+    text = re.sub(r"\s*<url>\s*<loc>([^<]+)</loc>.*?</url>", _drop_stale, text, flags=re.S)
+    if removed["n"]:
+        log.info("Removed %d stale guide URL(s) from sitemap", removed["n"])
     seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
     additions: List[str] = []
     for guide in sorted(guides_dir.glob("*.html")):

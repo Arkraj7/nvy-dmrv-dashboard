@@ -1522,9 +1522,9 @@ ROLES: List[Dict[str, Any]] = [
         "slug": "sustainability-consulting",
         "answer": "A sustainability consultant advises companies on ESG strategy, reporting and decarbonisation. Entry usually needs a master's in sustainability or business; framework knowledge (BRSR, GRI, TCFD) is listed in most postings.",
         "name": "Sustainability Consultant",
-        "h1": "Sustainability Consultant Salary in India: Pay & Career Path",
-        "title": "Sustainability Consultant Salary in India 2026: Pay & Career Path",
-        "desc": "Sustainability consulting roles in India: what consultants do, skills employers list, advertised pay, and progression to partner.",
+        "h1": "Sustainability Consulting Careers in India: Salary, Skills & Entry",
+        "title": "Sustainability Consulting Careers in India 2026: Salary, Skills & Entry",
+        "desc": "Sustainability consulting in India: what consultants do, skills employers list, advertised pay, and progression to partner.",
         "kicker": "Consulting",
         "what": "Sustainability consultants advise companies on ESG strategy, reporting, carbon accounting and decarbonisation. The work is a mix of analysis, client management and delivery.",
         "entry": [
