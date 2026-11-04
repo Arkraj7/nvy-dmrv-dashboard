@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T02:08:39",
+  "generated_at": "2026-11-04T02:34:58",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,9 +34,9 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 296,
-      "passed": 0,
-      "active": 0
+      "leads": 249,
+      "passed": 1,
+      "active": 1
     },
     "official-page": {
       "leads": 157,
@@ -53,13 +53,13 @@
       "passed": 0,
       "active": 0
     },
-    "indeed": {
-      "leads": 17,
+    "portal:ceew": {
+      "leads": 16,
       "passed": 0,
       "active": 0
     },
-    "portal:ceew": {
-      "leads": 16,
+    "indeed": {
+      "leads": 9,
       "passed": 0,
       "active": 0
     },
@@ -68,13 +68,13 @@
       "passed": 0,
       "active": 0
     },
-    "reliefweb-rss": {
-      "leads": 7,
+    "google-news": {
+      "leads": 6,
       "passed": 0,
       "active": 0
     },
-    "google-news": {
-      "leads": 6,
+    "reliefweb-rss": {
+      "leads": 5,
       "passed": 0,
       "active": 0
     },
@@ -85,8 +85,8 @@
     }
   },
   "totals": {
-    "leads": 579,
-    "passed": 0,
-    "active": 0
+    "leads": 522,
+    "passed": 1,
+    "active": 1
   }
 }

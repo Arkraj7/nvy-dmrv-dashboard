@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-03T22:24:50+05:30",
-  "last_updated_ist": "2026-11-03T22:24:50+05:30",
-  "last_pipeline_run_date_ist": "2026-11-03",
-  "active_open_jobs": 139,
-  "opened_this_week": 38,
-  "passed_this_week": 35,
-  "total_archived_jobs": 44,
-  "total_historical_indexed": 183,
+  "last_updated": "2026-11-04T08:04:58+05:30",
+  "last_updated_ist": "2026-11-04T08:04:58+05:30",
+  "last_pipeline_run_date_ist": "2026-11-04",
+  "active_open_jobs": 138,
+  "opened_this_week": 43,
+  "passed_this_week": 36,
+  "total_archived_jobs": 46,
+  "total_historical_indexed": 184,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -51,56 +51,56 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
-    "GIS, Remote Sensing & Earth Observation": {
-      "active": 8,
-      "archived": 6
-    },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
-      "archived": 1
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 3,
       "archived": 2
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 17,
-      "archived": 5
-    },
-    "Conferences, Summits & Events": {
-      "active": 3,
-      "archived": 1
-    },
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 55,
-      "archived": 11
-    },
-    "Grants & Research Funding": {
-      "active": 1,
-      "archived": 0
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 7,
-      "archived": 1
-    },
-    "Ambassador & Fellowship Programs": {
-      "active": 1,
-      "archived": 0
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 6,
-      "archived": 11
-    },
-    "Scholarships & Doctoral Support": {
-      "active": 3,
-      "archived": 1
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 11,
       "archived": 2
     },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 55,
+      "archived": 11
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 3,
+      "archived": 2
+    },
     "Internships & Student Traineeships": {
       "active": 6,
+      "archived": 2
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 8,
+      "archived": 6
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 17,
+      "archived": 5
+    },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 6,
+      "archived": 11
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 7,
+      "archived": 1
+    },
+    "Conferences, Summits & Events": {
+      "active": 3,
+      "archived": 1
+    },
+    "Grants & Research Funding": {
+      "active": 1,
+      "archived": 0
+    },
+    "Ambassador & Fellowship Programs": {
+      "active": 1,
+      "archived": 0
+    },
+    "Scholarships & Doctoral Support": {
+      "active": 2,
       "archived": 2
     },
     "Competitions, Hackathons & Awards": {
@@ -115,14 +115,14 @@
     "Delhi": 7,
     "Gujarat": 7,
     "Global / Remote": 6,
+    "Tamil Nadu": 6,
     "Uttarakhand": 6,
-    "Tamil Nadu": 5,
     "Telangana": 5,
-    "Uttar Pradesh": 4,
     "Assam": 3,
-    "Himachal Pradesh": 3,
     "Punjab": 3,
+    "Uttar Pradesh": 3,
     "Haryana": 2,
+    "Himachal Pradesh": 2,
     "Kerala": 2,
     "Odisha": 2,
     "West Bengal": 2,
@@ -135,26 +135,26 @@
     "Madhya Pradesh": 1,
     "Remote (India)": 1
   },
-  "active_global_jobs": 73,
-  "active_global_portals": 13,
-  "total_global_records": 86,
-  "total_archived_global_jobs": 33,
+  "active_global_jobs": 80,
+  "active_global_portals": 12,
+  "total_global_records": 92,
+  "total_archived_global_jobs": 35,
   "global_jobs_by_region": {
-    "Asia-Pacific": 11,
-    "Europe": 17,
-    "Global / Remote": 14,
     "Africa & Middle East": 15,
-    "North America": 9,
-    "UN / Multilateral": 5,
-    "Global": 2
+    "Asia-Pacific": 15,
+    "Europe": 17,
+    "Global / Remote": 16,
+    "Latin America": 1,
+    "North America": 10,
+    "UN / Multilateral": 6
   },
   "global_jobs_by_kind": {
-    "Job / Career": 50,
-    "Internship": 1,
-    "Scholarship": 10,
     "Competition / Award": 1,
+    "Fellowship": 8,
     "Grant / Funding": 3,
-    "Fellowship": 8
+    "Internship": 1,
+    "Job / Career": 57,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
