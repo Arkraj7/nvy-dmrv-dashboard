@@ -4,9 +4,15 @@
 
 Today's verified picks (6):
 
+<<<<<<< Updated upstream
 1. Senior Research Fellow — Vellore Institute of Technology
 📍 Vellore, Tamil Nadu · Apply by 2026-12-04
 🔗 https://www.urbanforestpark.com/jobs/senior-research-fellow-vit-chennai
+=======
+1. Research Assistant (ICSSR Project) — Dr. B. R. Ambedkar University Delhi (AUD)
+📍 New Delhi, Delhi · Apply by 2026-12-02
+🔗 https://www.urbanforestpark.com/jobs/aud-research-assistant-icssr-2026
+>>>>>>> Stashed changes
 
 2. Climate & Biodiversity Analyst Intern — Candriam
 📍 Remote (Global), Global / Remote · Apply by 2026-12-02
@@ -24,9 +30,15 @@ Today's verified picks (6):
 📍 Oficina Regional para México · Apply by 2026-11-16
 🔗 https://www.urbanforestpark.com/jobs/asistente-especialista-en-gesti-n-ambiental-y-social-salvagu
 
+<<<<<<< Updated upstream
 6. Research Assistant (ICSSR Project) — Dr. B. R. Ambedkar University Delhi (AUD)
 📍 New Delhi, Delhi · Apply by 2026-12-02
 🔗 https://www.urbanforestpark.com/jobs/aud-research-assistant-icssr-2026
+=======
+6. Project Associate-I - Forestry & Ecology (CSIR-TKDL) — CSIR - Traditional Knowledge Digital Library (TKDL) Unit
+📍 New Delhi, Delhi · Apply by 2026-11-12
+🔗 https://www.urbanforestpark.com/jobs/csir-tkdl-project-associate-i-forestry-2026
+>>>>>>> Stashed changes
 
 Plus 4 more verified roles: https://www.urbanforestpark.com/
 💬 WhatsApp: https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw

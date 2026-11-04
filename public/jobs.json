@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< Updated upstream
     "id": "senior-research-fellow-vit-chennai",
     "date_added": "2026-11-04",
     "clean_title": "Senior Research Fellow",
@@ -67,6 +68,8 @@
     "valid_through": "2026-12-04"
   },
   {
+=======
+>>>>>>> Stashed changes
     "clean_title": "Field Biologist (5 Posts)",
     "organization": "Tadoba Andhari Tiger Reserve (TATR), Maharashtra Forest Department",
     "city": "Chandrapur",
@@ -106,8 +109,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Field Biologist (5 पद)",
     "summary_hi": "Tadoba Andhari Tiger Reserve, Maharashtra, विभिन्न पारिस्थितिक क्षेत्रों में विशेषज्ञता वाले Field Biologist के 5 पदों के लिए 11 महीने के अनुबंध पर आवेदन आमंत्रित करता है। उम्मीदवारों के पास संबंधित विषयों जैसे एवियन बायोलॉजी, जलीय जीव विज्ञान या टाइगर इकोलॉजी में डिग्री होनी चाहिए।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -162,8 +170,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "पर्यावरण अधिकारी — Swadesh Metallics Pvt. Ltd.",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Swadesh Metallics Pvt. Ltd. (Chhattisgarh) हेतु उपलब्ध है। आवश्यक योग्यता: Relevant qualification in Environmental Science or Environmental Engineering; experience in environmental management or the steel industry preferred.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "official-email-in-post",
@@ -218,8 +231,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Sardar Patel Good शासन CM फेलोशिप 2027-28 — Government of Gujarat (SPIPA)",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Government of Gujarat (SPIPA) (Gujarat) हेतु उपलब्ध है। आवश्यक योग्यता: Graduate with at least 60% in SSC, HSC and graduation. Minimum 3 years experience. Age up to 35 years (as on 15/12/2026).। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -268,8 +286,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "MoEFCC इंटर्नशिप Scheme 2027 — Ministry of Environment, Forest and Climate Change (MoEFCC)",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Ministry of Environment, Forest and Climate Change (MoEFCC) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Graduation, post-graduation or research students from recognised institutions in India or abroad. 22 eligible disciplines including environmental science, law, GIS, forestry, wildlife, climate change.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-04T00:46:25.109741+00:00",
       "final_url": "https://moef.gov.in/recruitment/update",
@@ -326,8 +349,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "सलाहकार / सहायक प्रबंधक - ESG Advisory — KPMG India",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद KPMG India (Haryana) हेतु उपलब्ध है। आवश्यक योग्यता: Relevant experience in ESG consulting, sustainability strategy, ESG analytics and technology, supply chain sustainability, or blue economy topics.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -376,8 +404,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "यंग प्रोफेशनल-II (रिमोट सेंसिंग & GIS) — ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP)",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP) (Maharashtra) हेतु उपलब्ध है। आवश्यक योग्यता: Postgraduate degree in Remote Sensing & GIS, Geoinformatics, Geography or a related discipline, as per the ICAR-NBSS&LUP advertisement.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-04T00:46:22.859875+00:00",
       "final_url": "https://www.freejobalert.com/articles/icar-nbss-lup-young-professional-ii-rs-gis-recruitment-2026-3077207",
@@ -433,8 +466,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Himalayan संरक्षण कार्यक्रम समन्वयक — Zoo Outreach Organisation",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Zoo Outreach Organisation (Himachal Pradesh) हेतु उपलब्ध है। आवश्यक योग्यता: Completed PhD in a relevant discipline (ecology, conservation, wildlife or related).। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -488,8 +526,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Monitoring, Evaluation and Reporting अधिकारी — Global Initiative Against Transnational Organized Crime (GI-TOC)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Global Initiative Against Transnational Organized Crime (GI-TOC) (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: University degree in a relevant field. Some experience in programme support, research, M&E or communications.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -540,8 +583,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "GIS Trainer (प्रशिक्षु) - Remote — GeoInfra Technologies India",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद GeoInfra Technologies India (Remote (India)) हेतु उपलब्ध है। आवश्यक योग्यता: Minimum 5 years GIS industry experience. Knowledge of ArcGIS, QGIS, Remote Sensing, Spatial Analysis. English and Hindi mandatory.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -598,8 +646,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Global Young Professionals Programme 2027 — Genesis Analytics",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Genesis Analytics (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Graduates and early-career professionals in economics, public policy, international development, business and related fields.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -647,8 +700,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "प्रोजेक्ट एसोसिएट-I - वानिकी & पारिस्थितिकी (CSIR-TKDL) — CSIR - Traditional Knowledge Digital Library (TKDL) Unit",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट CSIR - Traditional Knowledge Digital Library (TKDL) Unit (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Master's degree in Forestry & Ecology, Environmental Sciences or related disciplines, as per the CSIR-TKDL notice.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-04T00:46:22.713761+00:00",
       "final_url": "https://www.freejobalert.com/articles/csir-tkdl-recruitment-2026-project-associate-i-pat-i-3077260",
@@ -703,8 +761,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "जलवायु Campaign निदेशक — Corporate Accountability",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Corporate Accountability (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: 5+ years experience in climate organising or corporate campaigning. Work authorisation required.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -753,8 +816,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "इंटर्न - पर्यावरणीय and सामाजिक स्थिरता (जलवायु परिवर्तन) — Council of Europe Development Bank (CEB)",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Council of Europe Development Bank (CEB) (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Graduate-level. 6-month internship starting February 2027.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -803,8 +871,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "जलवायु & जैवविविधता विश्लेषक इंटर्न — Candriam",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Candriam (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Passion for ecological transition. IT development skills and/or strong data management competencies. Ideal for environmental engineers.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -855,8 +928,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "अनुसंधान विश्लेषक - Bioenergy & नीति — Bio Trend Energy Pvt. Ltd.",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Bio Trend Energy Pvt. Ltd. (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Degree in a technical, energy, agricultural or environmental field (B.Sc., M.Sc., Biotechnology or similar); freshers welcome.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "official-email-in-post",
@@ -909,8 +987,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "पर्यावरणीय अभियंता — BIOFICS PVT. LTD.",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद BIOFICS PVT. LTD. (Gujarat) हेतु उपलब्ध है। आवश्यक योग्यता: 1-2 years experience in environmental engineering. Immediate joiners preferred.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -965,8 +1048,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "Australia Awards Short Course: जलवायु-Resilient कृषि & Food Security — Australia Awards - Pakistan",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Australia Awards - Pakistan (Global / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Minimum 5 years relevant professional experience. Demonstrated leadership potential. Ability to engage in online learning.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -1014,8 +1102,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "रिसर्च असिस्टेंट (ICSSR Project) — Dr. B. R. Ambedkar University Delhi (AUD)",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट Dr. B. R. Ambedkar University Delhi (AUD) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Ph.D./M.Phil./Postgraduate in a Social Science discipline with minimum 55% marks.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",
@@ -1067,8 +1160,13 @@
     "evergreen": false,
     "date_added": "2026-11-02",
     "date_posted": "2026-11-02",
+<<<<<<< Updated upstream
     "title_hi": "प्रोजेक्ट समन्वयक (Livelihood & Women Empowerment) — Anuragini NGO",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Anuragini NGO (Uttar Pradesh) हेतु उपलब्ध है। आवश्यक योग्यता: Graduate/Postgraduate in Social Work, Rural Development, Management or relevant discipline, with 1-3 years experience in development sector.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+=======
+    "title_hi": "",
+    "summary_hi": "",
+>>>>>>> Stashed changes
     "verification": {
       "verified_at": "2026-11-02",
       "method": "manual-batch-verified",

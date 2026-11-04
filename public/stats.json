@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "last_updated": "2026-11-04T08:05:30+05:30",
   "last_updated_ist": "2026-11-04T08:05:30+05:30",
   "last_pipeline_run_date_ist": "2026-11-04",
@@ -7,6 +8,16 @@
   "passed_this_week": 36,
   "total_archived_jobs": 46,
   "total_historical_indexed": 184,
+=======
+  "last_updated": "2026-11-04T08:25:03+05:30",
+  "last_updated_ist": "2026-11-04T08:25:03+05:30",
+  "last_pipeline_run_date_ist": "2026-11-04",
+  "active_open_jobs": 137,
+  "opened_this_week": 42,
+  "passed_this_week": 36,
+  "total_archived_jobs": 46,
+  "total_historical_indexed": 183,
+>>>>>>> Stashed changes
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -51,6 +62,7 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
+<<<<<<< Updated upstream
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
       "archived": 2
@@ -69,6 +81,58 @@
     },
     "Internships & Student Traineeships": {
       "active": 6,
+=======
+    "Forestry, Wildlife & Afforestation": {
+      "active": 11,
+      "archived": 2
+    },
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 55,
+      "archived": 11
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 3,
+      "archived": 2
+    },
+    "Internships & Student Traineeships": {
+      "active": 6,
+      "archived": 2
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 8,
+      "archived": 6
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 17,
+      "archived": 5
+    },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 6,
+      "archived": 11
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 7,
+      "archived": 1
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 17,
+      "archived": 2
+    },
+    "Conferences, Summits & Events": {
+      "active": 3,
+      "archived": 1
+    },
+    "Grants & Research Funding": {
+      "active": 1,
+      "archived": 0
+    },
+    "Ambassador & Fellowship Programs": {
+      "active": 1,
+      "archived": 0
+    },
+    "Scholarships & Doctoral Support": {
+      "active": 2,
+>>>>>>> Stashed changes
       "archived": 2
     },
     "GIS, Remote Sensing & Earth Observation": {
@@ -140,6 +204,7 @@
   "total_global_records": 92,
   "total_archived_global_jobs": 35,
   "global_jobs_by_region": {
+<<<<<<< Updated upstream
     "North America": 10,
     "Asia-Pacific": 15,
     "UN / Multilateral": 6,
@@ -155,6 +220,23 @@
     "Grant / Funding": 3,
     "Internship": 1,
     "Competition / Award": 1
+=======
+    "Africa & Middle East": 15,
+    "Asia-Pacific": 15,
+    "Europe": 17,
+    "Global / Remote": 16,
+    "Latin America": 1,
+    "North America": 10,
+    "UN / Multilateral": 6
+  },
+  "global_jobs_by_kind": {
+    "Competition / Award": 1,
+    "Fellowship": 8,
+    "Grant / Funding": 3,
+    "Internship": 1,
+    "Job / Career": 57,
+    "Scholarship": 10
+>>>>>>> Stashed changes
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [

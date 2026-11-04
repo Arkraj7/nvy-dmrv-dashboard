@@ -4,6 +4,7 @@
 
 *🌱 Fresh Green Jobs, Fellowships & Research Roles — 04 Nov 2026*
 
+<<<<<<< Updated upstream
 1. 🆕 *Senior Research Fellow*
 🏛️ *Organization:* Vellore Institute of Technology
 📍 *Location:* Vellore, Tamil Nadu
@@ -12,6 +13,16 @@
 🕒 *Apply before:* 2026-12-04
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/senior-research-fellow-vit-chennai
+=======
+1. 📌 *Research Assistant (ICSSR Project)*
+🏛️ *Organization:* Dr. B. R. Ambedkar University Delhi (AUD)
+📍 *Location:* New Delhi, Delhi
+🎓 *Eligibility:* Ph.D./M.Phil./Postgraduate in a Social Science discipline with minimum 55% marks.
+💰 *Fellowship/Pay:* Rs 37,000 per month
+🕒 *Apply before:* 2026-12-02
+
+🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/aud-research-assistant-icssr-2026
+>>>>>>> Stashed changes
 
 2. 📌 *Climate & Biodiversity Analyst Intern*
 🏛️ *Organization:* Candriam
@@ -49,6 +60,7 @@
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/asistente-especialista-en-gesti-n-ambiental-y-social-salvagu
 
+<<<<<<< Updated upstream
 6. 📌 *Research Assistant (ICSSR Project)*
 🏛️ *Organization:* Dr. B. R. Ambedkar University Delhi (AUD)
 📍 *Location:* New Delhi, Delhi
@@ -57,6 +69,16 @@
 🕒 *Apply before:* 2026-12-02
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/aud-research-assistant-icssr-2026
+=======
+6. 📌 *Project Associate-I - Forestry & Ecology (CSIR-TKDL)*
+🏛️ *Organization:* CSIR - Traditional Knowledge Digital Library (TKDL) Unit
+📍 *Location:* New Delhi, Delhi
+🎓 *Eligibility:* Master's degree in Forestry & Ecology, Environmental Sciences or related disciplines, as per the CSIR-TKDL notice.
+💰 *Fellowship/Pay:* Rs 25,000-31,000 per month + HRA
+🕒 *Apply before:* 2026-11-12
+
+🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/csir-tkdl-project-associate-i-forestry-2026
+>>>>>>> Stashed changes
 
 7. ⏳ *Himalayan Conservation Programme Coordinator*
 🏛️ *Organization:* Zoo Outreach Organisation
@@ -76,6 +98,7 @@
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/biofics-environmental-engineer-surat-2026
 
+<<<<<<< Updated upstream
 9. 📌 *Project Associate-I - Forestry & Ecology (CSIR-TKDL)*
 🏛️ *Organization:* CSIR - Traditional Knowledge Digital Library (TKDL) Unit
 📍 *Location:* New Delhi, Delhi
@@ -86,6 +109,9 @@
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/csir-tkdl-project-associate-i-forestry-2026
 
 10. 📌 *Atlas France to Southeast Asia Postdoctoral Mobility Fellowship*
+=======
+9. 📌 *Atlas France to Southeast Asia Postdoctoral Mobility Fellowship*
+>>>>>>> Stashed changes
 🏛️ *Organization:* Fondation Maison des sciences de l'homme
 📍 *Location:* Remote (India), Multiple States / Remote
 🎓 *Eligibility:* PhD in Social Sciences or Humanities with a focus on environmental or geographical research.
@@ -94,6 +120,18 @@
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/atlas-france-southeast-asia-postdoctoral-mobility-fellowship
 
+<<<<<<< Updated upstream
+=======
+10. 📌 *Biology PhD Programme*
+🏛️ *Organization:* IISER Pune
+📍 *Location:* Pune, Maharashtra
+🎓 *Eligibility:* Master's degree in Biology or related life sciences with a valid national-level fellowship (CSIR/UGC-JRF/DBT-JRF/INSPIRE).
+💰 *Fellowship/Pay:* As per institute norms
+🕒 *Apply before:* 2026-11-19
+
+🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/biology-phd-programme-iiser
+
+>>>>>>> Stashed changes
 ━━━━━━━━━━━━━━━━━━━━
 📡 *Never miss a verified green job:*
 • WhatsApp group: https://chat.whatsapp.com/JJ0ItiNOfvEDCDIENscenw
