@@ -2263,5 +2263,76 @@
     },
     "date_archived": "2026-11-03",
     "archive_reason": "expired"
+  },
+  {
+    "state": "",
+    "global": true,
+    "evergreen": true,
+    "status": "archived",
+    "source_portal": "Official Organization Website",
+    "id": "future-earth-global-opportunities",
+    "clean_title": "Global Sustainability Opportunities - Future Earth Network",
+    "organization": "Future Earth",
+    "region": "Global / Remote",
+    "country": "Global",
+    "city": "Remote (Global) / Stockholm Secretariat",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "experience_level": "1-3 Years",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "deadline_or_window": "Rolling / Open",
+    "qualification_summary": "Varies by listing: research, programme and communications roles in sustainability science typically require a relevant master's degree or equivalent experience.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "Future Earth is a global research network advancing sustainability science, linking thousands of researchers through programmes such as the Global Land Programme and Sustainability Transitions. Its opportunities desk circulates jobs, fellowships and calls from network members and partner institutions worldwide. India has one of the network's largest research communities, so many listed roles are open to Indian applicants or offer remote participation.",
+    "title_hi": "वैश्विक सतत विकास अवसर — Future Earth नेटवर्क",
+    "summary_hi": "Future Earth एक वैश्विक शोध नेटवर्क है जो सतत विकास विज्ञान को आगे बढ़ाता है और अपने सदस्यों तथा साझेदार संस्थानों की नौकरियों, फेलोशिप एवं कॉल को प्रकाशित करता है। इसके अवसर पृष्ठ पर भारतीय शोधकर्ताओं हेतु उपयुक्त दूरस्थ एवं अंतर्राष्ट्रीय भूमिकाएँ नियमित रूप से सूचीबद्ध होती हैं।",
+    "key_responsibilities": [
+      "Track global sustainability-science opportunities and calls",
+      "Support network research programmes and working groups",
+      "Assist with events, synthesis products and communications",
+      "Connect regional communities with global initiatives"
+    ],
+    "must_have_skills": [
+      "Sustainability science",
+      "Research programme support",
+      "Science communication",
+      "International collaboration",
+      "English writing"
+    ],
+    "application_tip": "Follow Future Earth's opportunities desk and subscribe to its newsletters, since listings from member institutes often appear there before they circulate on job boards.",
+    "apply_url": "https://futureearth.org/about/careers/",
+    "org_website": "https://futureearth.org",
+    "org_domain": "futureearth.org",
+    "date_added": "2026-10-19",
+    "valid_through": "2036-10-16",
+    "link_policy": {
+      "policy_version": 2,
+      "restored_at": "2026-10-20",
+      "previous_reason_code": "HTTP_404",
+      "reason_code": "NOT_DIRECT_LINK",
+      "checked_at": "2026-10-20T10:19:57.980214+00:00",
+      "platform": ""
+    },
+    "entry_type": "careers_portal",
+    "last_link_check": {
+      "checked_at": "2026-11-04T00:46:56Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 200,
+      "consecutive_failures": 3
+    },
+    "verification": {
+      "verified_at": "2026-10-31T00:00:16.441033+00:00",
+      "final_url": "https://futureearth.org/about/careers/",
+      "final_host": "futureearth.org",
+      "http_status": 200,
+      "content_hash": "bbff2328ffaf3ec103d99c2dce810224",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
+    "date_archived": "2026-11-04",
+    "archive_reason": "dead_page"
   }
 ]
