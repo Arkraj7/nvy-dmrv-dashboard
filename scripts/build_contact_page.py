@@ -56,6 +56,7 @@ html_doc = f"""<!DOCTYPE html>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="https://www.urbanforestpark.com/contact">
   <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
 </head>
 <body>
 {bsp.header_html()}

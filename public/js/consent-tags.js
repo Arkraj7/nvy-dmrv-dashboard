@@ -68,20 +68,9 @@
     window.gtag('config', GA_ID);
   }
 
-  function loadAdvertising() {
-    if (loaded.ads || !window.ufpAdsClient) return;
-    loaded.ads = true;
-    injectScript(
-      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' +
-        encodeURIComponent(window.ufpAdsClient),
-      { crossorigin: 'anonymous' }
-    );
-  }
-
   function grant() {
     window.gtag('consent', 'update', consentPayload('granted'));
     loadAnalytics();
-    loadAdvertising();
   }
 
   function deny() {

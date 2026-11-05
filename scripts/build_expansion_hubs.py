@@ -139,6 +139,7 @@ def shell(
 {bsp.FONTS}
 
     <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     {HUB_CSS}
     <style>
       @media (min-width: 1280px) {{

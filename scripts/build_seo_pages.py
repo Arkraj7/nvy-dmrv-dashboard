@@ -3845,6 +3845,7 @@ def build_hub_page(
 
     <!-- Registry styles (shared design system) + hub styles -->
     <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       @media (min-width: 1280px) {{
@@ -4921,6 +4922,7 @@ def build_job_page(
 {FONTS}
 
     <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       /* Centered two-row header on wide screens only; mobile/tablet keep the
@@ -5925,6 +5927,7 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <meta property="og:url" content="{canonical}">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       @media (min-width: 1280px) {{
