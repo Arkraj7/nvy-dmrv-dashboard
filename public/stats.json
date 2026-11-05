@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-04T21:30:54+05:30",
-  "last_updated_ist": "2026-11-04T21:30:54+05:30",
-  "last_pipeline_run_date_ist": "2026-11-04",
-  "active_open_jobs": 147,
-  "opened_this_week": 43,
-  "passed_this_week": 36,
-  "total_archived_jobs": 46,
-  "total_historical_indexed": 193,
+  "last_updated": "2026-11-05T06:57:02+05:30",
+  "last_updated_ist": "2026-11-05T06:57:02+05:30",
+  "last_pipeline_run_date_ist": "2026-11-05",
+  "active_open_jobs": 146,
+  "opened_this_week": 40,
+  "passed_this_week": 37,
+  "total_archived_jobs": 48,
+  "total_historical_indexed": 194,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -51,17 +51,37 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 7,
+      "archived": 11
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 9,
+      "archived": 7
+    },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
-      "archived": 2
-    },
-    "Forestry, Wildlife & Afforestation": {
-      "active": 12,
       "archived": 2
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
       "active": 57,
       "archived": 11
+    },
+    "Conferences, Summits & Events": {
+      "active": 5,
+      "archived": 1
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 8,
+      "archived": 1
+    },
+    "Forestry, Wildlife & Afforestation": {
+      "active": 12,
+      "archived": 2
+    },
+    "Memberships & Community Programs": {
+      "active": 1,
+      "archived": 0
     },
     "Fellowships & Leadership Programs": {
       "active": 3,
@@ -71,25 +91,9 @@
       "active": 6,
       "archived": 2
     },
-    "GIS, Remote Sensing & Earth Observation": {
-      "active": 10,
-      "archived": 6
-    },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 17,
-      "archived": 5
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 6,
-      "archived": 11
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 8,
-      "archived": 1
-    },
-    "Conferences, Summits & Events": {
-      "active": 5,
-      "archived": 1
+      "active": 16,
+      "archived": 6
     },
     "Grants & Research Funding": {
       "active": 1,
@@ -103,10 +107,6 @@
       "active": 2,
       "archived": 2
     },
-    "Memberships & Community Programs": {
-      "active": 1,
-      "archived": 0
-    },
     "Competitions, Hackathons & Awards": {
       "active": 0,
       "archived": 1
@@ -115,21 +115,21 @@
   "by_state": {
     "Maharashtra": 20,
     "Delhi NCR": 16,
-    "Karnataka": 16,
+    "Karnataka": 15,
     "Delhi": 8,
-    "Gujarat": 7,
+    "Gujarat": 8,
     "Tamil Nadu": 7,
     "Global / Remote": 6,
     "Uttarakhand": 6,
     "Telangana": 5,
     "Assam": 3,
     "Punjab": 3,
-    "Uttar Pradesh": 3,
     "West Bengal": 3,
     "Haryana": 2,
     "Himachal Pradesh": 2,
     "Kerala": 2,
     "Odisha": 2,
+    "Uttar Pradesh": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Bihar": 1,
@@ -139,29 +139,26 @@
     "Madhya Pradesh": 1,
     "Remote (India)": 1
   },
-  "active_global_jobs": 89,
+  "active_global_jobs": 96,
   "active_global_portals": 12,
-  "total_global_records": 101,
-  "total_archived_global_jobs": 35,
+  "total_global_records": 108,
+  "total_archived_global_jobs": 36,
   "global_jobs_by_region": {
-    "North America": 10,
-    "Asia-Pacific": 15,
-    "UN / Multilateral": 6,
-    "Latin America": 1,
-    "Global / Remote": 16,
+    "Africa & Middle East": 17,
+    "Asia-Pacific": 19,
     "Europe": 18,
-    "Africa & Middle East": 15,
-    "Global": 6,
-    "Middle East & Africa": 1,
-    "Africa": 1
+    "Global / Remote": 25,
+    "Latin America": 1,
+    "North America": 10,
+    "UN / Multilateral": 6
   },
   "global_jobs_by_kind": {
-    "Job / Career": 62,
-    "Scholarship": 10,
+    "Competition / Award": 2,
     "Fellowship": 10,
-    "Grant / Funding": 3,
+    "Grant / Funding": 4,
     "Internship": 2,
-    "Competition / Award": 2
+    "Job / Career": 68,
+    "Scholarship": 10
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
