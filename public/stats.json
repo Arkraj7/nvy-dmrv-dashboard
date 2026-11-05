@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-05T12:11:20+05:30",
-  "last_updated_ist": "2026-11-05T12:11:20+05:30",
+  "last_updated": "2026-11-05T19:41:59+05:30",
+  "last_updated_ist": "2026-11-05T19:41:59+05:30",
   "last_pipeline_run_date_ist": "2026-11-05",
-  "active_open_jobs": 143,
+  "active_open_jobs": 157,
   "opened_this_week": 34,
   "passed_this_week": 43,
   "total_archived_jobs": 54,
-  "total_historical_indexed": 197,
+  "total_historical_indexed": 211,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -56,7 +56,7 @@
       "archived": 11
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 9,
+      "active": 14,
       "archived": 8
     },
     "Academic, JRF, SRF & PhD Positions": {
@@ -64,7 +64,7 @@
       "archived": 2
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 56,
+      "active": 61,
       "archived": 13
     },
     "Conferences, Summits & Events": {
@@ -76,7 +76,7 @@
       "archived": 1
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 11,
+      "active": 13,
       "archived": 4
     },
     "Memberships & Community Programs": {
@@ -88,11 +88,11 @@
       "archived": 2
     },
     "Internships & Student Traineeships": {
-      "active": 6,
+      "active": 7,
       "archived": 2
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 15,
+      "active": 16,
       "archived": 7
     },
     "Grants & Research Funding": {
@@ -113,50 +113,51 @@
     }
   },
   "by_state": {
-    "Maharashtra": 20,
+    "Maharashtra": 21,
     "Delhi NCR": 16,
     "Karnataka": 16,
+    "Gujarat": 9,
+    "Tamil Nadu": 8,
     "Delhi": 7,
-    "Gujarat": 7,
-    "Tamil Nadu": 7,
     "Global / Remote": 6,
     "Uttarakhand": 6,
     "Telangana": 5,
+    "West Bengal": 4,
     "Assam": 3,
+    "Kerala": 3,
+    "Odisha": 3,
     "Punjab": 3,
-    "West Bengal": 3,
+    "Uttar Pradesh": 3,
     "Haryana": 2,
-    "Kerala": 2,
-    "Odisha": 2,
-    "Uttar Pradesh": 2,
+    "Jharkhand": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Bihar": 1,
     "Chhattisgarh": 1,
     "Goa": 1,
     "Himachal Pradesh": 1,
-    "Jharkhand": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 97,
+  "active_global_jobs": 101,
   "active_global_portals": 12,
-  "total_global_records": 109,
+  "total_global_records": 113,
   "total_archived_global_jobs": 36,
   "global_jobs_by_region": {
     "Asia-Pacific": 19,
     "Africa & Middle East": 18,
     "Global / Remote": 25,
     "North America": 10,
-    "Europe": 18,
+    "Europe": 19,
     "UN / Multilateral": 6,
-    "Latin America": 1
+    "Latin America": 1,
+    "Global": 3
   },
   "global_jobs_by_kind": {
-    "Job / Career": 69,
+    "Job / Career": 72,
     "Grant / Funding": 4,
     "Internship": 2,
     "Competition / Award": 2,
-    "Fellowship": 10,
+    "Fellowship": 11,
     "Scholarship": 10
   },
   "telegram_last_status": "delivered",
