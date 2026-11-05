@@ -44,8 +44,10 @@ def build_page(slug: str, title: str, desc: str, kicker: str, h1: str, sub: str,
     </section>"""
         for s in sections
     )
+    byline = f'''    <p style="font-size:12.5px;color:var(--ink-3);margin:0 0 18px 4px;">Verified and published by the Urban Forest Park editorial team &middot; Last reviewed {TODAY.strftime("%d %b %Y")}</p>'''
     body = "\n".join([
         hero(kicker, h1, sub, [("Updated", TODAY.strftime("%d %b %Y"))]),
+        byline,
         sec_html,
         f"""    <section class="hub-main">
       <div class="hub-main-inner">
@@ -151,6 +153,52 @@ TRANSITIONS = [
             ("How long does the transition take?", "2-4 months of active job searching with a translated CV and basic ESG framework knowledge."),
         ],
         "related": [("/roles/sustainability-manager", "Sustainability manager profile"), ("/roles/csr-manager", "CSR manager profile"), ("/roles/esg-analyst", "ESG analyst profile"), ("/esg-carbon-sustainability-jobs", "ESG and sustainability jobs")],
+    },
+    {
+        "slug": "gis-career-roadmap-india",
+        "title": "GIS Career Roadmap in India 2026: Skills, Roles and Salary",
+        "desc": "A complete roadmap for building a GIS and remote sensing career in India: skills, tools, roles, salary bands and where to apply.",
+        "kicker": "Career deep-dive",
+        "h1": "GIS Career Roadmap in India 2026",
+        "sub": "Skills, tools, roles, salary bands and where to apply for GIS and remote sensing careers in India.",
+        "sections": [
+            ("What GIS professionals do", "<p>GIS professionals collect, manage, analyse and visualise spatial data. They work across urban planning, forestry, agriculture, disaster management, infrastructure, environmental monitoring and defence. The work ranges from digitisation and mapping to spatial modelling and decision support.</p>"),
+            ("Core skills and tools", "<ul class=\"check-list\"><li><strong>Software:</strong> QGIS, ArcGIS, Google Earth Engine, GRASS GIS.</li><li><strong>Remote sensing:</strong> Sentinel, Landsat, MODIS, drone imagery, NDVI, LULC classification.</li><li><strong>Programming:</strong> Python (geopandas, rasterio, shapely), R (sf, terra), SQL with PostGIS.</li><li><strong>Data skills:</strong> GPS/GNSS, field surveys, drone mapping, LiDAR basics.</li><li><strong>Soft skills:</strong> technical writing, map design, stakeholder communication.</li></ul>"),
+            ("Career ladder", "<ol class=\"check-list\"><li><strong>GIS intern / trainee:</strong> digitisation, data entry, basic mapping. Pay: Rs. 10,000-20,000 per month.</li><li><strong>GIS analyst / technician:</strong> spatial analysis, map production, field support. Pay: Rs. 3-6 lakh per annum.</li><li><strong>GIS specialist / senior analyst:</strong> advanced analysis, modelling, project ownership. Pay: Rs. 6-12 lakh per annum.</li><li><strong>GIS lead / manager:</strong> team leadership, architecture, client delivery. Pay: Rs. 12-20 lakh per annum.</li><li><strong>Geospatial scientist / researcher:</strong> PhD-level research, algorithm development. Pay: Rs. 8-18 lakh per annum.</li></ol>"),
+            ("Where the jobs are", "<p>Government bodies (FSI, NRSC, IIRS, Survey of India, state forest departments), ISRO centres, research institutes (IIT, IISc, WII, ATREE), consultancies (APARC, D8, GeoNxt), NGOs (WRI, WWF, CEEW), and private firms (Esri India, RMSI, Cyient, SAGE). Browse <a href='/gis-remote-sensing-climate-jobs'>GIS and remote sensing jobs</a> and the <a href='/roles/gis-analyst'>GIS analyst profile</a>.</p>"),
+            ("How to start", "<ol class=\"check-list\"><li><strong>Learn QGIS first.</strong> It is free and industry-standard. Complete a structured course.</li><li><strong>Build a portfolio.</strong> Create 3-5 maps or analyses on real data (forest cover, LULC, urban heat). Publish on GitHub or a personal site.</li><li><strong>Learn Python for GIS.</strong> geopandas and rasterio are the most useful libraries.</li><li><strong>Get field experience.</strong> Volunteer for plantation monitoring, forest surveys or urban mapping projects.</li><li><strong>Apply broadly.</strong> Start with internships and trainee roles; move to analyst roles with 6-12 months of experience.</li></ol>"),
+            ("Certifications that help", "<ul class=\"check-list\"><li>Esri technical certifications (ArcGIS).</li><li>ISRO/IIIRS short courses in remote sensing and GIS.</li><li>Google Earth Engine courses (free).</li><li>QGIS certification from QGIS.org.</li></ul>"),
+        ],
+        "faqs": [
+            ("Is a geography degree required for GIS?", "No. Graduates from engineering, environmental science, agriculture, forestry and computer science enter GIS regularly."),
+            ("How much can a GIS fresher earn?", "Rs. 10,000-25,000 per month as a trainee or intern. Analyst roles start at Rs. 3-5 lakh per annum."),
+            ("Is coding necessary for GIS?", "Not for entry-level roles. But Python and SQL become important for career growth."),
+            ("Are there government GIS jobs?", "Yes. Survey of India, FSI, NRSC, ISRO centres and state forest departments recruit GIS professionals regularly."),
+        ],
+        "related": [("/roles/gis-analyst", "GIS analyst profile"), ("/gis-remote-sensing-climate-jobs", "GIS and remote sensing jobs"), ("/glossary/gis", "GIS glossary entry"), ("/green-internships", "Internships and entry-level roles")],
+    },
+    {
+        "slug": "esg-career-roadmap-2026",
+        "title": "ESG Career Roadmap 2026: From Entry to Leadership",
+        "desc": "A complete roadmap for building an ESG and sustainability career in India: skills, frameworks, roles, salary bands and where to apply.",
+        "kicker": "Career deep-dive",
+        "h1": "ESG Career Roadmap 2026",
+        "sub": "Skills, frameworks, roles, salary bands and where to apply for ESG and sustainability careers in India.",
+        "sections": [
+            ("What ESG professionals do", "<p>ESG professionals help organisations measure, manage and report their environmental, social and governance performance. They work in corporate sustainability teams, consulting firms, rating agencies, financial institutions and think tanks. The work spans data collection, reporting, strategy, compliance and stakeholder engagement.</p>"),
+            ("Core skills and frameworks", "<ul class=\"check-list\"><li><strong>Frameworks:</strong> BRSR, GRI, SASB, TCFD, GHG Protocol, ISO 14064, CDP.</li><li><strong>Data skills:</strong> Excel, Power BI, Python, SQL for ESG data management.</li><li><strong>Domain knowledge:</strong> carbon accounting, climate risk, supply chain sustainability, human rights due diligence.</li><li><strong>Communication:</strong> report writing, stakeholder engagement, board presentations.</li><li><strong>Regulatory awareness:</strong> SEBI BRSR mandates, EU CSRD, CBAM implications for Indian exporters.</li></ul>"),
+            ("Career ladder", "<ol class=\"check-list\"><li><strong>ESG intern / trainee:</strong> data collection, research support. Pay: Rs. 10,000-20,000 per month.</li><li><strong>ESG analyst:</strong> data analysis, report drafting, framework mapping. Pay: Rs. 4-7 lakh per annum.</li><li><strong>ESG consultant / senior analyst:</strong> client delivery, strategy support, assurance. Pay: Rs. 7-12 lakh per annum.</li><li><strong>ESG manager:</strong> team leadership, strategy ownership, board reporting. Pay: Rs. 12-20 lakh per annum.</li><li><strong>Head of sustainability / chief sustainability officer:</strong> enterprise-wide strategy, investor relations. Pay: Rs. 25 lakh per annum and above.</li></ol>"),
+            ("Where the jobs are", "<p>Big Four (EY, KPMG, Deloitte, PwC), specialist consultancies (ERM, Sustainalytics, MSCI), corporates (Tata, Mahindra, Aditya Birla, Infosys, Wipro), financial institutions (HDFC, ICICI, Axis), and think tanks (CEEW, WRI India, TERI, CSTEP). Browse <a href='/esg-carbon-sustainability-jobs'>ESG and sustainability jobs</a> and the <a href='/roles/esg-analyst'>ESG analyst profile</a>.</p>"),
+            ("How to start", "<ol class=\"check-list\"><li><strong>Learn BRSR first.</strong> It is the most common requirement in Indian ESG postings. SEBI's BRSR format is freely available.</li><li><strong>Take one certification.</strong> GRI Professional, SASB FSA or BRSR training. Do not collect many.</li><li><strong>Build a portfolio.</strong> Write a short BRSR analysis of a listed company. Publish on LinkedIn or a personal blog.</li><li><strong>Get experience.</strong> Intern at a consulting firm or corporate sustainability team. Even 3-6 months helps.</li><li><strong>Target adjacent roles.</strong> Data analysts, compliance officers and finance professionals can move into ESG data and reporting roles.</li></ol>"),
+            ("Certifications that help", "<ul class=\"check-list\"><li>GRI Professional Certification.</li><li>SASB Fundamentals of Sustainability Accounting (FSA).</li><li>TCFD Knowledge Hub courses (free).</li><li>GHG Protocol courses (free).</li><li>BRSR training (IICA, ICSI).</li><li>ISO 14064 lead verifier.</li></ul>"),
+        ],
+        "faqs": [
+            ("Is a commerce or science degree required for ESG?", "No. ESG roles accept graduates from commerce, management, law, engineering and social sciences. Domain knowledge matters more than degree."),
+            ("How much can an ESG fresher earn?", "Rs. 4-7 lakh per annum for analyst roles. Consulting roles may start slightly higher."),
+            ("Is ESG a stable career?", "Yes. Regulatory mandates (BRSR, EU CSRD, CBAM) are expanding, driving sustained demand for ESG professionals."),
+            ("Can I transition from finance to ESG?", "Yes. Finance professionals with data and reporting skills are well-suited for ESG data and sustainable finance roles."),
+        ],
+        "related": [("/roles/esg-analyst", "ESG analyst profile"), ("/roles/sustainability-consultant", "Sustainability consultant profile"), ("/roles/carbon-analyst", "Carbon analyst profile"), ("/esg-carbon-sustainability-jobs", "ESG and sustainability jobs")],
     },
 ]
 

@@ -192,7 +192,9 @@ def build_career_advice():
         </ul>
       </div>
     </section>""" % related_html)
-    body = "\n".join([hero_html] + sections + [bsp.faq_section_html(faqs)])
+    byline = '<p style="font-size:12.5px;color:var(--ink-3);margin:0 0 18px 4px;">Verified and published by the Urban Forest Park editorial team &middot; Last reviewed %s</p>' % TODAY.strftime("%d %b %Y")
+    ad_slot = '<!-- AdSense ad unit (activate after approval): <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3149295668666793" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->'
+    body = "\n".join([hero_html, byline, ad_slot] + sections + [bsp.faq_section_html(faqs)])
     jsonld = "\n".join([
         bsp.organization_jsonld(),
         bsp.website_jsonld(),
@@ -434,7 +436,9 @@ def build_news():
         </ul>
       </div>
     </section>""")
-    body = "\n".join([hero_html] + sections + [bsp.faq_section_html(faqs)])
+    byline = '<p style="font-size:12.5px;color:var(--ink-3);margin:0 0 18px 4px;">Verified and published by the Urban Forest Park editorial team &middot; Last reviewed %s</p>' % TODAY.strftime("%d %b %Y")
+    ad_slot = '<!-- AdSense ad unit (activate after approval): <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3149295668666793" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->'
+    body = "\n".join([hero_html, byline, ad_slot] + sections + [bsp.faq_section_html(faqs)])
     jsonld = "\n".join([
         bsp.organization_jsonld(),
         bsp.website_jsonld(),

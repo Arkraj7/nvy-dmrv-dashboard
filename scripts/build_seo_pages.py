@@ -4969,6 +4969,8 @@ def build_job_page(
       </div>
     </section>
 
+    <!-- AdSense ad unit (activate after approval): <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3149295668666793" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script> -->
+
     <div class="job-page-layout">
       <article class="job-page-main">
         <section>
