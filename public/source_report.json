@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-11-05T01:27:02",
+=======
+  "generated_at": "2026-11-05T02:01:41",
+>>>>>>> Stashed changes
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {

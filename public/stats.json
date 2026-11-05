@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "last_updated": "2026-11-05T06:57:02+05:30",
   "last_updated_ist": "2026-11-05T06:57:02+05:30",
   "last_pipeline_run_date_ist": "2026-11-05",
@@ -6,6 +7,15 @@
   "opened_this_week": 40,
   "passed_this_week": 37,
   "total_archived_jobs": 48,
+=======
+  "last_updated": "2026-11-05T07:31:41+05:30",
+  "last_updated_ist": "2026-11-05T07:31:41+05:30",
+  "last_pipeline_run_date_ist": "2026-11-05",
+  "active_open_jobs": 140,
+  "opened_this_week": 34,
+  "passed_this_week": 43,
+  "total_archived_jobs": 54,
+>>>>>>> Stashed changes
   "total_historical_indexed": 194,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
@@ -56,16 +66,37 @@
       "archived": 11
     },
     "GIS, Remote Sensing & Earth Observation": {
+<<<<<<< Updated upstream
       "active": 9,
       "archived": 7
+=======
+      "active": 8,
+      "archived": 8
+>>>>>>> Stashed changes
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
       "archived": 2
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 57,
-      "archived": 11
+      "active": 55,
+      "archived": 13
+    },
+    "Conferences, Summits & Events": {
+      "active": 5,
+      "archived": 1
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 8,
+      "archived": 1
+    },
+    "Forestry, Wildlife & Afforestation": {
+      "active": 10,
+      "archived": 4
+    },
+    "Memberships & Community Programs": {
+      "active": 1,
+      "archived": 0
     },
     "Conferences, Summits & Events": {
       "active": 5,
@@ -92,8 +123,13 @@
       "archived": 2
     },
     "Climate Policy, Think-Tanks & Fellowships": {
+<<<<<<< Updated upstream
       "active": 16,
       "archived": 6
+=======
+      "active": 15,
+      "archived": 7
+>>>>>>> Stashed changes
     },
     "Grants & Research Funding": {
       "active": 1,
@@ -113,11 +149,16 @@
     }
   },
   "by_state": {
-    "Maharashtra": 20,
+    "Maharashtra": 19,
     "Delhi NCR": 16,
     "Karnataka": 15,
+<<<<<<< Updated upstream
     "Delhi": 8,
     "Gujarat": 8,
+=======
+    "Delhi": 7,
+    "Gujarat": 7,
+>>>>>>> Stashed changes
     "Tamil Nadu": 7,
     "Global / Remote": 6,
     "Uttarakhand": 6,
@@ -126,18 +167,16 @@
     "Punjab": 3,
     "West Bengal": 3,
     "Haryana": 2,
-    "Himachal Pradesh": 2,
     "Kerala": 2,
     "Odisha": 2,
     "Uttar Pradesh": 2,
     "Arunachal Pradesh": 1,
     "Assam / Haryana": 1,
     "Bihar": 1,
-    "Chhattisgarh": 1,
     "Goa": 1,
+    "Himachal Pradesh": 1,
     "Jharkhand": 1,
-    "Madhya Pradesh": 1,
-    "Remote (India)": 1
+    "Madhya Pradesh": 1
   },
   "active_global_jobs": 96,
   "active_global_portals": 12,

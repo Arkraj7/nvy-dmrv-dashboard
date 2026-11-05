@@ -15,12 +15,21 @@
     "country": "",
     "qualification_summary": "Master’s degree in Health or allied fields (M.Phil/PhD preferred)",
     "compensation_or_fellowship": "As per institute norms",
+<<<<<<< Updated upstream
     "role_summary": "The Indian Institute of Public Health Gandhinagar seeks a consultant for the AWARE project, an international consortium focused on climate-change-related disease adaptation. You will manage primary research activities, conduct in-depth interviews, and facilitate stakeholder engagement across Gujarat. This role requires strong documentation skills to support the development of epidemiological interventions and climate service reports for managing diarrheal disease risks.",
     "key_responsibilities": [
       "Conduct primary research activities and in-depth interviews",
       "Prepare detailed interview transcripts and project reports",
       "Coordinate meetings with government and external stakeholders",
       "Manage project-related communications and documentation",
+=======
+    "role_summary": "The Indian Institute of Public Health Gandhinagar seeks a consultant for the AWARE project, an international consortium focused on climate-change-related health threats. You will support research on diarrheal disease risks linked to climate variables through primary data collection and stakeholder engagement. The role requires field travel within Gujarat and coordination with government partners to develop effective public health adaptation strategies.",
+    "key_responsibilities": [
+      "Conduct primary research and in-depth interviews for the AWARE project",
+      "Prepare detailed interview transcripts and research reports",
+      "Coordinate meetings with government officials and relevant stakeholders",
+      "Manage internal and external project communications",
+>>>>>>> Stashed changes
       "Undertake field travel within Gujarat for data collection"
     ],
     "must_have_skills": [
@@ -28,10 +37,16 @@
       "Qualitative data collection",
       "Report writing",
       "Stakeholder management",
+<<<<<<< Updated upstream
       "Climate-health adaptation",
       "Epidemiological methods"
     ],
     "application_tip": "Ensure your application highlights your experience with field-based research and qualitative data analysis. When applying through the portal, explicitly mention the position code IIPHG/REC/2026-27/123 R in your subject line to avoid rejection.",
+=======
+      "Climate health adaptation"
+    ],
+    "application_tip": "Highlight your experience with primary data collection and any previous work involving climate-sensitive health research. Ensure your application clearly references the position code IIPHG/REC/2026-27/123 R as requested.",
+>>>>>>> Stashed changes
     "apply_url": "https://iiphg.edu.in/work-with-us/",
     "org_website": "https://iiphg.edu.in",
     "org_domain": "iiphg.edu.in",
@@ -39,7 +54,11 @@
     "entry_type": "careers_portal",
     "status": "active",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-05T01:12:13.010040+00:00",
+=======
+      "verified_at": "2026-11-05T01:46:38.787185+00:00",
+>>>>>>> Stashed changes
       "final_url": "https://iiphg.edu.in/work-with-us/",
       "final_host": "iiphg.edu.in",
       "http_status": 0,
@@ -54,7 +73,11 @@
     "link_policy": {
       "policy_version": 2,
       "reason_code": "NOT_DIRECT_LINK",
+<<<<<<< Updated upstream
       "checked_at": "2026-11-05T01:12:13.010040+00:00"
+=======
+      "checked_at": "2026-11-05T01:46:38.787185+00:00"
+>>>>>>> Stashed changes
     },
     "academic_meta": {
       "selection_process": "Online Application"
@@ -115,6 +138,15 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "softa-gis-expert-kolkata-2026",
+<<<<<<< Updated upstream
+=======
+    "last_link_check": {
+      "checked_at": "2026-11-05T01:01:22Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    },
+>>>>>>> Stashed changes
     "reverify_after": "2026-11-19"
   },
   {
@@ -186,7 +218,10 @@
   },
   {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     "clean_title": "Civil / Environmental / Chemical Engineer",
     "organization": "SAGE - Sustainable Approach for Green Environment LLP",
     "city": "Mumbai",
@@ -237,6 +272,15 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "sage-environmental-engineer-mumbai-2026",
+<<<<<<< Updated upstream
+=======
+    "last_link_check": {
+      "checked_at": "2026-11-05T01:01:22Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    },
+>>>>>>> Stashed changes
     "reverify_after": "2026-11-19"
   },
   {
@@ -332,10 +376,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:01:24.340014+00:00",
+      "final_url": "https://nutgraph.in/lay-of-the-land",
+      "final_host": "nutgraph.in",
+      "http_status": 200,
+      "content_hash": "37244ab6db9baf45c2ec0f794421b8a5",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "land-conflict-watch-lay-of-the-land-2026",
     "reverify_after": "2026-11-19"
@@ -374,7 +431,11 @@
     "org_website": "",
     "org_domain": "aicte.gov.in",
     "source_portal": "LinkedIn post (Dr. Mahendra HN)",
+<<<<<<< Updated upstream
     "entry_type": "careers_portal",
+=======
+    "entry_type": "posting",
+>>>>>>> Stashed changes
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -442,6 +503,15 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "grow-billion-trees-operations-specialist-agroforestry-2026",
+<<<<<<< Updated upstream
+=======
+    "last_link_check": {
+      "checked_at": "2026-11-05T01:01:22Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    },
+>>>>>>> Stashed changes
     "reverify_after": "2026-11-19"
   },
   {
@@ -485,10 +555,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:01:24.066036+00:00",
+      "final_url": "https://azimpremjiuniversity.edu.in/be-a-volunteer-for-the-planetary-boundaries-of-life-festival-2027",
+      "final_host": "azimpremjiuniversity.edu.in",
+      "http_status": 200,
+      "content_hash": "d3dee1054b27a3994115b5e66eb71a9d",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "azim-premji-planetary-boundaries-festival-volunteer-2027"
   },
@@ -544,6 +627,15 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "axykno-assistant-manager-environment-chandrapur-2026",
+<<<<<<< Updated upstream
+=======
+    "last_link_check": {
+      "checked_at": "2026-11-05T01:01:22Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
+    },
+>>>>>>> Stashed changes
     "reverify_after": "2026-11-19"
   },
   {
@@ -600,6 +692,7 @@
       "method": "manual-batch-verified",
       "source": "User-shared posting",
       "http_status": "UNKNOWN_KEEP"
+<<<<<<< Updated upstream
     }
   },
   {
@@ -712,6 +805,17 @@
       "reason_code": "DEAD_LINK",
       "http_status": 0,
       "consecutive_failures": 2
+    }
+  },
+  {
+>>>>>>> Stashed changes
+=======
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-05T01:01:24Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -7520,6 +7624,7 @@
       "verifier": "verify_link_v2"
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   },
   {
     "id": "project-associate-geospatial-urban-green-infrastructure-atree",
@@ -8074,6 +8179,8 @@
       "http_status": 0,
       "consecutive_failures": 1
     }
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   }

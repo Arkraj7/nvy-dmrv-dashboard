@@ -440,10 +440,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:02:17.974805+00:00",
+      "final_url": "https://docs.google.com/forms/d/e/1FAIpQLSeT4ojRXRJXhUqgelfASp_CjTwf95RHVJG4LnFOk1dtf07TAQ/viewform",
+      "final_host": "docs.google.com",
+      "http_status": 200,
+      "content_hash": "6ae14fc0d61cbb77c8ba24a74394d34a",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "youngo-ylcf-2026-cop31-speakers-moderators",
     "reverify_after": "2026-11-19"
@@ -635,7 +648,11 @@
     "org_website": "https://www.nature.org",
     "org_domain": "nature.org",
     "source_portal": "LinkedIn post (Remote and Early-Career Opportunity Hub)",
+<<<<<<< Updated upstream
     "entry_type": "careers_portal",
+=======
+    "entry_type": "posting",
+>>>>>>> Stashed changes
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -644,10 +661,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:02:20.258426+00:00",
+      "final_url": "https://www.nature.org/en-us/about-us/careers/",
+      "final_host": "www.nature.org",
+      "http_status": 200,
+      "content_hash": "1cdb41b79d2d6a06e692c50c96abe122",
+      "entry_type": "posting",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "tnc-associate-gef-partnership-public-funding-2026",
     "reverify_after": "2026-11-19"
@@ -895,7 +925,11 @@
     "org_website": "https://www.humboldt-foundation.de",
     "org_domain": "humboldt-foundation.de",
     "source_portal": "LinkedIn post (Alexander von Humboldt Foundation)",
+<<<<<<< Updated upstream
     "entry_type": "posting",
+=======
+    "entry_type": "award_portal",
+>>>>>>> Stashed changes
     "status": "active",
     "global": true,
     "evergreen": false,
@@ -904,10 +938,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:02:19.220080+00:00",
+      "final_url": "https://www.humboldt-foundation.de/en/apply/sponsorship-programmes/humboldt-residency-programme/humboldt-residency-programme-call-for-applications",
+      "final_host": "www.humboldt-foundation.de",
+      "http_status": 200,
+      "content_hash": "75133ce4f2c2cba63ce82116d50faf0e",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "humboldt-residency-programme-2027"
   },
@@ -1274,10 +1321,23 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
+<<<<<<< Updated upstream
       "verified_at": "2026-11-04",
       "method": "manual-batch-verified",
       "source": "LinkedIn post",
       "http_status": 200
+=======
+      "verified_at": "2026-11-05T01:02:20.587300+00:00",
+      "final_url": "https://docs.google.com/forms/d/e/1FAIpQLSe_u_0serYXFYgAJs3Jpv5oMpu3EqOJis26s-jgbnWWWpnNNQ/viewform",
+      "final_host": "docs.google.com",
+      "http_status": 200,
+      "content_hash": "381d4434178bf3c9af91534ec69c0238",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+>>>>>>> Stashed changes
     },
     "id": "ain-shams-maewa-msc-phd-water-resources-2026",
     "reverify_after": "2026-11-19"
@@ -4841,6 +4901,7 @@
   },
   {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "id": "gcf-project-manager-national-damascus-save-the-children",
     "date_added": "2026-10-23",
     "date_posted": "Wed, 21 Oct 2026 11:58:49 +0000",
@@ -4899,6 +4960,8 @@
     }
   },
   {
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     "id": "fully-funded-phd-community-challenges-nottingham",
@@ -6050,6 +6113,7 @@
       "verifier": "verify_link"
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   },
   {
     "clean_title": "Youth-led Climate Forum 2026 - Speakers and Moderators (COP31)",
@@ -6509,6 +6573,8 @@
       "http_status": 200
     },
     "id": "stellenbosch-behind-climate-science-storytelling-workshop-2027"
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   }
