@@ -819,14 +819,35 @@ def _discover_name(text: str) -> str:
 
 
 def discover_image_for(job: Dict[str, Any]) -> str:
-    """Pick the 16:9 category banner that best matches a listing."""
+    """Pick the 16:9 category banner that best matches a listing.
+
+    If several variants exist for a category (e.g. ``gis.webp``, ``gis-2.webp``,
+    ``gis-3.webp``) a stable choice is made per job id so the same listing
+    always gets the same image while different listings vary.
+    """
     category_text = " ".join(
         plain(job.get(key)) for key in ("category", "opportunity_kind", "position_type")
     )
     name = _discover_name(category_text)
     if name == "default":
         name = _discover_name(plain(job.get("clean_title")))
-    return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
+    discover_dir = DEFAULT_PUBLIC / "assets" / "images" / "discover"
+    variants = [
+        p.name
+        for p in discover_dir.glob(f"{name}*.webp")
+        if p.stem == name or p.stem.startswith(name + "-") or p.stem.startswith(name + "_")
+    ]
+    if not variants:
+        # fall back to jpg if no webp
+        variants = [
+            p.name
+            for p in discover_dir.glob(f"{name}*.jpg")
+            if p.stem == name or p.stem.startswith(name + "-") or p.stem.startswith(name + "_")
+        ]
+    if not variants:
+        return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
+    idx = hash(str(job.get("id") or job.get("clean_title") or "")) % len(variants)
+    return DISCOVER_IMAGE_DIR + "/" + variants[idx]
 
 
 def discover_image_for_hub(hub: Dict[str, Any]) -> str:
@@ -3291,14 +3312,14 @@ def header_html(active: Optional[str] = None) -> str:
       <a class="brand" href="/" aria-label="Urban Forest Park — National Climate, Forestry, ESG and Geospatial Career Registry, India">
         <img src="/assets/images/Logo_UFF.png?v=20261019" alt="Urban Forest Park — India Climate, Forestry, ESG &amp; Research Jobs Registry Logo" title="Urban Forest Park Official Emblem" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
-        <span class="brand-sub">Green Jobs &amp; Research Registry</span>
+        <span class="brand-sub" data-i18n="brand.sub">Green Jobs &amp; Research Registry</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a class="{cls('registry')}" href="/">Career Registry</a>
+        <a class="{cls('registry')}" id="nav-registry" href="/" data-i18n="nav.registry">Career Registry</a>
         <a class="{cls('career-advice')}" href="/career-advice">Career Advice</a>
         <a class="{cls('news')}" href="/news">News</a>
-        <a class="{cls('archive')}" href="/?view=archive" rel="nofollow">Historical Archive</a>
-        <a class="{cls('global')}" href="/global-climate-sustainability-opportunities">Global Opportunities</a>
+        <a class="{cls('archive')}" id="nav-archive" href="/?view=archive" rel="nofollow" data-i18n="nav.archive">Historical Archive</a>
+        <a class="{cls('global')}" id="nav-browse" href="/#filter-bar" data-i18n="nav.browse">Browse by State</a>
       </nav>
       <div class="header-actions">
         <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to night mode">
@@ -3309,7 +3330,7 @@ def header_html(active: Optional[str] = None) -> str:
         <button class="saved-header-btn" id="saved-header-btn" type="button" aria-label="Open saved jobs (0)" aria-controls="saved-drawer" aria-expanded="false">
           <span aria-hidden="true">★</span> <span class="saved-header-label">Saved</span> <span class="saved-count" id="saved-count">0</span>
         </button>
-        <a class="btn btn-outline nav-cta" href="/" data-i18n="nav.publish">Publish a Vacancy</a>
+        <button class="btn btn-outline nav-cta" type="button" data-open-modal data-i18n="nav.publish">Publish a Vacancy</button>
         <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>

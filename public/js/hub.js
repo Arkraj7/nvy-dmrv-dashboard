@@ -109,5 +109,11 @@
     if (btn) btn.setAttribute('aria-label', 'Open saved jobs (' + count + ')');
   } catch (e) { /* ignore */ }
 
+  /* "Publish a Vacancy" button: on non-home pages the modal lives on the home
+     page, so navigate there. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open-modal]'), function (btn) {
+    btn.addEventListener('click', function (e) { e.preventDefault(); window.location.href = '/'; });
+  });
+
   hydrateRegistryBadge();
 })();

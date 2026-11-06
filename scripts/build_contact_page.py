@@ -59,7 +59,7 @@ html_doc = f"""<!DOCTYPE html>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
 </head>
 <body>
-{bsp.header_html()}
+{bsp.header_html('registry')}
 {body}
 {bsp.footer_html()}
   <script defer src="/js/i18n.js"></script>
