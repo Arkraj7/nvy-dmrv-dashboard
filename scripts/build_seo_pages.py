@@ -832,21 +832,24 @@ def discover_image_for(job: Dict[str, Any]) -> str:
     if name == "default":
         name = _discover_name(plain(job.get("clean_title")))
     discover_dir = DEFAULT_PUBLIC / "assets" / "images" / "discover"
-    variants = [
+    variants = sorted(
         p.name
         for p in discover_dir.glob(f"{name}*.webp")
         if p.stem == name or p.stem.startswith(name + "-") or p.stem.startswith(name + "_")
-    ]
+    )
     if not variants:
         # fall back to jpg if no webp
-        variants = [
+        variants = sorted(
             p.name
             for p in discover_dir.glob(f"{name}*.jpg")
             if p.stem == name or p.stem.startswith(name + "-") or p.stem.startswith(name + "_")
-        ]
+        )
     if not variants:
         return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
-    idx = hash(str(job.get("id") or job.get("clean_title") or "")) % len(variants)
+    import hashlib
+
+    key = str(job.get("id") or job.get("clean_title") or job.get("title") or "")
+    idx = int(hashlib.md5(key.encode("utf-8")).hexdigest(), 16) % len(variants)
     return DISCOVER_IMAGE_DIR + "/" + variants[idx]
 
 
@@ -858,7 +861,19 @@ def discover_image_for_hub(hub: Dict[str, Any]) -> str:
         name = _discover_name(
             " ".join(plain(hub.get(key)) for key in ("title", "h1"))
         )
-    return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
+    discover_dir = DEFAULT_PUBLIC / "assets" / "images" / "discover"
+    variants = sorted(
+        p.name
+        for p in discover_dir.glob(f"{name}*.webp")
+        if p.stem == name or p.stem.startswith(name + "-") or p.stem.startswith(name + "_")
+    )
+    if not variants:
+        return DISCOVER_IMAGE_DIR + "/" + name + ".webp"
+    import hashlib
+
+    key = str(hub.get("canonical") or hub.get("title") or "")
+    idx = int(hashlib.md5(key.encode("utf-8")).hexdigest(), 16) % len(variants)
+    return DISCOVER_IMAGE_DIR + "/" + variants[idx]
 
 
 def article_jsonld(
