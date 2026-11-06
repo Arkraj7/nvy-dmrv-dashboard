@@ -159,7 +159,17 @@
   function t(key, fallback, vars) {
     var i18n = window.UFPI18N;
     var value = i18n ? i18n.t(key, vars) : undefined;
-    return value !== undefined && value !== null && value !== '' ? value : fallback;
+    if (value !== undefined && value !== null && value !== '') return value;
+    /* Fallback templates carry their own {name} placeholders; substitute
+       here too so the strings stay correct when i18n.js is not loaded
+       (e.g. after the Hindi/English toggle was removed from the shells). */
+    var text = String(fallback == null ? '' : fallback);
+    if (vars) {
+      Object.keys(vars).forEach(function (name) {
+        text = text.split('{' + name + '}').join(String(vars[name]));
+      });
+    }
+    return text;
   }
 
   function isHindi() {
@@ -1639,8 +1649,13 @@
       ? iconSvg('clock') + escapeHtml(sentenceText(formatClosed(job.date_archived)))
       : iconSvg('calendar') + escapeHtml(sentenceText(formatPosted(job.date_added)));
 
-    var deadlineMeta = (!isArchived && deadlineOf(job))
-      ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(sentenceText(t('card.deadline', 'Apply: {d}', { d: deadlineOf(job) }))) + '</span>'
+    /* deadline_or_window values are already phrased like "Apply by 10 Nov
+       2026" or "Rolling / Open"; only prefix the generic "Apply: " form
+       when the value does not already start with "Apply". */
+    var _dl = deadlineOf(job);
+    var _dlText = /^apply\b/i.test(_dl) ? _dl : t('card.deadline', 'Apply: {d}', { d: _dl });
+    var deadlineMeta = (!isArchived && _dl)
+      ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(sentenceText(_dlText)) + '</span>'
       : '';
 
     var footDate = isArchived

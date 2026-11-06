@@ -3425,6 +3425,20 @@ body.saved-open { overflow: hidden; }
   .mobile-action-bar { display: flex; }
   .mobile-action-bar[hidden] { display: none; }
   body.view-detail .detail-wrap { padding-bottom: 100px; }
+  /* Stack the three fixed bottom elements so nothing covers anything:
+     cookie banner (bottom: 0, max z) -> mobile action bar above it ->
+     app pill/widget above the action bar. */
+  .ufp-app-pill { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .ufp-app-widget { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  html.ufp-consent-open .mobile-action-bar {
+    bottom: 128px; /* sit directly above the consent banner */
+  }
+  html.ufp-consent-open .ufp-app-widget { bottom: 204px; }
+  /* Beat the consent.js injected sheet (same specificity) so the page
+     keeps room for both the banner and the action bar. */
+  html.ufp-consent-open body,
+  html.ufp-consent-open body.view-detail { padding-bottom: 208px; }
+  body.view-detail { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
   #jobs-grid, .skeleton-grid { grid-template-columns: minmax(0, 1fr); }
   .job-card { padding: 16px; }
 }
