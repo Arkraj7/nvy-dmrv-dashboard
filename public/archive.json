@@ -49,12 +49,12 @@
     },
     "id": "tadoba-field-biologist-2026",
     "last_link_check": {
-      "checked_at": "2026-11-05T00:58:40Z",
+      "checked_at": "2026-11-06T01:00:53Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 3
+      "consecutive_failures": 4
     },
-    "date_archived": "2026-11-05",
+    "date_archived": "2026-11-06",
     "archive_reason": "dead_page"
   },
   {
@@ -107,12 +107,12 @@
     "id": "swadesh-metallics-environment-officer-2026",
     "reverify_after": "2026-11-17",
     "last_link_check": {
-      "checked_at": "2026-11-05T00:58:40Z",
+      "checked_at": "2026-11-06T01:00:53Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 3
+      "consecutive_failures": 4
     },
-    "date_archived": "2026-11-05",
+    "date_archived": "2026-11-06",
     "archive_reason": "dead_page"
   },
   {
