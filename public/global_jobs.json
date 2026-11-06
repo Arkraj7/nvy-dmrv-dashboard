@@ -1,5 +1,54 @@
 [
   {
+    "id": "internal-strategic-coordinator-european-executive-office-exe",
+    "date_added": "2026-11-06",
+    "date_posted": "2026-11-06",
+    "clean_title": "Internal: Strategic Coordinator, European Executive Office, Executive Office",
+    "organization": "World Resources Institute (WRI)",
+    "city": "Remote",
+    "state": "",
+    "country": "Global",
+    "region": "UN / Multilateral",
+    "category": "Research Associate & Project Staff (Contractual)",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-12-06",
+    "qualification_summary": "Students or recent graduates in a relevant discipline; see the official call for specific eligibility.",
+    "compensation_or_fellowship": "Not disclosed - see official portal",
+    "role_summary": "Internal: Strategic Coordinator, European Executive Office, Executive Office at World Resources Institute (WRI).",
+    "title_hi": "",
+    "summary_hi": "",
+    "key_responsibilities": [
+      "Deliver the role's core research and programme outputs.",
+      "Coordinate with internal teams, partners and external stakeholders.",
+      "Prepare high-quality written analysis, reports and briefings.",
+      "Support monitoring, reporting and delivery against agreed deadlines."
+    ],
+    "must_have_skills": [
+      "Research and analysis",
+      "Stakeholder engagement",
+      "Report writing"
+    ],
+    "application_tip": "Apply through the official application link and tailor your CV to the specific competencies and deadline stated in the notice.",
+    "apply_url": "https://www.wri.org/careers/jobs/internal-strategic-coordinator-european-executive-office-executive-office-2026",
+    "org_website": "https://www.wri.org",
+    "org_domain": "wri.org",
+    "source_portal": "Official Organization Website",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "verification": {
+      "verified_at": "2026-11-06",
+      "method": "official-source-harvest",
+      "source": "WRI"
+    },
+    "reverify_after": "2026-11-21"
+  },
+  {
     "id": "user-research-lead-world-resources-institute-wri",
     "date_added": "2026-11-05",
     "date_posted": "2026-11-05",
@@ -112,6 +161,60 @@
     }
   },
   {
+    "clean_title": "Sustainability Consultant - Product Carbon Footprints & LCA",
+    "organization": "Climate-tech company (Berlin)",
+    "city": "Berlin",
+    "state": "",
+    "country": "Germany",
+    "region": "Europe",
+    "category": "ESG, Carbon Markets & Corporate Sustainability",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Senior",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-12-05",
+    "qualification_summary": "Experienced professional. Expertise in PCF/LCA processes, carbon footprinting, data modelling and validation. CSRD-related experience relevant.",
+    "compensation_or_fellowship": "EUR 50,000-70,000 per annum",
+    "role_summary": "Sustainability Consultant specialising in Product Carbon Footprints and Life Cycle Assessments, supporting companies with carbon footprinting projects from data collection to validation.",
+    "key_responsibilities": [
+      "PCF/LCA projects",
+      "Data collection and modelling",
+      "Validation and reporting",
+      "CSRD support"
+    ],
+    "must_have_skills": [
+      "LCA",
+      "PCF",
+      "Carbon footprinting",
+      "Data modelling",
+      "CSRD"
+    ],
+    "application_tip": "Apply via the link in the posting.",
+    "apply_url": "https://lnkd.in/dNsnnNTz",
+    "org_website": "https://thesustainabilitygrid.com",
+    "org_domain": "thesustainabilitygrid.com",
+    "source_portal": "LinkedIn post (The Sustainability Grid)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-11-05",
+    "date_posted": "2026-11-05",
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-20",
+    "verification": {
+      "verified_at": "2026-11-05",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "sustainability-grid-pcf-lca-consultant-berlin-2026"
+  },
+  {
     "id": "project-implementation-assistant-world-resources-institute-w",
     "date_added": "2026-11-05",
     "date_posted": "2026-11-05",
@@ -166,6 +269,57 @@
       "platform": "",
       "verifier": "verify_link_v2"
     }
+  },
+  {
+    "clean_title": "Global Solvers Accelerator 2027",
+    "organization": "Melton Foundation",
+    "city": "Global (in-person Co-Lab in Germany)",
+    "state": "",
+    "country": "Global",
+    "region": "Global / Remote",
+    "category": "Fellowships & Leadership Programs",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Fellowship",
+    "experience_level": "Young professionals",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Apply by 15 Nov 2026",
+    "valid_through": "2026-12-05",
+    "qualification_summary": "Practitioners aged 20-35 anywhere in the world, already leading social impact projects.",
+    "compensation_or_fellowship": "Fully funded in-person Co-Lab",
+    "role_summary": "Ten-month peer learning and leadership programme for emerging changemakers; online learning plus a fully funded week-long in-person Co-Lab in Germany.",
+    "key_responsibilities": [
+      "Peer learning",
+      "Leadership development",
+      "Social impact project work"
+    ],
+    "must_have_skills": [
+      "Social impact",
+      "Leadership",
+      "Community engagement"
+    ],
+    "application_tip": "Apply by 15 November 2026 via the link in the posting.",
+    "apply_url": "https://lnkd.in/gxCvq6H9",
+    "org_website": "https://meltonfoundation.org",
+    "org_domain": "meltonfoundation.org",
+    "source_portal": "LinkedIn post (Daniel Stein-Sayles)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-11-05",
+    "date_posted": "2026-11-05",
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-20",
+    "verification": {
+      "verified_at": "2026-11-05",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "melton-global-solvers-accelerator-2027"
   },
   {
     "id": "low-carbon-technology-analyst-world-resources-institute-wri",
@@ -284,6 +438,58 @@
     }
   },
   {
+    "clean_title": "Green Climate Fund Specialist",
+    "organization": "Food and Agriculture Organization of the United Nations (FAO)",
+    "city": "Various Locations",
+    "state": "",
+    "country": "Global",
+    "region": "Global / Remote",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "employment_type": "CONTRACTOR",
+    "deadline_or_window": "Apply by 27 Nov 2026",
+    "valid_through": "2026-12-05",
+    "qualification_summary": "Specialists in GCF Project Design and GCF Accreditation.",
+    "compensation_or_fellowship": "Not disclosed - see official notification",
+    "role_summary": "FAO is recruiting Green Climate Fund Specialists in GCF Project Design and GCF Accreditation.",
+    "key_responsibilities": [
+      "GCF project design",
+      "GCF accreditation",
+      "Climate finance"
+    ],
+    "must_have_skills": [
+      "Climate finance",
+      "GCF",
+      "Project design",
+      "Accreditation"
+    ],
+    "application_tip": "Apply via the link in the posting before 27 November 2026.",
+    "apply_url": "https://lnkd.in/dn2bhRWi",
+    "org_website": "https://www.fao.org",
+    "org_domain": "fao.org",
+    "source_portal": "LinkedIn post (Green Opportunities Worldwide / Climate and Remote Opportunities)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-11-05",
+    "date_posted": "2026-11-05",
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-20",
+    "verification": {
+      "verified_at": "2026-11-05",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "fao-green-climate-fund-specialist-2026"
+  },
+  {
     "id": "communications-specialist-cimmyt-cifor-icraf-landscape-allia",
     "date_added": "2026-11-05",
     "date_posted": "2026-11-05",
@@ -332,6 +538,60 @@
       "method": "official-source-harvest",
       "source": "CIFOR-ICRAF / Landscape Alliance"
     }
+  },
+  {
+    "clean_title": "Junior Energy and Climate Analyst",
+    "organization": "ClearlyEnergy",
+    "city": "Remote",
+    "state": "",
+    "country": "Global",
+    "region": "Global / Remote",
+    "category": "Climate Policy, Think-Tanks & Fellowships",
+    "position_type": "Full-Time Corporate / NGO",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "FULL_TIME",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-12-05",
+    "qualification_summary": "Analytical, organised candidates passionate about sustainability and climate innovation.",
+    "compensation_or_fellowship": "USD 50,000-55,000 per year",
+    "role_summary": "Support climate policy research, energy efficiency, environmental data analysis, emissions reduction and sustainable building programmes.",
+    "key_responsibilities": [
+      "Climate policy research",
+      "Energy efficiency analysis",
+      "Environmental data analysis",
+      "Emissions reduction",
+      "Sustainable building programmes"
+    ],
+    "must_have_skills": [
+      "Data analysis",
+      "Climate policy",
+      "Energy efficiency",
+      "Research"
+    ],
+    "application_tip": "Apply via the link in the posting.",
+    "apply_url": "https://lnkd.in/dqfSwdpk",
+    "org_website": "https://clearlyenergy.com",
+    "org_domain": "clearlyenergy.com",
+    "source_portal": "LinkedIn post (Climate and Remote Opportunities)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-11-05",
+    "date_posted": "2026-11-05",
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-20",
+    "verification": {
+      "verified_at": "2026-11-05",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "clearlyenergy-junior-energy-climate-analyst-2026"
   },
   {
     "id": "call-for-proposals-ethiopia-national-ecosystem-scoping-study",
@@ -712,54 +972,6 @@
     },
     "id": "tnc-associate-gef-partnership-public-funding-2026",
     "reverify_after": "2026-11-19"
-  },
-  {
-    "clean_title": "Behind Climate Science: A Storytelling Workshop",
-    "organization": "Imidibaniso (SARChI in Science Communication), Stellenbosch University",
-    "city": "Stellenbosch",
-    "state": "",
-    "country": "South Africa",
-    "region": "Global / Remote",
-    "category": "Workshops, Training & Capacity Building",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Researchers",
-    "employment_type": "OTHER",
-    "deadline_or_window": "5 November 2026",
-    "valid_through": "2026-11-05",
-    "qualification_summary": "PhD holders researching climate change in Africa.",
-    "compensation_or_fellowship": "Workshop participation - see official call",
-    "role_summary": "Three-day storytelling workshop from 22-24 February 2027 in Stellenbosch for South African climate scientists, focused on bringing the human side of research to life. Ten places available.",
-    "key_responsibilities": [
-      "Attend the three-day workshop in Stellenbosch",
-      "Develop storytelling skills for climate research",
-      "Submit a one-page CV and a three-minute video with the application"
-    ],
-    "must_have_skills": [
-      "Climate Science",
-      "Science Communication",
-      "Storytelling"
-    ],
-    "application_tip": "Submit a one-page CV and a three-minute video introducing yourself and your research by 5 November 2026 through the application form.",
-    "apply_url": "https://docs.google.com/forms/d/e/1FAIpQLSdiz9YMy59_dKGkwhaDMmrOnZ9AXsdDQfFsuOGIiqpgl5sGbg/viewform",
-    "org_website": "https://www.sun.ac.za",
-    "org_domain": "sun.ac.za",
-    "source_portal": "LinkedIn post (Imidibaniso)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": true,
-    "evergreen": false,
-    "date_added": "2026-11-04",
-    "date_posted": "2026-11-04",
-    "title_hi": "",
-    "summary_hi": "",
-    "verification": {
-      "verified_at": "2026-11-04",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": 200
-    },
-    "id": "stellenbosch-behind-climate-science-storytelling-workshop-2027"
   },
   {
     "id": "project-operations-assistant-world-resources-institute-wri",
@@ -2143,6 +2355,7 @@
     }
   },
   {
+<<<<<<< Updated upstream
     "id": "environment-energy-officer-nakivale-refugee-settlement-heks",
     "date_added": "2026-10-29",
     "date_posted": "Wed, 28 Oct 2026 11:39:03 +0000",
@@ -2202,6 +2415,8 @@
     }
   },
   {
+=======
+>>>>>>> Stashed changes
     "id": "environment-and-social-safeguards-officer-catholic-relief-se",
     "date_added": "2026-10-29",
     "date_posted": "Thu, 29 Oct 2026 06:27:42 +0000",
@@ -4114,6 +4329,7 @@
     "id": "mittal-family-climate-fellowship-academic-year-2027-28-harva"
   },
   {
+<<<<<<< Updated upstream
     "id": "national-consultant-local-expert-for-mtr-biodiversity-govern",
     "date_added": "2026-10-24",
     "date_posted": "Thu, 22 Oct 2026 12:33:48 +0000",
@@ -4171,6 +4387,8 @@
     }
   },
   {
+=======
+>>>>>>> Stashed changes
     "id": "women-building-power-for-climate-justice-lead-womin",
     "date_added": "2026-10-23",
     "date_posted": "Fri, 09 Oct 2026 07:53:18 +0000",
@@ -4618,6 +4836,7 @@
     }
   },
   {
+<<<<<<< Updated upstream
     "id": "portfolio-officer-esaro-gef-and-gcf-nairobi-international-un",
     "date_added": "2026-10-23",
     "date_posted": "2026-10-23",
@@ -4736,6 +4955,8 @@
     }
   },
   {
+=======
+>>>>>>> Stashed changes
     "id": "monitoring-evaluation-learning-mel-coordinator-eden-reforest",
     "date_added": "2026-10-23",
     "date_posted": "Wed, 21 Oct 2026 08:00:56 +0000",
@@ -4913,6 +5134,7 @@
     }
   },
   {
+<<<<<<< Updated upstream
     "id": "gcf-project-manager-national-damascus-save-the-children",
     "date_added": "2026-10-23",
     "date_posted": "Wed, 21 Oct 2026 11:58:49 +0000",
@@ -4971,6 +5193,8 @@
     }
   },
   {
+=======
+>>>>>>> Stashed changes
     "id": "fully-funded-phd-community-challenges-nottingham",
     "date_added": "2026-10-23",
     "clean_title": "Fully Funded PhD Opportunities in Community Challenges",
@@ -6119,216 +6343,5 @@
       "host_class": "employer_primary",
       "verifier": "verify_link"
     }
-  },
-  {
-    "clean_title": "Sustainability Consultant - Product Carbon Footprints & LCA",
-    "organization": "Climate-tech company (Berlin)",
-    "city": "Berlin",
-    "state": "",
-    "country": "Germany",
-    "region": "Europe",
-    "category": "ESG, Carbon Markets & Corporate Sustainability",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Senior",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-31",
-    "qualification_summary": "Experienced professional. Expertise in PCF/LCA processes, carbon footprinting, data modelling and validation. CSRD-related experience relevant.",
-    "compensation_or_fellowship": "EUR 50,000-70,000 per annum",
-    "role_summary": "Sustainability Consultant specialising in Product Carbon Footprints and Life Cycle Assessments, supporting companies with carbon footprinting projects from data collection to validation.",
-    "key_responsibilities": [
-      "PCF/LCA projects",
-      "Data collection and modelling",
-      "Validation and reporting",
-      "CSRD support"
-    ],
-    "must_have_skills": [
-      "LCA",
-      "PCF",
-      "Carbon footprinting",
-      "Data modelling",
-      "CSRD"
-    ],
-    "application_tip": "Apply via the link in the posting.",
-    "apply_url": "https://lnkd.in/dNsnnNTz",
-    "org_website": "https://thesustainabilitygrid.com",
-    "org_domain": "thesustainabilitygrid.com",
-    "source_portal": "LinkedIn post (The Sustainability Grid)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": true,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "",
-    "summary_hi": "",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-30",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "sustainability-grid-pcf-lca-consultant-berlin-2026"
-  },
-  {
-    "clean_title": "Global Solvers Accelerator 2027",
-    "organization": "Melton Foundation",
-    "city": "Global (in-person Co-Lab in Germany)",
-    "state": "",
-    "country": "Global",
-    "region": "Global",
-    "category": "Fellowships & Leadership Programs",
-    "position_type": "Fellowship / Internship",
-    "opportunity_kind": "Fellowship",
-    "experience_level": "Young professionals",
-    "employment_type": "OTHER",
-    "deadline_or_window": "Apply by 15 Nov 2026",
-    "valid_through": "2026-11-15",
-    "qualification_summary": "Practitioners aged 20-35 anywhere in the world, already leading social impact projects.",
-    "compensation_or_fellowship": "Fully funded in-person Co-Lab",
-    "role_summary": "Ten-month peer learning and leadership programme for emerging changemakers; online learning plus a fully funded week-long in-person Co-Lab in Germany.",
-    "key_responsibilities": [
-      "Peer learning",
-      "Leadership development",
-      "Social impact project work"
-    ],
-    "must_have_skills": [
-      "Social impact",
-      "Leadership",
-      "Community engagement"
-    ],
-    "application_tip": "Apply by 15 November 2026 via the link in the posting.",
-    "apply_url": "https://lnkd.in/gxCvq6H9",
-    "org_website": "https://meltonfoundation.org",
-    "org_domain": "meltonfoundation.org",
-    "source_portal": "LinkedIn post (Daniel Stein-Sayles)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": true,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "",
-    "summary_hi": "",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-30",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "melton-global-solvers-accelerator-2027"
-  },
-  {
-    "clean_title": "Junior Energy and Climate Analyst",
-    "organization": "ClearlyEnergy",
-    "city": "Remote",
-    "state": "",
-    "country": "Global",
-    "region": "Global",
-    "category": "Climate Policy, Think-Tanks & Fellowships",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-31",
-    "qualification_summary": "Analytical, organised candidates passionate about sustainability and climate innovation.",
-    "compensation_or_fellowship": "USD 50,000-55,000 per year",
-    "role_summary": "Support climate policy research, energy efficiency, environmental data analysis, emissions reduction and sustainable building programmes.",
-    "key_responsibilities": [
-      "Climate policy research",
-      "Energy efficiency analysis",
-      "Environmental data analysis",
-      "Emissions reduction",
-      "Sustainable building programmes"
-    ],
-    "must_have_skills": [
-      "Data analysis",
-      "Climate policy",
-      "Energy efficiency",
-      "Research"
-    ],
-    "application_tip": "Apply via the link in the posting.",
-    "apply_url": "https://lnkd.in/dqfSwdpk",
-    "org_website": "https://clearlyenergy.com",
-    "org_domain": "clearlyenergy.com",
-    "source_portal": "LinkedIn post (Climate and Remote Opportunities)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": true,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "",
-    "summary_hi": "",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-30",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "clearlyenergy-junior-energy-climate-analyst-2026"
-  },
-  {
-    "clean_title": "Green Climate Fund Specialist",
-    "organization": "Food and Agriculture Organization of the United Nations (FAO)",
-    "city": "Various Locations",
-    "state": "",
-    "country": "Global",
-    "region": "Global",
-    "category": "Climate Policy, Think-Tanks & Fellowships",
-    "position_type": "Young Professional / Consultant (Contractual)",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Mid-Senior (3-6 Years)",
-    "employment_type": "CONTRACTOR",
-    "deadline_or_window": "Apply by 27 Nov 2026",
-    "valid_through": "2026-11-27",
-    "qualification_summary": "Specialists in GCF Project Design and GCF Accreditation.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "FAO is recruiting Green Climate Fund Specialists in GCF Project Design and GCF Accreditation.",
-    "key_responsibilities": [
-      "GCF project design",
-      "GCF accreditation",
-      "Climate finance"
-    ],
-    "must_have_skills": [
-      "Climate finance",
-      "GCF",
-      "Project design",
-      "Accreditation"
-    ],
-    "application_tip": "Apply via the link in the posting before 27 November 2026.",
-    "apply_url": "https://lnkd.in/dn2bhRWi",
-    "org_website": "https://www.fao.org",
-    "org_domain": "fao.org",
-    "source_portal": "LinkedIn post (Green Opportunities Worldwide / Climate and Remote Opportunities)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": true,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "",
-    "summary_hi": "",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-30",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "fao-green-climate-fund-specialist-2026"
   }
 ]
