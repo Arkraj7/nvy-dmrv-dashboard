@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-06T11:33:55+05:30",
-  "last_updated_ist": "2026-11-06T11:33:55+05:30",
+  "last_updated": "2026-11-06T11:50:45+05:30",
+  "last_updated_ist": "2026-11-06T11:50:45+05:30",
   "last_pipeline_run_date_ist": "2026-11-06",
-  "active_open_jobs": 153,
+  "active_open_jobs": 156,
   "opened_this_week": 38,
   "passed_this_week": 45,
   "total_archived_jobs": 56,
-  "total_historical_indexed": 209,
+  "total_historical_indexed": 212,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -56,7 +56,7 @@
       "archived": 13
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 13,
+      "active": 15,
       "archived": 8
     },
     "Forestry, Wildlife & Afforestation": {
@@ -92,7 +92,7 @@
       "archived": 0
     },
     "Fellowships & Leadership Programs": {
-      "active": 3,
+      "active": 4,
       "archived": 2
     },
     "Grants & Research Funding": {
@@ -122,12 +122,12 @@
     "Global / Remote": 6,
     "Telangana": 5,
     "Uttarakhand": 5,
+    "Punjab": 4,
+    "Uttar Pradesh": 4,
     "West Bengal": 4,
     "Assam": 3,
     "Kerala": 3,
     "Odisha": 3,
-    "Punjab": 3,
-    "Uttar Pradesh": 3,
     "Haryana": 2,
     "Jharkhand": 2,
     "Arunachal Pradesh": 1,
@@ -138,24 +138,25 @@
     "Himachal Pradesh": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 96,
+  "active_global_jobs": 105,
   "active_global_portals": 12,
-  "total_global_records": 108,
+  "total_global_records": 117,
   "total_archived_global_jobs": 41,
   "global_jobs_by_region": {
     "UN / Multilateral": 6,
     "Asia-Pacific": 19,
     "Africa & Middle East": 14,
-    "Europe": 19,
+    "Europe": 23,
     "Global / Remote": 27,
     "North America": 10,
-    "Latin America": 1
+    "Latin America": 1,
+    "Global": 5
   },
   "global_jobs_by_kind": {
-    "Job / Career": 67,
-    "Fellowship": 11,
+    "Job / Career": 73,
+    "Fellowship": 13,
     "Grant / Funding": 4,
-    "Internship": 2,
+    "Internship": 3,
     "Competition / Award": 2,
     "Scholarship": 10
   },
