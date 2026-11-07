@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-07T07:09:31+05:30",
-  "last_updated_ist": "2026-11-07T07:09:31+05:30",
+  "last_updated": "2026-11-07T07:18:31+05:30",
+  "last_updated_ist": "2026-11-07T07:18:31+05:30",
   "last_pipeline_run_date_ist": "2026-11-07",
-  "active_open_jobs": 152,
+  "active_open_jobs": 151,
   "opened_this_week": 40,
   "passed_this_week": 24,
   "total_archived_jobs": 60,
-  "total_historical_indexed": 212,
+  "total_historical_indexed": 211,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -52,7 +52,7 @@
   ],
   "by_category": {
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 14,
+      "active": 13,
       "archived": 9
     },
     "Fellowships & Leadership Programs": {
@@ -123,10 +123,10 @@
     "Uttarakhand": 5,
     "Punjab": 4,
     "Telangana": 4,
-    "Uttar Pradesh": 4,
     "West Bengal": 4,
     "Assam": 3,
     "Kerala": 3,
+    "Uttar Pradesh": 3,
     "Haryana": 2,
     "Jharkhand": 2,
     "Odisha": 2,
@@ -143,19 +143,19 @@
   "total_archived_global_jobs": 44,
   "global_jobs_by_region": {
     "Africa & Middle East": 14,
-    "Asia-Pacific": 19,
-    "Europe": 21,
     "Global / Remote": 32,
-    "Latin America": 1,
+    "Europe": 21,
+    "UN / Multilateral": 6,
+    "Asia-Pacific": 19,
     "North America": 10,
-    "UN / Multilateral": 6
+    "Latin America": 1
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 2,
-    "Fellowship": 13,
-    "Grant / Funding": 4,
-    "Internship": 3,
     "Job / Career": 71,
+    "Fellowship": 13,
+    "Internship": 3,
+    "Grant / Funding": 4,
+    "Competition / Award": 2,
     "Scholarship": 10
   },
   "telegram_last_status": "delivered",
