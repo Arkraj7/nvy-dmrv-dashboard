@@ -66,13 +66,14 @@
     "entry-level-environmental-jobs.html": {
       "streak_on": 0,
       "streak_off": 25,
-      "indexable": false,
-      "last_flip": "2026-10-31",
+      "indexable": true,
+      "last_flip": "2026-11-07",
       "flip_log": [
         "2026-10-21: ON (count=18, streak_on=3)",
         "2026-10-21: OFF (count=4, streak_off=7)",
         "2026-10-27: ON (editorial)",
-        "2026-10-31: OFF (hard floor: count=7 < 8)"
+        "2026-10-31: OFF (hard floor: count=7 < 8)",
+        "2026-11-07: ON (editorial)"
       ]
     },
     "remote-environmental-jobs.html": {
