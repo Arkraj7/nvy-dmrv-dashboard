@@ -200,10 +200,198 @@ COURSES = [
         "cost": "Paid",
         "duration": "1-3 months",
     },
+    {
+        "name": "QGIS for Environmental and Geospatial Jobs",
+        "provider": "QGIS Project / OSGeo (free, open-source)",
+        "url": "https://qgis.org",
+        "what": "Hands-on QGIS training for maps, spatial data, land-use mapping and field-data analysis. The free software most GIS trainee and mapping-associate roles expect candidates to know.",
+        "who_asks": "GIS trainee, mapping associate, GIS analyst, project associate",
+        "roles": ["/roles/gis-analyst", "/roles/project-associate", "/roles/junior-research-fellow"],
+        "level": "Beginner to intermediate",
+        "cost": "Free (QGIS + official documentation and community tutorials)",
+        "duration": "6-10 weeks self-paced",
+        "audience": "Freshers, geography / environment / civil graduates, and research scholars who need to produce publishable maps without an ArcGIS licence.",
+        "curriculum": [
+            "Map theory: projections, coordinate systems, scales and symbology for Indian maps",
+            "Digitisation and georeferencing of Survey of India toposheets and satellite imagery",
+            "Vector editing, topology and attribute-table data cleaning",
+            "LULC, land-use and building-footprint mapping workflows (the exact tasks GeoNxt and Axiom trainees do)",
+            "Raster analysis: NDVI, clipping, reclassification and terrain analysis",
+            "QGIS plugins, layouts and exporting maps that look professional in reports",
+            "Portfolio project: a land-use map of your district with a one-page report",
+        ],
+        "outcomes": [
+            "Produce a complete LULC or building-footprint map from raw data",
+            "Georeference and digitise paper maps and satellite imagery",
+            "Build a print-ready map layout with symbols and a clear legend",
+            "Show a real GIS portfolio in interviews instead of only a certificate",
+        ],
+    },
+    {
+        "name": "ArcGIS Pro for GIS Analysts",
+        "provider": "Esri",
+        "url": "https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview",
+        "what": "Esri's desktop GIS platform used by government departments, urban-planning boards and large consultancies. Covers map production, spatial analysis and geodatabase workflows employers list in senior GIS notices.",
+        "who_asks": "GIS analyst, GIS planner, GIS manager, urban planner",
+        "roles": ["/roles/gis-analyst", "/roles/project-associate"],
+        "level": "Intermediate",
+        "cost": "Paid (ArcGIS licence / Esri Academy)",
+        "duration": "8-12 weeks self-paced",
+        "audience": "Candidates targeting state GIS cells (like NIT Calicut CoEUPD and Uttarakhand GIS roles), PRSC/ISRO project posts, and consultancy jobs that list ArcGIS Pro explicitly.",
+        "curriculum": [
+            "ArcGIS Pro interface, projects and data management",
+            "Editing, georeferencing and geodatabase design",
+            "Spatial analysis with overlay, buffer and suitability tools",
+            "Raster and 3D analysis for urban and environmental planning",
+            "Cartography, labelling and professional layouts",
+            "ArcGIS Online sharing and working with field data",
+            "Case study: a city land-use suitability map end to end",
+        ],
+        "outcomes": [
+            "Work confidently in ArcGIS Pro based offices and GIS cells",
+            "Design a geodatabase and run overlay/suitability analysis",
+            "Produce publication-quality maps with professional symbology",
+            "Read ArcGIS-heavy job descriptions without guessing",
+        ],
+    },
+    {
+        "name": "Google Earth Engine for Earth Observation",
+        "provider": "Google",
+        "url": "https://earthengine.google.com",
+        "what": "Cloud-based Earth-observation platform for analysing Sentinel, Landsat and MODIS imagery at scale. The toolkit behind most modern climate, vegetation-change and urban-heat research roles.",
+        "who_asks": "Research associate, project associate, climate analyst, GIS analyst",
+        "roles": ["/roles/gis-analyst", "/roles/junior-research-fellow", "/roles/project-associate", "/roles/climate-risk-analyst"],
+        "level": "Intermediate",
+        "cost": "Free (research and education use)",
+        "duration": "8-12 weeks self-paced",
+        "audience": "Postgraduates and JRF/Project Associate candidates wanting to move beyond desktop mapping into data-driven climate and land-change research.",
+        "curriculum": [
+            "JavaScript API and Code Editor basics for Earth Engine",
+            "Loading Sentinel-2 and Landsat collections and cloud masking",
+            "NDVI, SAVI and vegetation-change time series",
+            "Supervised classification for land-use and land-cover mapping",
+            "Urban heat island analysis with land-surface temperature",
+            "Exporting charts, maps and statistics for research papers",
+            "Project: a 10-year vegetation-trend study of your home district",
+        ],
+        "outcomes": [
+            "Analyse satellite imagery for any district in minutes",
+            "Build a defensible forest-change or heat-island study",
+            "Write the methods section of a research paper with real data",
+            "Stand out in JRF/Project Associate interviews with a live demo",
+        ],
+    },
+    {
+        "name": "Remote Sensing Fundamentals and Image Classification",
+        "provider": "Indian Institute of Remote Sensing (IIRS), ISRO / open learning",
+        "url": "https://www.iirs.gov.in",
+        "what": "Core remote-sensing theory and practice: sensor physics, image interpretation, and supervised/unsupervised classification. The foundation every PRSC, NRSC and university GIS post quietly assumes.",
+        "who_asks": "JRF, project associate, remote sensing assistant, research associate",
+        "roles": ["/roles/junior-research-fellow", "/roles/project-associate", "/roles/gis-analyst"],
+        "level": "Beginner to intermediate",
+        "cost": "Free (IIRS outreach / open courses) to paid (certificate courses)",
+        "duration": "10-14 weeks self-paced",
+        "audience": "M.Sc. Remote Sensing, Geography, Earth Science and Environmental Science students preparing for JRF, PRSC and project-associate screening tests.",
+        "curriculum": [
+            "Electromagnetic spectrum, sensors and the Sentinel/Landsat/IRIS family",
+            "Image geometry and radiometric corrections",
+            "Visual image interpretation of terrain, water, vegetation and settlements",
+            "Spectral signatures and indices (NDVI, NDWI, NDBI)",
+            "Supervised classification: training data, algorithms and accuracy assessment",
+            "Change detection for deforestation, urban growth and water bodies",
+            "Mock screening: a 30-question practice test with explanations",
+        ],
+        "outcomes": [
+            "Explain how sensors see the Earth in a JRF interview",
+            "Classify a satellite image and report accuracy honestly",
+            "Detect land-use change between two dates with a clear map",
+            "Answer the theory questions that screen GIS/RS notices",
+        ],
+    },
+    {
+        "name": "Drone and Aerial Mapping for Geospatial Surveys",
+        "provider": "DJI Academy / ISRO-registered training centres",
+        "url": "https://www.dji.com/academy",
+        "what": "Drone surveying, photogrammetry and orthomosaic mapping for land records, mining, forestry and infrastructure surveys. A fast-growing niche in government and consultancy GIS teams.",
+        "who_asks": "GIS analyst, survey associate, drone operator, project associate",
+        "roles": ["/roles/gis-analyst", "/roles/project-associate", "/roles/environmental-engineer"],
+        "level": "Intermediate",
+        "cost": "Paid (course + DGCA RPTO training where required)",
+        "duration": "4-8 weeks",
+        "audience": "Field-oriented candidates who want to combine drone flying with GIS processing, and current GIS trainees moving into survey roles.",
+        "curriculum": [
+            "Drone regulations in India (DGCA rules, RPTO and permissions)",
+            "Flight planning: overlap, GSD and ground control points",
+            "Photogrammetry software: orthomosaics, DSM/DTM and 3D models",
+            "Volume estimation for mines, quarries and stockpiles",
+            "Crop-health and NDVI mapping from drone imagery",
+            "Integrating drone outputs into QGIS/ArcGIS workflows",
+            "Field safety, batteries and data backup discipline",
+        ],
+        "outcomes": [
+            "Plan and fly a legal, repeatable survey mission",
+            "Produce an orthomosaic and digital surface model",
+            "Estimate volumes and crop health from drone data",
+            "Add a high-demand drone skill to a GIS CV",
+        ],
+    },
+    {
+        "name": "GNSS and GPS Surveying for Field Mapping",
+        "provider": "Survey of India / CSIR training programmes",
+        "url": "https://www.surveyofindia.gov.in",
+        "what": "GPS/GNSS field surveying: coordinate systems, DGPS/RTK workflows and field-data collection that research and infrastructure projects depend on for accurate ground truth.",
+        "who_asks": "Field investigator, project associate, GIS analyst, survey associate",
+        "roles": ["/roles/gis-analyst", "/roles/project-associate", "/roles/biodiversity-analyst"],
+        "level": "Beginner to intermediate",
+        "cost": "Free concepts / paid instrument training",
+        "duration": "4-6 weeks",
+        "audience": "Candidates joining field-based JRF and project positions where GPS ground-truthing is a daily task, not just screen work.",
+        "curriculum": [
+            "Coordinate systems made practical: WGS84, UTM and datum shifts",
+            "Handheld GPS vs DGPS vs RTK — accuracy, cost and when each fits",
+            "Collecting clean field data: points, tracks and attributes",
+            "Ground control points for satellite and drone imagery",
+            "Converting field data into GIS-ready layers",
+            "Quality checks: PDOP, fix types and error budgets",
+            "Field protocol: a one-day ground-truthing checklist you can reuse",
+        ],
+        "outcomes": [
+            "Collect survey-grade field data with confidence",
+            "Validate satellite and drone maps with real ground points",
+            "Convert GPS logs into clean GIS layers without losing accuracy",
+            "Work independently in field teams for JRF and project posts",
+        ],
+    },
 ]
 
 
 def build_course_page(course: Dict[str, Any]) -> None:
+    extra = ""
+    if course.get("curriculum"):
+        items = "".join(f"<li>{esc(x)}</li>" for x in course["curriculum"])
+        extra += f"""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>What you will learn</h2>
+        <p>{esc(course.get("audience", ""))}</p>
+        <ul class="check-list">{items}</ul>
+      </div>
+    </section>"""
+    if course.get("outcomes"):
+        items = "".join(f"<li>{esc(x)}</li>" for x in course["outcomes"])
+        extra += f"""    <section class="hub-main">
+      <div class="hub-main-inner">
+        <h2>What you will be able to do</h2>
+        <ul class="check-list">{items}</ul>
+      </div>
+    </section>"""
+    faqs = [
+        (f"Is {course['name']} worth it?", "It depends on your target role. Check the 'who asks for it' section above. If your target employers list it, it is worth the investment."),
+        ("Can I learn this for free?", "Most frameworks publish their standards for free. Certification exams and training courses are usually paid."),
+        ("How long does it take?", f"Typically {course['duration']}. Self-paced options are available for most."),
+    ]
+    if course.get("curriculum"):
+        faqs.append(("Do I need a certificate, or is a portfolio better?", "For GIS and remote-sensing roles, a small portfolio (a completed map or study with a one-page report) usually matters more than a certificate. Complete the portfolio project in the curriculum and link it in your CV."))
+        faqs.append(("Which software do I need?", "Start with the free tools named in the curriculum. Paid software is worth buying only when a target employer requires it."))
     body = "\n".join([
         hero("Certification", course["name"], course["what"], [("Provider", course["provider"]), ("Level", course["level"]), ("Cost", course["cost"])]),
         f"""    <section class="hub-main">
@@ -224,6 +412,7 @@ def build_course_page(course: Dict[str, Any]) -> None:
         <p><a href="{course['url']}" target="_blank" rel="noopener noreferrer">Official website &nearr;</a></p>
       </div>
     </section>""",
+        extra,
         f"""    <section class="hub-main">
       <div class="hub-main-inner">
         <h2>Related role profiles</h2>
@@ -232,11 +421,7 @@ def build_course_page(course: Dict[str, Any]) -> None:
         </ul>
       </div>
     </section>""",
-        beh.bsp.faq_section_html([
-            (f"Is {course['name']} worth it?", "It depends on your target role. Check the 'who asks for it' section above. If your target employers list it, it is worth the investment."),
-            ("Can I learn this for free?", "Most frameworks publish their standards for free. Certification exams and training courses are usually paid."),
-            ("How long does it take?", f"Typically {course['duration']}. Self-paced options are available for most."),
-        ]),
+        beh.bsp.faq_section_html(faqs),
     ])
     jsonld = "\n".join([
         beh.bsp.organization_jsonld(),
@@ -280,8 +465,8 @@ def build_courses_index() -> None:
         ]),
     ])
     write_sub(COURSES_DIR, "index", shell(
-        title="Green Job Certifications & Courses: GRI, BRSR, LEED, GHG Protocol & More",
-        description="Certifications and courses for green jobs in India: GRI, BRSR, LEED, GRIHA, GHG Protocol, SBTi, TCFD, TNFD, ISO 14001 and more.",
+        title="Green Job Certifications & GIS Courses: QGIS, ArcGIS, GEE, GRI, BRSR & More",
+        description="Certifications and courses for green jobs in India: QGIS, ArcGIS Pro, Google Earth Engine, remote sensing, drones, GNSS, GRI, BRSR, LEED, GHG Protocol and more.",
         canonical=f"{SITE}/courses",
         body=body,
         jsonld="\n".join([beh.bsp.organization_jsonld(), beh.bsp.website_jsonld(), beh.breadcrumb("Green Job Certifications", f"{SITE}/courses")]),
