@@ -331,13 +331,14 @@
     "esg-jobs-noida.html": {
       "streak_on": 0,
       "streak_off": 13,
-      "indexable": false,
-      "last_flip": "2026-11-07",
+      "indexable": true,
+      "last_flip": "2026-11-08",
       "flip_log": [
         "2026-10-27: ON (editorial)",
         "2026-10-31: OFF (hard floor: count=6 < 8)",
         "2026-11-06: ON (editorial)",
-        "2026-11-07: OFF (hard floor: count=7 < 8)"
+        "2026-11-07: OFF (hard floor: count=7 < 8)",
+        "2026-11-08: ON (editorial)"
       ]
     },
     "esg-jobs-coimbatore.html": {
@@ -413,13 +414,14 @@
     "environmental-jobs-noida.html": {
       "streak_on": 0,
       "streak_off": 13,
-      "indexable": false,
-      "last_flip": "2026-11-07",
+      "indexable": true,
+      "last_flip": "2026-11-08",
       "flip_log": [
         "2026-10-27: ON (editorial)",
         "2026-10-31: OFF (hard floor: count=6 < 8)",
         "2026-11-06: ON (editorial)",
-        "2026-11-07: OFF (hard floor: count=7 < 8)"
+        "2026-11-07: OFF (hard floor: count=7 < 8)",
+        "2026-11-08: ON (editorial)"
       ]
     },
     "environmental-jobs-bengaluru.html": {
@@ -504,11 +506,12 @@
     "environmental-jobs-gurugram.html": {
       "streak_on": 0,
       "streak_off": 13,
-      "indexable": false,
-      "last_flip": "2026-10-31",
+      "indexable": true,
+      "last_flip": "2026-11-08",
       "flip_log": [
         "2026-10-27: ON (editorial)",
-        "2026-10-31: OFF (hard floor: count=6 < 8)"
+        "2026-10-31: OFF (hard floor: count=6 < 8)",
+        "2026-11-08: ON (editorial)"
       ]
     },
     "workshops-training-capacity-building.html": {
