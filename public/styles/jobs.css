@@ -3439,6 +3439,8 @@ body.saved-open { overflow: hidden; }
   html.ufp-consent-open body,
   html.ufp-consent-open body.view-detail { padding-bottom: 208px; }
   body.view-detail { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  /* Toast must clear the sticky action bar + floating controls on phones. */
+  .toast { bottom: calc(140px + env(safe-area-inset-bottom, 0px)); }
   #jobs-grid, .skeleton-grid { grid-template-columns: minmax(0, 1fr); }
   .job-card { padding: 16px; }
 }

@@ -85,7 +85,7 @@ def page_shell(title, desc, canonical, body):
   <script type="application/ld+json">
   {{"@context":"https://schema.org","@type":"CollectionPage","name":"{title}","description":"{desc}","url":"{canonical}"}}
   </script>
-  <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+  <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
   <link rel="stylesheet" href="/styles/hub.css">
   <script src="/js/consent-tags.js?v=20261028"></script>
 </head>

@@ -3880,7 +3880,7 @@ def build_hub_page(
 {FONTS}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
@@ -3966,7 +3966,7 @@ def build_hub_page(
 
   <script defer src="/js/toc2.js"></script>
   <script defer src="/js/consent.js?v=20261028b"></script>
-<script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/back-to-top.js?v=20261108b"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 <script async type="application/javascript"
         src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
@@ -4957,7 +4957,7 @@ def build_job_page(
 
 {FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
@@ -5082,7 +5082,7 @@ def build_job_page(
 
   <script defer src="/js/toc2.js"></script>
   <script defer src="/js/consent.js?v=20261028b"></script>
-<script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/back-to-top.js?v=20261108b"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 <script async type="application/javascript"
         src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
@@ -5826,7 +5826,7 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(desc)}">
-  <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+  <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
   <link rel="stylesheet" href="/styles/hub.css">
   <script src="/js/consent-tags.js?v=20261028"></script>
   <script type="application/ld+json">
@@ -5964,7 +5964,7 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>

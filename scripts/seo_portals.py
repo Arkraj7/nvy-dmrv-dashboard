@@ -403,7 +403,7 @@ def build_hindi_hub_page(
 {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
@@ -490,7 +490,7 @@ def build_hindi_hub_page(
 {footer_html_hi()}
 
   <script defer src="/js/consent.js?v=20261028b"></script>
-<script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/back-to-top.js?v=20261108b"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
 </html>
@@ -680,7 +680,7 @@ def build_regional_hub_page(
 {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
@@ -757,7 +757,7 @@ def build_regional_hub_page(
 {footer_html(None)}
 
   <script defer src="/js/consent.js?v=20261028b"></script>
-<script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/back-to-top.js?v=20261108b"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
 </html>
@@ -1075,7 +1075,7 @@ def build_global_hub_page(
     {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
@@ -1166,7 +1166,7 @@ def build_global_hub_page(
 {footer_html(None)}
 
   <script defer src="/js/consent.js?v=20261028b"></script>
-<script defer src="/js/back-to-top.js"></script>
+<script defer src="/js/back-to-top.js?v=20261108b"></script>
 <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
 </html>

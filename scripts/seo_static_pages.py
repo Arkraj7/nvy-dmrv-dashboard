@@ -506,7 +506,7 @@ def _page_shell(
     <meta name="theme-color" content="#F8FAFC">
 {bsp.FAVICONS}
 {bsp.FONTS}
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
     <link rel="stylesheet" href="/styles/hub.css">
 {ld}
 </head>
@@ -515,7 +515,7 @@ def _page_shell(
 {bsp.header_html('registry')}
 {body}
   <script defer src="/js/consent.js?v=20261028b"></script>
-  <script defer src="/js/back-to-top.js"></script>
+  <script defer src="/js/back-to-top.js?v=20261108b"></script>
   <script defer src="/js/syndication-drawer.js?v=20261023-1"></script>
 </body>
 </html>

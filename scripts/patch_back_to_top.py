@@ -22,12 +22,12 @@ log = logging.getLogger("patch_back_to_top")
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = REPO_ROOT / "public"
 
-TAG = '<script defer src="/js/back-to-top.js"></script>'
+TAG = '<script defer src="/js/back-to-top.js?v=20261108b"></script>'
 
 
 def patch(path: Path) -> str:
     html = path.read_text(encoding="utf-8")
-    if "/js/back-to-top.js" in html:
+    if "/js/back-to-top.js?v=20261108b" in html:
         return "skipped (already present)"
     idx = html.rfind("</body>")
     if idx == -1:

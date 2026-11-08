@@ -47,7 +47,7 @@
     'border-color:rgba(255,255,255,.18);box-shadow:0 18px 36px -18px rgba(0,0,0,.78);}',
     'html[data-theme="dark"] .ufp-btt:hover,html[data-theme="dark"] .ufp-btt:focus,',
     'html.dark .ufp-btt:hover,html.dark .ufp-btt:focus{border-color:#34d399;color:#34d399;}',
-    '@media (max-width:768px){.ufp-btt{width:36px;height:36px;left:12px;right:auto;bottom:14px;}',
+    '@media (max-width:768px){.ufp-btt{width:36px;height:36px;left:12px;right:auto;bottom:calc(84px + env(safe-area-inset-bottom, 0px));}',
     '.ufp-btt svg{width:16px;height:16px;}}',
     '@media print{.ufp-btt{display:none !important;}}',
     '@media (prefers-reduced-motion:reduce){.ufp-btt{transition:none;}}'
@@ -89,7 +89,9 @@
     if (!btn) { return; }
     var mobile = window.innerWidth <= MOBILE_MAX;
     var size = mobile ? MOBILE_SIZE : SIZE;
-    var bottom = mobile ? 14 : GAP;
+    /* On phones the sticky dossier action bar owns the bottom ~62px, so the
+       control docks ABOVE it (84px) and never covers its Back/Apply buttons. */
+    var bottom = mobile ? 84 : GAP;
     var right = GAP;
 
     var bar = visibleRect(document.getElementById('ufp-cookie-consent'));
@@ -97,9 +99,21 @@
       bottom = Math.max(bottom, window.innerHeight - bar.top + 10);
     }
 
+    /* Same discipline for the mobile action bar (Back / Save / Apply Now):
+       if it is visible, stay above it. */
+    var actionBar = visibleRect(document.querySelector('.mobile-action-bar'));
+    if (actionBar) {
+      bottom = Math.max(bottom, window.innerHeight - actionBar.top + 10);
+    }
+
     /* On phones the control docks bottom-left, opposite the app mini-pill, so
        the two can never stack on top of each other. */
-    if (!mobile) {
+    if (mobile) {
+      var appMobile = visibleRect(document.getElementById('ufp-app-widget'));
+      if (appMobile) {
+        bottom = Math.max(bottom, window.innerHeight - appMobile.top + 10);
+      }
+    } else {
       var app = visibleRect(document.getElementById('ufp-app-widget')) ||
                 visibleRect(document.getElementById('ufp-app-pill'));
       if (app) {
