@@ -16,13 +16,13 @@
 
 /* Bump this cache name whenever the shell CSS/JS changes, so installed
    clients replace the old interface instead of serving it cache-first. */
-var CACHE_NAME = 'ufp-shell-v4';
+var CACHE_NAME = 'ufp-shell-v5';
 var DATA_FILES = ['/jobs.json', '/global_jobs.json', '/archive.json', '/global_archive.json', '/stats.json', '/daily_digest.json'];
 var PRECACHE = [
   '/',
   '/',
   '/manifest.json',
-  '/styles/jobs.css',
+  '/styles/jobs.css?v=20261108d',
   '/js/i18n.js',
   '/js/jobs.js?v=20261108-1',
   '/js/pwa.js',
