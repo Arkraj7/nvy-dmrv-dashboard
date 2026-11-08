@@ -321,11 +321,12 @@
     "esg-jobs-pune.html": {
       "streak_on": 0,
       "streak_off": 13,
-      "indexable": false,
-      "last_flip": "2026-10-31",
+      "indexable": true,
+      "last_flip": "2026-11-08",
       "flip_log": [
         "2026-10-27: ON (editorial)",
-        "2026-10-31: OFF (hard floor: count=5 < 8)"
+        "2026-10-31: OFF (hard floor: count=5 < 8)",
+        "2026-11-08: ON (editorial)"
       ]
     },
     "esg-jobs-noida.html": {
@@ -384,11 +385,12 @@
     "environmental-jobs-pune.html": {
       "streak_on": 0,
       "streak_off": 13,
-      "indexable": false,
-      "last_flip": "2026-10-31",
+      "indexable": true,
+      "last_flip": "2026-11-08",
       "flip_log": [
         "2026-10-27: ON (editorial)",
-        "2026-10-31: OFF (hard floor: count=5 < 8)"
+        "2026-10-31: OFF (hard floor: count=5 < 8)",
+        "2026-11-08: ON (editorial)"
       ]
     },
     "environmental-jobs-ahmedabad.html": {
