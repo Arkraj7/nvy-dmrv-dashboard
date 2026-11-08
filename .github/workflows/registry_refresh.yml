@@ -22,6 +22,9 @@ on:
       - "public/js/syndication-drawer.js"
       - "public/js/pwa.js"
       - "public/styles/jobs.css"
+      - "scripts/build_seo_pages.py"
+      - "scripts/build_new_hubs.py"
+      - "scripts/build_expansion_hubs.py"
       - ".github/workflows/registry_refresh.yml"
 
 permissions:

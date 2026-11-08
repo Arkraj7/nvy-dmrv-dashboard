@@ -5568,6 +5568,11 @@ def rebuild_downstream_pages() -> None:
         log.info("Running downstream builder build_glossary.py")
         subprocess.run([sys.executable, str(glossary)], check=True, cwd=str(REPO_ROOT))
 
+    new_hubs = Path(__file__).resolve().parent / "build_new_hubs.py"
+    if new_hubs.exists():
+        log.info("Running downstream builder build_new_hubs.py")
+        subprocess.run([sys.executable, str(new_hubs)], check=True, cwd=str(REPO_ROOT))
+
 
 def main(argv: Optional[List[str]] = None) -> int:
     logging.basicConfig(
