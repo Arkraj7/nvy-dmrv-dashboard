@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-08T13:31:30+05:30",
-  "last_updated_ist": "2026-11-08T13:31:30+05:30",
+  "last_updated": "2026-11-08T14:11:37+05:30",
+  "last_updated_ist": "2026-11-08T14:11:37+05:30",
   "last_pipeline_run_date_ist": "2026-11-08",
-  "active_open_jobs": 197,
+  "active_open_jobs": 229,
   "opened_this_week": 43,
   "passed_this_week": 29,
   "total_archived_jobs": 66,
-  "total_historical_indexed": 263,
+  "total_historical_indexed": 295,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
     "iisc-urban-flood-forecasting-4-positions-2026",
@@ -51,37 +51,37 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
-    "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 87,
-      "archived": 15
-    },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 14,
+      "active": 22,
       "archived": 11
     },
-    "Internships & Student Traineeships": {
-      "active": 8,
-      "archived": 2
+    "ESG, Carbon Markets & Corporate Sustainability": {
+      "active": 95,
+      "archived": 15
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 14,
+      "active": 21,
       "archived": 5
     },
+    "Internships & Student Traineeships": {
+      "active": 9,
+      "archived": 2
+    },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 11,
+      "active": 13,
       "archived": 12
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 26,
+      "archived": 10
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 6,
+      "archived": 2
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 19,
       "archived": 4
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 21,
-      "archived": 10
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 5,
-      "archived": 2
     },
     "Conferences, Summits & Events": {
       "active": 5,
@@ -113,20 +113,20 @@
     }
   },
   "by_state": {
-    "Delhi": 25,
-    "Maharashtra": 25,
-    "Karnataka": 20,
+    "Maharashtra": 36,
+    "Delhi": 29,
+    "Karnataka": 28,
     "Delhi NCR": 15,
-    "Gujarat": 10,
+    "Gujarat": 11,
     "Tamil Nadu": 8,
+    "Uttar Pradesh": 8,
     "Haryana": 7,
     "Uttarakhand": 7,
+    "Kerala": 6,
+    "Telangana": 6,
     "Global / Remote": 5,
-    "Kerala": 5,
-    "Telangana": 5,
-    "Uttar Pradesh": 5,
+    "Odisha": 5,
     "West Bengal": 5,
-    "Odisha": 4,
     "Punjab": 4,
     "Assam": 3,
     "Jharkhand": 2,
@@ -137,12 +137,12 @@
     "Madhya Pradesh": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 128,
+  "active_global_jobs": 129,
   "active_global_portals": 12,
-  "total_global_records": 140,
+  "total_global_records": 141,
   "total_archived_global_jobs": 54,
   "global_jobs_by_region": {
-    "North America": 19,
+    "North America": 20,
     "Oceania": 2,
     "Global": 3,
     "Europe": 23,
@@ -153,10 +153,10 @@
     "Latin America": 1
   },
   "global_jobs_by_kind": {
+    "Fellowship": 19,
     "Grant / Funding": 10,
     "Job / Career": 80,
     "Scholarship": 11,
-    "Fellowship": 18,
     "Competition / Award": 5,
     "Internship": 4
   },
