@@ -11,6 +11,18 @@ on:
     paths:
       - "public/jobs.json"
       - "public/global_jobs.json"
+      # Front-end shell changes must reach Cloudflare Pages immediately too:
+      # unversioned /js/* assets are cached immutably, so a shell fix that
+      # waits for the next daily run leaves visitors on the old bundle.
+      - "public/index.html"
+      - "public/sw.js"
+      - "public/_headers"
+      - "public/js/jobs.js"
+      - "public/js/i18n.js"
+      - "public/js/syndication-drawer.js"
+      - "public/js/pwa.js"
+      - "public/styles/jobs.css"
+      - ".github/workflows/registry_refresh.yml"
 
 permissions:
   contents: write
