@@ -1014,6 +1014,17 @@
     return (left >= 0 && left <= 7) ? '⏳' : '📌';
   }
 
+  /* Human deadline for digests. A real apply-by date comes from
+     deadline_or_window; rolling/open posts have no closing date, so never
+     present the synthetic valid_through (posted + 30d) as an apply-by. */
+  function clientDeadlineText(job) {
+    var window = String(job.deadline_or_window || '').trim();
+    if (/apply by/i.test(window)) return window;
+    if (/rolling|open|not disclosed/i.test(window)) return 'Rolling / Open';
+    if (job.valid_through) return 'Apply by ' + String(job.valid_through).slice(0, 10);
+    return '';
+  }
+
   function clientSelect(jobs, globalJobs, stats) {
     var today = istDateKey();
     var recent = (stats && stats.recent_telegram_job_ids) || [];
@@ -1138,7 +1149,8 @@
       if (location) lines.push('📍 *Location:* ' + location);
       if (job.qualification_summary) lines.push('🎓 *Eligibility:* ' + job.qualification_summary);
       if (job.compensation_or_fellowship) lines.push('💰 *Fellowship/Pay:* ' + job.compensation_or_fellowship);
-      if (job.valid_through) lines.push('🕒 *Apply before:* ' + String(job.valid_through).slice(0, 10));
+      var _dlText = clientDeadlineText(job);
+      if (_dlText) lines.push('🕒 ' + _dlText);
       lines.push('🔗 *Full Details & Apply:* ' + SITE + '/jobs/' + encodeURIComponent(job.id));
       lines.push('');
     });
@@ -1171,10 +1183,10 @@
       var title = job.clean_title || job.title || 'Untitled role';
       var org = job.organization || '';
       var location = [job.city, job.state].filter(Boolean).join(', ') || job.country || 'India';
-      var deadline = String(job.valid_through || '').slice(0, 10);
+      var deadline = clientDeadlineText(job);
       var url = job.url || (SITE + '/jobs/' + encodeURIComponent(job.id));
       lines.push((index + 1) + '. ' + title + (org ? ' — ' + org : ''));
-      lines.push('📍 ' + location + (deadline ? ' · Apply by ' + deadline : ''));
+      lines.push('📍 ' + location + (deadline ? ' · ' + deadline : ''));
       lines.push('🔗 ' + url);
       lines.push('');
     });

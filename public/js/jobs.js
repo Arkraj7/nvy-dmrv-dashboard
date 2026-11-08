@@ -927,6 +927,23 @@
     return String(job.deadline_or_window || '').trim();
   }
 
+  /* Card label for a deadline_or_window value. "Apply by 10 Nov 2026" and
+     already-phrased values ("Walk-in 21 Nov 2026", "Rolling / Open",
+     "Not disclosed") render as-is; a bare date ("10 November 2026",
+     "8-11 December 2026") gets an "Apply by " prefix. */
+  function deadlineTextOf(raw) {
+    var value = String(raw || '').trim();
+    if (!value) return '';
+    if (/^apply\b/i.test(value)) return value;
+    if (/^(rolling|open|not disclosed|tba|online)/i.test(value)) return value;
+    if (/^\d{1,2}(?:\s*[-–]\s*\d{1,2})?\s+(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\b/i.test(value) ||
+        /^\d{1,2}(?:\s*[-–]\s*\d{1,2})?\s+(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s+\d{4}/i.test(value)) {
+      return 'Apply by ' + value;
+    }
+    if (/^[A-Z][a-z]+\s+\d{1,2},?\s+\d{4}$/.test(value)) return 'Apply by ' + value;
+    return value;
+  }
+
   function toast(message) {
     var el = els.toast;
     if (!el) return;
@@ -1649,11 +1666,12 @@
       ? iconSvg('clock') + escapeHtml(sentenceText(formatClosed(job.date_archived)))
       : iconSvg('calendar') + escapeHtml(sentenceText(formatPosted(job.date_added)));
 
-    /* deadline_or_window values are already phrased like "Apply by 10 Nov
-       2026" or "Rolling / Open"; only prefix the generic "Apply: " form
-       when the value does not already start with "Apply". */
+    /* deadline_or_window values arrive in mixed phrasings: "Apply by 10 Nov
+       2026", "Rolling / Open", "Not disclosed", "Walk-in 21 Nov 2026", or a
+       bare date like "10 November 2026". Prefix "Apply by " only for bare
+       dates; rolling/open and already-phrased values render as-is. */
     var _dl = deadlineOf(job);
-    var _dlText = /^apply\b/i.test(_dl) ? _dl : t('card.deadline', 'Apply: {d}', { d: _dl });
+    var _dlText = deadlineTextOf(_dl);
     var deadlineMeta = (!isArchived && _dl)
       ? '<span class="jc-deadline">' + iconSvg('clock') + escapeHtml(sentenceText(_dlText)) + '</span>'
       : '';
