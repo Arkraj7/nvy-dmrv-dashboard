@@ -128,8 +128,12 @@ jobs:
         if: steps.watchdog.outputs.skip != 'true'
         run: python -m pytest tests -q
 
+      # Telegram pipeline disabled by owner request (2026-11-08).
+      # No Telegram message (digest, failure alert or preflight) is sent
+      # from this workflow. Re-enable by removing the if:false guards and
+      # restoring TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID below.
       - name: Verify Telegram bot + channel (preflight)
-        if: steps.watchdog.outputs.skip != 'true'
+        if: false
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -142,13 +146,18 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LOOKBACK_HOURS: "72"
-          # Telegram broadcast disabled by owner request (2026-11-01).
-          # Re-enable by restoring TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID below.
+          # Telegram broadcast disabled by owner request (2026-11-01,
+          # confirmed 2026-11-08). Secrets are deliberately not passed so
+          # fetch_and_humanize.py treats the broadcast as unconfigured and
+          # skips it. Re-enable by restoring TELEGRAM_BOT_TOKEN /
+          # TELEGRAM_CHAT_ID below.
+          TELEGRAM_BOT_TOKEN: ""
+          TELEGRAM_CHAT_ID: ""
           WHATSAPP_WEBHOOK_URL: ${{ secrets.WHATSAPP_WEBHOOK_URL }}
           WHATSAPP_GROUP_URL: ${{ secrets.WHATSAPP_GROUP_URL }}
           # A manual force run bypasses only the once-per-day guard; the
           # rolling recent_telegram_job_ids exclusion still applies.
-          FORCE_TELEGRAM_BROADCAST: ${{ github.event.inputs.force == 'true' && '1' || '0' }}
+          FORCE_TELEGRAM_BROADCAST: '0'
         run: python scripts/fetch_and_humanize.py
 
       - name: Persist registry + broadcast rotation marker before the long build
@@ -360,8 +369,9 @@ jobs:
           done
           exit 1
 
+      # Telegram failure alerts disabled by owner request (2026-11-08).
       - name: Alert Telegram on pipeline failure
-        if: failure()
+        if: false
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
