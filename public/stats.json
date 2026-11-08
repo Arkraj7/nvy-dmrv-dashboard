@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-07T20:42:16+05:30",
-  "last_updated_ist": "2026-11-07T20:42:16+05:30",
-  "last_pipeline_run_date_ist": "2026-11-07",
-  "active_open_jobs": 160,
-  "opened_this_week": 40,
-  "passed_this_week": 24,
-  "total_archived_jobs": 60,
+  "last_updated": "2026-11-08T06:55:52+05:30",
+  "last_updated_ist": "2026-11-08T06:55:52+05:30",
+  "last_pipeline_run_date_ist": "2026-11-08",
+  "active_open_jobs": 154,
+  "opened_this_week": 43,
+  "passed_this_week": 29,
+  "total_archived_jobs": 66,
   "total_historical_indexed": 220,
   "last_telegram_broadcast_date": "2026-10-31",
   "recent_telegram_job_ids": [
@@ -51,37 +51,37 @@
     "phd-research-sustainable-rurban-food-systems-atree"
   ],
   "by_category": {
-    "GIS, Remote Sensing & Earth Observation": {
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 10,
+      "archived": 12
+    },
+    "Climate Policy, Think-Tanks & Fellowships": {
       "active": 14,
-      "archived": 9
+      "archived": 10
+    },
+    "Forestry, Wildlife & Afforestation": {
+      "active": 12,
+      "archived": 5
     },
     "Fellowships & Leadership Programs": {
       "active": 5,
       "archived": 2
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 62,
-      "archived": 13
-    },
-    "Forestry, Wildlife & Afforestation": {
-      "active": 13,
-      "archived": 4
-    },
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 15,
-      "archived": 9
-    },
-    "Internships & Student Traineeships": {
-      "active": 7,
-      "archived": 2
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 8,
-      "archived": 12
+      "active": 59,
+      "archived": 15
     },
     "Academic, JRF, SRF & PhD Positions": {
       "active": 18,
       "archived": 4
+    },
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 11,
+      "archived": 11
+    },
+    "Internships & Student Traineeships": {
+      "active": 7,
+      "archived": 2
     },
     "Conferences, Summits & Events": {
       "active": 5,
@@ -113,9 +113,9 @@
     }
   },
   "by_state": {
-    "Maharashtra": 21,
-    "Delhi NCR": 16,
-    "Karnataka": 15,
+    "Karnataka": 17,
+    "Maharashtra": 17,
+    "Delhi NCR": 15,
     "Gujarat": 9,
     "Delhi": 8,
     "Tamil Nadu": 8,
@@ -124,41 +124,38 @@
     "Kerala": 5,
     "Punjab": 4,
     "Telangana": 4,
-    "West Bengal": 4,
     "Assam": 3,
     "Odisha": 3,
     "Uttar Pradesh": 3,
+    "West Bengal": 3,
     "Haryana": 2,
     "Jharkhand": 2,
-    "Andhra Pradesh": 1,
     "Assam / Haryana": 1,
     "Bihar": 1,
-    "Chhattisgarh": 1,
     "Goa": 1,
     "Himachal Pradesh": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 115,
+  "active_global_jobs": 114,
   "active_global_portals": 12,
-  "total_global_records": 127,
-  "total_archived_global_jobs": 44,
+  "total_global_records": 126,
+  "total_archived_global_jobs": 46,
   "global_jobs_by_region": {
-    "Africa & Middle East": 16,
-    "Global / Remote": 32,
-    "Europe": 23,
-    "UN / Multilateral": 6,
+    "Africa & Middle East": 15,
     "Asia-Pacific": 20,
-    "North America": 10,
+    "Europe": 22,
+    "Global / Remote": 39,
     "Latin America": 1,
-    "Global": 7
+    "North America": 11,
+    "UN / Multilateral": 6
   },
   "global_jobs_by_kind": {
-    "Job / Career": 73,
-    "Fellowship": 16,
-    "Internship": 4,
-    "Grant / Funding": 7,
     "Competition / Award": 5,
-    "Scholarship": 10
+    "Fellowship": 16,
+    "Grant / Funding": 7,
+    "Internship": 4,
+    "Job / Career": 74,
+    "Scholarship": 8
   },
   "telegram_last_status": "delivered",
   "last_broadcast_job_ids": [
