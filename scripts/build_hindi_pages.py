@@ -87,7 +87,7 @@ def hindi_shell(*, title: str, description: str, canonical: str, body: str, json
 
     {HINDI_FONT}
 
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <link rel="stylesheet" href="/styles/hub.css">
     <link rel="stylesheet" href="/styles/expansion.css">
 </head>

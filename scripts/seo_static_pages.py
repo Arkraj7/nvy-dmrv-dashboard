@@ -506,7 +506,7 @@ def _page_shell(
     <meta name="theme-color" content="#F8FAFC">
 {bsp.FAVICONS}
 {bsp.FONTS}
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <link rel="stylesheet" href="/styles/hub.css">
 {ld}
 </head>

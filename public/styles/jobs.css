@@ -3572,3 +3572,15 @@ html[data-theme="dark"] .registry-refresh-dot {
     border-left: 0;
   }
 }
+
+/* Canonical header layout (all pages): centered two-row header on wide
+   screens — brand on row 1, nav on row 2, Night/Saved/Publish actions
+   pinned to row 2 on the right. This matches public/index.html exactly;
+   page templates must not override it. Mobile/tablet keep the compact
+   header rules above. */
+@media (min-width: 1280px) {
+  .header-inner{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;text-align:center;position:relative;}
+  .brand{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
+  .site-nav{flex:1 1 auto;justify-content:center;flex-wrap:wrap;padding-right:260px;}
+  .header-actions{position:absolute;right:20px;top:62px;justify-content:flex-end;flex:0 0 auto;}
+}

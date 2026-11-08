@@ -403,7 +403,7 @@ def build_hindi_hub_page(
 {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
@@ -680,7 +680,7 @@ def build_regional_hub_page(
 {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->
@@ -1075,7 +1075,7 @@ def build_global_hub_page(
     {FONTS_HI}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <link rel="stylesheet" href="/styles/hub.css">
 
     <!-- Structured data -->

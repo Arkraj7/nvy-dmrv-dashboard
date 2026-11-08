@@ -81,17 +81,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Spectral:wght@500;600;700&display=swap">
 
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       /* Centered two-row header on wide screens only; mobile/tablet keep the
          compact header rules from jobs.css. */
       @media (min-width: 1280px) {
-        .header-inner{flex-direction:column;align-items:center;text-align:center;}
+        .header-inner{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;text-align:center;position:relative;}
         .brand{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}
         .site-nav{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}
-        .header-actions{margin-left:0;justify-content:center;}
+        .header-actions{position:absolute;right:20px;top:62px;justify-content:flex-end;flex:0 0 auto;}
       }
     </style>
     <link rel="stylesheet" href="/styles/job-page.css">

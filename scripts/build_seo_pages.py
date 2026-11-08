@@ -3880,15 +3880,15 @@ def build_hub_page(
 {FONTS}
 
     <!-- Registry styles (shared design system) + hub styles -->
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       @media (min-width: 1280px) {{
-        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .header-inner{{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;text-align:center;position:relative;}}
         .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
         .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-        .header-actions{{margin-left:0;justify-content:center;}}
+        .header-actions{{position:absolute;right:20px;top:62px;justify-content:flex-end;flex:0 0 auto;}}
       }}
     </style>
 
@@ -4957,17 +4957,17 @@ def build_job_page(
 
 {FONTS}
 
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       /* Centered two-row header on wide screens only; mobile/tablet keep the
          compact header rules from jobs.css. */
       @media (min-width: 1280px) {{
-        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .header-inner{{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;text-align:center;position:relative;}}
         .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
         .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-        .header-actions{{margin-left:0;justify-content:center;}}
+        .header-actions{{position:absolute;right:20px;top:62px;justify-content:flex-end;flex:0 0 auto;}}
       }}
     </style>
     <link rel="stylesheet" href="/styles/job-page.css">
@@ -5826,7 +5826,7 @@ def build_employer_page(org: str, jobs: List[Dict[str, Any]], today: date) -> st
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(desc)}">
-  <link rel="stylesheet" href="/styles/jobs.css">
+  <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
   <link rel="stylesheet" href="/styles/hub.css">
   <script src="/js/consent-tags.js?v=20261028"></script>
   <script type="application/ld+json">
@@ -5964,15 +5964,15 @@ def build_employer_index(entries: List[tuple[str, int]], today: date) -> str:
     <meta property="og:description" content="{esc(desc)}">
     <meta property="og:url" content="{canonical}">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="/styles/jobs.css?v=20261104c">
+    <link rel="stylesheet" href="/styles/jobs.css?v=20261108d">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/hub.css">
     <style>
       @media (min-width: 1280px) {{
-        .header-inner{{flex-direction:column;align-items:center;text-align:center;}}
+        .header-inner{{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;text-align:center;position:relative;}}
         .brand{{flex-basis:100%;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;}}
         .site-nav{{flex:1 1 auto!important;justify-content:center!important;flex-wrap:wrap!important;padding-right:260px!important;}}
-        .header-actions{{margin-left:0;justify-content:center;}}
+        .header-actions{{position:absolute;right:20px;top:62px;justify-content:flex-end;flex:0 0 auto;}}
       }}
     </style>
     <script type="application/ld+json">
