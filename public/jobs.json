@@ -40,6 +40,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:51:51Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -83,6 +89,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:51:51Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -126,6 +138,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:51:51Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -165,10 +183,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:52.124608+00:00",
+      "final_url": "https://www.greenjobsindia.in/apply/supervisor-%E2%80%93-plantation/j00123",
+      "final_host": "www.greenjobsindia.in",
+      "http_status": 200,
+      "content_hash": "cd4d1f315de7ceb1238e4a9ca0470b78",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -282,7 +306,7 @@
     "org_website": "https://pravah.in",
     "org_domain": "pravah.in",
     "source_portal": "GreenJobsIndia job listing (owner-shared)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -294,10 +318,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:52.414893+00:00",
+      "final_url": "https://jobs.ashbyhq.com/pravah/3d580ee8-0b2b-411a-bd39-ca2e8921e5bb",
+      "final_host": "jobs.ashbyhq.com",
+      "http_status": 200,
+      "content_hash": "1a70f44c3e0165f5ff895323e1d83d7c",
+      "entry_type": "careers_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -337,10 +367,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:52.709394+00:00",
+      "final_url": "https://careers.jacobs.com/en_US/careers/JobDetail/Carbon-Accounting-Decarbonization-Advisory/43409",
+      "final_host": "careers.jacobs.com",
+      "http_status": 202,
+      "content_hash": "0984c90c5d666180b1b08595e6816794",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -380,10 +416,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:53.852479+00:00",
+      "final_url": "https://iforest.global/career/senior-programme-associate-boiler-and-heat-pump/",
+      "final_host": "iforest.global",
+      "http_status": 200,
+      "content_hash": "1bfa4abac5a28cd26fb61dd01855a13c",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -423,10 +465,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:54.765998+00:00",
+      "final_url": "https://iforest.global/career/programme-lead-boiler-and-heat-pump-programme/",
+      "final_host": "iforest.global",
+      "http_status": 200,
+      "content_hash": "3424b4de81977b33b0a328f4040a13fc",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -466,10 +514,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:55.305136+00:00",
+      "final_url": "https://iforest.global/career/programme-associate-boiler-and-heat-pump/",
+      "final_host": "iforest.global",
+      "http_status": 200,
+      "content_hash": "07f0d53b0abccdea5a9d8ec928f5b60c",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -509,10 +563,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:56.237680+00:00",
+      "final_url": "https://iforest.global/career/deputy-director-boiler-and-heat-pump-programme/",
+      "final_host": "iforest.global",
+      "http_status": 200,
+      "content_hash": "0ba3a1badae3501c4618726ad82ae505",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -552,10 +612,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:57.195886+00:00",
+      "final_url": "https://iforest.global/career/coordinator-chhattisgarh-coal-dri-steel-programme/",
+      "final_host": "iforest.global",
+      "http_status": 200,
+      "content_hash": "ea56d791f4bde87c0c4c5b820a418b0f",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -599,6 +665,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:51:58Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 200,
+      "consecutive_failures": 1
     }
   },
   {
@@ -626,7 +698,7 @@
     "org_website": "https://www.db.com",
     "org_domain": "db.com",
     "source_portal": "GreenJobsIndia job listing (owner-shared)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -638,10 +710,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:58.877909+00:00",
+      "final_url": "https://careers.db.com/professionals/search-roles/#/professional/job/74250",
+      "final_host": "careers.db.com",
+      "http_status": 200,
+      "content_hash": "76649789d673550ac74746e834d1fd4d",
+      "entry_type": "careers_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -685,6 +763,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:51:58Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -1627,10 +1711,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:51:59.042904+00:00",
+      "final_url": "https://business.edf.org/insights/program-details-india-fellowship/",
+      "final_host": "business.edf.org",
+      "http_status": 200,
+      "content_hash": "21b3a8942758c55633104411d270572d",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -2573,10 +2663,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:52:04.551365+00:00",
+      "final_url": "https://www.nihroorkee.gov.in/job26102026.pdf",
+      "final_host": "www.nihroorkee.gov.in",
+      "http_status": 200,
+      "content_hash": "c2e00c75775700711726da5df5b5885f",
+      "entry_type": "posting",
+      "host_class": "government_notice",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -2659,10 +2755,16 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-08",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
-      "http_status": "UNKNOWN_KEEP"
+      "verified_at": "2026-11-08T23:52:05.264416+00:00",
+      "final_url": "https://floracarbon.ai/resources/careers/",
+      "final_host": "floracarbon.ai",
+      "http_status": 200,
+      "content_hash": "ff229744e199e234c1cbaa7b696d1ca4",
+      "entry_type": "careers_portal",
+      "host_class": "employer_primary",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
     }
   },
   {
@@ -2835,6 +2937,12 @@
       "method": "manual-batch-verified",
       "source": "LinkedIn listing (owner-shared)",
       "http_status": "UNKNOWN_KEEP"
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-08T23:52:05Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 1
     }
   },
   {
@@ -3953,12 +4061,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-08T00:49:04.966666+00:00",
+      "verified_at": "2026-11-08T23:52:09.355711+00:00",
       "final_url": "https://iwst.icfre.gov.in/docs/Walk%20in%20interview%20for%20PA%20.pdf",
       "final_host": "iwst.icfre.gov.in",
       "http_status": 200,
       "content_hash": "49d06ef7ab4947ee6b248f1db2c443be",
-      "evidence_snippet": "",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -4018,12 +4125,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-08T00:48:33.362377+00:00",
+      "verified_at": "2026-11-08T23:52:12.672540+00:00",
       "final_url": "https://iwst.icfre.gov.in/docs/jpf_pa%20advertisement.pdf",
       "final_host": "iwst.icfre.gov.in",
       "http_status": 200,
       "content_hash": "db0fccdf1baafc72d0327b12f2715259",
-      "evidence_snippet": "",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -4095,10 +4201,10 @@
     },
     "id": "uprepare-environment-social-experts-2026",
     "last_link_check": {
-      "checked_at": "2026-11-07T23:47:36Z",
+      "checked_at": "2026-11-08T23:52:12Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 1
+      "consecutive_failures": 2
     }
   },
   {
@@ -4209,10 +4315,10 @@
     },
     "id": "spread-koraput-research-intern-2026",
     "last_link_check": {
-      "checked_at": "2026-11-07T23:47:34Z",
+      "checked_at": "2026-11-08T23:52:13Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 1
+      "consecutive_failures": 2
     }
   },
   {
@@ -4261,7 +4367,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-07T23:47:30.117531+00:00",
+      "verified_at": "2026-11-08T23:52:13.914297+00:00",
       "final_url": "https://www.utgf.rmponweb.org/process.html",
       "final_host": "www.utgf.rmponweb.org",
       "http_status": 200,
@@ -4325,10 +4431,10 @@
     },
     "id": "nrdc-india-renewable-energy-specialists-2026",
     "last_link_check": {
-      "checked_at": "2026-11-07T23:47:34Z",
+      "checked_at": "2026-11-08T23:52:14Z",
       "reason_code": "DEAD_LINK",
       "http_status": 200,
-      "consecutive_failures": 1
+      "consecutive_failures": 2
     }
   },
   {
@@ -4377,7 +4483,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-07T23:47:36.433998+00:00",
+      "verified_at": "2026-11-08T23:52:16.249053+00:00",
       "final_url": "https://nitc.ac.in/contract-adhoc-recruitment-non-faculty",
       "final_host": "nitc.ac.in",
       "http_status": 200,
@@ -4434,7 +4540,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-07T23:47:34.165419+00:00",
+      "verified_at": "2026-11-08T23:52:18.424205+00:00",
       "final_url": "https://www.tropmet.res.in/476-news_details",
       "final_host": "www.tropmet.res.in",
       "http_status": 200,
@@ -4492,11 +4598,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-07T23:47:32.097888+00:00",
+      "verified_at": "2026-11-08T23:52:19.959484+00:00",
       "final_url": "https://phdadmission.iisertvm.ac.in/application/view-ad/28",
       "final_host": "phdadmission.iisertvm.ac.in",
       "http_status": 200,
-      "content_hash": "f74460ba099c951a76f12b758e6ffe19",
+      "content_hash": "c085233bcd45c71a022765a3b74109b4",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -4558,10 +4664,10 @@
     },
     "id": "prsc-gis-remote-sensing-recruitment-2026",
     "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
+      "checked_at": "2026-11-08T23:52:19Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 1
+      "consecutive_failures": 2
     }
   },
   {
@@ -4790,127 +4896,6 @@
     "id": "wipro-mapping-associate-kolkata-2026"
   },
   {
-    "clean_title": "Head of Sustainability - Manufacturing Carbon Footprint",
-    "organization": "Senseible",
-    "city": "Remote",
-    "state": "",
-    "country": "India",
-    "region": "",
-    "category": "ESG, Carbon Markets & Corporate Sustainability",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Senior (7+ years)",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "5+ years in sustainability, carbon accounting or verification. Strong working knowledge of GHG Protocol (Scope 3), CBAM, ISO 14064 and BRSR. Hands-on manufacturing/cluster experience. Third-party verification experience.",
-    "compensation_or_fellowship": "Among the best in industry + equity",
-    "role_summary": "Own how carbon footprint data gets verified for Indian manufacturers and suppliers; check calculations and emission factors, verify manufacturers' data, update approach as CBAM, BRSR and buyer requirements change.",
-    "key_responsibilities": [
-      "Carbon footprint verification for manufacturers",
-      "GHG Protocol Scope 3",
-      "CBAM compliance",
-      "BRSR reporting",
-      "Third-party assurance"
-    ],
-    "must_have_skills": [
-      "Carbon accounting",
-      "GHG Protocol",
-      "CBAM",
-      "ISO 14064",
-      "BRSR",
-      "Verification"
-    ],
-    "application_tip": "Reply to the post or send your CV to build@senseible.earth with 2-3 manufacturers/clusters you have worked with.",
-    "apply_url": "mailto:build@senseible.earth",
-    "org_website": "https://senseible.earth",
-    "org_domain": "senseible.earth",
-    "source_portal": "LinkedIn post (Senseible / Ankit Kumar)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "प्रमुख of स्थिरता - Manufacturing कार्बन Footprint — Senseible",
-    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Senseible (भारत) हेतु उपलब्ध है। आवश्यक योग्यता: 5+ years in sustainability, carbon accounting or verification. Strong working knowledge of GHG Protocol (Scope 3), CBAM, ISO 14064 and BRSR. Hands-on manufacturing/cluster experience. Third-party verification experience.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "senseible-head-sustainability-carbon-footprint-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
-    "clean_title": "GIS Professional / Junior Planner / Transport Planner / Urban Designer",
-    "organization": "Centre of Excellence in Urban Planning and Design (CoEUPD), NIT Calicut",
-    "city": "Ernakulam & Idukki",
-    "state": "Kerala",
-    "country": "India",
-    "region": "",
-    "category": "GIS, Remote Sensing & Earth Observation",
-    "position_type": "Young Professional / Consultant (Contractual)",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "1-3 Years",
-    "employment_type": "CONTRACTOR",
-    "deadline_or_window": "Apply by 10 Nov 2026",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "Proficiency in Malayalam (read, write, speak) required. Positions: Junior Planner (2), GIS Professional (2), Infrastructure Specialist/Transport Planner (1), Urban Designer (1) for GIS-based master plans under AMRUT 2.0.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "Support professionals for formulation of GIS-based master plans under AMRUT 2.0 for towns in Ernakulam and Idukki, Kerala.",
-    "key_responsibilities": [
-      "GIS-based master plan formulation",
-      "Spatial analysis",
-      "Urban planning support",
-      "Infrastructure planning"
-    ],
-    "must_have_skills": [
-      "GIS",
-      "ArcGIS/QGIS",
-      "Urban planning",
-      "Malayalam proficiency"
-    ],
-    "application_tip": "Send your CV to coeupd.recruitment@nitc.ac.in by 10 November 2026, mentioning the position in the subject line.",
-    "apply_url": "mailto:coeupd.recruitment@nitc.ac.in",
-    "org_website": "https://nitc.ac.in",
-    "org_domain": "nitc.ac.in",
-    "source_portal": "LinkedIn post (Dr. Mohammed Firoz C)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "GIS Professional / Junior Planner / Transport Planner / शहरी Designer — Centre of Excellence in Urban Planning and Design (CoEUPD), NIT Calicut",
-    "summary_hi": "यह यंग प्रोफेशनल / परामर्शदाता (संविदा) Centre of Excellence in Urban Planning and Design (CoEUPD), NIT Calicut (Kerala) हेतु उपलब्ध है। आवश्यक योग्यता: Proficiency in Malayalam (read, write, speak) required. Positions: Junior Planner (2), GIS Professional (2), Infrastructure Specialist/Transport Planner (1), Urban Designer (1) for GIS-based master plans under AMRUT 2.0.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "nitc-coeupd-gis-masterplan-kerala-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
     "clean_title": "Research Associate / Senior Project Associate / Project Associate / Lab Technician",
     "organization": "Office of the Conservator of Forest, Plantation, Research & Evaluation, Government of Jharkhand",
     "city": "Ranchi",
@@ -4964,183 +4949,6 @@
     "id": "jharkhand-forest-department-research-associates-2026"
   },
   {
-    "clean_title": "GIS Specialist",
-    "organization": "iMerit Technology",
-    "city": "India",
-    "state": "",
-    "country": "India",
-    "region": "",
-    "category": "GIS, Remote Sensing & Earth Observation",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "GIS freshers and experienced candidates. Immediate joiners preferred.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "GIS Specialist role at iMerit Technology; immediate joiners preferred.",
-    "key_responsibilities": [
-      "GIS mapping",
-      "Spatial data processing",
-      "Quality control"
-    ],
-    "must_have_skills": [
-      "GIS",
-      "Mapping",
-      "Digitization"
-    ],
-    "application_tip": "Share your CV at subhanka.chakraborty@imerit.net.",
-    "apply_url": "mailto:subhanka.chakraborty@imerit.net",
-    "org_website": "https://imerit.net",
-    "org_domain": "imerit.net",
-    "source_portal": "LinkedIn post (Subhanka Chakraborty)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "GIS विशेषज्ञ — iMerit Technology",
-    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद iMerit Technology (भारत) हेतु उपलब्ध है। आवश्यक योग्यता: GIS freshers and experienced candidates. Immediate joiners preferred.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "imerit-gis-specialist-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
-    "clean_title": "Environment Officer",
-    "organization": "Godrej Properties (Third-Party Payroll)",
-    "city": "Panvel & Kandivali, Mumbai",
-    "state": "Maharashtra",
-    "country": "India",
-    "region": "",
-    "category": "ESG, Carbon Markets & Corporate Sustainability",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "0-2 years experience. Compliance with environmental laws, waste disposal, water conservation, pollution control, site audits.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "Environment Officer at construction sites: environmental compliance, waste disposal, water conservation, pollution control, site audits, environmental management plans.",
-    "key_responsibilities": [
-      "Environmental compliance",
-      "Waste disposal and water conservation",
-      "Site audits and inspections",
-      "Environmental management plans",
-      "Risk identification"
-    ],
-    "must_have_skills": [
-      "Environmental compliance",
-      "Site audits",
-      "Waste management",
-      "MS Office"
-    ],
-    "application_tip": "Email your resume to ciel.disha@godrejproperties.com.",
-    "apply_url": "mailto:ciel.disha@godrejproperties.com",
-    "org_website": "https://www.godrejproperties.com",
-    "org_domain": "godrejproperties.com",
-    "source_portal": "LinkedIn post (Disha Singh)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "पर्यावरण अधिकारी — Godrej Properties (Third-Party Payroll)",
-    "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Godrej Properties (Third-Party Payroll) (Maharashtra) हेतु उपलब्ध है। आवश्यक योग्यता: 0-2 years experience. Compliance with environmental laws, waste disposal, water conservation, pollution control, site audits.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "godrej-properties-environment-officer-mumbai-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
-    "clean_title": "GIS Trainee",
-    "organization": "GeoNxt Info Solutions Pvt. Ltd.",
-    "city": "Bhubaneswar",
-    "state": "Odisha",
-    "country": "India",
-    "region": "",
-    "category": "GIS, Remote Sensing & Earth Observation",
-    "position_type": "Fellowship / Internship",
-    "opportunity_kind": "Internship",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "CONTRACTOR",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "B.Tech, Diploma or any graduate. Basic computer knowledge; CAD/GIS software; LULC mapping and building footprint mapping.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "GeoNxt is hiring 30 GIS Trainees in Bhubaneswar for digitisation, LULC and building-footprint mapping. Immediate joiners preferred; Odisha and West Bengal candidates preferred.",
-    "key_responsibilities": [
-      "GIS mapping and digitization",
-      "LULC mapping",
-      "Building footprint mapping",
-      "Geospatial data processing"
-    ],
-    "must_have_skills": [
-      "GIS",
-      "CAD",
-      "LULC mapping",
-      "Digitization",
-      "MS Excel"
-    ],
-    "application_tip": "Email your updated CV to hr.geonxt@gmail.com.",
-    "apply_url": "mailto:hr.geonxt@gmail.com",
-    "org_website": "",
-    "org_domain": "",
-    "source_portal": "LinkedIn post (GeoCareerGo)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "GIS प्रशिक्षु",
-    "summary_hi": "GeoNxt Info Solutions Pvt. Ltd. द्वारा भुवनेश्वर, Odisha में डिजिटलीकरण, LULC और भवन मानचित्रण हेतु 30 GIS प्रशिक्षुओं की भर्ती की जा रही है। इस पद के लिए B.Tech, डिप्लोमा या किसी भी विषय में स्नातक तथा बुनियादी कंप्यूटर व CAD/GIS का ज्ञान होना आवश्यक है।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "geonxt-gis-trainee-bhubaneswar-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
     "clean_title": "Lead - Energy Transition, India",
     "organization": "Forum for the Future",
     "city": "India (remote)",
@@ -5192,185 +5000,6 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "forum-for-the-future-lead-energy-transition-india-2026"
-  },
-  {
-    "clean_title": "Engineer - Waterbody Restoration",
-    "organization": "ExNoRa International Foundation",
-    "city": "Chennai (Ashok Nagar)",
-    "state": "Tamil Nadu",
-    "country": "India",
-    "region": "",
-    "category": "Forestry, Wildlife & Afforestation",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "1-3 Years",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "Civil or Agricultural Engineering background.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "Engineer supporting waterbody restoration initiatives; travel required.",
-    "key_responsibilities": [
-      "Waterbody restoration",
-      "Site supervision",
-      "Engineering support",
-      "Travel to project sites"
-    ],
-    "must_have_skills": [
-      "Civil/Agricultural engineering",
-      "Water management",
-      "Field work"
-    ],
-    "application_tip": "Email your CV to exnora25@gmail.com.",
-    "apply_url": "mailto:exnora25@gmail.com",
-    "org_website": "",
-    "org_domain": "",
-    "source_portal": "LinkedIn post (ExNoRa)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "अभियंता - जल निकाय पुनरुद्धार",
-    "summary_hi": "ExNoRa International Foundation द्वारा चेन्नई, Tamil Nadu में जल निकायों के पुनरुद्धार संबंधी परियोजनाओं के संचालन हेतु अभियंता के पद पर भर्ती की जा रही है। इसके लिए सिविल या कृषि अभियांत्रिकी पृष्ठभूमि वाले उम्मीदवार पात्र हैं तथा आवश्यकतानुसार यात्रा करना अनिवार्य होगा।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "exnora-engineer-waterbody-restoration-chennai-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
-    "clean_title": "Executive / Sr. Executive - Environment Operations",
-    "organization": "Enterslice",
-    "city": "Noida (Sector 60)",
-    "state": "Uttar Pradesh",
-    "country": "India",
-    "region": "",
-    "category": "ESG, Carbon Markets & Corporate Sustainability",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "1-3 Years",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "Bachelor's or Master's in Environmental Science / Environmental Engineering or related field. 1-3 years with a reputed environmental consultancy preferred.",
-    "compensation_or_fellowship": "Attractive hike on current CTC",
-    "role_summary": "Environment operations role covering EPR registration and annual returns, SPCB NOC, CTE/CTO applications, Hazardous Waste and Bio-Medical Waste authorizations, AVSF/RVSF services and client compliance calendars across states.",
-    "key_responsibilities": [
-      "EPR registration and annual returns",
-      "SPCB NOC and consent applications",
-      "HW and BMW authorizations",
-      "AVSF/RVSF services",
-      "Client portfolio management",
-      "Compliance calendars"
-    ],
-    "must_have_skills": [
-      "EPR",
-      "Pollution consents",
-      "CPCB/SPCB portals",
-      "MS Office",
-      "Client handling"
-    ],
-    "application_tip": "Email your CV to mahi.anand@enterslice.com with subject line 'Application - Executive / Sr. Executive, Environment Operations'.",
-    "apply_url": "mailto:mahi.anand@enterslice.com",
-    "org_website": "https://enterslice.com",
-    "org_domain": "enterslice.com",
-    "source_portal": "LinkedIn post (Mahi Anand)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "कार्यकारी / वरिष्ठ कार्यकारी - पर्यावरण संचालन",
-    "summary_hi": "Enterslice द्वारा नोएडा, Uttar Pradesh में पर्यावरण संचालन, EPR पंजीकरण, SPCB अनापत्ति प्रमाणपत्र और अपशिष्ट प्रबंधन अनुपालनों के लिए कार्यकारी की नियुक्ति की जा रही है। पर्यावरण विज्ञान अथवा पर्यावरण अभियांत्रिकी में स्नातक या स्नातकोत्तर उपाधि और 1-3 वर्ष का अनुभव रखने वाले अभ्यर्थी पात्र हैं।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "enterslice-executive-environment-operations-noida-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
-  },
-  {
-    "clean_title": "Junior Environmental Specialist",
-    "organization": "D8 Consultants Ltd. (D8CL)",
-    "city": "India",
-    "state": "",
-    "country": "India",
-    "region": "",
-    "category": "ESG, Carbon Markets & Corporate Sustainability",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Entry Level / Fellowship",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Apply by 10 Nov 2026",
-    "valid_through": "2026-12-05",
-    "qualification_summary": "B.Sc. in Civil Engineering / Environmental Engineering / Environmental Science. Fresh graduates or up to 1-2 years experience. Good English communication.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "Junior Environmental Specialist supporting EIA, environmental management, compliance and sustainable infrastructure projects.",
-    "key_responsibilities": [
-      "Environmental impact assessment support",
-      "Environmental management and compliance",
-      "Environmental reports and documentation",
-      "Sustainable infrastructure support"
-    ],
-    "must_have_skills": [
-      "EIA",
-      "Environmental compliance",
-      "Report writing",
-      "MS Office"
-    ],
-    "application_tip": "Email your CV to hr@d8cl.com by 10 November 2026.",
-    "apply_url": "mailto:hr@d8cl.com",
-    "org_website": "",
-    "org_domain": "",
-    "source_portal": "LinkedIn post (D8 Consultants)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-05",
-    "date_posted": "2026-11-05",
-    "title_hi": "कनिष्ठ पर्यावरण विशेषज्ञ",
-    "summary_hi": "D8 Consultants Ltd. (D8CL) द्वारा EIA, पर्यावरण प्रबंधन और संधारणीय अवसंरचना परियोजनाओं में सहयोग प्रदान करने हेतु कनिष्ठ पर्यावरण विशेषज्ञ की आवश्यकता है। सिविल अभियांत्रिकी, पर्यावरण अभियांत्रिकी अथवा पर्यावरण विज्ञान में B.Sc. उत्तीर्ण नवागंतुक या 1-2 वर्ष के अनुभवी अभ्यर्थी इसके लिए पात्र हैं।",
-    "academic_meta": {},
-    "selection_process": "",
-    "reverify_after": "2026-11-20",
-    "verification": {
-      "verified_at": "2026-11-05",
-      "method": "manual-batch-verified",
-      "source": "LinkedIn post",
-      "http_status": "UNKNOWN_KEEP"
-    },
-    "id": "d8-consultants-junior-environmental-specialist-2026",
-    "last_link_check": {
-      "checked_at": "2026-11-07T23:45:08Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
-    }
   },
   {
     "clean_title": "Winter Internship - Urban Planning & Policy",
@@ -5703,7 +5332,7 @@
     "title_hi": "ले ऑफ द लैंड: भारत के बदलते परिदृश्यों के दस्तावेजीकरण का एक दशक",
     "summary_hi": "Land Conflict Watch द्वारा अपने दस वर्ष पूरे होने के अवसर पर India Habitat Centre, Delhi में चार दिवसीय सम्मेलन एवं प्रदर्शनी का आयोजन किया जा रहा है। भूमि, डेटा और विकास के क्षेत्र में संलग्न शोधकर्ता, पत्रकार, विद्यार्थी तथा संबंधित विशेषज्ञ इस कार्यक्रम में सहभागिता के लिए पात्र हैं।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:19.940044+00:00",
+      "verified_at": "2026-11-08T23:52:31.036234+00:00",
       "final_url": "https://nutgraph.in/lay-of-the-land",
       "final_host": "nutgraph.in",
       "http_status": 200,
@@ -5809,11 +5438,11 @@
     "title_hi": "स्वयंसेवक - प्लैनेटरी बाउंड्रीज ऑफ लाइफ फेस्टिवल 2027",
     "summary_hi": "Azim Premji University, Bengaluru (Karnataka) द्वारा फरवरी 2027 में आयोजित होने वाले 'Planetary Boundaries of Life Festival' के संचालन हेतु स्वयंसेवकों से आवेदन आमंत्रित किए गए हैं। पर्यावरण, जलवायु कार्रवाई तथा विज्ञान संचार में रुचि रखने वाले 18 से 30 वर्ष की आयु के युवा इस भूमिका के लिए पात्र हैं।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:22.168384+00:00",
+      "verified_at": "2026-11-08T23:52:32.954906+00:00",
       "final_url": "https://azimpremjiuniversity.edu.in/be-a-volunteer-for-the-planetary-boundaries-of-life-festival-2027",
       "final_host": "azimpremjiuniversity.edu.in",
       "http_status": 200,
-      "content_hash": "b383df02a9d6a1d029239ca39ce71a10",
+      "content_hash": "d182a8347b3987253f777d36c0ab8e8a",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -5915,11 +5544,11 @@
     "title_hi": "MoEFCC इंटर्नशिप Scheme 2027 — Ministry of Environment, Forest and Climate Change (MoEFCC)",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Ministry of Environment, Forest and Climate Change (MoEFCC) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Graduation, post-graduation or research students from recognised institutions in India or abroad. 22 eligible disciplines including environmental science, law, GIS, forestry, wildlife, climate change.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:26.023003+00:00",
+      "verified_at": "2026-11-08T23:52:35.739975+00:00",
       "final_url": "https://moef.gov.in/recruitment/update",
       "final_host": "moef.gov.in",
       "http_status": 200,
-      "content_hash": "8fed0531d67b8a9c2535ce4bea0faaa7",
+      "content_hash": "74043e411c0a49e4538b252b75a29f56",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -6023,11 +5652,11 @@
     "title_hi": "यंग प्रोफेशनल-II (रिमोट सेंसिंग & GIS) — ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP)",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP) (Maharashtra) हेतु उपलब्ध है। आवश्यक योग्यता: Postgraduate degree in Remote Sensing & GIS, Geoinformatics, Geography or a related discipline, as per the ICAR-NBSS&LUP advertisement.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:26.233566+00:00",
+      "verified_at": "2026-11-08T23:52:36.019009+00:00",
       "final_url": "https://www.freejobalert.com/articles/icar-nbss-lup-young-professional-ii-rs-gis-recruitment-2026-3077207",
       "final_host": "www.freejobalert.com",
       "http_status": 200,
-      "content_hash": "c64d0c25888cc972a6ebdc33a273ab77",
+      "content_hash": "877d21bf0f67a4b88e98147a3eceb73d",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -6129,11 +5758,11 @@
     "title_hi": "प्रोजेक्ट एसोसिएट-I - वानिकी & पारिस्थितिकी (CSIR-TKDL) — CSIR - Traditional Knowledge Digital Library (TKDL) Unit",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट CSIR - Traditional Knowledge Digital Library (TKDL) Unit (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Master's degree in Forestry & Ecology, Environmental Sciences or related disciplines, as per the CSIR-TKDL notice.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:26.397779+00:00",
+      "verified_at": "2026-11-08T23:52:36.112318+00:00",
       "final_url": "https://www.freejobalert.com/articles/csir-tkdl-recruitment-2026-project-associate-i-pat-i-3077260",
       "final_host": "www.freejobalert.com",
       "http_status": 200,
-      "content_hash": "9f336bf0a55cbfc768f5d420e7fc9e91",
+      "content_hash": "080f2cf94953a65ef89e917128847f48",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -6547,11 +6176,11 @@
     "date_added": "2026-10-29",
     "date_posted": "2026-10-29",
     "verification": {
-      "verified_at": "2026-11-07T23:45:28.603752+00:00",
+      "verified_at": "2026-11-08T23:52:38.438771+00:00",
       "final_url": "https://iica.nic.in/cclp/",
       "final_host": "iica.nic.in",
       "http_status": 200,
-      "content_hash": "8582d136e221082583a554a07ea41cb7",
+      "content_hash": "99de01356fd26409be605dab32ecc18b",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -6765,7 +6394,7 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:29.395653+00:00",
+      "verified_at": "2026-11-08T23:52:39.271855+00:00",
       "final_url": "https://emit.fa.ca3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/94772",
       "final_host": "emit.fa.ca3.oraclecloud.com",
       "http_status": 200,
@@ -6808,11 +6437,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:30.099085+00:00",
+      "verified_at": "2026-11-08T23:52:40.235830+00:00",
       "final_url": "https://www.inclimate.com/climate-jobs/india/carbon-and-esg-reporting",
       "final_host": "www.inclimate.com",
       "http_status": 200,
-      "content_hash": "2d335fcd3ab419bc8b95e59ee79a6159",
+      "content_hash": "802558b4a3b33df430023b3fad076c2d",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6857,11 +6486,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:30.354547+00:00",
+      "verified_at": "2026-11-08T23:52:40.793836+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "668d50aa3d7d8523cdd0cfa083ae1784",
+      "content_hash": "8d1e100214043e7a255da88bb4204e82",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6906,11 +6535,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:30.526030+00:00",
+      "verified_at": "2026-11-08T23:52:41.002822+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "668d50aa3d7d8523cdd0cfa083ae1784",
+      "content_hash": "8d1e100214043e7a255da88bb4204e82",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6955,11 +6584,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:31.185865+00:00",
+      "verified_at": "2026-11-08T23:52:41.886600+00:00",
       "final_url": "https://jobs.mahindracareers.com/job/Mumbai-A_O-Dy_-Manager-Sustainability-%26-Environment-MUM/1438986800/",
       "final_host": "jobs.mahindracareers.com",
       "http_status": 200,
-      "content_hash": "8772faaac7165af816b28700e6dd07e5",
+      "content_hash": "53dd3779c85c8a6f1261041a812f7644",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7013,7 +6642,7 @@
     "title_hi": "कार्यकारी Programme - Understanding Human Dimensions of जलवायु परिवर्तन — Indian School of Business (ISB) - Bharti Institute of Public Policy",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Indian School of Business (ISB) - Bharti Institute of Public Policy (Telangana) हेतु उपलब्ध है। आवश्यक योग्यता: Senior government officers across ministries and states, plus a limited number of self- or organisation-sponsored private sector leaders.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:31.352666+00:00",
+      "verified_at": "2026-11-08T23:52:42.023697+00:00",
       "final_url": "https://form.jotform.com/BIPP_ISB/understanding-human-dimensions-of-c",
       "final_host": "form.jotform.com",
       "http_status": 200,
@@ -7070,7 +6699,7 @@
     "title_hi": "PhD / M.Tech (अनुसंधान) Admissions - Centre for जलवायु परिवर्तन and Disaster प्रबंधन — IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR)",
     "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप IIT Mandi - Centre for Climate Change and Disaster Management (C3DAR) (Himachal Pradesh) हेतु उपलब्ध है। आवश्यक योग्यता: Master's or bachelor's degree in engineering, technology, sciences, or allied subjects with the prescribed CGPA/CPI, plus GATE/NET or an equivalent national examination unless exempt.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:33.307611+00:00",
+      "verified_at": "2026-11-08T23:52:43.910036+00:00",
       "final_url": "https://iitmandi.ac.in/pdf/admissions/c3dar_2026_27.pdf",
       "final_host": "iitmandi.ac.in",
       "http_status": 200,
@@ -7111,11 +6740,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:33.963365+00:00",
+      "verified_at": "2026-11-08T23:52:44.460928+00:00",
       "final_url": "https://www.inclimate.com/climate-jobs/india/carbon-and-esg-reporting",
       "final_host": "www.inclimate.com",
       "http_status": 200,
-      "content_hash": "2d335fcd3ab419bc8b95e59ee79a6159",
+      "content_hash": "802558b4a3b33df430023b3fad076c2d",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7160,11 +6789,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:34.536100+00:00",
+      "verified_at": "2026-11-08T23:52:45.238275+00:00",
       "final_url": "https://corningjobs.corning.com/job/Gurgaon-Supply-Chain-Data-%26-Carbon-Accounting-Specialist-HR-122002/1425224500/",
       "final_host": "corningjobs.corning.com",
       "http_status": 200,
-      "content_hash": "6eaee385d7ef43f07fb446b1ff05f19b",
+      "content_hash": "6e9969e7cbd8d20c4deaf2d47b2ab024",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7221,11 +6850,11 @@
     "title_hi": "Project अनुसंधान वैज्ञानिक III (Non-Medical) - GIS विशेषज्ञ — Centre for Chronic Disease Control (CCDC)",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट Centre for Chronic Disease Control (CCDC) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Postgraduate degree in GIS, geoinformatics, remote sensing, geography, environmental science, geomatics, computer science, data science, statistics, or a related discipline with five years of post-qualification experience, or a PhD with two years; at least five relevant projects.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:34.745957+00:00",
+      "verified_at": "2026-11-08T23:52:46.883634+00:00",
       "final_url": "https://ccdcindia.org/career/project-research-scientist-iii-non-medical-2/",
       "final_host": "ccdcindia.org",
       "http_status": 200,
-      "content_hash": "a5be8065a463ede385080efcbf4ee776",
+      "content_hash": "e9f68cbb5c36eae2d84fa6be3247a141",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7262,11 +6891,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:34.893012+00:00",
+      "verified_at": "2026-11-08T23:52:47.125730+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "668d50aa3d7d8523cdd0cfa083ae1784",
+      "content_hash": "8d1e100214043e7a255da88bb4204e82",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7311,7 +6940,7 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-07T23:45:35.050137+00:00",
+      "verified_at": "2026-11-08T23:52:47.326139+00:00",
       "final_url": "https://csrjobs.club/jobs/boston-consulting-group-bcg-sustainability-data-analytics-senior-manager-t4ap",
       "final_host": "csrjobs.club",
       "http_status": 200,
@@ -7374,11 +7003,11 @@
     "title_hi": "कार्यक्रम प्रबंधक / रिसर्च एसोसिएट - Heat Forecast — Precision Development (PxD)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Precision Development (PxD) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Relevant degree and experience in programme management, economics, climate adaptation, or research; existing authorization to work in India.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:45:35.595644+00:00",
+      "verified_at": "2026-11-08T23:52:47.557034+00:00",
       "final_url": "https://precisiondev.org/about-us/careers/",
       "final_host": "precisiondev.org",
       "http_status": 200,
-      "content_hash": "c11111403e822affff8786af8855c12d",
+      "content_hash": "731b1bedb9e9267767e45204c93f9443",
       "entry_type": "careers_portal",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7479,11 +7108,11 @@
     "title_hi": "स्थिरता & Mission LiFE Conclave 2026 — IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद IIT Goa (Mission LiFE Cell & School of Humanities and Social Sciences) (Goa) हेतु उपलब्ध है। आवश्यक योग्यता: Open to industry, MSMEs, faculty, researchers, and students.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-05T00:58:56.364856+00:00",
+      "verified_at": "2026-11-08T23:53:13.843470+00:00",
       "final_url": "https://iitgoa.ac.in/mlc/sustainabilityconclave2026/index.php",
       "final_host": "iitgoa.ac.in",
       "http_status": 200,
-      "content_hash": "8931afe155096645118e9239d2b35f76",
+      "content_hash": "b0a7506a8204694dd2b56d7a8242eba0",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -7655,11 +7284,11 @@
     "title_hi": "पर्यावरणीय नीति & जलवायु Action Training — IMPRI (Impact and Policy Research Institute)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद IMPRI (Impact and Policy Research Institute) (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to students, researchers, and professionals interested in environmental policy.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:46:37.733328+00:00",
+      "verified_at": "2026-11-08T23:53:14.389990+00:00",
       "final_url": "https://www.impriindia.com/event/environmental-policy-and-climate-action/",
       "final_host": "www.impriindia.com",
       "http_status": 200,
-      "content_hash": "b88f6c8766fd057592e6c98e1db57bed",
+      "content_hash": "0ca20e1e5abaf49ba92ef2bf7200fb56",
       "entry_type": "award_portal",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7943,7 +7572,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:46:40.216852+00:00",
+      "verified_at": "2026-11-08T23:53:16.578009+00:00",
       "final_url": "https://sams.co.in/Jobs/job-list",
       "final_host": "sams.co.in",
       "http_status": 200,
@@ -8006,11 +7635,11 @@
     "title_hi": "PhD प्रवेश (नियमित - जनवरी 2027)",
     "summary_hi": "IIT Hyderabad जनवरी 2027 सत्र के लिए अपने पूर्णकालिक PhD कार्यक्रम हेतु आवेदन आमंत्रित करता है। यह कार्यक्रम क्लाइमेट चेंज, सस्टेनेबिलिटी, आर्टिफिशियल इंटेलिजेंस और इंजीनियरिंग जैसे विविध विषयों को कवर करता है।",
     "verification": {
-      "verified_at": "2026-11-07T23:46:42.089731+00:00",
+      "verified_at": "2026-11-08T23:53:18.331456+00:00",
       "final_url": "https://iith.ac.in/phdadmissions/",
       "final_host": "iith.ac.in",
       "http_status": 200,
-      "content_hash": "6ec4ef38959a987b0e2074a48927d1f2",
+      "content_hash": "9077afce772a2c390e95dd08b6ca2375",
       "entry_type": "award_portal",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -8065,11 +7694,11 @@
     "title_hi": "जूनियर रिसर्च फेलो — KSCSTE-Centre for Water Resources Development and Management",
     "summary_hi": "यह जूनियर/सीनियर रिसर्च फेलोशिप (JRF / SRF) KSCSTE-Centre for Water Resources Development and Management (Kerala) हेतु उपलब्ध है। आवश्यक योग्यता: First Class Post Graduation degree in Agriculture with specialisation in Agronomy/Environmental Science/Botany/Plant Sciences or allied discipline with CSIR-UGC-ASRB-NET/GATE qualified.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:46:44.436907+00:00",
+      "verified_at": "2026-11-08T23:53:20.706217+00:00",
       "final_url": "https://cwrdm.kerala.gov.in/walk-interview-post-junior-research-fellow",
       "final_host": "cwrdm.kerala.gov.in",
       "http_status": 200,
-      "content_hash": "cfd187d6cec9e8a5b9aa17fea2fac5f7",
+      "content_hash": "ef937cc0ef0670acd1c659d2cc6b64f9",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -8125,7 +7754,7 @@
     "title_hi": "DPhil in Biology — University of Oxford",
     "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप University of Oxford (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Applicants should hold or be predicted to achieve a first-class or strong upper second-class undergraduate degree with honours in appropriate subjects.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-07T23:46:47.429646+00:00",
+      "verified_at": "2026-11-08T23:53:21.804522+00:00",
       "final_url": "https://www.biology.ox.ac.uk/dphil#tab-5820131",
       "final_host": "www.biology.ox.ac.uk",
       "http_status": 200,
@@ -8238,11 +7867,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:46:49.405689+00:00",
+      "verified_at": "2026-11-08T23:53:23.682375+00:00",
       "final_url": "https://www.atree.org/career/ffwlf/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "3714afb1ae421777acebda8903495543",
+      "content_hash": "63e07acf91f0a1e5332d6899b471d1b9",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -8292,7 +7921,7 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:46:55.181645+00:00",
+      "verified_at": "2026-11-08T23:53:36.194461+00:00",
       "final_url": "https://wii.gov.in/course-in-wildlife-trade-&-forensics-for-revenue-officers",
       "final_host": "wii.gov.in",
       "http_status": 200,
@@ -8346,7 +7975,7 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:46:59.534026+00:00",
+      "verified_at": "2026-11-08T23:53:38.428171+00:00",
       "final_url": "https://wii.gov.in/wildlife-enthusiasts-course",
       "final_host": "wii.gov.in",
       "http_status": 200,
@@ -8524,11 +8153,11 @@
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:00.086496+00:00",
+      "verified_at": "2026-11-08T23:53:38.892016+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-sustainable-food-systems-0",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "3b9688515d4eb67dc9b6b2e62a43f427",
+      "content_hash": "d1e248306f459f89f46d10ea8ced2cd2",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -8578,11 +8207,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:01.679875+00:00",
+      "verified_at": "2026-11-08T23:53:40.498887+00:00",
       "final_url": "https://www.atree.org/career/research-associate-maharastratgi/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "9ebedf7e894aca713430809b04d964a4",
+      "content_hash": "12966d684b3a54437be9fd5299fa8f95",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -8639,11 +8268,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:01.927931+00:00",
+      "verified_at": "2026-11-08T23:53:40.748208+00:00",
       "final_url": "https://reliefweb.int/job/4232853/regional-health-and-wash-coordinator-asia-hub",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "54d50d423f2f05e483c24428ad2a3957",
+      "content_hash": "27b4c87874c8eccf2a89f36d6c91da0c",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -8819,7 +8448,7 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:05.609638+00:00",
+      "verified_at": "2026-11-08T23:53:42.990682+00:00",
       "final_url": "https://wii.gov.in/pg-diploma-in-wildlife",
       "final_host": "wii.gov.in",
       "http_status": 200,
@@ -9005,7 +8634,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:08.179599+00:00",
+      "verified_at": "2026-11-08T23:53:45.494036+00:00",
       "final_url": "https://bsi.gov.in/uploads/documents/whatsnew/hindi/BSI-ADDITIONAL_LIST_OF_4_CANDIDATES_FOR_JRF_2026.pdf",
       "final_host": "bsi.gov.in",
       "http_status": 200,
@@ -9059,7 +8688,7 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-07T23:47:22.012206+00:00",
+      "verified_at": "2026-11-08T23:53:47.477865+00:00",
       "final_url": "https://wii.gov.in/international-course-on-heritage-conservation",
       "final_host": "wii.gov.in",
       "http_status": 200,
@@ -9378,11 +9007,11 @@
     "entry_type": "posting",
     "reverify_after": "2026-11-03",
     "verification": {
-      "verified_at": "2026-11-07T23:47:22.711953+00:00",
+      "verified_at": "2026-11-08T23:53:48.068437+00:00",
       "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
       "final_host": "www.indiawaterportal.org",
       "http_status": 200,
-      "content_hash": "5e925a69afd869ece9850e8573c37031",
+      "content_hash": "817a86f23ae88319ef438b1837018838",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -9432,11 +9061,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-07T23:47:23.228141+00:00",
+      "verified_at": "2026-11-08T23:53:48.499867+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-technology-futures-2",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "6223ef823d508778f5c054d794418256",
+      "content_hash": "7fdbbc4d5b400bda9cc98c7301f204fc",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -9487,11 +9116,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-07T23:47:23.758067+00:00",
+      "verified_at": "2026-11-08T23:53:48.887380+00:00",
       "final_url": "https://www.ceew.in/careers/programme-associate-%E2%80%93-energy-transitions",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "f1b5d560cdd9be2d2a1db3b8e67a4846",
+      "content_hash": "9160605e19f720570d9b088f01bfe5c2",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -9948,11 +9577,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-07T23:47:24.249743+00:00",
+      "verified_at": "2026-11-08T23:53:55.804621+00:00",
       "final_url": "https://www.ceew.in/careers/research-analyst-programme-associate-technology-futures",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "9f4b6f8dc1da88e6c407e617463f0ca9",
+      "content_hash": "46681f0a1bb2ccedcd72e4147a20361b",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11914,7 +11543,7 @@
     "entry_type": "posting",
     "reverify_after": "2026-10-31",
     "verification": {
-      "verified_at": "2026-11-07T23:47:26.464596+00:00",
+      "verified_at": "2026-11-08T23:53:58.076701+00:00",
       "final_url": "https://home.iitd.ac.in/jobs-iitd/index.html",
       "final_host": "home.iitd.ac.in",
       "http_status": 200,
