@@ -5,7 +5,7 @@
     <link>https://www.urbanforestpark.com</link>
     <description>Global climate, sustainability and green jobs.</description>
     <language>en-in</language>
-    <lastBuildDate>Sun, 08 Nov 2026 16:46:26 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 17:24:40 GMT</lastBuildDate>
     <atom:link href="https://www.urbanforestpark.com/feed-global.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Information Management Specialist (Loss and Damage Report Submissions), Santiago Network</title>
@@ -132,15 +132,6 @@
       <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
       <category>Grants &amp; Research Funding</category>
       <author>U.S. Endowment for Forestry and Communities (Remote)</author>
-    </item>
-    <item>
-      <title>UNB MScF Opportunity - Black Spruce Stress Resilience</title>
-      <link>https://www.urbanforestpark.com/jobs/unb-mscf-black-spruce-stress-resilience-2026</link>
-      <guid isPermaLink="true">https://www.urbanforestpark.com/jobs/unb-mscf-black-spruce-stress-resilience-2026</guid>
-      <description>High-throughput phenotyping of black spruce stress resilience, combining greenhouse data collection, remote sensing and geomatics.</description>
-      <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
-      <category>Academic, JRF, SRF &amp; PhD Positions</category>
-      <author>University of New Brunswick (Fredericton)</author>
     </item>
     <item>
       <title>UBC Master of International Forestry Tuition Scholarship</title>
@@ -456,6 +447,15 @@
       <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
       <category>Internships &amp; Student Traineeships</category>
       <author>Foundation for Environmental Education (FEE) (Copenhagen)</author>
+    </item>
+    <item>
+      <title>Research Assistant - MultiFutures Project</title>
+      <link>https://www.urbanforestpark.com/jobs/ceps-research-assistant-multifutures-2026</link>
+      <guid isPermaLink="true">https://www.urbanforestpark.com/jobs/ceps-research-assistant-multifutures-2026</guid>
+      <description>CEPS Research Assistant supporting the MultiFutures project on the green transition and sustainable societies.</description>
+      <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Climate Policy, Think-Tanks &amp; Fellowships</category>
+      <author>Centre for European Policy Studies (CEPS) (Brussels)</author>
     </item>
   </channel>
 </rss>
