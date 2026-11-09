@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-11-09T00:50:15",
+=======
+  "generated_at": "2026-11-09T02:20:34",
+>>>>>>> Stashed changes
   "reason": "hard-negative sales/commercial/support blocklist",
   "removed": [
     {

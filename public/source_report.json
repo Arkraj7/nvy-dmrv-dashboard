@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-11-09T02:15:35",
+=======
+  "generated_at": "2026-11-09T02:46:07",
+>>>>>>> Stashed changes
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +38,24 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
+<<<<<<< Updated upstream
       "leads": 280,
+=======
+      "leads": 334,
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
     "official-page": {
       "leads": 165,
+<<<<<<< Updated upstream
       "passed": 0,
       "active": 0
     },
     "naukri": {
       "leads": 52,
+=======
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -58,6 +69,7 @@
       "passed": 0,
       "active": 0
     },
+<<<<<<< Updated upstream
     "portal:atree": {
       "leads": 7,
       "passed": 0,
@@ -65,6 +77,10 @@
     },
     "google-news": {
       "leads": 4,
+=======
+    "google-news": {
+      "leads": 5,
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -74,7 +90,11 @@
       "active": 0
     },
     "indeed": {
+<<<<<<< Updated upstream
       "leads": 2,
+=======
+      "leads": 3,
+>>>>>>> Stashed changes
       "passed": 0,
       "active": 0
     },
@@ -85,7 +105,11 @@
     }
   },
   "totals": {
+<<<<<<< Updated upstream
     "leads": 552,
+=======
+    "leads": 549,
+>>>>>>> Stashed changes
     "passed": 0,
     "active": 0
   }
