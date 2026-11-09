@@ -1,12 +1,18 @@
 {
-  "generated_at": "2026-11-08T00:32:54",
+  "generated_at": "2026-11-09T00:50:15",
   "reason": "hard-negative sales/commercial/support blocklist",
   "removed": [
     {
       "bucket": "active",
-      "id": "iittnif-careers-2026-tirupati",
-      "title": "Open Positions - CEO, AOO, Startup Manager, Graphic Designer, Senior Accountant",
-      "organization": "IIT Tirupati Navavishkar I-Hub Foundation (IITTNiF)"
+      "id": "alignerr-wildlife-habitat-conservation-scientist-mumbai-2026",
+      "title": "Wildlife and Habitat Conservation Scientist",
+      "organization": "Alignerr"
+    },
+    {
+      "bucket": "active",
+      "id": "alignerr-wildlife-habitat-conservation-scientist-delhi-2026",
+      "title": "Wildlife and Habitat Conservation Scientist",
+      "organization": "Alignerr"
     }
   ]
 }
