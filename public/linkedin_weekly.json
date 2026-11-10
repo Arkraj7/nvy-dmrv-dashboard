@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-09T17:26:05+05:30",
-  "week_of": "2026-11-09",
+  "generated_at": "2026-11-10T08:24:47+05:30",
+  "week_of": "2026-11-10",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -41,30 +41,6 @@
     {
       "position": 3,
       "registry": "india",
-      "id": "iitm-msc-mtech-projects-2026",
-      "title": "M.Sc./M.Tech Research Projects (6-9 months)",
-      "organization": "Indian Institute of Tropical Meteorology (IITM)",
-      "location": "Pune, Maharashtra",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Fellowship",
-      "score": 47.0,
-      "url": "https://www.urbanforestpark.com/jobs/iitm-msc-mtech-projects-2026"
-    },
-    {
-      "position": 4,
-      "registry": "global",
-      "id": "northumbria-phd-permafrost-satellite-ai-2027",
-      "title": "PhD - Permafrost Subsidence and Greenhouse Gas Release in the Canadian Arctic (Satellite + AI)",
-      "organization": "Northumbria University",
-      "location": "Newcastle upon Tyne (Mackenzie Delta research)",
-      "position_type": "PhD / Doctoral Fellowship",
-      "opportunity_kind": "Fellowship",
-      "score": 45.0,
-      "url": "https://www.urbanforestpark.com/jobs/northumbria-phd-permafrost-satellite-ai-2027"
-    },
-    {
-      "position": 5,
-      "registry": "india",
       "id": "swaniti-global-associate-research-climate-sustainability-delhi-2026",
       "title": "Associate - Research, Climate & Sustainability",
       "organization": "Swaniti Global",
@@ -75,7 +51,7 @@
       "url": "https://www.urbanforestpark.com/jobs/swaniti-global-associate-research-climate-sustainability-delhi-2026"
     },
     {
-      "position": 6,
+      "position": 4,
       "registry": "india",
       "id": "berhampur-university-research-associate-ecology-2026",
       "title": "Research Associate (Ecology)",
@@ -87,31 +63,7 @@
       "url": "https://www.urbanforestpark.com/jobs/berhampur-university-research-associate-ecology-2026"
     },
     {
-      "position": 7,
-      "registry": "india",
-      "id": "wri-india-intern-sustainable-agriculture-delhi-2026",
-      "title": "Intern - Sustainable Agriculture",
-      "organization": "WRI India",
-      "location": "New Delhi, Delhi",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 43.0,
-      "url": "https://www.urbanforestpark.com/jobs/wri-india-intern-sustainable-agriculture-delhi-2026"
-    },
-    {
-      "position": 8,
-      "registry": "india",
-      "id": "wri-india-intern-electric-mobility-bengaluru-2026",
-      "title": "Intern - Electric Mobility",
-      "organization": "WRI India",
-      "location": "Bengaluru, Karnataka",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 43.0,
-      "url": "https://www.urbanforestpark.com/jobs/wri-india-intern-electric-mobility-bengaluru-2026"
-    },
-    {
-      "position": 9,
+      "position": 5,
       "registry": "india",
       "id": "edf-climate-corps-india-fellowship-2027",
       "title": "Ashoka - EDF Climate Corps Fellowship 2027",
@@ -123,7 +75,31 @@
       "url": "https://www.urbanforestpark.com/jobs/edf-climate-corps-india-fellowship-2027"
     },
     {
-      "position": 10,
+      "position": 6,
+      "registry": "india",
+      "id": "wri-india-intern-sustainable-agriculture-delhi-2026",
+      "title": "Intern - Sustainable Agriculture",
+      "organization": "WRI India",
+      "location": "New Delhi, Delhi",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 43.0,
+      "url": "https://www.urbanforestpark.com/jobs/wri-india-intern-sustainable-agriculture-delhi-2026"
+    },
+    {
+      "position": 7,
+      "registry": "india",
+      "id": "wri-india-intern-electric-mobility-bengaluru-2026",
+      "title": "Intern - Electric Mobility",
+      "organization": "WRI India",
+      "location": "Bengaluru, Karnataka",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 43.0,
+      "url": "https://www.urbanforestpark.com/jobs/wri-india-intern-electric-mobility-bengaluru-2026"
+    },
+    {
+      "position": 8,
       "registry": "india",
       "id": "project-assistant-iwst-bengaluru",
       "title": "Project Assistant",
@@ -133,7 +109,31 @@
       "opportunity_kind": "Job / Career",
       "score": 42.0,
       "url": "https://www.urbanforestpark.com/jobs/project-assistant-iwst-bengaluru"
+    },
+    {
+      "position": 9,
+      "registry": "india",
+      "id": "nih-roorkee-young-professional-full-stack-2026",
+      "title": "Young Professional - Full Stack Development",
+      "organization": "National Institute of Hydrology (NIH)",
+      "location": "Roorkee, Uttarakhand",
+      "position_type": "Young Professional / Consultant (Contractual)",
+      "opportunity_kind": "Job / Career",
+      "score": 42.0,
+      "url": "https://www.urbanforestpark.com/jobs/nih-roorkee-young-professional-full-stack-2026"
+    },
+    {
+      "position": 10,
+      "registry": "global",
+      "id": "mcw-young-leaders-fellowship-2027",
+      "title": "MCW Young Leaders Fellowship Program 2027",
+      "organization": "MCW Global",
+      "location": "New York / Burlington",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Fellowship",
+      "score": 39.0,
+      "url": "https://www.urbanforestpark.com/jobs/mcw-young-leaders-fellowship-2027"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Especialista en Financiamiento de Ecosistemas de Manglar — World Resources Institute (WRI) (Mexico City | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-en-financiamiento-de-ecosistemas-de-manglar-wor\n\n2. [GLOBAL] SONG Masters Scholarships — EU-FCCB Programme / Expertise France (Port Moresby | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/song-masters-scholarships-papua-new-guinea-2026\n\n3. [INDIA] M.Sc./M.Tech Research Projects (6-9 months) — Indian Institute of Tropical Meteorology (IITM) (Pune, Maharashtra | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/iitm-msc-mtech-projects-2026\n\n4. [GLOBAL] PhD - Permafrost Subsidence and Greenhouse Gas Release in the Canadian Arctic (Satellite + AI) — Northumbria University (Newcastle upon Tyne (Mackenzie Delta research) | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/northumbria-phd-permafrost-satellite-ai-2027\n\n5. [INDIA] Associate - Research, Climate & Sustainability — Swaniti Global (Delhi, Delhi | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/swaniti-global-associate-research-climate-sustainability-delhi-2026\n\n6. [INDIA] Research Associate (Ecology) — Berhampur University (Berhampur, Odisha | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/berhampur-university-research-associate-ecology-2026\n\n7. [INDIA] Intern - Sustainable Agriculture — WRI India (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wri-india-intern-sustainable-agriculture-delhi-2026\n\n8. [INDIA] Intern - Electric Mobility — WRI India (Bengaluru, Karnataka | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wri-india-intern-electric-mobility-bengaluru-2026\n\n9. [INDIA] Ashoka - EDF Climate Corps Fellowship 2027 — Ashoka University / Environmental Defense Fund (Multiple locations across India, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/edf-climate-corps-india-fellowship-2027\n\n10. [INDIA] Project Assistant — Institute of Wood Science and Technology (IWST) (Bengaluru, Karnataka | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-assistant-iwst-bengaluru\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Especialista en Financiamiento de Ecosistemas de Manglar — World Resources Institute (WRI) (Mexico City | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-en-financiamiento-de-ecosistemas-de-manglar-wor\n\n2. [GLOBAL] SONG Masters Scholarships — EU-FCCB Programme / Expertise France (Port Moresby | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/song-masters-scholarships-papua-new-guinea-2026\n\n3. [INDIA] Associate - Research, Climate & Sustainability — Swaniti Global (Delhi, Delhi | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/swaniti-global-associate-research-climate-sustainability-delhi-2026\n\n4. [INDIA] Research Associate (Ecology) — Berhampur University (Berhampur, Odisha | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/berhampur-university-research-associate-ecology-2026\n\n5. [INDIA] Ashoka - EDF Climate Corps Fellowship 2027 — Ashoka University / Environmental Defense Fund (Multiple locations across India, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/edf-climate-corps-india-fellowship-2027\n\n6. [INDIA] Intern - Sustainable Agriculture — WRI India (New Delhi, Delhi | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wri-india-intern-sustainable-agriculture-delhi-2026\n\n7. [INDIA] Intern - Electric Mobility — WRI India (Bengaluru, Karnataka | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/wri-india-intern-electric-mobility-bengaluru-2026\n\n8. [INDIA] Project Assistant — Institute of Wood Science and Technology (IWST) (Bengaluru, Karnataka | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-assistant-iwst-bengaluru\n\n9. [INDIA] Young Professional - Full Stack Development — National Institute of Hydrology (NIH) (Roorkee, Uttarakhand | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/nih-roorkee-young-professional-full-stack-2026\n\n10. [GLOBAL] MCW Young Leaders Fellowship Program 2027 — MCW Global (New York / Burlington | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/mcw-young-leaders-fellowship-2027\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
