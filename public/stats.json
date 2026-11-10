@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-09T12:18:47+05:30",
-  "last_updated_ist": "2026-11-09T12:18:47+05:30",
-  "last_pipeline_run_date_ist": "2026-11-09",
-  "active_open_jobs": 233,
-  "opened_this_week": 124,
-  "passed_this_week": 37,
-  "total_archived_jobs": 78,
+  "last_updated": "2026-11-10T08:24:43+05:30",
+  "last_updated_ist": "2026-11-10T08:24:43+05:30",
+  "last_pipeline_run_date_ist": "2026-11-10",
+  "active_open_jobs": 232,
+  "opened_this_week": 112,
+  "passed_this_week": 38,
+  "total_archived_jobs": 79,
   "total_historical_indexed": 311,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -39,8 +39,8 @@
       "archived": 2
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 19,
-      "archived": 4
+      "active": 18,
+      "archived": 5
     },
     "Conferences, Summits & Events": {
       "active": 5,
@@ -92,29 +92,28 @@
     "Bihar": 1,
     "Chhattisgarh": 1,
     "Goa": 1,
-    "Himachal Pradesh": 1,
     "Jharkhand": 1,
     "Rajasthan": 1
   },
-  "active_global_jobs": 123,
+  "active_global_jobs": 122,
   "active_global_portals": 12,
-  "total_global_records": 135,
-  "total_archived_global_jobs": 74,
+  "total_global_records": 134,
+  "total_archived_global_jobs": 79,
   "global_jobs_by_region": {
-    "Global / Remote": 45,
-    "Africa & Middle East": 15,
-    "North America": 16,
+    "Africa & Middle East": 16,
+    "Asia-Pacific": 16,
     "Europe": 23,
-    "Asia-Pacific": 17,
-    "UN / Multilateral": 6,
-    "Latin America": 1
+    "Global / Remote": 44,
+    "Latin America": 1,
+    "North America": 15,
+    "UN / Multilateral": 7
   },
   "global_jobs_by_kind": {
-    "Job / Career": 76,
-    "Grant / Funding": 10,
-    "Scholarship": 10,
-    "Fellowship": 18,
     "Competition / Award": 5,
-    "Internship": 4
+    "Fellowship": 18,
+    "Grant / Funding": 10,
+    "Internship": 5,
+    "Job / Career": 74,
+    "Scholarship": 10
   }
 }
