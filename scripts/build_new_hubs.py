@@ -137,11 +137,11 @@ def salary_stats(jobs: List[Dict[str, Any]]):
 # ---------------------------------------------------------------------------
 FOREST_PAT = re.compile(
     r"forest guard|forest ranger|forester|rfo\b|assistant conservator|indian forest service|ifs\b|"
-    r"wildlife|forestry|afforestation|campa|forest department|fsi\b|icfre|wildlife institute|"
+    r"wildlife|forestry|afforestation|\bcampa\b|forest department|fsi\b|icfre|wildlife institute|"
     r"sacon|forest survey", re.I)
 
 GOV_ORG_PAT = re.compile(
-    r"forest department|forest survey|icfre|wildlife institute|sacon|moefcc|campa|"
+    r"forest department|forest survey|icfre|wildlife institute|sacon|moefcc|\bcampa\b|"
     r"government of|department of forest|forest & environment|forest and environment|"
     r"state forest|biodiversity board|pollution control", re.I)
 

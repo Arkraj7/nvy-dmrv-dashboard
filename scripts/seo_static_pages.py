@@ -174,6 +174,12 @@ def _normalise_head(file_name: str, text: str, meta: Dict[str, Any]) -> str:
     head = _drop(head, r"<link\b[^>]*rel=[\"'][^\"']*canonical[^\"']*[\"'][^>]*>\s*")
     head = _drop(head, r"<link\b[^>]*hreflang=[^>]*>\s*")
     head = _drop(head, r"<link\b[^>]*rel=[\"'][^\"']*(?:icon|manifest|apple-touch-icon|mask-icon)[^\"']*[\"'][^>]*>\s*")
+    # The homepage preloads the header logo. Drop any existing copy first, or
+    # every rebuild appends another identical <link> (once per run).
+    head = _drop(
+        head,
+        r"<link\b(?=[^>]*\brel=[\"']preload[\"'])(?=[^>]*Logo_UFF)[^>]*>\s*",
+    )
     head = _drop(head, r"<meta\b[^>]*name=[\"']theme-color[\"'][^>]*>\s*")
 
     # Ensure charset/viewport survive on hand-written email/tool templates.
