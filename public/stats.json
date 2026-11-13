@@ -171,18 +171,22 @@
     "Grant / Funding": 13,
     "Scholarship": 12,
     "Competition / Award": 5
+=======
+    "Africa & Middle East": 16,
+    "Asia-Pacific": 16,
+    "Europe": 23,
+    "Global / Remote": 44,
+    "Latin America": 1,
+    "North America": 15,
+    "UN / Multilateral": 7
   },
-  "telegram_last_status": "delivered",
-  "last_broadcast_job_ids": [
-    "junior-research-fellow-kscste-centre-for-water-resources-dev",
-    "assistant-manager-horticulture-adani-natural-resources",
-    "blackrock-sustainability-data-process-reporting-associate",
-    "udd-uttarakhand-gis-positions-2026",
-    "communications-and-stakeholder-engagement-intern-lpa-interna",
-    "phd-admissions-regular-january-2027-indian-institute-of-tech",
-    "satluj-river-basin-assessment-tnc",
-    "corning-supply-chain-data-carbon-accounting-specialist",
-    "phd-students-kotak-school-of-sustainability-iit-kanpur",
-    "phd-research-sustainable-rurban-food-systems-atree"
-  ]
+  "global_jobs_by_kind": {
+    "Competition / Award": 5,
+    "Fellowship": 18,
+    "Grant / Funding": 10,
+    "Internship": 5,
+    "Job / Career": 74,
+    "Scholarship": 10
+>>>>>>> Stashed changes
+  }
 }

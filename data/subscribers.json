@@ -151,5 +151,23 @@
     "welcome_sent": true,
     "welcome_queued": false,
     "welcome_sent_at": "2026-11-08T11:53:49+00:00"
+  },
+  {
+    "email": "hittaln521@gmail.com",
+    "frequency": "3-days",
+    "sector": "all",
+    "channels": [
+      "email"
+    ],
+    "saved_search": null,
+    "whatsapp_number": null,
+    "active": true,
+    "source": "urbanforestpark.com",
+    "subscribed_at": "2026-11-13T05:25:08.523Z",
+    "updated_at": "2026-11-13T05:25:20+00:00",
+    "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+    "welcome_sent": true,
+    "welcome_queued": false,
+    "welcome_sent_at": "2026-11-13T05:25:21+00:00"
   }
 ]
