@@ -1,107 +1,62 @@
 {
-  "last_updated": "2026-11-13T19:58:31+05:30",
-  "last_updated_ist": "2026-11-13T19:58:31+05:30",
+  "last_updated": "2026-11-13T21:40:11+05:30",
+  "last_updated_ist": "2026-11-13T21:40:11+05:30",
   "last_pipeline_run_date_ist": "2026-11-13",
-  "active_open_jobs": 326,
-  "opened_this_week": 43,
-  "passed_this_week": 29,
-  "total_archived_jobs": 88,
-  "total_historical_indexed": 414,
-  "last_telegram_broadcast_date": "2026-10-31",
-  "recent_telegram_job_ids": [
-    "iisc-urban-flood-forecasting-4-positions-2026",
-    "iora-biodiversity-data-intern-2026",
-    "churchgate-partners-research-analyst-sustainability-2026",
-    "ag-horizon-water-resources-multiple-positions-2026",
-    "champ-advisor-world-resources-institute-wri",
-    "iit-madras-teaching-program-coordinator-2026",
-    "program-manager-water-supply-planet-water-foundation",
-    "enkay-enviro-junior-social-expert-2026",
-    "pxd-heat-forecast-program-manager-research-associate-2026",
-    "reeds-program-manager-finance-research-assistant-2026",
-    "envirocatalysts-project-associate-punjab",
-    "atree-policy-lead-analyst-himalayan-region",
-    "fao-environment-climate-change-specialist",
-    "ccdc-gis-specialist-charm-india-2026",
-    "afs-sir-cyril-taylor-young-african-leaders-2027",
-    "iit-bhubaneswar-jrf-environmental-engineering",
-    "erm-consultant-biodiversity",
-    "bcg-sustainability-data-analytics-senior-manager",
-    "iit-roorkee-jrf-landscape-ecology-terai",
-    "rgu-research-associate-field-investigator",
-    "iit-mandi-c3dar-phd-jan-2027",
-    "wildlife-enthusiasts-course-wii",
-    "giga-young-leaders-summer-academy-2027",
-    "adel-pan-african-consultant-roster",
-    "development-associate-folu-world-resources-institute-wri",
-    "iit-mandi-scene-phd-jan-2027",
-    "wildlife-trade-forensics-course-wii",
-    "iica-corporate-climate-leadership-programme",
-    "lead-poisoning-surveillance-coordinator-gujarat-vital-strate",
-    "dphil-in-biology-university-of-oxford",
-    "junior-research-fellow-kscste-centre-for-water-resources-dev",
-    "assistant-manager-horticulture-adani-natural-resources",
-    "blackrock-sustainability-data-process-reporting-associate",
-    "udd-uttarakhand-gis-positions-2026",
-    "communications-and-stakeholder-engagement-intern-lpa-interna",
-    "phd-admissions-regular-january-2027-indian-institute-of-tech",
-    "satluj-river-basin-assessment-tnc",
-    "corning-supply-chain-data-carbon-accounting-specialist",
-    "phd-students-kotak-school-of-sustainability-iit-kanpur",
-    "phd-research-sustainable-rurban-food-systems-atree"
-  ],
+  "active_open_jobs": 316,
+  "opened_this_week": 180,
+  "passed_this_week": 40,
+  "total_archived_jobs": 92,
+  "total_historical_indexed": 408,
+  "last_telegram_broadcast_date": null,
+  "recent_telegram_job_ids": [],
   "by_category": {
-    "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 45,
-      "archived": 12
-    },
-    "Internships & Student Traineeships": {
-      "active": 10,
-      "archived": 4
-    },
-    "Workshops, Training & Capacity Building": {
-      "active": 8,
-      "archived": 1
-    },
-    "Conferences, Summits & Events": {
-      "active": 5,
-      "archived": 2
-    },
-    "Grants & Research Funding": {
-      "active": 3,
-      "archived": 0
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 7,
-      "archived": 2
-    },
     "Forestry, Wildlife & Afforestation": {
-      "active": 26,
-      "archived": 6
+      "active": 23,
+      "archived": 7
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 20,
-      "archived": 13
+      "active": 19,
+      "archived": 14
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 142,
+      "active": 141,
       "archived": 21
     },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 21,
-      "archived": 6
+    "Climate Policy, Think-Tanks & Fellowships": {
+      "active": 44,
+      "archived": 12
     },
     "Renewable Energy & Clean Tech": {
-      "active": 14,
+      "active": 13,
       "archived": 0
     },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 21,
       "archived": 17
     },
-    "Waste Management & Circular Economy": {
-      "active": 1,
+    "Grants & Research Funding": {
+      "active": 3,
       "archived": 0
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 19,
+      "archived": 8
+    },
+    "Internships & Student Traineeships": {
+      "active": 10,
+      "archived": 4
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 7,
+      "archived": 2
+    },
+    "Conferences, Summits & Events": {
+      "active": 5,
+      "archived": 2
+    },
+    "Workshops, Training & Capacity Building": {
+      "active": 8,
+      "archived": 1
     },
     "Memberships & Community Programs": {
       "active": 1,
@@ -121,12 +76,12 @@
     }
   },
   "by_state": {
-    "Maharashtra": 70,
-    "Delhi": 44,
-    "Karnataka": 40,
-    "Delhi NCR": 14,
+    "Maharashtra": 67,
+    "Delhi": 43,
+    "Karnataka": 38,
     "Gujarat": 14,
-    "Haryana": 13,
+    "Delhi NCR": 13,
+    "Haryana": 12,
     "Uttar Pradesh": 12,
     "Tamil Nadu": 11,
     "Telangana": 11,
@@ -139,54 +94,32 @@
     "Rajasthan": 4,
     "Global / Remote": 3,
     "Jharkhand": 2,
-    "Madhya Pradesh": 2,
     "Assam / Haryana": 1,
     "Bihar": 1,
     "Chandigarh": 1,
     "Chhattisgarh": 1,
-    "Goa": 1
+    "Goa": 1,
+    "Madhya Pradesh": 1
   },
-  "active_global_jobs": 153,
+  "active_global_jobs": 151,
   "active_global_portals": 12,
-  "total_global_records": 165,
-  "total_archived_global_jobs": 79,
+  "total_global_records": 163,
+  "total_archived_global_jobs": 96,
   "global_jobs_by_region": {
-    "Global / Remote": 47,
-    "Global": 16,
-    "Europe": 29,
-    "Asia": 5,
-    "North America": 18,
-    "Middle East": 1,
-    "Africa": 4,
-    "Latin America": 2,
-    "Oceania": 2,
-    "Africa & Middle East": 12,
-    "Asia-Pacific": 12,
-    "UN / Multilateral": 5
-  },
-  "global_jobs_by_kind": {
-    "Internship": 9,
-    "Job / Career": 93,
-    "Fellowship": 21,
-    "Grant / Funding": 13,
-    "Scholarship": 12,
-    "Competition / Award": 5
-=======
-    "Africa & Middle East": 16,
+    "Africa & Middle East": 15,
     "Asia-Pacific": 16,
-    "Europe": 23,
-    "Global / Remote": 44,
-    "Latin America": 1,
-    "North America": 15,
+    "Europe": 27,
+    "Global / Remote": 68,
+    "Latin America": 2,
+    "North America": 16,
     "UN / Multilateral": 7
   },
   "global_jobs_by_kind": {
     "Competition / Award": 5,
-    "Fellowship": 18,
-    "Grant / Funding": 10,
-    "Internship": 5,
-    "Job / Career": 74,
-    "Scholarship": 10
->>>>>>> Stashed changes
+    "Fellowship": 19,
+    "Grant / Funding": 15,
+    "Internship": 7,
+    "Job / Career": 94,
+    "Scholarship": 11
   }
 }

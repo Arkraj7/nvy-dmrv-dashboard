@@ -1,11 +1,25 @@
 {
-<<<<<<< Updated upstream
-  "generated_at": "2026-11-09T00:50:15",
-=======
-  "generated_at": "2026-11-09T02:20:34",
->>>>>>> Stashed changes
+  "generated_at": "2026-11-13T15:22:23",
   "reason": "hard-negative sales/commercial/support blocklist",
   "removed": [
+    {
+      "bucket": "active",
+      "id": "sgmedia-content-writer-mumbai-2026",
+      "title": "Content Writer",
+      "organization": "SG media LLP"
+    },
+    {
+      "bucket": "active",
+      "id": "rayonix-field-sales-executive-solar-faridabad-2026",
+      "title": "Field Sales Executive - Solar",
+      "organization": "Rayonix Energy"
+    },
+    {
+      "bucket": "active",
+      "id": "gemcorp-sales-manager-mumbai-2026",
+      "title": "Sales Manager",
+      "organization": "Gemcorp Recycling & Technologies Pvt Ltd"
+    },
     {
       "bucket": "active",
       "id": "alignerr-wildlife-habitat-conservation-scientist-mumbai-2026",
