@@ -175,9 +175,9 @@ def build_career_advice():
         <h2>10. Resources for women and underrepresented groups</h2>
         <p>Several fellowships, grants and networks specifically support women and underrepresented researchers in climate and environment.</p>
         <ul class="check-list">
-          <li><a href="/scholarships-doctoral-support">Scholarships and doctoral support</a> &mdash; funded PhD and postdoc opportunities.</li>
+          <li><a href="/phd-fellowships-climate-sustainability">Scholarships and doctoral support</a> &mdash; funded PhD and postdoc opportunities.</li>
           <li><a href="/fellowship-deadlines">Fellowship deadlines</a> &mdash; curated deadlines with direct links.</li>
-          <li><a href="/grants-research-funding">Grants and research funding</a> &mdash; small grants and seed funding.</li>
+          <li><a href="/fellowship-deadlines">Grants and research funding</a> &mdash; small grants and seed funding.</li>
           <li><a href="/ambassador-fellowship-programs">Ambassador and fellowship programmes</a> &mdash; leadership and youth programmes.</li>
           <li>Look for diversity-focused fellowships from WISER, OWSD, L'Oreal-UNESCO and national science academies.</li>
         </ul>

@@ -563,7 +563,7 @@ def build_fellowship_deadlines(jobs: List[Dict[str, Any]], global_jobs: List[Dic
             f"""          <tr{urgent}>
             <td><time datetime="{parsed.isoformat()}">{parsed.strftime('%d %b %Y')}</time><br>
                 <span class="muted">{left} day{'s' if left != 1 else ''} left</span></td>
-            <td><a href="{bsp.job_url(job)}"><strong>{esc(plain(job.get('clean_title')))}</strong></a><br>
+            <td><a href="{bsp.job_url(job)}" title="{esc(plain(job.get('clean_title')))}"><strong>{esc(bsp.anchor_text(plain(job.get('clean_title'))))}</strong></a><br>
                 <span class="muted">{esc(plain(job.get('organization')))}</span></td>
             <td>{esc(plain(job.get('category')))}</td>
             <td>{esc(plain(job.get('city')) or plain(job.get('country')))}</td>

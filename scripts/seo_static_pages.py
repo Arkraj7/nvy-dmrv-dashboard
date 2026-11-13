@@ -40,7 +40,7 @@ NO_COMPACT_MATRIX = GENERATED_PAGES | {"index.html", "about.html", "404.html", "
 
 FULL_CLUSTER_PAGES = {
     "index.html": ("en-IN", bsp.SITE + "/"),
-    "hindi-environment-forestry-jobs.html": ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs.html"),
+    "hindi-environment-forestry-jobs.html": ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs"),
 }
 
 SITE_MATRIX_START = "<!-- SITE_MATRIX_START -->"
@@ -73,8 +73,9 @@ def _head_block(file_name: str, meta: Dict[str, Any]) -> str:
     )
     if file_name in FULL_CLUSTER_PAGES:
         cluster = [
+            ("en", bsp.SITE + "/global-climate-sustainability-opportunities"),
             ("en-IN", bsp.SITE + "/"),
-            ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs.html"),
+            ("hi-IN", bsp.SITE + "/hindi-environment-forestry-jobs"),
             ("x-default", bsp.SITE + "/"),
         ]
     else:

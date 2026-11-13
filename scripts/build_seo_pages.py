@@ -902,10 +902,13 @@ def article_jsonld(
                 "@type": "Organization",
                 "name": "Urban Forest Park",
                 "url": SITE,
+                "sameAs": list(OFFICIAL_SOCIAL_URLS),
             },
             "publisher": {
                 "@type": "Organization",
                 "name": "Urban Forest Park",
+                "url": SITE,
+                "sameAs": list(OFFICIAL_SOCIAL_URLS),
                 "logo": {
                     "@type": "ImageObject",
                     "url": LOGO_URL,
@@ -3391,7 +3394,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/contact">Contact us</a></li>
           <li><a href="/hindi-environment-forestry-jobs" hreflang="hi">हिंदी (Hindi)</a></li>
           <li><a href="/global-climate-sustainability-opportunities">International opportunities</a></li>
-          <li><a href="/salary-guide">Salary guide</a></li>
+          <li><a href="/salary-guide">Full salary guide</a></li>
           <li><a href="/employers">Employer profiles</a></li>
           <li><a href="/glossary">Glossary</a></li>
           <li><a href="/green-sectors">Green sectors</a></li>
@@ -3403,7 +3406,7 @@ def footer_html(current_hub: Optional[str] = None) -> str:
           <li><a href="/green-internships">Internships</a></li>
           <li><a href="/fellowship-deadlines">Fellowship deadlines</a></li>
           <li><a href="/green-careers">Career pathways</a></li>
-          <li><a href="/career-advice">Career advice</a></li>
+          <li><a href="/career-advice">Career advice hub</a></li>
           <li><a href="/news">Climate & ESG news</a></li>
         </ul>
       </div>
@@ -3529,6 +3532,29 @@ def _valid_through(job: Dict[str, Any]) -> str:
         return ""
 
 
+def job_anchor_label(job: Dict[str, Any], limit: int = 68) -> str:
+    """Card anchor text with the city appended so repeated titles stay unique.
+
+    Several employers post the same role in more than one city; without the
+    location two cards on the same hub would share identical link text.
+    """
+    title = plain(job.get("clean_title")) or "Untitled job"
+    city = plain(job.get("city"))
+    state = state_label(job)
+    loc = city or state
+    if loc in ("", "India", "Global / Remote"):
+        loc = ""
+    archived = bool(job.get("date_archived")) or str(job.get("status")).lower() == "archived"
+    if not loc and not archived:
+        return anchor_text(title, limit)
+    tail = f" ({loc})" if loc else ""
+    if archived:
+        tail += " (archived)"
+    room = max(20, limit - len(tail))
+    label = trim(title, room) if len(title) > room else title
+    return label + tail
+
+
 def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
     """Match the JavaScript card structure closely enough that hydration is a
     no-op visually, while keeping a real crawlable link even without JS.
@@ -3584,7 +3610,7 @@ def feed_card_html(job: Dict[str, Any], archived: bool = False) -> str:
           <div class="jc-top">{BADGE_SEP.join(badges)}{CARD_STOP}</div>
           <div class="jc-main">
             <div class="jc-main-text">
-              <h3 class="jc-title"><a class="jc-title-link" href="{href}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</h3>
+              <h3 class="jc-title"><a class="jc-title-link" href="{href}" title="{esc(title)}">{esc(job_anchor_label(job))}</a>{CARD_STOP}</h3>
               <p class="jc-org">{esc(sentence(org))}</p>
               <div class="jc-meta">
                 <span>{PIN_SVG}{esc(sentence(loc))}</span>
@@ -3691,7 +3717,7 @@ def hub_card_html(job: Dict[str, Any], archived: bool = False) -> str:
           <div class="hub-card-top">
             {BADGE_SEP.join(badges)}{CARD_STOP}
           </div>
-          <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</h3>
+          <h3 class="hub-card-title"><a href="{job_url(job)}" title="{esc(title)}">{esc(job_anchor_label(job))}</a>{CARD_STOP}</h3>
           <p class="hub-card-org">{esc(org_line)}</p>
           {submitter_html}
           {elig_html}
@@ -4204,15 +4230,34 @@ def sync_job_redirects(public: Path) -> int:
 
 
 def job_page_title(job: Dict[str, Any]) -> str:
+    """Unique 30-75 character title for a job dossier.
+
+    The location suffix is kept even when the role or employer name is long:
+    the same role is often posted in several cities, so dropping the city
+    would give those pages identical titles.
+    """
     title = plain(job.get("clean_title")) or "Environmental Job"
     org = plain(job.get("organization"))
+    city = plain(job.get("city"))
     state = state_label(job)
-    suffix = f" | {state} Job" if state and state not in ("India", "Global / Remote") else " | India Job"
+    loc = city or state
+    if loc in ("", "India", "Global / Remote"):
+        loc = ""
+    suffix = f" | {loc} Job" if loc else " | India Job"
     base = f"{title} at {org}" if org else title
-    candidate = base + suffix
-    if len(candidate) <= 65:
+    if len(base) + len(suffix) <= 75:
+        candidate = base + suffix
+        if len(candidate) < 30:
+            candidate += " | Environmental Jobs"
         return candidate
-    return trim(base, 64)
+    room = 75 - len(suffix) - 2
+    trimmed = trim(base, room if room >= 30 else 64)
+    candidate = trimmed + suffix
+    if len(candidate) > 75:
+        candidate = trim(base, 75 - len(suffix)) + suffix
+    if len(candidate) < 30:
+        candidate += " | Environmental Jobs"
+    return candidate
 
 
 def job_page_description(job: Dict[str, Any]) -> str:
@@ -4727,7 +4772,7 @@ def related_guides_for(job: Dict[str, Any]) -> List[Tuple[str, str]]:
     for url, label in glossary_map.get(category, []):
         add(label, url)
 
-    add("Salary guide", "/salary-guide")
+    add("Salary guide by role and city", "/salary-guide")
     add("Green career pathways", "/green-careers")
     return guides[:8]
 
@@ -4736,14 +4781,20 @@ def related_jobs_html(related: List[Dict[str, Any]]) -> str:
     if not related:
         return '<p class="job-page-note">No related listings at present. <a href="/">Browse the full registry</a>.</p>'
     cards = []
+    seen_anchors: set[str] = set()
     for job in related:
         title = plain(job.get("clean_title")) or "Untitled job"
+        org = plain(job.get("organization")) or ""
+        anchor = anchor_text(title)
+        if anchor in seen_anchors:
+            anchor = anchor_text(f"{title} ({org})" if org else title)
+        seen_anchors.add(anchor)
         related_meta = sentence(
             f"{plain(job.get('organization'))} \u00b7 {state_label(job)}"
         )
         cards.append(f"""          <article class="related-card">
             <span class="related-kicker">{esc(sentence(plain(job.get("category"))))}</span>
-            <strong><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor_text(title))}</a>{CARD_STOP}</strong>
+            <strong><a href="{job_url(job)}" title="{esc(title)}">{esc(anchor)}</a>{CARD_STOP}</strong>
             <span class="related-meta">{esc(related_meta)}</span>
           </article>""")
     return "\n".join(cards)
@@ -4842,7 +4893,7 @@ def build_job_page(
     summary = plain(job.get("role_summary")) or plain(job.get("summary")) or desc
     skills = [plain(item) for item in (job.get("must_have_skills") or []) if plain(item)]
     if apply_url.lower().startswith("mailto:"):
-        apply_label = "Apply now"
+        apply_label = "Apply by email"
     elif apply_url:
         apply_label = f"Apply on {_hostname(apply_url)}"
     else:
@@ -4875,7 +4926,10 @@ def build_job_page(
 
     employer_link = esc(org)
     if not is_archived and org:
-        employer_link = f'<a href="/employers/{_employer_slug(org)}">{esc(org)}</a>'
+        employer_link = (
+            f'<a href="/employers/{_employer_slug(org)}" title="{esc(org)}">'
+            f"{esc(anchor_text(org))}</a>"
+        )
 
     related_pool = [j for j in active if job_slug(j) != slug]
     if is_archived:
@@ -5036,7 +5090,7 @@ def build_job_page(
           <h2>How to apply</h2>
           <p>{'This job is closed. The original portal is retained for reference only.' if is_archived else 'Applications are submitted directly through the official employer portal. Urban Forest Park does not charge any fee and does not act as a recruitment intermediary.'}</p>
           <p><strong>Application deadline / window:</strong> {esc(deadline)}</p>
-          {('<p><a class="btn btn-primary" href="' + esc(apply_url) + '" target="_blank" rel="noopener noreferrer">Apply now &nearr;</a></p>') if (not is_archived and apply_url) else ''}
+          {('<p><a class="btn btn-primary" href="' + esc(apply_url) + '" target="_blank" rel="noopener noreferrer">' + ('Apply via email &nearr;' if apply_url.lower().startswith('mailto:') else 'Apply now &nearr;') + '</a></p>') if (not is_archived and apply_url) else ''}
           {('<p class="job-page-note"><strong>How to apply:</strong> ' + esc(plain(job.get("application_tip")) or "Email your CV and a short cover letter to the address above. Include the job title in the subject line.") + '</p>') if (not is_archived and apply_url.lower().startswith("mailto:")) else ''}
           {('<p><a class="btn btn-outline" href="' + esc(website) + '" target="_blank" rel="noopener noreferrer">Open official employer website &nearr;</a></p>') if website else ''}
         </section>
@@ -5152,6 +5206,10 @@ def sync_sitemap_guides(public: Path, today: date) -> int:
         loc = m.group(1)
         if "/guides/" not in loc:
             return m.group(0)
+        if loc.rstrip("/") == SITE + "/guides/index":
+            # guides/index.html canonicals to /guides, so the index loc is wrong.
+            removed["n"] += 1
+            return ""
         stem = loc.rsplit("/", 1)[-1]
         if stem in valid_stems:
             return m.group(0)
@@ -5164,7 +5222,7 @@ def sync_sitemap_guides(public: Path, today: date) -> int:
     seen = set(re.findall(r"<loc>([^<]+)</loc>", text))
     additions: List[str] = []
     for guide in sorted(guides_dir.glob("*.html")):
-        loc = SITE + "/guides/" + guide.stem
+        loc = SITE + "/guides" if guide.stem == "index" else SITE + "/guides/" + guide.stem
         if loc in seen:
             continue
         seen.add(loc)
@@ -5174,8 +5232,48 @@ def sync_sitemap_guides(public: Path, today: date) -> int:
         )
     if additions:
         text = text.replace("</urlset>", "\n".join(additions) + "\n</urlset>")
+    if additions or removed["n"]:
         path.write_text(text, encoding="utf-8")
     return len(additions)
+
+
+def dedupe_sitemap(public: Path) -> int:
+    """Collapse duplicate <loc> entries left by downstream page builders."""
+    path = public / "sitemap.xml"
+    if not path.exists():
+        return 0
+    text = path.read_text(encoding="utf-8")
+    urlset = re.search(r"<urlset[^>]*>", text)
+    head = text.split(urlset.group(0), 1)[0] if urlset else text.split("<urlset>", 1)[0]
+    seen: set[str] = set()
+    kept: List[str] = []
+    removed = 0
+    for block in re.findall(r"\s*<url>.*?</url>", text, flags=re.S):
+        match = re.search(r"<loc>([^<]+)</loc>", block)
+        loc = match.group(1) if match else ""
+        if loc and loc in seen:
+            removed += 1
+            continue
+        # Drop entries whose backing file no longer exists (purged records).
+        if loc.startswith(SITE + "/jobs/"):
+            slug = loc.rsplit("/", 1)[-1]
+            if not (public / "jobs" / (slug + ".html")).exists():
+                removed += 1
+                continue
+        if loc.startswith(SITE + "/guides/"):
+            stem = loc.rsplit("/", 1)[-1]
+            if stem and not (public / "guides" / (stem + ".html")).exists():
+                removed += 1
+                continue
+        seen.add(loc)
+        kept.append(block)
+    if removed:
+        path.write_text(
+            head + (urlset.group(0) if urlset else "<urlset>") + "".join(kept) + "\n</urlset>\n",
+            encoding="utf-8",
+        )
+        log.info("Removed %d duplicate sitemap URL(s)", removed)
+    return removed
 
 
 def sync_sitemap_jobs(
@@ -5773,6 +5871,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         len(HUBS),
     )
     rebuild_downstream_pages()
+    dedupe_sitemap(public)
     return 0
 
 

@@ -82,7 +82,8 @@
       ],
       "direct_patterns": [
         "viewjob\\?.*\\bjk=[A-Za-z0-9]+",
-        "/viewjob\\?"
+        "/viewjob\\?",
+        "^/job/[A-Za-z0-9-]+/?$"
       ],
       "bot_blocked": true
     },

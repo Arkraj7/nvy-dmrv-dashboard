@@ -259,7 +259,9 @@ def build_state_forest_pages(india: List[Dict[str, Any]], states: List[str]) -> 
 # 2. CAMPA hub
 # ---------------------------------------------------------------------------
 def build_campa(india: List[Dict[str, Any]], global_jobs: List[Dict[str, Any]]):
-    pool = [j for j in india + global_jobs if "campa" in text_of(j)]
+    # \bcampa\b so "campaign" does not match.
+    campa_pat = re.compile(r"\bcampa\b", re.I)
+    pool = [j for j in india + global_jobs if campa_pat.search(text_of(j))]
     sections = section(
         "What is CAMPA?",
         "The Compensatory Afforestation Fund Management and Planning Authority (CAMPA) channels funds collected "

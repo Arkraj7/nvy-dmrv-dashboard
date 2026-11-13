@@ -27,6 +27,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 from urllib.parse import urljoin, urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from job_schema import is_job_posting_eligible  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
 SITE = "https://www.urbanforestpark.com"
@@ -246,12 +249,12 @@ def group_1(pages: Dict[str, str], kmap: Dict[str, dict]) -> None:
             error(1, f"{name}: missing <link rel=\"canonical\">")
         elif len(link_canon) != 1:
             error(1, f"{name}: expected exactly one canonical, found {len(link_canon)}")
-        elif link_canon[0] != expected:
+        elif expected and link_canon[0] != expected:
             error(1, f"{name}: canonical {link_canon[0]!r} != keyword map {expected!r}")
         elif link_canon[0].endswith(".html"):
             error(1, f"{name}: canonical uses the redirecting .html form")
 
-        if canonical and canonical != expected:
+        if canonical and expected and canonical != expected:
             error(1, f"{name}: og:url {canonical!r} != keyword map {expected!r}")
 
         for raw in re.findall(r"\"(?:url|@id|logo|image)\"\s*:\s*\"([^\"]+)\"", text):
@@ -816,7 +819,10 @@ def group_8_job_pages() -> None:
         if meta_content(text, prop="og:url") != expected:
             error(8, f"{rel}: og:url does not match the static canonical")
         if (meta_content(text, name="robots") or "").lower().find("noindex") >= 0:
-            error(8, f"{rel}: static job page is noindex")
+            # Archived dossier pages are deliberately noindex and excluded from
+            # the sitemap so closed roles stop competing in search.
+            if slug not in archived:
+                error(8, f"{rel}: static job page is noindex")
 
         title_match = re.search(r"<title\b[^>]*>(.*?)</title>", text, re.I | re.S)
         title = visible(title_match.group(1)) if title_match else ""
@@ -826,7 +832,11 @@ def group_8_job_pages() -> None:
         else:
             if not (30 <= len(title) <= 75):
                 error(8, f"{rel}: title length {len(title)} outside 30-75: {title!r}")
-            if title in titles:
+            if slug in archived:
+                # Archived dossiers are noindex and sitemap-excluded, so a
+                # title shared with a live page is not a search collision.
+                pass
+            elif title in titles:
                 error(8, f"{rel}: duplicate title shared with {titles[title]}")
             else:
                 titles[title] = rel
@@ -860,15 +870,23 @@ def group_8_job_pages() -> None:
             if "WebPage" not in found:
                 error(8, f"{rel}: archived page is missing WebPage schema")
         else:
-            if "JobPosting" not in found:
-                error(8, f"{rel}: active page is missing JobPosting schema")
+            record = records.get(slug) or {}
+            if is_job_posting_eligible(record):
+                if "JobPosting" not in found:
+                    error(8, f"{rel}: active page is missing JobPosting schema")
+            elif "WebPage" not in found:
+                # Fellowships, events, grants and portal records keep their
+                # dossier page and Article/WebPage graph, never JobPosting.
+                error(8, f"{rel}: non-job page is missing WebPage schema")
             related = len(re.findall(r'class="related-card"', text))
             if related != 5:
                 error(8, f"{rel}: expected 5 related jobs, found {related}")
 
-        if expected not in locs:
+        if slug not in archived and expected not in locs:
             error(8, f"{rel}: static job page is missing from sitemap.xml")
-        if re.search(r'href="[^"]*\?job=', text):
+        # Only this site's own ?job= routes are legacy; external employer
+        # career URLs legitimately use a "?job=<id>" query parameter.
+        if re.search(r'href="(?:https?://(?:www\.)?urbanforestpark\.com)?/[^"]*\?job=', text):
             error(8, f"{rel}: contains a legacy ?job= link")
         if re.search(r'href="/jobs/[^"]*\.html"', text):
             error(8, f"{rel}: links to the redirecting .html job form")

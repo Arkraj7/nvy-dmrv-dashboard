@@ -44,7 +44,7 @@ header_html = bsp.header_html
 
 HINDI_HUB_FILE = "hindi-environment-forestry-jobs.html"
 REGIONAL_HUB_FILE = "bharat-regional-green-jobs.html"
-HINDI_HUB_URL = SITE + "/" + HINDI_HUB_FILE
+HINDI_HUB_URL = SITE + "/" + HINDI_HUB_FILE.removesuffix(".html")
 REGIONAL_HUB_URL = SITE + "/" + REGIONAL_HUB_FILE
 HINDI_META = bsp.page_meta(HINDI_HUB_FILE)
 REGIONAL_META = bsp.page_meta(REGIONAL_HUB_FILE)
@@ -198,7 +198,7 @@ def hindi_card_html(job: Dict[str, Any]) -> str:
           <div class="hub-card-top">
             {bsp.BADGE_SEP.join(badges)}
           </div>
-          <h3 class="hub-card-title"><a href="{link}" title="{esc(title)}">{esc(bsp.anchor_text(title))}</a></h3>
+          <h3 class="hub-card-title"><a href="{link}" title="{esc(title)}">{esc(bsp.job_anchor_label(job) if not title_hi else bsp.anchor_text(title))}</a></h3>
           {english_line}
           <p class="hub-card-org">{esc(org_line)}</p>
           {elig_html}
@@ -213,7 +213,7 @@ def header_html_hi() -> str:
       <a class="brand" href="#hindi-list" aria-label="Urban Forest Park - हिंदी करियर रजिस्ट्री">
         <img src="/assets/images/Logo_UFF.png" alt="Urban Forest Park — India Climate, Forestry, ESG &amp; Research Jobs Registry Logo" title="Urban Forest Park Official Emblem" class="ufp-header-logo" width="48" height="48" loading="eager" decoding="async" fetchpriority="high" />
         <span class="brand-word">Urban Forest Park</span>
-        <span class="brand-sub">राष्ट्रीय जलवायु, वानिकी, ESG एवं भू-स्थानिक करियर रजिस्ट्री (भारत)</span>
+        <span class="brand-sub">भारत ग्रीन जॉब्स रजिस्ट्री</span>
       </a>
       <nav class="site-nav" id="site-nav" aria-label="मुख्य नेविगेशन">
         <a class="nav-link" href="#hindi-list">करियर रजिस्ट्री (हिंदी)</a>
@@ -375,6 +375,7 @@ def build_hindi_hub_page(
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{HINDI_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities">
     <link rel="alternate" hreflang="en-IN" href="{SITE}/">
     <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
     <link rel="alternate" hreflang="x-default" href="{SITE}/">
@@ -653,8 +654,10 @@ def build_regional_hub_page(
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{REGIONAL_HUB_URL}">
-    <link rel="alternate" hreflang="en-IN" href="{REGIONAL_HUB_URL}">
-    <link rel="alternate" hreflang="x-default" href="{REGIONAL_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities">
+    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
+    <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">
@@ -895,7 +898,7 @@ def global_card_html(job: Dict[str, Any]) -> str:
           <div class="hub-card-top">
             {bsp.BADGE_SEP.join(badges)}{bsp.CARD_STOP}
           </div>
-          <h3 class="hub-card-title"><a href="{bsp.job_url(job)}" title="{esc(title)}">{esc(bsp.anchor_text(title))}</a>{bsp.CARD_STOP}</h3>
+          <h3 class="hub-card-title"><a href="{bsp.job_url(job)}" title="{esc(title)}">{esc(bsp.job_anchor_label(job))}</a>{bsp.CARD_STOP}</h3>
           <p class="hub-card-org">{esc(org)} <span class="global-card-loc">&middot; {esc(location)}</span></p>
           {elig_html}
           {summary_html}
@@ -1050,8 +1053,10 @@ def build_global_hub_page(
     <meta name="description" content="{esc(desc)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{GLOBAL_HUB_URL}">
-    <link rel="alternate" hreflang="en-IN" href="{GLOBAL_HUB_URL}">
-    <link rel="alternate" hreflang="x-default" href="{GLOBAL_HUB_URL}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities">
+    <link rel="alternate" hreflang="en-IN" href="{SITE}/">
+    <link rel="alternate" hreflang="hi-IN" href="{HINDI_HUB_URL}">
+    <link rel="alternate" hreflang="x-default" href="{SITE}/">
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website">

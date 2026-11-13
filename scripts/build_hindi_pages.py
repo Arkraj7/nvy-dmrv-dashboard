@@ -70,6 +70,7 @@ def hindi_shell(*, title: str, description: str, canonical: str, body: str, json
     <link rel="canonical" href="{canonical}">
     <link rel="alternate" hreflang="hi-IN" href="{canonical}">
     <link rel="alternate" hreflang="en-IN" href="{en_url}">
+    <link rel="alternate" hreflang="en" href="{SITE}/global-climate-sustainability-opportunities">
     <link rel="alternate" hreflang="x-default" href="{en_url}">
 
     <meta property="og:type" content="website">
@@ -252,7 +253,7 @@ def build_fellowship_hi() -> None:
     funding = [j for j in pool if match_funding(j)]
     dated = sorted([(beh.parse_date(j.get("valid_through")), j) for j in funding if beh.parse_date(j.get("valid_through")) and beh.parse_date(j.get("valid_through")) >= TODAY], key=lambda x: x[0])
     rolling = [j for j in funding if not beh.parse_date(j.get("valid_through"))]
-    rows = "\n".join(f"          <tr><td><time datetime='{p.isoformat()}'>{p.strftime('%d %b %Y')}</time></td><td><a href='{beh.bsp.job_url(j)}'><strong>{esc(plain(j.get('clean_title')))}</strong></a><br><span class='muted'>{esc(plain(j.get('organization')))}</span></td><td>{esc(plain(j.get('category')))}</td><td>{esc(plain(j.get('city')) or plain(j.get('country')))}</td></tr>" for p, j in dated[:40])
+    rows = "\n".join(f"          <tr><td><time datetime='{p.isoformat()}'>{p.strftime('%d %b %Y')}</time></td><td><a href='{beh.bsp.job_url(j)}' title='{esc(plain(j.get('clean_title')))}'><strong>{esc(beh.bsp.anchor_text(plain(j.get('clean_title'))))}</strong></a><br><span class='muted'>{esc(plain(j.get('organization')))}</span></td><td>{esc(plain(j.get('category')))}</td><td>{esc(plain(j.get('city')) or plain(j.get('country')))}</td></tr>" for p, j in dated[:40])
     body = "\n".join([
         hero("फंडिंग और प्रशिक्षण कैलेंडर", "फेलोशिप, छात्रवृत्ति और अनुदान डेडलाइन", "जलवायु, पर्यावरण और सस्टेनेबिलिटी में फेलोशिप, छात्रवृत्ति, अनुदान, प्रतियोगिता और प्रशिक्षण की एक डेडलाइन कैलेंडर, अगले बंद होने वाले के अनुसार क्रमबद्ध।", [("डेटेड डेडलाइन", str(len(dated))), ("रोलिंग/ओपन", str(len(rolling))), ("अपडेट", TODAY.strftime("%d %b %Y"))]),
         f"""    <section class="hub-main">

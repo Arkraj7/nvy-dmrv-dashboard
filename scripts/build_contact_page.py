@@ -47,6 +47,24 @@ body = """
 
 title = "Contact Urban Forest Park | Green Jobs & Career Registry"
 desc = "Contact Urban Forest Park: email, official communities, broken-link reports and editorial queries for the India green jobs and career registry."
+contact_jsonld = bsp.jsonld_script(
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": title,
+        "description": desc,
+        "url": bsp.SITE + "/contact",
+        "isPartOf": {"@id": bsp.SITE + "/#website"},
+        "publisher": {"@id": bsp.SITE + "/#organization"},
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Urban Forest Park",
+            "email": "urbanforestpark@gmail.com",
+            "url": bsp.SITE,
+            "sameAs": list(bsp.OFFICIAL_SOCIAL_URLS),
+        },
+    }
+)
 html_doc = f"""<!DOCTYPE html>
 <html lang="en-IN">
 <head>
@@ -55,6 +73,10 @@ html_doc = f"""<!DOCTYPE html>
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="https://www.urbanforestpark.com/contact">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#F8FAFC">
+{bsp.FAVICONS}
+  {contact_jsonld}
   <link rel="stylesheet" href="/styles/jobs.css?v=20261108e">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3149295668666793" crossorigin="anonymous"></script>
 </head>
