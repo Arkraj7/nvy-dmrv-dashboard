@@ -4900,13 +4900,61 @@ def build_job_page(
         apply_label = "Official application page"
 
     if is_archived:
+        archive_reason = plain(job.get("archive_reason")).lower()
+        if archive_reason == "duplicate listing":
+            archive_note = (
+                "<strong>This listing has been merged.</strong> The same vacancy is "
+                "published under a single record, so this duplicate is kept only "
+                "for reference."
+            )
+        elif "unverified" in archive_reason:
+            archive_note = (
+                "<strong>This listing was withdrawn from the active board.</strong> "
+                "The vacancy could not be confirmed at the employer's own page, so "
+                "it is no longer shown as open. It may since have been filled or "
+                "re-advertised - check the employer's careers page."
+            )
+        else:
+            archive_note = (
+                "<strong>This position is closed.</strong> The application window "
+                "has ended. The record is preserved for stipend, eligibility and "
+                "institutional reference."
+            )
         apply_block = f"""        <div class="job-page-archive-note">
-          <strong>This position is closed.</strong> The application window has ended.
-          The record is preserved for stipend, eligibility and institutional reference.
+          {archive_note}
         </div>"""
     else:
         apply_block = f"""        <div class="job-page-actions">
           <a class="btn btn-primary" href="{esc(apply_url)}" target="_blank" rel="noopener noreferrer">{esc(apply_label)} &nearr;</a>"""
+
+    # The byline must describe the record's own verification, never the build
+    # date: a rebuild is not a re-check of the employer's page.
+    def _fmt_day(value):
+        try:
+            return date.fromisoformat(str(value)[:10]).strftime("%d %b %Y")
+        except (TypeError, ValueError):
+            return ""
+
+    verification = job.get("verification") or {}
+    verified_at = _fmt_day(verification.get("verified_at") or job.get("date_added"))
+    added_at = _fmt_day(job.get("date_added"))
+    http_status = verification.get("http_status")
+    if is_archived:
+        archived_at = _fmt_day(job.get("date_archived")) or verified_at
+        source_line = (
+            f"Archived {archived_at} &middot; originally listed {added_at} "
+            "by the Urban Forest Park editorial team"
+        )
+    elif verification.get("method") == "official-page-verified" and http_status == 200:
+        source_line = (
+            f"Verified and published by the Urban Forest Park editorial team "
+            f"&middot; Source checked {verified_at}"
+        )
+    else:
+        source_line = (
+            f"Published by the Urban Forest Park editorial team &middot; listed {added_at} "
+            "from the employer's advert; not re-checked since"
+        )
 
     if website:
         apply_block += f"""
@@ -5047,7 +5095,7 @@ def build_job_page(
         <p class="eyebrow">{esc(plain(job.get("category")) or "Environmental Job")}</p>
         <h1>{esc(job_title)}</h1>
         <p class="job-page-org"><strong>{esc(org)}</strong> &middot; {esc(location)}</p>
-        <p class="job-page-byline" style="font-size:12.5px;color:var(--ink-3);margin:4px 0 0;">Verified and published by the Urban Forest Park editorial team &middot; Last checked {today.strftime('%d %b %Y')}</p>
+        <p class="job-page-byline" style="font-size:12.5px;color:var(--ink-3);margin:4px 0 0;">{source_line}</p>
         <div class="job-page-badges">
           <span class="badge badge-type">{esc(position_type_of(job))}</span>
           <span class="badge badge-state">{PIN_SVG}{esc(state_label(job))}</span>

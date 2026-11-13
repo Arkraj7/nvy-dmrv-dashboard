@@ -174,7 +174,16 @@ jobs:
           git config user.email "urbanforestpark-bot@users.noreply.github.com"
           git stash push --include-untracked -m "daily-marker-$(date -u +%s)" || true
           git pull --rebase origin main || true
-          git stash pop || true
+          if ! git stash pop; then
+            echo "::warning::stash pop conflicted; keeping this run's freshly built registry"
+            for f in public/jobs.json public/global_jobs.json public/archive.json \
+                     public/global_archive.json public/stats.json public/source_report.json \
+                     public/sitemap.xml; do
+              git checkout --theirs -- "$f" 2>/dev/null || true
+              git add "$f" 2>/dev/null || true
+            done
+          fi
+          python scripts/validate_registry_json.py
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
                   public/daily_digest.json public/whatsapp_digest.txt public/facebook_digest.txt \
                   public/global_jobs.json public/global_archive.json \
@@ -240,7 +249,16 @@ jobs:
           # protects generated Hindi/SEO files that are not yet tracked.
           git stash push --include-untracked -m "daily-pipeline-$(date -u +%s)" || true
           git pull --rebase origin main || true
-          git stash pop || true
+          if ! git stash pop; then
+            echo "::warning::stash pop conflicted; keeping this run's freshly built registry"
+            for f in public/jobs.json public/global_jobs.json public/archive.json \
+                     public/global_archive.json public/stats.json public/source_report.json \
+                     public/sitemap.xml; do
+              git checkout --theirs -- "$f" 2>/dev/null || true
+              git add "$f" 2>/dev/null || true
+            done
+          fi
+          python scripts/validate_registry_json.py
 
           git add public/jobs.json public/archive.json public/stats.json public/sitemap.xml \
                   public/daily_digest.json public/whatsapp_digest.txt public/facebook_digest.txt \

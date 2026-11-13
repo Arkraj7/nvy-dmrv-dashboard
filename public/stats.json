@@ -1,26 +1,18 @@
 {
-  "last_updated": "2026-11-13T21:40:11+05:30",
-  "last_updated_ist": "2026-11-13T21:40:11+05:30",
+  "last_updated": "2026-11-13T22:03:45+05:30",
+  "last_updated_ist": "2026-11-13T22:03:45+05:30",
   "last_pipeline_run_date_ist": "2026-11-13",
-  "active_open_jobs": 316,
+  "active_open_jobs": 307,
   "opened_this_week": 180,
   "passed_this_week": 40,
-  "total_archived_jobs": 92,
+  "total_archived_jobs": 101,
   "total_historical_indexed": 408,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
-    "Forestry, Wildlife & Afforestation": {
-      "active": 23,
-      "archived": 7
-    },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 19,
-      "archived": 14
-    },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 141,
-      "archived": 21
+      "active": 137,
+      "archived": 25
     },
     "Climate Policy, Think-Tanks & Fellowships": {
       "active": 44,
@@ -29,6 +21,10 @@
     "Renewable Energy & Clean Tech": {
       "active": 13,
       "archived": 0
+    },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 17,
+      "archived": 16
     },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 21,
@@ -39,7 +35,11 @@
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 19,
+      "active": 17,
+      "archived": 10
+    },
+    "Forestry, Wildlife & Afforestation": {
+      "active": 22,
       "archived": 8
     },
     "Internships & Student Traineeships": {
@@ -76,17 +76,17 @@
     }
   },
   "by_state": {
-    "Maharashtra": 67,
-    "Delhi": 43,
+    "Maharashtra": 65,
+    "Delhi": 41,
     "Karnataka": 38,
     "Gujarat": 14,
-    "Delhi NCR": 13,
+    "Delhi NCR": 12,
     "Haryana": 12,
     "Uttar Pradesh": 12,
     "Tamil Nadu": 11,
     "Telangana": 11,
-    "Uttarakhand": 7,
     "West Bengal": 7,
+    "Uttarakhand": 6,
     "Kerala": 5,
     "Assam": 4,
     "Odisha": 4,
@@ -101,25 +101,25 @@
     "Goa": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 151,
+  "active_global_jobs": 149,
   "active_global_portals": 12,
-  "total_global_records": 163,
-  "total_archived_global_jobs": 96,
+  "total_global_records": 161,
+  "total_archived_global_jobs": 98,
   "global_jobs_by_region": {
     "Africa & Middle East": 15,
     "Asia-Pacific": 16,
-    "Europe": 27,
-    "Global / Remote": 68,
-    "Latin America": 2,
+    "UN / Multilateral": 7,
     "North America": 16,
-    "UN / Multilateral": 7
+    "Latin America": 2,
+    "Global / Remote": 66,
+    "Europe": 27
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 5,
-    "Fellowship": 19,
+    "Job / Career": 92,
     "Grant / Funding": 15,
+    "Fellowship": 19,
     "Internship": 7,
-    "Job / Career": 94,
-    "Scholarship": 11
+    "Scholarship": 11,
+    "Competition / Award": 5
   }
 }
