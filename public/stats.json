@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-13T22:20:29+05:30",
-  "last_updated_ist": "2026-11-13T22:20:29+05:30",
-  "last_pipeline_run_date_ist": "2026-11-13",
-  "active_open_jobs": 307,
-  "opened_this_week": 180,
-  "passed_this_week": 40,
-  "total_archived_jobs": 101,
+  "last_updated": "2026-11-14T07:14:20+05:30",
+  "last_updated_ist": "2026-11-14T07:14:20+05:30",
+  "last_pipeline_run_date_ist": "2026-11-14",
+  "active_open_jobs": 304,
+  "opened_this_week": 169,
+  "passed_this_week": 49,
+  "total_archived_jobs": 104,
   "total_historical_indexed": 408,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -23,20 +23,20 @@
       "archived": 0
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 17,
-      "archived": 16
+      "active": 16,
+      "archived": 17
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 21,
-      "archived": 17
+      "active": 20,
+      "archived": 18
     },
     "Grants & Research Funding": {
       "active": 3,
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 17,
-      "archived": 10
+      "active": 16,
+      "archived": 11
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 22,
@@ -78,16 +78,16 @@
   "by_state": {
     "Maharashtra": 65,
     "Delhi": 41,
-    "Karnataka": 38,
+    "Karnataka": 37,
     "Gujarat": 14,
     "Delhi NCR": 12,
     "Haryana": 12,
     "Uttar Pradesh": 12,
     "Tamil Nadu": 11,
     "Telangana": 11,
-    "West Bengal": 7,
-    "Uttarakhand": 6,
+    "West Bengal": 6,
     "Kerala": 5,
+    "Uttarakhand": 5,
     "Assam": 4,
     "Odisha": 4,
     "Punjab": 4,
@@ -101,25 +101,25 @@
     "Goa": 1,
     "Madhya Pradesh": 1
   },
-  "active_global_jobs": 149,
+  "active_global_jobs": 147,
   "active_global_portals": 12,
-  "total_global_records": 161,
-  "total_archived_global_jobs": 98,
+  "total_global_records": 159,
+  "total_archived_global_jobs": 101,
   "global_jobs_by_region": {
     "Africa & Middle East": 15,
-    "Asia-Pacific": 16,
-    "UN / Multilateral": 7,
-    "North America": 16,
+    "Asia-Pacific": 15,
+    "Europe": 27,
+    "Global / Remote": 64,
     "Latin America": 2,
-    "Global / Remote": 66,
-    "Europe": 27
+    "North America": 16,
+    "UN / Multilateral": 8
   },
   "global_jobs_by_kind": {
-    "Job / Career": 92,
-    "Grant / Funding": 15,
+    "Competition / Award": 5,
     "Fellowship": 19,
+    "Grant / Funding": 15,
     "Internship": 7,
-    "Scholarship": 11,
-    "Competition / Award": 5
+    "Job / Career": 91,
+    "Scholarship": 10
   }
 }

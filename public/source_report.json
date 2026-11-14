@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T02:54:43",
+  "generated_at": "2026-11-14T01:44:20",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,22 +34,17 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 267,
+      "leads": 250,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 159,
+      "leads": 164,
       "passed": 0,
       "active": 0
     },
     "naukri": {
-      "leads": 55,
-      "passed": 0,
-      "active": 0
-    },
-    "portal:agrijob": {
-      "leads": 20,
+      "leads": 50,
       "passed": 0,
       "active": 0
     },
@@ -58,23 +53,28 @@
       "passed": 0,
       "active": 0
     },
-    "portal:atree": {
-      "leads": 7,
+    "google-news": {
+      "leads": 10,
       "passed": 0,
       "active": 0
     },
-    "google-news": {
+    "indeed": {
+      "leads": 8,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:atree": {
+      "leads": 8,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:agrijob": {
       "leads": 6,
       "passed": 0,
       "active": 0
     },
     "reliefweb-rss": {
       "leads": 4,
-      "passed": 0,
-      "active": 0
-    },
-    "indeed": {
-      "leads": 2,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 538,
+    "leads": 518,
     "passed": 0,
     "active": 0
   }

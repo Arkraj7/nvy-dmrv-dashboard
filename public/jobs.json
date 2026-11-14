@@ -36,16 +36,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:25.018705+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/financial-officer/j00122",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "0f34c6a76fcefcaacdc2dc4178776f34",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -85,16 +79,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:25.770673+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/relationship%2Fretention-officer-fundraising/j00070",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "5109553a25fa2adad720f87d869eee80",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -134,16 +122,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:25.926280+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/program-associate-%E2%80%93-food-loss-and-waste/j00087",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "aed07bc3def692822c954ca258ba0a38",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -183,16 +165,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:26.744457+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/power-%26-renewables-intern/j00090",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "0c403fd59429b80c28a482411cda0cba",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -232,16 +208,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:27.560627+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/lead%2C-sustainability/j00084",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "34f81af9cf58c76759c75bfca2c4eeaf",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -281,16 +251,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:28.180355+00:00",
-      "final_url": "https://vivriti.darwinbox.in/ms/candidate/careers",
-      "final_host": "vivriti.darwinbox.in",
-      "http_status": 200,
-      "content_hash": "942ea74fce1939b5796760ec7643d6aa",
-      "entry_type": "careers_portal",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -330,16 +294,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:28.960477+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/manager-%E2%80%93-renewable-energy-projects/j00098",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "496002738557db3da1793b8280103fd9",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -379,16 +337,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:29.681211+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-and-impact-lead/j00056",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "c2f592a41deedc0d1babf55040f9892e",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -428,16 +380,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:30.471361+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/research-associate/j00065",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "768f481ca1df7b7690f4fb478b0d2f85",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -477,16 +423,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:31.127772+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/climate-%26-nature-fund%2C-senior-program-manager/j00071",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "d5ddf5c0a34e35e8c671439ff533bba1",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -526,16 +466,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:31.855792+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/solar-technician/j00126",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "ec5bd906c9c386460f1031fdb7ec156a",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -575,16 +509,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:32.357223+00:00",
-      "final_url": "https://careers.logicladder.com/jobs/Careers/532257000007103001/ESG-Sustainability-Consultant",
-      "final_host": "careers.logicladder.com",
-      "http_status": 200,
-      "content_hash": "fd4ee83415b8b31b7e74de8c51195628",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -624,16 +552,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:33.123737+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/environment-specialist/j00089",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "27b538bf05020066c059b009dbbbb0c7",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -673,16 +595,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:33.879855+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-professional%2F-analyst/j00076",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "aa9add31289b33178dda1db70f2c9031",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -722,16 +638,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:34.554712+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/senior-engineer-bess/j00095",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "923ec7547ca6617016ffa45a36be00d5",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -814,16 +724,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:34.910986+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/environment-social-governance-consultant/j00061",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "b4c580a6723d55d6a8c937866beed8b5",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -863,16 +767,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:35.580278+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/solar-consultant/j00079",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "639a86e81ca9275e89c5d197b7b32492",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -943,7 +841,7 @@
     "org_website": "https://www.siemens.com/in",
     "org_domain": "siemens.com",
     "source_portal": "GreenJobsIndia job listing (competitor full sweep, 12 Nov 2026)",
-    "entry_type": "careers_portal",
+    "entry_type": "posting",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -955,16 +853,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:37.584324+00:00",
-      "final_url": "https://jobs.siemens.com/en_US/externaljobs/redirect",
-      "final_host": "jobs.siemens.com",
-      "http_status": 200,
-      "content_hash": "ab0976245d91cbd0b1a1f52bee356f2d",
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -1011,10 +903,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:57:37Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -1054,16 +946,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:38.285382+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/agm-quality-solar-module/j00078",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "766f3a6f10cd961ecc001ef8fbcdc1f7",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1103,16 +989,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:39.020386+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/weather-data-scientist-%28data-assimilation%29/j00108",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "68c4c265949642d73193bfe888c0fd89",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1226,7 +1106,7 @@
     "org_website": "https://www.oceaneering.com",
     "org_domain": "oceaneering.com",
     "source_portal": "GreenJobsIndia job listing (competitor full sweep, 12 Nov 2026)",
-    "entry_type": "careers_portal",
+    "entry_type": "posting",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -1238,16 +1118,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:40.879704+00:00",
-      "final_url": "https://ebfr.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobs",
-      "final_host": "ebfr.fa.us2.oraclecloud.com",
-      "http_status": 200,
-      "content_hash": "4c11d610f6941f1abd694bf526db0c68",
-      "entry_type": "careers_portal",
-      "host_class": "employer_ats",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -1331,16 +1205,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:41.045561+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/manager%2C-sustainability/j00113",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "880d89c872f5ad083b45222aa6d062fb",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1423,16 +1291,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:41.811301+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-and-climate-product-marketing/j00057",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "9448dd29a22afa82a049ea5f3b61bb00",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1472,16 +1334,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:41.953959+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-lead/j00083",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "8709a538172fda259c31b792d5f57f50",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1521,16 +1377,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:42.601943+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-strategy-lead/j00058",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "b62ea28e6c95e883a041bf537215f1d4",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1614,16 +1464,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:43.255564+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/senior-manager-environment-social-governance/j00054",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "388fa841db9f74e2e71b678379b44907",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1663,16 +1507,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:43.410723+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/senior-climate-change/j00050",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "a8e4236fc825d69b94b43311b755795e",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1756,16 +1594,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:44.187029+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainable-investing-solutions-associate/j00068",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "6da9c28ac900310d064d9143b7d51465",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1805,16 +1637,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:44.815341+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/%E2%81%A0junior-editor/j00066",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "e4d316ffc3ae61c3fcdd807280b03a0f",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1854,16 +1680,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:45.509500+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/copywriter/j00067",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "264579082d255aaf504dc71700ad6414",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -1910,10 +1730,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:57:45Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -1953,16 +1773,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:46.226382+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-analyst-berl/j00073",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "e5de5adb09c0ebb45ff8b38f61e8dbe5",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2002,16 +1816,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:46.980836+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/junior-data-analyst-esg-data/j00063",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "246a80eaed57085f880f43e34547b5a2",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2051,16 +1859,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:47.739638+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-research-methodology-specialist-%E2%80%93-corporate-rating/j00045",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "0eb5228757c309e7cedded83496bf572",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2100,65 +1902,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:47.893158+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/senior-sustainable-finance-research-associate/j00044",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "67c9698ad6f1417cdb6913bf13f71e3e",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
-    }
-  },
-  {
-    "id": "isec-research-associate-tobacco-cultivation-2026",
-    "clean_title": "Research Associate (Tobacco Cultivation Situational Analysis)",
-    "organization": "Institute for Social and Economic Change (ISEC), Bengaluru",
-    "city": "Bengaluru",
-    "state": "Karnataka",
-    "country": "India",
-    "region": "",
-    "category": "Research Associate & Project Staff (Contractual)",
-    "position_type": "Project Associate / Research Associate",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "1-3 Years",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "13 November 2026",
-    "valid_through": "2026-11-13",
-    "qualification_summary": "As per ISEC notice; seven temporary consultancy positions under Vital Strategies-funded project.",
-    "compensation_or_fellowship": "Not disclosed - see notice",
-    "role_summary": "Research associate on situational analysis of tobacco cultivation in India: value chains, labour dynamics and transition opportunities.",
-    "key_responsibilities": [],
-    "must_have_skills": [],
-    "application_tip": "Email CV, qualifications, experience certificates and two references to Prof. Ramappa K B.",
-    "apply_url": "mailto:ramappa@isec.ac.in",
-    "org_website": "https://isec.ac.in",
-    "org_domain": "isec.ac.in",
-    "source_portal": "LinkedIn feed post (owner-shared, 12 Nov 2026)",
-    "entry_type": "posting",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-11-12",
-    "date_posted": "2026-11-12",
-    "title_hi": "",
-    "summary_hi": "",
-    "academic_meta": {},
-    "selection_process": "",
-    "verification": {
       "verified_at": "2026-11-12",
       "method": "manual-batch-verified",
-      "source": "LinkedIn listing (owner-shared)",
+      "source": "GreenJobsIndia listing (competitor scan)",
       "http_status": "UNKNOWN_KEEP"
-    },
-    "verified_at": "2026-11-12",
-    "last_link_check": {
-      "checked_at": "2026-11-14T00:57:47Z",
-      "reason_code": "DEAD_LINK",
-      "http_status": 0,
-      "consecutive_failures": 2
     }
   },
   {
@@ -2198,16 +1945,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:48.582940+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/operations-carbon-and-sustainability-manager/j00080",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "9108d3b225ca96cafa945471b7515379",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2247,16 +1988,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:49.495595+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/nature-based-solutions-manager/j00086",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "8a13c15f11339265faac681d542363ef",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2327,7 +2062,7 @@
     "org_website": "https://www.iitk.ac.in",
     "org_domain": "iitk.ac.in",
     "source_portal": "GreenJobsIndia job listing (competitor full sweep, 12 Nov 2026)",
-    "entry_type": "posting",
+    "entry_type": "careers_portal",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -2339,16 +2074,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:51.107945+00:00",
-      "final_url": "https://pingala.iitk.ac.in/IITKFR-0/login",
-      "final_host": "pingala.iitk.ac.in",
-      "http_status": 200,
-      "content_hash": "156261869e3e5854a557d6d21002429d",
-      "entry_type": "posting",
-      "host_class": "employer_primary",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -2388,16 +2117,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:51.730232+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/assistant-manager%2C-global-sustainability/j00075",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "efd90b374cb0509c4a7fe1fd0dfc97ca",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2480,16 +2203,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:52.709099+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-specilist/j00082",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "9002adce1f280049f74ac2ab2d21818c",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2536,10 +2253,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:57:52Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -2586,10 +2303,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:57:52Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -2629,16 +2346,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:53.450183+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/regional-business-leader/j00093",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "7815ba7a79d0512a617d52454e77727f",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2765,16 +2476,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:54.072631+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/solar-technician/j00099",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "ef65d548e0c68a34ab555524a9e798dc",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2814,16 +2519,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:54.756070+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-reporting-specialist/j00064",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "bc4a137ca1cfdd44379e4939a0682b29",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2863,16 +2562,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:55.386787+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/enviromental-consultant/j00088",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "d53f61009a57a5c81cadc351b164590d",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2912,16 +2605,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:55.986066+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/emp-environmental-management-plan/j00104",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "e41c4fbd0cc3d60a64b2b0649a2a2761",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -2961,16 +2648,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:56.928304+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-%26-esg-consultant/j00039",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "3a65ffbfc50f5a400cb5b1099ae29480",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3017,10 +2698,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:57:56Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -3060,16 +2741,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:57.563512+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-%28intern%29/j00081",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "06827d9759889c9d3f42e10295a98901",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3109,16 +2784,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:58.103011+00:00",
-      "final_url": "https://www.saurenergy.com/energy-jobs/manager-sustainability-services",
-      "final_host": "www.saurenergy.com",
-      "http_status": 200,
-      "content_hash": "918d51b0af90d8cd1e1de251df5b597e",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -3158,16 +2827,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:58.854202+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/esg-research-analyst-%E2%80%93-environmental-research-team/j00062",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "a7e8d088bcc879736c8049dedce2f516",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3207,16 +2870,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:59.003539+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/principal-public-health-engineer/j00074",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "5b8346bf785fff3a72fc472d300e970d",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3299,16 +2956,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:57:59.781664+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/manager-esg-ratings/j00047",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "f625b6bb55688c927c275f796ab4a753",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3348,16 +2999,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:01.554020+00:00",
-      "final_url": "https://www.crescendo-global.com/job/research-analyst-clean-energy-slash-renewable-energy-1-plus-years-mumbai",
-      "final_host": "www.crescendo-global.com",
-      "http_status": 200,
-      "content_hash": "1314cfaffcc57d8017bbdc6ab39dc75f",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -3397,16 +3042,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:02.256772+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/social-impact-manager-india/j00043",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "0da3b6050256c9dd164e7223d68348dd",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3446,16 +3085,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:03.333848+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/research-intern/j00077",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "a33c3517bdcb72d051650fbe525bef29",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3502,10 +3135,10 @@
     },
     "verified_at": "2026-11-12",
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:03Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -3576,7 +3209,7 @@
     "org_website": "https://www.ceew.in",
     "org_domain": "ceew.in",
     "source_portal": "GreenJobsIndia job listing (competitor full sweep, 12 Nov 2026)",
-    "entry_type": "careers_portal",
+    "entry_type": "posting",
     "status": "active",
     "global": false,
     "evergreen": false,
@@ -3588,16 +3221,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:05.204624+00:00",
-      "final_url": "https://www.ceew.in/careers",
-      "final_host": "www.ceew.in",
-      "http_status": 200,
-      "content_hash": "ae8e1740dc8aa98dd415177f44cdeeee",
-      "entry_type": "careers_portal",
-      "host_class": "employer_primary",
-      "reason_code": "NOT_DIRECT_LINK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -3637,16 +3264,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:05.867354+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/senior-manager-energy-and-sustainability-head-%28apac%29/j00041",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "089412b554be1365032680caa03a92ba",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3686,16 +3307,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:06.548311+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/apac-energy-%26-sustainability-manager/j00040",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "c2dfcb6d45b1e52027fe5c6aeb134595",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3735,16 +3350,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:07.270238+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-specialist/j00059",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "54428bdcc1f4d4773e05255349a97d09",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3784,16 +3393,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:07.958320+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/environmental-and-social-analyst/j00069",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "a8a07fa831e70021c85d90d8debe2cc9",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3833,16 +3436,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:08.605231+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/climate-change-manager/j00085",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "fe4b9b9c63eb87596c796cfb27dbfba1",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3882,16 +3479,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:09.444556+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/executive-%E2%80%93-sustainability-solutions/j00060",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "4866d9264b1853d92f6e4a8c2b7254fa",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -3975,16 +3566,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:10.257613+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/sustainability-manager/j00042",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "17d4328edf3e807153d0c0befcf6c348",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4111,16 +3696,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:10.954717+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/summer-internship/j00106",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "b90ff407a9058d1dc766d6b5c10b455f",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4160,16 +3739,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:11.922498+00:00",
-      "final_url": "https://eibd.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/18223",
-      "final_host": "eibd.fa.em2.oraclecloud.com",
-      "http_status": 200,
-      "content_hash": "e2b38aa2bdfbb4129d27dfec80238e38",
-      "entry_type": "posting",
-      "host_class": "employer_ats",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing detail page (competitor full sweep)",
+      "http_status": 200
     }
   },
   {
@@ -4209,16 +3782,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:12.686766+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/corporate-sustainability-executive-%28operations%29/j00120",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "88c03aa4838e24c37e87630fb6646bd9",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4258,16 +3825,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:13.429484+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/business-development-manager-%E2%80%93-renewable-energy/j00124",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "98465091c26ec351ca1168055247a1b4",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4307,16 +3868,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:14.079706+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/backend-operations-executive/j00125",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "72145f00e5fab5390e05d9c547f28c34",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4356,16 +3911,10 @@
     "selection_process": "",
     "reverify_after": "2026-11-27",
     "verification": {
-      "verified_at": "2026-11-14T00:58:14.929021+00:00",
-      "final_url": "https://www.greenjobsindia.in/apply/assistant-manager-sustainability/j00048",
-      "final_host": "www.greenjobsindia.in",
-      "http_status": 200,
-      "content_hash": "50c3bbf7cf62b4300f91b4188de76800",
-      "entry_type": "posting",
-      "host_class": "unknown_host",
-      "reason_code": "OK",
-      "platform": "",
-      "verifier": "verify_link_v2"
+      "verified_at": "2026-11-12",
+      "method": "manual-batch-verified",
+      "source": "GreenJobsIndia listing (competitor scan)",
+      "http_status": "UNKNOWN_KEEP"
     }
   },
   {
@@ -4405,11 +3954,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:15.587352+00:00",
+      "verified_at": "2026-11-12T12:25:24.520037+00:00",
       "final_url": "https://www.greenjobsindia.in/apply/supervisor-%E2%80%93-plantation/j00123",
       "final_host": "www.greenjobsindia.in",
       "http_status": 200,
-      "content_hash": "977697c8a5f82ab9b014ac5332605388",
+      "content_hash": "884c8757b9e27479b29e65ce7e996e89",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -5447,7 +4996,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T00:58:20.059719+00:00",
+      "verified_at": "2026-11-12T12:25:40.588849+00:00",
       "final_url": "https://iwst.icfre.gov.in/docs/Walk%20in%20interview%20for%20PA%20.pdf",
       "final_host": "iwst.icfre.gov.in",
       "http_status": 200,
@@ -5507,11 +5056,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:20.287358+00:00",
+      "verified_at": "2026-11-08T23:51:52.414893+00:00",
       "final_url": "https://jobs.ashbyhq.com/pravah/3d580ee8-0b2b-411a-bd39-ca2e8921e5bb",
       "final_host": "jobs.ashbyhq.com",
       "http_status": 200,
-      "content_hash": "9ec727d7c006bd3ec201951e5c5b726f",
+      "content_hash": "1a70f44c3e0165f5ff895323e1d83d7c",
       "entry_type": "careers_portal",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -5728,7 +5277,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:28.835302+00:00",
+      "verified_at": "2026-11-08T23:52:04.551365+00:00",
       "final_url": "https://www.nihroorkee.gov.in/job26102026.pdf",
       "final_host": "www.nihroorkee.gov.in",
       "http_status": 200,
@@ -5824,7 +5373,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T00:58:32.823544+00:00",
+      "verified_at": "2026-11-12T12:25:41.661806+00:00",
       "final_url": "https://iwst.icfre.gov.in/docs/jpf_pa%20advertisement.pdf",
       "final_host": "iwst.icfre.gov.in",
       "http_status": 200,
@@ -5927,11 +5476,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:33.165705+00:00",
+      "verified_at": "2026-11-12T12:25:27.018462+00:00",
       "final_url": "https://careers.jacobs.com/en_US/careers/JobDetail/Carbon-Accounting-Decarbonization-Advisory/43409",
       "final_host": "careers.jacobs.com",
       "http_status": 202,
-      "content_hash": "38ac891ee9c790848da8f756a861bb7a",
+      "content_hash": "f7853d0edbb583e18a50e1e24a13677d",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -5976,11 +5525,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:34.641434+00:00",
+      "verified_at": "2026-11-12T12:25:27.534201+00:00",
       "final_url": "https://iforest.global/career/senior-programme-associate-boiler-and-heat-pump/",
       "final_host": "iforest.global",
       "http_status": 200,
-      "content_hash": "7be91ffbd15eb3c895bc5da26804e222",
+      "content_hash": "da336bc5f045f909fe01a09b8c6135d5",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6025,11 +5574,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:35.882075+00:00",
+      "verified_at": "2026-11-12T12:25:27.963388+00:00",
       "final_url": "https://iforest.global/career/programme-lead-boiler-and-heat-pump-programme/",
       "final_host": "iforest.global",
       "http_status": 200,
-      "content_hash": "fa361e499eaeef7d226e144e08fa9887",
+      "content_hash": "c2c2c0762c4315b1f280810a06befffe",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6117,11 +5666,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:36.274057+00:00",
+      "verified_at": "2026-11-12T12:25:28.489331+00:00",
       "final_url": "https://iforest.global/career/programme-associate-boiler-and-heat-pump/",
       "final_host": "iforest.global",
       "http_status": 200,
-      "content_hash": "93d99e44e54ae241e23cb6800473cbf0",
+      "content_hash": "032172facb49a77d2d903d3dd09f8844",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6166,11 +5715,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:36.654886+00:00",
+      "verified_at": "2026-11-12T12:25:29.004048+00:00",
       "final_url": "https://iforest.global/career/deputy-director-boiler-and-heat-pump-programme/",
       "final_host": "iforest.global",
       "http_status": 200,
-      "content_hash": "ab9ec168c40ad3b3ce429407df5e027d",
+      "content_hash": "4b83bfa71c8486234fb84eda219253fa",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6215,11 +5764,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:37.940917+00:00",
+      "verified_at": "2026-11-12T12:25:29.524574+00:00",
       "final_url": "https://iforest.global/career/coordinator-chhattisgarh-coal-dri-steel-programme/",
       "final_host": "iforest.global",
       "http_status": 200,
-      "content_hash": "c9633251572a93abc84260ee2fd6878a",
+      "content_hash": "86c8101e39763ef69037003d0ca0bae8",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6307,11 +5856,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:38.368103+00:00",
+      "verified_at": "2026-11-12T12:25:39.504227+00:00",
       "final_url": "https://floracarbon.ai/resources/careers/",
       "final_host": "floracarbon.ai",
       "http_status": 200,
-      "content_hash": "5413631fa0924244edb053d30cf25a78",
+      "content_hash": "48ec60b99ad1e811cff350c937f3f33b",
       "entry_type": "careers_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -6614,11 +6163,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:39.936093+00:00",
+      "verified_at": "2026-11-12T12:25:33.329755+00:00",
       "final_url": "https://business.edf.org/insights/program-details-india-fellowship/",
       "final_host": "business.edf.org",
       "http_status": 200,
-      "content_hash": "3f82d05cfd591b1758d27c49a8b16094",
+      "content_hash": "3f43483e713b4b870f36987f9c4566e3",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -6663,7 +6212,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-23",
     "verification": {
-      "verified_at": "2026-11-14T00:58:40.691003+00:00",
+      "verified_at": "2026-11-12T12:25:32.835942+00:00",
       "final_url": "https://careers.db.com/professionals/search-roles/#/professional/job/74250",
       "final_host": "careers.db.com",
       "http_status": 200,
@@ -6804,10 +6353,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:41Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -6853,10 +6402,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:41Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -6902,10 +6451,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:41Z",
+      "checked_at": "2026-11-12T12:25:32Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -6951,10 +6500,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:41Z",
+      "checked_at": "2026-11-12T12:25:23Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -7258,10 +6807,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-14T00:58:41Z",
+      "checked_at": "2026-11-12T12:25:39Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 2
+      "consecutive_failures": 1
     }
   },
   {
@@ -7523,6 +7072,65 @@
     }
   },
   {
+    "clean_title": "Environment Expert / Social Expert (World Bank-assisted Project)",
+    "organization": "Uttarakhand Disaster Preparedness and Resilience Project (U-PREPARE) - Field Rural Works Department",
+    "city": "Dehradun",
+    "state": "Uttarakhand",
+    "country": "India",
+    "region": "",
+    "category": "Research Associate & Project Staff (Contractual)",
+    "position_type": "Young Professional / Consultant (Contractual)",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Mid-Senior (3-6 Years)",
+    "employment_type": "CONTRACTOR",
+    "deadline_or_window": "Apply by 26 Nov 2026, 5:00 PM",
+    "valid_through": "2026-12-07",
+    "qualification_summary": "Environment Expert (01 post, UR) and Social Expert (01 post, UR). Contractual, 1-year engagement (extendable). See official notification for detailed eligibility.",
+    "compensation_or_fellowship": "Not disclosed - see official notification",
+    "role_summary": "The World Bank-assisted Uttarakhand Disaster Preparedness and Resilience Project (U-PREPARE) invites applications for Environment Expert and Social Expert contractual positions in its Project Implementation Unit.",
+    "key_responsibilities": [
+      "Environment assessment",
+      "Social assessment",
+      "Disaster preparedness",
+      "Project implementation support"
+    ],
+    "must_have_skills": [
+      "Environment",
+      "Social development",
+      "Disaster management",
+      "Rural development"
+    ],
+    "application_tip": "Apply by Speed Post, by hand, or email to recruitmentuprepare@gmail.com by 26 November 2026, 5:00 PM. Official site: https://www.u-prepare.com",
+    "apply_url": "mailto:recruitmentuprepare@gmail.com",
+    "org_website": "https://www.u-prepare.com",
+    "org_domain": "u-prepare.com",
+    "source_portal": "LinkedIn post (Raghvendra Singh)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-11-07",
+    "date_posted": "2026-11-07",
+    "title_hi": "पर्यावरण Expert / सामाजिक Expert (World Bank-assisted Project) — Uttarakhand Disaster Preparedness and Resilience Project (U-PREPARE) - Field Rural Works Department",
+    "summary_hi": "यह यंग प्रोफेशनल / परामर्शदाता (संविदा) Uttarakhand Disaster Preparedness and Resilience Project (U-PREPARE) - Field Rural Works Department (Uttarakhand) हेतु उपलब्ध है। आवश्यक योग्यता: Environment Expert (01 post, UR) and Social Expert (01 post, UR). Contractual, 1-year engagement (extendable). See official notification for detailed eligibility.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-22",
+    "verification": {
+      "verified_at": "2026-11-07",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "uprepare-environment-social-experts-2026",
+    "last_link_check": {
+      "checked_at": "2026-11-12T12:25:41Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 2
+    }
+  },
+  {
     "clean_title": "Young Professionals Program",
     "organization": "Total Synergy Consulting (TSCPL)",
     "city": "India",
@@ -7578,6 +7186,65 @@
     "id": "tscpl-young-professionals-program-2026"
   },
   {
+    "clean_title": "Research Intern - Climate Change Team",
+    "organization": "SPREAD - Society for Promoting Rural Education and Development",
+    "city": "Koraput",
+    "state": "Odisha",
+    "country": "India",
+    "region": "",
+    "category": "Forestry, Wildlife & Afforestation",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Internship",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Apply by 12 Nov 2026",
+    "valid_through": "2026-12-07",
+    "qualification_summary": "Students and graduates interested in community research, forest rights and climate change. One position available.",
+    "compensation_or_fellowship": "Paid internship (2 months)",
+    "role_summary": "Paid Research Internship (2 months) with the SPREAD Climate Change Team on Community Forest Rights documentation, qualitative research and case studies, working with Gram Sabhas and rural communities in Koraput.",
+    "key_responsibilities": [
+      "Community Forest Rights documentation",
+      "Qualitative research and case studies",
+      "Community-led climate initiatives",
+      "Fieldwork with Gram Sabhas"
+    ],
+    "must_have_skills": [
+      "Field research",
+      "Documentation",
+      "Community engagement",
+      "Climate change"
+    ],
+    "application_tip": "Email CV and Statement of Interest (max 300 words) to animesh@spread.org.in by 12 November 2026. Subject: Application: Research Intern, CFR and Climate Change.",
+    "apply_url": "mailto:animesh@spread.org.in",
+    "org_website": "",
+    "org_domain": "",
+    "source_portal": "LinkedIn post (Lopamudra Sahoo)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-11-07",
+    "date_posted": "2026-11-07",
+    "title_hi": "अनुसंधान इंटर्न - जलवायु परिवर्तन Team — SPREAD - Society for Promoting Rural Education and Development",
+    "summary_hi": "यह फेलोशिप / इंटर्नशिप SPREAD - Society for Promoting Rural Education and Development (Odisha) हेतु उपलब्ध है। आवश्यक योग्यता: Students and graduates interested in community research, forest rights and climate change. One position available.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-22",
+    "verification": {
+      "verified_at": "2026-11-07",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "spread-koraput-research-intern-2026",
+    "last_link_check": {
+      "checked_at": "2026-11-12T12:25:43Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 2
+    }
+  },
+  {
     "clean_title": "Governance Research Fellowship 2026 (Modi@25)",
     "organization": "Rambhau Mhalgi Prabodhini (RMP)",
     "city": "New Delhi",
@@ -7623,11 +7290,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-14T00:58:42.581368+00:00",
+      "verified_at": "2026-11-12T12:25:43.819113+00:00",
       "final_url": "https://www.utgf.rmponweb.org/process.html",
       "final_host": "www.utgf.rmponweb.org",
       "http_status": 200,
-      "content_hash": "036633d022a0482e9d3bfbc9aba221b3",
+      "content_hash": "01736ceed9e98376ec947006022dd573",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -7682,7 +7349,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-14T00:58:44.535285+00:00",
+      "verified_at": "2026-11-12T12:25:45.825446+00:00",
       "final_url": "https://nitc.ac.in/contract-adhoc-recruitment-non-faculty",
       "final_host": "nitc.ac.in",
       "http_status": 200,
@@ -7739,7 +7406,7 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-14T00:58:46.572363+00:00",
+      "verified_at": "2026-11-12T12:25:46.495922+00:00",
       "final_url": "https://www.tropmet.res.in/476-news_details",
       "final_host": "www.tropmet.res.in",
       "http_status": 200,
@@ -7797,11 +7464,11 @@
     "selection_process": "",
     "reverify_after": "2026-11-22",
     "verification": {
-      "verified_at": "2026-11-14T00:58:48.188544+00:00",
+      "verified_at": "2026-11-12T12:25:47.652552+00:00",
       "final_url": "https://phdadmission.iisertvm.ac.in/application/view-ad/28",
       "final_host": "phdadmission.iisertvm.ac.in",
       "http_status": 200,
-      "content_hash": "d27c06ac3623851d83ad3b6a790d1cf8",
+      "content_hash": "f978dda9874d33560dd0313ef9a1bba7",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -7981,6 +7648,65 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "id": "unv-sustainable-finance-specialist-iwm-delhi-remote-2026"
+  },
+  {
+    "clean_title": "Geospatial Assistant / JRF / Project Assistant / Research Associate (PRSC)",
+    "organization": "Punjab Remote Sensing Centre (PRSC)",
+    "city": "Ludhiana",
+    "state": "Punjab",
+    "country": "India",
+    "region": "",
+    "category": "GIS, Remote Sensing & Earth Observation",
+    "position_type": "Project Associate / Research Associate",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "CONTRACTOR",
+    "deadline_or_window": "Apply by 17 Nov 2026",
+    "valid_through": "2026-12-06",
+    "qualification_summary": "M.Sc. Remote Sensing & GIS, Geoinformatics, Geospatial Technology, Geography, Earth Science, Environmental Science, Agriculture. Positions: Principal Project Associate (Soil Science), Research Scientist, Research Associate, Research Fellow, JRF, Geospatial Assistant, Project Assistant.",
+    "compensation_or_fellowship": "Rs. 27,000-60,000 + HRA per month (varies by post)",
+    "role_summary": "PRSC contractual positions (Advertisement No. 05/2026) for soil science, geospatial analysis and remote sensing projects. Shortlisting followed by written/practical/skill test and interview.",
+    "key_responsibilities": [
+      "Soil science research",
+      "Geospatial analysis",
+      "Remote sensing",
+      "Project support"
+    ],
+    "must_have_skills": [
+      "GIS",
+      "Remote sensing",
+      "Geoinformatics",
+      "Soil science"
+    ],
+    "application_tip": "Email application to recruitment.prsc@punjab.gov.in by 17 November 2026. Read the complete official notification for eligibility.",
+    "apply_url": "mailto:recruitment.prsc@punjab.gov.in",
+    "org_website": "https://prsc.punjab.gov.in",
+    "org_domain": "prsc.punjab.gov.in",
+    "source_portal": "LinkedIn post (Bengal Institute of Remote sensing and GIS / Arindam Mandal)",
+    "entry_type": "posting",
+    "status": "active",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-11-06",
+    "date_posted": "2026-11-06",
+    "title_hi": "भू-स्थानिक सहायक / JRF / प्रोजेक्ट असिस्टेंट / रिसर्च एसोसिएट (PRSC) — Punjab Remote Sensing Centre (PRSC)",
+    "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट Punjab Remote Sensing Centre (PRSC) (Punjab) हेतु उपलब्ध है। आवश्यक योग्यता: M.Sc. Remote Sensing & GIS, Geoinformatics, Geospatial Technology, Geography, Earth Science, Environmental Science, Agriculture. Positions: Principal Project Associate (Soil Science), Research Scientist, Research Associate, Research Fellow, JRF, Geospatial Assistant, Project Assistant.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-21",
+    "verification": {
+      "verified_at": "2026-11-06",
+      "method": "manual-batch-verified",
+      "source": "LinkedIn post",
+      "http_status": "UNKNOWN_KEEP"
+    },
+    "id": "prsc-gis-remote-sensing-recruitment-2026",
+    "last_link_check": {
+      "checked_at": "2026-11-12T12:25:47Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 2
+    }
   },
   {
     "clean_title": "Plant 4 India Fellowship",
@@ -9074,7 +8800,7 @@
     "title_hi": "ले ऑफ द लैंड: भारत के बदलते परिदृश्यों के दस्तावेजीकरण का एक दशक",
     "summary_hi": "Land Conflict Watch द्वारा अपने दस वर्ष पूरे होने के अवसर पर India Habitat Centre, Delhi में चार दिवसीय सम्मेलन एवं प्रदर्शनी का आयोजन किया जा रहा है। भूमि, डेटा और विकास के क्षेत्र में संलग्न शोधकर्ता, पत्रकार, विद्यार्थी तथा संबंधित विशेषज्ञ इस कार्यक्रम में सहभागिता के लिए पात्र हैं।",
     "verification": {
-      "verified_at": "2026-11-14T00:58:49.591815+00:00",
+      "verified_at": "2026-11-12T12:26:09.055669+00:00",
       "final_url": "https://nutgraph.in/lay-of-the-land",
       "final_host": "nutgraph.in",
       "http_status": 200,
@@ -9315,11 +9041,11 @@
     "title_hi": "स्वयंसेवक - प्लैनेटरी बाउंड्रीज ऑफ लाइफ फेस्टिवल 2027",
     "summary_hi": "Azim Premji University, Bengaluru (Karnataka) द्वारा फरवरी 2027 में आयोजित होने वाले 'Planetary Boundaries of Life Festival' के संचालन हेतु स्वयंसेवकों से आवेदन आमंत्रित किए गए हैं। पर्यावरण, जलवायु कार्रवाई तथा विज्ञान संचार में रुचि रखने वाले 18 से 30 वर्ष की आयु के युवा इस भूमिका के लिए पात्र हैं।",
     "verification": {
-      "verified_at": "2026-11-14T00:58:51.718891+00:00",
+      "verified_at": "2026-11-12T12:26:11.431491+00:00",
       "final_url": "https://azimpremjiuniversity.edu.in/be-a-volunteer-for-the-planetary-boundaries-of-life-festival-2027",
       "final_host": "azimpremjiuniversity.edu.in",
       "http_status": 200,
-      "content_hash": "4c0cf71ea281985ce9dfe015ce7dec81",
+      "content_hash": "41e88c1a7203c4a40945ace9e1e2b578",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -9507,11 +9233,11 @@
     "title_hi": "MoEFCC इंटर्नशिप Scheme 2027 — Ministry of Environment, Forest and Climate Change (MoEFCC)",
     "summary_hi": "यह फेलोशिप / इंटर्नशिप Ministry of Environment, Forest and Climate Change (MoEFCC) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Graduation, post-graduation or research students from recognised institutions in India or abroad. 22 eligible disciplines including environmental science, law, GIS, forestry, wildlife, climate change.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T00:58:54.217241+00:00",
+      "verified_at": "2026-11-12T12:26:12.708599+00:00",
       "final_url": "https://moef.gov.in/recruitment/update",
       "final_host": "moef.gov.in",
       "http_status": 200,
-      "content_hash": "00502f93c1723a861e8cb3ac42df752e",
+      "content_hash": "8f0bec1e81356f4f5842f8fb694352ce",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -9615,11 +9341,11 @@
     "title_hi": "यंग प्रोफेशनल-II (रिमोट सेंसिंग & GIS) — ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP)",
     "summary_hi": "यह प्रोजेक्ट एसोसिएट / रिसर्च एसोसिएट ICAR - National Bureau of Soil Survey and Land Use Planning (NBSS&LUP) (Maharashtra) हेतु उपलब्ध है। आवश्यक योग्यता: Postgraduate degree in Remote Sensing & GIS, Geoinformatics, Geography or a related discipline, as per the ICAR-NBSS&LUP advertisement.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T00:58:54.474287+00:00",
+      "verified_at": "2026-11-12T12:26:13.277160+00:00",
       "final_url": "https://www.freejobalert.com/articles/icar-nbss-lup-young-professional-ii-rs-gis-recruitment-2026-3077207",
       "final_host": "www.freejobalert.com",
       "http_status": 200,
-      "content_hash": "e37dd9f40b379ec53d594a8cef2382ef",
+      "content_hash": "ee842f5d41cecf74bc23add289dc1e3d",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -9873,48 +9599,6 @@
     "reverify_after": "2026-11-17"
   },
   {
-    "id": "udd-uttarakhand-gis-positions-2026",
-    "clean_title": "GIS Positions (Lead Consultant, GIS Planner, GIS Manager, GIS Technical)",
-    "title_hi": "GIS Positions (लीड सलाहकार, GIS Planner, GIS प्रबंधक, GIS Technical) — Urban Development Directorate, Government of Uttarakhand",
-    "organization": "Urban Development Directorate, Government of Uttarakhand",
-    "city": "Dehradun",
-    "state": "Uttarakhand",
-    "country": "India",
-    "category": "GIS, Remote Sensing & Earth Observation",
-    "position_type": "Young Professional / Consultant (Contractual)",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "Varies by post",
-    "employment_type": "CONTRACTOR",
-    "deadline_or_window": "13 November 2026",
-    "valid_through": "2026-11-13",
-    "role_summary": "Contractual GIS positions under SMMU/CMMU: Lead Consultant, GIS Planner, GIS Manager, GIS Technical. Last date 13 Nov 2026.",
-    "summary_hi": "यह यंग प्रोफेशनल / परामर्शदाता (संविदा) Urban Development Directorate, Government of Uttarakhand (Uttarakhand) हेतु उपलब्ध है। आवश्यक योग्यता: Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "apply_url": "https://udd.uk.gov.in",
-    "org_website": "",
-    "org_domain": "",
-    "source_portal": "Official government website",
-    "entry_type": "careers_portal",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-10-29",
-    "date_posted": "2026-10-29",
-    "verification": {
-      "verified_on": "2026-10-29",
-      "verified_by": "manual review of LinkedIn posts",
-      "source": "User-provided LinkedIn posts",
-      "notes": "Link pattern-validated (platform). Content not fetched per policy."
-    },
-    "link_policy": {
-      "status": "listing",
-      "entry_type": "careers_portal",
-      "checked": "2026-10-29",
-      "note": "LinkedIn-sourced listing; tagged as portal under policy v2."
-    },
-    "qualification_summary": "Master's degree in the relevant discipline with 0-3 years of experience, as per the scheme norms",
-    "compensation_or_fellowship": "As per institute norms"
-  },
-  {
     "id": "jnmc-jawaharlal-nehru-fellowship",
     "clean_title": "Jawaharlal Nehru Fellowship – Research & Creative Projects",
     "title_hi": "Jawaharlal Nehru फेलोशिप – अनुसंधान & Creative Projects — Jawaharlal Nehru Memorial Fund (JNMF)",
@@ -9985,11 +9669,11 @@
     "date_added": "2026-10-29",
     "date_posted": "2026-10-29",
     "verification": {
-      "verified_at": "2026-11-14T00:58:56.731847+00:00",
+      "verified_at": "2026-11-12T12:26:14.545341+00:00",
       "final_url": "https://iica.nic.in/cclp/",
       "final_host": "iica.nic.in",
       "http_status": 200,
-      "content_hash": "c116d9989985516e85424aff3ce2801d",
+      "content_hash": "d7f0b4650d432d9b593d7759f7903163",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -10203,7 +9887,7 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:58:57.976324+00:00",
+      "verified_at": "2026-11-12T12:26:15.890284+00:00",
       "final_url": "https://emit.fa.ca3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/94772",
       "final_host": "emit.fa.ca3.oraclecloud.com",
       "http_status": 200,
@@ -10246,11 +9930,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:58:59.626649+00:00",
+      "verified_at": "2026-11-12T12:26:16.877874+00:00",
       "final_url": "https://www.inclimate.com/climate-jobs/india/carbon-and-esg-reporting",
       "final_host": "www.inclimate.com",
       "http_status": 200,
-      "content_hash": "fb597b6cd4a3d8934254dba26a9bbeda",
+      "content_hash": "2be44f9c669199b0ca3e47840c8d584b",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10295,11 +9979,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:58:59.872578+00:00",
+      "verified_at": "2026-11-12T12:26:17.779791+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "c68520c08881d6ff477f4439afb62922",
+      "content_hash": "47bccaae43a8ed15b4c2fa6efffc00cd",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10344,11 +10028,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:59:00.110902+00:00",
+      "verified_at": "2026-11-12T12:26:18.957901+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "c68520c08881d6ff477f4439afb62922",
+      "content_hash": "47bccaae43a8ed15b4c2fa6efffc00cd",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10408,7 +10092,7 @@
     "title_hi": "कार्यकारी Programme - Understanding Human Dimensions of जलवायु परिवर्तन — Indian School of Business (ISB) - Bharti Institute of Public Policy",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद Indian School of Business (ISB) - Bharti Institute of Public Policy (Telangana) हेतु उपलब्ध है। आवश्यक योग्यता: Senior government officers across ministries and states, plus a limited number of self- or organisation-sponsored private sector leaders.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T00:59:00.247648+00:00",
+      "verified_at": "2026-11-12T12:26:21.729901+00:00",
       "final_url": "https://form.jotform.com/BIPP_ISB/understanding-human-dimensions-of-c",
       "final_host": "form.jotform.com",
       "http_status": 200,
@@ -10450,11 +10134,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:59:01.845195+00:00",
+      "verified_at": "2026-11-12T12:26:23.380284+00:00",
       "final_url": "https://www.inclimate.com/climate-jobs/india/carbon-and-esg-reporting",
       "final_host": "www.inclimate.com",
       "http_status": 200,
-      "content_hash": "fb597b6cd4a3d8934254dba26a9bbeda",
+      "content_hash": "2be44f9c669199b0ca3e47840c8d584b",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10499,11 +10183,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:59:02.370872+00:00",
+      "verified_at": "2026-11-12T12:26:26.871514+00:00",
       "final_url": "https://corningjobs.corning.com/job/Gurgaon-Supply-Chain-Data-%26-Carbon-Accounting-Specialist-HR-122002/1425224500/",
       "final_host": "corningjobs.corning.com",
       "http_status": 200,
-      "content_hash": "e4f232c0f7ffca9cfc28558dad94f2ec",
+      "content_hash": "d4bbbfe3801fab83bc5b8ad4459eac12",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10542,11 +10226,11 @@
     "date_added": "2026-10-28",
     "date_posted": "2026-10-28",
     "verification": {
-      "verified_at": "2026-11-14T00:59:02.607098+00:00",
+      "verified_at": "2026-11-12T12:26:30.190627+00:00",
       "final_url": "https://csrjobs.club/jobboard/india",
       "final_host": "csrjobs.club",
       "http_status": 200,
-      "content_hash": "c68520c08881d6ff477f4439afb62922",
+      "content_hash": "47bccaae43a8ed15b4c2fa6efffc00cd",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -10605,7 +10289,7 @@
     "title_hi": "",
     "summary_hi": "",
     "verification": {
-      "verified_at": "2026-11-14T00:59:02.997950+00:00",
+      "verified_at": "2026-11-12T12:30:48.926933+00:00",
       "final_url": "https://careers.un.org/ypp/home",
       "final_host": "careers.un.org",
       "http_status": 200,
@@ -10887,11 +10571,11 @@
     "title_hi": "पर्यावरणीय नीति & जलवायु Action Training — IMPRI (Impact and Policy Research Institute)",
     "summary_hi": "यह कॉर्पोरेट / गैर-सरकारी संगठन में पूर्णकालिक पद IMPRI (Impact and Policy Research Institute) (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Open to students, researchers, and professionals interested in environmental policy.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T01:00:09.746629+00:00",
+      "verified_at": "2026-11-12T12:26:34.048329+00:00",
       "final_url": "https://www.impriindia.com/event/environmental-policy-and-climate-action/",
       "final_host": "www.impriindia.com",
       "http_status": 200,
-      "content_hash": "cdd9f9b2a99a8468c9ff624f08986137",
+      "content_hash": "ed327bd26894219e48ba3152ec5016d1",
       "entry_type": "award_portal",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -11175,7 +10859,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:11.903847+00:00",
+      "verified_at": "2026-11-12T12:26:35.588000+00:00",
       "final_url": "https://sams.co.in/Jobs/job-list",
       "final_host": "sams.co.in",
       "http_status": 200,
@@ -11239,11 +10923,11 @@
     "title_hi": "जूनियर रिसर्च फेलो — KSCSTE-Centre for Water Resources Development and Management",
     "summary_hi": "यह जूनियर/सीनियर रिसर्च फेलोशिप (JRF / SRF) KSCSTE-Centre for Water Resources Development and Management (Kerala) हेतु उपलब्ध है। आवश्यक योग्यता: First Class Post Graduation degree in Agriculture with specialisation in Agronomy/Environmental Science/Botany/Plant Sciences or allied discipline with CSIR-UGC-ASRB-NET/GATE qualified.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T01:00:18.754450+00:00",
+      "verified_at": "2026-11-12T12:26:37.774430+00:00",
       "final_url": "https://cwrdm.kerala.gov.in/walk-interview-post-junior-research-fellow",
       "final_host": "cwrdm.kerala.gov.in",
       "http_status": 200,
-      "content_hash": "4ea4c95a4f08db2c2cc5ba94f417e77f",
+      "content_hash": "fa8fa65e88e7f8e29a7cd949dbe25330",
       "entry_type": "posting",
       "host_class": "government_notice",
       "reason_code": "OK",
@@ -11299,11 +10983,11 @@
     "title_hi": "DPhil in Biology — University of Oxford",
     "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप University of Oxford (Multiple States / Remote) हेतु उपलब्ध है। आवश्यक योग्यता: Applicants should hold or be predicted to achieve a first-class or strong upper second-class undergraduate degree with honours in appropriate subjects.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
     "verification": {
-      "verified_at": "2026-11-14T01:00:20.344702+00:00",
+      "verified_at": "2026-11-12T12:26:38.883946+00:00",
       "final_url": "https://www.biology.ox.ac.uk/dphil#tab-5820131",
       "final_host": "www.biology.ox.ac.uk",
       "http_status": 200,
-      "content_hash": "98c7a8306d922bac6ca4e82df38410d0",
+      "content_hash": "2ee7ac969fb8f5d3e0382ba3e32a2c9a",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -11412,11 +11096,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:22.339525+00:00",
+      "verified_at": "2026-11-12T12:26:42.295730+00:00",
       "final_url": "https://www.atree.org/career/ffwlf/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "55b420117aefd1da4c101719ce401525",
+      "content_hash": "07a05302de5c65fde8c7b5ac9a1c204d",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11466,11 +11150,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:24.773498+00:00",
+      "verified_at": "2026-11-12T12:26:53.185127+00:00",
       "final_url": "https://wii.gov.in/course-in-wildlife-trade-&-forensics-for-revenue-officers",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "4f34f839207ad1339352257349f6ea40",
+      "content_hash": "2bfe7ac6ee797fd63758173c9cf25559",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11520,11 +11204,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:38.566528+00:00",
+      "verified_at": "2026-11-12T12:27:04.133741+00:00",
       "final_url": "https://wii.gov.in/wildlife-enthusiasts-course",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "0d2c40f66e9860e3f55339e3b90bac4f",
+      "content_hash": "4f228e6757c93f9f192759a7dad17c28",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11636,11 +11320,11 @@
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:38.925410+00:00",
+      "verified_at": "2026-11-12T12:27:04.818104+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-sustainable-food-systems-0",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "7a08fdc6d63df941a9c68401b6fc6dc2",
+      "content_hash": "b6aafcd0e7c53adbe03bf0a6440af0da",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11690,11 +11374,11 @@
     "employer_id": "atree",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:40.566787+00:00",
+      "verified_at": "2026-11-12T12:27:06.578118+00:00",
       "final_url": "https://www.atree.org/career/research-associate-maharastratgi/",
       "final_host": "www.atree.org",
       "http_status": 200,
-      "content_hash": "c284bee42f08e3b55675e15c7463b706",
+      "content_hash": "c2987334487319a4e4de67ef5a0a2d27",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -11751,11 +11435,11 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:40.785669+00:00",
+      "verified_at": "2026-11-12T12:27:08.500092+00:00",
       "final_url": "https://reliefweb.int/job/4232853/regional-health-and-wash-coordinator-asia-hub",
       "final_host": "reliefweb.int",
       "http_status": 202,
-      "content_hash": "101afa816ab127deae120ecca1a868ac",
+      "content_hash": "989aa7063121fe65e48ab439e5895f19",
       "entry_type": "posting",
       "host_class": "platform",
       "reason_code": "OK",
@@ -11931,11 +11615,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:44.942084+00:00",
+      "verified_at": "2026-11-12T12:27:19.681802+00:00",
       "final_url": "https://wii.gov.in/pg-diploma-in-wildlife",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "0540d5ae8c839fdf601b878a9a5edf2a",
+      "content_hash": "d1600c577a24ea1ac5e3896189430c20",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -12117,7 +11801,7 @@
     "entry_type": "posting",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:47.300460+00:00",
+      "verified_at": "2026-11-12T12:27:21.484244+00:00",
       "final_url": "https://bsi.gov.in/uploads/documents/whatsnew/hindi/BSI-ADDITIONAL_LIST_OF_4_CANDIDATES_FOR_JRF_2026.pdf",
       "final_host": "bsi.gov.in",
       "http_status": 200,
@@ -12171,11 +11855,11 @@
     "employer_id": "wildlife-institute-of-wii",
     "status": "active",
     "verification": {
-      "verified_at": "2026-11-14T01:00:59.483672+00:00",
+      "verified_at": "2026-11-12T12:27:32.548585+00:00",
       "final_url": "https://wii.gov.in/international-course-on-heritage-conservation",
       "final_host": "wii.gov.in",
       "http_status": 200,
-      "content_hash": "b19848b4375e2418e9c7a2e95172f316",
+      "content_hash": "dd98e6640f5e352247b0d3bb3bb227c1",
       "entry_type": "award_portal",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -12490,11 +12174,11 @@
     "entry_type": "posting",
     "reverify_after": "2026-11-03",
     "verification": {
-      "verified_at": "2026-11-14T01:01:00.327652+00:00",
+      "verified_at": "2026-11-12T12:27:36.517085+00:00",
       "final_url": "https://www.indiawaterportal.org/opportunities/rfp-agencyconsultant-for-conducting-comprehensive-assessment-of-the-satluj-river-basin-for-agroforestry-freshwater-conservation-and-landscape-restoration-in-punjab-tnc",
       "final_host": "www.indiawaterportal.org",
       "http_status": 200,
-      "content_hash": "343cf450db186f55cd9bfff85ea0dd01",
+      "content_hash": "eab3382e422b3fd1fcbb2b560f52ef17",
       "entry_type": "posting",
       "host_class": "unknown_host",
       "reason_code": "OK",
@@ -12544,11 +12228,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-14T01:01:00.764771+00:00",
+      "verified_at": "2026-11-12T12:27:37.454157+00:00",
       "final_url": "https://www.ceew.in/careers/research-intern-technology-futures-2",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "384c0e95dd3c6f39d9f5d5007285982a",
+      "content_hash": "1cf9b74a5d780ce5c9941ecdaf3ba90a",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -12599,11 +12283,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-14T01:01:01.203458+00:00",
+      "verified_at": "2026-11-12T12:27:38.092702+00:00",
       "final_url": "https://www.ceew.in/careers/programme-associate-%E2%80%93-energy-transitions",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "1ed6e4e07317155b945957c4de5b14c7",
+      "content_hash": "978b940fdceadaa0ed9eb944f21ce259",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -13060,11 +12744,11 @@
     "entry_type": "posting",
     "employer_id": "council-on-energy-environment-and-water-ceew",
     "verification": {
-      "verified_at": "2026-11-14T01:01:01.840519+00:00",
+      "verified_at": "2026-11-12T12:27:38.645759+00:00",
       "final_url": "https://www.ceew.in/careers/research-analyst-programme-associate-technology-futures",
       "final_host": "www.ceew.in",
       "http_status": 200,
-      "content_hash": "d8fe83d7f3525be0ae66157b7a809272",
+      "content_hash": "565a4d74041d55156ab55918a59506bd",
       "entry_type": "posting",
       "host_class": "employer_primary",
       "reason_code": "OK",
@@ -14975,54 +14659,5 @@
     },
     "entry_type": "careers_portal",
     "reverify_after": "2026-10-30"
-  },
-  {
-    "id": "postdoctoral-fellow-environmental-sustainability-climate-risk-iitkgp",
-    "date_added": "2026-10-14",
-    "clean_title": "Postdoctoral Fellow - Environmental Sustainability & Climate Risk",
-    "title_hi": "पोस्टडॉक्टोरल फेलो - पर्यावरणीय स्थिरता & जलवायु जोखिम — Indian Institute of Technology Kharagpur (IIT Kharagpur)",
-    "organization": "Indian Institute of Technology Kharagpur (IIT Kharagpur)",
-    "state": "West Bengal",
-    "city": "Kharagpur",
-    "category": "Academic, JRF, SRF & PhD Positions",
-    "experience_level": "1-3 Years",
-    "position_type": "PhD / Doctoral Fellowship",
-    "qualification_summary": "Ph.D. in Environmental Science / Engineering / Sustainability / Climate Studies with a strong publication record",
-    "compensation_or_fellowship": "Rs 50,000 - Rs 60,000/month consolidated (as per institute postdoctoral norms)",
-    "role_summary": "IIT Kharagpur invites applications for a postdoctoral fellow to work on climate risk assessment and environmental sustainability modelling within an interdisciplinary research group. The fellow will lead a work package on vulnerability mapping and adaptation planning for eastern India. The position is contractual for one year with extension subject to performance and project funds.",
-    "summary_hi": "यह PhD / डॉक्टोरल फेलोशिप Indian Institute of Technology Kharagpur (IIT Kharagpur) (West Bengal) हेतु उपलब्ध है। आवश्यक योग्यता: Ph.D. in Environmental Science / Engineering / Sustainability / Climate Studies with a strong publication record। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
-    "key_responsibilities": [
-      "Lead climate risk and vulnerability assessments for assigned regions",
-      "Develop and document modelling workflows for sustainability indicators",
-      "Mentor postgraduate students associated with the project",
-      "Publish in peer-reviewed journals and present at conferences",
-      "Prepare technical reports for project sponsors"
-    ],
-    "must_have_skills": [
-      "Climate risk assessment",
-      "Spatial analysis and modelling",
-      "Python or R",
-      "Academic publishing",
-      "Research project coordination"
-    ],
-    "application_tip": "Lead with your three strongest publications and the datasets or models you can reuse immediately. Postdoc selections at IITs favour candidates who arrive with a concrete plan for the first year.",
-    "apply_url": "https://www.iitkgp.ac.in/careers",
-    "valid_through": "2026-11-13",
-    "status": "active",
-    "org_website": "https://www.iitkgp.ac.in",
-    "org_domain": "iitkgp.ac.in",
-    "source_portal": "Official Organization Website",
-    "opportunity_kind": "Fellowship",
-    "deadline_or_window": "Rolling / Open",
-    "link_policy": {
-      "policy_version": 2,
-      "restored_at": "2026-10-20",
-      "previous_reason_code": "SOFT_404",
-      "reason_code": "NOT_DIRECT_LINK",
-      "checked_at": "2026-10-20T10:19:57.968009+00:00",
-      "platform": ""
-    },
-    "entry_type": "careers_portal",
-    "reverify_after": "2026-10-29"
   }
 ]
