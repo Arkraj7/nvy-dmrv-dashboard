@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T01:44:20",
+  "generated_at": "2026-11-14T02:48:52",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -39,7 +39,7 @@
       "active": 0
     },
     "official-page": {
-      "leads": 164,
+      "leads": 165,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 518,
+    "leads": 519,
     "passed": 0,
     "active": 0
   }

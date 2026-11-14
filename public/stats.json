@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-14T07:14:20+05:30",
-  "last_updated_ist": "2026-11-14T07:14:20+05:30",
+  "last_updated": "2026-11-14T08:18:52+05:30",
+  "last_updated_ist": "2026-11-14T08:18:52+05:30",
   "last_pipeline_run_date_ist": "2026-11-14",
-  "active_open_jobs": 304,
-  "opened_this_week": 169,
-  "passed_this_week": 49,
-  "total_archived_jobs": 104,
+  "active_open_jobs": 301,
+  "opened_this_week": 167,
+  "passed_this_week": 52,
+  "total_archived_jobs": 107,
   "total_historical_indexed": 408,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -23,12 +23,12 @@
       "archived": 0
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 16,
-      "archived": 17
+      "active": 15,
+      "archived": 18
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 20,
-      "archived": 18
+      "active": 19,
+      "archived": 19
     },
     "Grants & Research Funding": {
       "active": 3,
@@ -39,8 +39,8 @@
       "archived": 11
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 22,
-      "archived": 8
+      "active": 21,
+      "archived": 9
     },
     "Internships & Student Traineeships": {
       "active": 10,
@@ -87,12 +87,12 @@
     "Telangana": 11,
     "West Bengal": 6,
     "Kerala": 5,
-    "Uttarakhand": 5,
     "Assam": 4,
-    "Odisha": 4,
-    "Punjab": 4,
     "Rajasthan": 4,
+    "Uttarakhand": 4,
     "Global / Remote": 3,
+    "Odisha": 3,
+    "Punjab": 3,
     "Jharkhand": 2,
     "Assam / Haryana": 1,
     "Bihar": 1,

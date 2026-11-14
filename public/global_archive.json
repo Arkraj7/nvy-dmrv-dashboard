@@ -85,10 +85,10 @@
       "http_status": "UNKNOWN_KEEP"
     },
     "last_link_check": {
-      "checked_at": "2026-11-12T12:27:54Z",
+      "checked_at": "2026-11-14T01:01:16Z",
       "reason_code": "DEAD_LINK",
       "http_status": 0,
-      "consecutive_failures": 1
+      "consecutive_failures": 2
     },
     "date_archived": "2026-11-14"
   },
