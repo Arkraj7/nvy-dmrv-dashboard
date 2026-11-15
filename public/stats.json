@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-14T21:13:49+05:30",
-  "last_updated_ist": "2026-11-14T21:13:49+05:30",
-  "last_pipeline_run_date_ist": "2026-11-14",
-  "active_open_jobs": 301,
-  "opened_this_week": 167,
-  "passed_this_week": 52,
-  "total_archived_jobs": 107,
+  "last_updated": "2026-11-15T07:22:00+05:30",
+  "last_updated_ist": "2026-11-15T07:22:00+05:30",
+  "last_pipeline_run_date_ist": "2026-11-15",
+  "active_open_jobs": 299,
+  "opened_this_week": 160,
+  "passed_this_week": 44,
+  "total_archived_jobs": 109,
   "total_historical_indexed": 408,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -35,8 +35,8 @@
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 16,
-      "archived": 11
+      "active": 15,
+      "archived": 12
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 21,
@@ -51,8 +51,8 @@
       "archived": 2
     },
     "Conferences, Summits & Events": {
-      "active": 5,
-      "archived": 2
+      "active": 4,
+      "archived": 3
     },
     "Workshops, Training & Capacity Building": {
       "active": 8,
@@ -83,8 +83,8 @@
     "Delhi NCR": 12,
     "Haryana": 12,
     "Uttar Pradesh": 12,
-    "Tamil Nadu": 11,
     "Telangana": 11,
+    "Tamil Nadu": 10,
     "West Bengal": 6,
     "Kerala": 5,
     "Assam": 4,
@@ -98,7 +98,6 @@
     "Bihar": 1,
     "Chandigarh": 1,
     "Chhattisgarh": 1,
-    "Goa": 1,
     "Madhya Pradesh": 1
   },
   "active_global_jobs": 147,
@@ -106,20 +105,20 @@
   "total_global_records": 159,
   "total_archived_global_jobs": 101,
   "global_jobs_by_region": {
-    "UN / Multilateral": 8,
     "Africa & Middle East": 15,
     "Asia-Pacific": 15,
-    "North America": 16,
-    "Latin America": 2,
+    "Europe": 27,
     "Global / Remote": 64,
-    "Europe": 27
+    "Latin America": 2,
+    "North America": 16,
+    "UN / Multilateral": 8
   },
   "global_jobs_by_kind": {
-    "Job / Career": 91,
-    "Grant / Funding": 15,
+    "Competition / Award": 5,
     "Fellowship": 19,
+    "Grant / Funding": 15,
     "Internship": 7,
-    "Scholarship": 10,
-    "Competition / Award": 5
+    "Job / Career": 91,
+    "Scholarship": 10
   }
 }
