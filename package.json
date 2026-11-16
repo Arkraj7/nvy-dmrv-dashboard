@@ -27,6 +27,7 @@
     "pdfjs-dist": "^4.0.379"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "wrangler": "^4.151.1"
   }
 }
