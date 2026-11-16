@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T01:52:01",
+  "generated_at": "2026-11-16T01:44:08",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,7 +34,7 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 291,
+      "leads": 281,
       "passed": 0,
       "active": 0
     },
@@ -58,23 +58,23 @@
       "passed": 0,
       "active": 0
     },
-    "indeed": {
-      "leads": 9,
-      "passed": 0,
-      "active": 0
-    },
-    "portal:atree": {
-      "leads": 8,
-      "passed": 0,
-      "active": 0
-    },
     "portal:agrijob": {
       "leads": 6,
       "passed": 0,
       "active": 0
     },
+    "portal:atree": {
+      "leads": 3,
+      "passed": 0,
+      "active": 0
+    },
     "reliefweb-rss": {
-      "leads": 4,
+      "leads": 3,
+      "passed": 0,
+      "active": 0
+    },
+    "indeed": {
+      "leads": 2,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 560,
+    "leads": 537,
     "passed": 0,
     "active": 0
   }

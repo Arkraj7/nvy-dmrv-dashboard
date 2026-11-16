@@ -1,46 +1,46 @@
 {
-  "last_updated": "2026-11-15T07:22:05+05:30",
-  "last_updated_ist": "2026-11-15T07:22:05+05:30",
-  "last_pipeline_run_date_ist": "2026-11-15",
-  "active_open_jobs": 299,
-  "opened_this_week": 160,
-  "passed_this_week": 44,
-  "total_archived_jobs": 109,
+  "last_updated": "2026-11-16T07:14:08+05:30",
+  "last_updated_ist": "2026-11-16T07:14:08+05:30",
+  "last_pipeline_run_date_ist": "2026-11-16",
+  "active_open_jobs": 285,
+  "opened_this_week": 83,
+  "passed_this_week": 46,
+  "total_archived_jobs": 123,
   "total_historical_indexed": 408,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 137,
-      "archived": 25
+      "active": 133,
+      "archived": 29
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 44,
-      "archived": 12
+      "active": 43,
+      "archived": 13
     },
     "Renewable Energy & Clean Tech": {
       "active": 13,
       "archived": 0
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 15,
-      "archived": 18
+      "active": 12,
+      "archived": 21
     },
     "GIS, Remote Sensing & Earth Observation": {
-      "active": 19,
-      "archived": 19
+      "active": 18,
+      "archived": 20
     },
     "Grants & Research Funding": {
       "active": 3,
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 15,
-      "archived": 12
+      "active": 13,
+      "archived": 14
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 21,
-      "archived": 9
+      "active": 19,
+      "archived": 11
     },
     "Internships & Student Traineeships": {
       "active": 10,
@@ -55,8 +55,8 @@
       "archived": 3
     },
     "Workshops, Training & Capacity Building": {
-      "active": 8,
-      "archived": 1
+      "active": 7,
+      "archived": 2
     },
     "Memberships & Community Programs": {
       "active": 1,
@@ -76,49 +76,48 @@
     }
   },
   "by_state": {
-    "Maharashtra": 65,
-    "Delhi": 41,
-    "Karnataka": 37,
+    "Maharashtra": 64,
+    "Delhi": 37,
+    "Karnataka": 36,
     "Gujarat": 14,
     "Delhi NCR": 12,
     "Haryana": 12,
     "Uttar Pradesh": 12,
     "Telangana": 11,
-    "Tamil Nadu": 10,
-    "West Bengal": 6,
+    "Tamil Nadu": 9,
     "Kerala": 5,
+    "West Bengal": 5,
     "Assam": 4,
-    "Rajasthan": 4,
     "Uttarakhand": 4,
-    "Global / Remote": 3,
-    "Odisha": 3,
-    "Punjab": 3,
-    "Jharkhand": 2,
+    "Rajasthan": 3,
+    "Global / Remote": 2,
+    "Odisha": 2,
+    "Punjab": 2,
     "Assam / Haryana": 1,
     "Bihar": 1,
     "Chandigarh": 1,
     "Chhattisgarh": 1,
-    "Madhya Pradesh": 1
+    "Jharkhand": 1
   },
-  "active_global_jobs": 147,
+  "active_global_jobs": 144,
   "active_global_portals": 12,
-  "total_global_records": 159,
-  "total_archived_global_jobs": 101,
+  "total_global_records": 156,
+  "total_archived_global_jobs": 104,
   "global_jobs_by_region": {
-    "UN / Multilateral": 8,
     "Africa & Middle East": 15,
-    "Asia-Pacific": 15,
-    "North America": 16,
+    "Asia-Pacific": 14,
+    "Europe": 27,
+    "Global / Remote": 63,
     "Latin America": 2,
-    "Global / Remote": 64,
-    "Europe": 27
+    "North America": 15,
+    "UN / Multilateral": 8
   },
   "global_jobs_by_kind": {
-    "Job / Career": 91,
-    "Grant / Funding": 15,
+    "Competition / Award": 5,
     "Fellowship": 19,
-    "Internship": 7,
-    "Scholarship": 10,
-    "Competition / Award": 5
+    "Grant / Funding": 15,
+    "Internship": 6,
+    "Job / Career": 89,
+    "Scholarship": 10
   }
 }
