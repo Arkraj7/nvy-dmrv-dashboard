@@ -5,7 +5,7 @@
     <link>https://www.urbanforestpark.com</link>
     <description>Green internships and entry-level environmental jobs in India.</description>
     <language>en-in</language>
-    <lastBuildDate>Mon, 16 Nov 2026 05:13:43 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 13:35:07 GMT</lastBuildDate>
     <atom:link href="https://www.urbanforestpark.com/feed-internships.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>ESG (Intern)</title>
@@ -96,6 +96,15 @@
       <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
       <category>Internships &amp; Student Traineeships</category>
       <author>Council on Energy, Environment and Water (CEEW) (Remote (India))</author>
+    </item>
+    <item>
+      <title>Environmental Intern</title>
+      <link>https://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026</link>
+      <guid isPermaLink="true">https://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026</guid>
+      <description>Hands-on exposure to environmental project data collection/analysis, Excel calculations, research on environmental regulations, report preparation, AI tools.</description>
+      <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+      <category>Internships &amp; Student Traineeships</category>
+      <author>Techknowgreen Solutions Limited (Pune)</author>
     </item>
   </channel>
 </rss>
