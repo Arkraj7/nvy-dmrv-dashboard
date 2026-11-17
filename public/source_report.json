@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T01:44:08",
+  "generated_at": "2026-11-17T03:45:41",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +34,17 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 281,
+      "leads": 310,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 165,
+      "leads": 149,
       "passed": 0,
       "active": 0
     },
     "naukri": {
-      "leads": 50,
+      "leads": 68,
       "passed": 0,
       "active": 0
     },
@@ -53,8 +53,8 @@
       "passed": 0,
       "active": 0
     },
-    "google-news": {
-      "leads": 9,
+    "indeed": {
+      "leads": 6,
       "passed": 0,
       "active": 0
     },
@@ -63,8 +63,13 @@
       "passed": 0,
       "active": 0
     },
+    "google-news": {
+      "leads": 5,
+      "passed": 0,
+      "active": 0
+    },
     "portal:atree": {
-      "leads": 3,
+      "leads": 4,
       "passed": 0,
       "active": 0
     },
@@ -73,19 +78,19 @@
       "passed": 0,
       "active": 0
     },
-    "indeed": {
+    "portal:wri-india": {
       "leads": 2,
       "passed": 0,
       "active": 0
     },
-    "portal:wri-india": {
-      "leads": 2,
+    "freejobalert": {
+      "leads": 1,
       "passed": 0,
       "active": 0
     }
   },
   "totals": {
-    "leads": 537,
+    "leads": 570,
     "passed": 0,
     "active": 0
   }

@@ -1,18 +1,42 @@
 {
-  "last_updated": "2026-11-16T19:25:05+05:30",
-  "last_updated_ist": "2026-11-16T19:25:05+05:30",
-  "last_pipeline_run_date_ist": "2026-11-16",
-  "active_open_jobs": 296,
-  "opened_this_week": 83,
+  "last_updated": "2026-11-17T09:15:41+05:30",
+  "last_updated_ist": "2026-11-17T09:15:41+05:30",
+  "last_pipeline_run_date_ist": "2026-11-17",
+  "active_open_jobs": 295,
+  "opened_this_week": 94,
   "passed_this_week": 46,
-  "total_archived_jobs": 123,
+  "total_archived_jobs": 124,
   "total_historical_indexed": 419,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
+    "GIS, Remote Sensing & Earth Observation": {
+      "active": 18,
+      "archived": 21
+    },
+    "Internships & Student Traineeships": {
+      "active": 11,
+      "archived": 4
+    },
+    "Research Associate & Project Staff (Contractual)": {
+      "active": 16,
+      "archived": 21
+    },
+    "Academic, JRF, SRF & PhD Positions": {
+      "active": 14,
+      "archived": 14
+    },
     "ESG, Carbon Markets & Corporate Sustainability": {
       "active": 135,
       "archived": 29
+    },
+    "Fellowships & Leadership Programs": {
+      "active": 8,
+      "archived": 2
+    },
+    "Grants & Research Funding": {
+      "active": 4,
+      "archived": 0
     },
     "Climate Policy, Think-Tanks & Fellowships": {
       "active": 43,
@@ -22,33 +46,9 @@
       "active": 13,
       "archived": 0
     },
-    "Research Associate & Project Staff (Contractual)": {
-      "active": 16,
-      "archived": 21
-    },
-    "GIS, Remote Sensing & Earth Observation": {
-      "active": 19,
-      "archived": 20
-    },
-    "Grants & Research Funding": {
-      "active": 4,
-      "archived": 0
-    },
-    "Academic, JRF, SRF & PhD Positions": {
-      "active": 14,
-      "archived": 14
-    },
     "Forestry, Wildlife & Afforestation": {
       "active": 19,
       "archived": 11
-    },
-    "Internships & Student Traineeships": {
-      "active": 11,
-      "archived": 4
-    },
-    "Fellowships & Leadership Programs": {
-      "active": 8,
-      "archived": 2
     },
     "Conferences, Summits & Events": {
       "active": 4,
@@ -76,7 +76,7 @@
     }
   },
   "by_state": {
-    "Maharashtra": 67,
+    "Maharashtra": 66,
     "Delhi": 37,
     "Karnataka": 36,
     "Gujarat": 14,
@@ -101,27 +101,25 @@
     "Sikkim / West Bengal": 1,
     "Various": 1
   },
-  "active_global_jobs": 147,
+  "active_global_jobs": 143,
   "active_global_portals": 12,
-  "total_global_records": 159,
-  "total_archived_global_jobs": 104,
+  "total_global_records": 155,
+  "total_archived_global_jobs": 109,
   "global_jobs_by_region": {
-    "UN / Multilateral": 8,
     "Africa & Middle East": 15,
-    "Asia-Pacific": 14,
-    "North America": 15,
-    "Latin America": 2,
-    "Global / Remote": 63,
+    "Asia-Pacific": 13,
     "Europe": 27,
-    "South Asia": 1,
-    "Global": 2
+    "Global / Remote": 65,
+    "Latin America": 1,
+    "North America": 14,
+    "UN / Multilateral": 8
   },
   "global_jobs_by_kind": {
-    "Job / Career": 92,
-    "Grant / Funding": 15,
-    "Fellowship": 19,
+    "Competition / Award": 5,
+    "Fellowship": 18,
+    "Grant / Funding": 13,
     "Internship": 6,
-    "Scholarship": 10,
-    "Competition / Award": 5
+    "Job / Career": 91,
+    "Scholarship": 10
   }
 }
