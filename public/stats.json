@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-11-17T09:15:41+05:30",
-  "last_updated_ist": "2026-11-17T09:15:41+05:30",
+  "last_updated": "2026-11-17T09:16:30+05:30",
+  "last_updated_ist": "2026-11-17T09:16:30+05:30",
   "last_pipeline_run_date_ist": "2026-11-17",
-  "active_open_jobs": 295,
+  "active_open_jobs": 294,
   "opened_this_week": 94,
   "passed_this_week": 46,
   "total_archived_jobs": 124,
-  "total_historical_indexed": 419,
+  "total_historical_indexed": 418,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
@@ -34,16 +34,16 @@
       "active": 8,
       "archived": 2
     },
-    "Grants & Research Funding": {
-      "active": 4,
-      "archived": 0
-    },
     "Climate Policy, Think-Tanks & Fellowships": {
       "active": 43,
       "archived": 13
     },
     "Renewable Energy & Clean Tech": {
       "active": 13,
+      "archived": 0
+    },
+    "Grants & Research Funding": {
+      "active": 3,
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
@@ -98,28 +98,27 @@
     "Chandigarh": 1,
     "Chhattisgarh": 1,
     "Jharkhand": 1,
-    "Sikkim / West Bengal": 1,
-    "Various": 1
+    "Sikkim / West Bengal": 1
   },
   "active_global_jobs": 143,
   "active_global_portals": 12,
   "total_global_records": 155,
   "total_archived_global_jobs": 109,
   "global_jobs_by_region": {
+    "Global / Remote": 65,
+    "UN / Multilateral": 8,
     "Africa & Middle East": 15,
     "Asia-Pacific": 13,
-    "Europe": 27,
-    "Global / Remote": 65,
-    "Latin America": 1,
     "North America": 14,
-    "UN / Multilateral": 8
+    "Latin America": 1,
+    "Europe": 27
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 5,
-    "Fellowship": 18,
+    "Job / Career": 91,
     "Grant / Funding": 13,
     "Internship": 6,
-    "Job / Career": 91,
-    "Scholarship": 10
+    "Scholarship": 10,
+    "Fellowship": 18,
+    "Competition / Award": 5
   }
 }
