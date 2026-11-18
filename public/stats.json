@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-17T09:16:30+05:30",
-  "last_updated_ist": "2026-11-17T09:16:30+05:30",
-  "last_pipeline_run_date_ist": "2026-11-17",
-  "active_open_jobs": 294,
-  "opened_this_week": 94,
-  "passed_this_week": 46,
-  "total_archived_jobs": 124,
+  "last_updated": "2026-11-18T06:57:33+05:30",
+  "last_updated_ist": "2026-11-18T06:57:33+05:30",
+  "last_pipeline_run_date_ist": "2026-11-18",
+  "active_open_jobs": 251,
+  "opened_this_week": 93,
+  "passed_this_week": 88,
+  "total_archived_jobs": 167,
   "total_historical_indexed": 418,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -27,16 +27,16 @@
       "archived": 14
     },
     "ESG, Carbon Markets & Corporate Sustainability": {
-      "active": 135,
-      "archived": 29
+      "active": 96,
+      "archived": 68
     },
     "Fellowships & Leadership Programs": {
       "active": 8,
       "archived": 2
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 43,
-      "archived": 13
+      "active": 41,
+      "archived": 15
     },
     "Renewable Energy & Clean Tech": {
       "active": 13,
@@ -47,8 +47,8 @@
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 19,
-      "archived": 11
+      "active": 17,
+      "archived": 13
     },
     "Conferences, Summits & Events": {
       "active": 4,
@@ -76,49 +76,48 @@
     }
   },
   "by_state": {
-    "Maharashtra": 66,
+    "Maharashtra": 57,
     "Delhi": 37,
-    "Karnataka": 36,
-    "Gujarat": 14,
+    "Karnataka": 29,
     "Uttar Pradesh": 13,
-    "Delhi NCR": 12,
+    "Gujarat": 12,
     "Haryana": 12,
-    "Telangana": 11,
-    "Tamil Nadu": 9,
-    "West Bengal": 8,
-    "Kerala": 5,
-    "Assam": 4,
+    "Telangana": 9,
+    "West Bengal": 7,
+    "Tamil Nadu": 5,
+    "Kerala": 4,
     "Uttarakhand": 4,
     "Rajasthan": 3,
+    "Assam": 2,
+    "Delhi NCR": 2,
     "Global / Remote": 2,
-    "Odisha": 2,
-    "Punjab": 2,
     "Assam / Haryana": 1,
-    "Bihar": 1,
     "Chandigarh": 1,
     "Chhattisgarh": 1,
     "Jharkhand": 1,
+    "Odisha": 1,
+    "Punjab": 1,
     "Sikkim / West Bengal": 1
   },
-  "active_global_jobs": 143,
+  "active_global_jobs": 140,
   "active_global_portals": 12,
-  "total_global_records": 155,
-  "total_archived_global_jobs": 109,
+  "total_global_records": 152,
+  "total_archived_global_jobs": 115,
   "global_jobs_by_region": {
-    "Global / Remote": 65,
-    "UN / Multilateral": 8,
-    "Africa & Middle East": 15,
-    "Asia-Pacific": 13,
+    "Africa & Middle East": 13,
+    "Asia-Pacific": 10,
+    "Europe": 27,
+    "Global / Remote": 66,
+    "Latin America": 2,
     "North America": 14,
-    "Latin America": 1,
-    "Europe": 27
+    "UN / Multilateral": 8
   },
   "global_jobs_by_kind": {
-    "Job / Career": 91,
+    "Competition / Award": 5,
+    "Fellowship": 18,
     "Grant / Funding": 13,
     "Internship": 6,
-    "Scholarship": 10,
-    "Fellowship": 18,
-    "Competition / Award": 5
+    "Job / Career": 88,
+    "Scholarship": 10
   }
 }
