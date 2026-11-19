@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-18T06:57:37+05:30",
-  "last_updated_ist": "2026-11-18T06:57:37+05:30",
-  "last_pipeline_run_date_ist": "2026-11-18",
-  "active_open_jobs": 251,
+  "last_updated": "2026-11-19T07:04:43+05:30",
+  "last_updated_ist": "2026-11-19T07:04:43+05:30",
+  "last_pipeline_run_date_ist": "2026-11-19",
+  "active_open_jobs": 246,
   "opened_this_week": 93,
-  "passed_this_week": 88,
-  "total_archived_jobs": 167,
+  "passed_this_week": 93,
+  "total_archived_jobs": 172,
   "total_historical_indexed": 418,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -35,8 +35,8 @@
       "archived": 2
     },
     "Climate Policy, Think-Tanks & Fellowships": {
-      "active": 41,
-      "archived": 15
+      "active": 38,
+      "archived": 18
     },
     "Renewable Energy & Clean Tech": {
       "active": 13,
@@ -47,8 +47,8 @@
       "archived": 0
     },
     "Forestry, Wildlife & Afforestation": {
-      "active": 17,
-      "archived": 13
+      "active": 15,
+      "archived": 15
     },
     "Conferences, Summits & Events": {
       "active": 4,
@@ -80,8 +80,8 @@
     "Delhi": 37,
     "Karnataka": 29,
     "Uttar Pradesh": 13,
-    "Gujarat": 12,
     "Haryana": 12,
+    "Gujarat": 10,
     "Telangana": 9,
     "West Bengal": 7,
     "Tamil Nadu": 5,
@@ -96,28 +96,27 @@
     "Chhattisgarh": 1,
     "Jharkhand": 1,
     "Odisha": 1,
-    "Punjab": 1,
     "Sikkim / West Bengal": 1
   },
-  "active_global_jobs": 140,
+  "active_global_jobs": 142,
   "active_global_portals": 12,
-  "total_global_records": 152,
-  "total_archived_global_jobs": 115,
+  "total_global_records": 154,
+  "total_archived_global_jobs": 120,
   "global_jobs_by_region": {
-    "Latin America": 2,
-    "Global / Remote": 66,
-    "Asia-Pacific": 10,
-    "UN / Multilateral": 8,
-    "Africa & Middle East": 13,
+    "Africa & Middle East": 12,
+    "Asia-Pacific": 12,
+    "Europe": 29,
+    "Global / Remote": 65,
+    "Latin America": 3,
     "North America": 14,
-    "Europe": 27
+    "UN / Multilateral": 7
   },
   "global_jobs_by_kind": {
-    "Job / Career": 88,
+    "Competition / Award": 5,
+    "Fellowship": 17,
     "Grant / Funding": 13,
     "Internship": 6,
-    "Scholarship": 10,
-    "Fellowship": 18,
-    "Competition / Award": 5
+    "Job / Career": 91,
+    "Scholarship": 10
   }
 }

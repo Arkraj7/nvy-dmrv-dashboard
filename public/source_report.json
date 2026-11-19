@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T01:27:33",
+  "generated_at": "2026-11-19T01:34:43",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,27 +34,27 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 284,
+      "leads": 220,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 150,
+      "leads": 151,
       "passed": 0,
       "active": 0
     },
     "naukri": {
-      "leads": 50,
+      "leads": 102,
       "passed": 0,
       "active": 0
     },
     "portal:ceew": {
-      "leads": 16,
+      "leads": 18,
       "passed": 0,
       "active": 0
     },
     "indeed": {
-      "leads": 10,
+      "leads": 12,
       "passed": 0,
       "active": 0
     },
@@ -64,7 +64,7 @@
       "active": 0
     },
     "portal:agrijob": {
-      "leads": 7,
+      "leads": 5,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 534,
+    "leads": 525,
     "passed": 0,
     "active": 0
   }
