@@ -6894,5 +6894,56 @@
       "reason_code": "DEAD_LINK",
       "archived_at": "2026-10-20"
     }
+  },
+  {
+    "id": "greens-metsell-research-associate-gis-chattogram-2026",
+    "date_added": "2026-11-16",
+    "date_posted": "2026-11-16",
+    "clean_title": "Research Associate (GIS/Remote Sensing)",
+    "organization": "GREENS (in collaboration with METSELL)",
+    "city": "Chattogram",
+    "state": "",
+    "country": "Bangladesh",
+    "region": "Global / Remote",
+    "category": "GIS, Remote Sensing & Earth Observation",
+    "position_type": "Project Associate / Research Associate",
+    "opportunity_kind": "Job / Career",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "Full-Time",
+    "deadline_or_window": "30 November 2026",
+    "valid_through": "2026-11-30",
+    "qualification_summary": "Bachelor's or Master's in GIS, Geography, Remote Sensing, Public Health, Environmental Science or related discipline.",
+    "compensation_or_fellowship": "Not disclosed",
+    "role_summary": "Interdisciplinary research involving geospatial analysis, statistical modeling, ML/DL for environmental and water treatment projects in Bangladesh.",
+    "key_responsibilities": "",
+    "must_have_skills": "",
+    "application_tip": "",
+    "apply_url": "mailto:metsell.career@gmail.com",
+    "org_website": "https://greens-bd.org",
+    "org_domain": "greens-bd.org",
+    "source_portal": "LinkedIn post (GREENS/METSELL)",
+    "entry_type": "posting",
+    "status": "archived",
+    "global": true,
+    "evergreen": null,
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "verification": {
+      "verified_at": "2026-11-16",
+      "method": "manual-addition",
+      "source": "LinkedIn post (GREENS/METSELL)",
+      "http_status": null,
+      "note": "Added from LinkedIn post. Facts taken from the post content only."
+    },
+    "last_link_check": {
+      "checked_at": "2026-11-19T01:59:43Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 0,
+      "consecutive_failures": 3
+    },
+    "date_archived": "2026-11-19",
+    "archive_reason": "dead_page"
   }
 ]
