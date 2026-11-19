@@ -137,13 +137,20 @@
     "org_domain": "iucn.org",
     "source_portal": "Official Organization Website",
     "entry_type": "posting",
-    "status": "active",
+    "status": "quarantined",
     "global": true,
     "evergreen": false,
     "verification": {
       "verified_at": "2026-11-19",
       "method": "official-source-harvest",
       "source": "IUCN"
+    },
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "title length 150 outside 30-75: 'Publications Officer at International Union for Conservation of… | Cambridge Office Cambridge United Kingdom of Great Britain and Northern Ireland Job'",
+      "date": "2026-11-19",
+      "source": "audit_and_sanitize.py"
     }
   },
   {
