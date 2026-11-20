@@ -10530,5 +10530,72 @@
       "checked_at": "2026-10-20T10:19:57.982215+00:00",
       "platform": ""
     }
+  },
+  {
+    "clean_title": "Governance Research Fellowship 2026 (Modi@25)",
+    "organization": "Rambhau Mhalgi Prabodhini (RMP)",
+    "city": "New Delhi",
+    "state": "Delhi",
+    "country": "India",
+    "region": "",
+    "category": "Fellowships & Leadership Programs",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Fellowship",
+    "experience_level": "Postgraduate",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Rolling / Open",
+    "valid_through": "2026-12-07",
+    "qualification_summary": "Postgraduates from any discipline. Six-month full-time research fellowship; approximately 10 fellows will be selected.",
+    "compensation_or_fellowship": "Rs. 1,00,000 per month + research and travel support",
+    "role_summary": "Governance Research Fellowship 2026 under Understanding Transformative Governance - Modi@25: six-month full-time research on governance and policy transformation across administrative reforms, digital governance, welfare and infrastructure, national identity and security, and institutional models.",
+    "key_responsibilities": [
+      "Governance research",
+      "Policy analysis",
+      "Research writing",
+      "Research assignment"
+    ],
+    "must_have_skills": [
+      "Public policy",
+      "Governance",
+      "Research",
+      "Writing"
+    ],
+    "application_tip": "Apply via the official process page. Selection: application, screening, shortlisting, research assignment, interview.",
+    "apply_url": "https://www.utgf.rmponweb.org/process.html",
+    "org_website": "https://rmponweb.org",
+    "org_domain": "rmponweb.org",
+    "source_portal": "LinkedIn post (Nagaraj Varatharaj)",
+    "entry_type": "posting",
+    "status": "archived",
+    "global": false,
+    "evergreen": false,
+    "date_added": "2026-11-07",
+    "date_posted": "2026-11-07",
+    "title_hi": "शासन अनुसंधान फेलोशिप 2026 (Modi@25) — Rambhau Mhalgi Prabodhini (RMP)",
+    "summary_hi": "यह फेलोशिप / इंटर्नशिप Rambhau Mhalgi Prabodhini (RMP) (Delhi) हेतु उपलब्ध है। आवश्यक योग्यता: Postgraduates from any discipline. Six-month full-time research fellowship; approximately 10 fellows will be selected.। आवेदन एवं पात्रता की पूर्ण जानकारी हेतु आधिकारिक पोर्टल अवश्य देखें।",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-22",
+    "verification": {
+      "verified_at": "2026-11-16T00:06:58.424059+00:00",
+      "final_url": "https://www.utgf.rmponweb.org/process.html",
+      "final_host": "www.utgf.rmponweb.org",
+      "http_status": 200,
+      "content_hash": "036633d022a0482e9d3bfbc9aba221b3",
+      "entry_type": "posting",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
+    "id": "rmp-governance-research-fellowship-2026",
+    "last_link_check": {
+      "checked_at": "2026-11-20T01:51:45Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 200,
+      "consecutive_failures": 3
+    },
+    "date_archived": "2026-11-20",
+    "archive_reason": "dead_page"
   }
 ]
