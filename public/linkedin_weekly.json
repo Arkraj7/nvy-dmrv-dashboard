@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-19T07:04:46+05:30",
-  "week_of": "2026-11-19",
+  "generated_at": "2026-11-20T06:37:19+05:30",
+  "week_of": "2026-11-20",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
-  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (5 India + 5 Global), verified with direct application links:",
   "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
-    "india": 7,
-    "global": 3
+    "india": 5,
+    "global": 5
   },
   "items": [
     {
@@ -28,30 +28,42 @@
     },
     {
       "position": 2,
-      "registry": "india",
-      "id": "iiser-kolkata-jrf-landscape-ecology-gis-terai-2026",
-      "title": "Junior Research Fellow (JRF) - Landscape Ecology & GIS/RS",
-      "organization": "Indian Institute of Science Education and Research (IISER) Kolkata",
-      "location": "Kalyani",
-      "position_type": "JRF / SRF",
-      "opportunity_kind": "Fellowship",
-      "score": 47.0,
-      "url": "https://www.urbanforestpark.com/jobs/iiser-kolkata-jrf-landscape-ecology-gis-terai-2026"
+      "registry": "global",
+      "id": "research-assistant-for-extended-producer-responsibilities-ep",
+      "title": "Research Assistant for Extended Producer Responsibilities (EPR) for Packaging",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Jakarta",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep"
     },
     {
       "position": 3,
-      "registry": "india",
-      "id": "parivesh-environmental-engineering-eia-noida-2026",
-      "title": "Environmental Professional (EIA)",
-      "organization": "Parivesh Environmental Engineering Services",
-      "location": "Noida",
-      "position_type": "Full-Time Corporate / NGO",
+      "registry": "global",
+      "id": "just-transition-and-gedsi-research-consultant-for-epr-for-pa",
+      "title": "Just Transition and GEDSI Research Consultant for EPR for Packaging",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Jakarta",
+      "position_type": "Young Professional / Consultant (Contractual)",
       "opportunity_kind": "Job / Career",
-      "score": 38.0,
-      "url": "https://www.urbanforestpark.com/jobs/parivesh-environmental-engineering-eia-noida-2026"
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/just-transition-and-gedsi-research-consultant-for-epr-for-pa"
     },
     {
       "position": 4,
+      "registry": "global",
+      "id": "senior-product-manager-core-platform-restorationworks-world",
+      "title": "Senior Product Manager, Core Platform, RestorationWorks",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Washington",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/senior-product-manager-core-platform-restorationworks-world"
+    },
+    {
+      "position": 5,
       "registry": "india",
       "id": "atree-ihr-fellowship-2026",
       "title": "IHR Fellowship 2026",
@@ -61,18 +73,6 @@
       "opportunity_kind": "Fellowship",
       "score": 37.0,
       "url": "https://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026"
-    },
-    {
-      "position": 5,
-      "registry": "india",
-      "id": "pi-rahi-ignite-2-0-2026",
-      "title": "IGNITE 2.0 - Initiation Grant up to Rs. 3 Lakhs (TRL 1-3)",
-      "organization": "PI-RAHI: Northern Region S&T Cluster",
-      "location": "Northern Region, India, Multiple States / Remote",
-      "position_type": "Young Professional / Consultant (Contractual)",
-      "opportunity_kind": "Grant / Funding",
-      "score": 36.0,
-      "url": "https://www.urbanforestpark.com/jobs/pi-rahi-ignite-2-0-2026"
     },
     {
       "position": 6,
@@ -88,18 +88,42 @@
     },
     {
       "position": 7,
-      "registry": "india",
-      "id": "crisp-fellowship-programme-2027",
-      "title": "CRISP Fellowship Programme 2027",
-      "organization": "Centre for Research in Schemes & Policies (CRISP)",
-      "location": "Multiple States, Multiple States / Remote",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 33.0,
-      "url": "https://www.urbanforestpark.com/jobs/crisp-fellowship-programme-2027"
+      "registry": "global",
+      "id": "for-pooling-consultant-solid-waste-management-expert-team-le",
+      "title": "For Pooling - Consultant: Solid Waste Management Expert (Team Lead) - Mindanao (Filipino Nationals Only)",
+      "organization": "Acción contra el Hambre España",
+      "location": "Philippines",
+      "position_type": "Young Professional / Consultant (Contractual)",
+      "opportunity_kind": "Grant / Funding",
+      "score": 32.0,
+      "url": "https://www.urbanforestpark.com/jobs/for-pooling-consultant-solid-waste-management-expert-team-le"
     },
     {
       "position": 8,
+      "registry": "india",
+      "id": "jpalsouth-research-manager-better-bricks-2026",
+      "title": "Research Manager - Better Bricks",
+      "organization": "J-PAL South Asia",
+      "location": "West Bengal",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 32.0,
+      "url": "https://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026"
+    },
+    {
+      "position": 9,
+      "registry": "india",
+      "id": "climate-collective-communications-associate-remote-2026",
+      "title": "Communications Associate",
+      "organization": "Climate Collective Foundation",
+      "location": "Remote",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 32.0,
+      "url": "https://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026"
+    },
+    {
+      "position": 10,
       "registry": "india",
       "id": "techknowgreen-environmental-intern-pune-2026",
       "title": "Environmental Intern",
@@ -109,31 +133,7 @@
       "opportunity_kind": "Internship",
       "score": 31.0,
       "url": "https://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026"
-    },
-    {
-      "position": 9,
-      "registry": "global",
-      "id": "asia-foundation-development-fellows-2027",
-      "title": "Asia Development Fellows Program 2027",
-      "organization": "The Asia Foundation",
-      "location": "Asia-Pacific",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 29.0,
-      "url": "https://www.urbanforestpark.com/jobs/asia-foundation-development-fellows-2027"
-    },
-    {
-      "position": 10,
-      "registry": "global",
-      "id": "kaust-fellowship-2027",
-      "title": "KAUST Fellowship 2027 (Master's & PhD)",
-      "organization": "King Abdullah University of Science and Technology (KAUST)",
-      "location": "Thuwal",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Scholarship",
-      "score": 28.0,
-      "url": "https://www.urbanforestpark.com/jobs/kaust-fellowship-2027"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (7 India + 3 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Senior Economist — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-economist-world-resources-institute-wri\n\n2. [INDIA] Junior Research Fellow (JRF) - Landscape Ecology & GIS/RS — Indian Institute of Science Education and Research (IISER) Kolkata (Kalyani | JRF / SRF)\nhttps://www.urbanforestpark.com/jobs/iiser-kolkata-jrf-landscape-ecology-gis-terai-2026\n\n3. [INDIA] Environmental Professional (EIA) — Parivesh Environmental Engineering Services (Noida | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/parivesh-environmental-engineering-eia-noida-2026\n\n4. [INDIA] IHR Fellowship 2026 — Ashoka Trust for Research in Ecology and the Environment (ATREE) (Gangtok / Kalimpong | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026\n\n5. [INDIA] IGNITE 2.0 - Initiation Grant up to Rs. 3 Lakhs (TRL 1-3) — PI-RAHI: Northern Region S&T Cluster (Northern Region, India, Multiple States / Remote | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/pi-rahi-ignite-2-0-2026\n\n6. [INDIA] GIS/Remote Sensing Instructor — Virtual Institute of GIS & Remote Sensing (VIGRS) (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026\n\n7. [INDIA] CRISP Fellowship Programme 2027 — Centre for Research in Schemes & Policies (CRISP) (Multiple States, Multiple States / Remote | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/crisp-fellowship-programme-2027\n\n8. [INDIA] Environmental Intern — Techknowgreen Solutions Limited (Pune | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026\n\n9. [GLOBAL] Asia Development Fellows Program 2027 — The Asia Foundation (Asia-Pacific | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/asia-foundation-development-fellows-2027\n\n10. [GLOBAL] KAUST Fellowship 2027 (Master's & PhD) — King Abdullah University of Science and Technology (KAUST) (Thuwal | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/kaust-fellowship-2027\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (5 India + 5 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Senior Economist — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-economist-world-resources-institute-wri\n\n2. [GLOBAL] Research Assistant for Extended Producer Responsibilities (EPR) for Packaging — World Resources Institute (WRI) (Jakarta | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep\n\n3. [GLOBAL] Just Transition and GEDSI Research Consultant for EPR for Packaging — World Resources Institute (WRI) (Jakarta | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/just-transition-and-gedsi-research-consultant-for-epr-for-pa\n\n4. [GLOBAL] Senior Product Manager, Core Platform, RestorationWorks — World Resources Institute (WRI) (Washington | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-product-manager-core-platform-restorationworks-world\n\n5. [INDIA] IHR Fellowship 2026 — Ashoka Trust for Research in Ecology and the Environment (ATREE) (Gangtok / Kalimpong | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026\n\n6. [INDIA] GIS/Remote Sensing Instructor — Virtual Institute of GIS & Remote Sensing (VIGRS) (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026\n\n7. [GLOBAL] For Pooling - Consultant: Solid Waste Management Expert (Team Lead) - Mindanao (Filipino Nationals Only) — Acción contra el Hambre España (Philippines | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/for-pooling-consultant-solid-waste-management-expert-team-le\n\n8. [INDIA] Research Manager - Better Bricks — J-PAL South Asia (West Bengal | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026\n\n9. [INDIA] Communications Associate — Climate Collective Foundation (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026\n\n10. [INDIA] Environmental Intern — Techknowgreen Solutions Limited (Pune | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }

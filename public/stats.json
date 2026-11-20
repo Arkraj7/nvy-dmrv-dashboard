@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-20T06:37:15+05:30",
-  "last_updated_ist": "2026-11-20T06:37:15+05:30",
+  "last_updated": "2026-11-20T06:37:20+05:30",
+  "last_updated_ist": "2026-11-20T06:37:20+05:30",
   "last_pipeline_run_date_ist": "2026-11-20",
   "active_open_jobs": 224,
   "opened_this_week": 5,
@@ -103,20 +103,20 @@
   "total_global_records": 152,
   "total_archived_global_jobs": 125,
   "global_jobs_by_region": {
-    "Africa & Middle East": 11,
     "Asia-Pacific": 13,
+    "Africa & Middle East": 11,
     "Europe": 28,
-    "Global / Remote": 64,
     "Latin America": 3,
-    "North America": 14,
-    "UN / Multilateral": 7
+    "Global / Remote": 64,
+    "UN / Multilateral": 7,
+    "North America": 14
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 5,
-    "Fellowship": 16,
-    "Grant / Funding": 13,
-    "Internship": 5,
     "Job / Career": 91,
-    "Scholarship": 10
+    "Grant / Funding": 13,
+    "Scholarship": 10,
+    "Fellowship": 16,
+    "Internship": 5,
+    "Competition / Award": 5
   }
 }
