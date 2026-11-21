@@ -1,15 +1,19 @@
 {
-  "last_updated": "2026-11-20T06:37:20+05:30",
-  "last_updated_ist": "2026-11-20T06:37:20+05:30",
-  "last_pipeline_run_date_ist": "2026-11-20",
-  "active_open_jobs": 224,
-  "opened_this_week": 5,
-  "passed_this_week": 113,
-  "total_archived_jobs": 194,
-  "total_historical_indexed": 418,
+  "last_updated": "2026-11-21T06:38:39+05:30",
+  "last_updated_ist": "2026-11-21T06:38:39+05:30",
+  "last_pipeline_run_date_ist": "2026-11-21",
+  "active_open_jobs": 222,
+  "opened_this_week": 6,
+  "passed_this_week": 96,
+  "total_archived_jobs": 197,
+  "total_historical_indexed": 419,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
+    "Competitions, Hackathons & Awards": {
+      "active": 1,
+      "archived": 1
+    },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 18,
       "archived": 21
@@ -27,8 +31,8 @@
       "archived": 71
     },
     "Fellowships & Leadership Programs": {
-      "active": 7,
-      "archived": 3
+      "active": 6,
+      "archived": 4
     },
     "Climate Policy, Think-Tanks & Fellowships": {
       "active": 36,
@@ -43,8 +47,8 @@
       "archived": 0
     },
     "Academic, JRF, SRF & PhD Positions": {
-      "active": 9,
-      "archived": 19
+      "active": 8,
+      "archived": 20
     },
     "Forestry, Wildlife & Afforestation": {
       "active": 11,
@@ -58,27 +62,23 @@
       "active": 7,
       "archived": 2
     },
-    "Memberships & Community Programs": {
-      "active": 1,
-      "archived": 0
-    },
     "Ambassador & Fellowship Programs": {
       "active": 1,
       "archived": 0
     },
+    "Memberships & Community Programs": {
+      "active": 0,
+      "archived": 1
+    },
     "Scholarships & Doctoral Support": {
       "active": 0,
       "archived": 4
-    },
-    "Competitions, Hackathons & Awards": {
-      "active": 0,
-      "archived": 1
     }
   },
   "by_state": {
     "Maharashtra": 51,
-    "Delhi": 37,
-    "Karnataka": 28,
+    "Delhi": 36,
+    "Karnataka": 27,
     "Haryana": 12,
     "Uttar Pradesh": 11,
     "Gujarat": 10,
@@ -87,8 +87,8 @@
     "West Bengal": 5,
     "Kerala": 4,
     "Rajasthan": 3,
+    "Uttarakhand": 3,
     "Global / Remote": 2,
-    "Uttarakhand": 2,
     "Assam": 1,
     "Assam / Haryana": 1,
     "Chandigarh": 1,
@@ -98,25 +98,25 @@
     "Odisha": 1,
     "Sikkim / West Bengal": 1
   },
-  "active_global_jobs": 140,
+  "active_global_jobs": 137,
   "active_global_portals": 12,
-  "total_global_records": 152,
-  "total_archived_global_jobs": 125,
+  "total_global_records": 149,
+  "total_archived_global_jobs": 131,
   "global_jobs_by_region": {
-    "Asia-Pacific": 13,
-    "Africa & Middle East": 11,
+    "Africa & Middle East": 10,
+    "Asia-Pacific": 11,
     "Europe": 28,
-    "Latin America": 3,
-    "Global / Remote": 64,
-    "UN / Multilateral": 7,
-    "North America": 14
+    "Global / Remote": 63,
+    "Latin America": 4,
+    "North America": 14,
+    "UN / Multilateral": 7
   },
   "global_jobs_by_kind": {
-    "Job / Career": 91,
-    "Grant / Funding": 13,
-    "Scholarship": 10,
+    "Competition / Award": 5,
     "Fellowship": 16,
+    "Grant / Funding": 11,
     "Internship": 5,
-    "Competition / Award": 5
+    "Job / Career": 91,
+    "Scholarship": 9
   }
 }
