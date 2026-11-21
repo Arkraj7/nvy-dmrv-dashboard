@@ -3,6 +3,7 @@
     "id": "urja-bachat-pratiyogita-fri-dehradun",
     "date_added": "2026-11-21",
     "clean_title": "Energy Conservation Competition (Mission LiFE)",
+    "title_hi": "ऊर्जा संरक्षण प्रतियोगिता (Mission LiFE)",
     "organization": "Forest Research Institute (FRI), Dehradun",
     "state": "Uttarakhand",
     "city": "Dehradun",
@@ -16,6 +17,7 @@
     "qualification_summary": "Open to students and individuals interested in environmental conservation and sustainability.",
     "compensation_or_fellowship": "Not disclosed - see official portal",
     "role_summary": "The EIACP Resource Partner at FRI Dehradun is hosting a week-long energy conservation competition under the Mission LiFE initiative. Participants are encouraged to demonstrate simple, daily energy-saving measures that contribute to broader environmental sustainability goals. This initiative aims to foster a culture of resource efficiency and climate-conscious living among the public through active engagement and practical application of conservation techniques.",
+    "summary_hi": "Forest Research Institute (FRI), Dehradun, उत्तराखंड के EIACP संसाधन भागीदार द्वारा Mission LiFE पहल के अंतर्गत ऊर्जा संरक्षण प्रतियोगिता का आयोजन किया जा रहा है। इस प्रतियोगिता में पर्यावरण संरक्षण एवं संधारणीयता में रुचि रखने वाले सभी छात्र और नागरिक भाग लेने के पात्र हैं।",
     "key_responsibilities": [
       "Implement daily energy-saving measures in personal or professional settings",
       "Document conservation practices for submission to the EIACP team",
@@ -37,7 +39,7 @@
     "_qualification_is_default": false,
     "_compensation_is_default": false,
     "_deadline_is_default": false,
-    "status": "active",
+    "status": "quarantined",
     "date_archived": "2026-11-21",
     "link_policy": {
       "policy_version": 2,
@@ -46,7 +48,14 @@
       "final_url": "https://fri.icfre.gov.in/hindi/eiacp-rp-fri-%E0%A4%A6%E0%A5%87%E0%A4%B9%E0%A4%B0%E0%A4%BE%E0%A4%A8-%E0%A4%A8%E0%A5%87-%E0%A4%AE%E0%A4%BF%E0%A4%B6%E0%A4%A8-life-%E0%A4%95%E0%A5%87-%E0%A4%85%E0%A4%82%E0%A4%A4/"
     },
     "reverify_after": "2026-12-06",
-    "valid_through": "2026-12-21"
+    "valid_through": "2026-12-21",
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "link_policy",
+      "detail": "invalid entry_type None",
+      "date": "2026-11-21",
+      "source": "audit_and_sanitize.py"
+    }
   },
   {
     "id": "vigors-gis-remote-sensing-instructor-remote-2026",

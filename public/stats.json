@@ -1,19 +1,15 @@
 {
-  "last_updated": "2026-11-21T06:38:39+05:30",
-  "last_updated_ist": "2026-11-21T06:38:39+05:30",
+  "last_updated": "2026-11-21T06:39:13+05:30",
+  "last_updated_ist": "2026-11-21T06:39:13+05:30",
   "last_pipeline_run_date_ist": "2026-11-21",
-  "active_open_jobs": 222,
+  "active_open_jobs": 221,
   "opened_this_week": 6,
   "passed_this_week": 96,
   "total_archived_jobs": 197,
-  "total_historical_indexed": 419,
+  "total_historical_indexed": 418,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
   "by_category": {
-    "Competitions, Hackathons & Awards": {
-      "active": 1,
-      "archived": 1
-    },
     "GIS, Remote Sensing & Earth Observation": {
       "active": 18,
       "archived": 21
@@ -73,6 +69,10 @@
     "Scholarships & Doctoral Support": {
       "active": 0,
       "archived": 4
+    },
+    "Competitions, Hackathons & Awards": {
+      "active": 0,
+      "archived": 1
     }
   },
   "by_state": {
@@ -87,8 +87,8 @@
     "West Bengal": 5,
     "Kerala": 4,
     "Rajasthan": 3,
-    "Uttarakhand": 3,
     "Global / Remote": 2,
+    "Uttarakhand": 2,
     "Assam": 1,
     "Assam / Haryana": 1,
     "Chandigarh": 1,
@@ -103,20 +103,20 @@
   "total_global_records": 149,
   "total_archived_global_jobs": 131,
   "global_jobs_by_region": {
-    "Africa & Middle East": 10,
-    "Asia-Pacific": 11,
     "Europe": 28,
-    "Global / Remote": 63,
+    "Asia-Pacific": 11,
     "Latin America": 4,
-    "North America": 14,
-    "UN / Multilateral": 7
+    "Africa & Middle East": 10,
+    "Global / Remote": 63,
+    "UN / Multilateral": 7,
+    "North America": 14
   },
   "global_jobs_by_kind": {
-    "Competition / Award": 5,
-    "Fellowship": 16,
-    "Grant / Funding": 11,
-    "Internship": 5,
     "Job / Career": 91,
-    "Scholarship": 9
+    "Grant / Funding": 11,
+    "Scholarship": 9,
+    "Fellowship": 16,
+    "Internship": 5,
+    "Competition / Award": 5
   }
 }

@@ -1,30 +1,30 @@
 {
-  "generated_at": "2026-11-20T06:37:19+05:30",
-  "week_of": "2026-11-20",
+  "generated_at": "2026-11-21T06:38:51+05:30",
+  "week_of": "2026-11-21",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
-  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (5 India + 5 Global), verified with direct application links:",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (6 India + 4 Global), verified with direct application links:",
   "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
-    "india": 5,
-    "global": 5
+    "india": 6,
+    "global": 4
   },
   "items": [
     {
       "position": 1,
       "registry": "global",
-      "id": "senior-economist-world-resources-institute-wri",
-      "title": "Senior Economist",
+      "id": "especialista-senior-en-energ-a-world-resources-institute-wri",
+      "title": "Especialista Senior en Energía",
       "organization": "World Resources Institute (WRI)",
-      "location": "Jakarta",
+      "location": "Bogota",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 50.0,
-      "url": "https://www.urbanforestpark.com/jobs/senior-economist-world-resources-institute-wri"
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri"
     },
     {
       "position": 2,
@@ -53,17 +53,29 @@
     {
       "position": 4,
       "registry": "global",
-      "id": "senior-product-manager-core-platform-restorationworks-world",
-      "title": "Senior Product Manager, Core Platform, RestorationWorks",
+      "id": "engineering-manager-mrv-product-world-resources-institute-wr",
+      "title": "Engineering Manager, MRV Product",
       "organization": "World Resources Institute (WRI)",
       "location": "Washington",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
       "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/senior-product-manager-core-platform-restorationworks-world"
+      "url": "https://www.urbanforestpark.com/jobs/engineering-manager-mrv-product-world-resources-institute-wr"
     },
     {
       "position": 5,
+      "registry": "india",
+      "id": "urja-bachat-pratiyogita-fri-dehradun",
+      "title": "Energy Conservation Competition (Mission LiFE)",
+      "organization": "Forest Research Institute (FRI), Dehradun",
+      "location": "Dehradun, Uttarakhand",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Competition / Award",
+      "score": 40.0,
+      "url": "https://www.urbanforestpark.com/jobs/urja-bachat-pratiyogita-fri-dehradun"
+    },
+    {
+      "position": 6,
       "registry": "india",
       "id": "atree-ihr-fellowship-2026",
       "title": "IHR Fellowship 2026",
@@ -71,11 +83,11 @@
       "location": "Gangtok / Kalimpong",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Fellowship",
-      "score": 37.0,
+      "score": 29.0,
       "url": "https://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026"
     },
     {
-      "position": 6,
+      "position": 7,
       "registry": "india",
       "id": "vigors-gis-remote-sensing-instructor-remote-2026",
       "title": "GIS/Remote Sensing Instructor",
@@ -83,20 +95,8 @@
       "location": "Remote",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 36.0,
+      "score": 28.0,
       "url": "https://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026"
-    },
-    {
-      "position": 7,
-      "registry": "global",
-      "id": "for-pooling-consultant-solid-waste-management-expert-team-le",
-      "title": "For Pooling - Consultant: Solid Waste Management Expert (Team Lead) - Mindanao (Filipino Nationals Only)",
-      "organization": "Acción contra el Hambre España",
-      "location": "Philippines",
-      "position_type": "Young Professional / Consultant (Contractual)",
-      "opportunity_kind": "Grant / Funding",
-      "score": 32.0,
-      "url": "https://www.urbanforestpark.com/jobs/for-pooling-consultant-solid-waste-management-expert-team-le"
     },
     {
       "position": 8,
@@ -107,7 +107,7 @@
       "location": "West Bengal",
       "position_type": "Project Associate / Research Associate",
       "opportunity_kind": "Job / Career",
-      "score": 32.0,
+      "score": 24.0,
       "url": "https://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026"
     },
     {
@@ -119,7 +119,7 @@
       "location": "Remote",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 32.0,
+      "score": 24.0,
       "url": "https://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026"
     },
     {
@@ -131,9 +131,9 @@
       "location": "Pune",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Internship",
-      "score": 31.0,
+      "score": 23.0,
       "url": "https://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (5 India + 5 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Senior Economist — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-economist-world-resources-institute-wri\n\n2. [GLOBAL] Research Assistant for Extended Producer Responsibilities (EPR) for Packaging — World Resources Institute (WRI) (Jakarta | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep\n\n3. [GLOBAL] Just Transition and GEDSI Research Consultant for EPR for Packaging — World Resources Institute (WRI) (Jakarta | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/just-transition-and-gedsi-research-consultant-for-epr-for-pa\n\n4. [GLOBAL] Senior Product Manager, Core Platform, RestorationWorks — World Resources Institute (WRI) (Washington | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-product-manager-core-platform-restorationworks-world\n\n5. [INDIA] IHR Fellowship 2026 — Ashoka Trust for Research in Ecology and the Environment (ATREE) (Gangtok / Kalimpong | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026\n\n6. [INDIA] GIS/Remote Sensing Instructor — Virtual Institute of GIS & Remote Sensing (VIGRS) (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026\n\n7. [GLOBAL] For Pooling - Consultant: Solid Waste Management Expert (Team Lead) - Mindanao (Filipino Nationals Only) — Acción contra el Hambre España (Philippines | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/for-pooling-consultant-solid-waste-management-expert-team-le\n\n8. [INDIA] Research Manager - Better Bricks — J-PAL South Asia (West Bengal | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026\n\n9. [INDIA] Communications Associate — Climate Collective Foundation (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026\n\n10. [INDIA] Environmental Intern — Techknowgreen Solutions Limited (Pune | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (6 India + 4 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Especialista Senior en Energía — World Resources Institute (WRI) (Bogota | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri\n\n2. [GLOBAL] Research Assistant for Extended Producer Responsibilities (EPR) for Packaging — World Resources Institute (WRI) (Jakarta | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep\n\n3. [GLOBAL] Just Transition and GEDSI Research Consultant for EPR for Packaging — World Resources Institute (WRI) (Jakarta | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/just-transition-and-gedsi-research-consultant-for-epr-for-pa\n\n4. [GLOBAL] Engineering Manager, MRV Product — World Resources Institute (WRI) (Washington | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/engineering-manager-mrv-product-world-resources-institute-wr\n\n5. [INDIA] Energy Conservation Competition (Mission LiFE) — Forest Research Institute (FRI), Dehradun (Dehradun, Uttarakhand | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/urja-bachat-pratiyogita-fri-dehradun\n\n6. [INDIA] IHR Fellowship 2026 — Ashoka Trust for Research in Ecology and the Environment (ATREE) (Gangtok / Kalimpong | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026\n\n7. [INDIA] GIS/Remote Sensing Instructor — Virtual Institute of GIS & Remote Sensing (VIGRS) (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026\n\n8. [INDIA] Research Manager - Better Bricks — J-PAL South Asia (West Bengal | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026\n\n9. [INDIA] Communications Associate — Climate Collective Foundation (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026\n\n10. [INDIA] Environmental Intern — Techknowgreen Solutions Limited (Pune | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
