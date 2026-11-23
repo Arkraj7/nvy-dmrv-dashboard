@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T01:54:03",
+  "generated_at": "2026-11-23T01:44:40",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +34,17 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 194,
-      "passed": 1,
-      "active": 1
+      "leads": 286,
+      "passed": 0,
+      "active": 0
     },
     "official-page": {
-      "leads": 163,
+      "leads": 150,
       "passed": 0,
       "active": 0
     },
     "naukri": {
-      "leads": 96,
+      "leads": 51,
       "passed": 0,
       "active": 0
     },
@@ -64,7 +64,7 @@
       "active": 0
     },
     "reliefweb-rss": {
-      "leads": 4,
+      "leads": 3,
       "passed": 0,
       "active": 0
     },
@@ -85,8 +85,8 @@
     }
   },
   "totals": {
-    "leads": 497,
-    "passed": 1,
-    "active": 1
+    "leads": 530,
+    "passed": 0,
+    "active": 0
   }
 }
