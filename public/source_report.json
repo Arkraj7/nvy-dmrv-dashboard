@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T01:44:40",
+  "generated_at": "2026-11-23T02:07:01",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,12 +34,12 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 286,
+      "leads": 217,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 150,
+      "leads": 151,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 530,
+    "leads": 462,
     "passed": 0,
     "active": 0
   }
