@@ -1,33 +1,45 @@
 {
-  "generated_at": "2026-11-23T18:56:30+05:30",
-  "week_of": "2026-11-23",
+  "generated_at": "2026-11-24T09:49:25+05:30",
+  "week_of": "2026-11-24",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
-  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (6 India + 4 Global), verified with direct application links:",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:",
   "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
-    "india": 6,
-    "global": 4
+    "india": 1,
+    "global": 9
   },
   "items": [
     {
       "position": 1,
       "registry": "global",
-      "id": "especialista-senior-en-energ-a-world-resources-institute-wri",
-      "title": "Especialista Senior en Energía",
+      "id": "project-associate-wri-africa-food-program-world-resources-in",
+      "title": "Project Associate - WRI Africa Food Program",
       "organization": "World Resources Institute (WRI)",
-      "location": "Bogota",
-      "position_type": "Full-Time Corporate / NGO",
+      "location": "Nairobi",
+      "position_type": "Project Associate / Research Associate",
       "opportunity_kind": "Job / Career",
       "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri"
+      "url": "https://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in"
     },
     {
       "position": 2,
+      "registry": "global",
+      "id": "expert-en-environnement-et-changement-climatique-soci-t-de-d",
+      "title": "Expert en environnement et changement climatique",
+      "organization": "Société de Développement International",
+      "location": "Chad",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 46.0,
+      "url": "https://www.urbanforestpark.com/jobs/expert-en-environnement-et-changement-climatique-soci-t-de-d"
+    },
+    {
+      "position": 3,
       "registry": "global",
       "id": "programme-operations-lead-pacific-community",
       "title": "Programme Operations Lead",
@@ -39,19 +51,31 @@
       "url": "https://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community"
     },
     {
-      "position": 3,
+      "position": 4,
       "registry": "global",
-      "id": "programme-manager-sustainable-development-32-38-hours-care-n",
-      "title": "Programme Manager Sustainable Development (32-38 hours)",
-      "organization": "CARE Nederland",
-      "location": "Netherlands",
-      "position_type": "Full-Time Corporate / NGO",
+      "id": "myanmar-humanitarian-and-peacebuilding-partner-advisor-menno",
+      "title": "Myanmar Humanitarian and Peacebuilding Partner Advisor",
+      "organization": "Mennonite Central Committee",
+      "location": "Cambodia",
+      "position_type": "Young Professional / Consultant (Contractual)",
       "opportunity_kind": "Job / Career",
-      "score": 46.0,
-      "url": "https://www.urbanforestpark.com/jobs/programme-manager-sustainable-development-32-38-hours-care-n"
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/jobs/myanmar-humanitarian-and-peacebuilding-partner-advisor-menno"
     },
     {
-      "position": 4,
+      "position": 5,
+      "registry": "global",
+      "id": "greenhouse-gas-monitoring-system-iot-enabled-improved-cookst",
+      "title": "Greenhouse Gas Monitoring system, IoT enabled Improved Cookstove Technology locally design & Pilot testing, & Environmental Restoration and Climate Ch",
+      "organization": "Islamic Relief",
+      "location": "Somalia",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/jobs/greenhouse-gas-monitoring-system-iot-enabled-improved-cookst"
+    },
+    {
+      "position": 6,
       "registry": "global",
       "id": "champ-events-intern-world-resources-institute-wri",
       "title": "CHAMP Events intern",
@@ -63,7 +87,19 @@
       "url": "https://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri"
     },
     {
-      "position": 5,
+      "position": 7,
+      "registry": "global",
+      "id": "champ-communications-intern-world-resources-institute-wri",
+      "title": "CHAMP Communications Intern",
+      "organization": "World Resources Institute (WRI)",
+      "location": "The Hague",
+      "position_type": "Fellowship / Internship",
+      "opportunity_kind": "Internship",
+      "score": 41.0,
+      "url": "https://www.urbanforestpark.com/jobs/champ-communications-intern-world-resources-institute-wri"
+    },
+    {
+      "position": 8,
       "registry": "india",
       "id": "agm-civil-project-development-renew-gurugram",
       "title": "Assistant General Manager - Civil Project Development (Hydro PSP)",
@@ -75,65 +111,29 @@
       "url": "https://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram"
     },
     {
-      "position": 6,
-      "registry": "india",
-      "id": "atree-ihr-fellowship-2026",
-      "title": "IHR Fellowship 2026",
-      "organization": "Ashoka Trust for Research in Ecology and the Environment (ATREE)",
-      "location": "Gangtok / Kalimpong",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Fellowship",
-      "score": 29.0,
-      "url": "https://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026"
-    },
-    {
-      "position": 7,
-      "registry": "india",
-      "id": "vigors-gis-remote-sensing-instructor-remote-2026",
-      "title": "GIS/Remote Sensing Instructor",
-      "organization": "Virtual Institute of GIS & Remote Sensing (VIGRS)",
-      "location": "Remote",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 28.0,
-      "url": "https://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026"
-    },
-    {
-      "position": 8,
-      "registry": "india",
-      "id": "jpalsouth-research-manager-better-bricks-2026",
-      "title": "Research Manager - Better Bricks",
-      "organization": "J-PAL South Asia",
-      "location": "West Bengal",
-      "position_type": "Project Associate / Research Associate",
-      "opportunity_kind": "Job / Career",
-      "score": 24.0,
-      "url": "https://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026"
-    },
-    {
       "position": 9,
-      "registry": "india",
-      "id": "climate-collective-communications-associate-remote-2026",
-      "title": "Communications Associate",
-      "organization": "Climate Collective Foundation",
-      "location": "Remote",
+      "registry": "global",
+      "id": "especialista-senior-en-energ-a-world-resources-institute-wri",
+      "title": "Especialista Senior en Energía",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Bogota",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 24.0,
-      "url": "https://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026"
+      "score": 40.0,
+      "url": "https://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri"
     },
     {
       "position": 10,
-      "registry": "india",
-      "id": "techknowgreen-environmental-intern-pune-2026",
-      "title": "Environmental Intern",
-      "organization": "Techknowgreen Solutions Limited",
-      "location": "Pune",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 23.0,
-      "url": "https://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026"
+      "registry": "global",
+      "id": "research-assistant-for-extended-producer-responsibilities-ep",
+      "title": "Research Assistant for Extended Producer Responsibilities (EPR) for Packaging",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Jakarta",
+      "position_type": "Project Associate / Research Associate",
+      "opportunity_kind": "Job / Career",
+      "score": 40.0,
+      "url": "https://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (6 India + 4 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Especialista Senior en Energía — World Resources Institute (WRI) (Bogota | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri\n\n2. [GLOBAL] Programme Operations Lead — Pacific Community (Fiji | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community\n\n3. [GLOBAL] Programme Manager Sustainable Development (32-38 hours) — CARE Nederland (Netherlands | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-manager-sustainable-development-32-38-hours-care-n\n\n4. [GLOBAL] CHAMP Events intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri\n\n5. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\n6. [INDIA] IHR Fellowship 2026 — Ashoka Trust for Research in Ecology and the Environment (ATREE) (Gangtok / Kalimpong | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/atree-ihr-fellowship-2026\n\n7. [INDIA] GIS/Remote Sensing Instructor — Virtual Institute of GIS & Remote Sensing (VIGRS) (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026\n\n8. [INDIA] Research Manager - Better Bricks — J-PAL South Asia (West Bengal | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/jpalsouth-research-manager-better-bricks-2026\n\n9. [INDIA] Communications Associate — Climate Collective Foundation (Remote | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/climate-collective-communications-associate-remote-2026\n\n10. [INDIA] Environmental Intern — Techknowgreen Solutions Limited (Pune | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/techknowgreen-environmental-intern-pune-2026\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Project Associate - WRI Africa Food Program — World Resources Institute (WRI) (Nairobi | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in\n\n2. [GLOBAL] Expert en environnement et changement climatique — Société de Développement International (Chad | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/expert-en-environnement-et-changement-climatique-soci-t-de-d\n\n3. [GLOBAL] Programme Operations Lead — Pacific Community (Fiji | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community\n\n4. [GLOBAL] Myanmar Humanitarian and Peacebuilding Partner Advisor — Mennonite Central Committee (Cambodia | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/myanmar-humanitarian-and-peacebuilding-partner-advisor-menno\n\n5. [GLOBAL] Greenhouse Gas Monitoring system, IoT enabled Improved Cookstove Technology locally design & Pilot testing, & Environmental Restoration and Climate Ch — Islamic Relief (Somalia | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/greenhouse-gas-monitoring-system-iot-enabled-improved-cookst\n\n6. [GLOBAL] CHAMP Events intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri\n\n7. [GLOBAL] CHAMP Communications Intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-communications-intern-world-resources-institute-wri\n\n8. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\n9. [GLOBAL] Especialista Senior en Energía — World Resources Institute (WRI) (Bogota | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri\n\n10. [GLOBAL] Research Assistant for Extended Producer Responsibilities (EPR) for Packaging — World Resources Institute (WRI) (Jakarta | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
