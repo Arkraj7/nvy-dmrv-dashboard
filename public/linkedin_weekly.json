@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-24T10:23:48+05:30",
-  "week_of": "2026-11-24",
+  "generated_at": "2026-11-25T08:09:02+05:30",
+  "week_of": "2026-11-25",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
@@ -17,6 +17,42 @@
     {
       "position": 1,
       "registry": "global",
+      "id": "membership-officer-international-union-for-conservation-of-n",
+      "title": "Membership Officer",
+      "organization": "International Union for Conservation of Nature (IUCN)",
+      "location": "Oceania Regional Office Suva Fiji Oceania Regional Office",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/membership-officer-international-union-for-conservation-of-n"
+    },
+    {
+      "position": 2,
+      "registry": "global",
+      "id": "kadin-net-zero-hub-lead-world-resources-institute-wri",
+      "title": "KADIN Net Zero Hub Lead",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Jakarta",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/kadin-net-zero-hub-lead-world-resources-institute-wri"
+    },
+    {
+      "position": 3,
+      "registry": "global",
+      "id": "clean-energy-associate-world-resources-institute-wri",
+      "title": "Clean Energy Associate",
+      "organization": "World Resources Institute (WRI)",
+      "location": "Washington",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/clean-energy-associate-world-resources-institute-wri"
+    },
+    {
+      "position": 4,
+      "registry": "global",
       "id": "project-associate-wri-africa-food-program-world-resources-in",
       "title": "Project Associate - WRI Africa Food Program",
       "organization": "World Resources Institute (WRI)",
@@ -27,7 +63,7 @@
       "url": "https://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in"
     },
     {
-      "position": 2,
+      "position": 5,
       "registry": "global",
       "id": "expert-en-environnement-et-changement-climatique-soci-t-de-d",
       "title": "Expert en environnement et changement climatique",
@@ -39,7 +75,7 @@
       "url": "https://www.urbanforestpark.com/jobs/expert-en-environnement-et-changement-climatique-soci-t-de-d"
     },
     {
-      "position": 3,
+      "position": 6,
       "registry": "global",
       "id": "programme-operations-lead-pacific-community",
       "title": "Programme Operations Lead",
@@ -51,31 +87,31 @@
       "url": "https://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community"
     },
     {
-      "position": 4,
+      "position": 7,
       "registry": "global",
-      "id": "myanmar-humanitarian-and-peacebuilding-partner-advisor-menno",
-      "title": "Myanmar Humanitarian and Peacebuilding Partner Advisor",
-      "organization": "Mennonite Central Committee",
-      "location": "Cambodia",
-      "position_type": "Young Professional / Consultant (Contractual)",
-      "opportunity_kind": "Job / Career",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/myanmar-humanitarian-and-peacebuilding-partner-advisor-menno"
-    },
-    {
-      "position": 5,
-      "registry": "global",
-      "id": "greenhouse-gas-monitoring-system-iot-enabled-improved-cookst",
-      "title": "Greenhouse Gas Monitoring system, IoT enabled Improved Cookstove Technology locally design & Pilot testing, & Environmental Restoration and Climate Ch",
-      "organization": "Islamic Relief",
-      "location": "Somalia",
+      "id": "fsl-program-coordinator-climate-specialist-care",
+      "title": "FSL Program Coordinator- Climate Specialist",
+      "organization": "CARE",
+      "location": "Syrian Arab Republic",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
       "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/greenhouse-gas-monitoring-system-iot-enabled-improved-cookst"
+      "url": "https://www.urbanforestpark.com/jobs/fsl-program-coordinator-climate-specialist-care"
     },
     {
-      "position": 6,
+      "position": 8,
+      "registry": "global",
+      "id": "coordinateur-de-projet-scale-agency-for-technical-cooperatio",
+      "title": "COORDINATEUR DE PROJET SCALE",
+      "organization": "Agency for Technical Cooperation and Development",
+      "location": "Chad",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 44.0,
+      "url": "https://www.urbanforestpark.com/jobs/coordinateur-de-projet-scale-agency-for-technical-cooperatio"
+    },
+    {
+      "position": 9,
       "registry": "global",
       "id": "champ-events-intern-world-resources-institute-wri",
       "title": "CHAMP Events intern",
@@ -87,19 +123,7 @@
       "url": "https://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri"
     },
     {
-      "position": 7,
-      "registry": "global",
-      "id": "champ-communications-intern-world-resources-institute-wri",
-      "title": "CHAMP Communications Intern",
-      "organization": "World Resources Institute (WRI)",
-      "location": "The Hague",
-      "position_type": "Fellowship / Internship",
-      "opportunity_kind": "Internship",
-      "score": 41.0,
-      "url": "https://www.urbanforestpark.com/jobs/champ-communications-intern-world-resources-institute-wri"
-    },
-    {
-      "position": 8,
+      "position": 10,
       "registry": "india",
       "id": "agm-civil-project-development-renew-gurugram",
       "title": "Assistant General Manager - Civil Project Development (Hydro PSP)",
@@ -107,33 +131,9 @@
       "location": "Gurugram, Delhi NCR",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 40.0,
+      "score": 32.0,
       "url": "https://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram"
-    },
-    {
-      "position": 9,
-      "registry": "global",
-      "id": "especialista-senior-en-energ-a-world-resources-institute-wri",
-      "title": "Especialista Senior en Energía",
-      "organization": "World Resources Institute (WRI)",
-      "location": "Bogota",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri"
-    },
-    {
-      "position": 10,
-      "registry": "global",
-      "id": "research-assistant-for-extended-producer-responsibilities-ep",
-      "title": "Research Assistant for Extended Producer Responsibilities (EPR) for Packaging",
-      "organization": "World Resources Institute (WRI)",
-      "location": "Jakarta",
-      "position_type": "Project Associate / Research Associate",
-      "opportunity_kind": "Job / Career",
-      "score": 40.0,
-      "url": "https://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Project Associate - WRI Africa Food Program — World Resources Institute (WRI) (Nairobi | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in\n\n2. [GLOBAL] Expert en environnement et changement climatique — Société de Développement International (Chad | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/expert-en-environnement-et-changement-climatique-soci-t-de-d\n\n3. [GLOBAL] Programme Operations Lead — Pacific Community (Fiji | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community\n\n4. [GLOBAL] Myanmar Humanitarian and Peacebuilding Partner Advisor — Mennonite Central Committee (Cambodia | Young Professional / Consultant (Contractual))\nhttps://www.urbanforestpark.com/jobs/myanmar-humanitarian-and-peacebuilding-partner-advisor-menno\n\n5. [GLOBAL] Greenhouse Gas Monitoring system, IoT enabled Improved Cookstove Technology locally design & Pilot testing, & Environmental Restoration and Climate Ch — Islamic Relief (Somalia | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/greenhouse-gas-monitoring-system-iot-enabled-improved-cookst\n\n6. [GLOBAL] CHAMP Events intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri\n\n7. [GLOBAL] CHAMP Communications Intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-communications-intern-world-resources-institute-wri\n\n8. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\n9. [GLOBAL] Especialista Senior en Energía — World Resources Institute (WRI) (Bogota | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/especialista-senior-en-energ-a-world-resources-institute-wri\n\n10. [GLOBAL] Research Assistant for Extended Producer Responsibilities (EPR) for Packaging — World Resources Institute (WRI) (Jakarta | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/research-assistant-for-extended-producer-responsibilities-ep\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Membership Officer — International Union for Conservation of Nature (IUCN) (Oceania Regional Office Suva Fiji Oceania Regional Office | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/membership-officer-international-union-for-conservation-of-n\n\n2. [GLOBAL] KADIN Net Zero Hub Lead — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/kadin-net-zero-hub-lead-world-resources-institute-wri\n\n3. [GLOBAL] Clean Energy Associate — World Resources Institute (WRI) (Washington | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/clean-energy-associate-world-resources-institute-wri\n\n4. [GLOBAL] Project Associate - WRI Africa Food Program — World Resources Institute (WRI) (Nairobi | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in\n\n5. [GLOBAL] Expert en environnement et changement climatique — Société de Développement International (Chad | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/expert-en-environnement-et-changement-climatique-soci-t-de-d\n\n6. [GLOBAL] Programme Operations Lead — Pacific Community (Fiji | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-operations-lead-pacific-community\n\n7. [GLOBAL] FSL Program Coordinator- Climate Specialist — CARE (Syrian Arab Republic | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/fsl-program-coordinator-climate-specialist-care\n\n8. [GLOBAL] COORDINATEUR DE PROJET SCALE — Agency for Technical Cooperation and Development (Chad | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/coordinateur-de-projet-scale-agency-for-technical-cooperatio\n\n9. [GLOBAL] CHAMP Events intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri\n\n10. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }
