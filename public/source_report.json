@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T04:53:44",
+  "generated_at": "2026-11-25T02:38:59",
   "policy_version": 2,
   "limits": {
     "jobspy_results_per_query": {
@@ -34,17 +34,22 @@
   "state_queries": 15,
   "sources": {
     "linkedin": {
-      "leads": 308,
+      "leads": 282,
       "passed": 0,
       "active": 0
     },
     "official-page": {
-      "leads": 166,
+      "leads": 168,
       "passed": 0,
       "active": 0
     },
     "naukri": {
       "leads": 50,
+      "passed": 0,
+      "active": 0
+    },
+    "portal:agrijob": {
+      "leads": 20,
       "passed": 0,
       "active": 0
     },
@@ -54,12 +59,7 @@
       "active": 0
     },
     "google-news": {
-      "leads": 16,
-      "passed": 0,
-      "active": 0
-    },
-    "portal:agrijob": {
-      "leads": 5,
+      "leads": 11,
       "passed": 0,
       "active": 0
     },
@@ -68,13 +68,13 @@
       "passed": 0,
       "active": 0
     },
-    "indeed": {
+    "portal:wri-india": {
       "leads": 2,
       "passed": 0,
       "active": 0
     },
-    "portal:wri-india": {
-      "leads": 2,
+    "indeed": {
+      "leads": 1,
       "passed": 0,
       "active": 0
     },
@@ -85,7 +85,7 @@
     }
   },
   "totals": {
-    "leads": 573,
+    "leads": 558,
     "passed": 0,
     "active": 0
   }

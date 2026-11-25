@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-24T10:23:49+05:30",
-  "last_updated_ist": "2026-11-24T10:23:49+05:30",
-  "last_pipeline_run_date_ist": "2026-11-24",
-  "active_open_jobs": 217,
+  "last_updated": "2026-11-25T08:08:59+05:30",
+  "last_updated_ist": "2026-11-25T08:08:59+05:30",
+  "last_pipeline_run_date_ist": "2026-11-25",
+  "active_open_jobs": 216,
   "opened_this_week": 1,
   "passed_this_week": 79,
-  "total_archived_jobs": 202,
+  "total_archived_jobs": 203,
   "total_historical_indexed": 419,
   "last_telegram_broadcast_date": null,
   "recent_telegram_job_ids": [],
@@ -23,8 +23,8 @@
       "archived": 6
     },
     "Research Associate & Project Staff (Contractual)": {
-      "active": 12,
-      "archived": 25
+      "active": 11,
+      "archived": 26
     },
     "Fellowships & Leadership Programs": {
       "active": 6,
@@ -81,7 +81,7 @@
     "Karnataka": 27,
     "Haryana": 12,
     "Uttar Pradesh": 11,
-    "Gujarat": 10,
+    "Gujarat": 9,
     "Telangana": 9,
     "Tamil Nadu": 5,
     "West Bengal": 5,
@@ -98,25 +98,25 @@
     "Odisha": 1,
     "Sikkim / West Bengal": 1
   },
-  "active_global_jobs": 127,
+  "active_global_jobs": 129,
   "active_global_portals": 12,
-  "total_global_records": 139,
-  "total_archived_global_jobs": 148,
+  "total_global_records": 141,
+  "total_archived_global_jobs": 151,
   "global_jobs_by_region": {
-    "Africa & Middle East": 11,
-    "Asia-Pacific": 11,
+    "Africa & Middle East": 13,
+    "Asia-Pacific": 12,
+    "Europe": 27,
     "Global / Remote": 58,
-    "Europe": 28,
     "Latin America": 4,
-    "UN / Multilateral": 3,
-    "North America": 12
+    "North America": 12,
+    "UN / Multilateral": 3
   },
   "global_jobs_by_kind": {
-    "Job / Career": 85,
-    "Internship": 6,
-    "Grant / Funding": 10,
-    "Scholarship": 6,
+    "Competition / Award": 5,
     "Fellowship": 15,
-    "Competition / Award": 5
+    "Grant / Funding": 10,
+    "Internship": 6,
+    "Job / Career": 87,
+    "Scholarship": 6
   }
 }
