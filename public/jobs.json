@@ -1,5 +1,70 @@
 [
   {
+    "id": "phd-renewable-energy-amrita-vishwa-vidyapeetham",
+    "date_added": "2026-11-27",
+    "clean_title": "PhD Position in Renewable Energy and Solar Thermal Systems",
+    "organization": "Amrita Vishwa Vidyapeetham",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "category": "Academic, JRF, SRF & PhD Positions",
+    "experience_level": "Entry Level / Fellowship",
+    "position_type": "PhD / Doctoral Fellowship",
+    "opportunity_kind": "Scholarship",
+    "deadline_or_window": "Rolling / Open",
+    "region": "",
+    "country": "",
+    "qualification_summary": "Master’s in Mechanical, Thermal, or Energy Engineering, Physics, or Chemistry",
+    "compensation_or_fellowship": "₹30,000 / month",
+    "role_summary": "Amrita Vishwa Vidyapeetham invites applications for two full-time PhD positions at their Chennai campus. The research focuses on advanced solar air heating, CFD-based design optimization, and sustainable thermal energy storage using bio-based phase change materials. Candidates will work within the Department of Mechanical Engineering on interdisciplinary projects aimed at improving solar thermal and PV/T system efficiency.",
+    "key_responsibilities": [
+      "Conduct advanced research on solar air heating and thermal storage systems.",
+      "Perform CFD-based design and optimization for solar thermal applications.",
+      "Develop novel bio-based phase change materials for thermal energy storage.",
+      "Analyze heat exchanger performance using nanofluids and hybrid nanofluids.",
+      "Publish research findings in high-impact academic journals."
+    ],
+    "must_have_skills": [
+      "Computational Fluid Dynamics (CFD)",
+      "Solar Thermal Systems",
+      "Thermal Energy Storage",
+      "Nanofluid Analysis",
+      "Renewable Energy Research",
+      "Technical Writing"
+    ],
+    "application_tip": "Highlight any prior experience with CFD software or experimental thermal testing in your research statement. Ensure your Master's thesis work is clearly linked to the research areas mentioned to strengthen your application.",
+    "apply_url": "https://lnkd.in/dbak-eCV",
+    "org_website": "https://www.amrita.edu",
+    "org_domain": "amrita.edu",
+    "source_portal": "LinkedIn",
+    "entry_type": "posting",
+    "status": "active",
+    "verification": {
+      "verified_at": "2026-11-27T02:09:30.928092+00:00",
+      "final_url": "https://lnkd.in/dbak-eCV",
+      "final_host": "lnkd.in",
+      "http_status": 0,
+      "content_hash": "",
+      "evidence_snippet": "",
+      "entry_type": "posting",
+      "host_class": "platform",
+      "reason_code": "UNKNOWN_KEEP",
+      "platform": "LinkedIn",
+      "verifier": "verify_link_v2"
+    },
+    "link_policy": {
+      "policy_version": 2,
+      "reason_code": "UNKNOWN_KEEP",
+      "checked_at": "2026-11-27T02:09:30.928092+00:00"
+    },
+    "academic_meta": {
+      "stipend": "₹30,000 / month",
+      "selection_process": "Email Application"
+    },
+    "selection_process": "Email Application",
+    "reverify_after": "2026-12-12",
+    "valid_through": "2026-12-27"
+  },
+  {
     "id": "agm-civil-project-development-renew-gurugram",
     "date_added": "2026-11-22",
     "clean_title": "Assistant General Manager - Civil Project Development (Hydro PSP)",
@@ -9995,56 +10060,6 @@
     },
     "id": "un-ypp-2026",
     "region": "UN / Multilateral"
-  },
-  {
-    "clean_title": "Water Resource Engineer / Business Consultant / Disaster Management Expert / Office Coordinator (Multiple Positions)",
-    "organization": "AG Horizon Pvt. Ltd.",
-    "city": "Guwahati / Gurugram",
-    "state": "Assam / Haryana",
-    "country": "India",
-    "category": "GIS, Remote Sensing & Earth Observation",
-    "position_type": "Full-Time Corporate / NGO",
-    "opportunity_kind": "Job / Career",
-    "experience_level": "1-3 Years",
-    "employment_type": "FULL_TIME",
-    "deadline_or_window": "Rolling / Open",
-    "valid_through": "2026-11-26",
-    "qualification_summary": "Engineering, environmental science, GIS, management, or related background depending on the role; experience in water resources, disaster management, business consulting, or office coordination.",
-    "compensation_or_fellowship": "Not disclosed - see official notification",
-    "role_summary": "AG Horizon is recruiting for multiple water resources, consulting, disaster management, and office coordination roles across its Guwahati and Gurugram offices. Current openings are listed on the official recruitment page.",
-    "key_responsibilities": [
-      "Support water resources and irrigation projects",
-      "Conduct GIS and spatial analysis",
-      "Contribute to disaster management and climate resilience work",
-      "Provide business consulting or office coordination support"
-    ],
-    "must_have_skills": [
-      "Water Resources",
-      "GIS",
-      "Disaster Management",
-      "Project Coordination"
-    ],
-    "application_tip": "Apply through the official AG Horizon recruitment form; current openings include Guwahati and Gurugram roles.",
-    "apply_url": "https://aggrp.in/recruitment/",
-    "org_website": "https://aggrp.in/",
-    "org_domain": "aggrp.in",
-    "source_portal": "LinkedIn batch - official recruitment page verified",
-    "entry_type": "careers_portal",
-    "status": "active",
-    "global": false,
-    "evergreen": false,
-    "date_added": "2026-10-27",
-    "date_posted": "2026-10-27",
-    "title_hi": "Water Resource Engineer / Business Consultant / Disaster Management Expert / Office Coordinator (विभिन्न पद)",
-    "summary_hi": "AG Horizon असम और हरियाणा में स्थित अपने कार्यालयों के लिए जल संसाधन, परामर्श, आपदा प्रबंधन और कार्यालय समन्वय के विभिन्न पदों पर भर्ती कर रहा है। इन पदों के लिए इंजीनियरिंग, पर्यावरण विज्ञान, GIS या प्रबंधन में शैक्षणिक योग्यता और संबंधित कार्य अनुभव अनिवार्य है।",
-    "verification": {
-      "verified_at": "2026-10-27",
-      "method": "manual-batch-official-portal",
-      "source": "https://aggrp.in/recruitment/",
-      "http_status": 200
-    },
-    "id": "ag-horizon-water-resources-multiple-positions-2026",
-    "reverify_after": "2026-11-11"
   },
   {
     "id": "mittal-family-climate-fellowship-program",
