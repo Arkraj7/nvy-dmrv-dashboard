@@ -4,7 +4,11 @@
 
 Today's verified picks (6):
 
+<<<<<<< Updated upstream
 1. PhD Position in Renewable Energy and Solar Thermal Systems — Amrita Vishwa Vidyapeetham
+=======
+1. PhD Position in Renewable Energy and Sustainable Thermal Technologies — Amrita Vishwa Vidyapeetham
+>>>>>>> Stashed changes
 📍 Chennai, Tamil Nadu · Apply by 2026-12-27
 🔗 https://www.urbanforestpark.com/jobs/phd-renewable-energy-amrita-vishwa-vidyapeetham
 

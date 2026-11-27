@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-27T07:51:30+05:30",
-  "last_updated_ist": "2026-11-27T07:51:30+05:30",
+  "last_updated": "2026-11-27T08:39:15+05:30",
+  "last_updated_ist": "2026-11-27T08:39:15+05:30",
   "last_pipeline_run_date_ist": "2026-11-27",
   "active_open_jobs": 209,
   "opened_this_week": 2,
@@ -97,25 +97,25 @@
     "Odisha": 1,
     "Sikkim / West Bengal": 1
   },
-  "active_global_jobs": 129,
+  "active_global_jobs": 131,
   "active_global_portals": 12,
-  "total_global_records": 141,
+  "total_global_records": 143,
   "total_archived_global_jobs": 160,
   "global_jobs_by_region": {
-    "Africa & Middle East": 14,
-    "Europe": 30,
-    "Global / Remote": 53,
+    "Africa & Middle East": 15,
     "Asia-Pacific": 13,
-    "North America": 12,
+    "Europe": 31,
+    "Global / Remote": 53,
     "Latin America": 4,
+    "North America": 12,
     "UN / Multilateral": 3
   },
   "global_jobs_by_kind": {
-    "Job / Career": 85,
-    "Internship": 7,
-    "Grant / Funding": 11,
-    "Scholarship": 6,
+    "Competition / Award": 5,
     "Fellowship": 15,
-    "Competition / Award": 5
+    "Grant / Funding": 11,
+    "Internship": 7,
+    "Job / Career": 87,
+    "Scholarship": 6
   }
 }

@@ -4,10 +4,17 @@
 
 *🌍 India + Global Sustainability Opportunities — 27 Nov 2026*
 
+<<<<<<< Updated upstream
 1. 🆕 *PhD Position in Renewable Energy and Solar Thermal Systems*
 🏛️ *Organization:* Amrita Vishwa Vidyapeetham
 📍 *Location:* Chennai, Tamil Nadu
 🎓 *Eligibility:* Master’s in Mechanical, Thermal, or Energy Engineering, Physics, or Chemistry
+=======
+1. 🆕 *PhD Position in Renewable Energy and Sustainable Thermal Technologies*
+🏛️ *Organization:* Amrita Vishwa Vidyapeetham
+📍 *Location:* Chennai, Tamil Nadu
+🎓 *Eligibility:* Master’s in Mechanical / Thermal / Energy Engineering, Physics, or Chemistry
+>>>>>>> Stashed changes
 💰 *Fellowship/Pay:* ₹30,000 / month
 🕒 *Apply before:* 2026-12-27
 
