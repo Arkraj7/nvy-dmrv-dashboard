@@ -1,21 +1,57 @@
 {
-  "generated_at": "2026-11-26T07:34:26+05:30",
-  "week_of": "2026-11-26",
+  "generated_at": "2026-11-27T07:50:59+05:30",
+  "week_of": "2026-11-27",
   "window_days": 7,
   "india_window": "last 7 day(s)",
   "global_window": "last 7 day(s)",
   "subject": "Ready to Post: Your Weekly LinkedIn Top 10 Opportunities Roundup",
-  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:",
+  "hook": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (2 India + 8 Global), verified with direct application links:",
   "cta": "Apply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark",
   "hashtags": "#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark",
   "counts": {
     "total": 10,
-    "india": 1,
-    "global": 9
+    "india": 2,
+    "global": 8
   },
   "items": [
     {
       "position": 1,
+      "registry": "global",
+      "id": "senior-financial-crime-analyst-international-union-for-conse",
+      "title": "Senior Financial Crime Analyst",
+      "organization": "International Union for Conservation of Nature (IUCN)",
+      "location": "TRAFFIC International Cambridge United Kingdom of Great Britain and Northern Ireland",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/senior-financial-crime-analyst-international-union-for-conse"
+    },
+    {
+      "position": 2,
+      "registry": "global",
+      "id": "programme-officer-coordination-and-administration-lilongwe-m",
+      "title": "Programme Officer – Coordination and Administration, Lilongwe, Malawi",
+      "organization": "International Union for Conservation of Nature (IUCN)",
+      "location": "Zimbabwe Country Office Harare Zimbabwe",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/programme-officer-coordination-and-administration-lilongwe-m"
+    },
+    {
+      "position": 3,
+      "registry": "global",
+      "id": "programme-officer-community-liaison-lilongwe-malawi-3-positi",
+      "title": "Programme Officer – Community Liaison Lilongwe, Malawi - ( 3 Positions)",
+      "organization": "International Union for Conservation of Nature (IUCN)",
+      "location": "Zimbabwe Country Office Harare Zimbabwe",
+      "position_type": "Full-Time Corporate / NGO",
+      "opportunity_kind": "Job / Career",
+      "score": 48.0,
+      "url": "https://www.urbanforestpark.com/jobs/programme-officer-community-liaison-lilongwe-malawi-3-positi"
+    },
+    {
+      "position": 4,
       "registry": "global",
       "id": "clean-energy-supply-senior-lead-world-resources-institute-wr",
       "title": "Clean Energy Supply Senior Lead",
@@ -27,7 +63,7 @@
       "url": "https://www.urbanforestpark.com/jobs/clean-energy-supply-senior-lead-world-resources-institute-wr"
     },
     {
-      "position": 2,
+      "position": 5,
       "registry": "global",
       "id": "membership-officer-international-union-for-conservation-of-n",
       "title": "Membership Officer",
@@ -39,7 +75,7 @@
       "url": "https://www.urbanforestpark.com/jobs/membership-officer-international-union-for-conservation-of-n"
     },
     {
-      "position": 3,
+      "position": 6,
       "registry": "global",
       "id": "kadin-net-zero-hub-lead-world-resources-institute-wri",
       "title": "KADIN Net Zero Hub Lead",
@@ -51,31 +87,7 @@
       "url": "https://www.urbanforestpark.com/jobs/kadin-net-zero-hub-lead-world-resources-institute-wri"
     },
     {
-      "position": 4,
-      "registry": "global",
-      "id": "clean-energy-associate-world-resources-institute-wri",
-      "title": "Clean Energy Associate",
-      "organization": "World Resources Institute (WRI)",
-      "location": "Washington",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/clean-energy-associate-world-resources-institute-wri"
-    },
-    {
-      "position": 5,
-      "registry": "global",
-      "id": "project-associate-wri-africa-food-program-world-resources-in",
-      "title": "Project Associate - WRI Africa Food Program",
-      "organization": "World Resources Institute (WRI)",
-      "location": "Nairobi",
-      "position_type": "Project Associate / Research Associate",
-      "opportunity_kind": "Job / Career",
-      "score": 48.0,
-      "url": "https://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in"
-    },
-    {
-      "position": 6,
+      "position": 7,
       "registry": "global",
       "id": "eu-funding-and-engagement-intern-world-resources-institute-w",
       "title": "EU Funding and Engagement Intern",
@@ -87,40 +99,28 @@
       "url": "https://www.urbanforestpark.com/jobs/eu-funding-and-engagement-intern-world-resources-institute-w"
     },
     {
-      "position": 7,
-      "registry": "global",
-      "id": "fsl-program-coordinator-climate-specialist-care",
-      "title": "FSL Program Coordinator- Climate Specialist",
-      "organization": "CARE",
-      "location": "Syrian Arab Republic",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/fsl-program-coordinator-climate-specialist-care"
-    },
-    {
       "position": 8,
-      "registry": "global",
-      "id": "coordinateur-de-projet-scale-agency-for-technical-cooperatio",
-      "title": "COORDINATEUR DE PROJET SCALE",
-      "organization": "Agency for Technical Cooperation and Development",
-      "location": "Chad",
-      "position_type": "Full-Time Corporate / NGO",
-      "opportunity_kind": "Job / Career",
-      "score": 44.0,
-      "url": "https://www.urbanforestpark.com/jobs/coordinateur-de-projet-scale-agency-for-technical-cooperatio"
+      "registry": "india",
+      "id": "phd-renewable-energy-amrita-vishwa-vidyapeetham",
+      "title": "PhD Position in Renewable Energy and Solar Thermal Systems",
+      "organization": "Amrita Vishwa Vidyapeetham",
+      "location": "Chennai, Tamil Nadu",
+      "position_type": "PhD / Doctoral Fellowship",
+      "opportunity_kind": "Scholarship",
+      "score": 42.0,
+      "url": "https://www.urbanforestpark.com/jobs/phd-renewable-energy-amrita-vishwa-vidyapeetham"
     },
     {
       "position": 9,
       "registry": "global",
-      "id": "champ-events-intern-world-resources-institute-wri",
-      "title": "CHAMP Events intern",
+      "id": "geospatial-data-scientist-intern-urban-heat-world-resources",
+      "title": "Geospatial Data Scientist Intern – Urban Heat",
       "organization": "World Resources Institute (WRI)",
       "location": "The Hague",
       "position_type": "Fellowship / Internship",
       "opportunity_kind": "Internship",
-      "score": 33.0,
-      "url": "https://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri"
+      "score": 41.0,
+      "url": "https://www.urbanforestpark.com/jobs/geospatial-data-scientist-intern-urban-heat-world-resources"
     },
     {
       "position": 10,
@@ -131,9 +131,9 @@
       "location": "Gurugram, Delhi NCR",
       "position_type": "Full-Time Corporate / NGO",
       "opportunity_kind": "Job / Career",
-      "score": 32.0,
+      "score": 24.0,
       "url": "https://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram"
     }
   ],
-  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (1 India + 9 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Clean Energy Supply Senior Lead — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/clean-energy-supply-senior-lead-world-resources-institute-wr\n\n2. [GLOBAL] Membership Officer — International Union for Conservation of Nature (IUCN) (Oceania Regional Office Suva Fiji Oceania Regional Office | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/membership-officer-international-union-for-conservation-of-n\n\n3. [GLOBAL] KADIN Net Zero Hub Lead — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/kadin-net-zero-hub-lead-world-resources-institute-wri\n\n4. [GLOBAL] Clean Energy Associate — World Resources Institute (WRI) (Washington | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/clean-energy-associate-world-resources-institute-wri\n\n5. [GLOBAL] Project Associate - WRI Africa Food Program — World Resources Institute (WRI) (Nairobi | Project Associate / Research Associate)\nhttps://www.urbanforestpark.com/jobs/project-associate-wri-africa-food-program-world-resources-in\n\n6. [GLOBAL] EU Funding and Engagement Intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/eu-funding-and-engagement-intern-world-resources-institute-w\n\n7. [GLOBAL] FSL Program Coordinator- Climate Specialist — CARE (Syrian Arab Republic | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/fsl-program-coordinator-climate-specialist-care\n\n8. [GLOBAL] COORDINATEUR DE PROJET SCALE — Agency for Technical Cooperation and Development (Chad | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/coordinateur-de-projet-scale-agency-for-technical-cooperatio\n\n9. [GLOBAL] CHAMP Events intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/champ-events-intern-world-resources-institute-wri\n\n10. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
+  "post_text": "🌱 Top 10 green opportunities this week — climate, forestry, ESG, geospatial & sustainability (2 India + 8 Global), verified with direct application links:\n🇮🇳 India Jobs · 🌍 Global Opportunities\n\n1. [GLOBAL] Senior Financial Crime Analyst — International Union for Conservation of Nature (IUCN) (TRAFFIC International Cambridge United Kingdom of Great Britain and Northern Ireland | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/senior-financial-crime-analyst-international-union-for-conse\n\n2. [GLOBAL] Programme Officer – Coordination and Administration, Lilongwe, Malawi — International Union for Conservation of Nature (IUCN) (Zimbabwe Country Office Harare Zimbabwe | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-officer-coordination-and-administration-lilongwe-m\n\n3. [GLOBAL] Programme Officer – Community Liaison Lilongwe, Malawi - ( 3 Positions) — International Union for Conservation of Nature (IUCN) (Zimbabwe Country Office Harare Zimbabwe | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/programme-officer-community-liaison-lilongwe-malawi-3-positi\n\n4. [GLOBAL] Clean Energy Supply Senior Lead — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/clean-energy-supply-senior-lead-world-resources-institute-wr\n\n5. [GLOBAL] Membership Officer — International Union for Conservation of Nature (IUCN) (Oceania Regional Office Suva Fiji Oceania Regional Office | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/membership-officer-international-union-for-conservation-of-n\n\n6. [GLOBAL] KADIN Net Zero Hub Lead — World Resources Institute (WRI) (Jakarta | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/kadin-net-zero-hub-lead-world-resources-institute-wri\n\n7. [GLOBAL] EU Funding and Engagement Intern — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/eu-funding-and-engagement-intern-world-resources-institute-w\n\n8. [INDIA] PhD Position in Renewable Energy and Solar Thermal Systems — Amrita Vishwa Vidyapeetham (Chennai, Tamil Nadu | PhD / Doctoral Fellowship)\nhttps://www.urbanforestpark.com/jobs/phd-renewable-energy-amrita-vishwa-vidyapeetham\n\n9. [GLOBAL] Geospatial Data Scientist Intern – Urban Heat — World Resources Institute (WRI) (The Hague | Fellowship / Internship)\nhttps://www.urbanforestpark.com/jobs/geospatial-data-scientist-intern-urban-heat-world-resources\n\n10. [INDIA] Assistant General Manager - Civil Project Development (Hydro PSP) — ReNew (Gurugram, Delhi NCR | Full-Time Corporate / NGO)\nhttps://www.urbanforestpark.com/jobs/agm-civil-project-development-renew-gurugram\n\nApply directly through the official portals — every listing links straight to the source (no fees).\nFull registry · daily alerts · Global opportunities hub: https://www.urbanforestpark.com/\nTelegram: https://t.me/urbanforestpark\n\n#ClimateJobs #Forestry #ESG #Sustainability #JRF #Fellowships #GreenJobsIndia #GIS #UrbanForestPark\n"
 }

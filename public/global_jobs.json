@@ -41,13 +41,20 @@
     "org_domain": "iucn.org",
     "source_portal": "Official Organization Website",
     "entry_type": "posting",
-    "status": "active",
+    "status": "quarantined",
     "global": true,
     "evergreen": false,
     "verification": {
       "verified_at": "2026-11-27",
       "method": "official-source-harvest",
       "source": "IUCN"
+    },
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "title length 162 outside 30-75: 'Senior Financial Crime Analyst at International Union for Conservation… | TRAFFIC International Cambridge United Kingdom of Great Britain and Northern Ireland Job'",
+      "date": "2026-11-27",
+      "source": "audit_and_sanitize.py"
     }
   },
   {
@@ -199,13 +206,20 @@
     "org_domain": "iucn.org",
     "source_portal": "Official Organization Website",
     "entry_type": "posting",
-    "status": "active",
+    "status": "quarantined",
     "global": true,
     "evergreen": false,
     "verification": {
       "verified_at": "2026-11-27",
       "method": "official-source-harvest",
       "source": "IUCN"
+    },
+    "status_before_quarantine": "active",
+    "quarantine": {
+      "reason": "seo_job_page",
+      "detail": "title length 76 outside 30-75: 'Programme Officer – Community… | Zimbabwe Country Office Harare Zimbabwe Job'",
+      "date": "2026-11-27",
+      "source": "audit_and_sanitize.py"
     }
   },
   {
