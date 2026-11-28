@@ -9451,5 +9451,72 @@
       "reason_code": "DEAD_LINK",
       "archived_at": "2026-10-20"
     }
+  },
+  {
+    "clean_title": "RESULTS Organizing and Advocacy Fellowship (Class of 2027)",
+    "organization": "RESULTS",
+    "city": "Virtual (USA)",
+    "state": "",
+    "country": "United States",
+    "region": "Global / Remote",
+    "category": "Fellowships & Leadership Programs",
+    "position_type": "Fellowship / Internship",
+    "opportunity_kind": "Fellowship",
+    "experience_level": "Entry Level / Fellowship",
+    "employment_type": "OTHER",
+    "deadline_or_window": "Apply by 15 Nov 2026, 11:59 PM EST",
+    "valid_through": "2026-12-07",
+    "qualification_summary": "Open to adults ages 20-45. Approximately 3-6 hours per week. 11-month fellowship beginning January 2027.",
+    "compensation_or_fellowship": "Free fellowship",
+    "role_summary": "The RESULTS Organizing and Advocacy Fellowship builds grassroots organizing, advocacy and digital communications skills through hands-on engagement with Congress, advocacy for poverty-alleviation policies, and a nationwide changemaker network.",
+    "key_responsibilities": [
+      "Grassroots organizing",
+      "Advocacy",
+      "Digital communications",
+      "Congressional engagement"
+    ],
+    "must_have_skills": [
+      "Advocacy",
+      "Organizing",
+      "Communications",
+      "Leadership"
+    ],
+    "application_tip": "Apply by 15 November 2026, 11:59 PM EST via the official application form.",
+    "apply_url": "https://fellowship2027.fillout.com/classapp",
+    "org_website": "https://results.org",
+    "org_domain": "results.org",
+    "source_portal": "LinkedIn post (RESULTS Organizing and Advocacy Fellowship)",
+    "entry_type": "award_portal",
+    "status": "archived",
+    "global": true,
+    "evergreen": false,
+    "date_added": "2026-11-07",
+    "date_posted": "2026-11-07",
+    "title_hi": "",
+    "summary_hi": "",
+    "academic_meta": {},
+    "selection_process": "",
+    "reverify_after": "2026-11-22",
+    "verification": {
+      "verified_at": "2026-11-25T03:40:13.828887+00:00",
+      "final_url": "https://fellowship2027.fillout.com/classapp",
+      "final_host": "fellowship2027.fillout.com",
+      "http_status": 200,
+      "content_hash": "392abfc493ac4c2eab38180f439ccd40",
+      "entry_type": "award_portal",
+      "host_class": "unknown_host",
+      "reason_code": "OK",
+      "platform": "",
+      "verifier": "verify_link_v2"
+    },
+    "id": "results-organizing-advocacy-fellowship-2027",
+    "last_link_check": {
+      "checked_at": "2026-11-28T02:53:05Z",
+      "reason_code": "DEAD_LINK",
+      "http_status": 404,
+      "consecutive_failures": 3
+    },
+    "date_archived": "2026-11-28",
+    "archive_reason": "dead_page"
   }
 ]
