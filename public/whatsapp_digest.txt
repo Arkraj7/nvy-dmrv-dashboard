@@ -1,20 +1,13 @@
 🌱 *India Green, Forestry, JRF & ESG Jobs | पर्यावरण एवं अनुसंधान भर्ती अपडेट*
-🗓️ 2026-11-27 · 10 job(s) · 10 भर्तियाँ
+🗓️ 2026-11-28 · 10 job(s) · 10 भर्तियाँ
 ━━━━━━━━━━━━━━━━━━━━
 
-*🌍 India + Global Sustainability Opportunities — 27 Nov 2026*
+*📚 Research, Forestry, GIS & ESG Roundup — 28 Nov 2026*
 
-<<<<<<< Updated upstream
-1. 🆕 *PhD Position in Renewable Energy and Solar Thermal Systems*
-🏛️ *Organization:* Amrita Vishwa Vidyapeetham
-📍 *Location:* Chennai, Tamil Nadu
-🎓 *Eligibility:* Master’s in Mechanical, Thermal, or Energy Engineering, Physics, or Chemistry
-=======
-1. 🆕 *PhD Position in Renewable Energy and Sustainable Thermal Technologies*
+1. 📌 *PhD Position in Renewable Energy and Sustainable Thermal Technologies*
 🏛️ *Organization:* Amrita Vishwa Vidyapeetham
 📍 *Location:* Chennai, Tamil Nadu
 🎓 *Eligibility:* Master’s in Mechanical / Thermal / Energy Engineering, Physics, or Chemistry
->>>>>>> Stashed changes
 💰 *Fellowship/Pay:* ₹30,000 / month
 🕒 *Apply before:* 2026-12-27
 
@@ -47,14 +40,14 @@
 
 🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/vigors-gis-remote-sensing-instructor-remote-2026
 
-5. 🆕 *Geospatial Data Scientist Intern – Urban Heat*
-🏛️ *Organization:* World Resources Institute (WRI)
-📍 *Location:* The Hague
-🎓 *Eligibility:* Students or recent graduates in a relevant discipline; see the official call for specific eligibility.
+5. 🆕 *Climate & Environment Coordinator*
+🏛️ *Organization:* Médecins Sans Frontières en Suisse
+📍 *Location:* Remote
+🎓 *Eligibility:* we are looking for. Inclusivity and Diversity at MSF Do your qualifications and experience not exactly match all requirements of the job? At MSF OCG, we are committed to an inclusive culture that supports and amplifies the diverse voices of our staff members. We strive to create workplaces where teams of people with diverse backgrounds, characteristics, perspectives, ideas and
 💰 *Fellowship/Pay:* Not disclosed - see official portal
-🕒 *Apply before:* 2027-01-02
+🕒 *Apply before:* 2026-12-20
 
-🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/geospatial-data-scientist-intern-urban-heat-world-resources
+🔗 *Full Details & Apply:* https://www.urbanforestpark.com/jobs/climate-environment-coordinator-m-decins-sans-fronti-res-en
 
 6. 📌 *Research Manager - Better Bricks*
 🏛️ *Organization:* J-PAL South Asia
